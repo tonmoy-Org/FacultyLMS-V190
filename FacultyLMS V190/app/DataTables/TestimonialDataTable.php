@@ -72,6 +72,7 @@ class TestimonialDataTable extends DataTable
         return [
             Column::computed('id')->data('DT_RowIndex')->title('#')->searchable(false)->width(10),
             Column::make('name')->title(__('name'))->searchable(false),
+            Column::make('position')->title(__('position'))->searchable(false),
             Column::computed('image')->title(__('image')),
             Column::make('description')->title(__('description'))->searchable(false),
             Column::computed('status')->title(__('status'))->exportable(false)

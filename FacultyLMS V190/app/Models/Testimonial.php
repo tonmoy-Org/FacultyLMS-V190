@@ -15,6 +15,9 @@ class Testimonial extends Model
         'media_id',
         'image',
         'status',
+        'position',
+        'rating',
+        'video',
     ];
 
     protected $casts    = [

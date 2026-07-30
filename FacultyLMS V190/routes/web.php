@@ -150,6 +150,11 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
 
     Route::post('subscribe', [FrontendController::class, 'subscribe'])->name('subscribe');
 
+    /*===================== Submit Testimonial ==============================*/
+    Route::get('success', [FrontendController::class, 'submitTestimonial'])->name('submit.testimonial');
+    Route::get('success/{slug}', [FrontendController::class, 'successDetails'])->name('success.details');
+    Route::post('store-testimonial', [FrontendController::class, 'storeTestimonial'])->name('store.testimonial');
+
     /*===================== Course Route ==============================*/
 
     Route::get('courses', [CourseController::class, 'course'])->name('courses');
@@ -202,6 +207,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
 
     //dynamic page route
     Route::get('page/{link}', [FrontendController::class, 'page']);
+    Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
 
     //will be deleted soon
     Route::get('welcome', function () {

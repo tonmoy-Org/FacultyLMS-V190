@@ -34,6 +34,8 @@
                             </a>
                         @endif
                     </div>
+                </div>
+                <div class="header-center flex-grow-1 d-flex justify-content-center mx-3">
                     <nav class="nav-menu d-none d-lg-block">
                         <ul>
                             @if (setting('show_default_courses_link') != 0)

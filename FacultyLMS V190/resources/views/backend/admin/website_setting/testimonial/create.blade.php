@@ -20,6 +20,36 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-12">
+                                    <div class="mb-4">
+                                        <label for="position" class="form-label">{{ __('position') }} / {{ __('title') }}</label>
+                                        <input type="text" class="form-control rounded-2" id="position" name="position"
+                                               placeholder="{{ __('position') }}">
+                                        <div class="nk-block-des text-danger">
+                                            <p class="position_error error"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="mb-4">
+                                        <label for="rating" class="form-label">{{ __('rating') }}</label>
+                                        <input type="number" class="form-control rounded-2" id="rating" name="rating" min="1" max="5"
+                                               placeholder="5">
+                                        <div class="nk-block-des text-danger">
+                                            <p class="rating_error error"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="mb-4">
+                                        <label for="video" class="form-label">{{ __('video_url') }} / {{ __('video_path') }}</label>
+                                        <input type="text" class="form-control rounded-2" id="video" name="video"
+                                               placeholder="{{ __('video_url') }}">
+                                        <div class="nk-block-des text-danger">
+                                            <p class="video_error error"></p>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- Success Description -->
                                 <div class="col-lg-12">
                                     <div class="mb-4">

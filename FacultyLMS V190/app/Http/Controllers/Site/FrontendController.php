@@ -417,4 +417,109 @@ class FrontendController extends Controller
 
         return view('frontend.page', compact('page_info'));
     }
+
+    public function contact()
+    {
+        return view('frontend.contact_us');
+    }
+
+    public function submitTestimonial(Request $request, \App\Repositories\SuccessStoryRepository $successStoryRepository)
+    {
+        $q = $request->q;
+        $sorting = $request->sorting ?? 'latest';
+        $style = $request->style ?? 'grid';
+
+        $query = \App\Models\SuccessStory::active();
+
+        if ($q) {
+            $query->where(function($q_builder) use ($q) {
+                $q_builder->where('title', 'like', "%{$q}%")
+                          ->orWhere('description', 'like', "%{$q}%")
+                          ->orWhere('position', 'like', "%{$q}%");
+            });
+        }
+
+        if ($sorting == 'latest') {
+            $query->latest();
+        } elseif ($sorting == 'oldest') {
+            $query->oldest();
+        } elseif ($sorting == 'top_rated') {
+            $query->orderByDesc('rating')->latest();
+        }
+
+        $total_success_stories = \App\Models\SuccessStory::active()->count();
+        $successStories = $query->paginate(16);
+        $total_results = $successStories->total();
+
+        return view('frontend.submit_testimonial', compact('successStories', 'q', 'sorting', 'style', 'total_results', 'total_success_stories'));
+    }
+
+    public function successDetails($slug)
+    {
+        $story = \App\Models\SuccessStory::where('slug', $slug)->active()->firstOrFail();
+        return view('frontend.success_details', compact('story'));
+    }
+
+    public function storeTestimonial(Request $request, \App\Repositories\SuccessStoryRepository $successStoryRepository)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'position' => 'nullable|string|max:255',
+            'description' => 'required|string',
+            'rating' => 'nullable|integer|min:1|max:5',
+            'file' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,mp4,mov,ogg|max:20480',
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
+        ]);
+
+        $data = $request->all();
+        $data['status'] = 0; // pending
+        $data['title'] = $data['name']; // map name to title for success story
+
+        if ($request->hasFile('profile_photo')) {
+            $photo = $request->file('profile_photo');
+            $photoExtension = $photo->getClientOriginalExtension();
+            $photoFilename = 'profile_' . time() . '.' . $photoExtension;
+            $photo->move(public_path('uploads/testimonials'), $photoFilename);
+            $photoPath = 'uploads/testimonials/' . $photoFilename;
+            $data['image'] = [
+                'storage' => 'local',
+                'original_image' => $photoPath,
+                'image_473x337' => $photoPath,
+                'image_40x40' => $photoPath,
+                'image_282x282' => $photoPath
+            ];
+        }
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move(public_path('uploads/testimonials'), $filename);
+            
+            $path = 'uploads/testimonials/' . $filename;
+            
+            if (in_array(strtolower($extension), ['mp4', 'mov', 'ogg'])) {
+                $data['video'] = $path;
+            } else {
+                if (!isset($data['image']) || !is_array($data['image'])) {
+                    $data['image'] = [
+                        'storage' => 'local',
+                        'original_image' => $path,
+                        'image_473x337' => $path,
+                        'image_40x40' => $path,
+                        'image_282x282' => $path
+                    ];
+                } else {
+                    $data['image']['original_image'] = $path;
+                    $data['image']['image_473x337'] = $path;
+                    $data['image']['image_282x282'] = $path;
+                }
+            }
+        }
+
+        $successStoryRepository->store($data);
+
+        Toastr::success(__('success_story_submitted_successfully_pending_approval'));
+        return redirect()->back()->with('success', 'Success story submitted successfully, pending approval.');
+    }
 }

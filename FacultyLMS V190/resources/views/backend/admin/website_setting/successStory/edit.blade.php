@@ -52,6 +52,35 @@
                                         </div>
                                     </div>
 
+                                    <!-- Position -->
+                                    <div class="col-lg-12">
+                                        <div class="mb-4">
+                                            <label for="position" class="form-label">{{ __('position') }}</label>
+                                            <input type="text" class="form-control rounded-2" id="position" name="position" placeholder="{{ __('position') }}" value="{{ $success->position }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- Rating -->
+                                    <div class="col-lg-12">
+                                        <div class="mb-4">
+                                            <label for="rating" class="form-label">{{ __('rating') }}</label>
+                                            <input type="number" class="form-control rounded-2" id="rating" name="rating" placeholder="1 to 5" min="1" max="5" value="{{ $success->rating }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- Video URL/Path -->
+                                    <div class="col-lg-12">
+                                        <div class="mb-4">
+                                            <label for="video" class="form-label">{{ __('Video Path/URL') }}</label>
+                                            <input type="text" class="form-control rounded-2" id="video" name="video" placeholder="e.g. uploads/testimonials/12345.mp4" value="{{ $success->video }}">
+                                            @if($success->video)
+                                                <div class="mt-2">
+                                                    <video src="{{ asset($success->video) }}" controls style="max-height: 200px;"></video>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
                                     <!-- Success Description -->
                                     <div class="col-lg-12">
                                         <div class="mb-4">

@@ -9,7 +9,7 @@ class SuccessStory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'description', 'image', 'success_media_id',  'status'];
+    protected $fillable = ['title', 'slug', 'description', 'image', 'success_media_id', 'status', 'position', 'rating', 'video'];
 
     protected $casts    = [
         'image' => 'array',
