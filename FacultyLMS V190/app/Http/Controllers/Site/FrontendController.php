@@ -51,71 +51,9 @@ class FrontendController extends Controller
     JsonResponse|
     Application {
         try {
-            $sections             = HomeScreen::where('type', 'home_page')->where('version', 1)->orderBy('position')->get();
-
-            $instructors          = $subjects = $lessons = $courses = $featured_courses = [];
-            $total_students       = User::where('role_id', 3)->where('status', 1)->where('is_deleted', 0)->where('is_user_banned', 0)->count();
-
-            $data                 = [
-                'sections'          => $sections,
-                'total_instructors' => User::where('role_id', 2)->where('status', 1)->where('is_deleted', 0)->where('is_user_banned', 0)->count(),
-                'total_students'    => $total_students,
-            ];
-
-            foreach ($sections as $key => $section) {
-                if (arrayCheck('ids', $section->contents)) {
-                    if ($section->section == 'instructors') {
-                        $instructors               = array_merge($instructors, $section->contents['ids']);
-                        $data['instructors_'.$key] = $userRepository->findUsers(['role_id' => 2, 'ids' => $instructors], ['instructor']);
-                    }
-                    if ($section->section == 'subject') {
-                        $subjects               = array_merge($subjects, $section->contents['ids']);
-                        $data['subjects_'.$key] = $subjectRepository->activeSubject(['ids' => $subjects]);
-                    }
-                    if ($section->section == 'lesson_with_mentor') {
-                        $lessons               = array_merge($lessons, $section->contents['ids']);
-                        $data['lessons_'.$key] = $lessonRepository->activeLesson(['ids' => $lessons]);
-                    }
-                    if ($section->section == 'single_course') {
-                        $courses               = array_merge($courses, $section->contents['ids']);
-                        $data['courses_'.$key] = $courseRepository->findCourses($courses, ['category.language']);
-                    }
-                    if ($section->section == 'featured_course') {
-                        $featured_courses               = array_merge($featured_courses, $section->contents['ids']);
-                        $data['featured_courses_'.$key] = $courseRepository->findCourses($featured_courses, ['category.language']);
-                    }
-                }
-                if ($section->section == 'blog_news') {
-                    $data['blogs'] = $blogRepository->activeBlogs(['take' => 3]);
-                }
-                if ($section->section == 'success_story') {
-                    $data['success_stories'] = $successStoriesRepository->activeStories();
-                }
-                if ($section->section == 'top_courses') {
-                    $data['top_course_categories'] = $categoryRepository->activeCategories([
-                        'take'       => 4,
-                        'top_course' => 1,
-                        'type'       => 'course',
-                        'parent_id'  => 1,
-                    ], ['activeCourses.category.language']);
-                }
-
-                if ($section->section == 'counter_section') {
-                    $total_rating            = Rating::where('status', 1)->where('commentable_type', Course::class)->sum('rating');
-                    $data['total_course']    = Course::where('status', 'approved')->count();
-                    $data['total_students']  = $total_students;
-                    $data['total_rating']    = $total_rating;
-                    $data['total_satisfies'] = $total_students ? ($total_rating / ($total_students * 5) * 100) : 0;
-                }
-
-                if ($section->section == 'fun_fact') {
-                    $data['total_videos'] = Lesson::where('lesson_type', 'video')->count();
-                }
-                $instructors = $subjects = $lessons = $courses = $featured_courses = [];
-            }
-
-            $data['testimonials'] = $testimonialRepository->activeTestimonials();
-            $data['partners']     = $brandRepository->activeBrands();
+            $data = [];
+            $data['course'] = \App\Models\Course::with(['category.language', 'lessons', 'instructor', 'reviews'])->where('status', 'approved')->first();
+            $data['success_stories'] = $successStoriesRepository->activeStories();
 
             // dd($data);
 

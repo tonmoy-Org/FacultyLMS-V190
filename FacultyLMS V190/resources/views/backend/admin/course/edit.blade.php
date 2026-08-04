@@ -1125,6 +1125,26 @@
                                 id="courseFAQ" role="tabpanel" aria-labelledby="faq" tabindex="0">
                                 <div class="row">
                                     <div class="col-lg-12">
+                                        
+                                        <!-- FAQ Image Upload -->
+                                        <div class="card mb-4 mt-2 border-0 shadow-sm">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-3">{{ __('FAQ Section Image') }}</h5>
+                                                <p class="text-muted mb-4">{{ __('Upload an image to display on the right side of the FAQ section on the single course page.') }}</p>
+                                                @include('backend.common.media-input', [
+                                                    'title' => __('FAQ Image'),
+                                                    'name' => 'faq_image_media_id',
+                                                    'col' => 'col-12',
+                                                    'size' => '(800x600)',
+                                                    'image' => old('faq_image_media_id', $course->faq_image_media_id),
+                                                    'label' => __('FAQ Image'),
+                                                    'edit' => $course,
+                                                    'image_object' => $course->faq_image,
+                                                    'media_id' => $course->faq_image_media_id,
+                                                ])
+                                            </div>
+                                        </div>
+
                                         <div class="oftions-content-right mb-20">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#add_faq"
                                                class="button-default">{{ __('add_faq') }} <i
@@ -1225,6 +1245,7 @@
 @endpush
 @push('js_asset')
     <!--====== media.js ======-->
+    <script src="{{ static_asset('admin/js/axios.min.js') }}"></script>
     <script src="{{ static_asset('admin/js/dropzone.min.js') }}"></script>
     <script src="{{ static_asset('admin/js/moment.min.js') }}"></script>
     <script src="{{ static_asset('admin/js/daterangepicker.js') }}"></script>

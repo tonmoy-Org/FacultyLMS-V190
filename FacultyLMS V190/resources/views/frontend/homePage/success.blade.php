@@ -20,7 +20,7 @@
     }
     .custom-testimonial-card .card-top-image {
         width: 100%;
-        height: auto;
+        height: 250px;
         object-fit: cover;
     }
     .custom-testimonial-card .card-body {

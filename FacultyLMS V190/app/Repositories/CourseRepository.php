@@ -28,6 +28,10 @@ class CourseRepository
             $request['image'] = $this->getImageWithRecommendedSize($request['image_media_id'], '402', '248', true);
         }
 
+        if (arrayCheck('faq_image_media_id', $request)) {
+            $request['faq_image'] = $this->getImageWithRecommendedSize($request['faq_image_media_id'], '800', '600', true);
+        }
+
         if (arrayCheck('meta_image', $request)) {
             $request['meta_image'] = $this->getImageWithRecommendedSize($request['meta_image'], '1200', '630', true);
         } else {
@@ -88,6 +92,10 @@ class CourseRepository
 
         if (arrayCheck('image_media_id', $request)) {
             $request['image'] = $this->getImageWithRecommendedSize($request['image_media_id'], '402', '248', true);
+        }
+
+        if (arrayCheck('faq_image_media_id', $request)) {
+            $request['faq_image'] = $this->getImageWithRecommendedSize($request['faq_image_media_id'], '800', '600', true);
         }
 
         if (! arrayCheck('meta_title', $request) && arrayCheck('title', $request)) {

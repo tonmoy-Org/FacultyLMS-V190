@@ -192,7 +192,13 @@ function load_modal_content(is_html) {
                 $('.load-button').addClass('d-none');
             }
 
-            let ids = selector.find('input[type="hidden"]').val().split(',');
+            let ids = [];
+            if (selector && typeof selector.find === 'function') {
+                let hiddenVal = selector.find('input[type="hidden"]').val();
+                if (hiddenVal) {
+                    ids = hiddenVal.split(',');
+                }
+            }
 
             let checkboxes = $('.media_selector');
             $.each(checkboxes, function (index, value) {
