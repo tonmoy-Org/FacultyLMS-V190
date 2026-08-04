@@ -8,6 +8,7 @@ use App\Models\Organization;
 use App\Models\User;
 use App\Repositories\InstructorRepository;
 use App\Repositories\OrganizationRepository;
+use App\Repositories\PageRepository;
 use App\Traits\SendMailTrait;
 use App\Traits\SendNotification;
 use Brian2694\Toastr\Facades\Toastr;
@@ -36,7 +37,15 @@ class RegisteredUserController extends Controller
 
     public function create(): View
     {
-        return view('auth.register');
+        $pageRepository = app(PageRepository::class);
+        $privacy        = $pageRepository->get(setting('privacy_agreement'));
+        $terms          = $pageRepository->get(setting('terms_agreement'));
+        $data           = [
+            'privacy_url'     => $privacy ? url('page/' . $privacy->link) : '#',
+            'terms_condition' => $terms ? url('page/' . $terms->link) : '#',
+        ];
+
+        return view('frontend.auth.sign_up', $data);
     }
 
     // student register
