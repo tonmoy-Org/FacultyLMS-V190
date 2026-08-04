@@ -74,35 +74,9 @@
         color: #f59e0b;
         font-size: 12px;
     }
-    .custom-testimonial-heading .subtitle {
-        color: #ff6b00;
-        font-size: 14px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 15px;
-        display: block;
-    }
-    .custom-testimonial-heading h2 {
-        font-size: 40px;
-        font-weight: 700;
-        color: #110B3A;
-        margin-bottom: 25px;
-        line-height: 1.3;
-    }
-    .custom-testimonial-heading p {
-        color: #6b7280;
-        font-size: 16px;
-        line-height: 1.8;
-    }
-    @media (max-width: 991px) {
-        .custom-testimonial-heading {
-            margin-bottom: 40px;
-        }
-    }
 </style>
 
-<section class="success-story-section p-t-80 p-b-80 custom-success-section">
+<section class="success-story-section p-t-80 p-b-80 bg-white">
     <div class="container container-1278">
         <div class="row align-items-center">
             
@@ -139,11 +113,12 @@
                 @endif
             </div>
 
-            <div class="col-lg-5 order-1 order-lg-2 pl-lg-5">
-                <div class="custom-testimonial-heading" data-aos="fade-left" dir="{{ systemLanguage() ? systemLanguage()->text_direction : 'ltr' }}">
-                    <span class="subtitle">{{__('success_story') }}</span>
-                    <h2>{{ isset($section->contents['title']) && !empty($section->contents['title']) ? $section->contents['title'] : __('What Says My Students About The Platform') }}</h2>
-                    <p>{{ isset($section->contents['sub_title']) && !empty($section->contents['sub_title']) ? $section->contents['sub_title'] : __('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra.') }}</p>
+            <div class="col-lg-5 order-1 order-lg-2 pl-lg-5 mb-5 mb-lg-0">
+                <div data-aos="fade-left" dir="{{ systemLanguage() ? systemLanguage()->text_direction : 'ltr' }}">
+                    <span class="d-block fw-bold text-uppercase mb-3" style="color: #12b884; font-size: 14px; letter-spacing: 1.5px;">{{__('success_story') }}</span>
+                    <h2 class="fw-bold mb-4" style="font-size: 40px; color: #110B3A; line-height: 1.3;">{{ isset($section->contents['title']) && !empty($section->contents['title']) ? $section->contents['title'] : __('What Says My Students About The Platform') }}</h2>
+                    <p class="text-secondary mb-4" style="font-size: 16px; line-height: 1.8;">{{ isset($section->contents['sub_title']) && !empty($section->contents['sub_title']) ? $section->contents['sub_title'] : __('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra.') }}</p>
+                    <a href="{{ url('success') }}" class="template-btn">{{ __('View All Success Stories') }}</a>
                 </div>
             </div>
 

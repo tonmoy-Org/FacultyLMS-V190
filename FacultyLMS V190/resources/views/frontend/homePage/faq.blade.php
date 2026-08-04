@@ -1,27 +1,6 @@
 <!--====== Start FAQ Section ======-->
 @if(isset($course) && count($course->faqs) > 0)
 <style>
-    .custom-faq-section {
-        background-color: #f0faf9;
-        padding: 80px 0;
-    }
-    .custom-faq-section .subtitle {
-        color: #ff6b00;
-        font-size: 14px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 15px;
-        display: block;
-    }
-    .custom-faq-section h2 {
-        font-size: 40px;
-        font-weight: 700;
-        color: #110B3A;
-        margin-bottom: 40px;
-        line-height: 1.3;
-    }
-    
     .custom-faq-accordion .accordion-item {
         border: none;
         border-radius: 8px;
@@ -47,7 +26,7 @@
     }
     .custom-faq-accordion .accordion-icon {
         font-size: 24px;
-        color: #ff6b00;
+        color: #12b884;
         margin-left: auto;
         font-weight: 300;
         transition: transform 0.3s;
@@ -73,13 +52,13 @@
     }
 </style>
 
-<section class="custom-faq-section">
+<section class="faq-section p-t-80 p-b-80 bg-white">
     <div class="container container-1278">
         <div class="row align-items-center">
             
             <div class="col-lg-6 mb-5 mb-lg-0">
-                <span class="subtitle">POPULAR QUESTIONS</span>
-                <h2>Frequently Asked Questions</h2>
+                <span class="d-block fw-bold text-uppercase mb-3" style="color: #12b884; font-size: 14px; letter-spacing: 1.5px;">POPULAR QUESTIONS</span>
+                <h2 class="fw-bold mb-4" style="font-size: 40px; color: #110B3A; line-height: 1.3;">Frequently Asked Questions</h2>
                 
                 <div class="accordion custom-faq-accordion" id="courseFaqAccordion">
                     @foreach($course->faqs as $key => $faq)

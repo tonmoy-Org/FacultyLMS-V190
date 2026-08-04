@@ -151,6 +151,12 @@
                             </div>
                             <div class="col-xl-4 col-lg-4 col-sm-12">
                                 <div class="mb-4">
+                                    <label class="form-label">Promo Banner BG Color</label>
+                                    <input type="text" name="promo_banner_bg_color" value="{{ setting('promo_banner_bg_color') ?: '#fcd34d' }}" class="form-control" placeholder="#fcd34d">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-sm-12">
+                                <div class="mb-4">
                                     <label class="form-label">Countdown Target Date (e.g., 2026-12-31 23:59:59)</label>
                                     <input type="text" name="promo_banner_countdown" value="{{ setting('promo_banner_countdown') }}" class="form-control" placeholder="YYYY-MM-DD HH:MM:SS">
                                 </div>

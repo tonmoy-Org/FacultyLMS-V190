@@ -1,47 +1,5 @@
 <!--====== Start Success Video Section ======-->
 <style>
-    .custom-success-video-section {
-        background-color: #ffffff;
-        padding: 80px 0;
-    }
-    .custom-success-video-section .subtitle {
-        color: #ff6b00;
-        font-size: 14px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 15px;
-        display: block;
-    }
-    .custom-success-video-section h2 {
-        font-size: 40px;
-        font-weight: 700;
-        color: #110B3A;
-        margin-bottom: 20px;
-        line-height: 1.3;
-    }
-    .custom-success-video-section p {
-        color: #6b7280;
-        font-size: 16px;
-        line-height: 1.8;
-        margin-bottom: 35px;
-    }
-    .custom-success-video-section .enroll-btn {
-        background-color: #ff6b00;
-        color: #ffffff;
-        font-weight: 600;
-        font-size: 16px;
-        padding: 15px 35px;
-        border-radius: 30px;
-        display: inline-block;
-        transition: all 0.3s ease;
-        border: 2px solid #ff6b00;
-    }
-    .custom-success-video-section .enroll-btn:hover {
-        background-color: transparent;
-        color: #ff6b00;
-    }
-
     .video-banner-wrapper {
         position: relative;
         border-radius: 12px;
@@ -63,7 +21,7 @@
         transform: translate(-50%, -50%);
         width: 80px;
         height: 80px;
-        background-color: #ff6b00;
+        background-color: #12b884;
         color: white;
         border-radius: 5px;
         display: flex;
@@ -71,28 +29,29 @@
         justify-content: center;
         font-size: 30px;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+        box-shadow: 0 4px 15px rgba(18, 184, 132, 0.4);
     }
     .video-banner-wrapper:hover .play-btn-overlay {
         transform: translate(-50%, -50%) scale(1.1);
-        background-color: #e65c00;
+        background-color: #0fa173;
+        color: white;
     }
     .play-btn-overlay i {
         margin-left: 5px;
     }
 </style>
 
-<section class="custom-success-video-section">
+<section class="success-video-section p-t-80 p-b-80 bg-white">
     <div class="container container-1278">
         <div class="row align-items-center">
             
             <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-up">
-                <span class="subtitle">{{ setting('success_video_subtitle') }}</span>
-                <h2>{{ setting('success_video_title') }}</h2>
-                <p>
+                <span class="d-block fw-bold text-uppercase mb-3" style="color: #12b884; font-size: 14px; letter-spacing: 1.5px;">{{ setting('success_video_subtitle') }}</span>
+                <h2 class="fw-bold mb-4" style="font-size: 40px; color: #110B3A; line-height: 1.3;">{{ setting('success_video_title') }}</h2>
+                <p class="text-secondary mb-5" style="font-size: 16px; line-height: 1.8;">
                     {{ setting('success_video_description') }}
                 </p>
-                <a href="{{ isset($course) ? route('course.details', $course->slug) : '#' }}" class="enroll-btn">
+                <a href="{{ isset($course) ? route('course.details', $course->slug) : '#' }}" class="template-btn">
                     {{ setting('success_video_button_text') }}
                 </a>
             </div>
