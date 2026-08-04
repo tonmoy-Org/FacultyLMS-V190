@@ -7,9 +7,9 @@
     <!--====== End Hero Area ======-->
     @foreach($sections as $key=> $section)
         <!--====== Start Top Courses Section ======-->
-        @if($section->section == 'top_courses')
-            @include('frontend.homePage.top_course')
-        @endif
+{{--        @if($section->section == 'top_courses')--}}
+{{--            @include('frontend.homePage.top_course')--}}
+{{--        @endif--}}
         <!--====== End Top Courses Section ======-->
 
         @if($section->section == 'fun_fact')
@@ -30,9 +30,9 @@
         <!--====== End Pricing Section ======-->
 
         <!--====== Start Success Story Section ======-->
-        @if($section->section == 'success_story')
-            @include('frontend.homePage.success')
-        @endif
+{{--        @if($section->section == 'success_story')--}}
+{{--            @include('frontend.homePage.success')--}}
+{{--        @endif--}}
         <!--====== End Success Story Section ======-->
 
         <!--====== Start Counter Section ======-->
@@ -70,16 +70,16 @@
         <!--====== End Featured Course Section ======-->
 
         <!--====== Start Featured Blog Section ======-->
-        @if($section->section == 'blog_news')
-            @include('frontend.homePage.blog_news')
-        @endif
+{{--        @if($section->section == 'blog_news')--}}
+{{--            @include('frontend.homePage.blog_news')--}}
+{{--        @endif--}}
         <!--====== End Featured Blog Section ======-->
 
-        <!--====== start Student testimonial Section ======-->
-        @if($section->section == 'testimonial')
-            @include('frontend.homePage.testimonial')
-        @endif
-        <!--====== End Student testimonial Section ======-->
+        <!--====== Start Student Feedback Section ======-->
+{{--        @if($section->section == 'testimonial')--}}
+{{--            @include('frontend.homePage.testimonial')--}}
+{{--        @endif--}}
+        <!--====== End Student Feedback Section ======-->
 
         <!--====== Start Become Instructor Section ======-->
         @if(!Auth::check() || auth()->user()->role_id == 3)
@@ -95,6 +95,8 @@
         @endif
         <!--====== End Brands Section ======-->
     @endforeach
+
+    @include('frontend.homePage.success')
 
     @include('frontend.homePage.cta')
 

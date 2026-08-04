@@ -8,9 +8,9 @@
 
     @foreach($sections as $key=> $section)
         <!--====== Start Top Courses Section ======-->
-        @if($section->section == 'top_courses')
-            @include('frontend.homePage.top_course')
-        @endif
+{{--        @if($section->section == 'top_courses')--}}
+{{--            @include('frontend.homePage.top_course')--}}
+{{--        @endif--}}
         <!--====== End Top Courses Section ======-->
 
 
@@ -34,9 +34,9 @@
         @endif
 
         <!--====== Start Success Story Section ======-->
-        @if($section->section == 'success_story')
-            @include('frontend.homePage.success')
-        @endif
+{{--        @if($section->section == 'success_story')--}}
+{{--            @include('frontend.homePage.success')--}}
+{{--        @endif--}}
         <!--====== End Success Story Section ======-->
 
         <!--====== Start Our Instructor Section ======-->
@@ -76,15 +76,15 @@
         <!--====== End Featured Course Section ======-->
 
         <!--====== Start Featured Blog Section ======-->
-        @if($section->section == 'blog_news')
-            @include('frontend.homePage.blog_news')
-        @endif
+{{--        @if($section->section == 'blog_news')--}}
+{{--            @include('frontend.homePage.blog_news')--}}
+{{--        @endif--}}
         <!--====== End Featured Blog Section ======-->
 
         <!--====== start Student testimonial Section ======-->
-        @if($section->section == 'testimonial')
-            @include('frontend.homePage.testimonial')
-        @endif
+{{--        @if($section->section == 'testimonial')--}}
+{{--            @include('frontend.homePage.testimonial')--}}
+{{--        @endif--}}
         <!--====== End Student testimonial Section ======-->
 
         <!--====== Start Become Instructor Section ======-->
@@ -99,5 +99,8 @@
         @endif
         <!--====== End Brands Section ======-->
     @endforeach
+
+    @include('frontend.homePage.success')
+
     @include('frontend.layouts.footer')
 @endsection
