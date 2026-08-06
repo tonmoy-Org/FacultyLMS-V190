@@ -21,4 +21,5 @@
         </div>
     </div>
 </section>
+@include('frontend.homePage.feature_section')
 <!--====== End Hero Area ======-->

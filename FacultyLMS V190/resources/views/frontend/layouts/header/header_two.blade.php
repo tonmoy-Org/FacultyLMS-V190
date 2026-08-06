@@ -64,8 +64,8 @@
                                           </li>
                                       @else
                                           <li class="dropdown-list-item">
-                                              <a href="{{ route('login') }}"><i
-                                                      class="fas fa-clipboard-list"></i>{{ __('login') }}</a>
+                                              <a href="{{ route('student.sign_up') }}"><i
+                                                      class="fas fa-clipboard-list"></i>{{ __('get_access') }}</a>
                                           </li>
                                       @endif
                                   </ul>

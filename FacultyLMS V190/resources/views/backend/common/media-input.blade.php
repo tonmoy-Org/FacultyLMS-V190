@@ -45,8 +45,9 @@
 @else
     @php
         $media = '';
-        if ($image) {
-            $media = \App\Models\MediaLibrary::find($image);
+        $imageVal = is_array($image) ? ($image['id'] ?? '') : $image;
+        if ($imageVal && (is_numeric($imageVal) || is_string($imageVal))) {
+            $media = \App\Models\MediaLibrary::find($imageVal);
         }
     @endphp
     <div class="{{ $col }} custom-image">
@@ -60,7 +61,7 @@
                 <span class="file-btn">{{ __('choose_file') }}</span>
             </label>
             <input class="d-none" type="hidden" name="{{ $name }}" data-type="{{ $type ?? '' }}" id="apkThumb"
-                   value="{{ $image }}">
+                   value="{{ is_array($image) ? ($image['id'] ?? '') : $image }}">
         </div>
         <div class="selected-files d-flex flex-wrap gap-20">
             @if($media)

@@ -321,6 +321,14 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::get('become-instructor-content', [WebsiteSettingController::class, 'instructorContent'])->name('website.instructor_content');
         Route::post('become-instructor-content', [WebsiteSettingController::class, 'saveInstructorContent'])->name('website.instructor_content');
 
+        //website webinar section setting
+        Route::get('webinar-section', [WebsiteSettingController::class, 'webinarSection'])->name('website.webinar_section');
+        Route::match(['get', 'post'], 'save-webinar-section', [WebsiteSettingController::class, 'saveWebinarSection'])->name('website.webinar_section.save');
+
+        //website feature section setting
+        Route::get('feature-section', [WebsiteSettingController::class, 'featureSection'])->name('website.feature_section');
+        Route::match(['get', 'post'], 'save-feature-section', [WebsiteSettingController::class, 'saveFeatureSection'])->name('website.feature_section.save');
+
         //website seo
         Route::get('website-seo', [WebsiteSettingController::class, 'seo'])->name('website.seo');
         Route::post('website-seo', [WebsiteSettingController::class, 'saveSeoSetting'])->name('website.seo');

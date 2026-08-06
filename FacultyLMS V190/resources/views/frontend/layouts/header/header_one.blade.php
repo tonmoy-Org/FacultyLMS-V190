@@ -210,9 +210,9 @@
                             </li>
                         @else
                             <li class="login-btn">
-                                <a href="{{ route('login') }}" class="template-btn">
+                                <a href="{{ route('student.sign_up') }}" class="template-btn">
                                     <i class="bx bx-user"></i>
-                                    <span>{{ __('login') }}</span>
+                                    <span>{{ __('get_access') }}</span>
                                 </a>
                             </li>
                         @endif

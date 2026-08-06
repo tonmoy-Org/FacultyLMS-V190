@@ -95,6 +95,24 @@
                         </a>
                     </li>
                 @endif
+                @if(hasPermission('website.webinar_section'))
+                    <li>
+                        <a href="{{ route('website.webinar_section') }}"
+                           class="{{ request()->routeIs('website.webinar_section') ? 'active' : '' }}">
+                            <span class="icon"><i class="las la-video"></i></span>
+                            <span>{{ __('webinar_section') }}</span>
+                        </a>
+                    </li>
+                @endif
+                @if(hasPermission('website.feature_section'))
+                    <li>
+                        <a href="{{ route('website.feature_section') }}"
+                           class="{{ request()->routeIs('website.feature_section') ? 'active' : '' }}">
+                            <span class="icon"><i class="las la-th-large"></i></span>
+                            <span>{{ __('feature_section') }}</span>
+                        </a>
+                    </li>
+                @endif
                 @if(hasPermission('custom.css'))
                     <li>
                         <a href="{{ route('custom.css') }}"

@@ -151,8 +151,8 @@
                                 </li>
                             @else
                             <li class="d-none d-md-block">
-                                <a href="{{ route('login') }}" class="template-btn">
-                                    <i class="fal fa-sign-in"></i> {{__('sign_in')}}
+                                <a href="{{ route('student.sign_up') }}" class="template-btn">
+                                    <i class="fal fa-sign-in"></i> {{__('get_access')}}
                                 </a>
                             </li>
                             @endif
