@@ -464,6 +464,301 @@ class WebsiteSettingController extends Controller
         }
     }
 
+    public function aboutSection(Request $request)
+    {
+        try {
+            $data = [
+                'languages' => $this->language->all(),
+                'lang'      => $request->lang == '' ? app()->getLocale() : $request->lang,
+            ];
+
+            return view('backend.admin.website_setting.about_section', $data);
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+
+            return back();
+        }
+    }
+
+    public function saveAboutSection(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            return redirect()->route('website.about_section');
+        }
+
+        if (config('app.demo_mode')) {
+            $data = [
+                'status' => 'danger',
+                'error'  => __('this_function_is_disabled_in_demo_server'),
+                'title'  => 'error',
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+            Toastr::error(__('this_function_is_disabled_in_demo_server'));
+            return back();
+        }
+
+        try {
+            $this->setting->update($request);
+            Toastr::success(__('update_successful'));
+            $data = [
+                'success' => __('update_successful'),
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+
+            return back();
+        } catch (\Exception $e) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'error' => $e->getMessage(),
+                ]);
+            }
+            Toastr::error($e->getMessage());
+            return back();
+        }
+    }
+
+    public function whyChooseSection(Request $request)
+    {
+        try {
+            $data = [
+                'languages' => $this->language->all(),
+                'lang'      => $request->lang == '' ? app()->getLocale() : $request->lang,
+            ];
+
+            return view('backend.admin.website_setting.why_choose_section', $data);
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+
+            return back();
+        }
+    }
+
+    public function saveWhyChooseSection(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            return redirect()->route('website.why_choose_section');
+        }
+
+        if (config('app.demo_mode')) {
+            $data = [
+                'status' => 'danger',
+                'error'  => __('this_function_is_disabled_in_demo_server'),
+                'title'  => 'error',
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+            Toastr::error(__('this_function_is_disabled_in_demo_server'));
+            return back();
+        }
+
+        try {
+            $this->setting->update($request);
+            Toastr::success(__('update_successful'));
+            $data = [
+                'success' => __('update_successful'),
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+
+            return back();
+        } catch (\Exception $e) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'error' => $e->getMessage(),
+                ]);
+            }
+            Toastr::error($e->getMessage());
+            return back();
+        }
+    }
+
+    public function successVideoSection(Request $request)
+    {
+        try {
+            $data = [
+                'languages' => $this->language->all(),
+                'lang'      => $request->lang == '' ? app()->getLocale() : $request->lang,
+            ];
+
+            return view('backend.admin.website_setting.success_video_section', $data);
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+
+            return back();
+        }
+    }
+
+    public function saveSuccessVideoSection(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            return redirect()->route('website.success_video_section');
+        }
+
+        if (config('app.demo_mode')) {
+            $data = [
+                'status' => 'danger',
+                'error'  => __('this_function_is_disabled_in_demo_server'),
+                'title'  => 'error',
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+            Toastr::error(__('this_function_is_disabled_in_demo_server'));
+            return back();
+        }
+
+        try {
+            $this->setting->update($request);
+            Toastr::success(__('update_successful'));
+            $data = [
+                'success' => __('update_successful'),
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+
+            return back();
+        } catch (\Exception $e) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'error' => $e->getMessage(),
+                ]);
+            }
+            Toastr::error($e->getMessage());
+            return back();
+        }
+    }
+
+    public function adBannerSection(Request $request)
+    {
+        try {
+            $data = [
+                'languages' => $this->language->all(),
+                'lang'      => $request->lang == '' ? app()->getLocale() : $request->lang,
+            ];
+
+            return view('backend.admin.website_setting.ad_banner_section', $data);
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+
+            return back();
+        }
+    }
+
+    public function saveAdBannerSection(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            return redirect()->route('website.ad_banner_section');
+        }
+
+        if (config('app.demo_mode')) {
+            $data = [
+                'status' => 'danger',
+                'error'  => __('this_function_is_disabled_in_demo_server'),
+                'title'  => 'error',
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+            Toastr::error(__('this_function_is_disabled_in_demo_server'));
+            return back();
+        }
+
+        try {
+            $this->setting->update($request);
+            Toastr::success(__('update_successful'));
+            $data = [
+                'success' => __('update_successful'),
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+
+            return back();
+        } catch (\Exception $e) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'error' => $e->getMessage(),
+                ]);
+            }
+            Toastr::error($e->getMessage());
+            return back();
+        }
+    }
+
+    public function singleCourseSection(Request $request)
+    {
+        try {
+            $data = [
+                'languages' => $this->language->all(),
+                'lang'      => $request->lang == '' ? app()->getLocale() : $request->lang,
+            ];
+
+            return view('backend.admin.website_setting.single_course_section', $data);
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+
+            return back();
+        }
+    }
+
+    public function saveSingleCourseSection(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            return redirect()->route('website.single_course_section');
+        }
+
+        if (config('app.demo_mode')) {
+            $data = [
+                'status' => 'danger',
+                'error'  => __('this_function_is_disabled_in_demo_server'),
+                'title'  => 'error',
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+            Toastr::error(__('this_function_is_disabled_in_demo_server'));
+            return back();
+        }
+
+        try {
+            $this->setting->update($request);
+            Toastr::success(__('update_successful'));
+            $data = [
+                'success' => __('update_successful'),
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+
+            return back();
+        } catch (\Exception $e) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'error' => $e->getMessage(),
+                ]);
+            }
+            Toastr::error($e->getMessage());
+            return back();
+        }
+    }
+
     public function seo(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         try {

@@ -2273,5 +2273,7 @@
     "8": "8",
     "change_status": "Change Status",
     "in_review": "In Review",
-    "maintenance_mode": "Maintenance Mode"
+    "maintenance_mode": "Maintenance Mode",
+    "about_me_section": "قسم نبذة عني",
+    "tag_badge_text": "نص الشارة"
 }

@@ -28,6 +28,9 @@ class SettingRepository
             }
 
             if (in_array($key, get_yrsetting('setting_image'))) {
+                if (!$request->hasFile($key)) {
+                    continue;
+                }
 
                 if (! blank($setting)) {
                     $this->deleteImage(setting($key));
@@ -35,7 +38,9 @@ class SettingRepository
 
                 $response = $this->saveImage($request->file($key), $key);
 
-                $value    = serialize($response['images']);
+                if ($response && isset($response['images'])) {
+                    $value = serialize($response['images']);
+                }
             }
 
             if (in_array($key, get_yrsetting('setting_array'))) {

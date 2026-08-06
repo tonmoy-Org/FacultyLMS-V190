@@ -2304,5 +2304,15 @@
     "14": "5",
     "15": "6",
     "16": "7",
-    "17": "8"
+    "17": "8",
+    "about_me_section": "অ্যাবাউট মি সেকশন",
+    "tag_badge_text": "ট্যাগ / ব্যাজ টেক্সট",
+    "why_choose_section": "হোয়াই চুজ মি সেকশন",
+    "success_video_section": "সাকসেস ভিডিও সেকশন",
+    "ad_banner_section": "অ্যাড ব্যানার সেকশন",
+    "ad_banner": "অ্যাড ব্যানার",
+    "ad_banner_link_url": "অ্যাড ব্যানার লিংক URL",
+    "banner_image": "ব্যানার ইমেজ",
+    "single_course_section": "সিঙ্গেল কোর্স সেকশন",
+    "course_image": "কোর্স ইমেজ"
 }

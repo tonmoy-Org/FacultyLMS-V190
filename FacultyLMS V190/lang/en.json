@@ -2286,5 +2286,15 @@
     "enrollment_approved_successfully": "Enrollment Approved Successfully",
     "enrollment_rejected_successfully": "Enrollment Rejected Successfully",
     "payable_amount": "Payable Amount",
-    "you_cannot_access_this_course": "You Cannot Access This Course"
+    "you_cannot_access_this_course": "You Cannot Access This Course",
+    "about_me_section": "About Me Section",
+    "tag_badge_text": "Tag / Badge Text",
+    "why_choose_section": "Why Choose Me Section",
+    "success_video_section": "Success Video Section",
+    "ad_banner_section": "Ad Banner Section",
+    "ad_banner": "Ad Banner",
+    "ad_banner_link_url": "Ad Banner Link URL",
+    "banner_image": "Banner Image",
+    "single_course_section": "Single Course Section",
+    "course_image": "Course Image"
 }

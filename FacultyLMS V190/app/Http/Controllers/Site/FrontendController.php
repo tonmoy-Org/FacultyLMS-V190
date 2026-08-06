@@ -361,6 +361,48 @@ class FrontendController extends Controller
         return view('frontend.contact_us');
     }
 
+    public function privacyPolicy(PageRepository $pageRepository)
+    {
+        try {
+            $page = \App\Models\Page::where('link', 'privacy-policy')->orWhere('link', 'privacy_policy')->first();
+            if ($page) {
+                $page_info = $pageRepository->getByLang($page->id, app()->getLocale());
+                if ($page_info && !empty($page_info->content)) {
+                    return view('frontend.page', compact('page_info'));
+                }
+            }
+        } catch (\Exception $e) {}
+        return view('frontend.privacy_policy');
+    }
+
+    public function termsPolicy(PageRepository $pageRepository)
+    {
+        try {
+            $page = \App\Models\Page::where('link', 'terms-and-conditions')->orWhere('link', 'terms_conditions')->first();
+            if ($page) {
+                $page_info = $pageRepository->getByLang($page->id, app()->getLocale());
+                if ($page_info && !empty($page_info->content)) {
+                    return view('frontend.page', compact('page_info'));
+                }
+            }
+        } catch (\Exception $e) {}
+        return view('frontend.terms_conditions');
+    }
+
+    public function refundPolicy(PageRepository $pageRepository)
+    {
+        try {
+            $page = \App\Models\Page::where('link', 'refund-policy')->orWhere('link', 'refund_policy')->first();
+            if ($page) {
+                $page_info = $pageRepository->getByLang($page->id, app()->getLocale());
+                if ($page_info && !empty($page_info->content)) {
+                    return view('frontend.page', compact('page_info'));
+                }
+            }
+        } catch (\Exception $e) {}
+        return view('frontend.refund_policy');
+    }
+
     public function submitTestimonial(Request $request, \App\Repositories\SuccessStoryRepository $successStoryRepository)
     {
         $q = $request->q;

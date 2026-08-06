@@ -94,8 +94,112 @@
     <!--====== Start Feature Cards Section (Life Time Access, Free Course Materials, Dedicated Support) ======-->
     @include('frontend.homePage.feature_section')
 
+    <!--====== Start About Me Section ======-->
+    @include('frontend.homePage.about_me_section')
+
+    <!--====== Start Stats Counter Section (Dynamic Database System Counts & Theme Green) ======-->
+    @php
+        // 1. Dynamic Enrolled Students Count from DB
+        $total_enrolments = \App\Models\Enroll::count();
+        if ($total_enrolments == 0) {
+            $total_enrolments = \App\Models\User::where('user_type', 'student')->count();
+        }
+        $stat1_number = $total_enrolments > 0 ? number_format($total_enrolments) . '+' : (setting('instructor_stat1_number') ?: '1,200+');
+        $stat1_title  = setting('instructor_stat1_title') ?: 'Students Enrolled';
+
+        // 2. Dynamic Online Courses Count from DB
+        $total_courses = \App\Models\Course::where('status', 1)->count();
+        if ($total_courses == 0) {
+            $total_courses = \App\Models\Course::count();
+        }
+        $stat2_number = $total_courses > 0 ? number_format($total_courses) . '+' : (setting('instructor_stat2_number') ?: '15+');
+        $stat2_title  = setting('instructor_stat2_title') ?: 'Online Courses';
+
+        // 3. Dynamic Success Rate from Ratings / Success Stories or Setting
+        $total_ratings = \App\Models\Rating::count();
+        if ($total_ratings > 0) {
+            $avg_rating = \App\Models\Rating::avg('rating');
+            $stat3_number = round(($avg_rating / 5) * 100) . '%';
+        } else {
+            $stat3_number = setting('instructor_stat3_number') ?: '99%';
+        }
+        $stat3_title = setting('instructor_stat3_title') ?: 'Success Rate';
+    @endphp
+    <section class="stats-counter-section p-t-60 p-b-60 bg-white">
+        <div class="container container-1278">
+            <div class="row justify-content-center align-items-center g-4 text-center">
+                <!-- Stat 1: Students Enrolled -->
+                <div class="col-md-4 col-4" data-aos="fade-up" data-aos-delay="0">
+                    <div class="stat-counter-item">
+                        <h2 class="fw-bold mb-2" style="font-size: 3.4rem; color: #10b981; font-weight: 800; line-height: 1; letter-spacing: -1px;">
+                            {{ $stat1_number }}
+                        </h2>
+                        <h6 class="fw-bold mb-0" style="color: #1a1b4b; font-size: 17px;">
+                            {{ __($stat1_title) }}
+                        </h6>
+                    </div>
+                </div>
+
+                <!-- Stat 2: Online Courses -->
+                <div class="col-md-4 col-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-counter-item">
+                        <h2 class="fw-bold mb-2" style="font-size: 3.4rem; color: #10b981; font-weight: 800; line-height: 1; letter-spacing: -1px;">
+                            {{ $stat2_number }}
+                        </h2>
+                        <h6 class="fw-bold mb-0" style="color: #1a1b4b; font-size: 17px;">
+                            {{ __($stat2_title) }}
+                        </h6>
+                    </div>
+                </div>
+
+                <!-- Stat 3: Success Rate -->
+                <div class="col-md-4 col-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-counter-item">
+                        <h2 class="fw-bold mb-2" style="font-size: 3.4rem; color: #10b981; font-weight: 800; line-height: 1; letter-spacing: -1px;">
+                            {{ $stat3_number }}
+                        </h2>
+                        <h6 class="fw-bold mb-0" style="color: #1a1b4b; font-size: 17px;">
+                            {{ __($stat3_title) }}
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--====== Start Single Course Section ======-->
+    @include('frontend.homePage.single_course_section')
+
+    <!--====== Start Ad Banner 1 (Upper Home Section) ======-->
+    @php
+        $b1ImgSetting = setting('home_ad_banner_image_1') ?: setting('home_ad_banner_image');
+        $b1Url = '';
+        if ($b1ImgSetting) {
+            $b1Url = getFileLink('original_image', $b1ImgSetting);
+        }
+        $b1Status = setting('home_ad_banner_status_1') !== '0';
+        $b1Link = setting('home_ad_banner_link_1') ?: setting('home_ad_banner_link');
+    @endphp
+    @if($b1Url && $b1Status && !str_contains($b1Url, 'default'))
+    <section class="ad-banner-section-1 p-t-60 p-b-60 bg-white overflow-hidden">
+        <div class="container container-1278">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    @if($b1Link)
+                        <a href="{{ $b1Link }}" target="_blank" class="d-block w-100 overflow-hidden">
+                    @endif
+                        <img src="{{ $b1Url }}" alt="Ad Banner 1" class="img-fluid w-100" style="border-radius: 0px !important; width: 100%; max-height: 280px; object-fit: cover; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                    @if($b1Link)
+                        </a>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
     <!--====== Promo Banner Restored to Original Position ======-->
-    <section class="promo-banner-section p-t-60 bg-white">
+    <section class="promo-banner-section p-t-60 p-b-60 bg-white">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -131,44 +235,24 @@
             </div>
         </div>
     </section>
-    <!--====== Start Ad Banner Section ======-->
-    @php
-        $adBannerMediaId = setting('home_ad_banner_image');
-        $adBannerImageUrl = '';
-        if ($adBannerMediaId) {
-            $media = \App\Models\MediaLibrary::find($adBannerMediaId);
-            if ($media && $media->image_variants) {
-                $adBannerImageUrl = getFileLink('original_image', $media->image_variants);
-            }
-        }
-    @endphp
-    @if($adBannerImageUrl)
-    <section class="ad-banner-section" style="padding: 40px 0;">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12 text-center">
-                    @if(setting('home_ad_banner_link'))
-                        <a href="{{ setting('home_ad_banner_link') }}" target="_blank">
-                    @endif
-                        <img src="{{ $adBannerImageUrl }}" alt="Ad Banner" class="img-fluid rounded shadow-sm" style="width: 100%; object-fit: cover;">
-                    @if(setting('home_ad_banner_link'))
-                        </a>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </section>
-    @endif
-
     <!--====== Start What You Will Learn ======-->
     @if($course->outcomes)
-    <section class="what-you-learn-section p-t-80 p-b-80 bg-white">
-        <div class="container">
+    <section class="what-you-learn-section p-t-80 p-b-80 position-relative" style="background-color: #F9FAFB;">
+        <div class="container container-1278">
             <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <h2 class="text-center mb-5 fw-bold">What You Will Learn</h2>
-                    <div class="card shadow-sm border-0 rounded p-4 p-md-5">
-                        {!! $course->outcomes !!}
+                <div class="col-lg-10">
+                    <div class="common-heading text-center m-b-40">
+                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                            {{ __('WHAT YOU WILL LEARN') }}
+                        </span>
+                        <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 38px; line-height: 1.25;">
+                            {{ __('Course Outcomes & Key Takeaways') }}
+                        </h2>
+                    </div>
+                    <div class="card shadow-lg border-0 p-4 p-md-5" style="border-radius: 20px; background: #ffffff;">
+                        <div class="learn-outcomes-content" style="color: #475569; font-size: 16px; line-height: 1.8;">
+                            {!! $course->outcomes !!}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -176,19 +260,35 @@
     </section>
     @endif
 
-
     <!--====== Start Instructor Profile ======-->
-    @if($course->instructor)
+    @if(isset($course) && $course->instructor)
     <section class="instructor-section p-t-80 p-b-80 bg-white">
-        <div class="container">
-            <h2 class="text-center mb-5 fw-bold">Meet Your Instructor</h2>
+        <div class="container container-1278">
             <div class="row justify-content-center">
-                <div class="col-lg-6 text-center">
-                    <img src="{{ getFileLink('100x100', $course->instructor->image) }}" class="rounded-circle mb-4 shadow" alt="{{ $course->instructor->name }}" style="width: 150px; height: 150px; object-fit: cover;">
-                    <h4 class="fw-bold">{{ $course->instructor->name }}</h4>
-                    <p class="text-secondary mb-4">{{ $course->instructor->instructor->designation ?? 'Instructor' }}</p>
-                    <div class="text-secondary" style="line-height: 1.8;">
-                        {!! $course->instructor->about !!}
+                <div class="col-lg-8 text-center">
+                    <div class="common-heading text-center m-b-40">
+                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                            {{ __('MEET YOUR INSTRUCTOR') }}
+                        </span>
+                        <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 38px; line-height: 1.25;">
+                            {{ __('Learn From An Expert Mentor') }}
+                        </h2>
+                    </div>
+
+                    <div class="instructor-card p-4 p-md-5 bg-white shadow-lg border border-light" style="border-radius: 20px;">
+                        <img src="{{ getFileLink('100x100', $course->instructor->image) }}" 
+                             class="rounded-circle mb-4 shadow" 
+                             alt="{{ $course->instructor->name }}" 
+                             style="width: 130px; height: 130px; object-fit: cover; border: 4px solid #10b981; padding: 3px;">
+                        
+                        <h3 class="fw-bold mb-1" style="color: #1a1b4b; font-size: 24px;">{{ $course->instructor->name }}</h3>
+                        <span class="d-inline-block fw-semibold mb-4 px-3 py-1 rounded-pill" style="background: rgba(16, 185, 129, 0.12); color: #10b981; font-size: 14px;">
+                            {{ $course->instructor->instructor->designation ?? 'Lead Instructor' }}
+                        </span>
+                        
+                        <div class="text-secondary" style="line-height: 1.8; color: #64748b; font-size: 15.5px;">
+                            {!! $course->instructor->about !!}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -205,54 +305,42 @@
     <!--====== Start Success Story Section ======-->
     @include('frontend.homePage.success')
 
+    <!--====== Start Why Choose Me Section ======-->
+    @include('frontend.homePage.why_choose_section')
+
     <!--====== Start FAQ Section ======-->
     @include('frontend.homePage.faq')
 
-    <!--====== Start Newsletter & Countdown Overlapping Footer ======-->
-    <section class="newsletter-countdown-section" style="position: relative; z-index: 10; margin-bottom: -120px;">
-        <div class="container" style="max-width: 1300px;">
-            <div class="newsletter-box rounded-4 p-5 shadow-lg" style="background-color: {{ setting('promo_banner_bg_color') ?: '#ffb606' }};">
-                <div class="row align-items-center">
-                    
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <h3 class="fw-bold text-dark mb-2" style="font-size: 1.8rem;">Subscribe Newsletter</h3>
-                        <p class="text-dark mb-0" style="opacity: 0.8; font-size: 0.95rem;">
-                            {{ setting('newsletter_description') ?: 'Get the latest updates, exclusive discounts, and news directly to your inbox.' }}
-                        </p>
-                    </div>
+    <!--====== Start Ad Banner 2 (Lower Home Section) ======-->
+    @php
+        $b2ImgSetting = setting('home_ad_banner_image_2');
+        $b2Url = '';
+        if ($b2ImgSetting) {
+            $b2Url = getFileLink('original_image', $b2ImgSetting);
+        }
+        $b2Status = setting('home_ad_banner_status_2') !== '0';
+        $b2Link = setting('home_ad_banner_link_2');
+    @endphp
 
-                    <div class="col-lg-5 mb-4 mb-lg-0">
-                        <form action="{{ route('subscribe') }}" method="POST" class="d-flex w-100 bg-white rounded shadow-sm p-1">
-                            @csrf
-                            <input type="email" name="email" class="form-control border-0 shadow-none px-3" placeholder="Email" required style="background: transparent;">
-                            <button type="submit" class="btn btn-dark rounded px-4 py-2 d-flex align-items-center justify-content-center" style="background-color: #111; color: white;">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </form>
-                    </div>
-
-                    <div class="col-lg-3 text-center text-lg-end">
-                        <div class="mb-2 fw-bold text-dark text-center" style="font-size: 1.1rem;">Admission Now</div>
-                        <div class="mini-countdown d-flex justify-content-center justify-content-lg-center gap-2" id="promoCountdownFooter" data-target="{{ setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days')) }}">
-                            <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 50px;">
-                                <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
-                                <span class="small text-secondary" style="font-size: 10px;">DAYS</span>
-                            </div>
-                            <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 50px;">
-                                <h4 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
-                                <span class="small text-secondary" style="font-size: 10px;">HRS</span>
-                            </div>
-                            <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 50px;">
-                                <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
-                                <span class="small text-secondary" style="font-size: 10px;">MIN</span>
-                            </div>
-                        </div>
-                    </div>
-
+    @if($b2Url && $b2Status && !str_contains($b2Url, 'default'))
+    <section class="ad-banner-section-2 p-t-60 p-b-60 bg-white overflow-hidden">
+        <div class="container container-1278">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    @if($b2Link)
+                        <a href="{{ $b2Link }}" target="_blank" class="d-block w-100 overflow-hidden">
+                    @endif
+                        <img src="{{ $b2Url }}" alt="Ad Banner 2" class="img-fluid w-100" style="border-radius: 0px !important; width: 100%; max-height: 280px; object-fit: cover; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                    @if($b2Link)
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
     </section>
+    @endif
+
+
 
     <!--====== Global Countdown Script for both timers ======-->
     <script>

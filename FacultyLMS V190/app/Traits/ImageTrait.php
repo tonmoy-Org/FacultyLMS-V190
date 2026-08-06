@@ -908,13 +908,33 @@ trait ImageTrait
     public function deleteImage($files, $storage = 'local')
     {
         try {
-            foreach (array_slice($files, 1) as $file) {
+            if (empty($files)) {
+                return true;
+            }
+
+            if (is_string($files)) {
                 if ($storage == 'aws_s3') {
-                    Storage::disk('s3')->delete($file);
+                    Storage::disk('s3')->delete($files);
                 } elseif ($storage == 'wasabi') {
-                    Storage::disk('wasabi')->delete($file);
+                    Storage::disk('wasabi')->delete($files);
                 } else {
-                    File::delete('public/' . $file);
+                    File::delete('public/' . $files);
+                }
+                return true;
+            }
+
+            if (is_array($files)) {
+                $targetFiles = count($files) > 1 ? array_slice($files, 1) : $files;
+                foreach ($targetFiles as $file) {
+                    if (is_string($file)) {
+                        if ($storage == 'aws_s3') {
+                            Storage::disk('s3')->delete($file);
+                        } elseif ($storage == 'wasabi') {
+                            Storage::disk('wasabi')->delete($file);
+                        } else {
+                            File::delete('public/' . $file);
+                        }
+                    }
                 }
             }
 
@@ -1048,10 +1068,15 @@ trait ImageTrait
 
     protected function uploadToS3($files, $contentType)
     {
-        foreach (array_slice($files, 1) as $file) {
-            if ($file != '' && file_exists('public/' . $file)) {
-                Storage::disk('s3')->put($file, file_get_contents('public/' . $file), $contentType);
+        if (is_array($files)) {
+            $targetFiles = count($files) > 1 ? array_slice($files, 1) : $files;
+            foreach ($targetFiles as $file) {
+                if (is_string($file) && $file != '' && file_exists('public/' . $file)) {
+                    Storage::disk('s3')->put($file, file_get_contents('public/' . $file), $contentType);
+                }
             }
+        } elseif (is_string($files) && $files != '' && file_exists('public/' . $files)) {
+            Storage::disk('s3')->put($files, file_get_contents('public/' . $files), $contentType);
         }
 
         return true;
@@ -1070,10 +1095,15 @@ trait ImageTrait
 
     protected function uploadToWasabi($files, $contentType)
     {
-        foreach (array_slice($files, 1) as $file) {
-            if ($file != '' && file_exists('public/' . $file)) {
-                Storage::disk('wasabi')->put($file, file_get_contents('public/' . $file), $contentType);
+        if (is_array($files)) {
+            $targetFiles = count($files) > 1 ? array_slice($files, 1) : $files;
+            foreach ($targetFiles as $file) {
+                if (is_string($file) && $file != '' && file_exists('public/' . $file)) {
+                    Storage::disk('wasabi')->put($file, file_get_contents('public/' . $file), $contentType);
+                }
             }
+        } elseif (is_string($files) && $files != '' && file_exists('public/' . $files)) {
+            Storage::disk('wasabi')->put($files, file_get_contents('public/' . $files), $contentType);
         }
 
         return true;

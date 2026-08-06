@@ -1,183 +1,200 @@
-<!--====== Start Footer Area ======-->
-<footer class="footer-area footer-area-v2 footer-offset">
+<!--====== Start Floating Newsletter Section ======-->
+<div class="footer-newsletter-wrapper" style="position: relative; z-index: 10; margin-bottom: -65px;">
+    <div class="container container-1278">
+        <div class="newsletter-card shadow-lg" 
+             style="background-color: {{ setting('promo_banner_bg_color') ?: '#fcd34d' }}; border-radius: 20px; padding: 35px 40px;">
+            <div class="row align-items-center g-4">
+                <!-- Column 1: Newsletter Title & Description -->
+                <div class="col-lg-4 col-md-12">
+                    <h3 class="fw-bold mb-2" style="color: #1a1b4b; font-size: 24px; line-height: 1.2;">
+                        {{ setting('newsletter_title', app()->getLocale()) ?: __('Subscribe Newsletter') }}
+                    </h3>
+                    <p class="mb-0" style="color: #4b5563; font-size: 14px; line-height: 1.5;">
+                        {{ setting('newsletter_description', app()->getLocale()) ?: (setting('newsletter_description') ?: __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.')) }}
+                    </p>
+                </div>
+
+                <!-- Column 2: Email Form with Pill Input & Round Submit Button -->
+                <div class="col-lg-5 col-md-7">
+                    <form action="{{ route('subscribe') }}" method="POST" class="footer-subscription-form ajax_form">
+                        @csrf
+                        <div class="d-flex align-items-center bg-white p-1 shadow-sm" style="border-radius: 50px;">
+                            <input type="email" name="email" class="form-control border-0 shadow-none px-4" 
+                                   placeholder="{{ __('your_email') ?: 'Email' }}" required 
+                                   style="background: transparent; font-size: 15px; color: #333;">
+                            <button type="submit" class="btn border-0 d-flex align-items-center justify-content-center flex-shrink-0" 
+                                    style="width: 46px; height: 46px; border-radius: 50%; background-color: #111111; color: #ffffff; transition: transform 0.2s ease;">
+                                <i class="fas fa-paper-plane" style="font-size: 16px;"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Column 3: Admission Now Countdown Timer -->
+                <div class="col-lg-3 col-md-5 text-center text-lg-end">
+                    <div class="mb-2 fw-bold text-dark text-center text-lg-center" style="font-size: 1.05rem;">{{ __('Admission Now') }}</div>
+                    <div class="mini-countdown d-flex justify-content-center justify-content-lg-center gap-2" id="promoCountdownFooter" data-target="{{ setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days')) }}">
+                        <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 52px;">
+                            <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
+                            <span class="small text-secondary fw-semibold" style="font-size: 10px;">DAYS</span>
+                        </div>
+                        <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 52px;">
+                            <h4 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
+                            <span class="small text-secondary fw-semibold" style="font-size: 10px;">HRS</span>
+                        </div>
+                        <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 52px;">
+                            <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
+                            <span class="small text-secondary fw-semibold" style="font-size: 10px;">MIN</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--====== Start Main Dark Footer Area ======-->
+<footer class="footer-area footer-area-v2" style="background-color: #110B3A; color: #ffffff; padding-top: 120px; padding-bottom: 30px; position: relative;">
     <div class="footer-widget">
         <div class="container container-1278">
-            <div class="footer-top">
-                <div class="row justify-content-between">
-                    <div class="col-md-4">
-                        <div class="widget">
-                            <!-- <h5 class="widget-title">Connect with us!</h5> -->
-                            <a href="{{ url('/') }}" class="brand-logo main-logo m-r-25">
-                                @php
-                                    $src = setting('light_logo') && @is_file_exists(setting('light_logo')['original_image']) ? get_media(setting('light_logo')['original_image']) : get_media('images/default/logo/logo-green-white.png');
-                                @endphp
-                                <img style="max-width: 140px"
-                                     src="{{ $src }}"
-                                     alt="logo">
-                            </a>
-                            <p class="py-2">{{ setting('footer_logo_description') }}</p>
-
-                            @if (setting('show_social_links') != 0)
-                                <ul class="social-profile m-t-75">
-                                    @if (setting('facebook_link') != '')
-                                        <li><a class="rounded-circle" href="{{ setting('facebook_link') }}"><i
-                                                    class="fab fa-facebook-f"></i></a></li>
-                                    @endif
-                                    @if (setting('twitter_link') != '')
-                                        <li><a class="rounded-circle" href="{{ setting('twitter_link') }}"><i
-                                                    class="fab fa-twitter"></i></a>
-                                        </li>
-                                    @endif
-                                    @if (setting('linkedin_link') != '')
-                                        <li><a class="rounded-circle" href="{{ setting('linkedin_link') }}"><i
-                                                    class="fab fa-linkedin-in"></i></a></li>
-                                    @endif
-                                    @if (setting('instagram_link') != '')
-                                        <li><a class="rounded-circle" href="{{ setting('instagram_link') }}"><i
-                                                    class="fab fa-instagram"></i></a></li>
-                                    @endif
-                                    @if (setting('youtube_link') != '')
-                                        <li><a class="rounded-circle" href="{{ setting('youtube_link') }}"><i
-                                                    class="fab fa-youtube"></i></a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            @endif
-
-                        </div>
+            <div class="row g-4 justify-content-between">
+                
+                <!-- Column 1: Logo & Logo Description -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-widget-item pe-lg-3">
+                        <a href="{{ url('/') }}" class="brand-logo d-inline-block mb-3">
+                            @php
+                                $src = setting('light_logo') && @is_file_exists(setting('light_logo')['original_image']) ? get_media(setting('light_logo')['original_image']) : get_media('images/default/logo/logo-green-white.png');
+                            @endphp
+                            <img style="max-width: 150px;" src="{{ $src }}" alt="logo">
+                        </a>
+                        <p style="color: #94a3b8; font-size: 14.5px; line-height: 1.7; margin-bottom: 20px;">
+                            {{ setting('footer_logo_description', app()->getLocale()) ?: (setting('footer_logo_description') ?: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id erat eget nisl eleifend tristique in eu ipsum. Aliquam condimentum dictum magna in molestie.') }}
+                        </p>
                     </div>
-
-                    @if(setting('show_newsletter'))
-                        <div class="col-md-5">
-                            <div class="widget newsletter-widget">
-                                <h5 class="widget-title">{{ setting('newsletter_title', app()->getLocale()) }}</h5>
-                                <form action="{{ route('subscribe') }}" method="POST"
-                                      class="footer-subscription form needs-validation ajax_form" novalidate>
-                                    <input class="subscription-mail" type="email" name="email"
-                                           placeholder="{{ __('your_email') }}" required>
-                                    @csrf
-                                    <div class="invalid-feedback">
-                                        {{ __('Please add your email.') }}
-                                    </div>
-                                    <div class="valid-feedback">
-                                        {{ __('Looks good!') }}
-                                    </div>
-                                    <button type="submit"> {{ __('subscribe') }}
-                                    </button>
-                                    @include('components.frontend_loading_btn', [
-                                        'class' => 'btn sg-btn-primary',
-                                    ])
-                                </form>
-                            </div>
-                        </div>
-                    @endif
                 </div>
-            </div>
 
-            <div class="row">
-
-                @if (setting('show_useful_link') && is_array(setting('footer_useful_link_menu')) && count(setting('footer_useful_link_menu')) > 0)
-                    <div class="col-md-3 offset-md-1 col-6 order-2 order-md-1">
-                        <div class="widget nav-widget">
-                            <h5 class="widget-title">{{ setting('useful_link_title', app()->getLocale()) }}</h5>
-                            <ul>
-                                @foreach (setting('footer_useful_link_menu') as $usefulLink)
-                                    <li><a href="{{ $usefulLink['url'] }}">{{ $usefulLink['label'] }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                @endif
-
-
-                @if (setting('show_resource_link') && is_array(setting('footer_resource_link_menu')) && count(setting('footer_resource_link_menu')) > 0)
-                    <div class="col-md-3 col-6 order-3 order-md-2">
-                        <div class="widget nav-widget">
-                            <h5 class="widget-title">{{ setting('resource_link_title', app()->getLocale()) }}</h5>
-                            @php
-                                $resource_link_menu = headerFooterMenu('footer_resource_link_menu', app()->getLocale()) ? : headerFooterMenu('footer_resource_link_menu');
-                            @endphp
-                            <ul>
-                                @foreach ($resource_link_menu as $resourceLink)
-                                    <li><a href="{{ $resourceLink['url'] }}">{{ $resourceLink['label'] }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                @endif
-
-
-                @if (setting('show_quick_link') && is_array(setting('footer_quick_link_menu')) && count(setting('footer_quick_link_menu')) > 0)
-                    <div class="col-md-2 col-6 order-4 order-md-3">
-                        <div class="widget nav-widget">
-                            <h5 class="widget-title">{{ setting('quick_link_title', app()->getLocale()) }}</h5>
-                            @php
-                                $quick_link_menu = headerFooterMenu('footer_quick_link_menu', app()->getLocale()) ? : headerFooterMenu('footer_quick_link_menu');
-                            @endphp
-                            <ul>
-                                @foreach ($quick_link_menu as $quickLink)
-                                    <li><a href="{{ $quickLink['url'] }}">{{ $quickLink['label'] }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                @endif
-
-
-                @if (setting('show_apps_link') != 0)
-                    <div class="col-md-3">
-                        <div class="widget download-app-widget">
-                            <h5 class="widget-title">{{ setting('apps_link_title', app()->getLocale()) }}</h5>
-                            <p>{{ setting('apps_link_description', app()->getLocale()) }}</p>
-                            <div class="row gx-3 m-t-15">
-                                @if (setting('play_store_link') != '')
-                                    <div class="col-xl-6 col-md-12 col-auto">
-                                        <a href="{{ setting('play_store_link') }}">
-                                            <img src="{{ static_asset('frontend/img/store/google-play.png') }}"
-                                                 alt="Google Play">
+                <!-- Column 2: Useful Links (Matching Header Navigation) -->
+                @php
+                    $useful_menu = headerFooterMenu('footer_useful_link_menu', app()->getLocale()) ?: (headerFooterMenu('footer_useful_link_menu') ?: setting('footer_useful_link_menu'));
+                @endphp
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="footer-widget-item">
+                        <h5 class="widget-title fw-bold mb-4" style="color: #ffffff; font-size: 20px;">
+                            {{ setting('useful_link_title', app()->getLocale()) ?: __('Useful Links') }}
+                        </h5>
+                        <ul class="list-unstyled mb-0" style="font-size: 14.5px;">
+                            @if (is_array($useful_menu) && count($useful_menu) > 0)
+                                @foreach ($useful_menu as $usefulLink)
+                                    <li class="mb-2">
+                                        <a href="{{ $usefulLink['url'] }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'">
+                                            <i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>
+                                            {{ $usefulLink['label'] }}
                                         </a>
-                                    </div>
-                                @endif
+                                    </li>
+                                @endforeach
+                            @else
+                                <li class="mb-2"><a href="{{ url('/') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'"><i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>{{ __('Home') }}</a></li>
+                                <li class="mb-2"><a href="{{ route('courses') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'"><i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>{{ __('Courses') }}</a></li>
+                                <li class="mb-2"><a href="{{ route('submit.testimonial') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'"><i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>{{ __('Success Story') }}</a></li>
+                                <li class="mb-2"><a href="{{ route('contact') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'"><i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>{{ __('Contact') }}</a></li>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
 
-                                @if (setting('app_store_link') != '')
-                                    <div class="col-xl-6 col-md-12 col-auto">
-                                        <a href="{{ setting('app_store_link') }}">
-                                            <img src="{{ static_asset('frontend/img/store/app-store.png') }}"
-                                                 alt="App Store">
-                                        </a>
-                                    </div>
-                                @endif
+                <!-- Column 3: Resource Links (Support - 3 Pages) -->
+                @php
+                    $resource_menu = headerFooterMenu('footer_resource_link_menu', app()->getLocale()) ?: (headerFooterMenu('footer_resource_link_menu') ?: setting('footer_resource_link_menu'));
+                @endphp
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="footer-widget-item">
+                        <h5 class="widget-title fw-bold mb-4" style="color: #ffffff; font-size: 20px;">
+                            {{ setting('resource_link_title', app()->getLocale()) ?: __('Resources') }}
+                        </h5>
+                        <ul class="list-unstyled mb-0" style="font-size: 14.5px;">
+                            <li class="mb-2">
+                                <a href="{{ url('privacy-policy') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'">
+                                    <i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>
+                                    {{ __('Privacy Policy') }}
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="{{ url('terms-and-conditions') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'">
+                                    <i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>
+                                    {{ __('Terms & Condition') }}
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="{{ url('refund-policy') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'">
+                                    <i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>
+                                    {{ __('Refund Policy') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 4: Get In Touch / Contact Information -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-widget-item ps-lg-3">
+                        <h5 class="widget-title fw-bold mb-4" style="color: #ffffff; font-size: 20px;">{{ __('Get In Touch') }}</h5>
+                        
+                        <p style="color: #94a3b8; font-size: 14.5px; line-height: 1.6; margin-bottom: 20px;">
+                            {{ setting('footer_get_in_touch_desc', app()->getLocale()) ?: (setting('footer_get_in_touch_desc') ?: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.') }}
+                        </p>
+                        
+                        <div class="contact-info-list" style="font-size: 14.5px; color: #e2e8f0;">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-map-marker-alt me-2" style="color: #10b981; font-size: 16px; width: 20px;"></i>
+                                <span>{{ setting('contact_address', app()->getLocale()) ?: (setting('contact_address') ?: (setting('address') ?: '99 Roving St., Big City')) }}</span>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-envelope me-2" style="color: #10b981; font-size: 16px; width: 20px;"></i>
+                                <span>{{ setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com') }}</span>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-phone-alt me-2" style="color: #10b981; font-size: 16px; width: 20px;"></i>
+                                <span>{{ setting('contact_phone') ?: (setting('phone') ?: '+123-234-1234') }}</span>
                             </div>
                         </div>
                     </div>
-                @endif
-                @if(setting('show_payment_method_banner') == 1)
-                    <div class="col-12 order-5">
-                        <div class="payment-logos text-align-md-end text-center">
-                            <img
-                                src="{{ setting('payment_method_banner') && @is_file_exists(setting('payment_method_banner')['original_image']) ? get_media(setting('payment_method_banner')['original_image']) : get_media('frontend/img/payment-methods/footer-payment.png') }}"
-                                alt="Payment Logos">
-                        </div>
-                    </div>
-                @endif
+                </div>
+
             </div>
         </div>
 
-
-        @if (setting('show_copyright') != 0)
-            <div class="footer-bottom m-t-40">
-                <div class="container container-1278">
-                    <div class="row justify-content-center align-items-center flex-column">
-                        <div class="col-lg-auto col-md-5">
-                            <div class="copyright-text d-flex align-items-end justify-content-center mt-4">
-                                {{-- <img src="{{ setting('copyright_logo') && @is_file_exists(setting('copyright_logo')['original_image']) ? get_media(setting('copyright_logo')['original_image']) : get_media('frontend/img/logo.png') }}" alt="Footer Logo" class="m-r-25"> --}}
-                                <span>{{ setting('copyright_title', app()->getLocale()) }}</span>
+        <!--====== Bottom Bar: Social Links & Copyright ======-->
+        <div class="footer-bottom mt-5" style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px;">
+            <div class="container container-1278">
+                <div class="row align-items-center justify-content-between g-3">
+                    
+                    <!-- Left: Follow Us Social Links -->
+                    <div class="col-md-6 col-12 text-center text-md-start">
+                        <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-3">
+                            <span class="fw-bold" style="color: #ffffff; font-size: 16px;">{{ __('Follow Us :') }}</span>
+                            <div class="social-links-list d-flex gap-2">
+                                <a href="{{ setting('facebook_link') ?: '#' }}" target="_blank" class="d-flex align-items-center justify-content-center text-white rounded-circle" style="width: 34px; height: 34px; background: rgba(255,255,255,0.1); text-decoration: none;"><i class="fab fa-facebook-f" style="font-size: 14px;"></i></a>
+                                <a href="{{ setting('twitter_link') ?: '#' }}" target="_blank" class="d-flex align-items-center justify-content-center text-white rounded-circle" style="width: 34px; height: 34px; background: rgba(255,255,255,0.1); text-decoration: none;"><i class="fab fa-twitter" style="font-size: 14px;"></i></a>
+                                <a href="{{ setting('youtube_link') ?: '#' }}" target="_blank" class="d-flex align-items-center justify-content-center text-white rounded-circle" style="width: 34px; height: 34px; background: rgba(255,255,255,0.1); text-decoration: none;"><i class="fab fa-youtube" style="font-size: 14px;"></i></a>
+                                <a href="{{ setting('instagram_link') ?: '#' }}" target="_blank" class="d-flex align-items-center justify-content-center text-white rounded-circle" style="width: 34px; height: 34px; background: rgba(255,255,255,0.1); text-decoration: none;"><i class="fab fa-instagram" style="font-size: 14px;"></i></a>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Right: Copyright Text -->
+                    <div class="col-md-6 col-12 text-center text-md-end ms-auto">
+                        <span style="color: #94a3b8; font-size: 14px;">
+                            {{ setting('copyright_title', app()->getLocale()) ?: (setting('copyright_title') ?: 'Copyright @ 2022 All Rights Reserved to SpaGreen') }}
+                        </span>
+                    </div>
+
                 </div>
             </div>
-        @endif
+        </div>
     </div>
 </footer>
 <!--====== End Footer Area ======-->
@@ -186,106 +203,3 @@
 <a href="#" class="back-to-top" id="fixed-scroll-top">
     <i class="far fa-angle-up"></i>
 </a>
-
-
-@php $lang =  app()->getLocale() @endphp
-@if (((request()->routeIs('home') && setting('popup_show_in') == 'home_page') || setting('popup_show_in') == 'all_page') && setting('site_popup_status') == 1)
-    <!--====== Window Load Subscription Modal ======-->
-    @if (!session()->get('dont_show'))
-        <div class="modal window-load-modal fade" id="windowLoadModal" tabindex="-1"
-             aria-labelledby="windowLoadModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row align-items-xl-center justify-content-center">
-                            <div class="col-lg-6">
-                                <div class="modal-thumbnail m-b-md-20">
-
-                                    <img class="selected-img"
-                                         src="{{ getFileLink('500x500', setting('popup_image')) }}" alt="pop-up">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="modal-content-inner">
-                                    <h4>{{ setting('popup_title', $lang) }}</h4>
-                                    <p>{{ setting('popup_description', $lang) }}</p>
-                                    <form action="{{ route('subscribe') }}" class="footer-subscription ajax_form"
-                                          method="POST">@csrf
-                                        <input class="subscription-mail" type="email" name="email"
-                                               placeholder="{{ __('email') }}">
-                                        <div class="nk-block-des">
-                                            <p class="email_error error text-danger"></p>
-                                        </div>
-                                        <button name="submit" type="submit" class="template-btn">
-                                            {{ __('subscribe') }}
-                                        </button>
-                                        @include('components.frontend_loading_btn', [
-                                            'class' => 'template-btn',
-                                        ])
-
-                                        <div class="social-links">
-                                            <ul>
-                                                @if (setting('facebook_link'))
-                                                    <li><a href="{{ setting('facebook_link') }}"><i
-                                                                class="fab fa-facebook-f"></i></a></li>
-                                                @endif
-                                                @if (setting('twitter_link'))
-                                                    <li><a href="{{ setting('twitter_link') }}"><i
-                                                                class="fab fa-twitter"></i></a></li>
-                                                @endif
-                                                @if (setting('linkedin_link'))
-                                                    <li><a href="{{ setting('linkedin_link') }}"><i
-                                                                class="fab fa-linkedin-in"></i></a></li>
-                                                @endif
-                                                @if (setting('instagram_link'))
-                                                    <li><a href="{{ setting('instagram_link') }}"><i
-                                                                class="fab fa-instagram"></i></a></li>
-                                                @endif
-                                                @if (setting('youtube_link'))
-                                                @endif
-                                                <li>
-                                                    <a href="{{ setting('youtube_link') }}">{{ session()->get('dont_show') }}</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="dont-show-popup">
-                                            <div class="remember-password m-b-15">
-                                                <input type="checkbox" id="tnc" value="1" name="dont_show_this">
-                                                <label for="tnc">{{ __('dont_show_this_again') }} </label>
-                                            </div>
-
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-@endif
-<input type="hidden" class="cookie_status" value="{{ setting('cookies_status') }}">
-<!--======= Cookie Alert Popup =======-->
-<div class="cookiealert-popup">
-    <div class="container container-1278">
-        <div class="row">
-            <div class="col-12">
-                <div class="cookiealert-content text-center">
-                    <h4>{{ setting('cookies_agreement_title', userLanguage()) }}</h4>
-                    <div>
-                        {!! setting('cookies_agreement', userLanguage()) !!}
-                    </div>
-                    <div class="confirmation-btns d-flex justify-content-center">
-                        <button type="button"
-                                class="dont-accept-cookies template-btn">{{ __('don’t_accept') }}</button>
-                        <button type="button" class="accept-cookies template-btn">{{ __('accept') }}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

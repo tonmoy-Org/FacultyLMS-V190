@@ -329,6 +329,26 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::get('feature-section', [WebsiteSettingController::class, 'featureSection'])->name('website.feature_section');
         Route::match(['get', 'post'], 'save-feature-section', [WebsiteSettingController::class, 'saveFeatureSection'])->name('website.feature_section.save');
 
+        //website about section setting
+        Route::get('about-section', [WebsiteSettingController::class, 'aboutSection'])->name('website.about_section');
+        Route::match(['get', 'post'], 'save-about-section', [WebsiteSettingController::class, 'saveAboutSection'])->name('website.about_section.save');
+
+        //website why choose section setting
+        Route::get('why-choose-section', [WebsiteSettingController::class, 'whyChooseSection'])->name('website.why_choose_section');
+        Route::match(['get', 'post'], 'save-why-choose-section', [WebsiteSettingController::class, 'saveWhyChooseSection'])->name('website.why_choose_section.save');
+
+        //website success video section setting
+        Route::get('success-video-section', [WebsiteSettingController::class, 'successVideoSection'])->name('website.success_video_section');
+        Route::match(['get', 'post'], 'save-success-video-section', [WebsiteSettingController::class, 'saveSuccessVideoSection'])->name('website.success_video_section.save');
+
+        //website ad banner section setting
+        Route::get('ad-banner-section', [WebsiteSettingController::class, 'adBannerSection'])->name('website.ad_banner_section');
+        Route::match(['get', 'post'], 'save-ad-banner-section', [WebsiteSettingController::class, 'saveAdBannerSection'])->name('website.ad_banner_section.save');
+
+        //website single course section setting
+        Route::get('single-course-section', [WebsiteSettingController::class, 'singleCourseSection'])->name('website.single_course_section');
+        Route::match(['get', 'post'], 'save-single-course-section', [WebsiteSettingController::class, 'saveSingleCourseSection'])->name('website.single_course_section.save');
+
         //website seo
         Route::get('website-seo', [WebsiteSettingController::class, 'seo'])->name('website.seo');
         Route::post('website-seo', [WebsiteSettingController::class, 'saveSeoSetting'])->name('website.seo');

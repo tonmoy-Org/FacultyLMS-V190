@@ -209,6 +209,11 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
     Route::get('page/{link}', [FrontendController::class, 'page']);
     Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
 
+    // Policy Pages
+    Route::get('privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy.policy');
+    Route::get('terms-and-conditions', [FrontendController::class, 'termsPolicy'])->name('terms.conditions');
+    Route::get('refund-policy', [FrontendController::class, 'refundPolicy'])->name('refund.policy');
+
     //will be deleted soon
     Route::get('welcome', function () {
         return view('frontend.welcome');

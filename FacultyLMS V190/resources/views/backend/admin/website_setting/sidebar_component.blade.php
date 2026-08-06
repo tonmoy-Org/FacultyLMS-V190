@@ -113,6 +113,41 @@
                         </a>
                     </li>
                 @endif
+                <li>
+                    <a href="{{ route('website.about_section') }}"
+                       class="{{ request()->routeIs('website.about_section') ? 'active' : '' }}">
+                        <span class="icon"><i class="las la-user-tie"></i></span>
+                        <span>{{ __('about_me_section') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('website.why_choose_section') }}"
+                       class="{{ request()->routeIs('website.why_choose_section') ? 'active' : '' }}">
+                        <span class="icon"><i class="las la-check-circle"></i></span>
+                        <span>{{ __('why_choose_section') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('website.success_video_section') }}"
+                       class="{{ request()->routeIs('website.success_video_section') ? 'active' : '' }}">
+                        <span class="icon"><i class="las la-play-circle"></i></span>
+                        <span>{{ __('success_video_section') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('website.ad_banner_section') }}"
+                       class="{{ request()->routeIs('website.ad_banner_section') ? 'active' : '' }}">
+                        <span class="icon"><i class="las la-ad"></i></span>
+                        <span>{{ __('ad_banner_section') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('website.single_course_section') }}"
+                       class="{{ request()->routeIs('website.single_course_section') ? 'active' : '' }}">
+                        <span class="icon"><i class="las la-graduation-cap"></i></span>
+                        <span>{{ __('single_course_section') }}</span>
+                    </a>
+                </li>
                 @if(hasPermission('custom.css'))
                     <li>
                         <a href="{{ route('custom.css') }}"
