@@ -1,636 +1,1153 @@
 @extends('frontend.layouts.master')
 @section('title', $course->title)
 @section('content')
-    <section class="course-details-area p-b-50">
-        <div class="course-details-header-wrapper p-t-60 p-b-95 p-t-md-40 p-b-md-50">
-            <div class="container container-1278">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="course-details-header color-white">
-                            <h2 class="title">{{ $course->title }}</h2>
-                            <p class="desc">{{ $course->short_description }}</p>
-                            <ul class="course-details-info">
-                                <li class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>{{ round($course->total_rating,2) }}</span>
-                                    ({{ count($reviews) }} {{__('rating')}})
-                                </li>
-                                <li><i class="fal fa-user-friends"></i>{{ $course->enrolls_count }}</li>
-                                <li><i class="fal fa-sync"></i> {{__('last_updated')}}
-                                    {{ \Carbon\Carbon::parse($course->updated_at)->format('M d, Y') }}</li>
-                            </ul>
+
+<style>
+    /* ============================================================
+       FACULTY LMS - DYNAMIC MASTERCLASS LANDING PAGE (WHITE THEME)
+       100% Sync with Admin Panel (/admin/courses/{id}/edit)
+       Inherits Theme Fonts & Design Tokens from base.blade.php
+       ============================================================ */
+    .masterclass-page-wrapper {
+        background-color: #ffffff !important;
+        color: #1a202c !important;
+        font-family: var(--body-font, system-ui, -apple-system, sans-serif);
+    }
+    
+    .mc-container {
+        max-width: 840px;
+        margin: 0 auto;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .mc-hero-header {
+        text-align: center;
+        padding-top: 40px;
+        padding-bottom: 30px;
+        background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+        border-bottom: 1px solid #edf2f7;
+    }
+
+    .mc-eyebrow-badge {
+        display: inline-block;
+        background-color: rgba(27, 138, 46, 0.08);
+        border: 1px solid rgba(27, 138, 46, 0.2);
+        color: #1b8a2e;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        padding: 6px 18px;
+        border-radius: 50px;
+        margin-bottom: 16px;
+    }
+
+    .mc-main-title {
+        font-family: var(--header-font, system-ui, sans-serif);
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: 800;
+        color: #1a202c !important;
+        line-height: 1.25;
+        margin-bottom: 16px;
+    }
+
+    .mc-sub-title {
+        font-size: 1.05rem;
+        color: #4a5568;
+        line-height: 1.65;
+        max-width: 760px;
+        margin: 0 auto 20px;
+    }
+
+    .mc-meta-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        font-size: 0.9rem;
+        color: #718096;
+    }
+
+    .mc-video-box {
+        background-color: #000000;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-bottom: 16px;
+        border: 1px solid #e2e8f0;
+    }
+
+    .mc-video-box iframe, 
+    .mc-video-box video, 
+    .mc-video-box .plyr {
+        width: 100% !important;
+        border-radius: 16px;
+    }
+
+    /* Primary High-Converting CTA Button */
+    .mc-btn-primary-cta {
+        display: block;
+        width: 100%;
+        max-width: 540px;
+        margin: 0 auto;
+        background: linear-gradient(180deg, #3CFD59 0%, #1b8a2e 100%) !important;
+        color: #000000 !important;
+        font-size: 1.25rem !important;
+        font-weight: 800 !important;
+        text-align: center;
+        padding: 16px 28px;
+        border-radius: 12px;
+        border: none !important;
+        box-shadow: 0 6px 22px rgba(60, 253, 89, 0.35);
+        text-decoration: none !important;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+    }
+
+    .mc-btn-primary-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(60, 253, 89, 0.5);
+        color: #000000 !important;
+    }
+
+    .mc-dual-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        overflow: hidden;
+        text-decoration: none !important;
+        box-shadow: 0 4px 16px rgba(253, 253, 60, 0.3);
+        transition: transform 0.2s ease;
+    }
+
+    .mc-dual-btn:hover {
+        transform: scale(1.02);
+    }
+
+    .mc-dual-left {
+        background: linear-gradient(90deg, #FDFD3C 10%, #FFFFCE 50%, #FDFD3C 90%);
+        color: #000000;
+        font-size: 1.1rem;
+        font-weight: 800;
+        padding: 14px 24px;
+    }
+
+    .mc-dual-right {
+        background: linear-gradient(90deg, #FDFD3C 10%, #FFFFCE 50%, #FDFD3C 90%);
+        color: #000000;
+        font-size: 1.1rem;
+        font-weight: 800;
+        padding: 14px 24px;
+        border-left: 1px solid rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .mc-red-badge-btn {
+        display: inline-block;
+        background: linear-gradient(90deg, #f7971e, #ff5858);
+        color: #ffffff !important;
+        font-size: 1.1rem;
+        font-weight: 800;
+        padding: 15px 36px;
+        border-radius: 12px;
+        text-decoration: none !important;
+        box-shadow: 0 6px 20px rgba(255, 88, 88, 0.35);
+        transition: transform 0.2s ease;
+    }
+
+    .mc-red-badge-btn:hover {
+        transform: scale(1.03);
+        color: #ffffff !important;
+    }
+
+    /* Pulsing Seats Counter */
+    .mc-seats-counter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 0.92rem;
+        color: #4a5568;
+        margin-top: 12px;
+    }
+
+    .mc-pulse-dot {
+        position: relative;
+        display: inline-flex;
+        height: 10px;
+        width: 10px;
+    }
+
+    .mc-pulse-dot span.ping {
+        position: absolute;
+        display: inline-flex;
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        background-color: #ff5858;
+        opacity: 0.75;
+        animation: ping 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    .mc-pulse-dot span.dot {
+        position: relative;
+        display: inline-flex;
+        border-radius: 50%;
+        height: 10px;
+        width: 10px;
+        background-color: #ff5858;
+    }
+
+    @keyframes ping {
+        75%, 100% { transform: scale(2); opacity: 0; }
+    }
+
+    /* Gold Info Card */
+    .mc-gold-info-card {
+        background: #ffffff;
+        border: 2px solid #C47942;
+        border-radius: 20px;
+        padding: 28px;
+        margin-top: 32px;
+        margin-bottom: 32px;
+        box-shadow: 0 8px 25px rgba(196, 121, 66, 0.08);
+    }
+
+    .mc-gold-badge-top {
+        display: block;
+        width: fit-content;
+        margin: 0 auto -20px;
+        position: relative;
+        z-index: 2;
+        background: #ffffff;
+        border: 2px solid #C47942;
+        border-radius: 12px 12px 0 0;
+        padding: 6px 22px;
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #C47942;
+    }
+
+    .mc-gold-item-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(196, 121, 66, 0.15);
+    }
+
+    .mc-gold-item-row:last-child {
+        border-bottom: none;
+    }
+
+    .mc-gold-icon-circle {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #fffaf5;
+        border: 1px solid rgba(196, 121, 66, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #C47942;
+        font-size: 1.15rem;
+        flex-shrink: 0;
+    }
+
+    .mc-gold-price-highlight {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #f0fff4;
+        border: 1px solid #b2f0c5;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-top: 20px;
+    }
+
+    .mc-gold-price-old {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        color: #718096;
+    }
+
+    /* Benefits Grid Card */
+    .mc-benefits-card-wrapper {
+        background: #ffffff;
+        border: 2px solid #fdcc0d;
+        border-radius: 20px;
+        padding: 32px 24px;
+        margin-bottom: 35px;
+        box-shadow: 0 6px 25px rgba(253, 204, 13, 0.1);
+        text-align: center;
+    }
+
+    .mc-benefit-single-card {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 20px 14px;
+        text-align: center;
+        height: 100%;
+        transition: all 0.2s ease;
+    }
+
+    .mc-benefit-single-card:hover {
+        border-color: #1b8a2e;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 18px rgba(27, 138, 46, 0.1);
+    }
+
+    .mc-benefit-single-card .check-circle {
+        width: 38px;
+        height: 38px;
+        background: #1b8a2e;
+        color: #ffffff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 12px;
+        font-size: 1rem;
+    }
+
+    .mc-benefit-single-card p {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin: 0;
+        line-height: 1.45;
+    }
+
+    /* Special Gift Box */
+    .mc-special-gift-card {
+        background: linear-gradient(135deg, #fff7f0 0%, #ffffff 100%);
+        border: 2px solid #C47942;
+        border-radius: 20px;
+        padding: 32px 28px;
+        margin-bottom: 35px;
+        box-shadow: 0 8px 30px rgba(196, 121, 66, 0.1);
+    }
+
+    .mc-gift-pill {
+        display: inline-block;
+        background: #fffbea;
+        border: 1px solid #fce83a;
+        color: #b8860b;
+        font-size: 0.88rem;
+        font-weight: 800;
+        padding: 6px 18px;
+        border-radius: 50px;
+        margin-bottom: 16px;
+    }
+
+    .mc-callout-quote {
+        background: #ffffff;
+        border-left: 4px solid #ff7a30;
+        border-radius: 10px;
+        padding: 16px 20px;
+        font-style: italic;
+        color: #4a5568;
+        margin-top: 18px;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    /* Progress Bar Box */
+    .mc-progress-box {
+        background: #eaf3ff;
+        border: 1px solid #cfe2ff;
+        border-radius: 16px;
+        padding: 22px;
+        margin-bottom: 28px;
+        color: #1a365d;
+        text-align: center;
+    }
+
+    .mc-progress-bar-bg {
+        height: 12px;
+        background: #dbe7ff;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-top: 10px;
+        margin-bottom: 8px;
+    }
+
+    .mc-progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #4A90D9, #1c6dd0);
+        border-radius: 20px;
+    }
+
+    .mc-blue-explainer {
+        background: #ffffff;
+        border-left: 5px solid #1c6dd0;
+        border-radius: 14px;
+        padding: 26px;
+        border: 1px solid #e2e8f0;
+        border-left-width: 5px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+        margin-bottom: 28px;
+    }
+
+    .mc-breakdown-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 26px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        margin-bottom: 32px;
+    }
+
+    /* Registration Form Card */
+    .mc-form-wrapper {
+        background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+        border: 2px solid #1c6dd0;
+        border-radius: 20px;
+        padding: 32px 26px;
+        box-shadow: 0 10px 35px rgba(28, 109, 208, 0.1);
+        margin-bottom: 40px;
+    }
+
+    .mc-form-input {
+        width: 100%;
+        background: #ffffff;
+        border: 1px solid #cbd5e0;
+        border-radius: 10px;
+        padding: 13px 16px;
+        font-size: 0.96rem;
+        color: #1a202c;
+        margin-top: 6px;
+        margin-bottom: 18px;
+        transition: border-color 0.2s ease;
+    }
+
+    .mc-form-input:focus {
+        outline: none;
+        border-color: #1c6dd0;
+        box-shadow: 0 0 0 3px rgba(28, 109, 208, 0.15);
+    }
+
+    /* Content Section Card */
+    .mc-content-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 28px;
+        margin-bottom: 32px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    /* FAQ Accordion */
+    .mc-faq-accordion .accordion-item {
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        margin-bottom: 10px;
+        overflow: hidden;
+        background: #ffffff !important;
+    }
+
+    .mc-faq-accordion .accordion-button {
+        background: #ffffff !important;
+        color: #1a202c !important;
+        font-weight: 700;
+        font-size: 1rem;
+        padding: 16px 20px;
+        box-shadow: none !important;
+    }
+
+    .mc-faq-accordion .accordion-button:not(.collapsed) {
+        background: #f0fff4 !important;
+        color: #1b8a2e !important;
+        border-bottom: 1px solid #b2f0c5 !important;
+    }
+
+    .mc-faq-accordion .accordion-body {
+        background: #fafafa !important;
+        color: #4a5568;
+        line-height: 1.65;
+        font-size: 0.95rem;
+        padding: 18px 20px;
+    }
+
+    @media (max-width: 768px) {
+        .mc-hero-header { padding-top: 30px; }
+        .mc-main-title { font-size: 1.55rem; }
+        .mc-gold-info-card { padding: 20px 16px; }
+        .mc-special-gift-card { padding: 22px 18px; }
+        .mc-form-wrapper { padding: 22px 18px; }
+    }
+</style>
+
+<div class="masterclass-page-wrapper">
+
+    {{-- =========================================================
+         1. HERO HEADER SECTION (100% Admin Panel Sync)
+         Fields from Admin: $course->title, $course->short_description, $course->category
+    ========================================================== --}}
+    <section class="mc-hero-header">
+        <div class="mc-container">
+            @if($category)
+                <span class="mc-eyebrow-badge">{{ $category->lang_title }}</span>
+            @else
+                <span class="mc-eyebrow-badge">E-commerce শুরু করার hidden path</span>
+            @endif
+
+            {{-- Main Title --}}
+            <h1 class="mc-main-title">{{ $course->title }}</h1>
+
+            {{-- Short Description --}}
+            @if($course->short_description)
+                <p class="mc-sub-title">{{ $course->short_description }}</p>
+            @endif
+
+            {{-- 2. CENTERED INTRO VIDEO / MEDIA (From Admin Video Tab) --}}
+            <div class="mc-video-box">
+                @include('frontend.components.video', [
+                    'source' => $course->video_source, 
+                    'video'  => $course->video, 
+                    'class'  => 'course-intro-video', 
+                    'image'  => $course->image, 
+                    'size'   => '780x440'
+                ])
+            </div>
+
+            <p class="small text-muted mb-4">
+                <i class="fas fa-arrow-up me-1"></i> বিস্তারিত জানতে ভিডিওটি দেখুন <i class="fas fa-arrow-up ms-1"></i>
+            </p>
+
+            {{-- 3. PRIMARY ENROLL / CTA BUTTON --}}
+            @if(!auth()->check() || auth()->user()->user_type == 'student')
+                <div class="cart_area text-center mb-3">
+                    @if($is_enrolled)
+                        <a href="{{ route('my-course', $course->slug) }}" class="mc-btn-primary-cta">
+                            {{ __('go_to_course') }} <i class="fal fa-long-arrow-right ms-2"></i>
+                        </a>
+                    @else
+                        <a href="javascript:void(0)" class="mc-btn-primary-cta added_to_cart {{ $is_added_to_cart ? '' : 'd-none' }}">
+                            {{ __('added_to_cart') }} <i class="fas fa-check-circle ms-1"></i>
+                        </a>
+                        <a href="javascript:void(0)" 
+                           class="mc-btn-primary-cta add_to_cart {{ $is_added_to_cart ? 'd-none' : '' }}" 
+                           data-id="{{ $course->id }}" 
+                           data-type="course" 
+                           data-quantity="1" 
+                           data-route="{{ route('add.cart') }}">
+                            রেজিস্ট্রেশন করুন এখনই <i class="fas fa-bolt ms-1"></i>
+                        </a>
+                    @endif
+                </div>
+                
+                @include('components.frontend_loading_btn', ['class' => 'mc-btn-primary-cta d-none'])
+
+                <div class="mc-seats-counter">
+                    <span class="mc-pulse-dot"><span class="ping"></span><span class="dot"></span></span>
+                    <span>আর মাত্র <strong class="text-danger fw-bold">৭২ সিট বাকি</strong></span>
+                </div>
+            @endif
+        </div>
+    </section>
+
+    {{-- =========================================================
+         MAIN STACKED BODY
+    ========================================================== --}}
+    <section class="py-4">
+        <div class="mc-container">
+
+            {{-- =========================================================
+                 4. GOLD BORDER MASTERCLASS INFO CARD (100% Admin Sync)
+                 Fields: $course->duration, $level->lang_title, $language->name, $course->price, $course->discount_amount
+            ========================================================== --}}
+            <span class="mc-gold-badge-top">
+                এখনই সিট বুক করুন
+            </span>
+            <div class="mc-gold-info-card">
+                <div class="mc-gold-item-row">
+                    <div class="mc-gold-icon-circle"><i class="fas fa-video"></i></div>
+                    <div>
+                        <p class="m-0 fw-bold fs-5 text-dark">Zoom লাইভ মাস্টারক্লাস</p>
+                        <small class="text-muted">অনলাইন ইন্টারেক্টিভ সেশন</small>
+                    </div>
+                </div>
+
+                @if($course->duration)
+                    <div class="mc-gold-item-row">
+                        <div class="mc-gold-icon-circle"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <p class="m-0 text-muted small">সময় / সময়সূচী</p>
+                            <p class="m-0 fw-bold fs-5 text-dark">{{ $course->duration }}</p>
                         </div>
+                    </div>
+                @endif
+
+                @if($level)
+                    <div class="mc-gold-item-row">
+                        <div class="mc-gold-icon-circle"><i class="fas fa-layer-group"></i></div>
+                        <div>
+                            <p class="m-0 text-muted small">{{ __('level') }}</p>
+                            <p class="m-0 fw-bold fs-6 text-dark">{{ $level->lang_title }}</p>
+                        </div>
+                    </div>
+                @endif
+
+                {{-- Price Display --}}
+                <div class="mc-gold-price-highlight">
+                    <span class="fw-bold fs-5 text-dark d-flex align-items-center gap-2">
+                        <span style="width: 12px; height: 12px; border-radius: 50%; background: #fdcc0d; display: inline-block;"></span>
+                        আজকের স্পেশাল অফার
+                    </span>
+                    <span class="fw-bold fs-4 text-success">
+                        @if($course->is_free == 1 || $course->price == 0)
+                            {{ __('free') }}
+                        @elseif($course->is_discountable == 1)
+                            {{ get_price($course->discount_amount, userCurrency()) }}
+                        @else
+                            {{ get_price($course->price, userCurrency()) }}
+                        @endif
+                    </span>
+                </div>
+
+                @if($course->is_discountable == 1 && $course->price > 0)
+                    <div class="mc-gold-price-old">
+                        <span class="d-flex align-items-center gap-2">
+                            <span style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid #cbd5e0; display: inline-block;"></span>
+                            মূল প্রাইস
+                        </span>
+                        <span class="fw-bold text-decoration-line-through">
+                            {{ get_price($course->price, userCurrency()) }}
+                        </span>
+                    </div>
+                @endif
+
+                {{-- Dual CTA Button --}}
+                @if(!auth()->check() || auth()->user()->user_type == 'student')
+                    @if(!$is_enrolled)
+                        <div class="text-center mt-4">
+                            <a href="#register" class="mc-dual-btn">
+                                <span class="mc-dual-left">রেজিস্ট্রেশন করুন এখনই</span>
+                                <span class="mc-dual-right">
+                                    @if($course->is_discountable == 1)
+                                        {{ get_price($course->discount_amount, userCurrency()) }}
+                                    @else
+                                        {{ get_price($course->price, userCurrency()) }}
+                                    @endif
+                                    <i class="fas fa-arrow-right ms-1"></i>
+                                </span>
+                            </a>
+                            <div class="mc-seats-counter mt-3">
+                                <span class="mc-pulse-dot"><span class="ping"></span><span class="dot"></span></span>
+                                <span>আর মাত্র <strong class="text-danger fw-bold">৭২ সিট বাকি</strong></span>
+                            </div>
+                        </div>
+                    @endif
+                @endif
+            </div>
+
+            {{-- =========================================================
+                 5. BENEFITS GRID ("এই মাস্টারক্লাস কার জন্য?")
+                 Field: $course->what_will_learn (From Admin Course Edit)
+            ========================================================== --}}
+            <div class="mc-benefits-card-wrapper">
+                <h2 class="fw-bold fs-3 text-dark mb-2">এই মাস্টারক্লাস কার জন্য?</h2>
+                <span class="d-block mx-auto mb-4" style="width: 70px; height: 3px; background: #fdcc0d; border-radius: 10px;"></span>
+
+                <div class="row g-3">
+                    @php
+                        $benefits = [];
+                        if(!empty($course->what_will_learn)) {
+                            $lines = array_filter(array_map('trim', explode("
+", strip_tags($course->what_will_learn))));
+                            $benefits = array_values($lines);
+                        }
+                        if(count($benefits) < 1) {
+                            $benefits = [
+                                'অনলাইন বিজনেস করতে চান কিন্তু কনফিউজড',
+                                'পুঁজি কম নিয়ে বিজনেস শুরু করতে চাচ্ছেন',
+                                'ই-কমার্স বিজনেস শুরু করার ভয় আছে',
+                                'লস না করে সঠিকভাবে শুরু করতে চান',
+                            ];
+                        }
+                    @endphp
+
+                    @foreach($benefits as $benefit)
+                        <div class="col-6 col-md-3">
+                            <div class="mc-benefit-single-card">
+                                <div class="check-circle"><i class="fas fa-check"></i></div>
+                                <p>{{ $benefit }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- =========================================================
+                 6. SPECIAL GIFT BANNER CARD
+            ========================================================== --}}
+            <div class="mc-special-gift-card">
+                <span class="mc-gift-pill">
+                    🎁 যারা join করবেন তাদের জন্য special gift
+                </span>
+
+                <h2 class="fw-bold fs-3 text-dark mb-3">
+                    ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ
+                </h2>
+
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <span class="fs-5 text-muted text-decoration-line-through">৳১০,০০০</span>
+                    <span class="badge bg-danger fs-6 px-3 py-2 rounded-pill">FREE</span>
+                </div>
+
+                <p class="text-secondary leading-relaxed fs-6">
+                    এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন। মাস্টারক্লাসে এই বিষয়ে বিস্তারিত আলোচনা।
+                </p>
+
+                <div class="mc-callout-quote">
+                    "এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় যেমন Facebook Ads, Google Ads নিয়ে বিস্তারিত শিখিয়েছি। এছাড়াও কিভাবে একটা বিজনেসকে Scale করতে তা নিয়ে ক্লাস আছে।"
+                </div>
+
+                <p class="small text-muted mb-4">
+                    যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।
+                </p>
+
+                <div class="text-center">
+                    <a href="#register" class="mc-red-badge-btn">
+                        সিট কনফার্ম করুন →
+                    </a>
+                    <div class="mc-seats-counter mt-3">
+                        <span class="mc-pulse-dot"><span class="ping"></span><span class="dot"></span></span>
+                        <span>বাকি আছে মাত্র <strong class="text-warning fw-bold">৭২</strong> টা seat</span>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="course-details-overview-wrapper">
-            <div class="container container-1278">
-                <div class="row">
-                    <div class="col-lg-8 p-b-md-40 order-2 order-lg-1">
-                        <div class="course-details-overview p-t-50 p-t-lg-5">
-                            <div class="course-details-overview-content">
-                                @if($course->description)
-                                    <h4>{{__('about_this_course')}}</h4>
-                                    <div
-                                        class="border-soft-white px-4 py-4 rounded-3">{!! $course->description !!}</div>
-                                @endif
-                                @if(setting('hide_instructor_from_course_details') !='1')
-                                    @if(count($instructors) > 0)
-                                        <h4 class="p-t-lg-15">{{__('course_instructor')}}</h4>
-                                        <div class="row gx-3 gx-lg-4 team-member-items-v3">
-                                            @foreach($instructors as $user)
-                                                <div class="col-sm-6">
-                                                    <div class="team-member-item">
-                                                        <a href="{{ route('instructor.details', $user->instructor->slug) }}"
-                                                           class="member-img">
-                                                            <img src="{{ getFileLink('80x80',$user->images) }}"
-                                                                 alt="Team member">
-                                                        </a>
-                                                        <div class="member-content">
-                                                            <h5 class="title">
-                                                                <a href="{{ route('instructor.details', $user->instructor->slug) }}">{{ $user->name }}</a>
-                                                                <span>{{ $user->tagline }}</span>
-                                                            </h5>
-                                                            <p>{{ $user->instructor->designation }}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
+
+            {{-- =========================================================
+                 7. LIVE ZOOM EXPLAINER & SEATS PROGRESS
+            ========================================================== --}}
+            <div class="text-center mb-4">
+                <span class="badge bg-primary px-3 py-2 rounded-pill fs-7 tracking-wider">LIVE ZOOM MASTERCLASS</span>
+                <h2 class="fw-bold fs-3 text-dark mt-3">২ দিনব্যাপী e-commerce live masterclass</h2>
+                <p class="text-secondary">
+                    ৬ আগস্ট তারিখ রাত ৮ টায় শুরু। Seat সীমিত — বাকি আছে মাত্র <strong class="text-warning fw-bold">৭২</strong> টা।
+                </p>
+            </div>
+
+            {{-- Progress Bar --}}
+            <div class="mc-progress-box">
+                <p class="fw-bold m-0 text-dark">
+                    ৫০০ seat-এর মধ্যে <span class="text-primary">৪২৮</span>টা বুক হয়ে গেছে — বাকি মাত্র <strong class="text-danger">৭২টা</strong>
+                </p>
+                <div class="mc-progress-bar-bg">
+                    <div class="mc-progress-bar-fill" style="width: 85.6%;"></div>
+                </div>
+                <div class="d-flex justify-content-between small text-muted">
+                    <span>বুক হয়েছে ৪২৮</span>
+                    <span>মোট ৫০০ seat</span>
+                </div>
+            </div>
+
+            {{-- Blue Explainer Box --}}
+            <div class="mc-blue-explainer">
+                <h3 class="fw-bold fs-5 text-dark mb-3">একটা প্রশ্ন আপনার মাথায় আসতে পারে — এত কিছু, মাত্র ৯৯ টাকায় কেন??</h3>
+                <p>টু বি অনেস্ট, আমি এই masterclass-টা সম্পূর্ণ free করাতে চেয়েছিলাম।</p>
+                <p>কিন্তু problem হচ্ছে — আমার free session-গুলোতে দেখা যায় কয়েক হাজার মানুষ register করে বা join করে। যেহেতু এই session-টা Zoom-এ live হবে, তাই আমি চাইলেও এখানে বেশি মানুষ নিতে পারব না। Seat limit থাকবে।</p>
+                <p>তাই আমি এখানে ছোট্ট একটা token amount রেখেছি — শুধু audience filter করার জন্য। যেন এই masterclass-এ তারাই join করে, যারা সত্যিই e-commerce business শুরু করার ব্যাপারে serious এবং step-by-step process-টা মনোযোগ দিয়ে শিখতে ready।</p>
+                <p>যদি এই masterclass-এর actual value অনুযায়ী charge করা হতো, তাহলে এর price কয়েক হাজার টাকা হওয়া উচিত ছিল। কিন্তু আমার goal এখানে টাকা নেওয়া না।</p>
+                <p class="fw-bold text-primary m-0">goal হচ্ছে serious মানুষগুলোকে একটা clear guideline দেওয়া।।</p>
+            </div>
+
+            {{-- Breakdown Table --}}
+            <div class="mc-breakdown-card">
+                <h4 class="fw-bold fs-5 text-dark mb-4">এই ৯৯ টাকায় আপনি পাচ্ছেন:</h4>
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <tbody>
+                            <tr>
+                                <td>🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ</td>
+                                <td class="text-end fw-bold">৳৩,০০০</td>
+                            </tr>
+                            <tr>
+                                <td>🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ</td>
+                                <td class="text-end fw-bold">৳১০,০০০</td>
+                            </tr>
+                            <tr class="border-top border-2">
+                                <td class="fw-bold">মোট মূল্য</td>
+                                <td class="text-end fw-bold text-decoration-line-through">৳১৩,০০০+</td>
+                            </tr>
+                            <tr class="table-success">
+                                <td class="fw-bold text-success">আজকের মূল্য (token)</td>
+                                <td class="text-end fw-black fs-4 text-success">
+                                    @if($course->is_discountable == 1)
+                                        {{ get_price($course->discount_amount, userCurrency()) }}
+                                    @else
+                                        {{ get_price($course->price, userCurrency()) }}
                                     @endif
-                                @endif
-                                @if(setting('hide_curriculum_from_course_details') !='1')
-                                    <div class="curriculum-tab m-t-30 m-t-lg-15 m-b-55 m-b-lg-35">
-                                        @if($hasEnrolled)
-                                            <h3 class="title">{{__('course_syllabus')}}</h3>
-                                            <div class="col-md-9">
-                                                <div class="line-progress">
-                                                    <p class="d-flex align-items-center justify-content-end mb-2"><span>{{$hasEnrolled->complete_count}}% {{__('done')}}</span>
-                                                    </p>
-                                                    <div data-progress="{{$hasEnrolled->complete_count}}"></div>
-                                                </div>
-                                            </div>
-                                        @endif
-                                        <div class="accordion accordion-flush" id="curriculumAccordion">
-                                            @if(count($sections) > 0)
-                                                @foreach($sections as $key=> $section)
-                                                    <div class="accordion-item">
-                                                        <div class="accordion-header"
-                                                             id="course-curriculum-heading{{$key}}">
-                                                            <div class="accordion-button" role="button"
-                                                                 data-bs-toggle="collapse"
-                                                                 data-bs-target="#course-curriculum-collapse{{$key}}"
-                                                                 {{ $key == 0 && (count($lessons->where('section_id',$section->id)) > 0 || count($section->quizzes) > 0) ? 'aria-expanded="true"' : 'aria-expanded="false"' }}
-                                                                 aria-controls="course-curriculum-collapse{{$key}}">
-                                                                {{ $section->title }}
-                                                            </div>
-                                                        </div>
-                                                        <div id="course-curriculum-collapse{{$key}}"
-                                                             class="accordion-collapse collapse {{ $key == 0 && (count($lessons->where('section_id',$section->id)) > 0 || count($section->quizzes) > 0) ? 'show' : '' }}"
-                                                             aria-labelledby="course-curriculum-heading{{$key}}"
-                                                             data-bs-parent="#curriculumAccordion">
-                                                            <div class="accordion-body">
-                                                                @if(count($lessons) > 0)
-                                                                    <div class="course-playlist">
-                                                                        <ul>
-                                                                            @foreach($lessons->where('section_id',$section->id) as $k => $lesson)
-                                                                                <li>
-                                                                                    <a href="#"
-                                                                                       class="{{ $lesson->is_free == 1 ? 'player-src' : '' }}"
-                                                                                       @if($lesson->is_free == 1)
-                                                                                           data-poster="{{ $lesson->image ? getFileLink('402x238', $lesson->image) : ($course->image ? getFileLink('402x248', $course->image) : '') }}"
-                                                                                       data-type="{{ $lesson->lesson_type }}"
-                                                                                       data-source="{{ $lesson->source }}"
-                                                                                       data-video="{{ getVideoId($lesson->source, $lesson->source_data) }}"
-                                                                                        @endif
-                                                                                    >
-                                                                                        <div class="title">
-                                                                                            <div
-                                                                                                class="checkbox-default">
-                                                                                                @if($lesson->is_free == 1)
-                                                                                                    <svg width="20px"
-                                                                                                         height="20px"
-                                                                                                         viewBox="0 0 24 24"
-                                                                                                         fill="none"
-                                                                                                         xmlns="http://www.w3.org/2000/svg">
-                                                                                                        <g id="SVGRepo_bgCarrier"
-                                                                                                           stroke-width="0"/>
-                                                                                                        <g id="SVGRepo_tracerCarrier"
-                                                                                                           stroke-linecap="round"
-                                                                                                           stroke-linejoin="round"/>
-                                                                                                        <g id="SVGRepo_iconCarrier">
-                                                                                                            <path
-                                                                                                                d="M2 16C2 13.1716 2 11.7574 2.87868 10.8787C3.75736 10 5.17157 10 8 10H16C18.8284 10 20.2426 10 21.1213 10.8787C22 11.7574 22 13.1716 22 16C22 18.8284 22 20.2426 21.1213 21.1213C20.2426 22 18.8284 22 16 22H8C5.17157 22 3.75736 22 2.87868 21.1213C2 20.2426 2 18.8284 2 16Z"
-                                                                                                                stroke="var(--color-secondary-4)"
-                                                                                                                stroke-width="1.5"/>
-                                                                                                            <circle
-                                                                                                                cx="12"
-                                                                                                                cy="16"
-                                                                                                                r="2"
-                                                                                                                stroke="var(--color-secondary-4)"
-                                                                                                                stroke-width="1.5"/>
-                                                                                                            <path
-                                                                                                                d="M6 10V8C6 4.68629 8.68629 2 12 2C14.7958 2 17.1449 3.91216 17.811 6.5"
-                                                                                                                stroke="var(--color-secondary-4)"
-                                                                                                                stroke-width="1.5"
-                                                                                                                stroke-linecap="round"/>
-                                                                                                        </g>
-                                                                                                    </svg>
-                                                                                                @else
-                                                                                                    <svg width="20px"
-                                                                                                         height="20px"
-                                                                                                         viewBox="0 0 24 24"
-                                                                                                         fill="none"
-                                                                                                         xmlns="http://www.w3.org/2000/svg">
-                                                                                                        <path
-                                                                                                            d="M2 16C2 13.1716 2 11.7574 2.87868 10.8787C3.75736 10 5.17157 10 8 10H16C18.8284 10 20.2426 10 21.1213 10.8787C22 11.7574 22 13.1716 22 16C22 18.8284 22 20.2426 21.1213 21.1213C20.2426 22 18.8284 22 16 22H8C5.17157 22 3.75736 22 2.87868 21.1213C2 20.2426 2 18.8284 2 16Z"
-                                                                                                            stroke="var(--color-secondary-4)"
-                                                                                                            stroke-width="1.5"/>
-                                                                                                        <circle cx="12"
-                                                                                                                cy="16"
-                                                                                                                r="2"
-                                                                                                                stroke="var(--color-secondary-4)"
-                                                                                                                stroke-width="1.5"/>
-                                                                                                        <path
-                                                                                                            d="M6 10V8C6 4.68629 8.68629 2 12 2C15.3137 2 18 4.68629 18 8V10"
-                                                                                                            stroke="var(--color-secondary-4)"
-                                                                                                            stroke-width="1.5"
-                                                                                                            stroke-linecap="round"/>
-                                                                                                    </svg>
-                                                                                                @endif
-                                                                                            </div>
-                                                                                            @if($lesson->lesson_type == 'video')
-                                                                                                <svg width="12"
-                                                                                                     height="12"
-                                                                                                     viewBox="0 0 9 10"
-                                                                                                     fill="none"
-                                                                                                     xmlns="http://www.w3.org/2000/svg">
-                                                                                                    <path
-                                                                                                        d="M7.44337 5.50769L2.06976 8.89219C1.67021 9.14384 1.15 8.85669 1.15 8.3845L1.15 1.6155C1.15 1.14331 1.67021 0.856158 2.06976 1.10781L7.44337 4.49231C7.81702 4.72765 7.81702 5.27235 7.44337 5.50769Z"
-                                                                                                        stroke="var(--color-secondary-4)"
-                                                                                                        stroke-width="0.8"/>
-                                                                                                </svg>
-                                                                                            @elseif($lesson->lesson_type == 'audio')
-                                                                                                <svg width="10"
-                                                                                                     height="14"
-                                                                                                     viewBox="0 0 10 14"
-                                                                                                     fill="none"
-                                                                                                     xmlns="http://www.w3.org/2000/svg">
-                                                                                                    <path
-                                                                                                        d="M5.00065 9.66827C6.62565 9.66827 7.91732 8.37349 7.91732 6.74457V3.40319C7.91732 1.77427 6.62565 0.479492 5.00065 0.479492C3.37565 0.479492 2.08398 1.77427 2.08398 3.40319V6.74457C2.08398 8.37349 3.37565 9.66827 5.00065 9.66827ZM2.91732 3.40319C2.91732 2.23371 3.83398 1.31484 5.00065 1.31484C6.16732 1.31484 7.08398 2.23371 7.08398 3.40319V6.74457C7.08398 7.91405 6.16732 8.83293 5.00065 8.83293C3.83398 8.83293 2.91732 7.91405 2.91732 6.74457V3.40319Z"
-                                                                                                        fill="#FDCC0D"/>
-                                                                                                    <path
-                                                                                                        d="M10 6.74414H9.16667C9.16667 9.04133 7.29167 10.9209 5 10.9209C2.70833 10.9209 0.833333 9.04133 0.833333 6.74414H0C0 9.37547 2 11.5056 4.58333 11.7144V13.0092H3.33333C3.08333 13.0092 2.91667 13.1763 2.91667 13.4269C2.91667 13.6775 3.08333 13.8446 3.33333 13.8446H6.66667C6.91667 13.8446 7.08333 13.6775 7.08333 13.4269C7.08333 13.1763 6.91667 13.0092 6.66667 13.0092H5.41667V11.7144C8 11.5056 10 9.37547 10 6.74414Z"
-                                                                                                        fill="#FDCC0D"/>
-                                                                                                </svg>
-                                                                                            @else
-                                                                                                <svg width="11"
-                                                                                                     height="13"
-                                                                                                     viewBox="0 0 11 13"
-                                                                                                     fill="none"
-                                                                                                     xmlns="http://www.w3.org/2000/svg">
-                                                                                                    <path
-                                                                                                        fill-rule="evenodd"
-                                                                                                        clip-rule="evenodd"
-                                                                                                        d="M7.81718 0.579102C9.72106 0.579102 11 1.88602 11 3.83091V9.41308C11 11.375 9.76042 12.6509 7.842 12.6631L3.18343 12.6649C1.27955 12.6649 0 11.358 0 9.41308V3.83091C0 1.86841 1.23958 0.593063 3.158 0.58153L7.81657 0.579102H7.81718ZM7.81718 1.48963L3.16102 1.49206C1.75128 1.50056 0.90834 2.37467 0.90834 3.83091V9.41308C0.90834 10.879 1.75915 11.7544 3.18282 11.7544L7.83898 11.7525C9.24872 11.744 10.0917 10.8687 10.0917 9.41308V3.83091C10.0917 2.36496 9.24145 1.48963 7.81718 1.48963ZM7.70036 8.75792C7.95107 8.75792 8.15453 8.96188 8.15453 9.21318C8.15453 9.46449 7.95107 9.66845 7.70036 9.66845H3.32822C3.07752 9.66845 2.87405 9.46449 2.87405 9.21318C2.87405 8.96188 3.07752 8.75792 3.32822 8.75792H7.70036ZM7.70036 6.21663C7.95107 6.21663 8.15453 6.42058 8.15453 6.67189C8.15453 6.9232 7.95107 7.12716 7.70036 7.12716H3.32822C3.07752 7.12716 2.87405 6.9232 2.87405 6.67189C2.87405 6.42058 3.07752 6.21663 3.32822 6.21663H7.70036ZM4.99636 3.68122C5.24706 3.68122 5.45053 3.88518 5.45053 4.13649C5.45053 4.38779 5.24706 4.59175 4.99636 4.59175H3.32804C3.07734 4.59175 2.87387 4.38779 2.87387 4.13649C2.87387 3.88518 3.07734 3.68122 3.32804 3.68122H4.99636Z"
-                                                                                                        fill="var(--color-secondary-4)"/>
-                                                                                                </svg>
-                                                                                            @endif
-                                                                                            <h6>{{ $lesson->title }}
-                                                                                                @if($lesson->is_free == 1)
-                                                                                                    <span class="badge">{{ __('free') }}</span>
-                                                                                                @endif
-                                                                                            </h6>
-                                                                                        </div>
-                                                                                        <span
-                                                                                            class="course-length">{{ $lesson->duration }}</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                            @endforeach
-                                                                        </ul>
-                                                                    </div>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            @endif
-                                        </div>
-                                    </div>
-                                @endif
-                                @if(setting('hide_faq_from_course_details') !='1')
-                                    @if(count($faqs) > 0)
-                                        <div class="faq-tab m-b-55 m-b-lg-35">
-                                            <h3 class="title">{{__('frequently_asked_questions')}}</h3>
-                                            <div class="accordion accordion-flush" id="faqAccordion">
-                                                @foreach($faqs as $key=> $faq)
-                                                    <div class="accordion-item">
-                                                        <div class="accordion-header"
-                                                             id="course-faq-headingOne{{$key}}">
-                                                            <div
-                                                                class="accordion-button {{ $key == 0 ? '' : 'collapsed' }}"
-                                                                role="button" data-bs-toggle="collapse"
-                                                                data-bs-target="#course-faq-collapse{{$key}}"
-                                                                aria-expanded="true"
-                                                                aria-controls="course-faq-collapse{{$key}}">
-                                                                {{ $faq->question }}
-                                                            </div>
-                                                        </div>
-                                                        <div id="course-faq-collapse{{$key}}"
-                                                             class="accordion-collapse collapse {{ $key == 0 ? 'show' : '' }}"
-                                                             aria-labelledby="course-faq-heading{{$key}}"
-                                                             data-bs-parent="#faqAccordion">
-                                                            <div class="accordion-body">
-                                                                {!! $faq->answer !!}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endif
-                            </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                            @if(setting('hide_review_from_course_details') !='1' && $course->total_rating > 0)
-                                <div class="rating-summary-wrapper m-b-55 m-b-md-25">
-                                    <h4 class="border-bottom-soft-white p-b-10 m-b-25 fw-semibold fz-18">{{__('reviews')}}</h4>
-                                    <div class="rating-summary">
-                                        <div class="rating-summary-content">
-                                            <div class="total-rating">
-                                                <h4>{{ round($course->total_rating,2) }}</h4>
-                                                <p>{{__('out_of_5')}}</p>
-                                            </div>
-                                            <div class="rating-details">
-                                                <div class="star-count-progress">
-                                                    <div class="rating-star">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                    <div class="line-progress">
-                                                        <div data-progress="{{ $ratings['five_star'] }}"
-                                                             class="animate-progress"
-                                                             style="--animate-progress:{{ $ratings['five_star'] }}%;"></div>
-                                                        <p>{{ $ratings['five_star'] }}%</p>
-                                                    </div>
-                                                </div>
-                                                <div class="star-count-progress">
-                                                    <div class="rating-star">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fal fa-star"></i>
-                                                    </div>
-                                                    <div class="line-progress">
-                                                        <div data-progress="{{ $ratings['four_star'] }}"
-                                                             class="animate-progress"
-                                                             style="--animate-progress:{{ $ratings['four_star'] }}%;"></div>
-                                                        <p>{{ $ratings['four_star'] }}%</p>
-                                                    </div>
-                                                </div>
-                                                <div class="star-count-progress">
-                                                    <div class="rating-star">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fal fa-star"></i>
-                                                        <i class="fal fa-star"></i>
-                                                    </div>
-                                                    <div class="line-progress">
-                                                        <div data-progress="{{ $ratings['three_star'] }}"
-                                                             class="animate-progress"
-                                                             style="--animate-progress:{{ $ratings['three_star'] }}%;"></div>
-                                                        <p>{{ $ratings['three_star'] }}%</p>
-                                                    </div>
-                                                </div>
-                                                <div class="star-count-progress">
-                                                    <div class="rating-star">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fal fa-star"></i>
-                                                        <i class="fal fa-star"></i>
-                                                        <i class="fal fa-star"></i>
-                                                    </div>
-                                                    <div class="line-progress">
-                                                        <div data-progress="{{ $ratings['two_star'] }}"
-                                                             class="animate-progress"
-                                                             style="--animate-progress:{{ $ratings['two_star'] }}%;"></div>
-                                                        <p>{{ $ratings['two_star'] }}%</p>
-                                                    </div>
-                                                </div>
-                                                <div class="star-count-progress">
-                                                    <div class="rating-star">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fal fa-star"></i>
-                                                        <i class="fal fa-star"></i>
-                                                        <i class="fal fa-star"></i>
-                                                        <i class="fal fa-star"></i>
-                                                    </div>
-                                                    <div class="line-progress">
-                                                        <div data-progress="{{ $ratings['one_star'] }}"
-                                                             class="animate-progress"
-                                                             style="--animate-progress:{{ $ratings['one_star'] }}%;"></div>
-                                                        <p>{{ $ratings['one_star'] }}%</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        @if(setting('disable_write_review') !='1' && $can_review)
-                                            <div class="write-review">
-                                                <a href="#comment-respond"></a>
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            @endif
-                            @if(setting('disable_write_review') !='1')
-                                <div class="comments-template comments-template-v2">
-                                    @if($can_review)
-                                        <div class="comments-respond" id="comment-respond">
-                                            <h4 class="template-title template-title mt-0 mb-3 mb-lg-4">
-                                                <span>{{__('Write_a_review')}}</span>
-                                            </h4>
-                                            <div class="rating-review rating_comment m-b-40 m-b-md-25 all-rating"></div>
-                                            <span class="live-rating"></span>
-                                            <form action="{{ route('store.comment') }}" method="post">
-                                                @csrf
-                                                <div class="input-field m-b-20">
-                                                    <textarea name="comment"></textarea>
-                                                    <input type="hidden" name="id" value="{{ $course->id }}">
-                                                    <input type="hidden" name="slug" value="{{ $course->slug }}">
-                                                    <input type="hidden" name="type" value="course">
-                                                    <input type="hidden" name="rating" class="give_rating">
-                                                </div>
-                                                <div class="input-field">
-                                                    <button type="submit"
-                                                            class="template-btn">{{__('post_review')}}</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    @endif
-                                    @if(count($reviews) > 0)
-                                        <ul class="comments-list">
-                                            @foreach($reviews as $review)
-                                                @include('frontend.review_component')
-                                            @endforeach
-                                        </ul>
-                                        @if($reviews->nextPageUrl())
-                                            <div class="less-more m-t-30 m-t-sm-10">
-                                                <button class="less-more-btn" data-page="{{ $reviews->currentPage() }}"
-                                                        data-url="{{ route('load.reviews') }}">{{__('see_more')}}
-                                                </button>
-                                                @include('components.frontend_loading_btn', ['class' => 'btn'])
-                                            </div>
-                                        @endif
-                                    @endif
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-lg-4 order-1 order-lg-2">
-                        <div class="course-details-sidebar sidebar-offset m-t-md-30">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="course-details-info">
-                                        <div class="course-video">
-                                            @include('frontend.components.video',['source' => $course->video_source, 'video' => $course->video, 'class' => 'course-intro-video', 'image' => $course->image, 'size' => '402x248'])
-                                        </div>
-                                        <div class="single-course-info">
-                                            @if ($course->is_discount == 1)
-                                                <p class="course-countdown m-b-15">
-                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                         xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15Z"
-                                                            stroke="#FF4747" stroke-linecap="round"
-                                                            stroke-linejoin="round"/>
-                                                        <path d="M8 3.80078V8.00078L10.8 9.40078" stroke="#FF4747"
-                                                              stroke-linecap="round" stroke-linejoin="round"/>
-                                                    </svg>
-
-                                                    <span class="p-l-5">{{ getRemainingDaysHours($course->discount_end_at)['days'] }} days
-                                                        {{ getRemainingDaysHours($course->discount_end_at)['hours'] }} {{ __('hours_left') }}!</span>
-
-                                                </p>
-                                            @endif
-                                            <div class="d-flex gap-3 justify-content-between">
-                                                @if (!auth()->check() || auth()->user()->user_type == 'student')
-                                                    @if($course->is_free == 1 || $course->price == 0)
-                                                        <span class="price">{{ __('free') }}</span>
-                                                    @elseif($course->is_discountable == 1)
-                                                        <span class="price">
-                                                            {{ get_price($course->discount_amount, userCurrency()) }}
-                                                            <small>{{ get_price($course->price, userCurrency()) }}</small>
-                                                        </span>
-                                                    @elseif ($course->is_renewable)
-                                                        <span class="price">
-                                                        {{ get_price($course->renew_price, userCurrency()) }}
-                                                    </span>
-                                                    @else
-                                                        <span class="price">
-                                                            {{ get_price($course->price, userCurrency()) }}
-                                                        </span>
-                                                    @endif
-                                                @else
-                                                    @if($course->is_free == 1 || $course->price == 0)
-                                                        <span class="price">{{ __('free') }}</span>
-                                                    @elseif($course->is_discountable == 1)
-                                                        <span class="price">
-                                                            {{ get_price($course->discount_amount, userCurrency()) }}
-                                                            <small>{{ get_price($course->price, userCurrency()) }}</small>
-                                                        </span>
-                                                    @else
-                                                        <span class="price">
-                                                            {{ get_price($course->price, userCurrency()) }}
-                                                        </span>
-                                                    @endif
-                                                @endif
-                                            </div>
-
-                                            <div class="course-feature-list">
-                                                <ul>
-                                                    @if($category)
-                                                        <li>
-                                                            <h6>{{__('category')}}</h6>
-                                                            <span>{{ $category->lang_title }}</span>
-                                                        </li>
-                                                    @endif
-                                                    @if(count($lessons) > 0)
-                                                        <li>
-                                                            <h6>{{__('lectures')}}</h6>
-                                                            <span>{{ count($lessons) }}</span>
-                                                        </li>
-                                                    @endif
-                                                    @if($course->duration)
-                                                        <li>
-                                                            <h6>{{__('duration')}}</h6>
-                                                            <span>{{ $course->duration }}</span>
-                                                        </li>
-                                                    @endif
-                                                    @if($language)
-                                                        <li>
-                                                            <h6>{{__('language')}}</h6>
-                                                            <span>{{ $language->name }}</span>
-                                                        </li>
-                                                    @endif
-                                                    <li>
-                                                        <h6>{{__('quiz_&_exam')}}</h6>
-                                                        @if($quiz)
-                                                            <span>{{__('available')}}</span>
-                                                        @else
-                                                            <span>{{__('not_available')}}</span>
-                                                        @endif
-                                                    </li>
-                                                    @if($level)
-                                                        <li>
-                                                            <h6>{{__('level')}}</h6>
-                                                            <span>{{ $level->lang_title }}</span>
-                                                        </li>
-                                                    @endif
-                                                </ul>
-                                            </div>
-                                            @if(!auth()->check() || auth()->user()->user_type =='student')
-                                                <div
-                                                    class="enroll-and-share d-flex d-lg-block gap-3 align-items-center">
-                                                    <div
-                                                        class="course-enroll cart_area d-flex align-items-center gap-4">
-                                                        @if($is_enrolled)
-                                                            <a href="{{ route('my-course', $course->slug) }}"
-                                                               class="template-btn {{ auth() ?
-                                                            'w-100' : 'w-75' }}">{{__('go_to_course') }}
-                                                                <i class="fal fa-long-arrow-right"></i></a>
-                                                        @else
-                                                            <a href="javascript:void(0)"
-                                                               class="template-btn added_to_cart {{ auth() ?
-                                                           'w-100' : 'w-75' }} {{ $is_added_to_cart ? '' : 'd-none' }}">{{__('added_to_cart')}}</a>
-                                                            <a href="javascript:void(0)"
-                                                               class="template-btn add_to_cart {{ auth() ?
-                                                            'w-100' : 'w-75' }} {{ $is_added_to_cart ? 'd-none' : '' }}"
-                                                               data-id="{{ $course->id }}" data-type="course"
-                                                               data-quantity="1"
-                                                               data-route="{{ route('add.cart') }}">{{__('enroll_now')}}
-                                                            </a>
-                                                        @endif
-                                                        @include('components.frontend_loading_btn', ['class' => auth() ? 'template-btn w-100' : 'template-btn w-75'])
-                                                        @auth
-                                                            <a href="javascript:void(0)"
-                                                               class="template-btn bordered-btn-secondary add_remove_wishlist"
-                                                               data-id="{{ $course->id }}"
-                                                               data-type="course"
-                                                               data-route="{{ route('add.remove.wishlist') }}"
-                                                               data-area="wishlist">
-                                                         <span class="wishlist-icon">
-                                                             @if($course->wishlists->where('user_id',auth()->id())->count())
-                                                                 <i class="fa-heart fas"></i>
-                                                             @else
-                                                                 <i class="fal fa-heart "></i>
-                                                             @endif
-
-                                                         </span></a>
-                                                        @endauth
-                                                    </div>
-                                                    @if(setting('disable_share_option_from_course_details') !='1')
-                                                        <div
-                                                            class="course-social justify-content-center justify-content-md-between align-items-center">
-                                                            <a href="javascript:void(0)"
-                                                               class="share-course">{{__('share')}} <i
-                                                                    class="fa fa-share"></i></a>
-                                                            <ul class="social-profile d-none d-md-flex">
-                                                                <li><a href="javascript:void(0)"><i
-                                                                            class="far fa-clone copy_text"
-                                                                            data-text="{{ url()->current() }}"></i></a>
-                                                                </li>
-                                                                <li><a href="{{ $facebook_link }}" target="_blank"><i
-                                                                            class="fab fa-facebook-f"></i></a></li>
-                                                                <li><a href="{{ $twitter_link }}" target="_blank"><i
-                                                                            class="fab fa-twitter"></i></a></li>
-                                                                <li><a href="{{ $linkedin_link }}" target="_blank"><i
-                                                                            class="fab fa-linkedin-in"></i></a></li>
-                                                                <li><a href="{{ $whatsapp_link }}" target="_blank"><i
-                                                                            class="fab fa-whatsapp"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    @endif
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-
-                                @if(setting('hide_organization_from_course_details') !='1')
-                                    @if($organization)
-                                        <div class="col-md-4 col-sm-6 col-lg-12">
-                                            <div class="course-instructor d-none d-lg-block">
-                                                <div class="instructor-thumb p-t-15">
-                                                    <img src="{{ getFileLink('127x102',$organization->logo) }}"
-                                                         alt="Logo">
-                                                </div>
-                                                <div class="course-instructor-info">
-                                                    <h3>{{ $organization->org_name }}</h3>
-                                                    <p>{{ $organization->tagline ?: 'Evolution of Application Experience' }}</p>
-                                                    <a href="{{ route('organization.details',$organization->slug) }}"
-                                                       class="template-btn">{{__('details')}} <i
-                                                            class="fal fa-long-arrow-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endif
-                            </div>
-                        </div>
+            {{-- =========================================================
+                 8. COURSE FULL DESCRIPTION (100% Admin WYSIWYG Editor Sync)
+                 Field: $course->description (Admin Edit Rich Text Editor)
+            ========================================================== --}}
+            @if($course->description)
+                <div class="mc-content-card">
+                    <h4 class="fw-bold fs-4 text-dark mb-3 pb-2 border-bottom">{{ __('about_this_course') }}</h4>
+                    <div class="description-body text-secondary leading-relaxed fs-6">
+                        {!! $course->description !!}
                     </div>
                 </div>
+            @endif
+
+            {{-- =========================================================
+                 9. COURSE SYLLABUS / CURRICULUM ACCORDION (100% Admin Sync)
+                 Fields: $sections, $lessons (Admin Curriculum Builder)
+            ========================================================== --}}
+            @if(setting('hide_curriculum_from_course_details') != '1' && count($sections) > 0)
+                <div class="mc-content-card">
+                    <h4 class="fw-bold fs-4 text-dark mb-4 pb-2 border-bottom">{{ __('course_syllabus') }}</h4>
+                    
+                    @if($hasEnrolled)
+                        <div class="bg-light p-3 rounded-3 mb-4 border">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="fw-bold small text-dark">{{ __('your_progress') }}</span>
+                                <span class="fw-bold small text-success">{{ $hasEnrolled->complete_count }}% {{ __('done') }}</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $hasEnrolled->complete_count }}%;"></div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="accordion mc-faq-accordion accordion-flush" id="curriculumAccordion">
+                        @foreach($sections as $key => $section)
+                            <div class="accordion-item">
+                                <div class="accordion-header" id="course-curriculum-heading{{ $key }}">
+                                    <div class="accordion-button {{ $key == 0 && (count($lessons->where('section_id', $section->id)) > 0 || count($section->quizzes) > 0) ? '' : 'collapsed' }}"
+                                         role="button" 
+                                         data-bs-toggle="collapse" 
+                                         data-bs-target="#course-curriculum-collapse{{ $key }}"
+                                         {{ $key == 0 && (count($lessons->where('section_id', $section->id)) > 0 || count($section->quizzes) > 0) ? 'aria-expanded="true"' : 'aria-expanded="false"' }}
+                                         aria-controls="course-curriculum-collapse{{ $key }}">
+                                        <i class="fal fa-book-open me-2 text-warning"></i> {{ $section->title }}
+                                    </div>
+                                </div>
+                                <div id="course-curriculum-collapse{{ $key }}"
+                                     class="accordion-collapse collapse {{ $key == 0 && (count($lessons->where('section_id', $section->id)) > 0 || count($section->quizzes) > 0) ? 'show' : '' }}"
+                                     aria-labelledby="course-curriculum-heading{{ $key }}" 
+                                     data-bs-parent="#curriculumAccordion">
+                                    <div class="accordion-body">
+                                        @if(count($lessons) > 0)
+                                            <div class="course-playlist">
+                                                <ul class="list-unstyled mb-0">
+                                                    @foreach($lessons->where('section_id', $section->id) as $k => $lesson)
+                                                        <li class="py-2 border-bottom">
+                                                            <a href="#" 
+                                                               class="d-flex align-items-center justify-content-between text-dark text-decoration-none {{ $lesson->is_free == 1 ? 'player-src' : '' }}"
+                                                               @if($lesson->is_free == 1)
+                                                                   data-poster="{{ $lesson->image ? getFileLink('402x238', $lesson->image) : ($course->image ? getFileLink('402x248', $course->image) : '') }}"
+                                                                   data-type="{{ $lesson->lesson_type }}" 
+                                                                   data-source="{{ $lesson->source }}"
+                                                                   data-video="{{ getVideoId($lesson->source, $lesson->source_data) }}"
+                                                               @endif>
+                                                                <div class="d-flex align-items-center gap-2">
+                                                                    @if($lesson->lesson_type == 'video')
+                                                                        <i class="fal fa-play-circle text-primary"></i>
+                                                                    @elseif($lesson->lesson_type == 'audio')
+                                                                        <i class="fal fa-microphone text-primary"></i>
+                                                                    @else
+                                                                        <i class="fal fa-file-alt text-primary"></i>
+                                                                    @endif
+                                                                    
+                                                                    <span class="fw-medium text-dark">{{ $lesson->title }}</span>
+                                                                    
+                                                                    @if($lesson->is_free == 1)
+                                                                        <span class="badge bg-success ms-2">{{ __('free') }}</span>
+                                                                    @endif
+                                                                </div>
+                                                                <span class="small text-muted">{{ $lesson->duration }}</span>
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+            {{-- =========================================================
+                 10. REGISTRATION ORDER FORM SECTION (`#register`)
+            ========================================================== --}}
+            @if(!auth()->check() || auth()->user()->user_type == 'student')
+                @if(!$is_enrolled)
+                    <div id="register" class="mc-form-wrapper">
+                        <h2 class="text-center fw-bold fs-3 text-dark mb-2">
+                            মাস্টারক্লাসে জয়েন করতে নিচের<br>
+                            <span class="text-primary">ফর্মটি পূরণ করুন</span>
+                        </h2>
+                        
+                        <p class="text-center text-muted small mb-4">Give valid information</p>
+
+                        <form action="{{ route('add.cart') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $course->id }}">
+                            <input type="hidden" name="type" value="course">
+                            <input type="hidden" name="quantity" value="1">
+
+                            <div class="mb-3">
+                                <label class="fw-semibold text-dark mb-1">Your Full Name <span class="text-danger">*</span></label>
+                                <input type="text" name="name" class="mc-form-input" placeholder="আপনার সম্পূর্ণ নাম" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="fw-semibold text-dark mb-1">Mobile Number <span class="text-danger">*</span></label>
+                                <input type="tel" name="phone" class="mc-form-input" placeholder="01XXXXXXXXX" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="fw-semibold text-dark mb-1">Email address <span class="text-danger">*</span></label>
+                                <input type="email" name="email" class="mc-form-input" placeholder="আপনার ইমেইল এড্রেস" required>
+                            </div>
+
+                            <div class="mc-breakdown-card border-0 bg-white p-3 mb-4">
+                                <p class="fw-bold text-dark mb-2">Your order</p>
+                                <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded-3">
+                                    <span class="fw-bold text-dark">{{ $course->title }}</span>
+                                    <span class="fw-bold text-success fs-5">
+                                        @if($course->is_discountable == 1)
+                                            {{ get_price($course->discount_amount, userCurrency()) }}
+                                        @else
+                                            {{ get_price($course->price, userCurrency()) }}
+                                        @endif
+                                    </span>
+                                </div>
+                            </div>
+
+                            <p class="small text-muted mb-4">
+                                Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.
+                            </p>
+
+                            <button type="submit" class="mc-btn-primary-cta w-100 py-3 border-0">
+                                PAY NOW <i class="fas fa-lock ms-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                @endif
+            @endif
+
+            {{-- =========================================================
+                 11. FAQ ACCORDION SECTION (100% Admin Sync)
+                 Field: $faqs (From Admin Course Edit -> FAQ tab)
+            ========================================================== --}}
+            @if(setting('hide_faq_from_course_details') != '1')
+                <div class="mb-5">
+                    <h2 class="text-center fw-bold fs-3 text-dark mb-2">কিছু সাধারণ প্রশ্নের উত্তর</h2>
+                    <span class="d-block mx-auto mb-4" style="width: 70px; height: 3px; background: #fdcc0d; border-radius: 10px;"></span>
+
+                    @php
+                        $displayFaqs = count($faqs) > 0 ? $faqs : [
+                            (object)['question' => 'লাইভ ক্লাসে কিভাবে যুক্ত হবো?', 'answer' => 'আপনি পেমেন্ট করার পর আপনাকে আমাদের একটা প্রাইভেট গ্রুপে জয়েন করানো হবে, এবং যেদিন লাইভ ক্লাসগুলো হবে সেদিন আপনাকে জুমের লিংক শেয়ার করা হবে'],
+                            (object)['question' => 'লাইভ ক্লাসগুলো কত ঘন্টার হবে?', 'answer' => 'এইটা সঠিক ভাবে বলা যাচ্ছে না, যে টাইম দেয়া আছে ঠিক সেই সময়েই শুরু হবে কিন্তু শেষ হবে আপনাদের ইচ্ছায়। যতক্ষণ আপনাদের প্রয়োজন আমি লাইভে থাকবো ইনশাআল্লাহ্'],
+                            (object)['question' => 'মাষ্টার ক্লাসটিতে ডিস্কাউন্ট দেয়া যাবে না?', 'answer' => 'বর্তমানে বিশাল ডিস্কাউন্ট দেয়া আছে তবে প্রতিনিয়ত প্রোগ্রামটির মূল্য কিছু কিছু করে বাড়ানো হবে। তাই যত দ্রুত যুক্ত হবেন তত বেশি আপনারই লাভ।'],
+                            (object)['question' => 'লাইভ ক্লাসের কি কোন রেকর্ড দেয়া হবে?', 'answer' => 'এখনো পর্যন্ত আমরা লাইভ ক্লাসের রেকর্ড দেয়ার কথা চিন্তা করছি না, তবে ভবিষ্যতে প্রয়োজন ভেদে আমরা রেকর্ড ভার্সন দেয়ার কথা চিন্তা করে দেখবো। তবে যারা সত্যিকার অর্থেই সিরিয়াস তারা লাইভ ক্লাসে জয়েন করবেই।'],
+                            (object)['question' => 'আপনাদের নেক্সট লাইভ মাষ্টারক্লাস কবে হবে', 'answer' => 'আমরা আপাতত আর লাইভ মাষ্টারক্লাস করানো কোন প্ল্যান রাখছি না, এইবারই লাস্ট। তাই সময় ম্যানেজ করে এইবারই যুক্ত হোন, যত দেরি করবেন শিখতে তত পিছিয়ে পড়বেন'],
+                        ];
+                    @endphp
+
+                    <div class="accordion mc-faq-accordion accordion-flush mt-4" id="faqAccordion">
+                        @foreach($displayFaqs as $key => $faq)
+                            <div class="accordion-item">
+                                <div class="accordion-header" id="course-faq-heading{{ $key }}">
+                                    <div class="accordion-button {{ $key == 0 ? '' : 'collapsed' }}" 
+                                         role="button" 
+                                         data-bs-toggle="collapse" 
+                                         data-bs-target="#course-faq-collapse{{ $key }}"
+                                         aria-expanded="{{ $key == 0 ? 'true' : 'false' }}" 
+                                         aria-controls="course-faq-collapse{{ $key }}">
+                                        {{ $faq->question }}
+                                    </div>
+                                </div>
+                                <div id="course-faq-collapse{{ $key }}" 
+                                     class="accordion-collapse collapse {{ $key == 0 ? 'show' : '' }}" 
+                                     aria-labelledby="course-faq-heading{{ $key }}" 
+                                     data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        {!! $faq->answer !!}
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    {{-- Bottom Dual CTA --}}
+                    @if(!auth()->check() || auth()->user()->user_type == 'student')
+                        @if(!$is_enrolled)
+                            <div class="text-center mt-5">
+                                <a href="#register" class="mc-dual-btn">
+                                    <span class="mc-dual-left">রেজিস্ট্রেশন করুন এখনই</span>
+                                    <span class="mc-dual-right">
+                                        @if($course->is_discountable == 1)
+                                            {{ get_price($course->discount_amount, userCurrency()) }}
+                                        @else
+                                            {{ get_price($course->price, userCurrency()) }}
+                                        @endif
+                                        <i class="fas fa-arrow-right ms-1"></i>
+                                    </span>
+                                </a>
+                                <div class="mc-seats-counter mt-3">
+                                    <span class="mc-pulse-dot"><span class="ping"></span><span class="dot"></span></span>
+                                    <span>আর মাত্র <strong class="text-danger fw-bold">৭২ সিট বাকি</strong></span>
+                                </div>
+                            </div>
+                        @endif
+                    @endif
+                </div>
+            @endif
+
+            {{-- =========================================================
+                 12. REVIEWS SECTION
+            ========================================================== --}}
+            @if(setting('hide_review_from_course_details') != '1' && $course->total_rating > 0)
+                <div class="mc-content-card">
+                    <h4 class="fw-bold fs-4 text-dark mb-4 pb-2 border-bottom">{{ __('reviews') }}</h4>
+                    
+                    <div class="mc-review-summary">
+                        <div class="mc-rating-big text-center">
+                            <div class="num fs-1 fw-bold text-dark">{{ round($course->total_rating, 1) }}</div>
+                            <div class="mc-rating-stars fs-6 my-1 text-warning">
+                                @for($i = 1; $i <= 5; $i++)
+                                    <i class="{{ $i <= round($course->total_rating) ? 'fas' : 'fal' }} fa-star"></i>
+                                @endfor
+                            </div>
+                            <small class="text-muted">{{ __('out_of_5') }}</small>
+                        </div>
+                        
+                        <div class="mc-rating-bars flex-grow-1">
+                            @foreach([5 => 'five_star', 4 => 'four_star', 3 => 'three_star', 2 => 'two_star', 1 => 'one_star'] as $starCount => $starKey)
+                                <div class="d-flex align-items-center gap-2 mb-1 fs-7">
+                                    <span class="stars text-warning me-1">
+                                        @for($s = 1; $s <= 5; $s++)
+                                            <i class="{{ $s <= $starCount ? 'fas' : 'fal' }} fa-star"></i>
+                                        @endfor
+                                    </span>
+                                    <div class="progress flex-grow-1" style="height: 8px;">
+                                        <div class="progress-bar bg-warning" style="width: {{ $ratings[$starKey] }}%;"></div>
+                                    </div>
+                                    <span class="pct text-muted ms-1">{{ $ratings[$starKey] }}%</span>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    @if(setting('disable_write_review') != '1' && $can_review)
+                        <div class="mc-review-form pt-4 border-top" id="comment-respond">
+                            <h5 class="fw-bold mb-3 text-dark">{{ __('Write_a_review') }}</h5>
+                            <div class="rating-review rating_comment mb-3 all-rating"></div>
+                            <span class="live-rating"></span>
+                            
+                            <form action="{{ route('store.comment') }}" method="post">
+                                @csrf
+                                <div class="mb-3">
+                                    <textarea name="comment" class="form-control rounded-3" rows="4" placeholder="{{ __('write_your_review') ?? 'Write your review...' }}"></textarea>
+                                    <input type="hidden" name="id" value="{{ $course->id }}">
+                                    <input type="hidden" name="slug" value="{{ $course->slug }}">
+                                    <input type="hidden" name="type" value="course">
+                                    <input type="hidden" name="rating" class="give_rating">
+                                </div>
+                                <button type="submit" class="mc-btn-primary-cta d-inline-block w-auto px-4 py-2 fs-6">
+                                    {{ __('post_review') }}
+                                </button>
+                            </form>
+                        </div>
+                    @endif
+
+                    @if(count($reviews) > 0)
+                        <ul class="comments-list mt-4 list-unstyled">
+                            @foreach($reviews as $review)
+                                @include('frontend.review_component')
+                            @endforeach
+                        </ul>
+                        
+                        @if($reviews->nextPageUrl())
+                            <div class="less-more mt-4 text-center">
+                                <button class="btn btn-outline-primary rounded-pill px-4 less-more-btn" 
+                                        data-page="{{ $reviews->currentPage() }}" 
+                                        data-url="{{ route('load.reviews') }}">
+                                    {{ __('see_more') }}
+                                </button>
+                                @include('components.frontend_loading_btn', ['class' => 'btn'])
+                            </div>
+                        @endif
+                    @endif
+                </div>
+            @endif
+
+        </div>
+    </section>
+
+</div>
+
+<input type="hidden" class="text_copied" value="{{ __('text_copied') }}">
+<input type="hidden" class="text_copied_fail" value="{{ __('text_copied_fail') }}">
+
+{{-- =========================================================
+     13. RELATED COURSES SECTION
+========================================================== --}}
+@if(setting('disable_related_course_from_course_details') != '1' && count($related_courses) > 0)
+    <section class="bg-light py-5 border-top">
+        <div class="container container-1278">
+            <div class="row justify-content-center mb-4">
+                <div class="col-lg-6 text-center">
+                    <h3 class="fw-extrabold text-dark">{{ __('related_course') }}</h3>
+                    <p class="text-muted">{{ __('Lorem Ipsum is not the simply random text') }}</p>
+                </div>
+            </div>
+            
+            <div class="course-items-wrap">
+                <div class="row course-items-v3 course-slider" dir="{{ systemLanguage() ? systemLanguage()->text_direction : 'ltr' }}">
+                    @foreach($related_courses as $key => $course)
+                        @include('frontend.course.component', ['col' => 'col-lg-4'])
+                    @endforeach
+                </div>
+                
+                @if(!$related_courses->nextPageUrl())
+                    <div class="text-center mt-4">
+                        <a class="btn btn-outline-success rounded-pill px-4" href="{{ route('courses', ['category_ids' => $course->category_id]) }}">
+                            {{ __('see_more') }}
+                        </a>
+                    </div>
+                @endif
             </div>
         </div>
     </section>
-    <input type="hidden" class="text_copied" value="{{ __('text_copied') }}">
-    <input type="hidden" class="text_copied_fail" value="{{ __('text_copied_fail') }}">
-    <!--====== End Course Details Area ======-->
-    @if(setting('disable_related_course_from_course_details') !='1' && count($related_courses) > 0)
-        <!--====== Start Related Course ======-->
-        <section class="related-courses-section color-bg-off-white p-t-70 p-b-50 p-t-sm-50 p-b-sm-20">
-            <div class="container container-1278">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="common-heading text-center m-b-40">
-                            <h3>{{__('related_course')}}</h3>
-                            <p>{{__('Lorem Ipsum is not the simply random text')}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="course-items-wrap">
-                    <div class="row course-items-v3 course-slider"
-                         dir="{{ systemLanguage() ? systemLanguage()->text_direction : 'ltr' }}">
-                        @foreach($related_courses as $key => $course)
-                            @include('frontend.course.component',['col' => 'col-lg-4'])
-                        @endforeach
-                    </div>
-                    @if(!$related_courses->nextPageUrl())
-                        <div class="text-center">
-                            <a class="template-btn"
-                               href="{{ route('courses',['category_ids' => $course->category_id]) }}">{{__('see_more')}}</a>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </section>
-    @endif
+@endif
+
 @endsection
+
 @push('css')
     <link rel="stylesheet" href="{{ static_asset('frontend/css/star-rating-svg.css') }}">
 @endpush
+
 @push('js')
     <script src="{{ static_asset('frontend/js/jquery.star-rating-svg.js') }}"></script>
     <script>
         $(document).ready(function () {
             initiateRating();
             let player = new Plyr('.yt_player');
+            
             $(".rating_comment").starRating({
                 totalStars: 5,
                 starShape: 'rounded',
@@ -654,6 +1171,7 @@
                     $('.give_rating').val(currentRating);
                 }
             });
+
             $(document).on('click', '.less-more-btn', function () {
                 let that = this;
                 let page = parseInt($(this).data('page')) + 1;
@@ -687,6 +1205,7 @@
                     }
                 });
             });
+
             $(document).on("click", ".copy_text", function () {
                 let text = $(this).data("text");
                 let success_txt = $(".text_copied").val();
@@ -700,6 +1219,7 @@
                         toastr["error"](error_txt + ": ", err);
                     });
             });
+
             $(document).on('click', '.player-src', function () {
                 let provider = $(this).data("source");
                 let video = $(this).data("video");
@@ -727,7 +1247,6 @@
                             {
                                 src: video,
                                 provider: provider,
-
                             },
                         ],
                     };
@@ -735,7 +1254,6 @@
                 player.on('ready', (event) => {
                     player.play();
                 });
-
             });
         });
 
@@ -749,5 +1267,4 @@
             });
         }
     </script>
-
 @endpush

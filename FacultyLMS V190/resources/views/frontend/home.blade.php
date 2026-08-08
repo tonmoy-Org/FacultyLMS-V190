@@ -6,90 +6,200 @@
     @include('frontend.layouts.header.'.$section['header'])
     
     @if(isset($course) && $course)
+    @php
+        $lang = app()->getLocale();
+        
+        $resolveImg = function($key, $fallback = '') {
+            $settingVal = setting($key);
+            if ($settingVal) {
+                if (is_numeric($settingVal)) {
+                    $media = \App\Models\MediaLibrary::find($settingVal);
+                    if ($media && $media->image_variants) {
+                        return getFileLink('original_image', $media->image_variants);
+                    }
+                }
+                if (is_array($settingVal)) {
+                    return getFileLink('original_image', $settingVal);
+                }
+                if (is_string($settingVal) && (str_contains($settingVal, '/') || str_contains($settingVal, '.'))) {
+                    return getFileLink('original_image', $settingVal);
+                }
+            }
+            return $fallback;
+        };
+
+        $heroTitle = setting('hero_title', $lang) ?: (setting('single_hero_title') ?: $course->title);
+        $heroDesc = setting('hero_description', $lang) ?: (setting('single_hero_description') ?: ($course->short_description ?? strip_tags($course->description)));
+        $heroBtnLabel = setting('hero_main_action_btn_label', $lang) ?: __('Enroll Now');
+        $heroBtnUrl = setting('hero_main_action_btn_url') ? url(setting('hero_main_action_btn_url')) : route('course.details', $course->slug);
+
+        $heroImg1 = $resolveImg('header1_hero_image1') ?: ($resolveImg('header2_hero_image1') ?: ($resolveImg('single_hero_image') ?: ($course->image ? getFileLink('original_image', $course->image) : static_asset('frontend/img/hero/hero-v5-masonry-1.jpg'))));
+        $heroImg2 = $resolveImg('header1_hero_image2') ?: ($resolveImg('header2_hero_image2') ?: static_asset('frontend/img/hero/hero-v5-masonry-2.jpg'));
+        $heroImg3 = $resolveImg('header1_hero_image3') ?: ($resolveImg('header2_hero_image3') ?: static_asset('frontend/img/hero/hero-v5-masonry-3.jpg'));
+        $heroImg4 = $resolveImg('header1_hero_image4') ?: ($resolveImg('header2_hero_image4') ?: static_asset('frontend/img/hero/hero-v5-masonry-4.jpg'));
+    @endphp
     <!--====== Start Single Course Hero Section ======-->
     <section class="hero-area hero-area-v5 p-t-120 p-b-100 p-b-md-40" style="background-color: #110B3A;">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row align-items-center g-4">
                 <div class="col-lg-6">
-                    <h1 class="hero-title m-b-20" style="color: #ffffff;">{{ setting('single_hero_title') ?: $course->title }}</h1>
+                    @if(setting('hero_subtitle', $lang))
+                        <span class="hero-subtitle mb-2 d-inline-block text-uppercase fw-bold" style="color: #10b981; letter-spacing: 1px;">{!! setting('hero_subtitle', $lang) !!}</span>
+                    @endif
+                    <h1 class="hero-title m-b-20" style="color: #ffffff; font-size: 2.8rem; line-height: 1.25;">{!! $heroTitle !!}</h1>
                     <p class="m-b-30" style="font-size: 1.1rem; line-height: 1.8; color: #d1d5db;">
-                        {{ setting('single_hero_description') ?: ($course->short_description ?? strip_tags($course->description)) }}
+                        {!! $heroDesc !!}
                     </p>
-                    <a href="{{ route('course.details', $course->slug) }}" class="template-btn mt-4">{{ __('Enroll Now') }}</a>
+                    <a href="{{ $heroBtnUrl }}" class="template-btn mt-3">{{ $heroBtnLabel }}</a>
                 </div>
                 <div class="col-lg-6">
-                    @if(setting('single_hero_image') || $course->image)
-                        <img src="{{ setting('single_hero_image') ? setting('single_hero_image') : getFileLink('original_image', $course->image) }}" alt="{{ $course->title }}" class="img-fluid rounded shadow-lg w-100">
-                    @else
-                        <div class="bg-secondary rounded shadow-lg d-flex align-items-center justify-content-center w-100" style="height: 400px; color: #fff;">
-                            <h3>No Image Available</h3>
+                    <div class="hero-staggered-collage position-relative w-100" style="min-height: 520px; max-width: 580px; margin: 0 auto;">
+                        <!-- Top Right Image -->
+                        @if($heroImg1)
+                        <div class="collage-card card-1 position-absolute shadow-lg overflow-hidden" 
+                             style="top: 0; right: 0; width: 55%; height: 320px; border-radius: 24px; z-index: 2; border: 3px solid rgba(255,255,255,0.15); transition: transform 0.3s ease;">
+                            <img src="{{ $heroImg1 }}" alt="Hero Image 1" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
-                    @endif
+                        @endif
+
+                        <!-- Left Middle Image -->
+                        @if($heroImg2)
+                        <div class="collage-card card-2 position-absolute shadow-lg overflow-hidden" 
+                             style="top: 90px; left: 0; width: 52%; height: 340px; z-index: 1; border-radius: 24px; border: 3px solid rgba(255,255,255,0.15); transition: transform 0.3s ease;">
+                            <img src="{{ $heroImg2 }}" alt="Hero Image 2" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        @endif
+
+                        <!-- Bottom Right Image -->
+                        @if($heroImg3)
+                        <div class="collage-card card-3 position-absolute shadow-lg overflow-hidden" 
+                             style="top: 230px; right: 2%; width: 55%; height: 310px; z-index: 3; border-radius: 24px; border: 3px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;">
+                            <img src="{{ $heroImg3 }}" alt="Hero Image 3" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        @endif
+
+                        <!-- Fourth Floating Accent Image -->
+                        @if($heroImg4)
+                        <div class="collage-card card-4 position-absolute shadow-lg overflow-hidden" 
+                             style="bottom: -15px; left: 10%; width: 36%; height: 160px; z-index: 4; border-radius: 20px; border: 4px solid #ffffff; transition: transform 0.3s ease;">
+                            <img src="{{ $heroImg4 }}" alt="Hero Image 4" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        @endif
+                    </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!--====== Start Feature Cards Section (Life Time Access, Free Course Materials, Dedicated Support) ======-->
+    @include('frontend.homePage.feature_section')
+
+    <!--====== Start About Me Section ======-->
+    @include('frontend.homePage.about_me_section')
+
+    <!--====== Start Stats Counter Section (Dynamic Database System Counts & Theme Green) ======-->
+    @php
+        // 1. Dynamic Enrolled Students Count from DB
+        $total_enrolments = \App\Models\Enroll::count();
+        if ($total_enrolments == 0) {
+            $total_enrolments = \App\Models\User::where('user_type', 'student')->count();
+        }
+        $stat1_number = $total_enrolments > 0 ? number_format($total_enrolments) . '+' : (setting('instructor_stat1_number') ?: '1,200+');
+        $stat1_title  = setting('instructor_stat1_title') ?: 'Students Enrolled';
+
+        // 2. Dynamic Online Courses Count from DB
+        $total_courses = \App\Models\Course::where('status', 1)->count();
+        if ($total_courses == 0) {
+            $total_courses = \App\Models\Course::count();
+        }
+        $stat2_number = $total_courses > 0 ? number_format($total_courses) . '+' : (setting('instructor_stat2_number') ?: '15+');
+        $stat2_title  = setting('instructor_stat2_title') ?: 'Online Courses';
+
+        // 3. Dynamic Success Rate from Ratings / Success Stories or Setting
+        $total_ratings = \App\Models\Rating::count();
+        if ($total_ratings > 0) {
+            $avg_rating = \App\Models\Rating::avg('rating');
+            $stat3_number = round(($avg_rating / 5) * 100) . '%';
+        } else {
+            $stat3_number = setting('instructor_stat3_number') ?: '99%';
+        }
+        $stat3_title = setting('instructor_stat3_title') ?: 'Success Rate';
+    @endphp
+    <section class="stats-counter-section p-t-60 p-b-60 bg-white">
+        <div class="container container-1278">
+            <div class="row justify-content-center align-items-center g-4 text-center">
+                <!-- Stat 1: Students Enrolled -->
+                <div class="col-md-4 col-4" data-aos="fade-up" data-aos-delay="0">
+                    <div class="stat-counter-item">
+                        <h2 class="fw-bold mb-2" style="font-size: 3.4rem; color: #10b981; font-weight: 800; line-height: 1; letter-spacing: -1px;">
+                            {{ $stat1_number }}
+                        </h2>
+                        <h6 class="fw-bold mb-0" style="color: #1a1b4b; font-size: 17px;">
+                            {{ __($stat1_title) }}
+                        </h6>
+                    </div>
+                </div>
+
+                <!-- Stat 2: Online Courses -->
+                <div class="col-md-4 col-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-counter-item">
+                        <h2 class="fw-bold mb-2" style="font-size: 3.4rem; color: #10b981; font-weight: 800; line-height: 1; letter-spacing: -1px;">
+                            {{ $stat2_number }}
+                        </h2>
+                        <h6 class="fw-bold mb-0" style="color: #1a1b4b; font-size: 17px;">
+                            {{ __($stat2_title) }}
+                        </h6>
+                    </div>
+                </div>
+
+                <!-- Stat 3: Success Rate -->
+                <div class="col-md-4 col-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-counter-item">
+                        <h2 class="fw-bold mb-2" style="font-size: 3.4rem; color: #10b981; font-weight: 800; line-height: 1; letter-spacing: -1px;">
+                            {{ $stat3_number }}
+                        </h2>
+                        <h6 class="fw-bold mb-0" style="color: #1a1b4b; font-size: 17px;">
+                            {{ __($stat3_title) }}
+                        </h6>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!--====== Start Course Curriculum ======-->
+    <!--====== Start Single Course Section ======-->
+    @include('frontend.homePage.single_course_section')
+
+    <!--====== Start Ad Banner 1 (Upper Home Section) ======-->
     @php
-        $sections = $course->sections;
-        $lessons = $course->lessons;
+        $b1ImgSetting = setting('home_ad_banner_image_1') ?: setting('home_ad_banner_image');
+        $b1Url = '';
+        if ($b1ImgSetting) {
+            $b1Url = getFileLink('original_image', $b1ImgSetting);
+        }
+        $b1Status = setting('home_ad_banner_status_1') !== '0';
+        $b1Link = setting('home_ad_banner_link_1') ?: setting('home_ad_banner_link');
     @endphp
-    @if($sections && count($sections) > 0)
-    <section class="curriculum-section p-t-80 p-b-80 bg-white">
-        <div class="container">
-            <h2 class="text-center mb-5 fw-bold">Course Curriculum</h2>
+    @if($b1Url && $b1Status && !str_contains($b1Url, 'default'))
+    <section class="ad-banner-section-1 p-t-60 p-b-60 bg-white overflow-hidden">
+        <div class="container container-1278">
             <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="curriculum-tab">
-                        <div class="accordion accordion-flush" id="curriculumAccordion">
-                            @foreach($sections as $key => $section)
-                                <div class="accordion-item shadow-sm mb-3 rounded overflow-hidden border-0">
-                                    <div class="accordion-header" id="course-curriculum-heading{{$key}}">
-                                        <div class="accordion-button fw-semibold p-4 {{ $key == 0 ? '' : 'collapsed' }}" role="button" data-bs-toggle="collapse" data-bs-target="#course-curriculum-collapse{{$key}}" {{ $key == 0 ? 'aria-expanded="true"' : 'aria-expanded="false"' }} aria-controls="course-curriculum-collapse{{$key}}" style="font-size: 1.1rem; box-shadow: none;">
-                                            {{ $section->title }}
-                                        </div>
-                                    </div>
-                                    <div id="course-curriculum-collapse{{$key}}" class="accordion-collapse collapse {{ $key == 0 ? 'show' : '' }}" aria-labelledby="course-curriculum-heading{{$key}}" data-bs-parent="#curriculumAccordion">
-                                        <div class="accordion-body bg-white border-top p-0">
-                                            @if($lessons && count($lessons->where('section_id', $section->id)) > 0)
-                                                <ul class="list-unstyled mb-0">
-                                                    @foreach($lessons->where('section_id', $section->id) as $lesson)
-                                                        <li class="d-flex justify-content-between align-items-center border-bottom p-3 p-md-4">
-                                                            <div class="d-flex align-items-center">
-                                                                @if($lesson->lesson_type == 'video')
-                                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-3"><path d="M15 12.3301L9 16.6603L9 8.00004L15 12.3301Z" fill="#ea580c"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12 20.5C16.6944 20.5 20.5 16.6944 20.5 12C20.5 7.30558 16.6944 3.5 12 3.5C7.30558 3.5 3.5 7.30558 3.5 12C3.5 16.6944 7.30558 20.5 12 20.5Z" fill="#ea580c"/></svg>
-                                                                @elseif($lesson->lesson_type == 'audio')
-                                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-3"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM11 16V8L16 12L11 16Z" fill="#FDCC0D"/></svg>
-                                                                @else
-                                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-3"><path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2V8H20" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 13H8" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 17H8" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 9H8" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                                                @endif
-                                                                <span class="fw-medium text-secondary">{{ $lesson->title }}</span>
-                                                            </div>
-                                                            <span class="text-muted small">{{ $lesson->duration }}</span>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            @else
-                                                <p class="text-muted mb-0 p-3 p-md-4">No lessons available in this module.</p>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
+                <div class="col-12 text-center">
+                    @if($b1Link)
+                        <a href="{{ $b1Link }}" target="_blank" class="d-block w-100 overflow-hidden">
+                    @endif
+                        <img src="{{ $b1Url }}" alt="Ad Banner 1" class="img-fluid w-100" style="border-radius: 0px !important; width: 100%; max-height: 280px; object-fit: cover; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                    @if($b1Link)
+                        </a>
+                    @endif
                 </div>
-            </div>
-            <div class="text-center mt-5">
-                <a href="{{ route('course.details', $course->slug) }}" class="template-btn">{{ __('Enroll Now') }}</a>
             </div>
         </div>
     </section>
     @endif
 
     <!--====== Promo Banner Restored to Original Position ======-->
-    <section class="promo-banner-section p-t-60 bg-white">
+    <section class="promo-banner-section p-t-60 p-b-60 bg-white">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -125,27 +235,103 @@
             </div>
         </div>
     </section>
-    <!--====== Start Ad Banner Section ======-->
-    @php
-        $adBannerMediaId = setting('home_ad_banner_image');
-        $adBannerImageUrl = '';
-        if ($adBannerMediaId) {
-            $media = \App\Models\MediaLibrary::find($adBannerMediaId);
-            if ($media && $media->image_variants) {
-                $adBannerImageUrl = getFileLink('original_image', $media->image_variants);
-            }
-        }
-    @endphp
-    @if($adBannerImageUrl)
-    <section class="ad-banner-section" style="padding: 40px 0;">
-        <div class="container">
+    <!--====== Start What You Will Learn ======-->
+    @if(isset($course) && $course && $course->outcomes)
+    <section class="what-you-learn-section p-t-80 p-b-80 position-relative" style="background-color: #F9FAFB;">
+        <div class="container container-1278">
             <div class="row justify-content-center">
-                <div class="col-lg-12 text-center">
-                    @if(setting('home_ad_banner_link'))
-                        <a href="{{ setting('home_ad_banner_link') }}" target="_blank">
+                <div class="col-lg-10">
+                    <div class="common-heading text-center m-b-40">
+                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                            {{ __('WHAT YOU WILL LEARN') }}
+                        </span>
+                        <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 38px; line-height: 1.25;">
+                            {{ __('Course Outcomes & Key Takeaways') }}
+                        </h2>
+                    </div>
+                    <div class="card shadow-lg border-0 p-4 p-md-5" style="border-radius: 20px; background: #ffffff;">
+                        <div class="learn-outcomes-content" style="color: #475569; font-size: 16px; line-height: 1.8;">
+                            {!! $course->outcomes !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!--====== Start Instructor Profile ======-->
+    @if(isset($course) && $course->instructor)
+    <section class="instructor-section p-t-80 p-b-80 bg-white">
+        <div class="container container-1278">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="common-heading text-center m-b-40">
+                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                            {{ __('MEET YOUR INSTRUCTOR') }}
+                        </span>
+                        <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 38px; line-height: 1.25;">
+                            {{ __('Learn From An Expert Mentor') }}
+                        </h2>
+                    </div>
+
+                    <div class="instructor-card p-4 p-md-5 bg-white shadow-lg border border-light" style="border-radius: 20px;">
+                        <img src="{{ getFileLink('100x100', $course->instructor->image) }}" 
+                             class="rounded-circle mb-4 shadow" 
+                             alt="{{ $course->instructor->name }}" 
+                             style="width: 130px; height: 130px; object-fit: cover; border: 4px solid #10b981; padding: 3px;">
+                        
+                        <h3 class="fw-bold mb-1" style="color: #1a1b4b; font-size: 24px;">{{ $course->instructor->name }}</h3>
+                        <span class="d-inline-block fw-semibold mb-4 px-3 py-1 rounded-pill" style="background: rgba(16, 185, 129, 0.12); color: #10b981; font-size: 14px;">
+                            {{ $course->instructor->instructor->designation ?? 'Lead Instructor' }}
+                        </span>
+                        
+                        <div class="text-secondary" style="line-height: 1.8; color: #64748b; font-size: 15.5px;">
+                            {!! $course->instructor->about !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!--====== Start Webinar Section ======-->
+    @include('frontend.homePage.webinar_section')
+
+    <!--====== Start Success Video Section ======-->
+    @include('frontend.homePage.success_video')
+
+    <!--====== Start Success Story Section ======-->
+    @include('frontend.homePage.success')
+
+    <!--====== Start Why Choose Me Section ======-->
+    @include('frontend.homePage.why_choose_section')
+
+    <!--====== Start FAQ Section ======-->
+    @include('frontend.homePage.faq')
+
+    <!--====== Start Ad Banner 2 (Lower Home Section) ======-->
+    @php
+        $b2ImgSetting = setting('home_ad_banner_image_2');
+        $b2Url = '';
+        if ($b2ImgSetting) {
+            $b2Url = getFileLink('original_image', $b2ImgSetting);
+        }
+        $b2Status = setting('home_ad_banner_status_2') !== '0';
+        $b2Link = setting('home_ad_banner_link_2');
+    @endphp
+
+    @if($b2Url && $b2Status && !str_contains($b2Url, 'default'))
+    <section class="ad-banner-section-2 p-t-60 p-b-60 bg-white overflow-hidden">
+        <div class="container container-1278">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    @if($b2Link)
+                        <a href="{{ $b2Link }}" target="_blank" class="d-block w-100 overflow-hidden">
                     @endif
-                        <img src="{{ $adBannerImageUrl }}" alt="Ad Banner" class="img-fluid rounded shadow-sm" style="width: 100%; object-fit: cover;">
-                    @if(setting('home_ad_banner_link'))
+                        <img src="{{ $b2Url }}" alt="Ad Banner 2" class="img-fluid w-100" style="border-radius: 0px !important; width: 100%; max-height: 280px; object-fit: cover; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                    @if($b2Link)
                         </a>
                     @endif
                 </div>
@@ -154,97 +340,7 @@
     </section>
     @endif
 
-    <!--====== Start What You Will Learn ======-->
-    @if($course->outcomes)
-    <section class="what-you-learn-section p-t-80 p-b-80 bg-white">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <h2 class="text-center mb-5 fw-bold">What You Will Learn</h2>
-                    <div class="card shadow-sm border-0 rounded p-4 p-md-5">
-                        {!! $course->outcomes !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    @endif
 
-
-    <!--====== Start Instructor Profile ======-->
-    @if($course->instructor)
-    <section class="instructor-section p-t-80 p-b-80 bg-white">
-        <div class="container">
-            <h2 class="text-center mb-5 fw-bold">Meet Your Instructor</h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-6 text-center">
-                    <img src="{{ getFileLink('100x100', $course->instructor->image) }}" class="rounded-circle mb-4 shadow" alt="{{ $course->instructor->name }}" style="width: 150px; height: 150px; object-fit: cover;">
-                    <h4 class="fw-bold">{{ $course->instructor->name }}</h4>
-                    <p class="text-secondary mb-4">{{ $course->instructor->instructor->designation ?? 'Instructor' }}</p>
-                    <div class="text-secondary" style="line-height: 1.8;">
-                        {!! $course->instructor->about !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    @endif
-    @endif
-
-    <!--====== Start Success Video Section ======-->
-    @include('frontend.homePage.success_video')
-
-    <!--====== Start Success Story Section ======-->
-    @include('frontend.homePage.success')
-
-    <!--====== Start FAQ Section ======-->
-    @include('frontend.homePage.faq')
-
-    <!--====== Start Newsletter & Countdown Overlapping Footer ======-->
-    <section class="newsletter-countdown-section" style="position: relative; z-index: 10; margin-bottom: -120px;">
-        <div class="container" style="max-width: 1300px;">
-            <div class="newsletter-box rounded-4 p-5 shadow-lg" style="background-color: {{ setting('promo_banner_bg_color') ?: '#ffb606' }};">
-                <div class="row align-items-center">
-                    
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <h3 class="fw-bold text-dark mb-2" style="font-size: 1.8rem;">Subscribe Newsletter</h3>
-                        <p class="text-dark mb-0" style="opacity: 0.8; font-size: 0.95rem;">
-                            {{ setting('newsletter_description') ?: 'Get the latest updates, exclusive discounts, and news directly to your inbox.' }}
-                        </p>
-                    </div>
-
-                    <div class="col-lg-5 mb-4 mb-lg-0">
-                        <form action="{{ route('subscribe') }}" method="POST" class="d-flex w-100 bg-white rounded shadow-sm p-1">
-                            @csrf
-                            <input type="email" name="email" class="form-control border-0 shadow-none px-3" placeholder="Email" required style="background: transparent;">
-                            <button type="submit" class="btn btn-dark rounded px-4 py-2 d-flex align-items-center justify-content-center" style="background-color: #111; color: white;">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </form>
-                    </div>
-
-                    <div class="col-lg-3 text-center text-lg-end">
-                        <div class="mb-2 fw-bold text-dark text-center" style="font-size: 1.1rem;">Admission Now</div>
-                        <div class="mini-countdown d-flex justify-content-center justify-content-lg-center gap-2" id="promoCountdownFooter" data-target="{{ setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days')) }}">
-                            <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 50px;">
-                                <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
-                                <span class="small text-secondary" style="font-size: 10px;">DAYS</span>
-                            </div>
-                            <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 50px;">
-                                <h4 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
-                                <span class="small text-secondary" style="font-size: 10px;">HRS</span>
-                            </div>
-                            <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 50px;">
-                                <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
-                                <span class="small text-secondary" style="font-size: 10px;">MIN</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!--====== Global Countdown Script for both timers ======-->
     <script>
