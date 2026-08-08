@@ -989,8 +989,8 @@ class WebsiteSettingController extends Controller
 
     public function themeOptions(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-
-        return view('backend.admin.website_setting.theme_options');
+        $courses = \App\Models\Course::where('status', 'approved')->get();
+        return view('backend.admin.website_setting.theme_options', compact('courses'));
     }
 
     public function updateThemesOptions(Request $request): JsonResponse

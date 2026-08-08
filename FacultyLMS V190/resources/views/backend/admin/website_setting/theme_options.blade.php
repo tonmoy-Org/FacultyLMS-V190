@@ -11,6 +11,44 @@
                     <form action="{{ route('theme.options') }}" method="post" class="form">@csrf
                         <div class="row">
                             <div class="pageTitle">
+                                <h6 class="sub-title">Website Mode</h6>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-sm-12 mb-4">
+                                <label class="form-label fw-bold">Select Website Mode</label>
+                                <select name="website_mode" id="website_mode" class="form-select" onchange="toggleSingleCourseSelect()">
+                                    <option value="multiple_course" {{ setting('website_mode') == 'multiple_course' || !setting('website_mode') ? 'selected' : '' }}>Multiple Course (Marketplace)</option>
+                                    <option value="single_course" {{ setting('website_mode') == 'single_course' ? 'selected' : '' }}>Single Course Website</option>
+                                </select>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-sm-12 mb-4" id="single_course_select_div" style="display: {{ setting('website_mode') == 'single_course' ? 'block' : 'none' }};">
+                                <label class="form-label fw-bold">Select Featured Course</label>
+                                <select name="single_course_id" class="form-select select2">
+                                    <option value="">Select a course...</option>
+                                    @if(isset($courses))
+                                        @foreach($courses as $course)
+                                            <option value="{{ $course->id }}" {{ setting('single_course_id') == $course->id ? 'selected' : '' }}>
+                                                {{ $course->title }}
+                                            </option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+
+                            <script>
+                                function toggleSingleCourseSelect() {
+                                    var mode = document.getElementById('website_mode').value;
+                                    var courseSelect = document.getElementById('single_course_select_div');
+                                    if (mode === 'single_course') {
+                                        courseSelect.style.display = 'block';
+                                    } else {
+                                        courseSelect.style.display = 'none';
+                                    }
+                                }
+                            </script>
+
+                            <div class="pageTitle mt-4">
                                 <h6 class="sub-title">{{ __('headers') }}</h6>
                             </div>
 

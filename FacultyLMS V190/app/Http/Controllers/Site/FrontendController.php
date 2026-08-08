@@ -52,7 +52,21 @@ class FrontendController extends Controller
     Application {
         try {
             $data = [];
-            $data['course'] = \App\Models\Course::with(['category.language', 'lessons', 'instructor', 'reviews'])->where('status', 'approved')->first();
+            $websiteMode = setting('website_mode');
+            
+            if ($websiteMode == 'single_course') {
+                $singleCourseId = setting('single_course_id');
+                if ($singleCourseId) {
+                    $data['course'] = \App\Models\Course::with(['category.language', 'lessons', 'instructor', 'reviews'])
+                        ->where('id', $singleCourseId)
+                        ->where('status', 'approved')
+                        ->first();
+                } else {
+                    $data['course'] = \App\Models\Course::with(['category.language', 'lessons', 'instructor', 'reviews'])->where('status', 'approved')->first();
+                }
+            } else {
+                $data['course'] = null;
+            }
             $data['success_stories'] = $successStoriesRepository->activeStories();
 
             // dd($data);

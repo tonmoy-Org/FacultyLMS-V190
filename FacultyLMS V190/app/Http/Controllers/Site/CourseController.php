@@ -42,6 +42,20 @@ class CourseController extends Controller
     public function course(Request $request, CategoryRepository $categoryRepository, LevelRepository $levelRepository, SubjectRepository $subjectRepository): View|Factory|\Illuminate\Http\JsonResponse|RedirectResponse|Application
     {
         try {
+            if (setting('website_mode') == 'single_course') {
+                $data = [];
+                $singleCourseId = setting('single_course_id');
+                if ($singleCourseId) {
+                    $data['course'] = \App\Models\Course::with(['category.language', 'lessons', 'instructor', 'reviews'])
+                        ->where('id', $singleCourseId)
+                        ->where('status', 'approved')
+                        ->first();
+                } else {
+                    $data['course'] = \App\Models\Course::with(['category.language', 'lessons', 'instructor', 'reviews'])->where('status', 'approved')->first();
+                }
+                return view('frontend.home', $data);
+            }
+
             $input                  = $request->all();
             $input['total_results'] = 0;
             $input['style']         = $request->style ?? 'grid';
