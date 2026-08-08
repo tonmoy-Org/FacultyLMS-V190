@@ -236,7 +236,7 @@
         </div>
     </section>
     <!--====== Start What You Will Learn ======-->
-    @if($course->outcomes)
+    @if(isset($course) && $course && $course->outcomes)
     <section class="what-you-learn-section p-t-80 p-b-80 position-relative" style="background-color: #F9FAFB;">
         <div class="container container-1278">
             <div class="row justify-content-center">
@@ -261,7 +261,7 @@
     @endif
 
     <!--====== Start Instructor Profile ======-->
-    @if(isset($course) && $course->instructor)
+    @if(isset($course) && $course && $course->instructor)
     <section class="instructor-section p-t-80 p-b-80 bg-white">
         <div class="container container-1278">
             <div class="row justify-content-center">
