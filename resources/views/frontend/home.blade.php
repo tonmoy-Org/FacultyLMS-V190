@@ -5,7 +5,6 @@
     <!--====== Start Header ======-->
     @include('frontend.layouts.header.'.$section['header'])
     
-    @if(isset($course) && $course)
     @php
         $lang = app()->getLocale();
         
@@ -28,12 +27,12 @@
             return $fallback;
         };
 
-        $heroTitle = setting('hero_title', $lang) ?: (setting('single_hero_title') ?: $course->title);
-        $heroDesc = setting('hero_description', $lang) ?: (setting('single_hero_description') ?: ($course->short_description ?? strip_tags($course->description)));
-        $heroBtnLabel = setting('hero_main_action_btn_label', $lang) ?: __('Enroll Now');
-        $heroBtnUrl = setting('hero_main_action_btn_url') ? url(setting('hero_main_action_btn_url')) : route('course.details', $course->slug);
+        $heroTitle = setting('hero_title', $lang) ?: (setting('single_hero_title') ?: (isset($course) && $course ? $course->title : __('Build Your Dream Career')));
+        $heroDesc = setting('hero_description', $lang) ?: (setting('single_hero_description') ?: (isset($course) && $course ? ($course->short_description ?? strip_tags($course->description)) : __('Learn from industry experts and enhance your skills with our comprehensive courses.')));
+        $heroBtnLabel = setting('hero_main_action_btn_label', $lang) ?: (isset($course) && $course ? __('Enroll Now') : __('Explore Courses'));
+        $heroBtnUrl = setting('hero_main_action_btn_url') ? url(setting('hero_main_action_btn_url')) : (isset($course) && $course ? route('course.details', $course->slug) : route('courses'));
 
-        $heroImg1 = $resolveImg('header1_hero_image1') ?: ($resolveImg('header2_hero_image1') ?: ($resolveImg('single_hero_image') ?: ($course->image ? getFileLink('original_image', $course->image) : static_asset('frontend/img/hero/hero-v5-masonry-1.jpg'))));
+        $heroImg1 = $resolveImg('header1_hero_image1') ?: ($resolveImg('header2_hero_image1') ?: ($resolveImg('single_hero_image') ?: (isset($course) && $course && $course->image ? getFileLink('original_image', $course->image) : static_asset('frontend/img/hero/hero-v5-masonry-1.jpg'))));
         $heroImg2 = $resolveImg('header1_hero_image2') ?: ($resolveImg('header2_hero_image2') ?: static_asset('frontend/img/hero/hero-v5-masonry-2.jpg'));
         $heroImg3 = $resolveImg('header1_hero_image3') ?: ($resolveImg('header2_hero_image3') ?: static_asset('frontend/img/hero/hero-v5-masonry-3.jpg'));
         $heroImg4 = $resolveImg('header1_hero_image4') ?: ($resolveImg('header2_hero_image4') ?: static_asset('frontend/img/hero/hero-v5-masonry-4.jpg'));
@@ -88,9 +87,10 @@
                     </div>
             </div>
         </div>
+        </div>
     </section>
-    @endif
 
+    <div class="home-page-sections">
     <!--====== Start Feature Cards Section (Life Time Access, Free Course Materials, Dedicated Support) ======-->
     @include('frontend.homePage.feature_section')
 
@@ -342,42 +342,10 @@
 
 
 
-    <!--====== Global Countdown Script for both timers ======-->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function initCountdown(elementId) {
-                const countdownEl = document.getElementById(elementId);
-                if(countdownEl) {
-                    const targetDateStr = countdownEl.getAttribute('data-target');
-                    const targetDate = new Date(targetDateStr.replace(/-/g, '/')).getTime();
-
-                    const timer = setInterval(function() {
-                        const now = new Date().getTime();
-                        const distance = targetDate - now;
-
-                        if (distance < 0) {
-                            clearInterval(timer);
-                            return;
-                        }
-
-                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                        if(countdownEl.querySelector('.days')) countdownEl.querySelector('.days').innerText = days;
-                        if(countdownEl.querySelector('.hours')) countdownEl.querySelector('.hours').innerText = hours;
-                        if(countdownEl.querySelector('.minutes')) countdownEl.querySelector('.minutes').innerText = minutes;
-                        if(countdownEl.querySelector('.seconds')) countdownEl.querySelector('.seconds').innerText = seconds;
-                    }, 1000);
-                }
-            }
-            initCountdown('promoCountdownMain');
-            initCountdown('promoCountdownFooter');
-        });
-    </script>
+    <!--====== Global Countdown Script for both timers is now in footer.blade.php ======-->
 
     <!--====== Start Footer ======-->
+    </div>
     @include('frontend.layouts.footer')
 @endsection
 

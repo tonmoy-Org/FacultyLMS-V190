@@ -46,6 +46,10 @@
                             <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
                             <span class="small text-secondary fw-semibold" style="font-size: 10px;">MIN</span>
                         </div>
+                        <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 52px;">
+                            <h4 class="seconds m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
+                            <span class="small text-secondary fw-semibold" style="font-size: 10px;">SEC</span>
+                        </div>
                     </div>
                 </div>
 
@@ -203,3 +207,40 @@
 <a href="#" class="back-to-top" id="fixed-scroll-top">
     <i class="far fa-angle-up"></i>
 </a>
+
+<!--====== Global Countdown Script for both timers ======-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function initCountdown(elementId) {
+            const countdownEl = document.getElementById(elementId);
+            if(countdownEl) {
+                const targetDateStr = countdownEl.getAttribute('data-target');
+                if(!targetDateStr) return;
+                const targetDate = new Date(targetDateStr.replace(/-/g, '/')).getTime();
+
+                const timer = setInterval(function() {
+                    const now = new Date().getTime();
+                    const distance = targetDate - now;
+
+                    if (distance < 0) {
+                        clearInterval(timer);
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    if(countdownEl.querySelector('.days')) countdownEl.querySelector('.days').innerText = days;
+                    if(countdownEl.querySelector('.hours')) countdownEl.querySelector('.hours').innerText = hours;
+                    if(countdownEl.querySelector('.minutes')) countdownEl.querySelector('.minutes').innerText = minutes;
+                    if(countdownEl.querySelector('.seconds')) countdownEl.querySelector('.seconds').innerText = seconds;
+                }, 1000);
+            }
+        }
+        initCountdown('promoCountdownMain');
+        initCountdown('promoCountdownFooter');
+    });
+</script>
+

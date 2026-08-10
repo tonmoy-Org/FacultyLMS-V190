@@ -18,13 +18,13 @@ class TestimonialLanguageSeeder extends Seeder
             'testimonial_id' => 1,
             'lang'           => 'en',
             'name'           => 'Natasha Hope',
-            'description'    => "We're loving it. Rocket LMS is both perfect    and highly adaptable.",
+            'description'    => "We're loving it. This platform is both perfect and highly adaptable to our needs.",
         ]);
         TestimonialLanguage::create([
             'testimonial_id' => 2,
             'lang'           => 'en',
             'name'           => 'Charles Dale',
-            'description'    => "We're loving it. Rocket LMS is both perfect    and highly adaptable.",
+            'description'    => "An incredible learning experience with great instructors and well-structured courses.",
         ]);
     }
 }

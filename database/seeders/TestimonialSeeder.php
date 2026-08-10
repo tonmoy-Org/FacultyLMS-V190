@@ -17,12 +17,12 @@ class TestimonialSeeder extends Seeder
         Testimonial::create([
             'id'          => 1,
             'name'        => 'Natasha Hope',
-            'description' => "We're loving it. OVOY LMS is both perfect    and highly adaptable.",
+            'description' => "We're loving it. This platform is both perfect and highly adaptable to our needs.",
         ]);
         Testimonial::create([
             'id'          => 2,
             'name'        => 'Charles Dale',
-            'description' => "We're loving it. OVOY LMS is both perfect    and highly adaptable.",
+            'description' => "An incredible learning experience with great instructors and well-structured courses.",
         ]);
     }
 }

@@ -29,7 +29,7 @@
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 bg-white">
+                    <div class="card border-0 rounded-4 p-4 p-md-5 bg-white">
                         
                         <div class="policy-section mb-4">
                             <h3 class="fw-bold mb-3" style="color: #1a1b4b; font-size: 22px;">

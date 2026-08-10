@@ -39,30 +39,31 @@
                                 <span
                                     class="default-tab-count {{ $step_1_error ? 'bg-danger text-white' : '' }}">{{ __('1') }}</span>{{ __('basic_information') }}</a>
                         </li>
+<li class="nav-item" role="presentation">
+                            <a class="nav-link" id="masterclass" data-bs-toggle="pill" data-bs-target="#courseMasterclass"
+                                role="tab" aria-controls="courseMasterclass" aria-selected="false">
+                                <span class="default-tab-count">{{ __('2') }}</span>{{ __('Masterclass Landing') }}</a>
+                        </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link {{ $step_2_error ? 'active text-danger' : '' }}" id="mediaImages"
                                 data-bs-toggle="pill" data-bs-target="#courseMediaImages" role="tab"
                                 aria-controls="courseMediaImages" aria-selected="false">
                                 <span
-                                    class="default-tab-count {{ $step_2_error ? 'bg-danger text-white' : '' }}">{{ __('2') }}</span>{{ __('media_images') }}</a>
+                                    class="default-tab-count {{ $step_2_error ? 'bg-danger text-white' : '' }}">{{ __('3') }}</span>{{ __('media_images') }}</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link {{ $step_3_error && !$step_2_error ? 'active text-danger' : '' }}"
                                 id="pricing" data-bs-toggle="pill" data-bs-target="#coursePricing" role="tab"
                                 aria-controls="coursePricing" aria-selected="false">
                                 <span
-                                    class="default-tab-count {{ $step_3_error && !$step_2_error ? 'bg-danger text-white' : '' }}">{{ __('3') }}</span>{{ __('pricing') }}</a>
+                                    class="default-tab-count {{ $step_3_error && !$step_2_error ? 'bg-danger text-white' : '' }}">{{ __('4') }}</span>{{ __('pricing') }}</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="seo" data-bs-toggle="pill" data-bs-target="#courseSEO"
                                 role="tab" aria-controls="courseSEO" aria-selected="false">
-                                <span class="default-tab-count">{{ __('4') }}</span>{{ __('seo') }}</a>
+                                <span class="default-tab-count">{{ __('5') }}</span>{{ __('seo') }}</a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="masterclass" data-bs-toggle="pill" data-bs-target="#courseMasterclass"
-                                role="tab" aria-controls="courseMasterclass" aria-selected="false">
-                                <span class="default-tab-count">{{ __('5') }}</span>{{ __('Masterclass Landing') }}</a>
-                        </li>
+                        
                     </ul>
                     <!-- End Add New Course tab menu -->
 
@@ -316,259 +317,14 @@
                                     <div class="col-lg-12">
                                         <div class="d-flex justify-content-end align-items-center mt-30">
                                             <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                                data-bs-target="#courseMediaImages">{{ __('next') }}</a>
-                                        </div>
-                                    </div>
-                                    <!-- End Next Page BTN -->
-                                </div>
-                            </div>
-                            <!-- End Basic Course Information -->
-
-                            <div class="tab-pane fade {{ $step_2_error ? 'show active' : '' }}" id="courseMediaImages"
-                                role="tabpanel" aria-labelledby="mediaImages" tabindex="0">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="video_source"
-                                                    class="form-label">{{ __('video_source') }}</label>
-                                                <select id="video_source"
-                                                    class="form-select form-select-lg mb-3 without_search"
-                                                    name="video_source">
-                                                    <option value="">{{ __('select_video_source') }}</option>
-                                                    <option value="upload"
-                                                        {{ old('video_source') == 'upload' ? 'selected' : '' }}>
-                                                        {{ __('upload') }}</option>
-
-                                                    <option value="youtube"
-                                                        {{ old('video_source') == 'youtube' ? 'selected' : '' }}>
-                                                        {{ __('youtube') }}</option>
-                                                    <option value="vimeo"
-                                                        {{ old('video_source') == 'vimeo' ? 'selected' : '' }}>
-                                                        {{ __('vimeo') }}</option>
-                                                    <option value="mp4"
-                                                        {{ old('video_source') == 'mp4' ? 'selected' : '' }}>
-                                                        {{ __('mp4') }}</option>
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('video_source') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Video Source -->
-                                    <div
-                                        class="col-lg-6 upload_div {{ old('video_source') == 'upload' ? '' : 'd-none' }}">
-                                        <div class="mb-3">
-                                            <label for="thumbnailFile"
-                                                class="form-label">{{ __('upload_video') }}</label>
-                                            <label for="thumbnailFile" class="file-upload-text">
-                                                <p class="file_name">{{ __('video') }}</p>
-                                                <span class="file-btn">{{ __('choose_file') }}</span>
-                                            </label>
-                                            <input class="d-none thumb_picker" name="video" type="file"
-                                                id="thumbnailFile">
-                                            <div class="nk-block-des text-danger">
-                                                <p class="error">{{ $errors->first('video') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- End Upload Video -->
-                                    <div
-                                        class="col-lg-6 video_link {{ old('video_source') && old('video_source') != 'upload' ? '' : 'd-none' }}">
-                                        <div class="mb-4">
-                                            <label for="videoLink" class="form-label">{{ __('video_link') }}</label>
-                                            <input type="text" class="form-control rounded-2" name="video_link"
-                                                id="videoLink" placeholder="{{ __('enter_video_link') }}"
-                                                value="{{ old('video') }}">
-                                            <div class="nk-block-des text-danger">
-                                                <p class="error">{{ $errors->first('video_link') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @include('backend.common.media-input', [
-                                        'title' => 'Slider Image',
-                                        'name' => 'image_media_id',
-                                        'col' => 'col-12',
-                                        'size' => '(402x248)',
-                                        'image' => old('image_media_id'),
-                                        'label' => __('thumbnail'),
-                                    ])
-                                    <div class="col-lg-6">
-                                        <div class="custom-checkbox mt-20">
-                                            <label>
-                                                <input type="checkbox" value="1"
-                                                    {{ old('is_downloadable') == 1 ? 'checked' : '' }}>
-                                                <span class="">{{ __('downloadable') }}</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button"
-                                                class="btn sg-btn-outline-primary btn_action"
-                                                data-bs-target="#basicCourseInformation">{{ __('back') }}</a>
-
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                                data-bs-target="#coursePricing">{{ __('next') }}</a>
-                                        </div>
-                                    </div>
-                                    <!-- End Next Page BTN -->
-                                </div>
-                            </div>
-                            <!-- End Course Media Images -->
-
-                            <div class="tab-pane fade {{ $step_3_error && !$step_2_error ? 'show active' : '' }}"
-                                id="coursePricing" role="tabpanel" aria-labelledby="pricing" tabindex="0">
-                                <div class="row gx-20">
-                                    <div class="col-lg-6">
-                                        <div class="price-checkbox d-flex gap-12 mb-4">
-                                            <label for="is_free">{{ __('free_course') }}</label>
-                                            <div class="setting-check">
-                                                <input type="checkbox" id="is_free" name="is_free" value="1"
-                                                    {{ old('is_free') == 1 ? 'checked' : '' }}>
-                                                <label for="is_free"></label>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="price-checkbox d-flex gap-12 mb-4 not_free_div {{ old('is_free') == 1 ? 'd-none' : '' }}">
-                                            <label for="discountable_course">{{ __('discountable_course') }}</label>
-                                            <div class="setting-check">
-                                                <input type="checkbox" id="discountable_course" name="is_discountable"
-                                                    value="1" {{ old('is_discountable') == 1 ? 'checked' : '' }}>
-                                                <label for="discountable_course"></label>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-6"></div>
-                                    <!-- End Price Checkbox -->
-
-                                    <div class="col-lg-6 not_free_div {{ old('is_free') == 1 ? 'd-none' : '' }}">
-                                        <div class="mb-4">
-                                            <label for="coursePrice" class="form-label">{{ __('course_price') }}</label>
-                                            <input type="number" class="form-control rounded-2" id="coursePrice"
-                                                name="price" value="{{ old('price') }}"
-                                                placeholder="{{ __('enter_course_price') }}">
-                                            <div class="nk-block-des text-danger">
-                                                <p class="error">{{ $errors->first('price') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Course Price -->
-
-                                    <div
-                                        class="col-lg-6 discountable_div {{ old('is_discountable') == 1 ? '' : 'd-none' }}">
-                                        <div class="">
-                                            <label for="discountType" class="form-label">{{ __('discount') }}</label>
-
-                                            <div class="customDiscountField">
-                                                <input type="text" class="form-control rounded-2" placeholder="e.g.20"
-                                                    id="discountType" name="discount" value="{{ old('discount') }}">
-
-                                                <div class="select-type-v2 selectField">
-                                                    <select class="form-select form-select-lg mb-3 without_search"
-                                                        name="discount_type">
-                                                        <option value="">{{ __('select_discount_type') }}</option>
-                                                        <option value="percent"
-                                                            {{ old('discount_type') == 'percent' ? 'selected' : 'd-none' }}>
-                                                            {{ __('percent') }}</option>
-                                                        <option value="amount"
-                                                            {{ old('discount_type') == 'amount' ? 'selected' : 'd-none' }}>
-                                                            {{ __('amount') }}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="nk-block-des text-danger">
-                                                <p class="error">{{ $errors->first('discount') }}</p>
-                                            </div>
-                                            <div class="nk-block-des text-danger">
-                                                <p class="error">{{ $errors->first('discount_type') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Discount Type -->
-
-                                    <div
-                                        class="col-lg-6 discountable_div {{ old('is_discountable') == 1 ? '' : 'd-none' }}">
-                                        <div class="mb-20">
-                                            <label for="dateRangePicker"
-                                                class="form-label">{{ __('discount_period') }}</label>
-                                            <input id="dateRangePicker" name="discount_period" type="text"
-                                                class="form-control rounded-2" value="{{ old('discount_period') }}"
-                                                placeholder="{{ __('select_date') }}">
-                                            <div class="nk-block-des text-danger">
-                                                <p class="dateRange_error error">{{ $errors->first('price') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Date Range Picker -->
-
-                                    <div class="col-lg-6 renewable_div {{ old('is_renewable') == 1 ? '' : 'd-none' }}">
-                                        <div class="">
-                                            <div class="select-type-v2">
-                                                <label for="renew_after"
-                                                    class="form-label">{{ __('access_validity') }}</label>
-                                                <input type="number" class="form-control rounded-2" id="renew_after"
-                                                    name="renew_after" value="{{ old('renew_after') }}"
-                                                    placeholder="e.g.90">
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="dateRange_error error">{{ $errors->first('renew_after') }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Access Validity -->
-
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button"
-                                                class="btn sg-btn-outline-primary btn_action"
-                                                data-bs-target="#courseMediaImages">{{ __('back') }}</a>
-
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                                data-bs-target="#courseSEO">{{ __('next') }}</a>
-                                        </div>
-                                    </div>
-                                    <!-- End Next Page BTN -->
-                                </div>
-                                <!-- End Product images section -->
-                            </div>
-                            <!-- End Course Pricing -->
-
-                            <div class="tab-pane fade" id="courseSEO" role="tabpanel" aria-labelledby="seo"
-                                tabindex="0">
-                                <div class="row gx-20">
-                                    @include('components.meta-fields', [
-                                        'meta_title_class' => 'col-lg-6',
-                                        'meta_description_class' => 'col-lg-12',
-                                        'meta_keywords_class' => 'col-lg-6',
-                                        'meta_image_class' => 'col-lg-12',
-                                        'meta_title' => old('meta_title'),
-                                        'meta_keywords' => old('meta_keywords'),
-                                        'meta_description' => old('meta_description'),
-                                        'meta_image' => old('meta_image'),
-                                        'edit' => true,
-                                    ])
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button"
-                                                class="btn sg-btn-outline-primary btn_action"
-                                                data-bs-target="#coursePricing">{{ __('back') }}</a>
-
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
                                                 data-bs-target="#courseMasterclass">{{ __('next') }}</a>
                                         </div>
                                     </div>
                                     <!-- End Next Page BTN -->
                                 </div>
                             </div>
-                            <!-- End Course SEO -->
-
-                            <!-- Start Masterclass Landing Tab -->
+                            <!-- End Basic Course Information -->
+<!-- Start Masterclass Landing Tab -->
                             <div class="tab-pane fade" id="courseMasterclass" role="tabpanel" aria-labelledby="masterclass" tabindex="0">
                                 @php
                                     $defEyebrow = old('masterclass_settings.eyebrow_title', 'E-commerce শুরু করার hidden path');
@@ -613,7 +369,8 @@
 
                                     $defBreakdownSubheading = old('masterclass_settings.breakdown_subheading', 'এই $15.00 টাকায় আপনি পাচ্ছেন:');
                                     $defBreakdownTodayTitle = old('masterclass_settings.breakdown_today_title', 'আজকের মূল্য (token)');
-                                    $defBreakdownItems = old('masterclass_settings.breakdown_items', "🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০\n🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০");
+                                    $defBreakdownItems = old('masterclass_settings.breakdown_items', "🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০
+🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০");
 
                                     $defOrderFormTitle = old('masterclass_settings.order_form_title', 'মাস্টারক্লাসে জয়েন করতে নিচের ফর্মটি পূরণ করুন');
                                     $defOrderFormSubtitle = old('masterclass_settings.order_form_subtitle', 'Give valid information');
@@ -769,9 +526,9 @@
                                                         <span class="badge bg-secondary p-2"><i class="fas fa-check"></i> #<span class="benefit-num">{{ $bIdx + 1 }}</span></span>
                                                         <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white"
                                                                value="{{ $bItem }}" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
-                                                        <button type="button" class="btn btn-outline-danger remove-benefit-btn px-3">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
+                                                        <a href="javascript:void(0)" class="text-danger remove-benefit-btn fs-4 ms-2">
+                                                            <i class="las la-trash-alt"></i>
+                                                        </a>
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -1008,105 +765,9 @@
                                         </div>
                                     </div>
 
-                                    <!-- Section 9: FAQ Accordion -->
-                                    <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
-                                            <h5 class="fw-bold text-dark m-0"><span class="badge bg-primary me-2">Section 9</span> FAQ Section Customization</h5>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary py-1" id="add_new_faq_btn">
-                                                <i class="fas fa-plus me-1"></i> Add Custom FAQ Item
-                                            </button>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="mb-4">
-                                                <label class="form-label fw-bold">FAQ Section Main Title</label>
-                                                <input type="text" name="masterclass_settings[faq_title]" class="form-control rounded-2"
-                                                       value="{{ $defFaqTitle }}" placeholder="কিছু সাধারণ প্রশ্নের উত্তর">
-                                            </div>
 
-                                            <div id="faq_items_container">
-                                                @foreach($faqList as $idx => $faqItem)
-                                                    <div class="faq-single-item card border mb-3 bg-light rounded-3 p-3 position-relative">
-                                                        <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
-                                                            <span class="fw-bold text-primary fs-6"><i class="fas fa-question-circle me-1"></i> Custom FAQ #<span class="faq-num">{{ $idx + 1 }}</span></span>
-                                                            <button type="button" class="btn btn-sm btn-outline-danger remove-faq-btn py-1 px-2">
-                                                                <i class="fas fa-trash-alt me-1"></i> Delete
-                                                            </button>
-                                                        </div>
 
-                                                        <div class="mb-3">
-                                                            <label class="form-label fw-bold small text-dark">Question (প্রশ্ন)</label>
-                                                            <input type="text" name="masterclass_settings[faq_list][{{ $idx }}][question]" class="form-control rounded-2 bg-white"
-                                                                   value="{{ $faqItem['question'] ?? '' }}" placeholder="প্রশ্নটি লিখুন...">
-                                                        </div>
 
-                                                        <div>
-                                                            <label class="form-label fw-bold small text-dark">Answer (উত্তর)</label>
-                                                            <textarea name="masterclass_settings[faq_list][{{ $idx }}][answer]" class="form-control rounded-2 bg-white" rows="2"
-                                                                      placeholder="উত্তরটি লিখুন...">{{ $faqItem['answer'] ?? '' }}</textarea>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Section 10: Dual CTA Banner & Footer Urgency -->
-                                    <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <h5 class="fw-bold text-dark m-0"><span class="badge bg-primary me-2">Section 10</span> Dual CTA Banner & Footer Urgency</h5>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="row gx-20">
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label fw-bold">Dual CTA Left Button Text</label>
-                                                    <input type="text" name="masterclass_settings[dual_cta_left]" class="form-control rounded-2"
-                                                           value="{{ $defDualCtaLeft }}" placeholder="রেজিস্ট্রেশন করুন এখনই">
-                                                </div>
-
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label fw-bold">Dual CTA Urgency Seats Text</label>
-                                                    <input type="text" name="masterclass_settings[dual_cta_seats]" class="form-control rounded-2"
-                                                           value="{{ $defDualCtaSeats }}" placeholder="আর মাত্র 72 সিট বাকি">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Section 11: Reviews & Ratings Visibility -->
-                                    <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <h5 class="fw-bold text-dark m-0"><span class="badge bg-primary me-2">Section 11</span> Reviews & Ratings Section</h5>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="row gx-20">
-                                                <div class="col-12">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" name="masterclass_settings[hide_reviews]" value="1" class="form-check-input" id="create_hide_rev"
-                                                            {{ old('masterclass_settings.hide_reviews') == '1' ? 'checked' : '' }}>
-                                                        <label class="form-check-label fw-bold" for="create_hide_rev">Hide Reviews Section from Landing Page</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Section 12: Related Courses Visibility -->
-                                    <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <h5 class="fw-bold text-dark m-0"><span class="badge bg-primary me-2">Section 12</span> Related Courses Section</h5>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="row gx-20">
-                                                <div class="col-12">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" name="masterclass_settings[hide_related_courses]" value="1" class="form-check-input" id="create_hide_rel"
-                                                            {{ old('masterclass_settings.hide_related_courses') == '1' ? 'checked' : '' }}>
-                                                        <label class="form-check-label fw-bold" for="create_hide_rel">Hide Related Courses Section from Landing Page</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="d-flex align-items-center justify-content-between pt-3 border-top">
                                         <a href="#" class="btn sg-btn-outline-primary btn_action" data-bs-toggle="tab" data-bs-target="#courseSEO">{{ __('back') }}</a>
@@ -1115,6 +776,251 @@
                                 </div>
                             </div>
                             <!-- End Masterclass Landing Tab -->
+
+                            <div class="tab-pane fade {{ $step_2_error ? 'show active' : '' }}" id="courseMediaImages"
+                                role="tabpanel" aria-labelledby="mediaImages" tabindex="0">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="mb-4">
+                                            <div class="select-type-v2">
+                                                <label for="video_source"
+                                                    class="form-label">{{ __('video_source') }}</label>
+                                                <select id="video_source"
+                                                    class="form-select form-select-lg mb-3 without_search"
+                                                    name="video_source">
+                                                    <option value="">{{ __('select_video_source') }}</option>
+                                                    <option value="upload"
+                                                        {{ old('video_source') == 'upload' ? 'selected' : '' }}>
+                                                        {{ __('upload') }}</option>
+
+                                                    <option value="youtube"
+                                                        {{ old('video_source') == 'youtube' ? 'selected' : '' }}>
+                                                        {{ __('youtube') }}</option>
+                                                    <option value="vimeo"
+                                                        {{ old('video_source') == 'vimeo' ? 'selected' : '' }}>
+                                                        {{ __('vimeo') }}</option>
+                                                    <option value="mp4"
+                                                        {{ old('video_source') == 'mp4' ? 'selected' : '' }}>
+                                                        {{ __('mp4') }}</option>
+                                                </select>
+                                                <div class="nk-block-des text-danger">
+                                                    <p class="error">{{ $errors->first('video_source') }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Video Source -->
+                                    <div
+                                        class="col-lg-6 upload_div {{ old('video_source') == 'upload' ? '' : 'd-none' }}">
+                                        <div class="mb-3">
+                                            <label for="thumbnailFile"
+                                                class="form-label">{{ __('upload_video') }}</label>
+                                            <label for="thumbnailFile" class="file-upload-text">
+                                                <p class="file_name">{{ __('video') }}</p>
+                                                <span class="file-btn">{{ __('choose_file') }}</span>
+                                            </label>
+                                            <input class="d-none thumb_picker" name="video" type="file"
+                                                id="thumbnailFile">
+                                            <div class="nk-block-des text-danger">
+                                                <p class="error">{{ $errors->first('video') }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- End Upload Video -->
+                                    <div
+                                        class="col-lg-6 video_link {{ old('video_source') && old('video_source') != 'upload' ? '' : 'd-none' }}">
+                                        <div class="mb-4">
+                                            <label for="videoLink" class="form-label">{{ __('video_link') }}</label>
+                                            <input type="text" class="form-control rounded-2" name="video_link"
+                                                id="videoLink" placeholder="{{ __('enter_video_link') }}"
+                                                value="{{ old('video') }}">
+                                            <div class="nk-block-des text-danger">
+                                                <p class="error">{{ $errors->first('video_link') }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @include('backend.common.media-input', [
+                                        'title' => 'Slider Image',
+                                        'name' => 'image_media_id',
+                                        'col' => 'col-12',
+                                        'size' => '(402x248)',
+                                        'image' => old('image_media_id'),
+                                        'label' => __('thumbnail'),
+                                    ])
+                                    <div class="col-lg-6">
+                                        <div class="custom-checkbox mt-20">
+                                            <label>
+                                                <input type="checkbox" value="1"
+                                                    {{ old('is_downloadable') == 1 ? 'checked' : '' }}>
+                                                <span class="">{{ __('downloadable') }}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="d-flex justify-content-between align-items-center mt-30">
+                                            <a href="#" type="button"
+                                                class="btn sg-btn-outline-primary btn_action"
+                                                data-bs-target="#courseMasterclass">{{ __('back') }}</a>
+
+                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
+                                                data-bs-target="#coursePricing">{{ __('next') }}</a>
+                                        </div>
+                                    </div>
+                                    <!-- End Next Page BTN -->
+                                </div>
+                            </div>
+                            <!-- End Course Media Images -->
+
+                            <div class="tab-pane fade {{ $step_3_error && !$step_2_error ? 'show active' : '' }}"
+                                id="coursePricing" role="tabpanel" aria-labelledby="pricing" tabindex="0">
+                                <div class="row gx-20">
+                                    <div class="col-lg-6">
+                                        <div class="price-checkbox d-flex gap-12 mb-4">
+                                            <label for="is_free">{{ __('free_course') }}</label>
+                                            <div class="setting-check">
+                                                <input type="checkbox" id="is_free" name="is_free" value="1"
+                                                    {{ old('is_free') == 1 ? 'checked' : '' }}>
+                                                <label for="is_free"></label>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="price-checkbox d-flex gap-12 mb-4 not_free_div {{ old('is_free') == 1 ? 'd-none' : '' }}">
+                                            <label for="discountable_course">{{ __('discountable_course') }}</label>
+                                            <div class="setting-check">
+                                                <input type="checkbox" id="discountable_course" name="is_discountable"
+                                                    value="1" {{ old('is_discountable') == 1 ? 'checked' : '' }}>
+                                                <label for="discountable_course"></label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6"></div>
+                                    <!-- End Price Checkbox -->
+
+                                    <div class="col-lg-6 not_free_div {{ old('is_free') == 1 ? 'd-none' : '' }}">
+                                        <div class="mb-4">
+                                            <label for="coursePrice" class="form-label">{{ __('course_price') }}</label>
+                                            <input type="number" class="form-control rounded-2" id="coursePrice"
+                                                name="price" value="{{ old('price') }}"
+                                                placeholder="{{ __('enter_course_price') }}">
+                                            <div class="nk-block-des text-danger">
+                                                <p class="error">{{ $errors->first('price') }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Course Price -->
+
+                                    <div
+                                        class="col-lg-6 discountable_div {{ old('is_discountable') == 1 ? '' : 'd-none' }}">
+                                        <div class="">
+                                            <label for="discountType" class="form-label">{{ __('discount') }}</label>
+
+                                            <div class="customDiscountField">
+                                                <input type="text" class="form-control rounded-2" placeholder="e.g.20"
+                                                    id="discountType" name="discount" value="{{ old('discount') }}">
+
+                                                <div class="select-type-v2 selectField">
+                                                    <select class="form-select form-select-lg mb-3 without_search"
+                                                        name="discount_type">
+                                                        <option value="">{{ __('select_discount_type') }}</option>
+                                                        <option value="percent"
+                                                            {{ old('discount_type') == 'percent' ? 'selected' : 'd-none' }}>
+                                                            {{ __('percent') }}</option>
+                                                        <option value="amount"
+                                                            {{ old('discount_type') == 'amount' ? 'selected' : 'd-none' }}>
+                                                            {{ __('amount') }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="nk-block-des text-danger">
+                                                <p class="error">{{ $errors->first('discount') }}</p>
+                                            </div>
+                                            <div class="nk-block-des text-danger">
+                                                <p class="error">{{ $errors->first('discount_type') }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Discount Type -->
+
+                                    <div
+                                        class="col-lg-6 discountable_div {{ old('is_discountable') == 1 ? '' : 'd-none' }}">
+                                        <div class="mb-20">
+                                            <label for="dateRangePicker"
+                                                class="form-label">{{ __('discount_period') }}</label>
+                                            <input id="dateRangePicker" name="discount_period" type="text"
+                                                class="form-control rounded-2" value="{{ old('discount_period') }}"
+                                                placeholder="{{ __('select_date') }}">
+                                            <div class="nk-block-des text-danger">
+                                                <p class="dateRange_error error">{{ $errors->first('price') }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Date Range Picker -->
+
+                                    <div class="col-lg-6 renewable_div {{ old('is_renewable') == 1 ? '' : 'd-none' }}">
+                                        <div class="">
+                                            <div class="select-type-v2">
+                                                <label for="renew_after"
+                                                    class="form-label">{{ __('access_validity') }}</label>
+                                                <input type="number" class="form-control rounded-2" id="renew_after"
+                                                    name="renew_after" value="{{ old('renew_after') }}"
+                                                    placeholder="e.g.90">
+                                                <div class="nk-block-des text-danger">
+                                                    <p class="dateRange_error error">{{ $errors->first('renew_after') }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Access Validity -->
+
+                                    <div class="col-lg-12">
+                                        <div class="d-flex justify-content-between align-items-center mt-30">
+                                            <a href="#" type="button"
+                                                class="btn sg-btn-outline-primary btn_action"
+                                                data-bs-target="#courseMediaImages">{{ __('back') }}</a>
+
+                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
+                                                data-bs-target="#courseSEO">{{ __('next') }}</a>
+                                        </div>
+                                    </div>
+                                    <!-- End Next Page BTN -->
+                                </div>
+                                <!-- End Product images section -->
+                            </div>
+                            <!-- End Course Pricing -->
+
+                            <div class="tab-pane fade" id="courseSEO" role="tabpanel" aria-labelledby="seo"
+                                tabindex="0">
+                                <div class="row gx-20">
+                                    @include('components.meta-fields', [
+                                        'meta_title_class' => 'col-lg-6',
+                                        'meta_description_class' => 'col-lg-12',
+                                        'meta_keywords_class' => 'col-lg-6',
+                                        'meta_image_class' => 'col-lg-12',
+                                        'meta_title' => old('meta_title'),
+                                        'meta_keywords' => old('meta_keywords'),
+                                        'meta_description' => old('meta_description'),
+                                        'meta_image' => old('meta_image'),
+                                        'edit' => true,
+                                    ])
+                                    <div class="col-lg-12">
+                                        <div class="d-flex justify-content-between align-items-center mt-30">
+                                            <a href="#" type="button"
+                                                class="btn sg-btn-outline-primary btn_action"
+                                                data-bs-target="#coursePricing">{{ __('back') }}</a>
+
+                                            <button type="submit" class="btn sg-btn-primary">{{ __(\'submit\') }}</button>
+                                        </div>
+                                    </div>
+                                    <!-- End Next Page BTN -->
+                                </div>
+                            </div>
+                            <!-- End Course SEO -->
+
+                            
                         </div>
                     </form>
                 </div>
@@ -1206,9 +1112,9 @@
                     <div class="benefit-single-item card border mb-3 bg-light rounded-3 p-3 position-relative">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <span class="fw-bold text-success fs-6"><i class="fas fa-check-circle me-1"></i> Benefit Point #<span class="benefit-num">${count}</span></span>
-                            <button type="button" class="btn btn-sm btn-outline-danger remove-benefit-btn py-1 px-2">
-                                <i class="fas fa-trash-alt me-1"></i> Delete
-                            </button>
+                            <a href="javascript:void(0)" class="text-danger remove-benefit-btn fs-4 ms-2">
+                                <i class="las la-trash-alt"></i>
+                            </a>
                         </div>
                         <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white" placeholder="এখানে বেনিফিট পয়েন্টটি লিখুন...">
                     </div>

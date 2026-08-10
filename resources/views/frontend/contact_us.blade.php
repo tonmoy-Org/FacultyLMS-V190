@@ -29,7 +29,7 @@
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 bg-white">
+                    <div class="card border-0 rounded-4 p-4 p-md-5 bg-white">
                         
                         <div class="text-center mb-5">
                             <h4 style="font-size: 24px; font-weight: 700; color: #1a1b4b;">{{ __('Get In Touch') }}</h4>

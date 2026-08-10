@@ -29,21 +29,21 @@ return new class extends Migration
 
         $data = [
             [
-                'title'       => 'Web Design',
+                'title'       => 'Computer Science',
                 'lang'        => 'en',
                 'category_id' => 1,
                 'created_at'  => $now,
                 'updated_at'  => $now,
             ],
             [
-                'title'       => 'Web Development',
+                'title'       => 'Business Administration',
                 'lang'        => 'en',
                 'category_id' => 2,
                 'created_at'  => $now,
                 'updated_at'  => $now,
             ],
             [
-                'title'       => 'Flutter',
+                'title'       => 'Data Science',
                 'lang'        => 'en',
                 'category_id' => 3,
                 'created_at'  => $now,

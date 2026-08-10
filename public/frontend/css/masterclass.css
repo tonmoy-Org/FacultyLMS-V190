@@ -34,14 +34,13 @@
         padding-top: 40px;
         padding-bottom: 30px;
         background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-        border-bottom: 1px solid #edf2f7;
     }
 
     .mc-eyebrow-badge {
         display: inline-block;
-        background-color: rgba(27, 138, 46, 0.08);
-        border: 1px solid rgba(27, 138, 46, 0.2);
-        color: #1b8a2e;
+        background-color: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        color: #10b981;
         font-family: var(--body-font) !important;
         font-size: 14px;
         font-weight: 600;
@@ -82,9 +81,8 @@
         background-color: #000000;
         border-radius: 16px;
         overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         margin-bottom: 16px;
-        border: 1px solid #e2e8f0;
+        border: none;
     }
 
     .mc-video-box iframe,
@@ -175,12 +173,15 @@
     /* Gold Info Card */
     .mc-gold-info-card {
         background: #ffffff;
-        border: 2px solid #C47942;
+        border: 2px solid #10b981;
         border-radius: 20px;
         padding: 28px;
         margin-top: 32px;
         margin-bottom: 32px;
-        box-shadow: 0 8px 25px rgba(196, 121, 66, 0.08);
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.08);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .mc-gold-badge-top {
@@ -189,13 +190,6 @@
         margin: 0 auto -20px;
         position: relative;
         z-index: 2;
-        background: #ffffff;
-        border: 2px solid #C47942;
-        border-radius: 12px 12px 0 0;
-        padding: 6px 22px;
-        font-size: 1.05rem;
-        font-weight: 800;
-        color: #C47942;
     }
 
     .mc-gold-item-row {
@@ -203,7 +197,7 @@
         align-items: center;
         gap: 16px;
         padding: 12px 0;
-        border-bottom: 1px solid rgba(196, 121, 66, 0.15);
+        border-bottom: 1px solid rgba(16, 185, 129, 0.15);
     }
 
     .mc-gold-item-row:last-child {
@@ -214,12 +208,12 @@
         width: 44px;
         height: 44px;
         border-radius: 50%;
-        background: #fffaf5;
-        border: 1px solid rgba(196, 121, 66, 0.3);
+        background: #ecfdf5;
+        border: 1px solid rgba(16, 185, 129, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #C47942;
+        color: #10b981;
         font-size: 1.15rem;
         flex-shrink: 0;
     }
@@ -245,18 +239,15 @@
 
     /* Benefits Grid Card */
     .mc-benefits-card-wrapper {
-        background: #ffffff;
-        border: 2px solid #fdcc0d;
-        border-radius: 20px;
-        padding: 32px 24px;
+        background: transparent;
+        padding: 32px 0;
         margin-bottom: 35px;
-        box-shadow: 0 6px 25px rgba(253, 204, 13, 0.1);
         text-align: center;
     }
 
     .mc-benefit-single-card {
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        border: 1px solid #10b981;
         border-radius: 14px;
         padding: 20px 14px;
         text-align: center;
@@ -265,15 +256,15 @@
     }
 
     .mc-benefit-single-card:hover {
-        border-color: #1b8a2e;
+        border-color: #059669;
         transform: translateY(-3px);
-        box-shadow: 0 6px 18px rgba(27, 138, 46, 0.1);
+        box-shadow: 0 6px 18px rgba(16, 185, 129, 0.15);
     }
 
     .mc-benefit-single-card .check-circle {
         width: 38px;
         height: 38px;
-        background: #1b8a2e;
+        background: #10b981;
         color: #ffffff;
         border-radius: 50%;
         display: flex;
@@ -293,19 +284,18 @@
 
     /* Special Gift Box */
     .mc-special-gift-card {
-        background: linear-gradient(135deg, #fff7f0 0%, #ffffff 100%);
-        border: 2px solid #C47942;
+        background-color: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
         border-radius: 20px;
         padding: 32px 28px;
         margin-bottom: 35px;
-        box-shadow: 0 8px 30px rgba(196, 121, 66, 0.1);
     }
 
     .mc-gift-pill {
         display: inline-block;
-        background: #fffbea;
-        border: 1px solid #fce83a;
-        color: #b8860b;
+        background-color: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        color: #10b981;
         font-size: 0.88rem;
         font-weight: 800;
         padding: 6px 18px;
@@ -315,7 +305,7 @@
 
     .mc-callout-quote {
         background: #ffffff;
-        border-left: 4px solid #ff7a30;
+        border-left: 4px solid #10b981;
         border-radius: 10px;
         padding: 16px 20px;
         font-style: italic;
@@ -327,18 +317,18 @@
 
     /* Progress Bar Box */
     .mc-progress-box {
-        background: #eaf3ff;
-        border: 1px solid #cfe2ff;
+        background: #f0fff4;
+        border: 1px solid #b2f0c5;
         border-radius: 16px;
         padding: 22px;
         margin-bottom: 28px;
-        color: #1a365d;
+        color: #2d3748;
         text-align: center;
     }
 
     .mc-progress-bar-bg {
         height: 12px;
-        background: #dbe7ff;
+        background: #d1fae5;
         border-radius: 20px;
         overflow: hidden;
         margin-top: 10px;
@@ -347,13 +337,13 @@
 
     .mc-progress-bar-fill {
         height: 100%;
-        background: linear-gradient(90deg, #4A90D9, #1c6dd0);
+        background: #10b981;
         border-radius: 20px;
     }
 
     .mc-blue-explainer {
         background: #ffffff;
-        border-left: 5px solid #1c6dd0;
+        border-left: 5px solid #10b981;
         border-radius: 14px;
         padding: 26px;
         border: 1px solid #e2e8f0;
@@ -364,20 +354,23 @@
 
     .mc-breakdown-card {
         background: #ffffff;
-        border: 1px solid #e2e8f0;
+        border: 1px solid #10b981;
         border-radius: 16px;
         padding: 26px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 4px 16px rgba(16, 185, 129, 0.08);
         margin-bottom: 32px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     /* Registration Form Card */
     .mc-form-wrapper {
-        background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-        border: 2px solid var(--color-primary, #1c6dd0);
+        background: #ffffff;
+        border: 2px solid #10b981;
         border-radius: 20px;
         padding: 32px 26px;
-        box-shadow: 0 10px 35px rgba(28, 109, 208, 0.1);
+        box-shadow: 0 10px 35px rgba(16, 185, 129, 0.1);
         margin-bottom: 40px;
     }
 
@@ -412,9 +405,9 @@
     }
 
     .mc-faq-accordion .accordion-button:not(.collapsed) {
-        background: #f0fff4 !important;
-        color: #1b8a2e !important;
-        border-bottom: 1px solid #b2f0c5 !important;
+        background: rgba(16, 185, 129, 0.08) !important;
+        color: #10b981 !important;
+        border-bottom: 1px solid rgba(16, 185, 129, 0.2) !important;
     }
 
     .mc-faq-accordion .accordion-body {
@@ -445,4 +438,34 @@
         .mc-form-wrapper {
             padding: 22px 18px;
         }
+    }
+
+    /* ============================================================
+       GLOBAL TYPOGRAPHY OVERRIDES — Masterclass Landing Page
+       All titles: 17px | All paragraph/body text: 14px
+       ============================================================ */
+    .masterclass-page-wrapper h1,
+    .masterclass-page-wrapper h2,
+    .masterclass-page-wrapper h3,
+    .masterclass-page-wrapper h4,
+    .masterclass-page-wrapper h5,
+    .masterclass-page-wrapper h6,
+    .masterclass-page-wrapper .course-section-title,
+    .masterclass-page-wrapper .mc-main-title,
+    .masterclass-page-wrapper .mc-section-heading {
+        font-size: 22px !important;
+        line-height: 1.4 !important;
+    }
+
+    .masterclass-page-wrapper p,
+    .masterclass-page-wrapper li,
+    .masterclass-page-wrapper span:not(.badge):not(.mc-pulse-dot):not(.dot):not(.ping),
+    .masterclass-page-wrapper label,
+    .masterclass-page-wrapper small,
+    .masterclass-page-wrapper .mc-sub-title,
+    .masterclass-page-wrapper .text-muted,
+    .masterclass-page-wrapper .accordion-body,
+    .masterclass-page-wrapper .form-label {
+        font-size: 14.5px !important;
+        line-height: 1.6 !important;
     }

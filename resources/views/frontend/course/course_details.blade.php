@@ -116,9 +116,7 @@
                 ])
             </div>
 
-            <p class="small text-muted mb-4">
-                <i class="fas fa-arrow-up me-1"></i> {{ $videoCaption }} <i class="fas fa-arrow-up ms-1"></i>
-            </p>
+
 
             {{-- 3. PRIMARY ENROLL / CTA BUTTON --}}
             @if(!auth()->check() || auth()->user()->user_type == 'student')
@@ -162,7 +160,7 @@
                  4. GOLD BORDER MASTERCLASS INFO CARD (100% Admin Sync)
                  Fields: $course->duration, $level->lang_title, $language->name, $course->price, $course->discount_amount
             ========================================================== --}}
-            <span class="mc-gold-badge-top">
+            <span class="template-btn mc-gold-badge-top">
                 {{ $goldBadgeTop }}
             </span>
             <div class="mc-gold-info-card">
@@ -246,8 +244,8 @@
                  Field: $course->what_will_learn (From Admin Course Edit)
             ========================================================== --}}
             <div class="mc-benefits-card-wrapper">
-                <h2 class="fw-bold fs-3 text-dark mb-2">{{ $benefitsTitle }}</h2>
-                <span class="d-block mx-auto mb-4" style="width: 70px; height: 3px; background: #fdcc0d; border-radius: 10px;"></span>
+                <h2 class="fw-bold course-section-title text-dark mb-2">{{ $benefitsTitle }}</h2>
+                <span class="d-block mx-auto mb-4" style="width: 70px; height: 3px; background: #10b981; border-radius: 10px;"></span>
 
                 <div class="row g-3 justify-content-center">
                     @php
@@ -330,26 +328,14 @@
                  7. LIVE ZOOM EXPLAINER & SEATS PROGRESS
             ========================================================== --}}
             <div class="text-center mb-4">
-                <span class="badge bg-primary px-3 py-2 rounded-pill fs-7 tracking-wider">LIVE ZOOM MASTERCLASS</span>
-                <h2 class="fw-bold fs-3 text-dark mt-3">{{ $classScheduleTitle }}</h2>
+                <span class="badge px-3 py-2 rounded-pill fs-7 tracking-wider" style="background-color: #10b981; color: #fff;">LIVE ZOOM MASTERCLASS</span>
+                <h2 class="fw-bold course-section-title text-dark mt-3">{{ $classScheduleTitle }}</h2>
                 <p class="text-secondary">
                     {{ $classScheduleTime }}। Seat সীমিত — বাকি আছে মাত্র <strong class="text-warning fw-bold">{{ $remainingSeats }}</strong> টা।
                 </p>
             </div>
 
-            {{-- Progress Bar --}}
-            <div class="mc-progress-box">
-                <p class="fw-bold m-0 text-dark">
-                    {{ $totalCapacity }} seat-এর মধ্যে <span class="text-primary">{{ $totalEnrolled }}</span>টা বুক হয়ে গেছে — বাকি মাত্র <strong class="text-danger">{{ $remainingSeats }}টা</strong>
-                </p>
-                <div class="mc-progress-bar-bg">
-                    <div class="mc-progress-bar-fill" style="width: {{ $progressPercent }}%;"></div>
-                </div>
-                <div class="d-flex justify-content-between small text-muted">
-                    <span>বুক হয়েছে {{ $totalEnrolled }}</span>
-                    <span>মোট {{ $totalCapacity }} seat</span>
-                </div>
-            </div>
+
 
             {{-- Blue Explainer Box --}}
             @if(!$hideExplainer)
@@ -370,14 +356,15 @@
             {{-- Breakdown Table --}}
             @if(!$hideBreakdown)
                 <div class="mc-breakdown-card">
-                    <h4 class="fw-bold fs-5 text-dark mb-4">এই 
+                    <h2 class="fw-bold course-section-title text-dark mb-3 text-center">
+                        এই 
                         @if($course->is_discountable == 1)
                             {{ get_price($course->discount_amount, userCurrency()) }}
                         @else
                             {{ get_price($course->price, userCurrency()) }}
                         @endif
                         টাকায় আপনি পাচ্ছেন:
-                    </h4>
+                    </h2>
                     <div class="table-responsive">
                         <table class="table align-middle">
                             <tbody>
@@ -408,7 +395,7 @@
                  Field: $course->description (Admin Edit Rich Text Editor)
             ========================================================== --}}
             <div class="mc-content-card">
-                <h4 class="fw-bold fs-4 text-dark mb-3 pb-2 border-bottom">{{ __('about_this_course') }}</h4>
+                <h4 class="fw-bold course-section-title text-dark mb-3 text-center">{{ __('about_this_course') }}</h4>
                 <div class="description-body text-secondary leading-relaxed fs-6">
                     @if(!empty($course->description))
                         {!! $course->description !!}
@@ -424,7 +411,7 @@
             ========================================================== --}}
             @if(setting('hide_curriculum_from_course_details') != '1' && count($sections) > 0)
                 <div class="mc-content-card">
-                    <h4 class="fw-bold fs-4 text-dark mb-4 pb-2 border-bottom">{{ __('course_syllabus') }}</h4>
+                    <h4 class="fw-bold course-section-title text-dark mb-4 text-center">{{ __('course_syllabus') }}</h4>
                     
                     @if($hasEnrolled)
                         <div class="bg-light p-3 rounded-3 mb-4 border">
@@ -499,79 +486,115 @@
                 </div>
             @endif
 
+
+
+
+        </div>
+    </section>
+
+</div>
+
+<input type="hidden" class="text_copied" value="{{ __('text_copied') }}">
+<input type="hidden" class="text_copied_fail" value="{{ __('text_copied_fail') }}">
+
+{{-- =========================================================
+     13. RELATED COURSES SECTION
+========================================================== --}}
+@if(setting('disable_related_course_from_course_details') != '1' && setting('website_mode') != 'single_course' && !$hideRelated && count($related_courses) > 0)
+    <section class="bg-light py-5 border-top">
+        <div class="container container-1278">
+            <div class="row justify-content-center mb-4">
+                <div class="col-lg-6 text-center">
+                    <h3 class="fw-extrabold course-section-title text-dark">{{ __('related_course') }}</h3>
+                    <p class="text-muted">{{ __('Lorem Ipsum is not the simply random text') }}</p>
+                </div>
+            </div>
+            
+            <div class="course-items-wrap">
+                <div class="row course-items-v3 course-slider" dir="{{ systemLanguage() ? systemLanguage()->text_direction : 'ltr' }}">
+                    @foreach($related_courses as $key => $course)
+                        @include('frontend.course.component', ['col' => 'col-lg-4'])
+                    @endforeach
+                </div>
+                
+                @if(!$related_courses->nextPageUrl())
+                    <div class="text-center mt-4">
+                        <a class="template-btn bordered-btn" href="{{ route('courses', ['category_ids' => $course->category_id]) }}">
+                            {{ __('see_more') }}
+                        </a>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </section>
+@endif
+
+<div class="masterclass-page-wrapper">
+    <section class="mc-main-content">
+        <div class="mc-container">
             {{-- =========================================================
                  10. REGISTRATION ORDER FORM SECTION (`#register`)
             ========================================================== --}}
-            @if(!auth()->check() || auth()->user()->user_type == 'student')
-                @if(!$is_enrolled)
-                    <div id="register" class="mc-form-wrapper user-form">
-                        <h2 class="text-center fw-bold fs-3 text-dark mb-2">
-                            {!! $orderFormTitle !!}
-                        </h2>
+            @if(!$is_enrolled)
+                <h2 class="text-center fw-bold course-section-title text-dark mb-2">
+                    {!! $orderFormTitle !!}
+                </h2>
+                <p class="text-center text-muted small mb-4">{{ $orderFormSubtitle }}</p>
+                
+                <div id="register" class="mc-form-wrapper user-form mx-auto mt-5" style="max-width: 700px;">
                         
-                        <p class="text-center text-muted small mb-4">{{ $orderFormSubtitle }}</p>
+                        <div class="mb-5">
+                            <h4 class="fw-bold mb-4" style="color: #10b981; font-size: 20px;">Give valid information</h4>
+                            
+                            <form action="{{ route('add.cart') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $course->id }}">
+                                <input type="hidden" name="type" value="course">
+                                <input type="hidden" name="quantity" value="1">
 
-                        <form action="{{ route('add.cart') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $course->id }}">
-                            <input type="hidden" name="type" value="course">
-                            <input type="hidden" name="quantity" value="1">
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold text-dark mb-1">{{ $nameLabel }} <span class="text-danger">*</span></label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="{{ $namePlaceholder }}" required>
-                                @error('name')
-                                    <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold text-dark mb-1">{{ $phoneLabel }} <span class="text-danger">*</span></label>
-                                <input type="tel" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" placeholder="{{ $phonePlaceholder }}" required>
-                                @error('phone')
-                                    <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold text-dark mb-1">{{ $emailLabel }} <span class="text-danger">*</span></label>
-                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="{{ $emailPlaceholder }}" required>
-                                @error('email')
-                                    <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="mc-breakdown-card border-0 bg-white p-3 mb-4">
-                                <p class="fw-bold text-dark mb-2">{{ $orderSummaryTitle }}</p>
-                                <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded-3">
-                                    <span class="fw-bold text-dark">{{ $course->title }}</span>
-                                    <span class="fw-bold text-success fs-5">
-                                        @if($course->is_discountable == 1)
-                                            {{ get_price($course->discount_amount, userCurrency()) }}
-                                        @else
-                                            {{ get_price($course->price, userCurrency()) }}
-                                        @endif
-                                    </span>
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold text-dark mb-2">{{ $nameLabel ?? 'Your Full Name' }} <span class="text-danger">*</span></label>
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="{{ $namePlaceholder }}" required style="background-color: #fff; border: 1px solid #d1d5db; color: #111827; padding: 14px; border-radius: 8px;">
+                                    @error('name')
+                                        <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                            </div>
 
-                            <p class="small text-muted mb-4">
-                                {{ $privacyNotice }}
-                            </p>
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold text-dark mb-2">{{ $phoneLabel ?? 'Mobile Number' }} <span class="text-danger">*</span></label>
+                                    <input type="tel" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" placeholder="{{ $phonePlaceholder }}" required style="background-color: #fff; border: 1px solid #d1d5db; color: #111827; padding: 14px; border-radius: 8px;">
+                                    @error('phone')
+                                        <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
 
-                            <button type="submit" class="template-btn w-100">
-                                {{ $payNowBtnText }} <i class="fas fa-lock ms-2"></i>
-                            </button>
-                        </form>
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold text-dark mb-2">{{ $emailLabel ?? 'Email address' }} <span class="text-danger">*</span></label>
+                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="{{ $emailPlaceholder }}" required style="background-color: #fff; border: 1px solid #d1d5db; color: #111827; padding: 14px; border-radius: 8px;">
+                                    @error('email')
+                                        <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+
+
+                                <p class="mb-4" style="color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
+                                    Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.
+                                </p>
+
+                                <button type="submit" class="btn w-100 fw-bold shadow-none" style="background-color: #10b981; color: #fff; padding: 18px; font-size: 18px; border-radius: 8px; letter-spacing: 1px;">
+                                    PAY NOW
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 @endif
-            @endif
 
             {{-- =========================================================
                  11. FAQ ACCORDION SECTION (100% Admin Sync)
@@ -619,8 +642,8 @@
 
             @if(setting('hide_faq_from_course_details') != '1' && count($displayFaqs) > 0)
                 <div class="mb-5">
-                    <h2 class="text-center fw-bold fs-3 text-dark mb-2">{{ $faqTitle }}</h2>
-                    <span class="d-block mx-auto mb-4" style="width: 70px; height: 3px; background: #fdcc0d; border-radius: 10px;"></span>
+                    <h2 class="text-center fw-bold course-section-title text-dark mb-2">{{ $faqTitle }}</h2>
+                    <span class="d-block mx-auto mb-4" style="width: 70px; height: 3px; background: #10b981; border-radius: 10px;"></span>
 
                     <div class="accordion mc-faq-accordion accordion-flush mt-4" id="faqAccordion">
                         @foreach($displayFaqs as $key => $faq)
@@ -669,124 +692,9 @@
                     @endif
                 </div>
             @endif
-
-            {{-- =========================================================
-                 12. REVIEWS SECTION
-            ========================================================== --}}
-            @if(setting('hide_review_from_course_details') != '1' && !$hideReviews && $course->total_rating > 0)
-                <div class="mc-content-card">
-                    <h4 class="fw-bold fs-4 text-dark mb-4 pb-2 border-bottom">{{ __('reviews') }}</h4>
-                    
-                    <div class="mc-review-summary">
-                        <div class="mc-rating-big text-center">
-                            <div class="num fs-1 fw-bold text-dark">{{ round($course->total_rating, 1) }}</div>
-                            <div class="mc-rating-stars fs-6 my-1 text-warning">
-                                @for($i = 1; $i <= 5; $i++)
-                                    <i class="{{ $i <= round($course->total_rating) ? 'fas' : 'fal' }} fa-star"></i>
-                                @endfor
-                            </div>
-                            <small class="text-muted">{{ __('out_of_5') }}</small>
-                        </div>
-                        
-                        <div class="mc-rating-bars flex-grow-1">
-                            @foreach([5 => 'five_star', 4 => 'four_star', 3 => 'three_star', 2 => 'two_star', 1 => 'one_star'] as $starCount => $starKey)
-                                <div class="d-flex align-items-center gap-2 mb-1 fs-7">
-                                    <span class="stars text-warning me-1">
-                                        @for($s = 1; $s <= 5; $s++)
-                                            <i class="{{ $s <= $starCount ? 'fas' : 'fal' }} fa-star"></i>
-                                        @endfor
-                                    </span>
-                                    <div class="progress flex-grow-1" style="height: 8px;">
-                                        <div class="progress-bar bg-warning" style="width: {{ $ratings[$starKey] }}%;"></div>
-                                    </div>
-                                    <span class="pct text-muted ms-1">{{ $ratings[$starKey] }}%</span>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    @if(setting('disable_write_review') != '1' && $can_review)
-                        <div class="mc-review-form pt-4 border-top" id="comment-respond">
-                            <h5 class="fw-bold mb-3 text-dark">{{ __('Write_a_review') }}</h5>
-                            <div class="rating-review rating_comment mb-3 all-rating"></div>
-                            <span class="live-rating"></span>
-                            
-                            <form action="{{ route('store.comment') }}" method="post">
-                                @csrf
-                                <div class="mb-3">
-                                    <textarea name="comment" class="form-control rounded-3" rows="4" placeholder="{{ __('write_your_review') ?? 'Write your review...' }}"></textarea>
-                                    <input type="hidden" name="id" value="{{ $course->id }}">
-                                    <input type="hidden" name="slug" value="{{ $course->slug }}">
-                                    <input type="hidden" name="type" value="course">
-                                    <input type="hidden" name="rating" class="give_rating">
-                                </div>
-                                <button type="submit" class="template-btn">
-                                    {{ __('post_review') }}
-                                </button>
-                            </form>
-                        </div>
-                    @endif
-
-                    @if(count($reviews) > 0)
-                        <ul class="comments-list mt-4 list-unstyled">
-                            @foreach($reviews as $review)
-                                @include('frontend.review_component')
-                            @endforeach
-                        </ul>
-                        
-                        @if($reviews->nextPageUrl())
-                            <div class="less-more mt-4 text-center">
-                                <button class="template-btn bordered-btn less-more-btn" 
-                                        data-page="{{ $reviews->currentPage() }}" 
-                                        data-url="{{ route('load.reviews') }}">
-                                    {{ __('see_more') }}
-                                </button>
-                                @include('components.frontend_loading_btn', ['class' => 'template-btn'])
-                            </div>
-                        @endif
-                    @endif
-                </div>
-            @endif
-
         </div>
     </section>
-
 </div>
-
-<input type="hidden" class="text_copied" value="{{ __('text_copied') }}">
-<input type="hidden" class="text_copied_fail" value="{{ __('text_copied_fail') }}">
-
-{{-- =========================================================
-     13. RELATED COURSES SECTION
-========================================================== --}}
-@if(setting('disable_related_course_from_course_details') != '1' && !$hideRelated && count($related_courses) > 0)
-    <section class="bg-light py-5 border-top">
-        <div class="container container-1278">
-            <div class="row justify-content-center mb-4">
-                <div class="col-lg-6 text-center">
-                    <h3 class="fw-extrabold text-dark">{{ __('related_course') }}</h3>
-                    <p class="text-muted">{{ __('Lorem Ipsum is not the simply random text') }}</p>
-                </div>
-            </div>
-            
-            <div class="course-items-wrap">
-                <div class="row course-items-v3 course-slider" dir="{{ systemLanguage() ? systemLanguage()->text_direction : 'ltr' }}">
-                    @foreach($related_courses as $key => $course)
-                        @include('frontend.course.component', ['col' => 'col-lg-4'])
-                    @endforeach
-                </div>
-                
-                @if(!$related_courses->nextPageUrl())
-                    <div class="text-center mt-4">
-                        <a class="template-btn bordered-btn" href="{{ route('courses', ['category_ids' => $course->category_id]) }}">
-                            {{ __('see_more') }}
-                        </a>
-                    </div>
-                @endif
-            </div>
-        </div>
-    </section>
-@endif
 
 @endsection
 

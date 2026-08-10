@@ -56,8 +56,8 @@ return new class extends Migration
         $now  = now();
         $data = [
             [
-                'first_name'        => 'Super',
-                'last_name'         => 'Admin',
+                'first_name'        => 'John',
+                'last_name'         => 'Doe',
                 'email'             => 'admin@spagreen.net',
                 'password'          => bcrypt('123456'),
                 'phone'             => '017111131111',
@@ -69,34 +69,27 @@ return new class extends Migration
                 'date_of_birth'     => date('Y-m-d', strtotime('Y-m-d'.'- 30 year')),
                 'created_at'        => $now,
                 'updated_at'        => $now,
-                'about'             => '',
+                'about'             => 'System Administrator',
             ],
             [
-                'first_name'        => 'Mr.',
-                'last_name'         => 'Instructor',
+                'first_name'        => 'Jane',
+                'last_name'         => 'Smith',
                 'email'             => 'instructor@spagreen.net',
                 'password'          => bcrypt('123456'),
                 'phone'             => '017111132111',
                 'address'           => 'Dhaka, Bangladesh',
-                'gender'            => 'male',
+                'gender'            => 'female',
                 'role_id'           => 2,
                 'user_type'         => 'instructor',
                 'email_verified_at' => $now,
                 'date_of_birth'     => date('Y-m-d', strtotime('Y-m-d'.'- 30 year')),
                 'created_at'        => $now,
                 'updated_at'        => $now,
-                'about'             => "Dedicated, resourceful and goal-driven professional educator with a solid commitment to the social and academic growth and development of every child.An accommodating and
-            versatile individual with the talent to develop inspiring hands-on lessons that will capture a child's imagination and breed success. Highly motivated, enthusiastic and dedicated educator
-            who wants all children to be successful learners.
-            Committed to creating a classroom atmosphere that is stimulating and encouraging to students. Aptitude to remain flexible, ensuring that every child's learning styles and abilities are
-            addressed.Superior interpersonal and communication skills to foster meaningful relationships with students, staff and parents Demonstrated ability to consistently individualize instruction, based on student's needs and interests
-            Exceptional ability to establish cooperative, professional relationships with parents, staff and administration.
-            Professional Educator with diverse experience and strong track record fostering child-centered curriculum and student creativity.
-            Warm and caring teacher who wants all children to be successful learners and works to create a classroom atmosphere that is stimulating, encouraging, and adaptive to the varied needs of students.",
+                'about'             => 'Experienced Educator in Computer Science and Programming.',
             ],
             [
-                'first_name'        => 'Mr.',
-                'last_name'         => 'Student',
+                'first_name'        => 'Michael',
+                'last_name'         => 'Johnson',
                 'email'             => 'student@spagreen.net',
                 'password'          => bcrypt('123456'),
                 'phone'             => '017116546511111',
@@ -108,23 +101,23 @@ return new class extends Migration
                 'date_of_birth'     => date('Y-m-d', strtotime('Y-m-d'.'- 30 year')),
                 'created_at'        => $now,
                 'updated_at'        => $now,
-                'about'             => '',
+                'about'             => 'Enthusiastic student looking to learn new skills.',
             ],
             [
-                'first_name'        => 'Mr.',
-                'last_name'         => 'Staff',
+                'first_name'        => 'Sarah',
+                'last_name'         => 'Connor',
                 'email'             => 'staff@spagreen.net',
                 'password'          => bcrypt('123456'),
                 'phone'             => '0171153411111',
                 'address'           => 'Dhaka, Bangladesh',
-                'gender'            => 'male',
+                'gender'            => 'female',
                 'user_type'         => 'stuff',
                 'role_id'           => 4,
                 'email_verified_at' => $now,
                 'date_of_birth'     => date('Y-m-d', strtotime('Y-m-d'.'- 30 year')),
                 'created_at'        => $now,
                 'updated_at'        => $now,
-                'about'             => '',
+                'about'             => 'Support Staff',
             ],
             [
                 'first_name'        => 'Organization',
@@ -140,7 +133,7 @@ return new class extends Migration
                 'date_of_birth'     => date('Y-m-d', strtotime('Y-m-d'.'- 30 year')),
                 'created_at'        => $now,
                 'updated_at'        => $now,
-                'about'             => '',
+                'about'             => 'Organization Support',
             ],
         ];
 
