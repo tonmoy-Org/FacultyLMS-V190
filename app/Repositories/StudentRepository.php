@@ -17,6 +17,7 @@ class StudentRepository
     public function store($request)
     {
         $request['role_id']     = 3;
+        $request['user_type']   = 'student';
         if (isset($request['image'])) {
             $requestImage      = $request['image'];
             $response          = $this->saveImage($requestImage, '_staff_');
@@ -47,5 +48,17 @@ class StudentRepository
         }
 
         return $user->update($request);
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            if (! empty($user->images)) {
+                $this->deleteImage($user->images);
+            }
+            return $user->delete();
+        }
+        return false;
     }
 }

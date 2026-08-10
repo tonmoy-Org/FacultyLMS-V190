@@ -1,8 +1,16 @@
-@if(hasPermission('students.show') || hasPermission('students.edit'))
+@if(hasPermission('students.show') || hasPermission('students.edit') || hasPermission('students.destroy'))
     <ul class="d-flex gap-30 justify-content-end align-items-center">
         @if(hasPermission('students.edit'))
             <li>
                 <a href="{{ route('students.edit', $user->id) }}"><i class="las la-edit"></i></a>
+            </li>
+        @endif
+        @if(hasPermission('students.destroy'))
+            <li>
+                <a href="javascript:void(0)"
+                   onclick="delete_row('{{ route('students.destroy', $user->id) }}')"
+                   data-toggle="tooltip"
+                   data-original-title="{{ __('delete') }}"><i class="las la-trash-alt"></i></a>
             </li>
         @endif
         <div class="dropdown">
@@ -32,8 +40,13 @@
                                href="{{ route('users.ban', $user->id) }}">{{__('active_this_student')}}</a></li>
                     @endif
                 @endif
+                @if(hasPermission('students.destroy'))
+                    <li><a class="dropdown-item text-danger" href="javascript:void(0)"
+                           onclick="delete_row('{{ route('students.destroy', $user->id) }}')">{{__('delete')}}</a></li>
+                @endif
             </ul>
         </div>
     </ul>
 @endif
+
 

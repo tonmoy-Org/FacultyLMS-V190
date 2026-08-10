@@ -204,6 +204,7 @@ return new class extends Migration
                 'view'                       => 'students.index',
                 'create'                     => 'students.create',
                 'edit'                       => 'students.edit',
+                'delete'                     => 'students.destroy',
                 'students certificates'      => 'students.certificates',
                 'students instructors'       => 'students.instructors',
                 'students payments'          => 'students.payments',

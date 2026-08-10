@@ -83,6 +83,12 @@ class OrderRepository
                 $enrolls['enrollable_id']   = $cart->cartable_id;
                 $enrolls['enrollable_type'] = $cart->cartable_type;
                 Enroll::create($enrolls);
+                if ($cart->cartable_type == Course::class || $cart->cartable_type == 'App\Models\Course') {
+                    $course = Course::find($cart->cartable_id);
+                    if ($course) {
+                        $course->increment('total_enrolled');
+                    }
+                }
                 $cart->delete();
             }
             $storage         = setting('default_storage') == 'aws_s3' ? 'aws_s3' : 'local';

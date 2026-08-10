@@ -16,11 +16,20 @@
     $scheduleBadge = !empty($mcSettings['schedule_badge']) ? $mcSettings['schedule_badge'] : 'LIVE ZOOM MASTERCLASS';
     $dualCtaLeft = !empty($mcSettings['dual_cta_left']) ? $mcSettings['dual_cta_left'] : 'রেজিস্ট্রেশন করুন এখনই';
     
-    $totalCapacity = $course->capacity > 0 ? $course->capacity : 500;
-    $totalEnrolled = $course->total_enrolled > 0 ? $course->total_enrolled : 428;
-    $remainingSeats = !empty($mcSettings['remaining_seats']) ? $mcSettings['remaining_seats'] : max(0, $totalCapacity - $totalEnrolled);
+    $totalCapacity = !empty($mcSettings['remaining_seats']) && is_numeric($mcSettings['remaining_seats']) 
+        ? (int)$mcSettings['remaining_seats'] 
+        : ($course->capacity > 0 ? $course->capacity : 100);
+    $totalEnrolled = (int)$course->total_enrolled;
+    $remainingSeats = max(0, $totalCapacity - $totalEnrolled);
     $progressPercent = min(100, round(($totalEnrolled / max(1, $totalCapacity)) * 100, 1));
-    $dualCtaSeats = !empty($mcSettings['dual_cta_seats']) ? $mcSettings['dual_cta_seats'] : 'আর মাত্র ' . $remainingSeats . ' সিট বাকি';
+    
+    if (!empty($mcSettings['dual_cta_seats'])) {
+        $dualCtaSeats = preg_match('/\d+/', $mcSettings['dual_cta_seats'])
+            ? preg_replace('/\d+/', $remainingSeats, $mcSettings['dual_cta_seats'])
+            : $mcSettings['dual_cta_seats'];
+    } else {
+        $dualCtaSeats = 'আর মাত্র ' . $remainingSeats . ' সিট বাকি';
+    }
 
     $benefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : 'এই মাস্টারক্লাস কার জন্য?';
     $orderFormTitle = !empty($mcSettings['order_form_title']) ? $mcSettings['order_form_title'] : 'মাস্টারক্লাসে জয়েন করতে নিচের<br><span class="text-primary">ফর্মটি পূরণ করুন</span>';
@@ -35,7 +44,14 @@
     $levelLabel = !empty($mcSettings['level_label']) ? $mcSettings['level_label'] : __('level');
     $levelValue = !empty($mcSettings['level_value']) ? $mcSettings['level_value'] : ($level ? $level->lang_title : 'beginner');
     $goldCtaText = !empty($mcSettings['gold_cta_text']) ? $mcSettings['gold_cta_text'] : 'এখনই জয়েন করুন';
-    $goldSeatsText = !empty($mcSettings['gold_seats_text']) ? $mcSettings['gold_seats_text'] : 'আর মাত্র ' . $remainingSeats . ' সিট বাকি';
+    
+    if (!empty($mcSettings['gold_seats_text'])) {
+        $goldSeatsText = preg_match('/\d+/', $mcSettings['gold_seats_text'])
+            ? preg_replace('/\d+/', $remainingSeats, $mcSettings['gold_seats_text'])
+            : $mcSettings['gold_seats_text'];
+    } else {
+        $goldSeatsText = 'আর মাত্র ' . $remainingSeats . ' সিট বাকি';
+    }
 
     $hideSpecialGift = !empty($mcSettings['hide_special_gift']);
     $hideExplainer = !empty($mcSettings['hide_explainer']);
@@ -50,7 +66,13 @@
     $giftQuote = !empty($mcSettings['gift_quote']) ? $mcSettings['gift_quote'] : '"এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় যেমন Facebook Ads, Google Ads নিয়ে বিস্তারিত শিখিয়েছি। এছাড়াও কিভাবে একটা বিজনেসকে Scale করতে তা নিয়ে ক্লাস আছে।"';
     $giftFooterNote = !empty($mcSettings['gift_footer_note']) ? $mcSettings['gift_footer_note'] : 'যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।';
     $giftCtaText = !empty($mcSettings['gift_cta_text']) ? $mcSettings['gift_cta_text'] : 'সিট কনফার্ম করুন →';
-    $giftSeatsText = !empty($mcSettings['gift_seats_text']) ? $mcSettings['gift_seats_text'] : 'বাকি আছে মাত্র ' . $remainingSeats . ' টা seat';
+    if (!empty($mcSettings['gift_seats_text'])) {
+        $giftSeatsText = preg_match('/\d+/', $mcSettings['gift_seats_text'])
+            ? preg_replace('/\d+/', $remainingSeats, $mcSettings['gift_seats_text'])
+            : $mcSettings['gift_seats_text'];
+    } else {
+        $giftSeatsText = 'বাকি আছে মাত্র ' . $remainingSeats . ' টা seat';
+    }
 
     $explainerTitle = !empty($mcSettings['explainer_title']) ? $mcSettings['explainer_title'] : 'একটা প্রশ্ন আপনার মাথায় আসতে পারে — এত কিছু, মাত্র ৯৯ টাকায় কেন??';
     $explainerText = !empty($mcSettings['explainer_text']) ? $mcSettings['explainer_text'] : null;
@@ -546,7 +568,7 @@
                         <div class="mb-5">
                             <h4 class="fw-bold mb-4" style="color: #10b981; font-size: 20px;">Give valid information</h4>
                             
-                            <form action="{{ route('add.cart') }}" method="post">
+                            <form action="{{ route('masterclass.checkout') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $course->id }}">
                                 <input type="hidden" name="type" value="course">
@@ -554,7 +576,7 @@
 
                                 <div class="mb-4">
                                     <label class="form-label fw-semibold text-dark mb-2">{{ $nameLabel ?? 'Your Full Name' }} <span class="text-danger">*</span></label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="{{ $namePlaceholder }}" required style="background-color: #fff; border: 1px solid #d1d5db; color: #111827; padding: 14px; border-radius: 8px;">
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', auth()->check() ? auth()->user()->name : '') }}" placeholder="{{ $namePlaceholder }}" required style="background-color: #fff; border: 1px solid #d1d5db; color: #111827; padding: 14px; border-radius: 8px;">
                                     @error('name')
                                         <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -564,7 +586,7 @@
 
                                 <div class="mb-4">
                                     <label class="form-label fw-semibold text-dark mb-2">{{ $phoneLabel ?? 'Mobile Number' }} <span class="text-danger">*</span></label>
-                                    <input type="tel" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" placeholder="{{ $phonePlaceholder }}" required style="background-color: #fff; border: 1px solid #d1d5db; color: #111827; padding: 14px; border-radius: 8px;">
+                                    <input type="tel" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone', auth()->check() ? auth()->user()->phone : '') }}" placeholder="{{ $phonePlaceholder }}" required style="background-color: #fff; border: 1px solid #d1d5db; color: #111827; padding: 14px; border-radius: 8px;">
                                     @error('phone')
                                         <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -574,7 +596,7 @@
 
                                 <div class="mb-4">
                                     <label class="form-label fw-semibold text-dark mb-2">{{ $emailLabel ?? 'Email address' }} <span class="text-danger">*</span></label>
-                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="{{ $emailPlaceholder }}" required style="background-color: #fff; border: 1px solid #d1d5db; color: #111827; padding: 14px; border-radius: 8px;">
+                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', auth()->check() ? auth()->user()->email : '') }}" placeholder="{{ $emailPlaceholder }}" required style="background-color: #fff; border: 1px solid #d1d5db; color: #111827; padding: 14px; border-radius: 8px;">
                                     @error('email')
                                         <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -588,8 +610,8 @@
                                     Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.
                                 </p>
 
-                                <button type="submit" class="btn w-100 fw-bold shadow-none" style="background-color: #10b981; color: #fff; padding: 18px; font-size: 18px; border-radius: 8px; letter-spacing: 1px;">
-                                    PAY NOW
+                                <button type="submit" class="template-btn w-100 text-center border-0">
+                                    {{ $payNowBtnText ?? 'PAY NOW' }}
                                 </button>
                             </form>
                         </div>

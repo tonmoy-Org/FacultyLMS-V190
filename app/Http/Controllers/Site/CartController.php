@@ -14,8 +14,11 @@ use App\Repositories\CouponRepository;
 use App\Repositories\CourseRepository;
 use App\Traits\PaymentTrait;
 use Brian2694\Toastr\Facades\Toastr;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class CartController extends Controller
@@ -180,9 +183,7 @@ class CartController extends Controller
         $data['payable_amount']  = $total_amount;
 
         $unpaid_checkout         = $this->checkout->unpaidCheckout($user_id);
-        if (empty($unpaid_checkout)) {
-            $this->checkout->store($data);
-        } else {
+        if (!empty($unpaid_checkout)) {
             $this->checkout->update($data, $trx_id);
         }
     }
@@ -389,6 +390,107 @@ class CartController extends Controller
             Toastr::error($e->getMessage());
 
             return back();
+        }
+    }
+
+    public function masterclassCheckout(Request $request)
+    {
+        try {
+            $request->validate([
+                'name'  => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'phone' => 'required|string|max:30',
+                'id'    => 'required',
+            ]);
+
+            // 1. Check or Create Student Account
+            if (!auth()->check()) {
+                $user = User::where('email', $request->email)
+                    ->orWhere('phone', $request->phone)
+                    ->first();
+
+                if (!$user) {
+                    $user = User::create([
+                        'first_name'        => $request->name,
+                        'email'             => $request->email,
+                        'phone'             => $request->phone,
+                        'password'          => Hash::make($request->phone ?: Str::random(8)),
+                        'user_type'         => 'student',
+                        'role_id'           => 3,
+                        'status'            => 1,
+                        'is_user_banned'    => 0,
+                        'email_verified_at' => now(),
+                    ]);
+                } else {
+                    if (empty($user->phone) && !empty($request->phone)) {
+                        $user->phone = $request->phone;
+                    }
+                    if (empty($user->first_name) && !empty($request->name)) {
+                        $user->first_name = $request->name;
+                    }
+                    $user->save();
+                }
+
+                Auth::login($user);
+            } else {
+                $user = auth()->user();
+                if (empty($user->phone) && !empty($request->phone)) {
+                    $user->update(['phone' => $request->phone]);
+                }
+            }
+
+            $user_id = $user->id;
+
+            // 2. Find Course
+            $course = $this->courseRepository->find($request->id);
+            if (!$course) {
+                Toastr::error(__('course_not_found'));
+                return back();
+            }
+
+            $cartable_type = Course::class;
+            $has_cart      = $this->cartRepository->hasCart($user_id);
+            $trx_id        = $has_cart ? $has_cart->trx_id : Str::random(12);
+
+            // 3. Store in Cart
+            $existingCart = Cart::where('user_id', $user_id)
+                ->where('cartable_id', $course->id)
+                ->where('cartable_type', $cartable_type)
+                ->first();
+
+            if (!$existingCart) {
+                $quantity  = 1;
+                $sub_total = $course->is_free ? 0 : $course->price * $quantity;
+                $discount  = $course->discount_check ?? 0;
+                $tax       = 0;
+                $shipping  = 0;
+
+                $this->cartRepository->store([
+                    'instructor_id' => $course->instructor_ids,
+                    'user_id'       => $user_id,
+                    'quantity'      => $quantity,
+                    'price'         => $course->is_free ? 0 : $course->price,
+                    'discount'      => $discount,
+                    'trx_id'        => $trx_id,
+                    'tax'           => 0,
+                    'sub_total'     => $sub_total,
+                    'total_amount'  => max(0, ($sub_total + $tax + $shipping) - $discount),
+                    'shipping_cost' => 0,
+                    'cartable_id'   => $course->id,
+                    'cartable_type' => $cartable_type,
+                ]);
+            } else {
+                $trx_id = $existingCart->trx_id;
+            }
+
+            // 4. Create/Update Checkout Session
+            $this->studentCheckout($user_id, $trx_id);
+
+            // 5. Redirect to Payment Gateway / Checkout Page
+            return redirect()->route('checkout');
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            return back()->withInput();
         }
     }
 }

@@ -88,6 +88,13 @@ class CheckoutRepository
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
+            if ($cart->cartable_type == Course::class || $cart->cartable_type == 'App\Models\Course') {
+                $course = Course::find($cart->cartable_id);
+                if ($course) {
+                    $course->increment('total_enrolled');
+                }
+            }
+
             $cart->delete();
         }
 
@@ -99,13 +106,14 @@ class CheckoutRepository
         if ($data['payment_type'] == 'wallet') {
             $wallet_repo = new WalletRepository();
 
-            $data = [
+            $walletData = [
+                'user_id' => $user ? $user->id : getArrayValue('user_id', $data),
                 'type' => 'expense',
                 'payment_type' => 'wallet',
                 'trx_id' => $checkout->trx_id,
                 'status' => 1,
             ];
-            $wallet_repo->store($data, $checkout->payable_amount, 'course_purchase', []);
+            $wallet_repo->store($walletData, $checkout->payable_amount, 'course_purchase', []);
 
             $wallet_repo->updateWallet($user, $checkout->payable_amount, 2);
         }
@@ -115,7 +123,7 @@ class CheckoutRepository
 
     public function completeOrder($data, $carts)
     {
-        $user = auth()->user();
+        $user = auth()->user() ?: (isset($data['user_id']) ? User::find($data['user_id']) : null);
 
         if ($data['payment_type'] == 'offline_method') {
             $payment_details = [];

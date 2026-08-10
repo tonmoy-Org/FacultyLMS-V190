@@ -48,9 +48,10 @@ class CourseController extends Controller
 
             $organization  = $this->organization->find($org_id ?? $request->organization_id);
 
-            $instructor    = $request->organization_id ? $this->user->findUsers([
+            $instructor    = $this->user->findUsers([
+                'role_id'         => 2,
                 'organization_id' => $request->organization_id,
-            ]) : [];
+            ]);
 
             $categories    = $request->category_ids ? $this->category->activeCategories([
                 'ids'  => $request->category_ids,
@@ -91,9 +92,10 @@ class CourseController extends Controller
                 'category'     => $this->category->find(old('category_id')),
                 'subject'      => $subjectRepository->find(old('subject_id')),
                 'organization' => $this->organization->find(old('organization_id')),
-                'instructors'  => old('organization_id') ? $this->user->findUsers([
+                'instructors'  => $this->user->findUsers([
+                    'role_id'         => 2,
                     'organization_id' => old('organization_id'),
-                ]) : [],
+                ]),
             ];
 
             return view('backend.admin.course.create', $data);
@@ -149,9 +151,10 @@ class CourseController extends Controller
                 'course'       => $course,
                 'liveClass'    => LiveClass::where('course_id', $id)->first(),
                 'request_tab'  => $request['tab'] ? $request['tab'] : 'basic',
-                'instructors'  => old('organization_id', $course->organization_id) ? $this->user->findUsers([
+                'instructors'  => $this->user->findUsers([
+                    'role_id'         => 2,
                     'organization_id' => old('organization_id', $course->organization_id),
-                ]) : [],
+                ]),
             ];
 
             return $dataTable->with('course_id', $id)->render('backend.admin.course.edit', $data);

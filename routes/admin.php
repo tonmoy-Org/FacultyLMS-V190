@@ -122,7 +122,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::get('resources/{id}/download', [ResourceController::class, 'download'])->name('resources.download');
 
         //    manage students
-        Route::resource('students', StudentController::class)->except(['destroy']);
+        Route::resource('students', StudentController::class);
         Route::get('students/certificates/{id}', [StudentController::class, 'certificates'])->name('students.certificates');
         Route::get('students/instructors/{id}', [StudentController::class, 'instructors'])->name('students.instructors');
         Route::get('students/payments/{id}', [StudentController::class, 'payments'])->name('students.payments');

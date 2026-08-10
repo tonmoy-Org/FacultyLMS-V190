@@ -467,7 +467,8 @@
                                     $defEyebrow = !empty($mcSettings['eyebrow_title']) ? $mcSettings['eyebrow_title'] : ($category ? $category->lang_title : 'E-commerce শুরু করার hidden path');
                                     $defPrimaryCta = !empty($mcSettings['primary_cta_text']) ? $mcSettings['primary_cta_text'] : 'রেজিস্ট্রেশন করুন এখনই';
                                     $defVideoCaption = !empty($mcSettings['video_caption']) ? $mcSettings['video_caption'] : 'বিস্তারিত জানতে ভিডিওটি দেখুন';
-                                    $defRemainingSeats = !empty($mcSettings['remaining_seats']) ? $mcSettings['remaining_seats'] : ($course->capacity > 0 ? max(0, $course->capacity - $course->total_enrolled) : '72');
+                                    $defRemainingSeats = !empty($mcSettings['remaining_seats']) ? $mcSettings['remaining_seats'] : ($course->capacity > 0 ? $course->capacity : '100');
+                                    $availSeatsCount = max(0, (int)$defRemainingSeats - (int)($course->total_enrolled ?? 0));
 
                                     $defGoldBadgeTop = !empty($mcSettings['gold_badge_top']) ? $mcSettings['gold_badge_top'] : 'এখনই সিট বুক করুন';
                                     $defZoomTitle = !empty($mcSettings['zoom_title']) ? $mcSettings['zoom_title'] : 'Zoom লাইভ 104';
@@ -479,7 +480,14 @@
                                     $defGoldOfferTitle = !empty($mcSettings['gold_offer_title']) ? $mcSettings['gold_offer_title'] : 'আজকের স্পেশাল অফার';
                                     $defOriginalPriceLabel = !empty($mcSettings['original_price_label']) ? $mcSettings['original_price_label'] : 'মূল প্রাইস';
                                     $defGoldCtaText = !empty($mcSettings['gold_cta_text']) ? $mcSettings['gold_cta_text'] : 'এখনই জয়েন করুন';
-                                    $defGoldSeatsText = !empty($mcSettings['gold_seats_text']) ? $mcSettings['gold_seats_text'] : 'আর মাত্র ' . $defRemainingSeats . ' সিট বাকি';
+                                    
+                                    if (!empty($mcSettings['gold_seats_text'])) {
+                                        $defGoldSeatsText = preg_match('/\d+/', $mcSettings['gold_seats_text'])
+                                            ? preg_replace('/\d+/', $availSeatsCount, $mcSettings['gold_seats_text'])
+                                            : $mcSettings['gold_seats_text'];
+                                    } else {
+                                        $defGoldSeatsText = 'আর মাত্র ' . $availSeatsCount . ' সিট বাকি';
+                                    }
 
                                     $defBenefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : 'এই মাস্টারক্লাস কার জন্য?';
                                     
@@ -558,7 +566,7 @@
                                         $faqList = [
                                             ['question' => 'লাইভ ক্লাসে কিভাবে যুক্ত হবো?', 'answer' => 'আপনি পেমেন্ট করার পর আপনাকে আমাদের একটা প্রাইভেট গ্রুপে জয়েন করানো হবে, এবং যেদিন লাইভ ক্লাসগুলো হবে সেদিন আপনাকে জুমের লিংক শেয়ার করা হবে'],
                                             ['question' => 'লাইভ ক্লাসগুলো কত ঘন্টার হবে?', 'answer' => 'এইটা সঠিক ভাবে বলা যাচ্ছে না, যে টাইম দেয়া আছে ঠিক সেই সময়েই শুরু হবে কিন্তু শেষ হবে আপনাদের ইচ্ছায়। যতক্ষণ আপনাদের প্রয়োজন আমি লাইভে থাকবো ইনশাআল্লাহ্'],
-                                            ['question' => 'মাষ্টার ক্লাসটিতে ডিস্কাউন্ট দেয়া যাবে না?', 'answer' => 'বর্তমানে বিশাল ডিস্কাউন্ট দেয়া আছে তবে প্রতিনিয়ত প্রোগ্রামটির মূল্য কিছু কিছু করে বাড়ানো হবে। তাই যত দ্রুত যুক্ত হবেন তত বেশি আপনারই লাভ।'],
+                                            ['question' => 'মাষ্টার ক্লাসটিতে ডিস্কাウント দেয়া যাবে না?', 'answer' => 'বর্তমানে বিশাল ডিস্কাউন্ট দেয়া আছে তবে প্রতিনিয়ত প্রোগ্রামটির মূল্য কিছু কিছু করে বাড়ানো হবে। তাই যত দ্রুত যুক্ত হবেন তত বেশি আপনারই লাভ।'],
                                         ];
                                     }
 
@@ -566,336 +574,370 @@
                                     $defDualCtaSeats = !empty($mcSettings['dual_cta_seats']) ? $mcSettings['dual_cta_seats'] : 'আর মাত্র ' . $defRemainingSeats . ' সিট বাকি';
                                 @endphp
                                 
-                                <div class="row gx-20">
-                                    <div class="col-12 mb-3">
-                                        <h5 class="fw-bold text-dark border-bottom pb-2 mb-0">{{ __('Masterclass Landing Page Settings') }}</h5>
-                                    </div>
-
+                                <div class="masterclass-single-page-wrapper">
                                     <!-- Section 1: Hero Header -->
-                                    <div class="col-12 mb-2">
-                                        <h6 class="fw-bold text-primary mb-3"><i class="fas fa-bullhorn me-1"></i> Section 1: Hero Header & Video Media</h6>
-                                    </div>
+                                    <div class="card border mb-4 rounded-3 shadow-sm">
+                                        <div class="card-header bg-white py-3">
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Hero Header & Video Media</span>
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <div class="row gx-20">
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Eyebrow Badge Text</label>
+                                                    <input type="text" name="masterclass_settings[eyebrow_title]" class="form-control rounded-2"
+                                                           value="{{ $defEyebrow }}" placeholder="E-commerce শুরু করার hidden path">
+                                                </div>
 
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Eyebrow Badge Text</label>
-                                        <input type="text" name="masterclass_settings[eyebrow_title]" class="form-control rounded-2"
-                                               value="{{ $defEyebrow }}" placeholder="E-commerce শুরু করার hidden path">
-                                    </div>
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Primary CTA Button Text</label>
+                                                    <input type="text" name="masterclass_settings[primary_cta_text]" class="form-control rounded-2"
+                                                           value="{{ $defPrimaryCta }}" placeholder="রেজিস্ট্রেশন করুন এখনই">
+                                                </div>
 
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Primary CTA Button Text</label>
-                                        <input type="text" name="masterclass_settings[primary_cta_text]" class="form-control rounded-2"
-                                               value="{{ $defPrimaryCta }}" placeholder="রেজিস্ট্রেশন করুন এখনই">
-                                    </div>
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Video Instruction Caption</label>
+                                                    <input type="text" name="masterclass_settings[video_caption]" class="form-control rounded-2"
+                                                           value="{{ $defVideoCaption }}" placeholder="বিস্তারিত জানতে ভিডিওটি দেখুন">
+                                                </div>
 
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Video Instruction Caption</label>
-                                        <input type="text" name="masterclass_settings[video_caption]" class="form-control rounded-2"
-                                               value="{{ $defVideoCaption }}" placeholder="বিস্তারিত জানতে ভিডিওটি দেখুন">
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Remaining Seats Urgency Count</label>
-                                        <input type="text" name="masterclass_settings[remaining_seats]" class="form-control rounded-2"
-                                               value="{{ $defRemainingSeats }}" placeholder="72">
-                                    </div>
-
-                                    <!-- Section 2: Gold Offer Card -->
-                                    <div class="col-12 mb-2 mt-3">
-                                        <h6 class="fw-bold text-primary mb-3"><i class="fas fa-crown me-1"></i> Section 2: Gold Info Card Settings</h6>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Top Gold Offer Badge</label>
-                                        <input type="text" name="masterclass_settings[gold_badge_top]" class="form-control rounded-2"
-                                               value="{{ $defGoldBadgeTop }}" placeholder="এখনই সিট বুক করুন">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Zoom Title</label>
-                                        <input type="text" name="masterclass_settings[zoom_title]" class="form-control rounded-2"
-                                               value="{{ $defZoomTitle }}" placeholder="Zoom লাইভ 104">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Zoom Subtitle</label>
-                                        <input type="text" name="masterclass_settings[zoom_subtitle]" class="form-control rounded-2"
-                                               value="{{ $defZoomSubtitle }}" placeholder="অনলাইন ইন্টারেক্টিভ সেশন">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Schedule Label</label>
-                                        <input type="text" name="masterclass_settings[schedule_label]" class="form-control rounded-2"
-                                               value="{{ $defScheduleLabel }}" placeholder="সময় / সময়সূচী">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Schedule Value</label>
-                                        <input type="text" name="masterclass_settings[schedule_value]" class="form-control rounded-2"
-                                               value="{{ $defScheduleValue }}" placeholder="2h 40min">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Level Label</label>
-                                        <input type="text" name="masterclass_settings[level_label]" class="form-control rounded-2"
-                                               value="{{ $defLevelLabel }}" placeholder="Level">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Level Value</label>
-                                        <input type="text" name="masterclass_settings[level_value]" class="form-control rounded-2"
-                                               value="{{ $defLevelValue }}" placeholder="beginner">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Gold Offer Title</label>
-                                        <input type="text" name="masterclass_settings[gold_offer_title]" class="form-control rounded-2"
-                                               value="{{ $defGoldOfferTitle }}" placeholder="আজকের স্পেশাল অফার">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Original Price Label</label>
-                                        <input type="text" name="masterclass_settings[original_price_label]" class="form-control rounded-2"
-                                               value="{{ $defOriginalPriceLabel }}" placeholder="মূল প্রাইস">
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Gold Card CTA Text</label>
-                                        <input type="text" name="masterclass_settings[gold_cta_text]" class="form-control rounded-2"
-                                               value="{{ $defGoldCtaText }}" placeholder="এখনই জয়েন করুন">
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Gold Card Remaining Seats</label>
-                                        <input type="text" name="masterclass_settings[gold_seats_text]" class="form-control rounded-2"
-                                               value="{{ $defGoldSeatsText }}" placeholder="আর মাত্র 72 সিট বাকি">
-                                    </div>
-
-                                    <!-- Section 3: Benefits Section -->
-                                    <div class="col-12 mb-2 mt-3">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <h6 class="fw-bold text-primary m-0"><i class="fas fa-check-circle me-1"></i> Section 3: Benefits & Target Audience</h6>
-                                            <button type="button" class="button-default" id="add_new_benefit_btn">
-                                                Add New Benefit Point <i class="las la-plus ms-1"></i>
-                                            </button>
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Total Course Seats (মোট আসন সংখ্যা)</label>
+                                                    <input type="text" name="masterclass_settings[remaining_seats]" id="mc_total_seats_input" data-enrolled="{{ $course->total_enrolled ?? 0 }}" class="form-control rounded-2"
+                                                           value="{{ $defRemainingSeats }}" placeholder="100">
+                                                    <small class="text-muted">বর্তমানে এনরোলড: <strong>{{ $course->total_enrolled ?? 0 }}</strong> জন</small>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label fw-bold">Benefits Heading</label>
-                                        <input type="text" name="masterclass_settings[benefits_title]" class="form-control rounded-2"
-                                               value="{{ $defBenefitsTitle }}" placeholder="এই মাস্টারক্লাস কার জন্য?">
+                                    <!-- Section 2: Gold Offer Card -->
+                                    <div class="card border mb-4 rounded-3 shadow-sm">
+                                        <div class="card-header bg-white py-3">
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Gold Info Card Settings</span>
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <div class="row gx-20">
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Top Gold Offer Badge</label>
+                                                    <input type="text" name="masterclass_settings[gold_badge_top]" class="form-control rounded-2"
+                                                           value="{{ $defGoldBadgeTop }}" placeholder="এখনই সিট বুক করুন">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Zoom Title</label>
+                                                    <input type="text" name="masterclass_settings[zoom_title]" class="form-control rounded-2"
+                                                           value="{{ $defZoomTitle }}" placeholder="Zoom লাইভ 104">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Zoom Subtitle</label>
+                                                    <input type="text" name="masterclass_settings[zoom_subtitle]" class="form-control rounded-2"
+                                                           value="{{ $defZoomSubtitle }}" placeholder="অনলাইন ইন্টারেক্টিভ সেশন">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Schedule Label</label>
+                                                    <input type="text" name="masterclass_settings[schedule_label]" class="form-control rounded-2"
+                                                           value="{{ $defScheduleLabel }}" placeholder="সময় / সময়সূচী">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Schedule Value</label>
+                                                    <input type="text" name="masterclass_settings[schedule_value]" class="form-control rounded-2"
+                                                           value="{{ $defScheduleValue }}" placeholder="2h 40min">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Level Label</label>
+                                                    <input type="text" name="masterclass_settings[level_label]" class="form-control rounded-2"
+                                                           value="{{ $defLevelLabel }}" placeholder="Level">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Level Value</label>
+                                                    <input type="text" name="masterclass_settings[level_value]" class="form-control rounded-2"
+                                                           value="{{ $defLevelValue }}" placeholder="beginner">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Gold Offer Title</label>
+                                                    <input type="text" name="masterclass_settings[gold_offer_title]" class="form-control rounded-2"
+                                                           value="{{ $defGoldOfferTitle }}" placeholder="আজকের স্পেশাল অফার">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Original Price Label</label>
+                                                    <input type="text" name="masterclass_settings[original_price_label]" class="form-control rounded-2"
+                                                           value="{{ $defOriginalPriceLabel }}" placeholder="মূল প্রাইস">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Gold Card CTA Text</label>
+                                                    <input type="text" name="masterclass_settings[gold_cta_text]" class="form-control rounded-2"
+                                                           value="{{ $defGoldCtaText }}" placeholder="এখনই জয়েন করুন">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Gold Card Remaining Seats</label>
+                                                    <input type="text" name="masterclass_settings[gold_seats_text]" id="mc_gold_seats_input" class="form-control rounded-2"
+                                                           value="{{ $defGoldSeatsText }}" placeholder="আর মাত্র 100 সিট বাকি">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div class="col-12 mb-4">
-                                        <label class="form-label fw-bold text-dark mb-2">Benefit Items</label>
-                                        <div id="benefits_items_container">
-                                            @foreach($benefitsList as $bIdx => $bItem)
-                                                <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
-                                                    <span class="badge bg-secondary p-2"><i class="fas fa-check"></i> #<span class="benefit-num">{{ $bIdx + 1 }}</span></span>
-                                                    <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white"
-                                                           value="{{ $bItem }}" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
-                                                    <a href="javascript:void(0)" class="text-danger remove-benefit-btn fs-4 ms-2">
-                                                        <i class="las la-trash-alt"></i>
-                                                    </a>
+                                    <!-- Section 3: Benefits Section -->
+                                    <div class="card border mb-4 rounded-3 shadow-sm">
+                                        <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Benefits & Target Audience</span>
+                                            <button type="button" class="btn sg-btn-primary btn-sm rounded-2" id="add_new_benefit_btn">
+                                                Add New Benefit Point <i class="las la-plus ms-1"></i>
+                                            </button>
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <div class="row gx-20">
+                                                <div class="col-lg-12 mb-4">
+                                                    <label class="form-label">Benefits Heading</label>
+                                                    <input type="text" name="masterclass_settings[benefits_title]" class="form-control rounded-2"
+                                                           value="{{ $defBenefitsTitle }}" placeholder="এই মাস্টারক্লাস কার জন্য?">
                                                 </div>
-                                            @endforeach
+
+                                                <div class="col-12 mb-2">
+                                                    <label class="form-label mb-2">Benefit Items</label>
+                                                    <div id="benefits_items_container">
+                                                        @foreach($benefitsList as $bIdx => $bItem)
+                                                            <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
+                                                                <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">{{ $bIdx + 1 }}</span></span>
+                                                                <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white"
+                                                                       value="{{ $bItem }}" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
+                                                                <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
+                                                                    <i class="las la-trash-alt fs-5"></i>
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <!-- Section 4: Special Bonus Gift -->
-                                    <div class="col-12 mb-2 mt-3">
-                                        <h6 class="fw-bold text-primary mb-3"><i class="fas fa-gift me-1"></i> Section 4: Special Gift Banner Offer</h6>
-                                    </div>
+                                    <div class="card border mb-4 rounded-3 shadow-sm">
+                                        <div class="card-header bg-white py-3">
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Special Gift Banner Offer</span>
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <div class="row gx-20">
+                                                <div class="col-12 mb-4">
+                                                    <div class="custom-checkbox">
+                                                        <label class="d-flex align-items-center gap-2 cursor-pointer">
+                                                            <input type="checkbox" name="masterclass_settings[hide_special_gift]" value="1" id="hide_gift"
+                                                                {{ !empty($mcSettings['hide_special_gift']) ? 'checked' : '' }}>
+                                                            <span class="text-dark font-16">Hide Special Gift Banner Card</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
 
-                                    <div class="col-12 mb-3">
-                                        <div class="form-check">
-                                            <input type="checkbox" name="masterclass_settings[hide_special_gift]" value="1" class="form-check-input" id="hide_gift"
-                                                {{ !empty($mcSettings['hide_special_gift']) ? 'checked' : '' }}>
-                                            <label class="form-check-label fw-bold" for="hide_gift">Hide Special Gift Banner Card</label>
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Gift Pill / Badge Text</label>
+                                                    <input type="text" name="masterclass_settings[gift_badge]" class="form-control rounded-2"
+                                                           value="{{ $defGiftBadge }}" placeholder="🎁 যারা join করবেন তাদের জন্য special gift">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Gift Title</label>
+                                                    <input type="text" name="masterclass_settings[gift_title]" class="form-control rounded-2"
+                                                           value="{{ $defGiftTitle }}" placeholder="৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Original Gift Value</label>
+                                                    <input type="text" name="masterclass_settings[gift_value]" class="form-control rounded-2"
+                                                           value="{{ $defGiftValue }}" placeholder="৳১০,০০০">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Gift Red CTA Text</label>
+                                                    <input type="text" name="masterclass_settings[gift_cta_text]" class="form-control rounded-2"
+                                                           value="{{ $defGiftCtaText }}" placeholder="সিট কনফার্ম করুন →">
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 mb-4">
+                                                    <label class="form-label">Gift Description</label>
+                                                    <textarea name="masterclass_settings[gift_description]" class="form-control rounded-2" rows="3"
+                                                              placeholder="এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন...">{{ $defGiftDescription }}</textarea>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 mb-4">
+                                                    <label class="form-label">Gift Quote Callout Box</label>
+                                                    <textarea name="masterclass_settings[gift_quote]" class="form-control rounded-2" rows="3"
+                                                              placeholder="এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় নিয়ে আলোচনা করেছি...">{{ $defGiftQuote }}</textarea>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 mb-4">
+                                                    <label class="form-label">Gift Footer Note Text</label>
+                                                    <input type="text" name="masterclass_settings[gift_footer_note]" class="form-control rounded-2"
+                                                           value="{{ $defGiftFooterNote }}" placeholder="যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Gift Pill / Badge Text</label>
-                                        <input type="text" name="masterclass_settings[gift_badge]" class="form-control rounded-2"
-                                               value="{{ $defGiftBadge }}" placeholder="🎁 যারা join করবেন তাদের জন্য special gift">
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Gift Title</label>
-                                        <input type="text" name="masterclass_settings[gift_title]" class="form-control rounded-2"
-                                               value="{{ $defGiftTitle }}" placeholder="৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ">
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Original Gift Value</label>
-                                        <input type="text" name="masterclass_settings[gift_value]" class="form-control rounded-2"
-                                               value="{{ $defGiftValue }}" placeholder="৳১০,০০০">
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Gift Red CTA Text</label>
-                                        <input type="text" name="masterclass_settings[gift_cta_text]" class="form-control rounded-2"
-                                               value="{{ $defGiftCtaText }}" placeholder="সিট কনফার্ম করুন →">
-                                    </div>
-
-                                    <div class="col-lg-12 col-md-12 mb-4">
-                                        <label class="form-label fw-bold">Gift Description</label>
-                                        <textarea name="masterclass_settings[gift_description]" class="form-control rounded-2" rows="3"
-                                                  placeholder="এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন...">{{ $defGiftDescription }}</textarea>
-                                    </div>
-
-                                    <div class="col-lg-12 col-md-12 mb-4">
-                                        <label class="form-label fw-bold">Gift Quote Callout Box</label>
-                                        <textarea name="masterclass_settings[gift_quote]" class="form-control rounded-2" rows="3"
-                                                  placeholder="এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় নিয়ে আলোচনা করেছি...">{{ $defGiftQuote }}</textarea>
-                                    </div>
-
-                                    <div class="col-lg-12 col-md-12 mb-4">
-                                        <label class="form-label fw-bold">Gift Footer Note Text</label>
-                                        <input type="text" name="masterclass_settings[gift_footer_note]" class="form-control rounded-2"
-                                               value="{{ $defGiftFooterNote }}" placeholder="যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।">
-                                    </div>
-
-                                    <!-- Section 5: Schedule & Token Fee Explainer -->
-                                    <div class="col-12 mb-2 mt-3">
-                                        <h6 class="fw-bold text-primary mb-3"><i class="fas fa-calendar-alt me-1"></i> Section 5 & 6: Schedule & Token Fee Explainer</h6>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Schedule Pill Badge Text</label>
-                                        <input type="text" name="masterclass_settings[schedule_badge]" class="form-control rounded-2"
-                                               value="{{ $defScheduleBadge }}" placeholder="LIVE ZOOM MASTERCLASS">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Live Schedule Headline</label>
-                                        <input type="text" name="masterclass_settings[class_schedule_title]" class="form-control rounded-2"
-                                               value="{{ $defClassScheduleTitle }}" placeholder="২ দিনব্যাপী e-commerce live masterclass">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Live Schedule Time</label>
-                                        <input type="text" name="masterclass_settings[class_schedule_time]" class="form-control rounded-2"
-                                               value="{{ $defClassScheduleTime }}" placeholder="৬ আগস্ট তারিখ রাত ৮ টায় শুরু">
-                                    </div>
-
-                                    <div class="col-12 mb-3">
-                                        <div class="form-check">
-                                            <input type="checkbox" name="masterclass_settings[hide_explainer]" value="1" class="form-check-input" id="hide_exp"
-                                                {{ !empty($mcSettings['hide_explainer']) ? 'checked' : '' }}>
-                                            <label class="form-check-label fw-bold" for="hide_exp">Hide Token Fee Explainer Box</label>
+                                    <!-- Section 5 & 6: Schedule & Token Fee Explainer -->
+                                    <div class="card border mb-4 rounded-3 shadow-sm">
+                                        <div class="card-header bg-white py-3">
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Schedule & Token Fee Explainer</span>
                                         </div>
-                                    </div>
+                                        <div class="card-body p-4">
+                                            <div class="row gx-20">
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Schedule Pill Badge Text</label>
+                                                    <input type="text" name="masterclass_settings[schedule_badge]" class="form-control rounded-2"
+                                                           value="{{ $defScheduleBadge }}" placeholder="LIVE ZOOM MASTERCLASS">
+                                                </div>
 
-                                    <div class="col-lg-12 col-md-12 mb-4">
-                                        <label class="form-label fw-bold">Explainer Title</label>
-                                        <input type="text" name="masterclass_settings[explainer_title]" class="form-control rounded-2"
-                                               value="{{ $defExplainerTitle }}" placeholder="একটা প্রশ্ন আপনার মাথায় আসতে পারে — এত কিছু, মাত্র ৯৯ টাকায় কেন??">
-                                    </div>
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Live Schedule Headline</label>
+                                                    <input type="text" name="masterclass_settings[class_schedule_title]" class="form-control rounded-2"
+                                                           value="{{ $defClassScheduleTitle }}" placeholder="২ দিনব্যাপী e-commerce live masterclass">
+                                                </div>
 
-                                    <div class="col-lg-12 col-md-12 mb-4">
-                                        <label class="form-label fw-bold">Explainer Content (WYSIWYG Rich Text)</label>
-                                        <textarea name="masterclass_settings[explainer_text]" class="form-control rounded-2 summernote" rows="5">{{ $defExplainerText }}</textarea>
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Live Schedule Time</label>
+                                                    <input type="text" name="masterclass_settings[class_schedule_time]" class="form-control rounded-2"
+                                                           value="{{ $defClassScheduleTime }}" placeholder="৬ আগস্ট তারিখ রাত ৮ টায় শুরু">
+                                                </div>
+
+                                                <div class="col-12 mb-4">
+                                                    <div class="custom-checkbox">
+                                                        <label class="d-flex align-items-center gap-2 cursor-pointer">
+                                                            <input type="checkbox" name="masterclass_settings[hide_explainer]" value="1" id="hide_exp"
+                                                                {{ !empty($mcSettings['hide_explainer']) ? 'checked' : '' }}>
+                                                            <span class="text-dark font-16">Hide Token Fee Explainer Box</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 mb-4">
+                                                    <label class="form-label">Explainer Title</label>
+                                                    <input type="text" name="masterclass_settings[explainer_title]" class="form-control rounded-2"
+                                                           value="{{ $defExplainerTitle }}" placeholder="একটা প্রশ্ন আপনার মাথায় আসতে পারে — এত কিছু, মাত্র ৯৯ টাকায় কেন??">
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 mb-4">
+                                                    <div class="editor-wrapper">
+                                                        <label class="form-label mb-1">Explainer Content</label>
+                                                        <textarea name="masterclass_settings[explainer_text]" class="form-control rounded-2 summernote" rows="5">{{ $defExplainerText }}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <!-- Section 7: Price Breakdown Table -->
-                                    <div class="col-12 mb-2 mt-3">
-                                        <h6 class="fw-bold text-primary mb-3"><i class="fas fa-list-alt me-1"></i> Section 7: Price Breakdown Table</h6>
-                                    </div>
+                                    <div class="card border mb-4 rounded-3 shadow-sm">
+                                        <div class="card-header bg-white py-3">
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Price Breakdown Table</span>
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <div class="row gx-20">
+                                                <div class="col-12 mb-4">
+                                                    <div class="custom-checkbox">
+                                                        <label class="d-flex align-items-center gap-2 cursor-pointer">
+                                                            <input type="checkbox" name="masterclass_settings[hide_breakdown]" value="1" id="hide_bd"
+                                                                {{ !empty($mcSettings['hide_breakdown']) ? 'checked' : '' }}>
+                                                            <span class="text-dark font-16">Hide Price Breakdown Table</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
 
-                                    <div class="col-12 mb-3">
-                                        <div class="form-check">
-                                            <input type="checkbox" name="masterclass_settings[hide_breakdown]" value="1" class="form-check-input" id="hide_bd"
-                                                {{ !empty($mcSettings['hide_breakdown']) ? 'checked' : '' }}>
-                                            <label class="form-check-label fw-bold" for="hide_bd">Hide Price Breakdown Table</label>
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Breakdown Subheading</label>
+                                                    <input type="text" name="masterclass_settings[breakdown_subheading]" class="form-control rounded-2"
+                                                           value="{{ $defBreakdownSubheading }}" placeholder="এই $15.00 টাকায় আপনি পাচ্ছেন:">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Today Token Price Title</label>
+                                                    <input type="text" name="masterclass_settings[breakdown_today_title]" class="form-control rounded-2"
+                                                           value="{{ $defBreakdownTodayTitle }}" placeholder="আজকের মূল্য (token)">
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 mb-4">
+                                                    <label class="form-label">Breakdown Items (Item Title | Price Value)</label>
+                                                    <textarea name="masterclass_settings[breakdown_items]" class="form-control rounded-2" rows="4"
+                                                              placeholder="🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০&#10;🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০">{{ $defBreakdownItems }}</textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Breakdown Subheading</label>
-                                        <input type="text" name="masterclass_settings[breakdown_subheading]" class="form-control rounded-2"
-                                               value="{{ $defBreakdownSubheading }}" placeholder="এই $15.00 টাকায় আপনি পাচ্ছেন:">
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Today Token Price Title</label>
-                                        <input type="text" name="masterclass_settings[breakdown_today_title]" class="form-control rounded-2"
-                                               value="{{ $defBreakdownTodayTitle }}" placeholder="আজকের মূল্য (token)">
-                                    </div>
-
-                                    <div class="col-lg-12 col-md-12 mb-4">
-                                        <label class="form-label fw-bold">Breakdown Items (Item Title | Price Value)</label>
-                                        <textarea name="masterclass_settings[breakdown_items]" class="form-control rounded-2" rows="4"
-                                                  placeholder="🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০&#10;🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০">{{ $defBreakdownItems }}</textarea>
-                                        <small class="text-muted">Format: <code>Item Title | Price Value</code> per line</small>
-                                    </div>
-
-                                    <!-- Section 8: Registration Form & FAQs -->
-                                    <div class="col-12 mb-2 mt-3">
-                                        <h6 class="fw-bold text-primary mb-3"><i class="fas fa-user-edit me-1"></i> Section 8 & 9: Registration Order Form & FAQs</h6>
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Registration Form Title</label>
-                                        <input type="text" name="masterclass_settings[order_form_title]" class="form-control rounded-2"
-                                               value="{{ $defOrderFormTitle }}" placeholder="মাস্টারক্লাসে জয়েন করতে নিচের ফর্মটি পূরণ করুন">
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Registration Form Subtitle</label>
-                                        <input type="text" name="masterclass_settings[order_form_subtitle]" class="form-control rounded-2"
-                                               value="{{ $defOrderFormSubtitle }}" placeholder="Give valid information">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Full Name Label</label>
-                                        <input type="text" name="masterclass_settings[name_label]" class="form-control rounded-2"
-                                               value="{{ $defNameLabel }}" placeholder="Your Full Name">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Mobile Number Label</label>
-                                        <input type="text" name="masterclass_settings[phone_label]" class="form-control rounded-2"
-                                               value="{{ $defPhoneLabel }}" placeholder="Mobile Number">
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Email Address Label</label>
-                                        <input type="text" name="masterclass_settings[email_label]" class="form-control rounded-2"
-                                               value="{{ $defEmailLabel }}" placeholder="Email address">
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Order Summary Heading</label>
-                                        <input type="text" name="masterclass_settings[order_summary_title]" class="form-control rounded-2"
-                                               value="{{ $defOrderSummaryTitle }}" placeholder="Your order">
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 mb-4">
-                                        <label class="form-label fw-bold">Pay Now Button Text</label>
-                                        <input type="text" name="masterclass_settings[pay_now_btn_text]" class="form-control rounded-2"
-                                               value="{{ $defPayNowBtnText }}" placeholder="PAY NOW">
-                                    </div>
-
-                                    <div class="col-lg-12 col-md-12 mb-4">
-                                        <label class="form-label fw-bold">Privacy Policy Notice</label>
-                                        <textarea name="masterclass_settings[privacy_notice]" class="form-control rounded-2" rows="2"
-                                                  placeholder="Your personal data will be used to process your order...">{{ $defPrivacyNotice }}</textarea>
-                                    </div>
-
-
-
-
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30 pt-3 border-top">
-                                            <a href="#" type="button" class="btn sg-btn-outline-primary btn_action"
-                                                data-bs-target="#basicCourseInformation">{{ __('back') }}</a>
-
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                                data-bs-target="#courseMediaImages">{{ __('next') }}</a>
+                                    <!-- Section 8 & 9: Registration Order Form & FAQs -->
+                                    <div class="card border mb-4 rounded-3 shadow-sm">
+                                        <div class="card-header bg-white py-3">
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Registration Order Form & FAQs</span>
                                         </div>
+                                        <div class="card-body p-4">
+                                            <div class="row gx-20">
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Registration Form Title</label>
+                                                    <input type="text" name="masterclass_settings[order_form_title]" class="form-control rounded-2"
+                                                           value="{{ $defOrderFormTitle }}" placeholder="মাস্টারক্লাসে জয়েন করতে নিচের ফর্মটি পূরণ করুন">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Registration Form Subtitle</label>
+                                                    <input type="text" name="masterclass_settings[order_form_subtitle]" class="form-control rounded-2"
+                                                           value="{{ $defOrderFormSubtitle }}" placeholder="Give valid information">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Full Name Label</label>
+                                                    <input type="text" name="masterclass_settings[name_label]" class="form-control rounded-2"
+                                                           value="{{ $defNameLabel }}" placeholder="Your Full Name">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Mobile Number Label</label>
+                                                    <input type="text" name="masterclass_settings[phone_label]" class="form-control rounded-2"
+                                                           value="{{ $defPhoneLabel }}" placeholder="Mobile Number">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <label class="form-label">Email Address Label</label>
+                                                    <input type="text" name="masterclass_settings[email_label]" class="form-control rounded-2"
+                                                           value="{{ $defEmailLabel }}" placeholder="Email address">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Order Summary Heading</label>
+                                                    <input type="text" name="masterclass_settings[order_summary_title]" class="form-control rounded-2"
+                                                           value="{{ $defOrderSummaryTitle }}" placeholder="Your order">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Pay Now Button Text</label>
+                                                    <input type="text" name="masterclass_settings[pay_now_btn_text]" class="form-control rounded-2"
+                                                           value="{{ $defPayNowBtnText }}" placeholder="PAY NOW">
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 mb-4">
+                                                    <label class="form-label">Privacy Policy Notice</label>
+                                                    <textarea name="masterclass_settings[privacy_notice]" class="form-control rounded-2" rows="2"
+                                                              placeholder="Your personal data will be used to process your order...">{{ $defPrivacyNotice }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-between align-items-center mt-30 pt-3 border-top">
+                                        <a href="#" type="button" class="btn sg-btn-outline-primary btn_action"
+                                            data-bs-target="#basicCourseInformation">{{ __('back') }}</a>
+
+                                        <a href="#" type="button" class="btn sg-btn-primary btn_action"
+                                            data-bs-target="#courseMediaImages">{{ __('next') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -1755,10 +1797,10 @@
                 let count = $('#benefits_items_container .benefit-single-item').length;
                 let html = `
                     <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
-                        <span class="badge bg-secondary p-2"><i class="fas fa-check"></i> #<span class="benefit-num">${count + 1}</span></span>
+                        <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">${count + 1}</span></span>
                         <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
-                        <a href="javascript:void(0)" class="text-danger remove-benefit-btn fs-4 ms-2">
-                            <i class="las la-trash-alt"></i>
+                        <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
+                            <i class="las la-trash-alt fs-5"></i>
                         </a>
                     </div>
                 `;
@@ -1770,6 +1812,19 @@
                 $('#benefits_items_container .benefit-single-item').each(function (i) {
                     $(this).find('.benefit-num').text(i + 1);
                 });
+            });
+
+            $(document).on('input change', '#mc_total_seats_input', function () {
+                let totalSeats = parseInt($(this).val()) || 0;
+                let enrolled = parseInt($(this).data('enrolled')) || 0;
+                let avail = Math.max(0, totalSeats - enrolled);
+                
+                let goldVal = $('#mc_gold_seats_input').val();
+                if (goldVal && /\d+/.test(goldVal)) {
+                    $('#mc_gold_seats_input').val(goldVal.replace(/\d+/, avail));
+                } else {
+                    $('#mc_gold_seats_input').val('আর মাত্র ' + avail + ' সিট বাকি');
+                }
             });
 
             $(document).on('click', '#add_new_faq_btn', function () {

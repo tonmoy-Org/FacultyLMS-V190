@@ -87,7 +87,18 @@
 
                             @if(is_array(headerFooterMenu('header_menu', app()->getLocale())))
                                 @foreach(headerFooterMenu('header_menu', app()->getLocale()) as $main_menu)
-                                    <li class="{{ url($main_menu['url']) == url()->current() || url($main_menu['url']) == url("/") ? 'active' : '' }}">
+                                    @php
+                                        $menu_path = trim(parse_url($main_menu['url'], PHP_URL_PATH) ?? '', '/');
+                                        $is_home_menu = ($main_menu['url'] == '/' || $main_menu['url'] == '' || $menu_path == '');
+                                        if ($is_home_menu) {
+                                            $is_active = (request()->is('/') || url()->current() == url('/'));
+                                        } else {
+                                            $is_active = (url($main_menu['url']) == url()->current() 
+                                                || url($main_menu['url']) == url()->full() 
+                                                || ($menu_path != '' && (request()->is($menu_path . '*') || ($menu_path == 'courses' && request()->is('course*')))));
+                                        }
+                                    @endphp
+                                    <li class="{{ $is_active ? 'active' : '' }}">
                                         <a href="{{ url('') == url($main_menu['url']) ? route('home') : url($main_menu['url']) }}"
                                            data-bs-toggle="dropdown">{{ $main_menu['label'] }}</a>
                                         @if (count($main_menu) > 3)
@@ -135,7 +146,7 @@
                 </div>
                 <div class="header-right">
                     <ul class="header-extra">
-                        <li>
+                        <!-- <li>
                             <form class="searchbox search-dark-color" action="{{ route('courses') }}" method="GET">
                                 <input type="search" placeholder="{{ __('search') }}" name="search"
                                        class="searchbox-input header_search" data-url="{{ route('header.search') }}">
@@ -159,7 +170,7 @@
                                     </svg>
                                 </span>
                             </form>
-                        </li>
+                        </li> -->
                         @if(auth()->check())
                             @if(!auth() || auth()->user()->user_type == 'student')
                                 <li class="shopping-mini-cart">

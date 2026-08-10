@@ -202,6 +202,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
 
     //add to cart route
     Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add.cart');
+    Route::post('masterclass-checkout', [CartController::class, 'masterclassCheckout'])->name('masterclass.checkout');
     Route::get('item/remove', [CartController::class, 'itemRemove']);
     Route::get('cart-view', [CartController::class, 'cartView'])->name('cart.view');
 

@@ -27,8 +27,10 @@ class WalletRepository
 
     public function store($data, $amount, $source, $payment_details)
     {
+        $userId = auth()->id() ?? getArrayValue('user_id', $data);
+
         return Wallet::create([
-            'user_id'           => auth()->id(),
+            'user_id'           => $userId,
             'walletable_id'     => null,
             'walletable_type'   => null,
             'amount'            => $amount,

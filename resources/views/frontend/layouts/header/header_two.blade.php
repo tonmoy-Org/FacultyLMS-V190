@@ -164,7 +164,18 @@
                             @endif --}}
                               @if (is_array(headerFooterMenu('header_menu', App::getLocale())))
                                   @foreach (headerFooterMenu('header_menu', App::getLocale()) as $main_menu)
-                                      <li class="{{ url($main_menu['url']) == url()->full() ? 'active' : '' }}">
+                                      @php
+                                          $menu_path = trim(parse_url($main_menu['url'], PHP_URL_PATH) ?? '', '/');
+                                          $is_home_menu = ($main_menu['url'] == '/' || $main_menu['url'] == '' || $menu_path == '');
+                                          if ($is_home_menu) {
+                                              $is_active = (request()->is('/') || url()->current() == url('/'));
+                                          } else {
+                                              $is_active = (url($main_menu['url']) == url()->current() 
+                                                  || url($main_menu['url']) == url()->full() 
+                                                  || ($menu_path != '' && (request()->is($menu_path . '*') || ($menu_path == 'courses' && request()->is('course*')))));
+                                          }
+                                      @endphp
+                                      <li class="{{ $is_active ? 'active' : '' }}">
                                           {{-- <a href="{{url($main_menu['url'])}}" @if (count($main_menu) > 3 && $main_menu['mega_menu'] != 'true') data-bs-toggle="dropdown" @endif>{{ $main_menu['label'] }}</a> --}}
                                           <a href="{{ url($main_menu['url']) }}"
                                               data-bs-toggle="dropdown">{{ $main_menu['label'] }}</a>

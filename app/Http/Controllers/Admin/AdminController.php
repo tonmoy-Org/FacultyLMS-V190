@@ -79,7 +79,7 @@ class AdminController extends Controller
             'since_last_month_course_count'    => $this->sinceLastMonthWiseQuery(new Course())->count(),
 
             'total_free_course_count'          => Course::where('is_free', 1)->count(),
-            'total_student_count'              => User::where('user_type', 'student')->count(),
+            'total_student_count'              => User::where('role_id', 3)->count(),
             'total_instructor_count'           => Instructor::count(),
             'total_enrolment_count'            => Enroll::count(),
             'since_last_month_enrolment_count' => $this->sinceLastMonthWiseQuery(new Enroll())->count(),

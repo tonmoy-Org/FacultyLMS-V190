@@ -32,7 +32,7 @@ class StudentStatistic
             DB::raw('MONTHNAME(created_at) as month_name'),
             DB::raw('COUNT(*) as data')
         )
-            ->where('user_type', 'student')
+            ->where('role_id', 3)
             ->groupBy(DB::raw('MONTH(created_at)'))
             ->orderBy(DB::raw('MONTH(created_at)'))
             ->get();

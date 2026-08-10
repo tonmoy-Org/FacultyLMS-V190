@@ -43,7 +43,7 @@ class AdvanceEarningStatistic
             DB::raw('DAYNAME(created_at) as day_name'),
             DB::raw('COUNT(*) as data')
         )
-            ->where('user_type', 'student');
+            ->where('role_id', 3);
         $students = $this->query($request, $query)->get();
 
         $query    = Course::select(
@@ -70,7 +70,7 @@ class AdvanceEarningStatistic
             'student'           => $this->parseData($students),
             'course'            => $this->parseData($courses),
             'earning'           => $this->parseData($earnings),
-            'new_student_count' => $this->query($request, User::where('user_type', 'student'))->count(),
+            'new_student_count' => $this->query($request, User::where('role_id', 3))->count(),
             'new_course_count'  => $this->query($request, new Course())->count(),
             'total_sales'       => $this->query($request, new Enroll())->sum('price'),
         ];
