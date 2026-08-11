@@ -1,7 +1,7 @@
 <!--====== Start Floating Newsletter Section ======-->
 <div class="footer-newsletter-wrapper" style="position: relative; z-index: 10; margin-bottom: -65px;">
     <div class="container container-1278">
-        <div class="newsletter-card shadow-lg" 
+        <div class="newsletter-card shadow-none" 
              style="background-color: {{ setting('promo_banner_bg_color') ?: '#fcd34d' }}; border-radius: 20px; padding: 35px 40px;">
             <div class="row align-items-center g-4">
                 <!-- Column 1: Newsletter Title & Description -->
@@ -18,7 +18,7 @@
                 <div class="col-lg-5 col-md-7">
                     <form action="{{ route('subscribe') }}" method="POST" class="footer-subscription-form ajax_form">
                         @csrf
-                        <div class="d-flex align-items-center bg-white p-1 shadow-sm" style="border-radius: 50px;">
+                        <div class="d-flex align-items-center bg-white p-1" style="border-radius: 50px;">
                             <input type="email" name="email" class="form-control border-0 shadow-none px-4" 
                                    placeholder="{{ __('your_email') ?: 'Email' }}" required 
                                    style="background: transparent; font-size: 15px; color: #333;">
@@ -34,19 +34,19 @@
                 <div class="col-lg-3 col-md-5 text-center text-lg-end">
                     <div class="mb-2 fw-bold text-dark text-center text-lg-center" style="font-size: 1.05rem;">{{ __('Admission Now') }}</div>
                     <div class="mini-countdown d-flex justify-content-center justify-content-lg-center gap-2" id="promoCountdownFooter" data-target="{{ setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days')) }}">
-                        <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 52px;">
+                        <div class="bg-white rounded p-2 text-center" style="width: 52px;">
                             <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
                             <span class="small text-secondary fw-semibold" style="font-size: 10px;">DAYS</span>
                         </div>
-                        <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 52px;">
+                        <div class="bg-white rounded p-2 text-center" style="width: 52px;">
                             <h4 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
                             <span class="small text-secondary fw-semibold" style="font-size: 10px;">HRS</span>
                         </div>
-                        <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 52px;">
+                        <div class="bg-white rounded p-2 text-center" style="width: 52px;">
                             <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
                             <span class="small text-secondary fw-semibold" style="font-size: 10px;">MIN</span>
                         </div>
-                        <div class="bg-white rounded p-2 text-center shadow-sm" style="width: 52px;">
+                        <div class="bg-white rounded p-2 text-center" style="width: 52px;">
                             <h4 class="seconds m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
                             <span class="small text-secondary fw-semibold" style="font-size: 10px;">SEC</span>
                         </div>

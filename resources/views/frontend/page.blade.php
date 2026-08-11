@@ -20,7 +20,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-10 p-b-md-40">
                         <div class="course-details-overview p-t-50 p-t-lg-5">
-                            <div class="course-details-overview-content dynamic-page-content" style="background-color: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: -60px; position: relative; z-index: 2;">
+                            <div class="course-details-overview-content dynamic-page-content" style="background-color: #fff; padding: 40px 0; position: relative; z-index: 2;">
                                 {!! __($page_info->content) !!}
                             </div>
                             
@@ -31,7 +31,8 @@
                                 .dynamic-page-content h4, 
                                 .dynamic-page-content h5, 
                                 .dynamic-page-content h6 {
-                                    color: #1a1b4b;
+                                    color: var(--color-dark, var(--color-body));
+                                    font-family: var(--header-font);
                                     font-weight: 700;
                                     margin-top: 1.5rem;
                                     margin-bottom: 1rem;
@@ -41,14 +42,14 @@
                                 .dynamic-page-content h3 { font-size: 20px; }
                                 .dynamic-page-content h4 { font-size: 18px; }
                                 .dynamic-page-content p {
-                                    color: #475569;
-                                    font-size: 15.5px;
+                                    color: var(--color-body);
+                                    font-family: var(--body-font);
                                     line-height: 1.8;
                                     margin-bottom: 1rem;
                                 }
                                 .dynamic-page-content ul, .dynamic-page-content ol {
-                                    color: #475569;
-                                    font-size: 15px;
+                                    color: var(--color-body);
+                                    font-family: var(--body-font);
                                     line-height: 1.8;
                                     margin-bottom: 1rem;
                                     padding-left: 1.5rem;
@@ -57,7 +58,7 @@
                                     margin-bottom: 0.5rem;
                                 }
                                 .dynamic-page-content a {
-                                    color: #10b981;
+                                    color: var(--theme-clr, var(--color-secondary-4));
                                     text-decoration: none;
                                 }
                                 .dynamic-page-content a:hover {
