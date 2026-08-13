@@ -135,13 +135,14 @@
                         <!-- Profile Photo -->
                         <div class="col-12 m-b-30">
                             <div class="d-flex align-items-center">
-                                <div class="profile-avatar d-flex align-items-center justify-content-center" style="width: 55px; height: 55px; background-color: #f0f0f0; border-radius: 50%; margin-right: 15px; font-size: 18px; color: #888;">
-                                    <i class="fas fa-camera-retro"></i>
+                                <div class="profile-avatar d-flex align-items-center justify-content-center" style="width: 55px; height: 55px; background-color: #f0f0f0; border-radius: 50%; margin-right: 15px; font-size: 18px; color: #888; overflow: hidden; position: relative;">
+                                    <i class="fas fa-camera-retro" id="profile-avatar-icon"></i>
+                                    <img id="profile-avatar-preview" src="" alt="Profile Preview" style="display: none; width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                                 <div class="profile-btn-wrap">
                                     <label class="btn btn-outline-secondary btn-sm mb-1" style="cursor: pointer; font-size: 13px; font-weight: 500; padding: 5px 12px;">
                                         <i class="fas fa-cloud-upload-alt m-r-5"></i> {{ __('PROFILE PHOTO') }}
-                                        <input type="file" name="profile_photo" style="display: none;" accept="image/*">
+                                        <input type="file" name="profile_photo" id="profile_photo" style="display: none;" accept="image/*">
                                     </label>
                                     <div class="fz-12 color-gray">{{ __('Optional, but recommended') }}</div>
                                 </div>
@@ -156,6 +157,10 @@
                                 <div class="upload-content d-flex align-items-center justify-content-center color-gray fw-500" style="font-size: 13px;">
                                     <i class="fas fa-video m-r-10 fz-16"></i> <span id="file-name">{{ __('UPLOAD PHOTO/VIDEO') }}</span>
                                 </div>
+                            </div>
+                            <div id="media-preview-container" class="mt-2 text-center" style="display: none; background: #f8fafc; border-radius: 6px; padding: 10px; border: 1px solid #e2e8f0;">
+                                <img id="media-image-preview" src="" alt="Media Preview" style="max-height: 200px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto; object-fit: cover;">
+                                <video id="media-video-preview" src="" controls style="max-height: 220px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto;"></video>
                             </div>
                             @error('file')
                                 <p class="text-danger error" style="font-size: 13px; margin-top: 5px;">{{ $message }}</p>
@@ -216,12 +221,49 @@
 @push('js')
 <script>
     $(document).ready(function() {
+        // Profile Photo Preview
+        $('#profile_photo').on('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    $('#profile-avatar-preview').attr('src', event.target.result).show();
+                    $('#profile-avatar-icon').hide();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                $('#profile-avatar-preview').hide().attr('src', '');
+                $('#profile-avatar-icon').show();
+            }
+        });
+
         // File preview for media
         $('#file').on('change', function(e) {
-            if(e.target.files.length > 0) {
-                $('#file-name').text(e.target.files[0].name);
+            const file = e.target.files[0];
+            if (file) {
+                $('#file-name').text(file.name);
+                const fileType = file.type;
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    $('#media-preview-container').show();
+                    if (fileType.startsWith('image/')) {
+                        $('#media-video-preview').hide().attr('src', '');
+                        $('#media-image-preview').attr('src', event.target.result).show();
+                    } else if (fileType.startsWith('video/')) {
+                        $('#media-image-preview').hide().attr('src', '');
+                        $('#media-video-preview').attr('src', event.target.result).show();
+                    } else {
+                        $('#media-image-preview').hide();
+                        $('#media-video-preview').hide();
+                    }
+                };
+                reader.readAsDataURL(file);
             } else {
                 $('#file-name').text('{{ __("UPLOAD PHOTO/VIDEO") }}');
+                $('#media-preview-container').hide();
+                $('#media-image-preview').hide().attr('src', '');
+                $('#media-video-preview').hide().attr('src', '');
             }
         });
 

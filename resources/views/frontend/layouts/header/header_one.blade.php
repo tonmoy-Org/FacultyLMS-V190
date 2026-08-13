@@ -236,10 +236,22 @@
                                 </div>
                             </li>
                         @else
-                            <li class="login-btn">
-                                <a href="{{ route('register') }}" class="template-btn get-access-btn">
-                                    <span>Get Access</span>
+                            <li class="login-btn dropdown">
+                                <a href="javascript:void(0)" class="template-btn get-access-btn dropdown-toggle" id="getAccessDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>{{ __('get_access') }}</span>
                                 </a>
+                                <ul class="dropdown-menu dropdown-menu-end get-access-dropdown-menu" aria-labelledby="getAccessDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('register') }}">
+                                            <i class="fal fa-user-plus me-2"></i>{{ __('registration') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('login') }}">
+                                            <i class="fal fa-sign-in me-2"></i>{{ __('sign_in') }}
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         @endif
                         <li class="d-lg-none">

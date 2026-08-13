@@ -23,6 +23,13 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-4">
+                                        <label for="follow_us_title" class="form-label">{{__('Follow Us Title') }}</label>
+                                        <input type="text" class="form-control rounded-2" id="follow_us_title" name="follow_us_title"
+                                               placeholder="{{ __('Enter Follow Us Title') }}" value="{{ setting('follow_us_title') ?: 'Follow Us :' }}">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-4">
                                         <div class="d-flex align-items-center gap-2">
                                             <label for="facebook" class="form-label">{{__('facebook') }}</label>
                                             <span class="info-content">

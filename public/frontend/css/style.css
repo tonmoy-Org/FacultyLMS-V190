@@ -12181,3 +12181,37 @@ svg.logo-icon path {
     font-size: 11px !important;
     margin-left: 15px;
 }
+
+/* Get Access Dropdown Styling */
+.get-access-dropdown-menu {
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    padding: 6px 0;
+    min-width: 170px;
+    margin-top: 8px !important;
+    background-color: #ffffff;
+    z-index: 1050;
+}
+
+.get-access-dropdown-menu .dropdown-item {
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.get-access-dropdown-menu .dropdown-item:hover {
+    background-color: #f4f6f8;
+    color: var(--color-secondary-4, #133e35);
+}
+
+.get-access-dropdown-menu .dropdown-item i {
+    width: 20px;
+    font-size: 14px;
+    color: var(--color-secondary-4, #133e35);
+}
+

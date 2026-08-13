@@ -58,6 +58,15 @@
     $hideBreakdown = !empty($mcSettings['hide_breakdown']);
     $hideReviews = !empty($mcSettings['hide_reviews']);
     $hideRelated = !empty($mcSettings['hide_related_courses']);
+    $hideOverviewSection = !empty($mcSettings['hide_overview_section']);
+
+    $overviewTag = !empty($mcSettings['overview_tag']) ? $mcSettings['overview_tag'] : 'FEATURED COURSE';
+    $overviewTitle = !empty($mcSettings['overview_title']) ? $mcSettings['overview_title'] : 'Master Your Skills With Expert Guidance';
+    $overviewDesc1 = !empty($mcSettings['overview_desc1']) ? $mcSettings['overview_desc1'] : 'Join our comprehensive single course program designed to take you from beginner to advanced level with real-world projects and direct mentor support.';
+    $overviewDesc2 = !empty($mcSettings['overview_desc2']) ? $mcSettings['overview_desc2'] : 'Get lifetime access to premium curriculum, practical assignments, downloadable resources, and a verified completion certificate.';
+    $overviewBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : 'ENROLL NOW';
+    $overviewBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : '#register';
+    $overviewImageUrl = !empty($mcSettings['overview_image_url']) ? $mcSettings['overview_image_url'] : ($course->image ? getFileLink('original_image', $course->image) : 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop');
 
     $giftBadge = !empty($mcSettings['gift_badge']) ? $mcSettings['gift_badge'] : '🎁 যারা join করবেন তাদের জন্য special gift';
     $giftTitle = !empty($mcSettings['gift_title']) ? $mcSettings['gift_title'] : '৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ';
@@ -186,29 +195,31 @@
                 {{ $goldBadgeTop }}
             </span>
             <div class="mc-gold-info-card">
-                <div class="mc-gold-item-row">
-                    <div class="mc-gold-icon-circle"><i class="fas fa-video"></i></div>
-                    <div>
-                        <p class="m-0 fw-bold fs-5 text-dark">{{ $zoomTitle }}</p>
-                        <small class="text-muted">{{ $zoomSubtitle }}</small>
-                    </div>
-                </div>
+                @php
+                    $goldInfoPointsList = !empty($mcSettings['gold_info_points']) && is_array($mcSettings['gold_info_points']) 
+                        ? $mcSettings['gold_info_points'] 
+                        : [
+                            ['icon' => 'fas fa-video', 'title' => $zoomTitle, 'value' => $zoomSubtitle],
+                            ['icon' => 'fas fa-clock', 'title' => $scheduleLabel, 'value' => $scheduleValue],
+                            ['icon' => 'fas fa-layer-group', 'title' => $levelLabel, 'value' => $levelValue]
+                        ];
+                @endphp
 
-                <div class="mc-gold-item-row">
-                    <div class="mc-gold-icon-circle"><i class="fas fa-clock"></i></div>
-                    <div>
-                        <p class="m-0 text-muted small">{{ $scheduleLabel }}</p>
-                        <p class="m-0 fw-bold fs-5 text-dark">{{ $scheduleValue }}</p>
-                    </div>
-                </div>
-
-                <div class="mc-gold-item-row">
-                    <div class="mc-gold-icon-circle"><i class="fas fa-layer-group"></i></div>
-                    <div>
-                        <p class="m-0 text-muted small">{{ $levelLabel }}</p>
-                        <p class="m-0 fw-bold fs-6 text-dark">{{ $levelValue }}</p>
-                    </div>
-                </div>
+                @foreach($goldInfoPointsList as $gItem)
+                    @if(!empty($gItem['title']) || !empty($gItem['value']))
+                        <div class="mc-gold-item-row">
+                            <div class="mc-gold-icon-circle"><i class="{{ !empty($gItem['icon']) ? $gItem['icon'] : 'fas fa-check-circle' }}"></i></div>
+                            <div>
+                                @if(!empty($gItem['title']))
+                                    <p class="m-0 fw-bold fs-5 text-dark">{{ $gItem['title'] }}</p>
+                                @endif
+                                @if(!empty($gItem['value']))
+                                    <small class="text-muted">{{ $gItem['value'] }}</small>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
 
                 {{-- Price Display --}}
                 <div class="mc-gold-price-highlight">
@@ -554,6 +565,60 @@
 <div class="masterclass-page-wrapper">
     <section class="mc-main-content">
         <div class="mc-container">
+            {{-- =========================================================
+                 FEATURE / OVERVIEW HIGHLIGHT SECTION (Image Left, Text Right)
+            ========================================================== --}}
+            @if(!$hideOverviewSection)
+                <div class="mc-overview-feature-section py-4 my-4">
+                    <div class="row align-items-center g-4">
+                        <!-- Left Side: Image -->
+                        <div class="col-lg-6 col-md-12">
+                            <div class="overview-img-card position-relative overflow-hidden shadow-sm" 
+                                 style="border-radius: 16px; background: #ffffff; border: 3px solid #ffffff;">
+                                <img src="{{ $overviewImageUrl }}" alt="{{ $overviewTitle }}" class="img-fluid w-100" 
+                                     style="width: 100%; height: auto; max-height: 440px; object-fit: cover; display: block; border-radius: 13px;">
+                            </div>
+                        </div>
+
+                        <!-- Right Side: Content & Action Button -->
+                        <div class="col-lg-6 col-md-12">
+                            <div class="overview-content ps-lg-3">
+                                @if($overviewTag)
+                                    <span class="sub-title text-uppercase fw-bold mb-2 d-inline-block" 
+                                          style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                                        {{ __($overviewTag) }}
+                                    </span>
+                                @endif
+
+                                @if($overviewTitle)
+                                    <h2 class="mb-3" style="color: #1a1b4b; font-size: 32px; line-height: 1.25; font-weight: 700;">
+                                        {{ __($overviewTitle) }}
+                                    </h2>
+                                @endif
+
+                                @if($overviewDesc1)
+                                    <p class="mb-3 text-secondary" style="font-size: 15.5px; line-height: 1.7;">
+                                        {{ __($overviewDesc1) }}
+                                    </p>
+                                @endif
+
+                                @if($overviewDesc2)
+                                    <p class="mb-4 text-secondary" style="font-size: 15.5px; line-height: 1.7;">
+                                        {{ __($overviewDesc2) }}
+                                    </p>
+                                @endif
+
+                                @if($overviewBtnText)
+                                    <a href="{{ $overviewBtnUrl }}" class="template-btn mt-2 d-inline-block">
+                                        {{ __($overviewBtnText) }} <i class="fas fa-arrow-right ms-2"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             {{-- =========================================================
                  10. REGISTRATION ORDER FORM SECTION (`#register`)
             ========================================================== --}}

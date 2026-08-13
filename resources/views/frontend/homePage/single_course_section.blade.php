@@ -8,12 +8,12 @@
     $btnText = setting('single_course_btn_text', $lang) ?: 'ENROLL NOW';
     $btnUrl = setting('single_course_btn_url', $lang) ?: (isset($course) ? route('course.details', $course->slug) : route('student.sign_up'));
 
-    $imgSetting = setting('single_course_image');
+    $imgSetting = setting('feature_section_image') ?: setting('single_course_image');
     $imageUrl = '';
     if ($imgSetting) {
         $imageUrl = getFileLink('original_image', $imgSetting);
     }
-    if (!$imageUrl || str_contains($imageUrl, 'default')) {
+    if (!$imageUrl || str_contains($imageUrl, 'default-image')) {
         $imageUrl = 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop';
     }
 @endphp

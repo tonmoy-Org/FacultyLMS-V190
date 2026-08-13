@@ -93,6 +93,7 @@ return [
         'become_instructor_image',
         'about_me_image',
         'single_course_image',
+        'feature_section_image',
         'why_choose_image_1',
         'why_choose_image_2',
         'why_choose_image_3',

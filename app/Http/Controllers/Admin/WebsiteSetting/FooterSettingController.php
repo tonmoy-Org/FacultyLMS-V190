@@ -23,7 +23,7 @@ class FooterSettingController extends Controller
 
     public function footerContent()
     {
-        return redirect()->route('footer.social-links');
+        return redirect()->route('footer.newsletter-settings');
     }
 
     public function socialLinkSetting(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application

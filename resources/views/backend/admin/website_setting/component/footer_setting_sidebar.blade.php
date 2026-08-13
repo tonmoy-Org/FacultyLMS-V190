@@ -1,10 +1,4 @@
 <ul class="nav pb-12 mb-20" id="pills-tab" role="tablist">
-    <li class="nav-item" role="presentation">
-        <a href="{{ route('footer.social-links') }}"
-           class="nav-link ps-0 {{ request()->routeIs('footer.social-links') ? 'active' : '' }}">
-            <span>{{ __('social_links') }}</span>
-        </a>
-    </li>
     @if(hasPermission('footer.newsletter-settings'))
         <li class="nav-item" role="presentation">
             <a href="{{ route('footer.newsletter-settings') }}"
@@ -13,19 +7,25 @@
             </a>
         </li>
     @endif
-    @if(hasPermission('footer.useful-links'))
-        <li class="nav-item" role="presentation">
-            <a href="{{ route('footer.useful-links') }}"
-               class="nav-link ps-0 {{ request()->routeIs('footer.useful-links') ? 'active' : '' }}">
-                <span>{{ __('useful_links') }}</span>
-            </a>
-        </li>
-    @endif
+    <li class="nav-item" role="presentation">
+        <a href="{{ route('footer.social-links') }}"
+           class="nav-link ps-0 {{ request()->routeIs('footer.social-links') ? 'active' : '' }}">
+            <span>{{ __('social_links') }}</span>
+        </a>
+    </li>
     @if(hasPermission('footer.resource-links'))
         <li class="nav-item" role="presentation">
             <a href="{{ route('footer.resource-links') }}"
                class="nav-link ps-0 {{ request()->routeIs('footer.resource-links') ? 'active' : '' }}">
                 <span>{{ __('resources_links') }}</span>
+            </a>
+        </li>
+    @endif
+    @if(hasPermission('footer.useful-links'))
+        <li class="nav-item" role="presentation">
+            <a href="{{ route('footer.useful-links') }}"
+               class="nav-link ps-0 {{ request()->routeIs('footer.useful-links') ? 'active' : '' }}">
+                <span>{{ __('useful_links') }}</span>
             </a>
         </li>
     @endif

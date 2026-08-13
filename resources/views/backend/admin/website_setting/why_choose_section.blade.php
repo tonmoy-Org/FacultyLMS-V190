@@ -55,14 +55,14 @@
                                 <!-- Item 1 -->
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-4">
-                                        <label for="why_choose_item1_title" class="form-label">{{ __('item_1_title') }}</label>
+                                        <label for="why_choose_item1_title" class="form-label">Item 1 Title</label>
                                         <input type="text" class="form-control rounded-2" id="why_choose_item1_title"
                                                name="why_choose_item1_title" value="{{ setting('why_choose_item1_title', $lang) ?: 'Highly Experienced' }}">
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-8">
                                     <div class="mb-4">
-                                        <label for="why_choose_item1_desc" class="form-label">{{ __('item_1_desc') }}</label>
+                                        <label for="why_choose_item1_desc" class="form-label">Item 1 Description</label>
                                         <input type="text" class="form-control rounded-2" id="why_choose_item1_desc"
                                                name="why_choose_item1_desc" value="{{ setting('why_choose_item1_desc', $lang) ?: 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim.' }}">
                                     </div>
@@ -71,14 +71,14 @@
                                 <!-- Item 2 -->
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-4">
-                                        <label for="why_choose_item2_title" class="form-label">{{ __('item_2_title') }}</label>
+                                        <label for="why_choose_item2_title" class="form-label">Item 2 Title</label>
                                         <input type="text" class="form-control rounded-2" id="why_choose_item2_title"
                                                name="why_choose_item2_title" value="{{ setting('why_choose_item2_title', $lang) ?: 'Question, Quiz & Course Materials' }}">
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-8">
                                     <div class="mb-4">
-                                        <label for="why_choose_item2_desc" class="form-label">{{ __('item_2_desc') }}</label>
+                                        <label for="why_choose_item2_desc" class="form-label">Item 2 Description</label>
                                         <input type="text" class="form-control rounded-2" id="why_choose_item2_desc"
                                                name="why_choose_item2_desc" value="{{ setting('why_choose_item2_desc', $lang) ?: 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim.' }}">
                                     </div>
@@ -87,14 +87,14 @@
                                 <!-- Item 3 -->
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-4">
-                                        <label for="why_choose_item3_title" class="form-label">{{ __('item_3_title') }}</label>
+                                        <label for="why_choose_item3_title" class="form-label">Item 3 Title</label>
                                         <input type="text" class="form-control rounded-2" id="why_choose_item3_title"
                                                name="why_choose_item3_title" value="{{ setting('why_choose_item3_title', $lang) ?: 'Lifetime Course Update & Access' }}">
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-8">
                                     <div class="mb-4">
-                                        <label for="why_choose_item3_desc" class="form-label">{{ __('item_3_desc') }}</label>
+                                        <label for="why_choose_item3_desc" class="form-label">Item 3 Description</label>
                                         <input type="text" class="form-control rounded-2" id="why_choose_item3_desc"
                                                name="why_choose_item3_desc" value="{{ setting('why_choose_item3_desc', $lang) ?: 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim.' }}">
                                     </div>
@@ -103,21 +103,21 @@
                                 <!-- Item 4 -->
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-4">
-                                        <label for="why_choose_item4_title" class="form-label">{{ __('item_4_title') }}</label>
+                                        <label for="why_choose_item4_title" class="form-label">Item 4 Title</label>
                                         <input type="text" class="form-control rounded-2" id="why_choose_item4_title"
                                                name="why_choose_item4_title" value="{{ setting('why_choose_item4_title', $lang) ?: 'Dedicated Support' }}">
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-8">
                                     <div class="mb-4">
-                                        <label for="why_choose_item4_desc" class="form-label">{{ __('item_4_desc') }}</label>
+                                        <label for="why_choose_item4_desc" class="form-label">Item 4 Description</label>
                                         <input type="text" class="form-control rounded-2" id="why_choose_item4_desc"
                                                name="why_choose_item4_desc" value="{{ setting('why_choose_item4_desc', $lang) ?: 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim.' }}">
                                     </div>
                                 </div>
 
                                 <hr class="my-3">
-                                <h5>{{ __('images') }} (3 {{ __('collage_images') }})</h5>
+                                <label class="form-label mb-3">Images (3 Collage Images)</label>
 
                                 <!-- Image 1 (Top Right Vertical) -->
                                 <div class="col-lg-4 input_file_div mb-3">

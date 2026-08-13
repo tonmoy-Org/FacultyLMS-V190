@@ -165,13 +165,25 @@
                                         @include('frontend.profile.sidebar',['profile_dropdown' => 1])
                                     </div>
                                 </li>
-                            @else
-                            <li class="d-none d-md-block">
-                                <a href="{{ route('student.sign_up') }}" class="template-btn">
-                                    <i class="fal fa-sign-in"></i> {{__('get_access')}}
-                                </a>
-                            </li>
-                            @endif
+                             @else
+                             <li class="d-none d-md-block dropdown">
+                                 <a href="javascript:void(0)" class="template-btn dropdown-toggle" id="getAccessDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+                                     <i class="fal fa-sign-in"></i> {{__('get_access')}}
+                                 </a>
+                                 <ul class="dropdown-menu dropdown-menu-end get-access-dropdown-menu" aria-labelledby="getAccessDropdown3">
+                                     <li>
+                                         <a class="dropdown-item" href="{{ route('register') }}">
+                                             <i class="fal fa-user-plus me-2"></i>{{ __('registration') }}
+                                         </a>
+                                     </li>
+                                     <li>
+                                         <a class="dropdown-item" href="{{ route('login') }}">
+                                             <i class="fal fa-sign-in me-2"></i>{{ __('sign_in') }}
+                                         </a>
+                                     </li>
+                                 </ul>
+                             </li>
+                             @endif
                             <li class="d-xl-none d-xl-none">
                                 <a href="#" class="navbar-toggler text-align-end d-inline-block">
                                     <span></span>

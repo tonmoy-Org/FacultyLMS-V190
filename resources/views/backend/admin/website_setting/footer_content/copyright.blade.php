@@ -9,20 +9,6 @@
                     <h3 class="section-title">{{ __('copyright_settings') }}</h3>
                     <div class="default-tab-list default-tab-list-v2  bg-white redious-border website-setting-social-link p-20 p-sm-30">
                         @include('backend.admin.website_setting.component.footer_setting_sidebar')
-                        <form id="lang">
-                            <div class="row gx-20">
-                                <div class="col-12">
-                                    <input type="hidden" name="r" value="{{ url()->current() }}" class="r">
-                                    <div class="select-type-v2 mb-40">
-                                        <select class="form-select form-select-lg mb-3 with_search selectric lang" name="site_lang">
-                                            @foreach(app('languages') as $language)
-                                                <option value="{{ $language->locale }}" {{ $language->locale == $lang ? 'selected' : '' }}>{{ $language->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
                         <form action="{{ route('footer.update-setting') }}" method="POST" class="form">@csrf
                             <input type="hidden" name="site_lang" value="{{$lang}}">
                             <div class="row gx-20">

@@ -377,6 +377,16 @@
                                     $defNameLabel = old('masterclass_settings.name_label', 'Your Full Name');
                                     $defNamePlaceholder = old('masterclass_settings.name_placeholder', 'আপনার সম্পূর্ণ নাম');
                                     $defPhoneLabel = old('masterclass_settings.phone_label', 'Mobile Number');
+
+                                    $defOverviewTag = old('masterclass_settings.overview_tag', 'FEATURED COURSE');
+                                    $defOverviewTitle = old('masterclass_settings.overview_title', 'Master Web Development With Expert Guidance');
+                                    $defOverviewDesc1 = old('masterclass_settings.overview_desc1', 'Join our comprehensive single course program designed to take you from beginner to advanced level with real-world projects and direct mentor support.');
+                                    $defOverviewDesc2 = old('masterclass_settings.overview_desc2', 'Get lifetime access to premium curriculum, practical assignments, downloadable resources, and a verified completion certificate.');
+                                    $defOverviewBtnText = old('masterclass_settings.overview_btn_text', 'ENROLL NOW');
+                                    $defOverviewBtnUrl = old('masterclass_settings.overview_btn_url', '#register');
+                                    $defOverviewImageUrl = old('masterclass_settings.overview_image_url', 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop');
+                                    $defHideOverviewSection = old('masterclass_settings.hide_overview_section');
+                                @endphp
                                  <div class="masterclass-single-page-wrapper">
                                      <!-- Section 1: Hero Header -->
                                      <div class="card border mb-4 rounded-3 shadow-sm">
@@ -390,93 +400,86 @@
                                                     <label class="form-label">Eyebrow Golden Badge Text</label>
                                                     <input type="text" name="masterclass_settings[eyebrow_title]" class="form-control rounded-2"
                                                            value="{{ $defEyebrow }}" placeholder="E-commerce শুরু করার hidden path">
-                                                    <small class="text-muted">Displayed inside top golden pill badge above course title.</small>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Primary CTA Button Text</label>
-                                                    <input type="text" name="masterclass_settings[primary_cta_text]" class="form-control rounded-2"
-                                                           value="{{ $defPrimaryCta }}" placeholder="রেজিস্ট্রেশন করুন এখনই">
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Video Box Instruction Caption</label>
-                                                    <input type="text" name="masterclass_settings[video_caption]" class="form-control rounded-2"
-                                                           value="{{ $defVideoCaption }}" placeholder="বিস্তারিত জানতে ভিডিওটি দেখুন">
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Total Course Seats (মোট আসন সংখ্যা)</label>
-                                                    <input type="text" name="masterclass_settings[remaining_seats]" id="mc_total_seats_input" data-enrolled="0" class="form-control rounded-2"
-                                                           value="{{ $defRemainingSeats }}" placeholder="100">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                        <!-- Section 2: Gold Info Card -->
+                                     <div class="card border mb-4 rounded-3 shadow-sm">
+                                         <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
+                                             <span class="form-label font-16 fw-normal text-dark m-0"> Gold Border Info Card
+                                             </span>
+                                             <button type="button" class="btn sg-btn-primary btn-sm rounded-2" id="add_new_gold_point_btn">
+                                                 Add New Info Point <i class="las la-plus ms-1"></i>
+                                             </button>
+                                         </div>
+                                         <div class="card-body p-4">
+                                             <div class="row gx-20 mb-4">
+                                                 <div class="col-lg-4 col-md-6 mb-4">
+                                                     <label class="form-label">Top Gold Offer Badge Text</label>
+                                                     <input type="text" name="masterclass_settings[gold_badge_top]" class="form-control rounded-2"
+                                                            value="{{ $defGoldBadgeTop }}" placeholder="এখনই সিট বুক করুন">
+                                                 </div>
+                                                 <div class="col-lg-4 col-md-6 mb-4">
+                                                     <label class="form-label">Gold Offer Highlight Title</label>
+                                                     <input type="text" name="masterclass_settings[gold_offer_title]" class="form-control rounded-2"
+                                                            value="{{ $defGoldOfferTitle }}" placeholder="আজকের স্পেশাল অফার">
+                                                 </div>
+                                                 <div class="col-lg-4 col-md-6 mb-4">
+                                                     <label class="form-label">Original Price Label</label>
+                                                     <input type="text" name="masterclass_settings[original_price_label]" class="form-control rounded-2"
+                                                            value="{{ $defOriginalPriceLabel }}" placeholder="মূল প্রাইস">
+                                                 </div>
+                                                 <div class="col-lg-6 col-md-6 mb-4">
+                                                     <label class="form-label">Gold Card CTA Button Text</label>
+                                                     <input type="text" name="masterclass_settings[gold_cta_text]" class="form-control rounded-2"
+                                                            value="{{ $defGoldCtaText }}" placeholder="এখনই জয়েন করুন">
+                                                 </div>
+                                                 <div class="col-lg-6 col-md-6 mb-4">
+                                                     <label class="form-label">Gold Card Remaining Seats Text</label>
+                                                     <input type="text" name="masterclass_settings[gold_seats_text]" id="mc_gold_seats_input" class="form-control rounded-2"
+                                                            value="{{ $defGoldSeatsText }}" placeholder="আর মাত্র 100 সিট বাকি">
+                                                 </div>
+                                             </div>
 
-                                    <!-- Section 2: Gold Info Card -->
-                                    <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-normal text-dark m-0"> Gold Border Info Card
-                                            </span>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="row gx-20">
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Top Gold Offer Badge Text</label>
-                                                    <input type="text" name="masterclass_settings[gold_badge_top]" class="form-control rounded-2"
-                                                           value="{{ $defGoldBadgeTop }}" placeholder="এখনই সিট বুক করুন">
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Zoom Title</label>
-                                                    <input type="text" name="masterclass_settings[zoom_title]" class="form-control rounded-2"
-                                                           value="{{ $defZoomTitle }}" placeholder="Zoom লাইভ 104">
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Zoom Subtitle</label>
-                                                    <input type="text" name="masterclass_settings[zoom_subtitle]" class="form-control rounded-2"
-                                                           value="{{ $defZoomSubtitle }}" placeholder="অনলাইন ইন্টারেক্টিভ সেশন">
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Schedule Label</label>
-                                                    <input type="text" name="masterclass_settings[schedule_label]" class="form-control rounded-2"
-                                                           value="{{ $defScheduleLabel }}" placeholder="সময় / সময়সূচী">
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Schedule Value</label>
-                                                    <input type="text" name="masterclass_settings[schedule_value]" class="form-control rounded-2"
-                                                           value="{{ $defScheduleValue }}" placeholder="2h 40min">
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Level Label</label>
-                                                    <input type="text" name="masterclass_settings[level_label]" class="form-control rounded-2"
-                                                           value="{{ $defLevelLabel }}" placeholder="Level">
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Level Value</label>
-                                                    <input type="text" name="masterclass_settings[level_value]" class="form-control rounded-2"
-                                                           value="{{ $defLevelValue }}" placeholder="beginner">
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Gold Offer Highlight Title</label>
-                                                    <input type="text" name="masterclass_settings[gold_offer_title]" class="form-control rounded-2"
-                                                           value="{{ $defGoldOfferTitle }}" placeholder="আজকের স্পেশাল অফার">
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Original Price Label</label>
-                                                    <input type="text" name="masterclass_settings[original_price_label]" class="form-control rounded-2"
-                                                           value="{{ $defOriginalPriceLabel }}" placeholder="মূল প্রাইস">
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Gold Card CTA Button Text</label>
-                                                    <input type="text" name="masterclass_settings[gold_cta_text]" class="form-control rounded-2"
-                                                           value="{{ $defGoldCtaText }}" placeholder="এখনই জয়েন করুন">
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Gold Card Remaining Seats Text</label>
-                                                    <input type="text" name="masterclass_settings[gold_seats_text]" id="mc_gold_seats_input" class="form-control rounded-2"
-                                                           value="{{ $defGoldSeatsText }}" placeholder="আর মাত্র 100 সিট বাকি">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                             <div class="border-top pt-4">
+                                                 <label class="form-label font-15 fw-semibold mb-3">Card Info Points (কার্ডের সেসন্স, সময়সূচী, লেভেল ইত্যাদি পয়েন্টসমূহ)</label>
+                                                 <div id="gold_points_container">
+                                                     @php
+                                                         $defGoldInfoPoints = !empty($mcSettings['gold_info_points']) && is_array($mcSettings['gold_info_points']) ? $mcSettings['gold_info_points'] : [
+                                                             ['icon' => 'fas fa-video', 'title' => $defZoomTitle ?? 'Zoom লাইভ 104', 'value' => $defZoomSubtitle ?? 'অনলাইন ইন্টারেক্টিভ সেশন'],
+                                                             ['icon' => 'fas fa-clock', 'title' => $defScheduleLabel ?? 'সময় / সময়সূচী', 'value' => $defScheduleValue ?? '4h 40min'],
+                                                             ['icon' => 'fas fa-layer-group', 'title' => $defLevelLabel ?? 'Level', 'value' => $defLevelValue ?? 'beginner']
+                                                         ];
+                                                     @endphp
+
+                                                     @foreach($defGoldInfoPoints as $gpIdx => $gpItem)
+                                                         <div class="gold-point-single-item card border p-3 mb-3 bg-light rounded-2">
+                                                             <div class="row gx-2 align-items-center">
+                                                                 <div class="col-md-3 col-12 mb-2 mb-md-0">
+                                                                     <label class="form-label small text-muted mb-1">Icon Class</label>
+                                                                     <input type="text" name="masterclass_settings[gold_info_points][{{ $gpIdx }}][icon]" class="form-control rounded-2 bg-white"
+                                                                            value="{{ $gpItem['icon'] ?? 'fas fa-check-circle' }}" placeholder="e.g. fas fa-video">
+                                                                 </div>
+                                                                 <div class="col-md-4 col-12 mb-2 mb-md-0">
+                                                                     <label class="form-label small text-muted mb-1">Title / Label</label>
+                                                                     <input type="text" name="masterclass_settings[gold_info_points][{{ $gpIdx }}][title]" class="form-control rounded-2 bg-white"
+                                                                            value="{{ $gpItem['title'] ?? '' }}" placeholder="যেমন: Zoom লাইভ 104">
+                                                                 </div>
+                                                                 <div class="col-md-4 col-12 mb-2 mb-md-0">
+                                                                     <label class="form-label small text-muted mb-1">Subtitle / Value</label>
+                                                                     <input type="text" name="masterclass_settings[gold_info_points][{{ $gpIdx }}][value]" class="form-control rounded-2 bg-white"
+                                                                            value="{{ $gpItem['value'] ?? '' }}" placeholder="যেমন: অনলাইন সেশন / 4h 40min">
+                                                                 </div>
+                                                                 <div class="col-md-1 col-12 text-end">
+                                                                     <label class="form-label d-none d-md-block opacity-0 mb-1">Del</label>
+                                                                     <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-gold-point-btn">
+                                                                         <i class="las la-trash-alt fs-4"></i>
+                                                                     </a>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     @endforeach
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
 
                                     <!-- Section 3: Benefits & Target Audience -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
@@ -508,7 +511,78 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                    </div>
+                                     </div>
+
+                                     <!-- Section: Feature / Overview Highlight (Image Left, Text Right) -->
+                                     <div class="card border mb-4 rounded-3 shadow-sm">
+                                         <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
+                                             <span class="form-label font-16 fw-normal text-dark m-0">Feature / Overview Highlight Section (Image Left, Text Right)</span>
+                                             <div class="form-check form-switch mb-0">
+                                                 <input class="form-check-input" type="checkbox" name="masterclass_settings[hide_overview_section]" value="1" id="create_hide_overview" {{ $defHideOverviewSection ? 'checked' : '' }}>
+                                                 <label class="form-check-label text-muted small" for="create_hide_overview">Hide Section</label>
+                                             </div>
+                                         </div>
+                                         <div class="card-body p-4">
+                                             <div class="row gx-20">
+                                                 <div class="col-lg-6 col-md-6 mb-4">
+                                                     <label class="form-label">Eyebrow / Tag Text</label>
+                                                     <input type="text" name="masterclass_settings[overview_tag]" class="form-control rounded-2"
+                                                            value="{{ $defOverviewTag }}" placeholder="FEATURED COURSE">
+                                                 </div>
+
+                                                 <div class="col-lg-6 col-md-6 mb-4">
+                                                     <label class="form-label">Section Title</label>
+                                                     <input type="text" name="masterclass_settings[overview_title]" class="form-control rounded-2"
+                                                            value="{{ $defOverviewTitle }}" placeholder="Master Web Development With Expert Guidance">
+                                                 </div>
+
+                                                 <div class="col-lg-12 mb-4">
+                                                     <label class="form-label">Description Paragraph 1</label>
+                                                     <textarea name="masterclass_settings[overview_desc1]" class="form-control rounded-2" rows="2"
+                                                               placeholder="Enter description paragraph 1">{{ $defOverviewDesc1 }}</textarea>
+                                                 </div>
+
+                                                 <div class="col-lg-12 mb-4">
+                                                     <label class="form-label">Description Paragraph 2</label>
+                                                     <textarea name="masterclass_settings[overview_desc2]" class="form-control rounded-2" rows="2"
+                                                               placeholder="Enter description paragraph 2">{{ $defOverviewDesc2 }}</textarea>
+                                                 </div>
+
+                                                 <div class="col-lg-6 col-md-6 mb-4">
+                                                     <label class="form-label">Button Text</label>
+                                                     <input type="text" name="masterclass_settings[overview_btn_text]" class="form-control rounded-2"
+                                                            value="{{ $defOverviewBtnText }}" placeholder="ENROLL NOW">
+                                                 </div>
+
+                                                 <div class="col-lg-6 col-md-6 mb-4">
+                                                     <label class="form-label">Button Link URL</label>
+                                                     <input type="text" name="masterclass_settings[overview_btn_url]" class="form-control rounded-2"
+                                                            value="{{ $defOverviewBtnUrl }}" placeholder="#register">
+                                                 </div>
+
+                                                 <div class="col-lg-12 mb-4">
+                                                     <label class="form-label mb-2">Section Image (Image on Left Side)</label>
+                                                     <div class="row align-items-center">
+                                                         <div class="col-lg-6 mb-2">
+                                                             <label class="small text-muted mb-1">Upload New Image File:</label>
+                                                             <input type="file" name="overview_image_file" class="form-control rounded-2" accept="image/*">
+                                                         </div>
+                                                         <div class="col-lg-6 mb-2">
+                                                             <label class="small text-muted mb-1">Or Image URL / Link:</label>
+                                                             <input type="text" name="masterclass_settings[overview_image_url_custom]" class="form-control rounded-2"
+                                                                    value="{{ $defOverviewImageUrl }}" placeholder="https://example.com/image.jpg">
+                                                         </div>
+                                                     </div>
+                                                     @if(!empty($defOverviewImageUrl))
+                                                         <div class="mt-2">
+                                                             <label class="small text-muted d-block mb-1">Current Image Preview:</label>
+                                                             <img src="{{ $defOverviewImageUrl }}" alt="Overview Image Preview" class="rounded border" style="max-height: 110px; object-fit: cover;">
+                                                         </div>
+                                                     @endif
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
 
                                     <!-- Section 4: Special Bonus Gift Offer -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
@@ -1121,6 +1195,44 @@
                 $('#benefits_items_container .benefit-single-item').each(function (idx) {
                     $(this).find('.benefit-num').text(idx + 1);
                 });
+            });
+
+            // Dynamic Gold Card Info Point Repeater
+            let goldPointCounter = $('#gold_points_container .gold-point-single-item').length;
+            $('#add_new_gold_point_btn').on('click', function () {
+                let idx = goldPointCounter++;
+                let html = `
+                    <div class="gold-point-single-item card border p-3 mb-3 bg-light rounded-2">
+                        <div class="row gx-2 align-items-center">
+                            <div class="col-md-3 col-12 mb-2 mb-md-0">
+                                <label class="form-label small text-muted mb-1">Icon Class</label>
+                                <input type="text" name="masterclass_settings[gold_info_points][${idx}][icon]" class="form-control rounded-2 bg-white"
+                                       value="fas fa-check-circle" placeholder="e.g. fas fa-video">
+                            </div>
+                            <div class="col-md-4 col-12 mb-2 mb-md-0">
+                                <label class="form-label small text-muted mb-1">Title / Label</label>
+                                <input type="text" name="masterclass_settings[gold_info_points][${idx}][title]" class="form-control rounded-2 bg-white"
+                                       placeholder="যেমন: Zoom লাইভ 104">
+                            </div>
+                            <div class="col-md-4 col-12 mb-2 mb-md-0">
+                                <label class="form-label small text-muted mb-1">Subtitle / Value</label>
+                                <input type="text" name="masterclass_settings[gold_info_points][${idx}][value]" class="form-control rounded-2 bg-white"
+                                       placeholder="যেমন: অনলাইন সেশন / 4h 40min">
+                            </div>
+                            <div class="col-md-1 col-12 text-end">
+                                <label class="form-label d-none d-md-block opacity-0 mb-1">Del</label>
+                                <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-gold-point-btn">
+                                    <i class="las la-trash-alt fs-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $('#gold_points_container').append(html);
+            });
+
+            $(document).on('click', '.remove-gold-point-btn', function () {
+                $(this).closest('.gold-point-single-item').remove();
             });
         });
     </script>

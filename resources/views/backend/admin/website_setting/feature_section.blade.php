@@ -48,7 +48,7 @@
                                 <hr class="my-4">
 
                                 <!-- Card 1 Settings -->
-                                <h5 class="fw-bold mb-3 text-primary"><i class="las la-certificate me-2"></i>Card 1 (Life Time Access)</h5>
+                                <label class="form-label mb-3">Card 1 (Life Time Access)</label>
                                 <div class="col-12 col-lg-6">
                                     <div class="mb-4">
                                         <label for="feature_1_title" class="form-label">Card 1 Title</label>
@@ -71,7 +71,7 @@
                                 <hr class="my-4">
 
                                 <!-- Card 2 Settings -->
-                                <h5 class="fw-bold mb-3 text-primary"><i class="las la-book me-2"></i>Card 2 (Free Course Materials)</h5>
+                                <label class="form-label mb-3">Card 2 (Free Course Materials)</label>
                                 <div class="col-12 col-lg-6">
                                     <div class="mb-4">
                                         <label for="feature_2_title" class="form-label">Card 2 Title</label>
@@ -94,7 +94,7 @@
                                 <hr class="my-4">
 
                                 <!-- Card 3 Settings -->
-                                <h5 class="fw-bold mb-3 text-primary"><i class="las la-headset me-2"></i>Card 3 (Dedicated Support)</h5>
+                                <label class="form-label mb-3">Card 3 (Dedicated Support)</label>
                                 <div class="col-12 col-lg-6">
                                     <div class="mb-4">
                                         <label for="feature_3_title" class="form-label">Card 3 Title</label>
@@ -114,6 +114,25 @@
                                     <textarea class="form-control" id="feature_3_desc" name="feature_3_desc" rows="2">{{ setting('feature_3_desc', $lang) ?: 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor.' }}</textarea>
                                 </div>
 
+                                <hr class="my-4">
+
+                                <!-- Section Image Settings -->
+                                <div class="col-lg-12 input_file_div mb-4">
+                                    <div class="mb-3">
+                                        <label for="feature_section_image" class="form-label mb-1">Section Image (Right Side Image)</label>
+                                        <label for="feature_section_image" class="file-upload-text">
+                                            <p></p>
+                                            <span class="file-btn">{{ __('choose_file') }}</span>
+                                        </label>
+                                        <input class="d-none file_picker" type="file" name="feature_section_image" id="feature_section_image">
+                                    </div>
+                                    <div class="selected-files d-flex flex-wrap gap-20">
+                                        <div class="selected-files-item">
+                                            <img class="selected-img" src="{{ getFileLink('80x80', setting('feature_section_image') ?: setting('single_course_image')) }}" alt="Section Image">
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Submit Button -->
                                 <div class="d-flex justify-content-start align-items-center mt-30">
                                     <button type="submit" class="btn sg-btn-primary">{{ __('save') }}</button>
@@ -126,4 +145,14 @@
             </div>
         </div>
     </section>
+    @include('backend.common.gallery-modal')
 @endsection
+@push('js')
+    <script src="{{ static_asset('admin/js/media.js') }}"></script>
+@endpush
+@push('css_asset')
+    <link rel="stylesheet" href="{{ static_asset('admin/css/dropzone.min.css') }}">
+@endpush
+@push('js_asset')
+    <script src="{{ static_asset('admin/js/dropzone.min.js') }}"></script>
+@endpush
