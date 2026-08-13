@@ -73,6 +73,62 @@ class CourseRepository
             $request['price'] = priceFormatUpdate($request['price'], setting('default_currency'));
         }
 
+        if (arrayCheck('masterclass_settings', $request)) {
+            $mc = $request['masterclass_settings'];
+            $mc['hide_special_gift'] = isset($mc['hide_special_gift']) ? 1 : 0;
+            $mc['hide_explainer'] = isset($mc['hide_explainer']) ? 1 : 0;
+            $mc['hide_breakdown'] = isset($mc['hide_breakdown']) ? 1 : 0;
+            $mc['hide_reviews'] = isset($mc['hide_reviews']) ? 1 : 0;
+            $mc['hide_related_courses'] = isset($mc['hide_related_courses']) ? 1 : 0;
+            $mc['hide_overview_section'] = isset($mc['hide_overview_section']) ? 1 : 0;
+            $mc['ad_banner_1_status'] = isset($mc['ad_banner_1_status']) ? 1 : 0;
+            $mc['ad_banner_2_status'] = isset($mc['ad_banner_2_status']) ? 1 : 0;
+            $mc['support_status'] = isset($mc['support_status']) ? 1 : 0;
+
+            if (request()->hasFile('overview_image_file')) {
+                $response = $this->saveImage(request()->file('overview_image_file'), 'course');
+                if ($response && isset($response['images'])) {
+                    $mc['overview_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                }
+            } elseif (!empty($mc['overview_image_media_id'])) {
+                $mediaArray = $this->getImageWithRecommendedSize($mc['overview_image_media_id'], '800', '600', true);
+                if ($mediaArray) {
+                    $mc['overview_image_url'] = getFileLink('original_image', $mediaArray);
+                }
+            } elseif (!empty($mc['overview_image_url_custom'])) {
+                $mc['overview_image_url'] = $mc['overview_image_url_custom'];
+            }
+
+            if (request()->hasFile('ad_banner_1_file')) {
+                $response = $this->saveImage(request()->file('ad_banner_1_file'), 'course');
+                if ($response && isset($response['images'])) {
+                    $mc['ad_banner_1_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                }
+            } elseif (!empty($mc['ad_banner_1_image_url_custom'])) {
+                $mc['ad_banner_1_image_url'] = $mc['ad_banner_1_image_url_custom'];
+            }
+
+            if (request()->hasFile('ad_banner_2_file')) {
+                $response = $this->saveImage(request()->file('ad_banner_2_file'), 'course');
+                if ($response && isset($response['images'])) {
+                    $mc['ad_banner_2_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                }
+            } elseif (!empty($mc['ad_banner_2_image_url_custom'])) {
+                $mc['ad_banner_2_image_url'] = $mc['ad_banner_2_image_url_custom'];
+            }
+
+            if (request()->hasFile('support_image_file')) {
+                $response = $this->saveImage(request()->file('support_image_file'), 'course');
+                if ($response && isset($response['images'])) {
+                    $mc['support_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                }
+            } elseif (!empty($mc['support_image_url_custom'])) {
+                $mc['support_image_url'] = $mc['support_image_url_custom'];
+            }
+
+            $request['masterclass_settings'] = $mc;
+        }
+
         $course             = Course::create($request);
         $course->users()->sync($request['instructor_ids']);
 
@@ -167,6 +223,9 @@ class CourseRepository
             $mc['hide_reviews'] = isset($mc['hide_reviews']) ? 1 : 0;
             $mc['hide_related_courses'] = isset($mc['hide_related_courses']) ? 1 : 0;
             $mc['hide_overview_section'] = isset($mc['hide_overview_section']) ? 1 : 0;
+            $mc['ad_banner_1_status'] = isset($mc['ad_banner_1_status']) ? 1 : 0;
+            $mc['ad_banner_2_status'] = isset($mc['ad_banner_2_status']) ? 1 : 0;
+            $mc['support_status'] = isset($mc['support_status']) ? 1 : 0;
 
             if (request()->hasFile('overview_image_file')) {
                 $response = $this->saveImage(request()->file('overview_image_file'), 'course');
@@ -180,6 +239,33 @@ class CourseRepository
                 }
             } elseif (!empty($mc['overview_image_url_custom'])) {
                 $mc['overview_image_url'] = $mc['overview_image_url_custom'];
+            }
+
+            if (request()->hasFile('ad_banner_1_file')) {
+                $response = $this->saveImage(request()->file('ad_banner_1_file'), 'course');
+                if ($response && isset($response['images'])) {
+                    $mc['ad_banner_1_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                }
+            } elseif (!empty($mc['ad_banner_1_image_url_custom'])) {
+                $mc['ad_banner_1_image_url'] = $mc['ad_banner_1_image_url_custom'];
+            }
+
+            if (request()->hasFile('ad_banner_2_file')) {
+                $response = $this->saveImage(request()->file('ad_banner_2_file'), 'course');
+                if ($response && isset($response['images'])) {
+                    $mc['ad_banner_2_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                }
+            } elseif (!empty($mc['ad_banner_2_image_url_custom'])) {
+                $mc['ad_banner_2_image_url'] = $mc['ad_banner_2_image_url_custom'];
+            }
+
+            if (request()->hasFile('support_image_file')) {
+                $response = $this->saveImage(request()->file('support_image_file'), 'course');
+                if ($response && isset($response['images'])) {
+                    $mc['support_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                }
+            } elseif (!empty($mc['support_image_url_custom'])) {
+                $mc['support_image_url'] = $mc['support_image_url_custom'];
             }
 
             $existing = is_array($course->masterclass_settings) ? $course->masterclass_settings : (json_decode($course->masterclass_settings, true) ?: []);

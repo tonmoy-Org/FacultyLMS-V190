@@ -1,7 +1,9 @@
 <!--====== Start Success Story Section ======-->
 @php
     if(!isset($success_stories)) {
-        $success_stories = \App\Models\SuccessStory::active()->get();
+        $success_stories = \App\Models\SuccessStory::active()->latest()->take(2)->get();
+    } else {
+        $success_stories = $success_stories->take(2);
     }
 @endphp
 <style>

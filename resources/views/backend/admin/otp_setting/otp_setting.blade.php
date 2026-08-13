@@ -223,7 +223,7 @@
                                 <div class="mb-4">
                                     <label for="REVESystemsSecret"
                                            class="form-label">{{ __('sms_url') }}</label>
-                                    <input type="text" class="form-control rounded-2" id="reve_systems_base_url" name="spagreen_sms_url" value="{{ stringMasking(setting('spagreen_sms_url'),'*',3) }}">
+                                    <input type="text" class="form-control rounded-2" id="reve_systems_base_url" name="spagreen_sms_url" value="{{ setting('spagreen_sms_url') }}" placeholder="http://apismpp.revesms.com/sendtext">
                                     <div class="nk-block-des text-danger">
                                         <p class="spagreen_sms_url_error error"></p>
                                     </div>

@@ -101,9 +101,16 @@
     $privacyNotice = !empty($mcSettings['privacy_notice']) ? $mcSettings['privacy_notice'] : 'Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.';
     $payNowBtnText = !empty($mcSettings['pay_now_btn_text']) ? $mcSettings['pay_now_btn_text'] : 'PAY NOW';
 
+    $supportStatus = !empty($mcSettings['support_status']);
+    $supportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : 'আর সাপোর্ট?';
+    $supportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '<p>কোর্সের টপিক রিলেটেড যেকোনো প্রবলেম ফেস করলে সরাসরি সাপোর্ট ফোরাম অথবা আমাদের মেন্টর টিম থেকে ইনস্ট্যান্ট হেল্প পাবেন। লাইভ সাপোর্ট সেশনের মাধ্যমে যেকোনো টেকনিক্যাল প্রবলেম ওয়ান টু ওয়ান সলভ করে দেওয়া হবে।</p><p>এই সাপোর্ট আমাদের টিম মেম্বারদের পক্ষে সরাসরি প্রোভাইড করা হচ্ছে, যাতে করে আপনি ফেস করা যেকোনো সমস্যার দ্রুততম সময়ে নিখুঁত সমাধান পেতে পারেন।</p>';
+    $supportImageUrl = !empty($mcSettings['support_image_url']) ? $mcSettings['support_image_url'] : null;
+
     $breakdownRows = [];
     if (!empty($breakdownItemsRaw)) {
-        $lines = array_filter(array_map('trim', explode("\n", $breakdownItemsRaw)));
+        $cleanItems = str_replace(['</p>', '<br>', '<br/>', '<br />'], "\n", $breakdownItemsRaw);
+        $cleanItems = strip_tags($cleanItems);
+        $lines = array_filter(array_map('trim', explode("\n", $cleanItems)));
         foreach ($lines as $line) {
             $parts = explode('|', $line);
             $breakdownRows[] = [
@@ -188,12 +195,38 @@
         <div class="mc-container">
 
             {{-- =========================================================
+                 7. LIVE ZOOM EXPLAINER & SEATS PROGRESS
+            ========================================================== --}}
+            <div class="mc-zoom-explainer-section">
+                <div class="text-center mb-0">
+                    <span class="badge px-3 py-2 rounded-pill fs-7 tracking-wider" style="background-color: #10b981; color: #fff;">LIVE ZOOM MASTERCLASS</span>
+                    <h2 class="fw-bold course-section-title text-dark mt-3">{{ $classScheduleTitle }}</h2>
+                    <p class="text-secondary mb-0">
+                        {{ $classScheduleTime }}। Seat সীমিত — বাকি আছে মাত্র <strong class="text-warning fw-bold">{{ $remainingSeats }}</strong> টা।
+                    </p>
+                </div>
+            </div>
+
+            {{-- Blue Explainer Box --}}
+            @if(!$hideExplainer)
+                <div class="mc-blue-explainer">
+                    <h3 class="fw-bold fs-5 text-dark mb-3">{{ $explainerTitle }}</h3>
+                    @if($explainerText)
+                        {!! $explainerText !!}
+                    @else
+                        <p>টু বি অনেস্ট, আমি এই masterclass-টা সম্পূর্ণ free করাতে চেয়েছিলাম।</p>
+                        <p>কিন্তু problem হচ্ছে — আমার free session-গুলোতে দেখা যায় কয়েক হাজার মানুষ register করে বা join করে। যেহেতু এই session-টা Zoom-এ live হবে, তাই আমি চাইলেও এখানে বেশি মানুষ নিতে পারব না। Seat limit থাকবে।</p>
+                        <p>তাই আমি এখানে ছোট্ট একটা token amount রেখেছি — শুধু audience filter করার জন্য। যেন এই masterclass-এ তারাই join করে, যারা সত্যিই e-commerce business শুরু করার ব্যাপারে serious এবং step-by-step process-টা মনোযোগ দিয়ে শিখতে ready।</p>
+                        <p>যদি এই masterclass-এর actual value অনুযায়ী charge করা হতো, তাহলে এর price কয়েক হাজার টাকা হওয়া উচিত ছিল। কিন্তু আমার goal এখানে টাকা নেওয়া না।</p>
+                        <p class="fw-bold text-primary m-0">goal হচ্ছে serious মানুষগুলোকে একটা clear guideline দেওয়া।।</p>
+                    @endif
+                </div>
+            @endif
+
+            {{-- =========================================================
                  4. GOLD BORDER MASTERCLASS INFO CARD (100% Admin Sync)
                  Fields: $course->duration, $level->lang_title, $language->name, $course->price, $course->discount_amount
             ========================================================== --}}
-            <span class="template-btn mc-gold-badge-top">
-                {{ $goldBadgeTop }}
-            </span>
             <div class="mc-gold-info-card">
                 @php
                     $goldInfoPointsList = !empty($mcSettings['gold_info_points']) && is_array($mcSettings['gold_info_points']) 
@@ -276,11 +309,36 @@
                  5. BENEFITS GRID ("এই মাস্টারক্লাস কার জন্য?")
                  Field: $course->what_will_learn (From Admin Course Edit)
             ========================================================== --}}
-            <div class="mc-benefits-card-wrapper">
-                <h2 class="fw-bold course-section-title text-dark mb-2">{{ $benefitsTitle }}</h2>
-                <span class="d-block mx-auto mb-4" style="width: 70px; height: 3px; background: #10b981; border-radius: 10px;"></span>
+            <style>
+                .mc-new-benefit-card {
+                    background: #ffffff;
+                    color: #1e293b;
+                    border-radius: 14px;
+                    padding: 30px;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+                    border: 1px solid #e2e8f0;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+                .mc-new-benefit-card:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06) !important;
+                    border-color: #cbd5e1 !important;
+                }
+                .mc-new-benefit-card.dark-theme:hover {
+                    border-color: #3b82f6 !important;
+                    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.12) !important;
+                }
+            </style>
 
-                <div class="row g-3 justify-content-center">
+            <div class="mc-benefits-card-wrapper mb-5 pt-3">
+                <h2 class="fw-bold course-section-title text-dark mb-4 text-center px-3" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px;">{{ $benefitsTitle }}</h2>
+                <span class="d-block mx-auto mb-5" style="width: 70px; height: 3px; background: #10b981; border-radius: 10px;"></span>
+
+                <div class="row g-4 justify-content-center">
                     @php
                         $benefits = [];
                         if(!empty($mcSettings['benefits_list']) && is_array($mcSettings['benefits_list'])) {
@@ -296,145 +354,80 @@
                         }
                         if(count($benefits) < 1) {
                             $benefits = [
-                                'অনলাইন বিজনেস করতে চান কিন্তু কনফিউজড',
-                                'পুঁজি কম নিয়ে বিজনেস শুরু করতে চাচ্ছেন',
-                                'ই-কমার্স বিজনেস শুরু করার ভয় আছে',
-                                'লস না করে সঠিকভাবে শুরু করতে চান',
+                                'মার্কেটপ্লেস থেকে ক্লায়েন্ট পাওয়ার জন্য সংগ্রাম করছেন? | বিভিন্ন ফ্রিল্যান্সিং মার্কেটপ্লেসে আপনার মতো আরো হাজারো ফ্রিল্যান্সার বা সার্ভিস প্রোভাইডারের প্রোফাইল রয়েছে। আপনাকে সেখানে তাদের সাথে প্রতিযোগিতা করতে হয়। হাজারো প্রোফাইলের ভিড়ে আপনার প্রোফাইলটি যদি ক্লায়েন্টের চোখে না পড়ে, তাহলে সেখান থেকে কাজ পাওয়া কঠিন হয়ে পড়ে। আর আপনি যদি আউট অফ মার্কেটপ্লেস ক্লায়েন্টকে টার্গেট করতে পারেন তবে ক্লায়েন্ট পাওয়া আপনার জন্য অনেক সহজ হয়ে যায়।',
+                                'ক্লায়েন্ট পেতে বারবার রিজেক্ট হচ্ছেন? | বারবার রিজেকশন হওয়া হতাশাজনক তবে এর পেছনে লুকিয়ে থাকতে পারে আপনার প্রাইসিং মডেল, প্রোফাইল অপটিমাইজেশন, বা ড্রাফট পিচিংয়ের ভুল কৌশল। আমরা এই ফানেলগুলো কিভাবে কাটিয়ে উঠতে হয় এবং ক্লায়েন্টের সাথে কিভাবে একটি ট্রাস্টেড সম্পর্ক তৈরি করতে হয়, তা শেখাব।',
+                                'আয়ের উপর মার্কেটপ্লেস অতিরিক্ত ফি কাটছে? | মার্কেটপ্লেসের প্ল্যাটফর্মগুলো প্রতিটি আয়ের একটি বড় অংশ ফি হিসেবে কেটে নেয়। এটি অনেক ফ্রিল্যান্সারের জন্য হতাশার কারণ। আমরা যেহেতু শিখব কিভাবে মার্কেটপ্লেসের বাইরে ক্লায়েন্ট খুঁজে পাওয়া যায়, তা এ ফি গুণা বন্ধ সম্ভব হবে।',
+                                'আপনার আউটরিচ ইমেইল কোনো রেসপন্স পাচ্ছে না? | আউটরিচ ইমেইলগুলোর কোনো জবাব না পাওয়া মানে সেখানে কিছু ঘাটতি আছে। এটা হতে পারে আপনার মেসেজের ভুল টোন, অসম্পূর্ণ মেসেজ, বা ভুল টার্গেটিং। আপনি এ কোর্সে শিখবেন কিভাবে সঠিকভাবে ইমেইল কপি লিখতে হয় যা ক্লায়েন্টের দৃষ্টি আকর্ষণ করবে এবং রিপ্লাই পাওয়ার সম্ভাবনা বাড়াবে।',
+                                'আপনার স্কিল আছে, কিন্তু ক্লায়েন্ট নেই? | ক্লায়েন্ট না থাকার মানে এই নয় যে আপনার স্কিল কম। এটা হতে পারে সঠিক মার্কেটিং ও নেটওয়ার্কিং কৌশলের অভাব। আপনার প্রতিভা বা দক্ষতা থাকা সত্ত্বেও যদি কাজ না পান, তবে এর কারণ হতে পারে আপনার আউটরিচ স্ট্র্যাটেজি বা প্রোফাইল অপটিমাইজেশনের ঘাটতি। আমরা দেখাব কিভাবে সঠিক পদ্ধতিতে ক্লায়েন্টদের কাছে পৌঁছাতে হয় এবং তাদের প্রয়োজন বুঝে অফার করতে হয়।'
                             ];
                         }
                     @endphp
 
                     @foreach($benefits as $benefit)
-                        <div class="col-6 col-md-3">
-                            <div class="mc-benefit-single-card">
-                                <div class="check-circle"><i class="fas fa-check"></i></div>
-                                <p>{{ $benefit }}</p>
+                        @php
+                            $parts = explode('|', $benefit);
+                            $bTitle = trim($parts[0] ?? '');
+                            $bDesc = trim($parts[1] ?? '');
+                            
+                            $idx = $loop->index;
+                            
+                            // 5th item spans full width, others take 6 columns
+                            $colClass = ($idx === 4) ? 'col-lg-12' : 'col-lg-6 col-md-6';
+                            
+                            if ($idx === 0) {
+                                $cardClass = 'mc-new-benefit-card dark-theme';
+                                $cardStyle = 'background: #111029; color: #ffffff; border-color: #111029;';
+                                $titleColor = '#ffffff';
+                                $descColor = '#cbd5e1';
+                                $iconHtml = '<div class="mc-icon-wrapper" style="background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;"><i class="fas fa-handshake" style="color: #60a5fa; font-size: 20px;"></i></div>';
+                            } elseif ($idx === 1) {
+                                $cardClass = 'mc-new-benefit-card';
+                                $cardStyle = '';
+                                $titleColor = '#0f172a';
+                                $descColor = '#475569';
+                                $iconHtml = '<div class="mc-icon-wrapper" style="background: #fef2f2; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;"><i class="fas fa-times-circle" style="color: #ef4444; font-size: 20px;"></i></div>';
+                            } elseif ($idx === 2) {
+                                $cardClass = 'mc-new-benefit-card';
+                                $cardStyle = '';
+                                $titleColor = '#0f172a';
+                                $descColor = '#475569';
+                                $iconHtml = '<div class="mc-icon-wrapper" style="background: #fffbeb; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;"><i class="fas fa-coins" style="color: #f59e0b; font-size: 20px;"></i></div>';
+                            } elseif ($idx === 3) {
+                                $cardClass = 'mc-new-benefit-card';
+                                $cardStyle = '';
+                                $titleColor = '#0f172a';
+                                $descColor = '#475569';
+                                $iconHtml = '<div class="mc-icon-wrapper" style="background: #e6fbf4; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;"><i class="fas fa-envelope-open-text" style="color: #10b981; font-size: 20px;"></i></div>';
+                            } elseif ($idx === 4) {
+                                $cardClass = 'mc-new-benefit-card';
+                                $cardStyle = '';
+                                $titleColor = '#0f172a';
+                                $descColor = '#475569';
+                                $iconHtml = '<div class="mc-icon-wrapper" style="background: #f0f9ff; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;"><i class="fas fa-user-tie" style="color: #0284c7; font-size: 20px;"></i></div>';
+                            } else {
+                                $cardClass = 'mc-new-benefit-card';
+                                $cardStyle = '';
+                                $titleColor = '#0f172a';
+                                $descColor = '#475569';
+                                $iconHtml = '<div class="mc-icon-wrapper" style="background: #f0fdf4; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;"><i class="fas fa-check-circle" style="color: #10b981; font-size: 20px;"></i></div>';
+                                $colClass = 'col-lg-6 col-md-6';
+                            }
+                        @endphp
+
+                        <div class="{{ $colClass }}">
+                            <div class="{{ $cardClass }}" style="{{ $cardStyle }}">
+                                <div class="d-flex align-items-start gap-3">
+                                    {!! $iconHtml !!}
+                                    <div style="flex-grow: 1;">
+                                        <h4 style="font-size: 18px; font-weight: 700; color: {{ $titleColor }}; margin: 0 0 8px 0; line-height: 1.45;">{{ $bTitle }}</h4>
+                                        @if(!empty($bDesc))
+                                            <p style="font-size: 14px; line-height: 1.65; color: {{ $descColor }}; margin: 0;">{{ $bDesc }}</p>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @endforeach
-                </div>
-            </div>
-
-            {{-- =========================================================
-                 6. SPECIAL GIFT BANNER CARD
-            ========================================================== --}}
-            @if(!$hideSpecialGift)
-                <div class="mc-special-gift-card">
-                    <span class="mc-gift-pill">
-                        {{ $giftBadge }}
-                    </span>
-
-                    <h2 class="fw-bold fs-3 text-dark mb-3">
-                        {{ $giftTitle }}
-                    </h2>
-
-                    <div class="d-flex align-items-center gap-3 mb-3">
-                        <span class="fs-5 text-muted text-decoration-line-through">{{ $giftValue }}</span>
-                        <span class="badge bg-danger fs-6 px-3 py-2 rounded-pill">FREE</span>
-                    </div>
-
-                    <p class="text-secondary leading-relaxed fs-6">
-                        {{ $giftDescription }}
-                    </p>
-
-                    <div class="mc-callout-quote">
-                        {{ $giftQuote }}
-                    </div>
-
-                    <p class="small text-muted mb-4">
-                        {{ $giftFooterNote }}
-                    </p>
-
-                    <div class="text-center">
-                        <a href="#register" class="template-btn">
-                            {{ $giftCtaText }}
-                        </a>
-                        <div class="mc-seats-counter mt-3">
-                            <span class="mc-pulse-dot"><span class="ping"></span><span class="dot"></span></span>
-                            <span>বাকি আছে মাত্র <strong class="text-warning fw-bold">{{ $remainingSeats }}</strong> টা seat</span>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-            {{-- =========================================================
-                 7. LIVE ZOOM EXPLAINER & SEATS PROGRESS
-            ========================================================== --}}
-            <div class="text-center mb-4">
-                <span class="badge px-3 py-2 rounded-pill fs-7 tracking-wider" style="background-color: #10b981; color: #fff;">LIVE ZOOM MASTERCLASS</span>
-                <h2 class="fw-bold course-section-title text-dark mt-3">{{ $classScheduleTitle }}</h2>
-                <p class="text-secondary">
-                    {{ $classScheduleTime }}। Seat সীমিত — বাকি আছে মাত্র <strong class="text-warning fw-bold">{{ $remainingSeats }}</strong> টা।
-                </p>
-            </div>
-
-
-
-            {{-- Blue Explainer Box --}}
-            @if(!$hideExplainer)
-                <div class="mc-blue-explainer">
-                    <h3 class="fw-bold fs-5 text-dark mb-3">{{ $explainerTitle }}</h3>
-                    @if($explainerText)
-                        {!! $explainerText !!}
-                    @else
-                        <p>টু বি অনেস্ট, আমি এই masterclass-টা সম্পূর্ণ free করাতে চেয়েছিলাম।</p>
-                        <p>কিন্তু problem হচ্ছে — আমার free session-গুলোতে দেখা যায় কয়েক হাজার মানুষ register করে বা join করে। যেহেতু এই session-টা Zoom-এ live হবে, তাই আমি চাইলেও এখানে বেশি মানুষ নিতে পারব না। Seat limit থাকবে।</p>
-                        <p>তাই আমি এখানে ছোট্ট একটা token amount রেখেছি — শুধু audience filter করার জন্য। যেন এই masterclass-এ তারাই join করে, যারা সত্যিই e-commerce business শুরু করার ব্যাপারে serious এবং step-by-step process-টা মনোযোগ দিয়ে শিখতে ready।</p>
-                        <p>যদি এই masterclass-এর actual value অনুযায়ী charge করা হতো, তাহলে এর price কয়েক হাজার টাকা হওয়া উচিত ছিল। কিন্তু আমার goal এখানে টাকা নেওয়া না।</p>
-                        <p class="fw-bold text-primary m-0">goal হচ্ছে serious মানুষগুলোকে একটা clear guideline দেওয়া।।</p>
-                    @endif
-                </div>
-            @endif
-
-            {{-- Breakdown Table --}}
-            @if(!$hideBreakdown)
-                <div class="mc-breakdown-card">
-                    <h2 class="fw-bold course-section-title text-dark mb-3 text-center">
-                        এই 
-                        @if($course->is_discountable == 1)
-                            {{ get_price($course->discount_amount, userCurrency()) }}
-                        @else
-                            {{ get_price($course->price, userCurrency()) }}
-                        @endif
-                        টাকায় আপনি পাচ্ছেন:
-                    </h2>
-                    <div class="table-responsive">
-                        <table class="table align-middle">
-                            <tbody>
-                                @foreach($breakdownRows as $row)
-                                    <tr>
-                                        <td>{{ $row['title'] }}</td>
-                                        <td class="text-end fw-bold">{{ $row['val'] }}</td>
-                                    </tr>
-                                @endforeach
-                                <tr class="table-success border-top border-2">
-                                    <td class="fw-bold text-success">{{ $breakdownTodayTitle }}</td>
-                                    <td class="text-end fw-black fs-4 text-success">
-                                        @if($course->is_discountable == 1)
-                                            {{ get_price($course->discount_amount, userCurrency()) }}
-                                        @else
-                                            {{ get_price($course->price, userCurrency()) }}
-                                        @endif
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            @endif
-
-            {{-- =========================================================
-                 8. COURSE FULL DESCRIPTION (100% Admin WYSIWYG Editor Sync)
-                 Field: $course->description (Admin Edit Rich Text Editor)
-            ========================================================== --}}
-            <div class="mc-content-card">
-                <h4 class="fw-bold course-section-title text-dark mb-3 text-center">{{ __('about_this_course') }}</h4>
-                <div class="description-body text-secondary leading-relaxed fs-6">
-                    @if(!empty($course->description))
-                        {!! $course->description !!}
-                    @else
-                        <p>এই লাইভ মাস্টারক্লাসে আমরা ই-কমার্স বিজনেস শুরু থেকে স্কেল আপ করার সব দরকারি ট্রিকস ও স্ট্র্যাটেজি নিয়ে বিস্তারিত আলোচনা করবো। ক্লাসে সরাসরি প্রশ্নোত্তর পর্ব থাকবে।</p>
-                    @endif
                 </div>
             </div>
 
@@ -519,6 +512,196 @@
                 </div>
             @endif
 
+            {{-- =========================================================
+                 AD BANNER 1 (Under Course Syllabus)
+            ========================================================== --}}
+            @php
+                $mcB1Url = !empty($mcSettings['ad_banner_1_image_url']) ? $mcSettings['ad_banner_1_image_url'] : '';
+                $mcB1Status = !empty($mcSettings['ad_banner_1_status']);
+                $mcB1Link = !empty($mcSettings['ad_banner_1_link']) ? $mcSettings['ad_banner_1_link'] : '';
+            @endphp
+            @if($mcB1Url && $mcB1Status)
+                <div class="mc-ad-banner-1">
+                    @if($mcB1Link)
+                        <a href="{{ $mcB1Link }}" target="_blank" class="d-block w-100 overflow-hidden">
+                    @endif
+                        <img src="{{ $mcB1Url }}" alt="Ad Banner 1" class="img-fluid w-100" style="border-radius: 16px; width: 100%; max-height: 280px; object-fit: cover; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                    @if($mcB1Link)
+                        </a>
+                    @endif
+                </div>
+            @endif
+
+            {{-- =========================================================
+                 6. SPECIAL GIFT BANNER CARD
+            ========================================================== --}}
+            @if(!$hideSpecialGift)
+                <div class="mc-special-gift-card text-center d-flex flex-column align-items-center">
+                    <span class="mc-gift-pill">
+                        {{ $giftBadge }}
+                    </span>
+
+                    <h2 class="fw-bold fs-3 text-dark mb-3 text-center">
+                        {{ $giftTitle }}
+                    </h2>
+
+                    <div class="d-flex align-items-center justify-content-center gap-3 mb-3">
+                        <span class="fs-5 text-muted text-decoration-line-through">{{ $giftValue }}</span>
+                        <span class="badge bg-danger fs-6 px-3 py-2 rounded-pill">FREE</span>
+                    </div>
+
+                    <div class="text-secondary leading-relaxed fs-6 text-center w-100">
+                        {!! $giftDescription !!}
+                    </div>
+
+                    <div class="mc-callout-quote w-100 text-start">
+                        {!! $giftQuote !!}
+                    </div>
+
+                    <p class="small text-muted mb-4 text-center w-100">
+                        {{ $giftFooterNote }}
+                    </p>
+
+                    <div class="text-center">
+                        <a href="#register" class="template-btn">
+                            {{ $giftCtaText }}
+                        </a>
+                        <div class="mc-seats-counter mt-3">
+                            <span class="mc-pulse-dot"><span class="ping"></span><span class="dot"></span></span>
+                            <span>বাকি আছে মাত্র <strong class="text-warning fw-bold">{{ $remainingSeats }}</strong> টা seat</span>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            {{-- =========================================================
+                 FEATURE / OVERVIEW HIGHLIGHT SECTION (Image Left, Text Right)
+            ========================================================== --}}
+            @if(!$hideOverviewSection)
+                @php
+                    $isYouTube = false;
+                    $youtubeEmbedUrl = '';
+                    if (!empty($overviewImageUrl) && (str_contains($overviewImageUrl, 'youtube.com') || str_contains($overviewImageUrl, 'youtu.be'))) {
+                        $isYouTube = true;
+                        $videoId = '';
+                        if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/\s]{11})%i', $overviewImageUrl, $match)) {
+                            $videoId = $match[1];
+                        }
+                        $youtubeEmbedUrl = "https://www.youtube.com/embed/" . $videoId;
+                    }
+                @endphp
+                <div class="mc-overview-feature-section py-4">
+                    <div class="row align-items-center g-4">
+                        <!-- Left Side: Content & Action Button -->
+                        <div class="col-lg-6 col-md-12">
+                            <div class="overview-content pe-lg-4">
+                                @if($overviewTag)
+                                    <span class="sub-title text-uppercase fw-bold mb-2 d-inline-block" 
+                                          style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                                        {{ __($overviewTag) }}
+                                    </span>
+                                @endif
+
+                                @if($overviewTitle)
+                                    <h2 class="mb-3" style="color: #1a1b4b; font-size: 32px; line-height: 1.25; font-weight: 700;">
+                                        {{ __($overviewTitle) }}
+                                    </h2>
+                                @endif
+
+                                @if($overviewDesc1)
+                                    <div class="mb-3 text-secondary" style="font-size: 15.5px; line-height: 1.7;">
+                                        {!! __($overviewDesc1) !!}
+                                    </div>
+                                @endif
+
+                                @if($overviewDesc2)
+                                    <div class="mb-4 text-secondary" style="font-size: 15.5px; line-height: 1.7;">
+                                        {!! __($overviewDesc2) !!}
+                                    </div>
+                                @endif
+
+                                @if($overviewBtnText)
+                                    <a href="{{ $overviewBtnUrl }}" class="template-btn mt-2 d-inline-block">
+                                        {{ __($overviewBtnText) }} <i class="fas fa-arrow-right ms-2"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Right Side: Image / YouTube Video -->
+                        <div class="col-lg-6 col-md-12">
+                            @if($isYouTube)
+                                <div class="overview-video-card ratio ratio-16x9 overflow-hidden shadow-sm" style="border-radius: 16px; background: #000; border: 3px solid #ffffff;">
+                                    <iframe src="{{ $youtubeEmbedUrl }}" class="w-100 h-100" style="border: none; display: block; border-radius: 13px;" allowfullscreen></iframe>
+                                </div>
+                            @else
+                                <div class="overview-img-card position-relative overflow-hidden shadow-sm" 
+                                     style="border-radius: 16px; background: #ffffff; border: 3px solid #ffffff;">
+                                    <img src="{{ $overviewImageUrl }}" alt="{{ $overviewTitle }}" class="img-fluid w-100" 
+                                         style="width: 100%; height: auto; max-height: 440px; object-fit: cover; display: block; border-radius: 13px;">
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+
+
+            {{-- Breakdown Table --}}
+            @if(!$hideBreakdown)
+                <div class="mc-breakdown-card">
+                    <h2 class="fw-bold course-section-title text-dark mb-3 text-center">
+                        এই 
+                        @if($course->is_discountable == 1)
+                            {{ get_price($course->discount_amount, userCurrency()) }}
+                        @else
+                            {{ get_price($course->price, userCurrency()) }}
+                        @endif
+                        টাকায় আপনি পাচ্ছেন:
+                    </h2>
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <tbody>
+                                @foreach($breakdownRows as $row)
+                                    <tr>
+                                        <td>{{ $row['title'] }}</td>
+                                        <td class="text-end fw-bold">{{ $row['val'] }}</td>
+                                    </tr>
+                                @endforeach
+                                <tr class="table-success border-top border-2">
+                                    <td class="fw-bold text-success">{{ $breakdownTodayTitle }}</td>
+                                    <td class="text-end fw-black fs-4 text-success">
+                                        @if($course->is_discountable == 1)
+                                            {{ get_price($course->discount_amount, userCurrency()) }}
+                                        @else
+                                            {{ get_price($course->price, userCurrency()) }}
+                                        @endif
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
+
+            {{-- =========================================================
+                 8. COURSE FULL DESCRIPTION (100% Admin WYSIWYG Editor Sync)
+                 Field: $course->description (Admin Edit Rich Text Editor)
+            ========================================================== --}}
+            <div class="mc-content-card">
+                <h4 class="fw-bold course-section-title text-dark mb-3 text-center">{{ __('about_this_course') }}</h4>
+                <div class="description-body text-secondary leading-relaxed fs-6">
+                    @if(!empty($course->description))
+                        {!! $course->description !!}
+                    @else
+                        <p>এই লাইভ মাস্টারক্লাসে আমরা ই-কমার্স বিজনেস শুরু থেকে স্কেল আপ করার সব দরকারি ট্রিকস ও স্ট্র্যাটেজি নিয়ে বিস্তারিত আলোচনা করবো। ক্লাসে সরাসরি প্রশ্নোত্তর পর্ব থাকবে।</p>
+                    @endif
+                </div>
+            </div>
+
+
+
 
 
 
@@ -564,71 +747,46 @@
 
 <div class="masterclass-page-wrapper">
     <section class="mc-main-content">
-        <div class="mc-container">
-            {{-- =========================================================
-                 FEATURE / OVERVIEW HIGHLIGHT SECTION (Image Left, Text Right)
-            ========================================================== --}}
-            @if(!$hideOverviewSection)
-                <div class="mc-overview-feature-section py-4 my-4">
-                    <div class="row align-items-center g-4">
-                        <!-- Left Side: Image -->
-                        <div class="col-lg-6 col-md-12">
-                            <div class="overview-img-card position-relative overflow-hidden shadow-sm" 
-                                 style="border-radius: 16px; background: #ffffff; border: 3px solid #ffffff;">
-                                <img src="{{ $overviewImageUrl }}" alt="{{ $overviewTitle }}" class="img-fluid w-100" 
-                                     style="width: 100%; height: auto; max-height: 440px; object-fit: cover; display: block; border-radius: 13px;">
+        @if($supportStatus)
+            <div class="mc-support-section-wrapper">
+                <div class="mc-container">
+                    <div class="mc-support-section">
+                        <div class="row align-items-end g-4">
+                            <!-- Left Side: Content -->
+                            <div class="col-lg-6 col-md-12 mc-support-content">
+                                <h2 class="mc-support-title">{!! $supportTitle !!}</h2>
+                                <div class="mc-support-description">
+                                    {!! $supportDescription !!}
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Right Side: Content & Action Button -->
-                        <div class="col-lg-6 col-md-12">
-                            <div class="overview-content ps-lg-3">
-                                @if($overviewTag)
-                                    <span class="sub-title text-uppercase fw-bold mb-2 d-inline-block" 
-                                          style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
-                                        {{ __($overviewTag) }}
-                                    </span>
-                                @endif
-
-                                @if($overviewTitle)
-                                    <h2 class="mb-3" style="color: #1a1b4b; font-size: 32px; line-height: 1.25; font-weight: 700;">
-                                        {{ __($overviewTitle) }}
-                                    </h2>
-                                @endif
-
-                                @if($overviewDesc1)
-                                    <p class="mb-3 text-secondary" style="font-size: 15.5px; line-height: 1.7;">
-                                        {{ __($overviewDesc1) }}
-                                    </p>
-                                @endif
-
-                                @if($overviewDesc2)
-                                    <p class="mb-4 text-secondary" style="font-size: 15.5px; line-height: 1.7;">
-                                        {{ __($overviewDesc2) }}
-                                    </p>
-                                @endif
-
-                                @if($overviewBtnText)
-                                    <a href="{{ $overviewBtnUrl }}" class="template-btn mt-2 d-inline-block">
-                                        {{ __($overviewBtnText) }} <i class="fas fa-arrow-right ms-2"></i>
-                                    </a>
+                            <!-- Right Side: Image -->
+                            <div class="col-lg-6 col-md-12 text-center text-lg-end mc-support-img-wrapper justify-content-center justify-content-lg-end">
+                                @if(!empty($supportImageUrl))
+                                    <img src="{{ $supportImageUrl }}" alt="Support Image" class="mc-support-img img-fluid">
+                                @else
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Support Image" class="mc-support-img img-fluid" style="padding-bottom: 50px; opacity: 0.85;">
                                 @endif
                             </div>
                         </div>
                     </div>
                 </div>
-            @endif
+            </div>
+        @endif
+
+        <div class="mc-container">
 
             {{-- =========================================================
                  10. REGISTRATION ORDER FORM SECTION (`#register`)
             ========================================================== --}}
             @if(!$is_enrolled)
-                <h2 class="text-center fw-bold course-section-title text-dark mb-2">
-                    {!! $orderFormTitle !!}
-                </h2>
-                <p class="text-center text-muted small mb-4">{{ $orderFormSubtitle }}</p>
-                
-                <div id="register" class="mc-form-wrapper user-form mx-auto mt-5" style="max-width: 700px;">
+                <div class="mc-registration-section" id="register">
+                    <h2 class="text-center fw-bold course-section-title text-dark mb-2">
+                        {!! $orderFormTitle !!}
+                    </h2>
+                    <p class="text-center text-muted small mb-4">{{ $orderFormSubtitle }}</p>
+                    
+                    <div class="mc-form-wrapper user-form mx-auto" style="max-width: 700px;">
                         
                         <div class="mb-5">
                             <h4 class="fw-bold mb-4" style="color: #10b981; font-size: 20px;">Give valid information</h4>
@@ -671,9 +829,9 @@
 
 
 
-                                <p class="mb-4" style="color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-                                    Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.
-                                </p>
+                                <div class="mb-4 text-start" style="color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
+                                    {!! $privacyNotice !!}
+                                </div>
 
                                 <button type="submit" class="template-btn w-100 text-center border-0">
                                     {{ $payNowBtnText ?? 'PAY NOW' }}
@@ -681,7 +839,8 @@
                             </form>
                         </div>
                     </div>
-                @endif
+                </div>
+            @endif
 
             {{-- =========================================================
                  11. FAQ ACCORDION SECTION (100% Admin Sync)
@@ -728,7 +887,7 @@
             @endphp
 
             @if(setting('hide_faq_from_course_details') != '1' && count($displayFaqs) > 0)
-                <div class="mb-5">
+                <div class="mc-faq-section">
                     <h2 class="text-center fw-bold course-section-title text-dark mb-2">{{ $faqTitle }}</h2>
                     <span class="d-block mx-auto mb-4" style="width: 70px; height: 3px; background: #10b981; border-radius: 10px;"></span>
 
@@ -776,6 +935,26 @@
                                 </div>
                             </div>
                         @endif
+                    @endif
+                </div>
+            @endif
+
+            {{-- =========================================================
+                 AD BANNER 2 (Under FAQ Section)
+            ========================================================== --}}
+            @php
+                $mcB2Url = !empty($mcSettings['ad_banner_2_image_url']) ? $mcSettings['ad_banner_2_image_url'] : '';
+                $mcB2Status = !empty($mcSettings['ad_banner_2_status']);
+                $mcB2Link = !empty($mcSettings['ad_banner_2_link']) ? $mcSettings['ad_banner_2_link'] : '';
+            @endphp
+            @if($mcB2Url && $mcB2Status)
+                <div class="mc-ad-banner-2">
+                    @if($mcB2Link)
+                        <a href="{{ $mcB2Link }}" target="_blank" class="d-block w-100 overflow-hidden">
+                    @endif
+                        <img src="{{ $mcB2Url }}" alt="Ad Banner 2" class="img-fluid w-100" style="border-radius: 16px; width: 100%; max-height: 280px; object-fit: cover; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                    @if($mcB2Link)
+                        </a>
                     @endif
                 </div>
             @endif

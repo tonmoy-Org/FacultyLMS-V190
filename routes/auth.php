@@ -18,6 +18,15 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
 
         Route::post('register', [RegisteredUserController::class, 'store'])->name('signup.store');
 
+        Route::get('confirm-registration-otp/{phone}', [RegisteredUserController::class, 'confirmRegisterOtp'])
+            ->name('register.confirm.otp');
+
+        Route::post('confirm-registration-otp', [RegisteredUserController::class, 'registerOtpSubmit'])
+            ->name('register.otp.submit');
+
+        Route::get('resend-registration-otp/{phone}', [RegisteredUserController::class, 'resendRegisterOtp'])
+            ->name('register.otp.resend');
+
         Route::get('login', [AuthenticatedSessionController::class, 'create'])
             ->name('login');
 

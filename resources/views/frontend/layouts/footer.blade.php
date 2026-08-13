@@ -15,16 +15,16 @@
                 </div>
 
                 <!-- Column 2: Email Form with Pill Input & Get Access Button -->
-                <div class="col-lg-5 col-md-7">
-                    <form action="{{ route('subscribe') }}" method="POST" class="footer-subscription-form ajax_form">
+                <div class="col-lg-4 col-md-7 d-flex flex-column align-items-center justify-content-center">
+                    <form action="{{ route('subscribe') }}" method="POST" class="footer-subscription-form ajax_form w-100" style="max-width: 320px;">
                         @csrf
-                        <div class="d-flex align-items-center bg-white p-1" style="border-radius: 50px;">
-                            <input type="email" name="email" class="form-control border-0 shadow-none px-4" 
+                        <div class="d-flex align-items-center bg-white p-1" style="border-radius: 50px; border: 1px solid #e2e8f0;">
+                            <input type="email" name="email" class="form-control border-0 shadow-none px-3" 
                                    placeholder="{{ __('your_email') ?: 'Email' }}" required 
-                                   style="background: transparent; font-size: 15px; color: #333;">
+                                   style="background: transparent; font-size: 14px; color: #333;">
                             <button type="submit" class="btn border-0 d-flex align-items-center justify-content-center flex-shrink-0" 
-                                    style="width: 46px; height: 46px; border-radius: 50%; background-color: #111111; color: #ffffff; transition: transform 0.2s ease;">
-                                <i class="fas fa-paper-plane" style="font-size: 16px;"></i>
+                                    style="width: 38px; height: 38px; border-radius: 50%; background-color: #111111; color: #ffffff; transition: transform 0.2s ease;">
+                                <i class="fas fa-paper-plane" style="font-size: 13px;"></i>
                             </button>
                         </div>
                     </form>
@@ -33,32 +33,32 @@
                         $getAccessLink = setting('get_access_btn_link') ?: route('register');
                         $getAccessTitle = setting('get_access_btn_title', app()->getLocale()) ?: (setting('get_access_btn_title') ?: __('get_access'));
                     @endphp
-                    <div class="mt-3 text-start">
-                        <a href="{{ url($getAccessLink) }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center" style="padding: 10px 24px; font-size: 14px; text-decoration: none;">
+                    <div class="mt-3 text-center">
+                        <a href="{{ url($getAccessLink) }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center" style="padding: 12px 32px; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: 8px;">
                             <span>{{ $getAccessTitle }}</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- Column 3: Admission Now Countdown Timer -->
-                <div class="col-lg-3 col-md-5 text-center text-lg-end">
-                    <div class="mb-2 fw-bold text-dark text-center text-lg-center" style="font-size: 1.05rem;">{{ __('Admission Now') }}</div>
-                    <div class="mini-countdown d-flex justify-content-center justify-content-lg-center gap-2" id="promoCountdownFooter" data-target="{{ setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days')) }}">
-                        <div class="bg-white rounded p-2 text-center" style="width: 52px;">
-                            <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
-                            <span class="small text-secondary fw-semibold" style="font-size: 10px;">DAYS</span>
+                <div class="col-lg-4 col-md-5 text-center d-flex flex-column align-items-center justify-content-center">
+                    <div class="mb-3 fw-bold text-dark text-center" style="font-size: 1.3rem; letter-spacing: 0.5px;">{{ __('Admission Now') }}</div>
+                    <div class="mini-countdown d-flex justify-content-center gap-3" id="promoCountdownFooter" data-target="{{ setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days')) }}">
+                        <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
+                            <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
+                            <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">DAYS</span>
                         </div>
-                        <div class="bg-white rounded p-2 text-center" style="width: 52px;">
-                            <h4 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
-                            <span class="small text-secondary fw-semibold" style="font-size: 10px;">HRS</span>
+                        <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
+                            <h4 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
+                            <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">HRS</span>
                         </div>
-                        <div class="bg-white rounded p-2 text-center" style="width: 52px;">
-                            <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
-                            <span class="small text-secondary fw-semibold" style="font-size: 10px;">MIN</span>
+                        <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
+                            <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
+                            <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">MIN</span>
                         </div>
-                        <div class="bg-white rounded p-2 text-center" style="width: 52px;">
-                            <h4 class="seconds m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem;">00</h4>
-                            <span class="small text-secondary fw-semibold" style="font-size: 10px;">SEC</span>
+                        <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
+                            <h4 class="seconds m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
+                            <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">SEC</span>
                         </div>
                     </div>
                 </div>

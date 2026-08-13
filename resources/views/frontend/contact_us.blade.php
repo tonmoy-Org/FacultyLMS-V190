@@ -24,9 +24,78 @@
         </div>
     </section>
 
+    <style>
+        .contact-info-card {
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .contact-info-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+        .contact-card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--theme-clr, #10b981);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .contact-info-card:hover .contact-card-icon {
+            background: var(--theme-clr, #10b981);
+            color: #ffffff;
+            transform: scale(1.1) rotate(5deg);
+        }
+        .contact-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-family: var(--header-font);
+        }
+        .contact-card-value {
+            font-size: 14.5px;
+            color: #64748b;
+            line-height: 1.6;
+            font-family: var(--body-font);
+            word-break: break-word;
+            margin-bottom: 0;
+        }
+        .contact-card-value a {
+            color: #64748b;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .contact-card-value a:hover {
+            color: var(--theme-clr, #10b981);
+        }
+    </style>
+
     <!--====== Main Content ======-->
     <section class="policy-content-area p-t-50 p-b-60 bg-white">
         <div class="container container-1278">
+            @php
+                $address = setting('contact_address', app()->getLocale()) ?: (setting('contact_address') ?: (setting('address') ?: '99 Roving St., Big City'));
+                $phone = setting('contact_phone') ?: (setting('phone') ?: '+8801400620055');
+                $email = setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com');
+            @endphp
+
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="contact-wrapper">
@@ -63,6 +132,41 @@
                             </div>
                         </form>
 
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Info Cards -->
+            <div class="row g-4 mt-5 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-info-card">
+                        <div class="contact-card-icon">
+                            <i class="fal fa-map-marker-alt"></i>
+                        </div>
+                        <h4 class="contact-card-title">{{ __('Our Address') }}</h4>
+                        <p class="contact-card-value">{{ $address }}</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-info-card">
+                        <div class="contact-card-icon">
+                            <i class="fal fa-phone"></i>
+                        </div>
+                        <h4 class="contact-card-title">{{ __('Phone Number') }}</h4>
+                        <p class="contact-card-value">
+                            <a href="tel:{{ str_replace(' ', '', $phone) }}">{{ $phone }}</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-info-card">
+                        <div class="contact-card-icon">
+                            <i class="fal fa-envelope"></i>
+                        </div>
+                        <h4 class="contact-card-title">{{ __('Email Address') }}</h4>
+                        <p class="contact-card-value">
+                            <a href="mailto:{{ $email }}">{{ $email }}</a>
+                        </p>
                     </div>
                 </div>
             </div>

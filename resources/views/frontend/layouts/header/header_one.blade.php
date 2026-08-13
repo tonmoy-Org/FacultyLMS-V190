@@ -195,7 +195,7 @@
                                 </li>
                             @endif
                         @endif
-                        <li class="language-selection d-sm-block">
+                        {{-- <li class="language-selection d-sm-block">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#languageCurrencyModal">
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -211,7 +211,7 @@
                                         stroke-linejoin="round"></path>
                                 </svg>
                             </a>
-                        </li>
+                        </li> --}}
                         @if(auth()->check())
                             <li class="user-profile-dropdown">
                                 <a href="#" class="dropdown-toggle" id="userProfileDropdown" data-bs-toggle="dropdown"

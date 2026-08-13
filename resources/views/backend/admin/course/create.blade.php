@@ -344,12 +344,13 @@
                                     $defGoldCtaText = old('masterclass_settings.gold_cta_text', 'এখনই জয়েন করুন');
                                     $defGoldSeatsText = old('masterclass_settings.gold_seats_text', 'আর মাত্র ' . $defRemainingSeats . ' সিট বাকি');
 
-                                    $defBenefitsTitle = old('masterclass_settings.benefits_title', 'এই মাস্টারক্লাস কার জন্য?');
+                                    $defBenefitsTitle = old('masterclass_settings.benefits_title', 'চলুন একটু খুঁজে বের করার চেষ্টা করি নিচের সমস্যাগুলোর কোনো একটি বা একাধিক সমস্যা আপনার সাথে মিলে কিনা?');
                                     $benefitsList = old('masterclass_settings.benefits_list', [
-                                        'অনলাইন বিজনেস করতে চান কিন্তু কনফিউজড',
-                                        'পুঁজি কম নিয়ে বিজনেস শুরু করতে চাচ্ছেন',
-                                        'ই-কমার্স বিজনেস শুরু করার ভয় আছে',
-                                        'লস না করে সঠিকভাবে শুরু করতে চান',
+                                        'মার্কেটপ্লেস থেকে ক্লায়েন্ট পাওয়ার জন্য সংগ্রাম করছেন? | বিভিন্ন ফ্রিল্যান্সিং মার্কেটপ্লেসে আপনার মতো আরো হাজারো ফ্রিল্যান্সার বা সার্ভিস প্রোভাইডারের প্রোফাইল রয়েছে। আপনাকে সেখানে তাদের সাথে প্রতিযোগিতা করতে হয়। হাজারো প্রোফাইলের ভিড়ে আপনার প্রোফাইলটি যদি ক্লায়েন্টের চোখে না পড়ে, তাহলে সেখান থেকে কাজ পাওয়া কঠিন হয়ে পড়ে। আর আপনি যদি আউট অফ মার্কেটপ্লেস ক্লায়েন্টকে টার্গেট করতে পারেন তবে ক্লায়েন্ট পাওয়া আপনার জন্য অনেক সহজ হয়ে যায়।',
+                                        'ক্লায়েন্ট পেতে বারবার রিজেক্ট হচ্ছেন? | বারবার রিজেকশন হওয়া হতাশাজনক তবে এর পেছনে লুকিয়ে থাকতে পারে আপনার প্রাইসিং মডেল, প্রোফাইল অপটিমাইজেশন, বা ড্রাফট পিচিংয়ের ভুল কৌশল। আমরা এই ফানেলগুলো কিভাবে কাটিয়ে উঠতে হয় এবং ক্লায়েন্টের সাথে কিভাবে একটি ট্রাস্টেড সম্পর্ক তৈরি করতে হয়, তা শেখাব।',
+                                        'আয়ের উপর মার্কেটপ্লেস অতিরিক্ত ফি কাটছে? | মার্কেটপ্লেসের প্ল্যাটফর্মগুলো প্রতিটি আয়ের একটি বড় অংশ ফি হিসেবে কেটে নেয়। এটি অনেক ফ্রিল্যান্সারের জন্য হতাশার কারণ। আমরা যেহেতু শিখব কিভাবে মার্কেটপ্লেসের বাইরে ক্লায়েন্ট খুঁজে পাওয়া যায়, তা এ ফি গুণা বন্ধ সম্ভব হবে।',
+                                        'আপনার আউটরিচ ইমেইল কোনো রেসপন্স পাচ্ছে না? | আউটরিচ ইমেইলগুলোর কোনো জবাব না পাওয়া মানে সেখানে কিছু ঘাটতি আছে। এটা হতে পারে আপনার মেসেজের ভুল টোন, অসম্পূর্ণ মেসেজ, বা ভুল টার্গেটিং। আপনি এ কোর্সে শিখবেন কিভাবে সঠিকভাবে ইমেইল কপি লিখতে হয় যা ক্লায়েন্টের দৃষ্টি আকর্ষণ করবে এবং রিপ্লাই পাওয়ার সম্ভাবনা বাড়াবে।',
+                                        'আপনার স্কিল আছে, কিন্তু ক্লায়েন্ট নেই? | ক্লায়েন্ট না থাকার মানে এই নয় যে আপনার স্কিল কম। এটা হতে পারে সঠিক মার্কেটিং ও নেটওয়ার্কিং কৌশলের অভাব। আপনার প্রতিভা বা দক্ষতা থাকা সত্ত্বেও যদি কাজ না পান, তবে এর কারণ হতে পারে আপনার আউটরিচ স্ট্র্যাটেজি বা প্রোফাইল অপটিমাইজেশনের ঘাটতি। আমরা দেখাব কিভাবে সঠিক পদ্ধতিতে ক্লায়েন্টদের কাছে পৌঁছাতে হয় এবং তাদের প্রয়োজন বুঝে অফার করতে হয়।'
                                     ]);
 
                                     $defGiftBadge = old('masterclass_settings.gift_badge', '🎁 যারা join করবেন তাদের জন্য special gift');
@@ -359,6 +360,8 @@
                                     $defGiftQuote = old('masterclass_settings.gift_quote', '"এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় যেমন Facebook Ads, Google Ads নিয়ে বিস্তারিত শিখিয়েছি। এছাড়াও কিভাবে একটা বিজনেসকে Scale করতে তা নিয়ে ক্লাস আছে।"');
                                     $defGiftFooterNote = old('masterclass_settings.gift_footer_note', 'যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।');
                                     $defGiftCtaText = old('masterclass_settings.gift_cta_text', 'সিট কনফার্ম করুন →');
+                                    $defSupportTitle = old('masterclass_settings.support_title', 'আর সাপোর্ট?');
+                                    $defSupportDescription = old('masterclass_settings.support_description', '<p>কোর্সের টপিক রিলেটেড যেকোনো প্রবলেম ফেস করলে সরাসরি সাপোর্ট ফোরাম অথবা আমাদের মেন্টর টিম থেকে ইনস্ট্যান্ট হেল্প পাবেন। লাইভ সাপোর্ট সেশনের মাধ্যমে যেকোনো টেকনিক্যাল প্রবলেম ওয়ান টু ওয়ান সলভ করে দেওয়া হবে।</p><p>এই সাপোর্ট আমাদের টিম মেম্বারদের পক্ষে সরাসরি প্রোভাইড করা হচ্ছে, যাতে করে আপনি ফেস করা যেকোনো সমস্যার দ্রুততম সময়ে নিখুঁত সমাধান পেতে পারেন।</p>');
 
                                     $defScheduleBadge = old('masterclass_settings.schedule_badge', 'LIVE ZOOM MASTERCLASS');
                                     $defClassScheduleTitle = old('masterclass_settings.class_schedule_title', '২ দিনব্যাপী e-commerce live masterclass');
@@ -538,13 +541,13 @@
 
                                                  <div class="col-lg-12 mb-4">
                                                      <label class="form-label">Description Paragraph 1</label>
-                                                     <textarea name="masterclass_settings[overview_desc1]" class="form-control rounded-2" rows="2"
+                                                     <textarea name="masterclass_settings[overview_desc1]" class="form-control rounded-2 summernote" rows="2"
                                                                placeholder="Enter description paragraph 1">{{ $defOverviewDesc1 }}</textarea>
                                                  </div>
 
                                                  <div class="col-lg-12 mb-4">
                                                      <label class="form-label">Description Paragraph 2</label>
-                                                     <textarea name="masterclass_settings[overview_desc2]" class="form-control rounded-2" rows="2"
+                                                     <textarea name="masterclass_settings[overview_desc2]" class="form-control rounded-2 summernote" rows="2"
                                                                placeholder="Enter description paragraph 2">{{ $defOverviewDesc2 }}</textarea>
                                                  </div>
 
@@ -622,13 +625,13 @@
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Gift Description</label>
-                                                    <textarea name="masterclass_settings[gift_description]" class="form-control rounded-2" rows="3"
+                                                    <textarea name="masterclass_settings[gift_description]" class="form-control rounded-2 summernote" rows="3"
                                                               placeholder="এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন...">{{ $defGiftDescription }}</textarea>
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Gift Quote Callout Box</label>
-                                                    <textarea name="masterclass_settings[gift_quote]" class="form-control rounded-2" rows="3"
+                                                    <textarea name="masterclass_settings[gift_quote]" class="form-control rounded-2 summernote" rows="3"
                                                               placeholder="এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় নিয়ে আলোচনা করেছি...">{{ $defGiftQuote }}</textarea>
                                                 </div>
 
@@ -742,7 +745,7 @@
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Breakdown Items (Format: Item Title | Price Value)</label>
-                                                    <textarea name="masterclass_settings[breakdown_items]" class="form-control rounded-2" rows="4"
+                                                    <textarea name="masterclass_settings[breakdown_items]" class="form-control rounded-2 summernote" rows="4"
                                                               placeholder="🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০&#10;🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০">{{ $defBreakdownItems }}</textarea>
                                                 </div>
                                             </div>
@@ -819,9 +822,149 @@
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Privacy Policy Notice Text</label>
-                                                    <textarea name="masterclass_settings[privacy_notice]" class="form-control rounded-2" rows="2"
+                                                    <textarea name="masterclass_settings[privacy_notice]" class="form-control rounded-2 summernote" rows="2"
                                                               placeholder="Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.">{{ $defPrivacyNotice }}</textarea>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section 10: Masterclass Ad Banners (1 & 2) -->
+                                    <div class="card border mb-4 rounded-3 shadow-sm">
+                                        <div class="card-header bg-white py-3">
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Ad Banners (Masterclass Landing Page)</span>
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <div class="row gx-20">
+                                                <!-- Banner 1 -->
+                                                <div class="col-12">
+                                                    <label class="form-label font-15 fw-semibold mb-3 border-bottom pb-2 w-100">Ad Banner 1</label>
+                                                </div>
+                                                <div class="col-lg-12 mb-4">
+                                                    <div class="custom-checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="masterclass_settings[ad_banner_1_status]" value="1"
+                                                                {{ !empty($mcSettings['ad_banner_1_status']) ? 'checked' : '' }}>
+                                                            <span>Enable Ad Banner 1</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <label class="form-label">Ad Banner Link URL 1</label>
+                                                    <input type="text" name="masterclass_settings[ad_banner_1_link]" class="form-control rounded-2"
+                                                           value="{{ $mcSettings['ad_banner_1_link'] ?? '' }}" placeholder="https://example.com/promotion1">
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <label class="form-label mb-2">Banner Image 1 (1200x300)</label>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-lg-6 mb-2">
+                                                            <label class="form-label mb-1">Upload Image File</label>
+                                                            <input type="file" name="ad_banner_1_file" class="form-control rounded-2" accept="image/*">
+                                                        </div>
+                                                        <div class="col-lg-6 mb-2">
+                                                            <label class="form-label mb-1">Or Image URL / Link</label>
+                                                            <input type="text" name="masterclass_settings[ad_banner_1_image_url_custom]" class="form-control rounded-2"
+                                                                   value="{{ $mcSettings['ad_banner_1_image_url'] ?? '' }}" placeholder="https://example.com/banner1.jpg">
+                                                        </div>
+                                                    </div>
+                                                    @if(!empty($mcSettings['ad_banner_1_image_url']))
+                                                        <div class="mt-2">
+                                                            <label class="small text-muted d-block mb-1">Current Banner 1 Preview:</label>
+                                                            <img src="{{ $mcSettings['ad_banner_1_image_url'] }}" alt="Ad Banner 1 Preview" class="rounded border w-100" style="max-height: 80px; object-fit: cover;">
+                                                        </div>
+                                                    @endif
+                                                </div>
+
+                                                <!-- Banner 2 -->
+                                                <div class="col-12 mt-3">
+                                                    <label class="form-label font-15 fw-semibold mb-3 border-bottom pb-2 w-100">Ad Banner 2</label>
+                                                </div>
+                                                <div class="col-lg-12 mb-4">
+                                                    <div class="custom-checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="masterclass_settings[ad_banner_2_status]" value="1"
+                                                                {{ !empty($mcSettings['ad_banner_2_status']) ? 'checked' : '' }}>
+                                                            <span>Enable Ad Banner 2</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <label class="form-label">Ad Banner Link URL 2</label>
+                                                    <input type="text" name="masterclass_settings[ad_banner_2_link]" class="form-control rounded-2"
+                                                           value="{{ $mcSettings['ad_banner_2_link'] ?? '' }}" placeholder="https://example.com/promotion2">
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <label class="form-label mb-2">Banner Image 2 (1200x300)</label>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-lg-6 mb-2">
+                                                            <label class="form-label mb-1">Upload Image File</label>
+                                                            <input type="file" name="ad_banner_2_file" class="form-control rounded-2" accept="image/*">
+                                                        </div>
+                                                        <div class="col-lg-6 mb-2">
+                                                            <label class="form-label mb-1">Or Image URL / Link</label>
+                                                            <input type="text" name="masterclass_settings[ad_banner_2_image_url_custom]" class="form-control rounded-2"
+                                                                   value="{{ $mcSettings['ad_banner_2_image_url'] ?? '' }}" placeholder="https://example.com/banner2.jpg">
+                                                        </div>
+                                                    </div>
+                                                    @if(!empty($mcSettings['ad_banner_2_image_url']))
+                                                        <div class="mt-2">
+                                                            <label class="small text-muted d-block mb-1">Current Banner 2 Preview:</label>
+                                                            <img src="{{ $mcSettings['ad_banner_2_image_url'] }}" alt="Ad Banner 2 Preview" class="rounded border w-100" style="max-height: 80px; object-fit: cover;">
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section 11: Masterclass Support Section -->
+                                    <div class="card border mb-4 rounded-3 shadow-sm">
+                                        <div class="card-header bg-white py-3">
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Support Section (Masterclass Landing Page)</span>
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <div class="row gx-20">
+                                                <!-- Status -->
+                                                <div class="col-12 mb-3">
+                                                    <div class="form-check form-switch mb-0">
+                                                        <input type="checkbox" name="masterclass_settings[support_status]" value="1"
+                                                               class="form-check-input" id="support_status"
+                                                               {{ !empty($mcSettings['support_status']) ? 'checked' : '' }}>
+                                                        <label class="form-label mb-0 ms-2 fw-semibold" for="support_status">Show Support Section</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Support Title -->
+                                                <div class="col-lg-12 col-md-12 mb-4">
+                                                    <label class="form-label">Support Title / Heading</label>
+                                                    <input type="text" name="masterclass_settings[support_title]" class="form-control rounded-2"
+                                                           value="{{ $mcSettings['support_title'] ?? $defSupportTitle }}" placeholder="আর সাপোর্ট?">
+                                                </div>
+
+                                                <!-- Support Description -->
+                                                <div class="col-lg-12 col-md-12 mb-4">
+                                                    <label class="form-label">Support Description</label>
+                                                    <textarea name="masterclass_settings[support_description]" class="form-control rounded-2 summernote" rows="3"
+                                                              placeholder="সাপোর্টের বিস্তারিত লিখুন...">{{ $mcSettings['support_description'] ?? $defSupportDescription }}</textarea>
+                                                </div>
+
+                                                <!-- Support Image Upload -->
+                                                <div class="col-lg-6 mb-2">
+                                                    <label class="form-label mb-1">Upload Support Image File (Transparent cut-out recommended)</label>
+                                                    <input type="file" name="support_image_file" class="form-control rounded-2" accept="image/*">
+                                                </div>
+                                                <div class="col-lg-6 mb-2">
+                                                    <label class="form-label mb-1">Or Support Image URL / Link</label>
+                                                    <input type="text" name="masterclass_settings[support_image_url_custom]" class="form-control rounded-2"
+                                                           value="{{ $mcSettings['support_image_url'] ?? '' }}" placeholder="https://example.com/support-person.png">
+                                                </div>
+
+                                                @if(!empty($mcSettings['support_image_url']))
+                                                    <div class="col-12 mt-2">
+                                                        <label class="small text-muted d-block mb-1">Current Support Image Preview:</label>
+                                                        <img src="{{ $mcSettings['support_image_url'] }}" alt="Support Image Preview" class="rounded border" style="max-height: 120px; object-fit: contain; background: #eefaf6; padding: 5px;">
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

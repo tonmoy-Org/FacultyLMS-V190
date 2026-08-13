@@ -67,7 +67,7 @@ trait SmsSenderTrait
             $phone_number = preg_replace('/-/', '', $phone_number);
             $phone_number = preg_replace('/(\s)/', '', $phone_number);
 
-            $url          = setting('spagreen_sms_url') ? setting('spagreen_sms_url') : 'https://smpp.ajuratech.com:7790/sendtext'; //http://apismpp.revesms.com
+            $url          = setting('spagreen_sms_url') ? setting('spagreen_sms_url') : 'http://apismpp.revesms.com/sendtext';
             $params       = [
                 'apikey'         => setting('spagreen_sms_api_key'),
                 'secretkey'      => setting('spagreen_secret_key'),

@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title', isset($course) && $course ? $course->title : __('home'))
+@section('title', __('home'))
 
 @section('base.content')
     <!--====== Start Header ======-->
