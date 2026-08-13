@@ -3,7 +3,7 @@
 @section('content')
 
 @push('css')
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/masterclass.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/masterclass.css') }}?v=1.11">
 @endpush
 
 @php
