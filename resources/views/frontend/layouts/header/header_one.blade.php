@@ -6,7 +6,7 @@
                 .template-header.header-layout-1 .header-inner { padding-top: 5px !important; padding-bottom: 5px !important; min-height: auto !important; }
                 .template-header .nav-menu > ul > li > a { padding-top: 8px !important; padding-bottom: 8px !important; }
                 .header-extra { padding-top: 5px !important; padding-bottom: 5px !important; }
-                .template-header.header-layout-1 .header-inner { height: 60px !important; }
+                .template-header.header-layout-1 .header-inner { height: 70px !important; }
                 .template-header.header-layout-1 .header-inner .brand-logo { max-height: 50px !important; }
                 .template-header.header-layout-1 .header-inner .brand-logo img { max-height: 35px !important; }
                 .template-header.header-layout-1 .header-inner .nav-menu > ul > li > a { line-height: 60px !important; }
