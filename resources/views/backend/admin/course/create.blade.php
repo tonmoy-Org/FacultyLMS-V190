@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+﻿@extends('backend.layouts.master')
 @section('title', __('add_new_course'))
 @section('content')
     <div class="container-fluid">
@@ -85,6 +85,14 @@
                                         </div>
                                     </div>
                                     <!-- End Course Title -->
+
+                                    <div class="col-lg-6">
+                                        <div class="mb-4">
+                                            <label for="courseSubtitle" class="form-label">Course Subtitle</label>
+                                            <input type="text" class="form-control" name="course_subtitle" id="courseSubtitle" placeholder="Enter Course Subtitle" value="{{ old('course_subtitle') }}">
+                                        </div>
+                                    </div>
+                                    <!-- End Course Subtitle -->
 
                                     <div class="col-lg-6">
                                         <div class="mb-4">
@@ -290,6 +298,14 @@
                                     <!-- End Short Description -->
 
                                     <div class="col-lg-12">
+                                        <div class="mb-4">
+                                            <label for="descriptionSubtitle" class="form-label">Description Subtitle</label>
+                                            <input type="text" class="form-control" name="description_subtitle" id="descriptionSubtitle" placeholder="Enter Description Subtitle" value="{{ old('description_subtitle') }}">
+                                        </div>
+                                    </div>
+                                    <!-- End Description Subtitle -->
+
+                                    <div class="col-lg-12">
                                         <div class="editor-wrapper">
                                             <div class="d-flex justify-content-between">
                                                 <label class="form-label mb-1">{{ __('description') }}</label>
@@ -327,58 +343,58 @@
 <!-- Start Masterclass Landing Tab -->
                             <div class="tab-pane fade" id="courseMasterclass" role="tabpanel" aria-labelledby="masterclass" tabindex="0">
                                 @php
-                                    $defEyebrow = old('masterclass_settings.eyebrow_title', 'E-commerce শুরু করার hidden path');
-                                    $defPrimaryCta = old('masterclass_settings.primary_cta_text', 'রেজিস্ট্রেশন করুন এখনই');
-                                    $defVideoCaption = old('masterclass_settings.video_caption', 'বিস্তারিত জানতে ভিডিওটি দেখুন');
+                                    $defEyebrow = old('masterclass_settings.eyebrow_title', 'E-commerce à¦¶à§à¦°à§ à¦•à¦°à¦¾à¦° hidden path');
+                                    $defPrimaryCta = old('masterclass_settings.primary_cta_text', 'à¦°à§‡à¦œà¦¿à¦¸à§à¦Ÿà§à¦°à§‡à¦¶à¦¨ à¦•à¦°à§à¦¨ à¦à¦–à¦¨à¦‡');
+                                    $defVideoCaption = old('masterclass_settings.video_caption', 'à¦¬à¦¿à¦¸à§à¦¤à¦¾à¦°à¦¿à¦¤ à¦œà¦¾à¦¨à¦¤à§‡ à¦­à¦¿à¦¡à¦¿à¦“à¦Ÿà¦¿ à¦¦à§‡à¦–à§à¦¨');
                                     $defRemainingSeats = old('masterclass_settings.remaining_seats', '100');
 
-                                    $defGoldBadgeTop = old('masterclass_settings.gold_badge_top', 'এখনই সিট বুক করুন');
-                                    $defZoomTitle = old('masterclass_settings.zoom_title', 'Zoom লাইভ 104');
-                                    $defZoomSubtitle = old('masterclass_settings.zoom_subtitle', 'অনলাইন ইন্টারেক্টিভ সেশন');
-                                    $defScheduleLabel = old('masterclass_settings.schedule_label', 'সময় / সময়সূচী');
+                                    $defGoldBadgeTop = old('masterclass_settings.gold_badge_top', 'à¦à¦–à¦¨à¦‡ à¦¸à¦¿à¦Ÿ à¦¬à§à¦• à¦•à¦°à§à¦¨');
+                                    $defZoomTitle = old('masterclass_settings.zoom_title', 'Zoom à¦²à¦¾à¦‡à¦­ 104');
+                                    $defZoomSubtitle = old('masterclass_settings.zoom_subtitle', 'à¦…à¦¨à¦²à¦¾à¦‡à¦¨ à¦‡à¦¨à§à¦Ÿà¦¾à¦°à§‡à¦•à§à¦Ÿà¦¿à¦­ à¦¸à§‡à¦¶à¦¨');
+                                    $defScheduleLabel = old('masterclass_settings.schedule_label', 'à¦¸à¦®à¦¯à¦¼ / à¦¸à¦®à¦¯à¦¼à¦¸à§‚à¦šà§€');
                                     $defScheduleValue = old('masterclass_settings.schedule_value', '2h 40min');
                                     $defLevelLabel = old('masterclass_settings.level_label', 'Level');
                                     $defLevelValue = old('masterclass_settings.level_value', 'beginner');
-                                    $defGoldOfferTitle = old('masterclass_settings.gold_offer_title', 'আজকের স্পেশাল অফার');
-                                    $defOriginalPriceLabel = old('masterclass_settings.original_price_label', 'মূল প্রাইস');
-                                    $defGoldCtaText = old('masterclass_settings.gold_cta_text', 'এখনই জয়েন করুন');
-                                    $defGoldSeatsText = old('masterclass_settings.gold_seats_text', 'আর মাত্র ' . $defRemainingSeats . ' সিট বাকি');
+                                    $defGoldOfferTitle = old('masterclass_settings.gold_offer_title', 'à¦†à¦œà¦•à§‡à¦° à¦¸à§à¦ªà§‡à¦¶à¦¾à¦² à¦…à¦«à¦¾à¦°');
+                                    $defOriginalPriceLabel = old('masterclass_settings.original_price_label', 'à¦®à§‚à¦² à¦ªà§à¦°à¦¾à¦‡à¦¸');
+                                    $defGoldCtaText = old('masterclass_settings.gold_cta_text', 'à¦à¦–à¦¨à¦‡ à¦œà§Ÿà§‡à¦¨ à¦•à¦°à§à¦¨');
+                                    $defGoldSeatsText = old('masterclass_settings.gold_seats_text', 'à¦†à¦° à¦®à¦¾à¦¤à§à¦° ' . $defRemainingSeats . ' à¦¸à¦¿à¦Ÿ à¦¬à¦¾à¦•à¦¿');
 
-                                    $defBenefitsTitle = old('masterclass_settings.benefits_title', 'চলুন একটু খুঁজে বের করার চেষ্টা করি নিচের সমস্যাগুলোর কোনো একটি বা একাধিক সমস্যা আপনার সাথে মিলে কিনা?');
+                                    $defBenefitsTitle = old('masterclass_settings.benefits_title', 'à¦šà¦²à§à¦¨ à¦à¦•à¦Ÿà§ à¦–à§à¦à¦œà§‡ à¦¬à§‡à¦° à¦•à¦°à¦¾à¦° à¦šà§‡à¦·à§à¦Ÿà¦¾ à¦•à¦°à¦¿ à¦¨à¦¿à¦šà§‡à¦° à¦¸à¦®à¦¸à§à¦¯à¦¾à¦—à§à¦²à§‹à¦° à¦•à§‹à¦¨à§‹ à¦à¦•à¦Ÿà¦¿ à¦¬à¦¾ à¦à¦•à¦¾à¦§à¦¿à¦• à¦¸à¦®à¦¸à§à¦¯à¦¾ à¦†à¦ªà¦¨à¦¾à¦° à¦¸à¦¾à¦¥à§‡ à¦®à¦¿à¦²à§‡ à¦•à¦¿à¦¨à¦¾?');
                                     $benefitsList = old('masterclass_settings.benefits_list', [
-                                        'মার্কেটপ্লেস থেকে ক্লায়েন্ট পাওয়ার জন্য সংগ্রাম করছেন? | বিভিন্ন ফ্রিল্যান্সিং মার্কেটপ্লেসে আপনার মতো আরো হাজারো ফ্রিল্যান্সার বা সার্ভিস প্রোভাইডারের প্রোফাইল রয়েছে। আপনাকে সেখানে তাদের সাথে প্রতিযোগিতা করতে হয়। হাজারো প্রোফাইলের ভিড়ে আপনার প্রোফাইলটি যদি ক্লায়েন্টের চোখে না পড়ে, তাহলে সেখান থেকে কাজ পাওয়া কঠিন হয়ে পড়ে। আর আপনি যদি আউট অফ মার্কেটপ্লেস ক্লায়েন্টকে টার্গেট করতে পারেন তবে ক্লায়েন্ট পাওয়া আপনার জন্য অনেক সহজ হয়ে যায়।',
-                                        'ক্লায়েন্ট পেতে বারবার রিজেক্ট হচ্ছেন? | বারবার রিজেকশন হওয়া হতাশাজনক তবে এর পেছনে লুকিয়ে থাকতে পারে আপনার প্রাইসিং মডেল, প্রোফাইল অপটিমাইজেশন, বা ড্রাফট পিচিংয়ের ভুল কৌশল। আমরা এই ফানেলগুলো কিভাবে কাটিয়ে উঠতে হয় এবং ক্লায়েন্টের সাথে কিভাবে একটি ট্রাস্টেড সম্পর্ক তৈরি করতে হয়, তা শেখাব।',
-                                        'আয়ের উপর মার্কেটপ্লেস অতিরিক্ত ফি কাটছে? | মার্কেটপ্লেসের প্ল্যাটফর্মগুলো প্রতিটি আয়ের একটি বড় অংশ ফি হিসেবে কেটে নেয়। এটি অনেক ফ্রিল্যান্সারের জন্য হতাশার কারণ। আমরা যেহেতু শিখব কিভাবে মার্কেটপ্লেসের বাইরে ক্লায়েন্ট খুঁজে পাওয়া যায়, তা এ ফি গুণা বন্ধ সম্ভব হবে।',
-                                        'আপনার আউটরিচ ইমেইল কোনো রেসপন্স পাচ্ছে না? | আউটরিচ ইমেইলগুলোর কোনো জবাব না পাওয়া মানে সেখানে কিছু ঘাটতি আছে। এটা হতে পারে আপনার মেসেজের ভুল টোন, অসম্পূর্ণ মেসেজ, বা ভুল টার্গেটিং। আপনি এ কোর্সে শিখবেন কিভাবে সঠিকভাবে ইমেইল কপি লিখতে হয় যা ক্লায়েন্টের দৃষ্টি আকর্ষণ করবে এবং রিপ্লাই পাওয়ার সম্ভাবনা বাড়াবে।',
-                                        'আপনার স্কিল আছে, কিন্তু ক্লায়েন্ট নেই? | ক্লায়েন্ট না থাকার মানে এই নয় যে আপনার স্কিল কম। এটা হতে পারে সঠিক মার্কেটিং ও নেটওয়ার্কিং কৌশলের অভাব। আপনার প্রতিভা বা দক্ষতা থাকা সত্ত্বেও যদি কাজ না পান, তবে এর কারণ হতে পারে আপনার আউটরিচ স্ট্র্যাটেজি বা প্রোফাইল অপটিমাইজেশনের ঘাটতি। আমরা দেখাব কিভাবে সঠিক পদ্ধতিতে ক্লায়েন্টদের কাছে পৌঁছাতে হয় এবং তাদের প্রয়োজন বুঝে অফার করতে হয়।'
+                                        'à¦®à¦¾à¦°à§à¦•à§‡à¦Ÿà¦ªà§à¦²à§‡à¦¸ à¦¥à§‡à¦•à§‡ à¦•à§à¦²à¦¾à¦¯à¦¼à§‡à¦¨à§à¦Ÿ à¦ªà¦¾à¦“à¦¯à¦¼à¦¾à¦° à¦œà¦¨à§à¦¯ à¦¸à¦‚à¦—à§à¦°à¦¾à¦® à¦•à¦°à¦›à§‡à¦¨? | à¦¬à¦¿à¦­à¦¿à¦¨à§à¦¨ à¦«à§à¦°à¦¿à¦²à§à¦¯à¦¾à¦¨à§à¦¸à¦¿à¦‚ à¦®à¦¾à¦°à§à¦•à§‡à¦Ÿà¦ªà§à¦²à§‡à¦¸à§‡ à¦†à¦ªà¦¨à¦¾à¦° à¦®à¦¤à§‹ à¦†à¦°à§‹ à¦¹à¦¾à¦œà¦¾à¦°à§‹ à¦«à§à¦°à¦¿à¦²à§à¦¯à¦¾à¦¨à§à¦¸à¦¾à¦° à¦¬à¦¾ à¦¸à¦¾à¦°à§à¦­à¦¿à¦¸ à¦ªà§à¦°à§‹à¦­à¦¾à¦‡à¦¡à¦¾à¦°à§‡à¦° à¦ªà§à¦°à§‹à¦«à¦¾à¦‡à¦² à¦°à¦¯à¦¼à§‡à¦›à§‡à¥¤ à¦†à¦ªà¦¨à¦¾à¦•à§‡ à¦¸à§‡à¦–à¦¾à¦¨à§‡ à¦¤à¦¾à¦¦à§‡à¦° à¦¸à¦¾à¦¥à§‡ à¦ªà§à¦°à¦¤à¦¿à¦¯à§‹à¦—à¦¿à¦¤à¦¾ à¦•à¦°à¦¤à§‡ à¦¹à¦¯à¦¼à¥¤ à¦¹à¦¾à¦œà¦¾à¦°à§‹ à¦ªà§à¦°à§‹à¦«à¦¾à¦‡à¦²à§‡à¦° à¦­à¦¿à¦¡à¦¼à§‡ à¦†à¦ªà¦¨à¦¾à¦° à¦ªà§à¦°à§‹à¦«à¦¾à¦‡à¦²à¦Ÿà¦¿ à¦¯à¦¦à¦¿ à¦•à§à¦²à¦¾à¦¯à¦¼à§‡à¦¨à§à¦Ÿà§‡à¦° à¦šà§‹à¦–à§‡ à¦¨à¦¾ à¦ªà§œà§‡, à¦¤à¦¾à¦¹à¦²à§‡ à¦¸à§‡à¦–à¦¾à¦¨ à¦¥à§‡à¦•à§‡ à¦•à¦¾à¦œ à¦ªà¦¾à¦“à§Ÿà¦¾ à¦•à¦ à¦¿à¦¨ à¦¹à§Ÿà§‡ à¦ªà§œà§‡à¥¤ à¦†à¦° à¦†à¦ªà¦¨à¦¿ à¦¯à¦¦à¦¿ à¦†à¦‰à¦Ÿ à¦…à¦« à¦®à¦¾à¦°à§à¦•à§‡à¦Ÿà¦ªà§à¦²à§‡à¦¸ à¦•à§à¦²à¦¾à¦¯à¦¼à§‡à¦¨à§à¦Ÿà¦•à§‡ à¦Ÿà¦¾à¦°à§à¦—à§‡à¦Ÿ à¦•à¦°à¦¤à§‡ à¦ªà¦¾à¦°à§‡à¦¨ à¦¤à¦¬à§‡ à¦•à§à¦²à¦¾à¦¯à¦¼à§‡à¦¨à§à¦Ÿ à¦ªà¦¾à¦“à§Ÿà¦¾ à¦†à¦ªà¦¨à¦¾à¦° à¦œà¦¨à§à¦¯ à¦…à¦¨à§‡à¦• à¦¸à¦¹à¦œ à¦¹à§Ÿà§‡ à¦¯à¦¾à§Ÿà¥¤',
+                                        'à¦•à§à¦²à¦¾à¦¯à¦¼à§‡à¦¨à§à¦Ÿ à¦ªà§‡à¦¤à§‡ à¦¬à¦¾à¦°à¦¬à¦¾à¦° à¦°à¦¿à¦œà§‡à¦•à§à¦Ÿ à¦¹à¦šà§à¦›à§‡à¦¨? | à¦¬à¦¾à¦°à¦¬à¦¾à¦° à¦°à¦¿à¦œà§‡à¦•à¦¶à¦¨ à¦¹à¦“à¦¯à¦¼à¦¾ à¦¹à¦¤à¦¾à¦¶à¦¾à¦œà¦¨à¦• à¦¤à¦¬à§‡ à¦à¦° à¦ªà§‡à¦›à¦¨à§‡ à¦²à§à¦•à¦¿à¦¯à¦¼à§‡ à¦¥à¦¾à¦•à¦¤à§‡ à¦ªà¦¾à¦°à§‡ à¦†à¦ªà¦¨à¦¾à¦° à¦ªà§à¦°à¦¾à¦‡à¦¸à¦¿à¦‚ à¦®à¦¡à§‡à¦², à¦ªà§à¦°à§‹à¦«à¦¾à¦‡à¦² à¦…à¦ªà¦Ÿà¦¿à¦®à¦¾à¦‡à¦œà§‡à¦¶à¦¨, à¦¬à¦¾ à¦¡à§à¦°à¦¾à¦«à¦Ÿ à¦ªà¦¿à¦šà¦¿à¦‚à¦¯à¦¼à§‡à¦° à¦­à§à¦² à¦•à§Œà¦¶à¦²à¥¤ à¦†à¦®à¦°à¦¾ à¦à¦‡ à¦«à¦¾à¦¨à§‡à¦²à¦—à§à¦²à§‹ à¦•à¦¿à¦­à¦¾à¦¬à§‡ à¦•à¦¾à¦Ÿà¦¿à¦¯à¦¼à§‡ à¦‰à¦ à¦¤à§‡ à¦¹à¦¯à¦¼ à¦à¦¬à¦‚ à¦•à§à¦²à¦¾à¦¯à¦¼à§‡à¦¨à§à¦Ÿà§‡à¦° à¦¸à¦¾à¦¥à§‡ à¦•à¦¿à¦­à¦¾à¦¬à§‡ à¦à¦•à¦Ÿà¦¿ à¦Ÿà§à¦°à¦¾à¦¸à§à¦Ÿà§‡à¦¡ à¦¸à¦®à§à¦ªà¦°à§à¦• à¦¤à§ˆà¦°à¦¿ à¦•à¦°à¦¤à§‡ à¦¹à¦¯à¦¼, à¦¤à¦¾ à¦¶à§‡à¦–à¦¾à¦¬à¥¤',
+                                        'à¦†à¦¯à¦¼à§‡à¦° à¦‰à¦ªà¦° à¦®à¦¾à¦°à§à¦•à§‡à¦Ÿà¦ªà§à¦²à§‡à¦¸ à¦…à¦¤à¦¿à¦°à¦¿à¦•à§à¦¤ à¦«à¦¿ à¦•à¦¾à¦Ÿà¦›à§‡? | à¦®à¦¾à¦°à§à¦•à§‡à¦Ÿà¦ªà§à¦²à§‡à¦¸à§‡à¦° à¦ªà§à¦²à§à¦¯à¦¾à¦Ÿà¦«à¦°à§à¦®à¦—à§à¦²à§‹ à¦ªà§à¦°à¦¤à¦¿à¦Ÿà¦¿ à¦†à¦¯à¦¼à§‡à¦° à¦à¦•à¦Ÿà¦¿ à¦¬à¦¡à¦¼ à¦…à¦‚à¦¶ à¦«à¦¿ à¦¹à¦¿à¦¸à§‡à¦¬à§‡ à¦•à§‡à¦Ÿà§‡ à¦¨à§‡à¦¯à¦¼à¥¤ à¦à¦Ÿà¦¿ à¦…à¦¨à§‡à¦• à¦«à§à¦°à¦¿à¦²à§à¦¯à¦¾à¦¨à§à¦¸à¦¾à¦°à§‡à¦° à¦œà¦¨à§à¦¯ à¦¹à¦¤à¦¾à¦¶à¦¾à¦° à¦•à¦¾à¦°à¦£à¥¤ à¦†à¦®à¦°à¦¾ à¦¯à§‡à¦¹à§‡à¦¤à§ à¦¶à¦¿à¦–à¦¬ à¦•à¦¿à¦­à¦¾à¦¬à§‡ à¦®à¦¾à¦°à§à¦•à§‡à¦Ÿà¦ªà§à¦²à§‡à¦¸à§‡à¦° à¦¬à¦¾à¦‡à¦°à§‡ à¦•à§à¦²à¦¾à¦¯à¦¼à§‡à¦¨à§à¦Ÿ à¦–à§à¦à¦œà§‡ à¦ªà¦¾à¦“à¦¯à¦¼à¦¾ à¦¯à¦¾à¦¯à¦¼, à¦¤à¦¾ à¦ à¦«à¦¿ à¦—à§à¦£à¦¾ à¦¬à¦¨à§à¦§ à¦¸à¦®à§à¦­à¦¬ à¦¹à¦¬à§‡à¥¤',
+                                        'à¦†à¦ªà¦¨à¦¾à¦° à¦†à¦‰à¦Ÿà¦°à¦¿à¦š à¦‡à¦®à§‡à¦‡à¦² à¦•à§‹à¦¨à§‹ à¦°à§‡à¦¸à¦ªà¦¨à§à¦¸ à¦ªà¦¾à¦šà§à¦›à§‡ à¦¨à¦¾? | à¦†à¦‰à¦Ÿà¦°à¦¿à¦š à¦‡à¦®à§‡à¦‡à¦²à¦—à§à¦²à§‹à¦° à¦•à§‹à¦¨à§‹ à¦œà¦¬à¦¾à¦¬ à¦¨à¦¾ à¦ªà¦¾à¦“à¦¯à¦¼à¦¾ à¦®à¦¾à¦¨à§‡ à¦¸à§‡à¦–à¦¾à¦¨à§‡ à¦•à¦¿à¦›à§ à¦˜à¦¾à¦Ÿà¦¤à¦¿ à¦†à¦›à§‡à¥¤ à¦à¦Ÿà¦¾ à¦¹à¦¤à§‡ à¦ªà¦¾à¦°à§‡ à¦†à¦ªà¦¨à¦¾à¦° à¦®à§‡à¦¸à§‡à¦œà§‡à¦° à¦­à§à¦² à¦Ÿà§‹à¦¨, à¦…à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ à¦®à§‡à¦¸à§‡à¦œ, à¦¬à¦¾ à¦­à§à¦² à¦Ÿà¦¾à¦°à§à¦—à§‡à¦Ÿà¦¿à¦‚à¥¤ à¦†à¦ªà¦¨à¦¿ à¦ à¦•à§‹à¦°à§à¦¸à§‡ à¦¶à¦¿à¦–à¦¬à§‡à¦¨ à¦•à¦¿à¦­à¦¾à¦¬à§‡ à¦¸à¦ à¦¿à¦•à¦­à¦¾à¦¬à§‡ à¦‡à¦®à§‡à¦‡à¦² à¦•à¦ªà¦¿ à¦²à¦¿à¦–à¦¤à§‡ à¦¹à¦¯à¦¼ à¦¯à¦¾ à¦•à§à¦²à¦¾à¦¯à¦¼à§‡à¦¨à§à¦Ÿà§‡à¦° à¦¦à§ƒà¦·à§à¦Ÿà¦¿ à¦†à¦•à¦°à§à¦·à¦£ à¦•à¦°à¦¬à§‡ à¦à¦¬à¦‚ à¦°à¦¿à¦ªà§à¦²à¦¾à¦‡ à¦ªà¦¾à¦“à¦¯à¦¼à¦¾à¦° à¦¸à¦®à§à¦­à¦¾à¦¬à¦¨à¦¾ à¦¬à¦¾à¦¡à¦¼à¦¾à¦¬à§‡à¥¤',
+                                        'à¦†à¦ªà¦¨à¦¾à¦° à¦¸à§à¦•à¦¿à¦² à¦†à¦›à§‡, à¦•à¦¿à¦¨à§à¦¤à§ à¦•à§à¦²à¦¾à¦¯à¦¼à§‡à¦¨à§à¦Ÿ à¦¨à§‡à¦‡? | à¦•à§à¦²à¦¾à¦¯à¦¼à§‡à¦¨à§à¦Ÿ à¦¨à¦¾ à¦¥à¦¾à¦•à¦¾à¦° à¦®à¦¾à¦¨à§‡ à¦à¦‡ à¦¨à¦¯à¦¼ à¦¯à§‡ à¦†à¦ªà¦¨à¦¾à¦° à¦¸à§à¦•à¦¿à¦² à¦•à¦®à¥¤ à¦à¦Ÿà¦¾ à¦¹à¦¤à§‡ à¦ªà¦¾à¦°à§‡ à¦¸à¦ à¦¿à¦• à¦®à¦¾à¦°à§à¦•à§‡à¦Ÿà¦¿à¦‚ à¦“ à¦¨à§‡à¦Ÿà¦“à¦¯à¦¼à¦¾à¦°à§à¦•à¦¿à¦‚ à¦•à§Œà¦¶à¦²à§‡à¦° à¦…à¦­à¦¾à¦¬à¥¤ à¦†à¦ªà¦¨à¦¾à¦° à¦ªà§à¦°à¦¤à¦¿à¦­à¦¾ à¦¬à¦¾ à¦¦à¦•à§à¦·à¦¤à¦¾ à¦¥à¦¾à¦•à¦¾ à¦¸à¦¤à§à¦¤à§à¦¬à§‡à¦“ à¦¯à¦¦à¦¿ à¦•à¦¾à¦œ à¦¨à¦¾ à¦ªà¦¾à¦¨, à¦¤à¦¬à§‡ à¦à¦° à¦•à¦¾à¦°à¦£ à¦¹à¦¤à§‡ à¦ªà¦¾à¦°à§‡ à¦†à¦ªà¦¨à¦¾à¦° à¦†à¦‰à¦Ÿà¦°à¦¿à¦š à¦¸à§à¦Ÿà§à¦°à§à¦¯à¦¾à¦Ÿà§‡à¦œà¦¿ à¦¬à¦¾ à¦ªà§à¦°à§‹à¦«à¦¾à¦‡à¦² à¦…à¦ªà¦Ÿà¦¿à¦®à¦¾à¦‡à¦œà§‡à¦¶à¦¨à§‡à¦° à¦˜à¦¾à¦Ÿà¦¤à¦¿à¥¤ à¦†à¦®à¦°à¦¾ à¦¦à§‡à¦–à¦¾à¦¬ à¦•à¦¿à¦­à¦¾à¦¬à§‡ à¦¸à¦ à¦¿à¦• à¦ªà¦¦à§à¦§à¦¤à¦¿à¦¤à§‡ à¦•à§à¦²à¦¾à¦¯à¦¼à§‡à¦¨à§à¦Ÿà¦¦à§‡à¦° à¦•à¦¾à¦›à§‡ à¦ªà§Œà¦à¦›à¦¾à¦¤à§‡ à¦¹à¦¯à¦¼ à¦à¦¬à¦‚ à¦¤à¦¾à¦¦à§‡à¦° à¦ªà§à¦°à¦¯à¦¼à§‹à¦œà¦¨ à¦¬à§à¦à§‡ à¦…à¦«à¦¾à¦° à¦•à¦°à¦¤à§‡ à¦¹à¦¯à¦¼à¥¤'
                                     ]);
 
-                                    $defGiftBadge = old('masterclass_settings.gift_badge', '🎁 যারা join করবেন তাদের জন্য special gift');
-                                    $defGiftTitle = old('masterclass_settings.gift_title', '৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ');
-                                    $defGiftValue = old('masterclass_settings.gift_value', '৳১০,০০০');
-                                    $defGiftDescription = old('masterclass_settings.gift_description', 'এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন। মাস্টারক্লাসে এই বিষয়ে বিস্তারিত আলোচনা।');
-                                    $defGiftQuote = old('masterclass_settings.gift_quote', '"এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় যেমন Facebook Ads, Google Ads নিয়ে বিস্তারিত শিখিয়েছি। এছাড়াও কিভাবে একটা বিজনেসকে Scale করতে তা নিয়ে ক্লাস আছে।"');
-                                    $defGiftFooterNote = old('masterclass_settings.gift_footer_note', 'যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।');
-                                    $defGiftCtaText = old('masterclass_settings.gift_cta_text', 'সিট কনফার্ম করুন →');
-                                    $defSupportTitle = old('masterclass_settings.support_title', 'আর সাপোর্ট?');
-                                    $defSupportDescription = old('masterclass_settings.support_description', '<p>কোর্সের টপিক রিলেটেড যেকোনো প্রবলেম ফেস করলে সরাসরি সাপোর্ট ফোরাম অথবা আমাদের মেন্টর টিম থেকে ইনস্ট্যান্ট হেল্প পাবেন। লাইভ সাপোর্ট সেশনের মাধ্যমে যেকোনো টেকনিক্যাল প্রবলেম ওয়ান টু ওয়ান সলভ করে দেওয়া হবে।</p><p>এই সাপোর্ট আমাদের টিম মেম্বারদের পক্ষে সরাসরি প্রোভাইড করা হচ্ছে, যাতে করে আপনি ফেস করা যেকোনো সমস্যার দ্রুততম সময়ে নিখুঁত সমাধান পেতে পারেন।</p>');
+                                    $defGiftBadge = old('masterclass_settings.gift_badge', 'ðŸŽ à¦¯à¦¾à¦°à¦¾ join à¦•à¦°à¦¬à§‡à¦¨ à¦¤à¦¾à¦¦à§‡à¦° à¦œà¦¨à§à¦¯ special gift');
+                                    $defGiftTitle = old('masterclass_settings.gift_title', 'à§³à§§à§¦,à§¦à§¦à§¦ à¦Ÿà¦¾à¦•à¦¾à¦° Ecom Dropshipping Mastery Course â€” à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ FREE à¦•à¦°à¦¾à¦° à¦¸à§à¦¯à§‹à¦—');
+                                    $defGiftValue = old('masterclass_settings.gift_value', 'à§³à§§à§¦,à§¦à§¦à§¦');
+                                    $defGiftDescription = old('masterclass_settings.gift_description', 'à¦à¦‡ master class-à¦ à¦¯à¦¾à¦°à¦¾ join à¦•à¦°à¦¬à§‡à¦¨, à¦¤à¦¾à¦°à¦¾ à¦†à¦®à¦¾à¦° à§³à§§à§¦,à§¦à§¦à§¦ à¦Ÿà¦¾à¦•à¦¾à¦° Ecom Dropshipping Mastery Course à¦Ÿà¦¾ free à¦¤à§‡ à¦•à¦°à¦¾à¦° à¦¸à§à¦¯à§‹à¦— à¦ªà¦¾à¦¬à§‡à¦¨à¥¤ à¦®à¦¾à¦¸à§à¦Ÿà¦¾à¦°à¦•à§à¦²à¦¾à¦¸à§‡ à¦à¦‡ à¦¬à¦¿à¦·à¦¯à¦¼à§‡ à¦¬à¦¿à¦¸à§à¦¤à¦¾à¦°à¦¿à¦¤ à¦†à¦²à§‹à¦šà¦¨à¦¾à¥¤');
+                                    $defGiftQuote = old('masterclass_settings.gift_quote', '"à¦à¦‡ à¦•à§‹à¦°à§à¦¸à§‡ à¦†à¦®à¦¿ à¦‡-à¦•à¦®à¦¾à¦°à§à¦¸ à¦¬à¦¿à¦œà¦¨à§‡à¦¸, à¦¡à¦¿à¦œà¦¿à¦Ÿà¦¾à¦² à¦®à¦¾à¦°à§à¦•à§‡à¦Ÿà¦¿à¦‚ à¦à¦° à¦¬à¦¿à¦­à¦¿à¦¨à§à¦¨ à¦¬à¦¿à¦·à¦¯à¦¼ à¦¯à§‡à¦®à¦¨ Facebook Ads, Google Ads à¦¨à¦¿à¦¯à¦¼à§‡ à¦¬à¦¿à¦¸à§à¦¤à¦¾à¦°à¦¿à¦¤ à¦¶à¦¿à¦–à¦¿à¦¯à¦¼à§‡à¦›à¦¿à¥¤ à¦à¦›à¦¾à¦¡à¦¼à¦¾à¦“ à¦•à¦¿à¦­à¦¾à¦¬à§‡ à¦à¦•à¦Ÿà¦¾ à¦¬à¦¿à¦œà¦¨à§‡à¦¸à¦•à§‡ Scale à¦•à¦°à¦¤à§‡ à¦¤à¦¾ à¦¨à¦¿à¦¯à¦¼à§‡ à¦•à§à¦²à¦¾à¦¸ à¦†à¦›à§‡à¥¤"');
+                                    $defGiftFooterNote = old('masterclass_settings.gift_footer_note', 'à¦¯à¦¾à¦°à¦¾ à¦à¦•à¦¦à¦® à¦¨à¦¤à§à¦¨ à¦†à¦›à§‡à¦¨ à¦¤à¦¾à¦°à¦¾à¦“ à¦à¦‡ à¦•à§‹à¦°à§à¦¸ à¦¥à§‡à¦•à§‡ à¦¬à§‡à¦¨à¦¿à¦«à¦¿à¦Ÿà§‡à¦¡ à¦¹à¦¤à§‡ à¦ªà¦¾à¦°à¦¬à§‡à¥¤');
+                                    $defGiftCtaText = old('masterclass_settings.gift_cta_text', 'à¦¸à¦¿à¦Ÿ à¦•à¦¨à¦«à¦¾à¦°à§à¦® à¦•à¦°à§à¦¨ â†’');
+                                    $defSupportTitle = old('masterclass_settings.support_title', 'à¦†à¦° à¦¸à¦¾à¦ªà§‹à¦°à§à¦Ÿ?');
+                                    $defSupportDescription = old('masterclass_settings.support_description', '<p>à¦•à§‹à¦°à§à¦¸à§‡à¦° à¦Ÿà¦ªà¦¿à¦• à¦°à¦¿à¦²à§‡à¦Ÿà§‡à¦¡ à¦¯à§‡à¦•à§‹à¦¨à§‹ à¦ªà§à¦°à¦¬à¦²à§‡à¦® à¦«à§‡à¦¸ à¦•à¦°à¦²à§‡ à¦¸à¦°à¦¾à¦¸à¦°à¦¿ à¦¸à¦¾à¦ªà§‹à¦°à§à¦Ÿ à¦«à§‹à¦°à¦¾à¦® à¦…à¦¥à¦¬à¦¾ à¦†à¦®à¦¾à¦¦à§‡à¦° à¦®à§‡à¦¨à§à¦Ÿà¦° à¦Ÿà¦¿à¦® à¦¥à§‡à¦•à§‡ à¦‡à¦¨à¦¸à§à¦Ÿà§à¦¯à¦¾à¦¨à§à¦Ÿ à¦¹à§‡à¦²à§à¦ª à¦ªà¦¾à¦¬à§‡à¦¨à¥¤ à¦²à¦¾à¦‡à¦­ à¦¸à¦¾à¦ªà§‹à¦°à§à¦Ÿ à¦¸à§‡à¦¶à¦¨à§‡à¦° à¦®à¦¾à¦§à§à¦¯à¦®à§‡ à¦¯à§‡à¦•à§‹à¦¨à§‹ à¦Ÿà§‡à¦•à¦¨à¦¿à¦•à§à¦¯à¦¾à¦² à¦ªà§à¦°à¦¬à¦²à§‡à¦® à¦“à§Ÿà¦¾à¦¨ à¦Ÿà§ à¦“à§Ÿà¦¾à¦¨ à¦¸à¦²à¦­ à¦•à¦°à§‡ à¦¦à§‡à¦“à§Ÿà¦¾ à¦¹à¦¬à§‡à¥¤</p><p>à¦à¦‡ à¦¸à¦¾à¦ªà§‹à¦°à§à¦Ÿ à¦†à¦®à¦¾à¦¦à§‡à¦° à¦Ÿà¦¿à¦® à¦®à§‡à¦®à§à¦¬à¦¾à¦°à¦¦à§‡à¦° à¦ªà¦•à§à¦·à§‡ à¦¸à¦°à¦¾à¦¸à¦°à¦¿ à¦ªà§à¦°à§‹à¦­à¦¾à¦‡à¦¡ à¦•à¦°à¦¾ à¦¹à¦šà§à¦›à§‡, à¦¯à¦¾à¦¤à§‡ à¦•à¦°à§‡ à¦†à¦ªà¦¨à¦¿ à¦«à§‡à¦¸ à¦•à¦°à¦¾ à¦¯à§‡à¦•à§‹à¦¨à§‹ à¦¸à¦®à¦¸à§à¦¯à¦¾à¦° à¦¦à§à¦°à§à¦¤à¦¤à¦® à¦¸à¦®à§Ÿà§‡ à¦¨à¦¿à¦–à§à¦à¦¤ à¦¸à¦®à¦¾à¦§à¦¾à¦¨ à¦ªà§‡à¦¤à§‡ à¦ªà¦¾à¦°à§‡à¦¨à¥¤</p>');
 
                                     $defScheduleBadge = old('masterclass_settings.schedule_badge', 'LIVE ZOOM MASTERCLASS');
-                                    $defClassScheduleTitle = old('masterclass_settings.class_schedule_title', '২ দিনব্যাপী e-commerce live masterclass');
-                                    $defClassScheduleTime = old('masterclass_settings.class_schedule_time', '৬ আগস্ট তারিখ রাত ৮ টায় শুরু');
+                                    $defClassScheduleTitle = old('masterclass_settings.class_schedule_title', 'à§¨ à¦¦à¦¿à¦¨à¦¬à§à¦¯à¦¾à¦ªà§€ e-commerce live masterclass');
+                                    $defClassScheduleTime = old('masterclass_settings.class_schedule_time', 'à§¬ à¦†à¦—à¦¸à§à¦Ÿ à¦¤à¦¾à¦°à¦¿à¦– à¦°à¦¾à¦¤ à§® à¦Ÿà¦¾à¦¯à¦¼ à¦¶à§à¦°à§');
 
-                                    $defExplainerTitle = old('masterclass_settings.explainer_title', 'একটা প্রশ্ন আপনার মাথায় আসতে পারে — এত কিছু, মাত্র ৯৯ টাকায় কেন??');
-                                    $defExplainerText = old('masterclass_settings.explainer_text', '<p>টু বি অনেস্ট, আমি এই masterclass-টা সম্পূর্ণ free করাতে চেয়েছিলাম।</p><p>কিন্তু problem হচ্ছে — আমার free session-গুলোতে দেখা যায় কয়েক হাজার মানুষ register করে বা join করে। যেহেতু এই session-টা Zoom-এ live হবে, তাই আমি চাইলেও এখানে বেশি মানুষ নিতে পারব না। Seat limit থাকবে।</p><p>তাই আমি এখানে ছোট্ট একটা token amount রেখেছি — শুধু audience filter করার জন্য। যেন এই masterclass-এ তারাই join করে, যারা সত্যিই e-commerce business শুরু করার ব্যাপারে serious এবং step-by-step process-টা মনোযোগ দিয়ে শিখতে ready।</p>');
+                                    $defExplainerTitle = old('masterclass_settings.explainer_title', 'à¦à¦•à¦Ÿà¦¾ à¦ªà§à¦°à¦¶à§à¦¨ à¦†à¦ªà¦¨à¦¾à¦° à¦®à¦¾à¦¥à¦¾à¦¯à¦¼ à¦†à¦¸à¦¤à§‡ à¦ªà¦¾à¦°à§‡ â€” à¦à¦¤ à¦•à¦¿à¦›à§, à¦®à¦¾à¦¤à§à¦° à§¯à§¯ à¦Ÿà¦¾à¦•à¦¾à¦¯à¦¼ à¦•à§‡à¦¨??');
+                                    $defExplainerText = old('masterclass_settings.explainer_text', '<p>à¦Ÿà§ à¦¬à¦¿ à¦…à¦¨à§‡à¦¸à§à¦Ÿ, à¦†à¦®à¦¿ à¦à¦‡ masterclass-à¦Ÿà¦¾ à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ free à¦•à¦°à¦¾à¦¤à§‡ à¦šà§‡à¦¯à¦¼à§‡à¦›à¦¿à¦²à¦¾à¦®à¥¤</p><p>à¦•à¦¿à¦¨à§à¦¤à§ problem à¦¹à¦šà§à¦›à§‡ â€” à¦†à¦®à¦¾à¦° free session-à¦—à§à¦²à§‹à¦¤à§‡ à¦¦à§‡à¦–à¦¾ à¦¯à¦¾à¦¯à¦¼ à¦•à¦¯à¦¼à§‡à¦• à¦¹à¦¾à¦œà¦¾à¦° à¦®à¦¾à¦¨à§à¦· register à¦•à¦°à§‡ à¦¬à¦¾ join à¦•à¦°à§‡à¥¤ à¦¯à§‡à¦¹à§‡à¦¤à§ à¦à¦‡ session-à¦Ÿà¦¾ Zoom-à¦ live à¦¹à¦¬à§‡, à¦¤à¦¾à¦‡ à¦†à¦®à¦¿ à¦šà¦¾à¦‡à¦²à§‡à¦“ à¦à¦–à¦¾à¦¨à§‡ à¦¬à§‡à¦¶à¦¿ à¦®à¦¾à¦¨à§à¦· à¦¨à¦¿à¦¤à§‡ à¦ªà¦¾à¦°à¦¬ à¦¨à¦¾à¥¤ Seat limit à¦¥à¦¾à¦•à¦¬à§‡à¥¤</p><p>à¦¤à¦¾à¦‡ à¦†à¦®à¦¿ à¦à¦–à¦¾à¦¨à§‡ à¦›à§‹à¦Ÿà§à¦Ÿ à¦à¦•à¦Ÿà¦¾ token amount à¦°à§‡à¦–à§‡à¦›à¦¿ â€” à¦¶à§à¦§à§ audience filter à¦•à¦°à¦¾à¦° à¦œà¦¨à§à¦¯à¥¤ à¦¯à§‡à¦¨ à¦à¦‡ masterclass-à¦ à¦¤à¦¾à¦°à¦¾à¦‡ join à¦•à¦°à§‡, à¦¯à¦¾à¦°à¦¾ à¦¸à¦¤à§à¦¯à¦¿à¦‡ e-commerce business à¦¶à§à¦°à§ à¦•à¦°à¦¾à¦° à¦¬à§à¦¯à¦¾à¦ªà¦¾à¦°à§‡ serious à¦à¦¬à¦‚ step-by-step process-à¦Ÿà¦¾ à¦®à¦¨à§‹à¦¯à§‹à¦— à¦¦à¦¿à¦¯à¦¼à§‡ à¦¶à¦¿à¦–à¦¤à§‡ readyà¥¤</p>');
 
-                                    $defBreakdownSubheading = old('masterclass_settings.breakdown_subheading', 'এই $15.00 টাকায় আপনি পাচ্ছেন:');
-                                    $defBreakdownTodayTitle = old('masterclass_settings.breakdown_today_title', 'আজকের মূল্য (token)');
-                                    $defBreakdownItems = old('masterclass_settings.breakdown_items', "🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০
-🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০");
+                                    $defBreakdownSubheading = old('masterclass_settings.breakdown_subheading', 'à¦à¦‡ $15.00 à¦Ÿà¦¾à¦•à¦¾à¦¯à¦¼ à¦†à¦ªà¦¨à¦¿ à¦ªà¦¾à¦šà§à¦›à§‡à¦¨:');
+                                    $defBreakdownTodayTitle = old('masterclass_settings.breakdown_today_title', 'à¦†à¦œà¦•à§‡à¦° à¦®à§‚à¦²à§à¦¯ (token)');
+                                    $defBreakdownItems = old('masterclass_settings.breakdown_items', "ðŸŽ“ à§¨ à¦¦à¦¿à¦¨à§‡à¦° live masterclass â€” à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ roadmap à¦¸à¦¹ | à§³à§©,à§¦à§¦à§¦
+ðŸŽ Ecom Dropshipping Mastery Course free à¦ªà¦¾à¦“à§Ÿà¦¾à¦° à¦¸à§à¦¯à§‹à¦— | à§³à§§à§¦,à§¦à§¦à§¦");
 
-                                    $defOrderFormTitle = old('masterclass_settings.order_form_title', 'মাস্টারক্লাসে জয়েন করতে নিচের ফর্মটি পূরণ করুন');
+                                    $defOrderFormTitle = old('masterclass_settings.order_form_title', 'à¦®à¦¾à¦¸à§à¦Ÿà¦¾à¦°à¦•à§à¦²à¦¾à¦¸à§‡ à¦œà¦¯à¦¼à§‡à¦¨ à¦•à¦°à¦¤à§‡ à¦¨à¦¿à¦šà§‡à¦° à¦«à¦°à§à¦®à¦Ÿà¦¿ à¦ªà§‚à¦°à¦£ à¦•à¦°à§à¦¨');
                                     $defOrderFormSubtitle = old('masterclass_settings.order_form_subtitle', 'Give valid information');
                                     $defNameLabel = old('masterclass_settings.name_label', 'Your Full Name');
-                                    $defNamePlaceholder = old('masterclass_settings.name_placeholder', 'আপনার সম্পূর্ণ নাম');
+                                    $defNamePlaceholder = old('masterclass_settings.name_placeholder', 'à¦†à¦ªà¦¨à¦¾à¦° à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ à¦¨à¦¾à¦®');
                                     $defPhoneLabel = old('masterclass_settings.phone_label', 'Mobile Number');
 
                                     $defOverviewTag = old('masterclass_settings.overview_tag', 'FEATURED COURSE');
@@ -391,99 +407,6 @@
                                     $defHideOverviewSection = old('masterclass_settings.hide_overview_section');
                                 @endphp
                                  <div class="masterclass-single-page-wrapper">
-                                     <!-- Section 1: Hero Header -->
-                                     <div class="card border mb-4 rounded-3 shadow-sm">
-                                         <div class="card-header bg-white py-3">
-                                              <span class="form-label font-16 fw-normal text-dark m-0"> Hero Header & Video Media
-                                              </span>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="row gx-20">
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Eyebrow Golden Badge Text</label>
-                                                    <input type="text" name="masterclass_settings[eyebrow_title]" class="form-control rounded-2"
-                                                           value="{{ $defEyebrow }}" placeholder="E-commerce শুরু করার hidden path">
-                                                        <!-- Section 2: Gold Info Card -->
-                                     <div class="card border mb-4 rounded-3 shadow-sm">
-                                         <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
-                                             <span class="form-label font-16 fw-normal text-dark m-0"> Gold Border Info Card
-                                             </span>
-                                             <button type="button" class="btn sg-btn-primary btn-sm rounded-2" id="add_new_gold_point_btn">
-                                                 Add New Info Point <i class="las la-plus ms-1"></i>
-                                             </button>
-                                         </div>
-                                         <div class="card-body p-4">
-                                             <div class="row gx-20 mb-4">
-                                                 <div class="col-lg-4 col-md-6 mb-4">
-                                                     <label class="form-label">Top Gold Offer Badge Text</label>
-                                                     <input type="text" name="masterclass_settings[gold_badge_top]" class="form-control rounded-2"
-                                                            value="{{ $defGoldBadgeTop }}" placeholder="এখনই সিট বুক করুন">
-                                                 </div>
-                                                 <div class="col-lg-4 col-md-6 mb-4">
-                                                     <label class="form-label">Gold Offer Highlight Title</label>
-                                                     <input type="text" name="masterclass_settings[gold_offer_title]" class="form-control rounded-2"
-                                                            value="{{ $defGoldOfferTitle }}" placeholder="আজকের স্পেশাল অফার">
-                                                 </div>
-                                                 <div class="col-lg-4 col-md-6 mb-4">
-                                                     <label class="form-label">Original Price Label</label>
-                                                     <input type="text" name="masterclass_settings[original_price_label]" class="form-control rounded-2"
-                                                            value="{{ $defOriginalPriceLabel }}" placeholder="মূল প্রাইস">
-                                                 </div>
-                                                 <div class="col-lg-6 col-md-6 mb-4">
-                                                     <label class="form-label">Gold Card CTA Button Text</label>
-                                                     <input type="text" name="masterclass_settings[gold_cta_text]" class="form-control rounded-2"
-                                                            value="{{ $defGoldCtaText }}" placeholder="এখনই জয়েন করুন">
-                                                 </div>
-                                                 <div class="col-lg-6 col-md-6 mb-4">
-                                                     <label class="form-label">Gold Card Remaining Seats Text</label>
-                                                     <input type="text" name="masterclass_settings[gold_seats_text]" id="mc_gold_seats_input" class="form-control rounded-2"
-                                                            value="{{ $defGoldSeatsText }}" placeholder="আর মাত্র 100 সিট বাকি">
-                                                 </div>
-                                             </div>
-
-                                             <div class="border-top pt-4">
-                                                 <label class="form-label font-15 fw-semibold mb-3">Card Info Points (কার্ডের সেসন্স, সময়সূচী, লেভেল ইত্যাদি পয়েন্টসমূহ)</label>
-                                                 <div id="gold_points_container">
-                                                     @php
-                                                         $defGoldInfoPoints = !empty($mcSettings['gold_info_points']) && is_array($mcSettings['gold_info_points']) ? $mcSettings['gold_info_points'] : [
-                                                             ['icon' => 'fas fa-video', 'title' => $defZoomTitle ?? 'Zoom লাইভ 104', 'value' => $defZoomSubtitle ?? 'অনলাইন ইন্টারেক্টিভ সেশন'],
-                                                             ['icon' => 'fas fa-clock', 'title' => $defScheduleLabel ?? 'সময় / সময়সূচী', 'value' => $defScheduleValue ?? '4h 40min'],
-                                                             ['icon' => 'fas fa-layer-group', 'title' => $defLevelLabel ?? 'Level', 'value' => $defLevelValue ?? 'beginner']
-                                                         ];
-                                                     @endphp
-
-                                                     @foreach($defGoldInfoPoints as $gpIdx => $gpItem)
-                                                         <div class="gold-point-single-item card border p-3 mb-3 bg-light rounded-2">
-                                                             <div class="row gx-2 align-items-center">
-                                                                 <div class="col-md-3 col-12 mb-2 mb-md-0">
-                                                                     <label class="form-label small text-muted mb-1">Icon Class</label>
-                                                                     <input type="text" name="masterclass_settings[gold_info_points][{{ $gpIdx }}][icon]" class="form-control rounded-2 bg-white"
-                                                                            value="{{ $gpItem['icon'] ?? 'fas fa-check-circle' }}" placeholder="e.g. fas fa-video">
-                                                                 </div>
-                                                                 <div class="col-md-4 col-12 mb-2 mb-md-0">
-                                                                     <label class="form-label small text-muted mb-1">Title / Label</label>
-                                                                     <input type="text" name="masterclass_settings[gold_info_points][{{ $gpIdx }}][title]" class="form-control rounded-2 bg-white"
-                                                                            value="{{ $gpItem['title'] ?? '' }}" placeholder="যেমন: Zoom লাইভ 104">
-                                                                 </div>
-                                                                 <div class="col-md-4 col-12 mb-2 mb-md-0">
-                                                                     <label class="form-label small text-muted mb-1">Subtitle / Value</label>
-                                                                     <input type="text" name="masterclass_settings[gold_info_points][{{ $gpIdx }}][value]" class="form-control rounded-2 bg-white"
-                                                                            value="{{ $gpItem['value'] ?? '' }}" placeholder="যেমন: অনলাইন সেশন / 4h 40min">
-                                                                 </div>
-                                                                 <div class="col-md-1 col-12 text-end">
-                                                                     <label class="form-label d-none d-md-block opacity-0 mb-1">Del</label>
-                                                                     <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-gold-point-btn">
-                                                                         <i class="las la-trash-alt fs-4"></i>
-                                                                     </a>
-                                                                 </div>
-                                                             </div>
-                                                         </div>
-                                                     @endforeach
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-
                                     <!-- Section 3: Benefits & Target Audience -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
@@ -497,16 +420,16 @@
                                             <div class="mb-4">
                                                 <label class="form-label">Benefits Section Heading</label>
                                                 <input type="text" name="masterclass_settings[benefits_title]" class="form-control rounded-2"
-                                                       value="{{ $defBenefitsTitle }}" placeholder="এই মাস্টারক্লাস কার জন্য?">
+                                                       value="{{ $defBenefitsTitle }}" placeholder="à¦à¦‡ à¦®à¦¾à¦¸à§à¦Ÿà¦¾à¦°à¦•à§à¦²à¦¾à¦¸ à¦•à¦¾à¦° à¦œà¦¨à§à¦¯?">
                                             </div>
 
-                                            <label class="form-label mb-2">Benefit Points (এই মাস্টারক্লাস কার কার জন্য)</label>
+                                            <label class="form-label mb-2">Benefit Points (à¦à¦‡ à¦®à¦¾à¦¸à§à¦Ÿà¦¾à¦°à¦•à§à¦²à¦¾à¦¸ à¦•à¦¾à¦° à¦•à¦¾à¦° à¦œà¦¨à§à¦¯)</label>
                                             <div id="benefits_items_container">
                                                 @foreach($benefitsList as $bIdx => $bItem)
                                                     <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
                                                         <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">{{ $bIdx + 1 }}</span></span>
                                                         <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white"
-                                                               value="{{ $bItem }}" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
+                                                               value="{{ $bItem }}" placeholder="à¦¸à§à¦¬à¦¿à¦§à¦¾ / à¦ªà¦¯à¦¼à§‡à¦¨à§à¦Ÿà¦Ÿà¦¿ à¦²à¦¿à¦–à§à¦¨...">
                                                         <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
                                                             <i class="las la-trash-alt fs-5"></i>
                                                         </a>
@@ -608,43 +531,43 @@
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Pill / Badge Text</label>
                                                     <input type="text" name="masterclass_settings[gift_badge]" class="form-control rounded-2"
-                                                           value="{{ $defGiftBadge }}" placeholder="🎁 যারা join করবেন তাদের জন্য special gift">
+                                                           value="{{ $defGiftBadge }}" placeholder="ðŸŽ à¦¯à¦¾à¦°à¦¾ join à¦•à¦°à¦¬à§‡à¦¨ à¦¤à¦¾à¦¦à§‡à¦° à¦œà¦¨à§à¦¯ special gift">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Title</label>
                                                     <input type="text" name="masterclass_settings[gift_title]" class="form-control rounded-2"
-                                                           value="{{ $defGiftTitle }}" placeholder="৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ">
+                                                           value="{{ $defGiftTitle }}" placeholder="à§³à§§à§¦,à§¦à§¦à§¦ à¦Ÿà¦¾à¦•à¦¾à¦° Ecom Dropshipping Mastery Course â€” à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ FREE à¦•à¦°à¦¾à¦° à¦¸à§à¦¯à§‹à¦—">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Original Gift Value</label>
                                                     <input type="text" name="masterclass_settings[gift_value]" class="form-control rounded-2"
-                                                           value="{{ $defGiftValue }}" placeholder="৳১০,০০০">
+                                                           value="{{ $defGiftValue }}" placeholder="à§³à§§à§¦,à§¦à§¦à§¦">
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Gift Description</label>
                                                     <textarea name="masterclass_settings[gift_description]" class="form-control rounded-2 summernote" rows="3"
-                                                              placeholder="এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন...">{{ $defGiftDescription }}</textarea>
+                                                              placeholder="à¦à¦‡ master class-à¦ à¦¯à¦¾à¦°à¦¾ join à¦•à¦°à¦¬à§‡à¦¨, à¦¤à¦¾à¦°à¦¾ à¦†à¦®à¦¾à¦° à§³à§§à§¦,à§¦à§¦à§¦ à¦Ÿà¦¾à¦•à¦¾à¦° Ecom Dropshipping Mastery Course à¦Ÿà¦¾ free à¦¤à§‡ à¦•à¦°à¦¾à¦° à¦¸à§à¦¯à§‹à¦— à¦ªà¦¾à¦¬à§‡à¦¨...">{{ $defGiftDescription }}</textarea>
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Gift Quote Callout Box</label>
                                                     <textarea name="masterclass_settings[gift_quote]" class="form-control rounded-2 summernote" rows="3"
-                                                              placeholder="এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় নিয়ে আলোচনা করেছি...">{{ $defGiftQuote }}</textarea>
+                                                              placeholder="à¦à¦‡ à¦•à§‹à¦°à§à¦¸à§‡ à¦†à¦®à¦¿ à¦‡-à¦•à¦®à¦¾à¦°à§à¦¸ à¦¬à¦¿à¦œà¦¨à§‡à¦¸, à¦¡à¦¿à¦œà¦¿à¦Ÿà¦¾à¦² à¦®à¦¾à¦°à§à¦•à§‡à¦Ÿà¦¿à¦‚ à¦à¦° à¦¬à¦¿à¦­à¦¿à¦¨à§à¦¨ à¦¬à¦¿à¦·à¦¯à¦¼ à¦¨à¦¿à¦¯à¦¼à§‡ à¦†à¦²à§‹à¦šà¦¨à¦¾ à¦•à¦°à§‡à¦›à¦¿...">{{ $defGiftQuote }}</textarea>
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Footer Note Text</label>
                                                     <input type="text" name="masterclass_settings[gift_footer_note]" class="form-control rounded-2"
-                                                           value="{{ $defGiftFooterNote }}" placeholder="যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।">
+                                                           value="{{ $defGiftFooterNote }}" placeholder="à¦¯à¦¾à¦°à¦¾ à¦à¦•à¦¦à¦® à¦¨à¦¤à§à¦¨ à¦†à¦›à§‡à¦¨ à¦¤à¦¾à¦°à¦¾à¦“ à¦à¦‡ à¦•à§‹à¦°à§à¦¸ à¦¥à§‡à¦•à§‡ à¦¬à§‡à¦¨à¦¿à¦«à¦¿à¦Ÿà§‡à¦¡ à¦¹à¦¤à§‡ à¦ªà¦¾à¦°à¦¬à§‡à¥¤">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Red CTA Button Text</label>
                                                     <input type="text" name="masterclass_settings[gift_cta_text]" class="form-control rounded-2"
-                                                           value="{{ $defGiftCtaText }}" placeholder="সিট কনফার্ম করুন →">
+                                                           value="{{ $defGiftCtaText }}" placeholder="à¦¸à¦¿à¦Ÿ à¦•à¦¨à¦«à¦¾à¦°à§à¦® à¦•à¦°à§à¦¨ â†’">
                                                 </div>
                                             </div>
                                         </div>
@@ -667,13 +590,13 @@
                                                 <div class="col-lg-4 col-md-6 mb-4">
                                                     <label class="form-label">Live Schedule Headline</label>
                                                     <input type="text" name="masterclass_settings[class_schedule_title]" class="form-control rounded-2"
-                                                           value="{{ $defClassScheduleTitle }}" placeholder="২ দিনব্যাপী e-commerce live masterclass">
+                                                           value="{{ $defClassScheduleTitle }}" placeholder="à§¨ à¦¦à¦¿à¦¨à¦¬à§à¦¯à¦¾à¦ªà§€ e-commerce live masterclass">
                                                 </div>
 
                                                 <div class="col-lg-4 col-md-6 mb-4">
                                                     <label class="form-label">Live Schedule Subtitle / Start Time</label>
                                                     <input type="text" name="masterclass_settings[class_schedule_time]" class="form-control rounded-2"
-                                                           value="{{ $defClassScheduleTime }}" placeholder="৬ আগস্ট তারিখ রাত ৮ টায় শুরু">
+                                                           value="{{ $defClassScheduleTime }}" placeholder="à§¬ à¦†à¦—à¦¸à§à¦Ÿ à¦¤à¦¾à¦°à¦¿à¦– à¦°à¦¾à¦¤ à§® à¦Ÿà¦¾à¦¯à¦¼ à¦¶à§à¦°à§">
                                                 </div>
                                             </div>
                                         </div>
@@ -700,7 +623,7 @@
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Explainer Heading Question</label>
                                                     <input type="text" name="masterclass_settings[explainer_title]" class="form-control rounded-2"
-                                                           value="{{ $defExplainerTitle }}" placeholder="একটা প্রশ্ন আপনার মাথায় আসতে পারে — এত কিছু, মাত্র ৯৯ টাকায় কেন??">
+                                                           value="{{ $defExplainerTitle }}" placeholder="à¦à¦•à¦Ÿà¦¾ à¦ªà§à¦°à¦¶à§à¦¨ à¦†à¦ªà¦¨à¦¾à¦° à¦®à¦¾à¦¥à¦¾à¦¯à¦¼ à¦†à¦¸à¦¤à§‡ à¦ªà¦¾à¦°à§‡ â€” à¦à¦¤ à¦•à¦¿à¦›à§, à¦®à¦¾à¦¤à§à¦° à§¯à§¯ à¦Ÿà¦¾à¦•à¦¾à¦¯à¦¼ à¦•à§‡à¦¨??">
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
@@ -734,19 +657,19 @@
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Breakdown Subheading Text</label>
                                                     <input type="text" name="masterclass_settings[breakdown_subheading]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownSubheading }}" placeholder="এই $15.00 টাকায় আপনি পাচ্ছেন:">
+                                                           value="{{ $defBreakdownSubheading }}" placeholder="à¦à¦‡ $15.00 à¦Ÿà¦¾à¦•à¦¾à¦¯à¦¼ à¦†à¦ªà¦¨à¦¿ à¦ªà¦¾à¦šà§à¦›à§‡à¦¨:">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Today Token Price Table Title</label>
                                                     <input type="text" name="masterclass_settings[breakdown_today_title]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownTodayTitle }}" placeholder="আজকের মূল্য (token)">
+                                                           value="{{ $defBreakdownTodayTitle }}" placeholder="à¦†à¦œà¦•à§‡à¦° à¦®à§‚à¦²à§à¦¯ (token)">
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Breakdown Items (Format: Item Title | Price Value)</label>
                                                     <textarea name="masterclass_settings[breakdown_items]" class="form-control rounded-2 summernote" rows="4"
-                                                              placeholder="🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০&#10;🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০">{{ $defBreakdownItems }}</textarea>
+                                                              placeholder="ðŸŽ“ à§¨ à¦¦à¦¿à¦¨à§‡à¦° live masterclass â€” à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ roadmap à¦¸à¦¹ | à§³à§©,à§¦à§¦à§¦&#10;ðŸŽ Ecom Dropshipping Mastery Course free à¦ªà¦¾à¦“à§Ÿà¦¾à¦° à¦¸à§à¦¯à§‹à¦— | à§³à§§à§¦,à§¦à§¦à§¦">{{ $defBreakdownItems }}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -763,7 +686,7 @@
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Registration Form Title</label>
                                                     <input type="text" name="masterclass_settings[order_form_title]" class="form-control rounded-2"
-                                                           value="{{ $defOrderFormTitle }}" placeholder="মাস্টারক্লাসে জয়েন করতে নিচের ফর্মটি পূরণ করুন">
+                                                           value="{{ $defOrderFormTitle }}" placeholder="à¦®à¦¾à¦¸à§à¦Ÿà¦¾à¦°à¦•à§à¦²à¦¾à¦¸à§‡ à¦œà¦¯à¦¼à§‡à¦¨ à¦•à¦°à¦¤à§‡ à¦¨à¦¿à¦šà§‡à¦° à¦«à¦°à§à¦®à¦Ÿà¦¿ à¦ªà§‚à¦°à¦£ à¦•à¦°à§à¦¨">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
@@ -781,7 +704,7 @@
                                                 <div class="col-lg-4 col-md-6 mb-4">
                                                     <label class="form-label">Full Name Field Placeholder</label>
                                                     <input type="text" name="masterclass_settings[name_placeholder]" class="form-control rounded-2"
-                                                           value="{{ $defNamePlaceholder }}" placeholder="আপনার সম্পূর্ণ নাম">
+                                                           value="{{ $defNamePlaceholder }}" placeholder="à¦†à¦ªà¦¨à¦¾à¦° à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ à¦¨à¦¾à¦®">
                                                 </div>
 
                                                 <div class="col-lg-4 col-md-6 mb-4">
@@ -805,7 +728,7 @@
                                                 <div class="col-lg-4 col-md-6 mb-4">
                                                     <label class="form-label">Email Address Field Placeholder</label>
                                                     <input type="text" name="masterclass_settings[email_placeholder]" class="form-control rounded-2"
-                                                           value="{{ $defEmailPlaceholder }}" placeholder="আপনার ইমেইল এড্রেস">
+                                                           value="{{ $defEmailPlaceholder }}" placeholder="à¦†à¦ªà¦¨à¦¾à¦° à¦‡à¦®à§‡à¦‡à¦² à¦à¦¡à§à¦°à§‡à¦¸">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
@@ -938,14 +861,14 @@
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Support Title / Heading</label>
                                                     <input type="text" name="masterclass_settings[support_title]" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['support_title'] ?? $defSupportTitle }}" placeholder="আর সাপোর্ট?">
+                                                           value="{{ $mcSettings['support_title'] ?? $defSupportTitle }}" placeholder="à¦†à¦° à¦¸à¦¾à¦ªà§‹à¦°à§à¦Ÿ?">
                                                 </div>
 
                                                 <!-- Support Description -->
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Support Description</label>
                                                     <textarea name="masterclass_settings[support_description]" class="form-control rounded-2 summernote" rows="3"
-                                                              placeholder="সাপোর্টের বিস্তারিত লিখুন...">{{ $mcSettings['support_description'] ?? $defSupportDescription }}</textarea>
+                                                              placeholder="à¦¸à¦¾à¦ªà§‹à¦°à§à¦Ÿà§‡à¦° à¦¬à¦¿à¦¸à§à¦¤à¦¾à¦°à¦¿à¦¤ à¦²à¦¿à¦–à§à¦¨...">{{ $mcSettings['support_description'] ?? $defSupportDescription }}</textarea>
                                                 </div>
 
                                                 <!-- Support Image Upload -->
@@ -1262,7 +1185,7 @@
                 if (goldVal && /\d+/.test(goldVal)) {
                     $('#mc_gold_seats_input').val(goldVal.replace(/\d+/, avail));
                 } else {
-                    $('#mc_gold_seats_input').val('আর মাত্র ' + avail + ' সিট বাকি');
+                    $('#mc_gold_seats_input').val('à¦†à¦° à¦®à¦¾à¦¤à§à¦° ' + avail + ' à¦¸à¦¿à¦Ÿ à¦¬à¦¾à¦•à¦¿');
                 }
             });
 
@@ -1324,7 +1247,7 @@
                 let html = `
                     <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
                         <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">${count + 1}</span></span>
-                        <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
+                        <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white" placeholder="à¦¸à§à¦¬à¦¿à¦§à¦¾ / à¦ªà¦¯à¦¼à§‡à¦¨à§à¦Ÿà¦Ÿà¦¿ à¦²à¦¿à¦–à§à¦¨...">
                         <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
                             <i class="las la-trash-alt fs-5"></i>
                         </a>
@@ -1355,12 +1278,12 @@
                             <div class="col-md-4 col-12 mb-2 mb-md-0">
                                 <label class="form-label small text-muted mb-1">Title / Label</label>
                                 <input type="text" name="masterclass_settings[gold_info_points][${idx}][title]" class="form-control rounded-2 bg-white"
-                                       placeholder="যেমন: Zoom লাইভ 104">
+                                       placeholder="à¦¯à§‡à¦®à¦¨: Zoom à¦²à¦¾à¦‡à¦­ 104">
                             </div>
                             <div class="col-md-4 col-12 mb-2 mb-md-0">
                                 <label class="form-label small text-muted mb-1">Subtitle / Value</label>
                                 <input type="text" name="masterclass_settings[gold_info_points][${idx}][value]" class="form-control rounded-2 bg-white"
-                                       placeholder="যেমন: অনলাইন সেশন / 4h 40min">
+                                       placeholder="à¦¯à§‡à¦®à¦¨: à¦…à¦¨à¦²à¦¾à¦‡à¦¨ à¦¸à§‡à¦¶à¦¨ / 4h 40min">
                             </div>
                             <div class="col-md-1 col-12 text-end">
                                 <label class="form-label d-none d-md-block opacity-0 mb-1">Del</label>

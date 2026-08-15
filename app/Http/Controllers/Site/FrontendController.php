@@ -67,6 +67,7 @@ class FrontendController extends Controller
             } else {
                 $data['course'] = null;
             }
+            $data['hero_course'] = \App\Models\Course::where('status', 'approved')->latest()->first();
             $data['success_stories'] = $successStoriesRepository->activeStories();
 
             // dd($data);

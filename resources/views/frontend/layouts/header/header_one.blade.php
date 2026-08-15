@@ -2,9 +2,18 @@
     class="template-header header-layout-1 course-item-active {{ isHome() ? 'nav-white-color position-absolute' : (isAuth() ? 'bg-white' : '')}}">
     <div class="header-navigation sticky-header {{ isHome() ? '': 'header-shadow'}}">
         <div class="container container-1278">
-            <div class="header-inner">
-                <div class="header-left">
-                    <div class="brand-logo">
+            <style>
+                .template-header.header-layout-1 .header-inner { padding-top: 5px !important; padding-bottom: 5px !important; min-height: auto !important; }
+                .template-header .nav-menu > ul > li > a { padding-top: 8px !important; padding-bottom: 8px !important; }
+                .header-extra { padding-top: 5px !important; padding-bottom: 5px !important; }
+                .template-header.header-layout-1 .header-inner { height: 60px !important; }
+                .template-header.header-layout-1 .header-inner .brand-logo { max-height: 50px !important; }
+                .template-header.header-layout-1 .header-inner .brand-logo img { max-height: 35px !important; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul > li > a { line-height: 60px !important; }
+            </style>
+            <div class="header-inner d-flex align-items-center justify-content-between py-0">
+                <div class="header-left" style="flex: 1;">
+                    <div class="brand-logo d-flex align-items-center">
                         @if(config('app.demo_mode'))
 
                             @php
@@ -35,9 +44,9 @@
                         @endif
                     </div>
                 </div>
-                <div class="header-center flex-grow-1 d-flex justify-content-center mx-3">
+                <div class="header-center d-flex justify-content-center align-items-center mx-3" style="flex: 1;">
                     <nav class="nav-menu d-none d-lg-block">
-                        <ul>
+                        <ul class="mb-0 d-flex align-items-center">
                             @if (setting('show_default_courses_link') != 0)
                                 @if (setting('website_mode') == 'single_course')
                                     @php
@@ -144,8 +153,8 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="header-right">
-                    <ul class="header-extra">
+                <div class="header-right d-flex justify-content-end align-items-center" style="flex: 1;">
+                    <ul class="header-extra d-flex align-items-center mb-0">
                         <!-- <li>
                             <form class="searchbox search-dark-color" action="{{ route('courses') }}" method="GET">
                                 <input type="search" placeholder="{{ __('search') }}" name="search"

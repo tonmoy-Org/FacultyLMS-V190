@@ -1,94 +1,11 @@
-@extends('frontend.layouts.master')
+﻿@extends('frontend.layouts.master')
 @section('title', __('home'))
 
 @section('base.content')
     <!--====== Start Header ======-->
     @include('frontend.layouts.header.'.$section['header'])
     
-    @php
-        $lang = app()->getLocale();
-        
-        $resolveImg = function($key, $fallback = '') {
-            $settingVal = setting($key);
-            if ($settingVal) {
-                if (is_numeric($settingVal)) {
-                    $media = \App\Models\MediaLibrary::find($settingVal);
-                    if ($media && $media->image_variants) {
-                        return getFileLink('original_image', $media->image_variants);
-                    }
-                }
-                if (is_array($settingVal)) {
-                    return getFileLink('original_image', $settingVal);
-                }
-                if (is_string($settingVal) && (str_contains($settingVal, '/') || str_contains($settingVal, '.'))) {
-                    return getFileLink('original_image', $settingVal);
-                }
-            }
-            return $fallback;
-        };
-
-        $heroTitle = setting('hero_title', $lang) ?: (setting('single_hero_title') ?: (isset($course) && $course ? $course->title : __('Build Your Dream Career')));
-        $heroDesc = setting('hero_description', $lang) ?: (setting('single_hero_description') ?: (isset($course) && $course ? ($course->short_description ?? strip_tags($course->description)) : __('Learn from industry experts and enhance your skills with our comprehensive courses.')));
-        $heroBtnLabel = setting('hero_main_action_btn_label', $lang) ?: (isset($course) && $course ? __('Enroll Now') : __('Explore Courses'));
-        $heroBtnUrl = setting('hero_main_action_btn_url') ? url(setting('hero_main_action_btn_url')) : (isset($course) && $course ? route('course.details', $course->slug) : route('courses'));
-
-        $heroImg1 = $resolveImg('header1_hero_image1') ?: ($resolveImg('header2_hero_image1') ?: ($resolveImg('single_hero_image') ?: (isset($course) && $course && $course->image ? getFileLink('original_image', $course->image) : static_asset('frontend/img/hero/hero-v5-masonry-1.jpg'))));
-        $heroImg2 = $resolveImg('header1_hero_image2') ?: ($resolveImg('header2_hero_image2') ?: static_asset('frontend/img/hero/hero-v5-masonry-2.jpg'));
-        $heroImg3 = $resolveImg('header1_hero_image3') ?: ($resolveImg('header2_hero_image3') ?: static_asset('frontend/img/hero/hero-v5-masonry-3.jpg'));
-        $heroImg4 = $resolveImg('header1_hero_image4') ?: ($resolveImg('header2_hero_image4') ?: static_asset('frontend/img/hero/hero-v5-masonry-4.jpg'));
-    @endphp
-    <!--====== Start Single Course Hero Section ======-->
-    <section class="hero-area hero-area-v5 p-t-120 p-b-100 p-b-md-40" style="background-color: #110B3A;">
-        <div class="container">
-            <div class="row align-items-center g-4">
-                <div class="col-lg-6">
-                    @if(setting('hero_subtitle', $lang))
-                        <span class="hero-subtitle mb-2 d-inline-block text-uppercase fw-bold" style="color: #10b981; letter-spacing: 1px;">{!! setting('hero_subtitle', $lang) !!}</span>
-                    @endif
-                    <h1 class="hero-title m-b-20" style="color: #ffffff; font-size: 2.8rem; line-height: 1.25;">{!! $heroTitle !!}</h1>
-                    <p class="m-b-30" style="font-size: 1.1rem; line-height: 1.8; color: #d1d5db;">
-                        {!! $heroDesc !!}
-                    </p>
-                    <a href="{{ $heroBtnUrl }}" class="template-btn mt-3">{{ $heroBtnLabel }}</a>
-                </div>
-                <div class="col-lg-6">
-                    <div class="hero-staggered-collage position-relative w-100" style="min-height: 520px; max-width: 580px; margin: 0 auto;">
-                        <!-- Top Right Image -->
-                        @if($heroImg1)
-                        <div class="collage-card card-1 position-absolute shadow-lg overflow-hidden" 
-                             style="top: 0; right: 0; width: 55%; height: 320px; border-radius: 24px; z-index: 2; border: 3px solid rgba(255,255,255,0.15); transition: transform 0.3s ease;">
-                            <img src="{{ $heroImg1 }}" alt="Hero Image 1" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        @endif
-
-                        <!-- Left Middle Image -->
-                        @if($heroImg2)
-                        <div class="collage-card card-2 position-absolute shadow-lg overflow-hidden" 
-                             style="top: 90px; left: 0; width: 52%; height: 340px; z-index: 1; border-radius: 24px; border: 3px solid rgba(255,255,255,0.15); transition: transform 0.3s ease;">
-                            <img src="{{ $heroImg2 }}" alt="Hero Image 2" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        @endif
-
-                        <!-- Bottom Right Image -->
-                        @if($heroImg3)
-                        <div class="collage-card card-3 position-absolute shadow-lg overflow-hidden" 
-                             style="top: 230px; right: 2%; width: 55%; height: 310px; z-index: 3; border-radius: 24px; border: 3px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;">
-                            <img src="{{ $heroImg3 }}" alt="Hero Image 3" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        @endif
-
-                        <!-- Fourth Floating Accent Image -->
-                        @if($heroImg4)
-                        <div class="collage-card card-4 position-absolute shadow-lg overflow-hidden" 
-                             style="bottom: -15px; left: 10%; width: 36%; height: 160px; z-index: 4; border-radius: 20px; border: 4px solid #ffffff; transition: transform 0.3s ease;">
-                            <img src="{{ $heroImg4 }}" alt="Hero Image 4" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        @endif
-                    </div>
-            </div>
-        </div>
-        </div>
-    </section>
+    @include('frontend.homePage.hero_area.hero_area_one')
 
     <div class="home-page-sections">
     <!--====== Start Feature Cards Section (Life Time Access, Free Course Materials, Dedicated Support) ======-->

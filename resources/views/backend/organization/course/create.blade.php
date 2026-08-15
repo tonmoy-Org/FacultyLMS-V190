@@ -85,6 +85,14 @@
 
                                     <div class="col-lg-6">
                                         <div class="mb-4">
+                                            <label for="courseSubtitle" class="form-label">Course Subtitle</label>
+                                            <input type="text" class="form-control" name="course_subtitle" id="courseSubtitle" placeholder="Enter Course Subtitle" value="{{ old('course_subtitle') }}">
+                                        </div>
+                                    </div>
+                                    <!-- End Course Subtitle -->
+
+                                    <div class="col-lg-6">
+                                        <div class="mb-4">
                                             <div class="select-type-v2">
                                                 <label for="select_category"
                                                     class="form-label">{{ __('select_category') }}</label>
@@ -262,6 +270,14 @@
                                         </div>
                                     </div>
                                     <!-- End Short Description -->
+
+                                    <div class="col-lg-12">
+                                        <div class="mb-4">
+                                            <label for="descriptionSubtitle" class="form-label">Description Subtitle</label>
+                                            <input type="text" class="form-control" name="description_subtitle" id="descriptionSubtitle" placeholder="Enter Description Subtitle" value="{{ old('description_subtitle') }}">
+                                        </div>
+                                    </div>
+                                    <!-- End Description Subtitle -->
 
                                     <div class="col-lg-12">
                                         <div class="editor-wrapper">
