@@ -9,13 +9,13 @@
 <style>
     .custom-testimonial-card {
         background: #ffffff;
-        border-radius: 18px;
+        border-radius: 8px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
         height: 100%;
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        border: 1px solid #F1F5F9;
+        border: 1px solid #E5E7EB;
         transition: all 0.3s ease;
     }
     .custom-testimonial-card:hover {
@@ -35,12 +35,12 @@
         flex-grow: 1;
     }
     .custom-testimonial-card p {
-        color: #64748b;
-        font-size: 15px;
-        line-height: 1.7;
+        color: #475569;
+        font-size: 15.5px;
+        line-height: 1.75;
         margin-bottom: 22px;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -51,8 +51,8 @@
         margin-top: auto;
     }
     .custom-testimonial-author > img {
-        width: 54px;
-        height: 54px;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
         margin-right: 14px;
         object-fit: cover;
@@ -125,13 +125,13 @@
                     <span class="sub-title text-uppercase fw-bold m-b-15 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
                         {{ __('SUCCESS STORIES') }}
                     </span>
-                    <h2 class="m-b-20" style="color: #1a1b4b; font-size: 38px; line-height: 1.25;">
+                    <h2 class="fw-bold m-b-20" style="color: #1a1b4b; font-size: 28px; line-height: 1.25;">
                         {{ isset($section->contents['title']) && !empty($section->contents['title']) ? $section->contents['title'] : __('What Says My Students About The Platform') }}
                     </h2>
-                    <p class="m-b-25" style="color: #64748b; font-size: 16px; line-height: 1.7;">
+                    <p class="m-b-25" style="color: #475569; font-size: 16px; line-height: 1.7;">
                         {{ isset($section->contents['sub_title']) && !empty($section->contents['sub_title']) ? $section->contents['sub_title'] : __('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi.') }}
                     </p>
-                    <a href="{{ url('success') }}" class="template-btn">
+                    <a href="{{ url('success') }}" class="template-btn" style="border-radius: 8px;">
                         {{ __('View All Success Stories') }}
                     </a>
                 </div>

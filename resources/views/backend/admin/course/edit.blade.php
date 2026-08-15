@@ -1,4 +1,4 @@
-﻿@extends('backend.layouts.master')
+@extends('backend.layouts.master')
 @section('title', __('edit_course'))
 @section('content')
     <div class="container-fluid">
@@ -480,32 +480,32 @@
                                     $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
                                     if(!is_array($mcSettings)) $mcSettings = [];
 
-                                    $defEyebrow = !empty($mcSettings['eyebrow_title']) ? $mcSettings['eyebrow_title'] : ($category ? $category->lang_title : 'E-commerce à¦¶à§à¦°à§ à¦•à¦°à¦¾à¦° hidden path');
-                                    $defPrimaryCta = !empty($mcSettings['primary_cta_text']) ? $mcSettings['primary_cta_text'] : 'à¦°à§‡à¦œà¦¿à¦¸à§à¦Ÿà§à¦°à§‡à¦¶à¦¨ à¦•à¦°à§à¦¨ à¦à¦–à¦¨à¦‡';
-                                    $defVideoCaption = !empty($mcSettings['video_caption']) ? $mcSettings['video_caption'] : 'à¦¬à¦¿à¦¸à§à¦¤à¦¾à¦°à¦¿à¦¤ à¦œà¦¾à¦¨à¦¤à§‡ à¦­à¦¿à¦¡à¦¿à¦“à¦Ÿà¦¿ à¦¦à§‡à¦–à§à¦¨';
+                                    $defEyebrow = !empty($mcSettings['eyebrow_title']) ? $mcSettings['eyebrow_title'] : ($category ? $category->lang_title : 'E-commerce শুরু করার hidden path');
+                                    $defPrimaryCta = !empty($mcSettings['primary_cta_text']) ? $mcSettings['primary_cta_text'] : 'রেজিস্ট্রেশন করুন এখনই';
+                                    $defVideoCaption = !empty($mcSettings['video_caption']) ? $mcSettings['video_caption'] : 'বিস্তারিত জানতে ভিডিওটি দেখুন';
                                     $defRemainingSeats = !empty($mcSettings['remaining_seats']) ? $mcSettings['remaining_seats'] : ($course->capacity > 0 ? $course->capacity : '100');
                                     $availSeatsCount = max(0, (int)$defRemainingSeats - (int)($course->total_enrolled ?? 0));
 
-                                    $defGoldBadgeTop = !empty($mcSettings['gold_badge_top']) ? $mcSettings['gold_badge_top'] : 'à¦à¦–à¦¨à¦‡ à¦¸à¦¿à¦Ÿ à¦¬à§à¦• à¦•à¦°à§à¦¨';
-                                    $defZoomTitle = !empty($mcSettings['zoom_title']) ? $mcSettings['zoom_title'] : 'Zoom à¦²à¦¾à¦‡à¦­ 104';
-                                    $defZoomSubtitle = !empty($mcSettings['zoom_subtitle']) ? $mcSettings['zoom_subtitle'] : 'à¦…à¦¨à¦²à¦¾à¦‡à¦¨ à¦‡à¦¨à§à¦Ÿà¦¾à¦°à§‡à¦•à§à¦Ÿà¦¿à¦­ à¦¸à§‡à¦¶à¦¨';
-                                    $defScheduleLabel = !empty($mcSettings['schedule_label']) ? $mcSettings['schedule_label'] : 'à¦¸à¦®à¦¯à¦¼ / à¦¸à¦®à¦¯à¦¼à¦¸à§‚à¦šà§€';
+                                    $defGoldBadgeTop = !empty($mcSettings['gold_badge_top']) ? $mcSettings['gold_badge_top'] : 'এখনই সিট বুক করুন';
+                                    $defZoomTitle = !empty($mcSettings['zoom_title']) ? $mcSettings['zoom_title'] : 'Zoom লাইভ 104';
+                                    $defZoomSubtitle = !empty($mcSettings['zoom_subtitle']) ? $mcSettings['zoom_subtitle'] : 'অনলাইন ইন্টারেক্টিভ সেশন';
+                                    $defScheduleLabel = !empty($mcSettings['schedule_label']) ? $mcSettings['schedule_label'] : 'সময় / সময়সূচী';
                                     $defScheduleValue = !empty($mcSettings['schedule_value']) ? $mcSettings['schedule_value'] : (!empty($course->duration) ? $course->duration : '2h 40min');
                                     $defLevelLabel = !empty($mcSettings['level_label']) ? $mcSettings['level_label'] : 'Level';
                                     $defLevelValue = !empty($mcSettings['level_value']) ? $mcSettings['level_value'] : ($level ? $level->lang_title : 'beginner');
-                                    $defGoldOfferTitle = !empty($mcSettings['gold_offer_title']) ? $mcSettings['gold_offer_title'] : 'à¦†à¦œà¦•à§‡à¦° à¦¸à§à¦ªà§‡à¦¶à¦¾à¦² à¦…à¦«à¦¾à¦°';
-                                    $defOriginalPriceLabel = !empty($mcSettings['original_price_label']) ? $mcSettings['original_price_label'] : 'à¦®à§‚à¦² à¦ªà§à¦°à¦¾à¦‡à¦¸';
-                                    $defGoldCtaText = !empty($mcSettings['gold_cta_text']) ? $mcSettings['gold_cta_text'] : 'à¦à¦–à¦¨à¦‡ à¦œà§Ÿà§‡à¦¨ à¦•à¦°à§à¦¨';
+                                    $defGoldOfferTitle = !empty($mcSettings['gold_offer_title']) ? $mcSettings['gold_offer_title'] : 'আজকের স্পেশাল অফার';
+                                    $defOriginalPriceLabel = !empty($mcSettings['original_price_label']) ? $mcSettings['original_price_label'] : 'মূল প্রাইস';
+                                    $defGoldCtaText = !empty($mcSettings['gold_cta_text']) ? $mcSettings['gold_cta_text'] : 'এখনই জয়েন করুন';
                                     
                                     if (!empty($mcSettings['gold_seats_text'])) {
                                         $defGoldSeatsText = preg_match('/\d+/', $mcSettings['gold_seats_text'])
                                             ? preg_replace('/\d+/', $availSeatsCount, $mcSettings['gold_seats_text'])
                                             : $mcSettings['gold_seats_text'];
                                     } else {
-                                        $defGoldSeatsText = 'à¦†à¦° à¦®à¦¾à¦¤à§à¦° ' . $availSeatsCount . ' à¦¸à¦¿à¦Ÿ à¦¬à¦¾à¦•à¦¿';
+                                        $defGoldSeatsText = 'আর মাত্র ' . $availSeatsCount . ' সিট বাকি';
                                     }
 
-                                    $defBenefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : 'à¦à¦‡ à¦®à¦¾à¦¸à§à¦Ÿà¦¾à¦°à¦•à§à¦²à¦¾à¦¸ à¦•à¦¾à¦° à¦œà¦¨à§à¦¯?';
+                                    $defBenefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : 'এই মাস্টারক্লাস কার জন্য?';
                                     
                                     $benefitsList = [];
                                     if (!empty($mcSettings['benefits_list']) && is_array($mcSettings['benefits_list'])) {
@@ -521,48 +521,48 @@
                                     }
                                     if (empty($benefitsList)) {
                                         $benefitsList = [
-                                            'à¦…à¦¨à¦²à¦¾à¦‡à¦¨ à¦¬à¦¿à¦œà¦¨à§‡à¦¸ à¦•à¦°à¦¤à§‡ à¦šà¦¾à¦¨ à¦•à¦¿à¦¨à§à¦¤à§ à¦•à¦¨à¦«à¦¿à¦‰à¦œà¦¡',
-                                            'à¦ªà§à¦à¦œà¦¿ à¦•à¦® à¦¨à¦¿à¦¯à¦¼à§‡ à¦¬à¦¿à¦œà¦¨à§‡à¦¸ à¦¶à§à¦°à§ à¦•à¦°à¦¤à§‡ à¦šà¦¾à¦šà§à¦›à§‡à¦¨',
-                                            'à¦‡-à¦•à¦®à¦¾à¦°à§à¦¸ à¦¬à¦¿à¦œà¦¨à§‡à¦¸ à¦¶à§à¦°à§ à¦•à¦°à¦¾à¦° à¦­à¦¯à¦¼ à¦†à¦›à§‡',
-                                            'à¦²à¦¸ à¦¨à¦¾ à¦•à¦°à§‡ à¦¸à¦ à¦¿à¦•à¦­à¦¾à¦¬à§‡ à¦¶à§à¦°à§ à¦•à¦°à¦¤à§‡ à¦šà¦¾à¦¨',
+                                            'অনলাইন বিজনেস করতে চান কিন্তু কনফিউজড',
+                                            'পুঁজি কম নিয়ে বিজনেস শুরু করতে চাচ্ছেন',
+                                            'ই-কমার্স বিজনেস শুরু করার ভয় আছে',
+                                            'লস না করে সঠিকভাবে শুরু করতে চান',
                                         ];
                                     }
 
-                                    $defGiftBadge = !empty($mcSettings['gift_badge']) ? $mcSettings['gift_badge'] : 'ðŸŽ à¦¯à¦¾à¦°à¦¾ join à¦•à¦°à¦¬à§‡à¦¨ à¦¤à¦¾à¦¦à§‡à¦° à¦œà¦¨à§à¦¯ special gift';
-                                    $defGiftTitle = !empty($mcSettings['gift_title']) ? $mcSettings['gift_title'] : 'à§³à§§à§¦,à§¦à§¦à§¦ à¦Ÿà¦¾à¦•à¦¾à¦° Ecom Dropshipping Mastery Course â€” à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ FREE à¦•à¦°à¦¾à¦° à¦¸à§à¦¯à§‹à¦—';
-                                    $defGiftValue = !empty($mcSettings['gift_value']) ? $mcSettings['gift_value'] : 'à§³à§§à§¦,à§¦à§¦à§¦';
-                                    $defGiftDescription = !empty($mcSettings['gift_description']) ? $mcSettings['gift_description'] : 'à¦à¦‡ master class-à¦ à¦¯à¦¾à¦°à¦¾ join à¦•à¦°à¦¬à§‡à¦¨, à¦¤à¦¾à¦°à¦¾ à¦†à¦®à¦¾à¦° à§³à§§à§¦,à§¦à§¦à§¦ à¦Ÿà¦¾à¦•à¦¾à¦° Ecom Dropshipping Mastery Course à¦Ÿà¦¾ free à¦¤à§‡ à¦•à¦°à¦¾à¦° à¦¸à§à¦¯à§‹à¦— à¦ªà¦¾à¦¬à§‡à¦¨à¥¤ à¦®à¦¾à¦¸à§à¦Ÿà¦¾à¦°à¦•à§à¦²à¦¾à¦¸à§‡ à¦à¦‡ à¦¬à¦¿à¦·à¦¯à¦¼à§‡ à¦¬à¦¿à¦¸à§à¦¤à¦¾à¦°à¦¿à¦¤ à¦†à¦²à§‹à¦šà¦¨à¦¾à¥¤';
-                                    $defGiftQuote = !empty($mcSettings['gift_quote']) ? $mcSettings['gift_quote'] : '"à¦à¦‡ à¦•à§‹à¦°à§à¦¸à§‡ à¦†à¦®à¦¿ à¦‡-à¦•à¦®à¦¾à¦°à§à¦¸ à¦¬à¦¿à¦œà¦¨à§‡à¦¸, à¦¡à¦¿à¦œà¦¿à¦Ÿà¦¾à¦² à¦®à¦¾à¦°à§à¦•à§‡à¦Ÿà¦¿à¦‚ à¦à¦° à¦¬à¦¿à¦­à¦¿à¦¨à§à¦¨ à¦¬à¦¿à¦·à¦¯à¦¼ à¦¯à§‡à¦®à¦¨ Facebook Ads, Google Ads à¦¨à¦¿à¦¯à¦¼à§‡ à¦¬à¦¿à¦¸à§à¦¤à¦¾à¦°à¦¿à¦¤ à¦¶à¦¿à¦–à¦¿à¦¯à¦¼à§‡à¦›à¦¿à¥¤ à¦à¦›à¦¾à¦¡à¦¼à¦¾à¦“ à¦•à¦¿à¦­à¦¾à¦¬à§‡ à¦à¦•à¦Ÿà¦¾ à¦¬à¦¿à¦œà¦¨à§‡à¦¸à¦•à§‡ Scale à¦•à¦°à¦¤à§‡ à¦¤à¦¾ à¦¨à¦¿à¦¯à¦¼à§‡ à¦•à§à¦²à¦¾à¦¸ à¦†à¦›à§‡à¥¤"';
-                                    $defGiftFooterNote = !empty($mcSettings['gift_footer_note']) ? $mcSettings['gift_footer_note'] : 'à¦¯à¦¾à¦°à¦¾ à¦à¦•à¦¦à¦® à¦¨à¦¤à§à¦¨ à¦†à¦›à§‡à¦¨ à¦¤à¦¾à¦°à¦¾à¦“ à¦à¦‡ à¦•à§‹à¦°à§à¦¸ à¦¥à§‡à¦•à§‡ à¦¬à§‡à¦¨à¦¿à¦«à¦¿à¦Ÿà§‡à¦¡ à¦¹à¦¤à§‡ à¦ªà¦¾à¦°à¦¬à§‡à¥¤';
-                                    $defSupportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : 'à¦†à¦° à¦¸à¦¾à¦ªà§‹à¦°à§à¦Ÿ?';
-                                    $defSupportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '<p>à¦•à§‹à¦°à§à¦¸à§‡à¦° à¦Ÿà¦ªà¦¿à¦• à¦°à¦¿à¦²à§‡à¦Ÿà§‡à¦¡ à¦¯à§‡à¦•à§‹à¦¨à§‹ à¦ªà§à¦°à¦¬à¦²à§‡à¦® à¦«à§‡à¦¸ à¦•à¦°à¦²à§‡ à¦¸à¦°à¦¾à¦¸à¦°à¦¿ à¦¸à¦¾à¦ªà§‹à¦°à§à¦Ÿ à¦«à§‹à¦°à¦¾à¦® à¦…à¦¥à¦¬à¦¾ à¦†à¦®à¦¾à¦¦à§‡à¦° à¦®à§‡à¦¨à§à¦Ÿà¦° à¦Ÿà¦¿à¦® à¦¥à§‡à¦•à§‡ à¦‡à¦¨à¦¸à§à¦Ÿà§à¦¯à¦¾à¦¨à§à¦Ÿ à¦¹à§‡à¦²à§à¦ª à¦ªà¦¾à¦¬à§‡à¦¨à¥¤ à¦²à¦¾à¦‡à¦­ à¦¸à¦¾à¦ªà§‹à¦°à§à¦Ÿ à¦¸à§‡à¦¶à¦¨à§‡à¦° à¦®à¦¾à¦§à§à¦¯à¦®à§‡ à¦¯à§‡à¦•à§‹à¦¨à§‹ à¦Ÿà§‡à¦•à¦¨à¦¿à¦•à§à¦¯à¦¾à¦² à¦ªà§à¦°à¦¬à¦²à§‡à¦® à¦“à§Ÿà¦¾à¦¨ à¦Ÿà§ à¦“à§Ÿà¦¾à¦¨ à¦¸à¦²à¦­ à¦•à¦°à§‡ à¦¦à§‡à¦“à§Ÿà¦¾ à¦¹à¦¬à§‡à¥¤</p><p>à¦à¦‡ à¦¸à¦¾à¦ªà§‹à¦°à§à¦Ÿ à¦†à¦®à¦¾à¦¦à§‡à¦° à¦Ÿà¦¿à¦® à¦®à§‡à¦®à§à¦¬à¦¾à¦°à¦¦à§‡à¦° à¦ªà¦•à§à¦·à§‡ à¦¸à¦°à¦¾à¦¸à¦°à¦¿ à¦ªà§à¦°à§‹à¦­à¦¾à¦‡à¦¡ à¦•à¦°à¦¾ à¦¹à¦šà§à¦›à§‡, à¦¯à¦¾à¦¤à§‡ à¦•à¦°à§‡ à¦†à¦ªà¦¨à¦¿ à¦«à§‡à¦¸ à¦•à¦°à¦¾ à¦¯à§‡à¦•à§‹à¦¨à§‹ à¦¸à¦®à¦¸à§à¦¯à¦¾à¦° à¦¦à§à¦°à§à¦¤à¦¤à¦® à¦¸à¦®à§Ÿà§‡ à¦¨à¦¿à¦–à§à¦à¦¤ à¦¸à¦®à¦¾à¦§à¦¾à¦¨ à¦ªà§‡à¦¤à§‡ à¦ªà¦¾à¦°à§‡à¦¨à¥¤</p>';
-                                    $defGiftCtaText = !empty($mcSettings['gift_cta_text']) ? $mcSettings['gift_cta_text'] : 'à¦¸à¦¿à¦Ÿ à¦•à¦¨à¦«à¦¾à¦°à§à¦® à¦•à¦°à§à¦¨ â†’';
+                                    $defGiftBadge = !empty($mcSettings['gift_badge']) ? $mcSettings['gift_badge'] : '🎁 যারা join করবেন তাদের জন্য special gift';
+                                    $defGiftTitle = !empty($mcSettings['gift_title']) ? $mcSettings['gift_title'] : '৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ';
+                                    $defGiftValue = !empty($mcSettings['gift_value']) ? $mcSettings['gift_value'] : '৳১০,০০০';
+                                    $defGiftDescription = !empty($mcSettings['gift_description']) ? $mcSettings['gift_description'] : 'এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন। মাস্টারক্লাসে এই বিষয়ে বিস্তারিত আলোচনা।';
+                                    $defGiftQuote = !empty($mcSettings['gift_quote']) ? $mcSettings['gift_quote'] : '"এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় যেমন Facebook Ads, Google Ads নিয়ে বিস্তারিত শিখিয়েছি। এছাড়াও কিভাবে একটা বিজনেসকে Scale করতে তা নিয়ে ক্লাস আছে।"';
+                                    $defGiftFooterNote = !empty($mcSettings['gift_footer_note']) ? $mcSettings['gift_footer_note'] : 'যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।';
+                                    $defSupportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : 'আর সাপোর্ট?';
+                                    $defSupportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '<p>কোর্সের টপিক রিলেটেড যেকোনো প্রবলেম ফেস করলে সরাসরি সাপোর্ট ফোরাম অথবা আমাদের মেন্টর টিম থেকে ইনস্ট্যান্ট হেল্প পাবেন। লাইভ সাপোর্ট সেশনের মাধ্যমে যেকোনো টেকনিক্যাল প্রবলেম ওয়ান টু ওয়ান সলভ করে দেওয়া হবে।</p><p>এই সাপোর্ট আমাদের টিম মেম্বারদের পক্ষে সরাসরি প্রোভাইড করা হচ্ছে, যাতে করে আপনি ফেস করা যেকোনো সমস্যার দ্রুততম সময়ে নিখুঁত সমাধান পেতে পারেন।</p>';
+                                    $defGiftCtaText = !empty($mcSettings['gift_cta_text']) ? $mcSettings['gift_cta_text'] : 'সিট কনফার্ম করুন →';
 
                                     $defScheduleBadge = !empty($mcSettings['schedule_badge']) ? $mcSettings['schedule_badge'] : 'LIVE ZOOM MASTERCLASS';
-                                    $defClassScheduleTitle = !empty($mcSettings['class_schedule_title']) ? $mcSettings['class_schedule_title'] : 'à§¨ à¦¦à¦¿à¦¨à¦¬à§à¦¯à¦¾à¦ªà§€ e-commerce live masterclass';
-                                    $defClassScheduleTime = !empty($mcSettings['class_schedule_time']) ? $mcSettings['class_schedule_time'] : 'à§¬ à¦†à¦—à¦¸à§à¦Ÿ à¦¤à¦¾à¦°à¦¿à¦– à¦°à¦¾à¦¤ à§® à¦Ÿà¦¾à¦¯à¦¼ à¦¶à§à¦°à§';
+                                    $defClassScheduleTitle = !empty($mcSettings['class_schedule_title']) ? $mcSettings['class_schedule_title'] : '২ দিনব্যাপী e-commerce live masterclass';
+                                    $defClassScheduleTime = !empty($mcSettings['class_schedule_time']) ? $mcSettings['class_schedule_time'] : '৬ আগস্ট তারিখ রাত ৮ টায় শুরু';
 
-                                    $defExplainerTitle = !empty($mcSettings['explainer_title']) ? $mcSettings['explainer_title'] : 'à¦à¦•à¦Ÿà¦¾ à¦ªà§à¦°à¦¶à§à¦¨ à¦†à¦ªà¦¨à¦¾à¦° à¦®à¦¾à¦¥à¦¾à¦¯à¦¼ à¦†à¦¸à¦¤à§‡ à¦ªà¦¾à¦°à§‡ â€” à¦à¦¤ à¦•à¦¿à¦›à§, à¦®à¦¾à¦¤à§à¦° à§¯à§¯ à¦Ÿà¦¾à¦•à¦¾à¦¯à¦¼ à¦•à§‡à¦¨??';
-                                    $defExplainerText = !empty($mcSettings['explainer_text']) ? $mcSettings['explainer_text'] : '<p>à¦Ÿà§ à¦¬à¦¿ à¦…à¦¨à§‡à¦¸à§à¦Ÿ, à¦†à¦®à¦¿ à¦à¦‡ masterclass-à¦Ÿà¦¾ à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ free à¦•à¦°à¦¾à¦¤à§‡ à¦šà§‡à¦¯à¦¼à§‡à¦›à¦¿à¦²à¦¾à¦®à¥¤</p><p>à¦•à¦¿à¦¨à§à¦¤à§ problem à¦¹à¦šà§à¦›à§‡ â€” à¦†à¦®à¦¾à¦° free session-à¦—à§à¦²à§‹à¦¤à§‡ à¦¦à§‡à¦–à¦¾ à¦¯à¦¾à¦¯à¦¼ à¦•à¦¯à¦¼à§‡à¦• à¦¹à¦¾à¦œà¦¾à¦° à¦®à¦¾à¦¨à§à¦· register à¦•à¦°à§‡ à¦¬à¦¾ join à¦•à¦°à§‡à¥¤ à¦¯à§‡à¦¹à§‡à¦¤à§ à¦à¦‡ session-à¦Ÿà¦¾ Zoom-à¦ live à¦¹à¦¬à§‡, à¦¤à¦¾à¦‡ à¦†à¦®à¦¿ à¦šà¦¾à¦‡à¦²à§‡à¦“ à¦à¦–à¦¾à¦¨à§‡ à¦¬à§‡à¦¶à¦¿ à¦®à¦¾à¦¨à§à¦· à¦¨à¦¿à¦¤à§‡ à¦ªà¦¾à¦°à¦¬ à¦¨à¦¾à¥¤ Seat limit à¦¥à¦¾à¦•à¦¬à§‡à¥¤</p><p>à¦¤à¦¾à¦‡ à¦†à¦®à¦¿ à¦à¦–à¦¾à¦¨à§‡ à¦›à§‹à¦Ÿà§à¦Ÿ à¦à¦•à¦Ÿà¦¾ token amount à¦°à§‡à¦–à§‡à¦›à¦¿ â€” à¦¶à§à¦§à§ audience filter à¦•à¦°à¦¾à¦° à¦œà¦¨à§à¦¯à¥¤ à¦¯à§‡à¦¨ à¦à¦‡ masterclass-à¦ à¦¤à¦¾à¦°à¦¾à¦‡ join à¦•à¦°à§‡, à¦¯à¦¾à¦°à¦¾ à¦¸à¦¤à§à¦¯à¦¿à¦‡ e-commerce business à¦¶à§à¦°à§ à¦•à¦°à¦¾à¦° à¦¬à§à¦¯à¦¾à¦ªà¦¾à¦°à§‡ serious à¦à¦¬à¦‚ step-by-step process-à¦Ÿà¦¾ à¦®à¦¨à§‹à¦¯à§‹à¦— à¦¦à¦¿à¦¯à¦¼à§‡ à¦¶à¦¿à¦–à¦¤à§‡ readyà¥¤</p>';
+                                    $defExplainerTitle = !empty($mcSettings['explainer_title']) ? $mcSettings['explainer_title'] : 'একটা প্রশ্ন আপনার মাথায় আসতে পারে — এত কিছু, মাত্র ৯৯ টাকায় কেন??';
+                                    $defExplainerText = !empty($mcSettings['explainer_text']) ? $mcSettings['explainer_text'] : '<p>টু বি অনেস্ট, আমি এই masterclass-টা সম্পূর্ণ free করাতে চেয়েছিলাম।</p><p>কিন্তু problem হচ্ছে — আমার free session-গুলোতে দেখা যায় কয়েক হাজার মানুষ register করে বা join করে। যেহেতু এই session-টা Zoom-এ live হবে, তাই আমি চাইলেও এখানে বেশি মানুষ নিতে পারব না। Seat limit থাকবে।</p><p>তাই আমি এখানে ছোট্ট একটা token amount রেখেছি — শুধু audience filter করার জন্য। যেন এই masterclass-এ তারাই join করে, যারা সত্যিই e-commerce business শুরু করার ব্যাপারে serious এবং step-by-step process-টা মনোযোগ দিয়ে শিখতে ready।</p>';
 
-                                    $defBreakdownSubheading = !empty($mcSettings['breakdown_subheading']) ? $mcSettings['breakdown_subheading'] : 'à¦à¦‡ $15.00 à¦Ÿà¦¾à¦•à¦¾à¦¯à¦¼ à¦†à¦ªà¦¨à¦¿ à¦ªà¦¾à¦šà§à¦›à§‡à¦¨:';
-                                    $defBreakdownTodayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : 'à¦†à¦œà¦•à§‡à¦° à¦®à§‚à¦²à§à¦¯ (token)';
-                                    $defBreakdownItems = !empty($mcSettings['breakdown_items']) ? $mcSettings['breakdown_items'] : "ðŸŽ“ à§¨ à¦¦à¦¿à¦¨à§‡à¦° live masterclass â€” à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ roadmap à¦¸à¦¹ | à§³à§©,à§¦à§¦à§¦
-ðŸŽ Ecom Dropshipping Mastery Course free à¦ªà¦¾à¦“à§Ÿà¦¾à¦° à¦¸à§à¦¯à§‹à¦— | à§³à§§à§¦,à§¦à§¦à§¦";
+                                    $defBreakdownSubheading = !empty($mcSettings['breakdown_subheading']) ? $mcSettings['breakdown_subheading'] : 'এই $15.00 টাকায় আপনি পাচ্ছেন:';
+                                    $defBreakdownTodayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : 'আজকের মূল্য (token)';
+                                    $defBreakdownItems = !empty($mcSettings['breakdown_items']) ? $mcSettings['breakdown_items'] : "🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০
+🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০";
 
-                                    $defOrderFormTitle = !empty($mcSettings['order_form_title']) ? $mcSettings['order_form_title'] : 'à¦®à¦¾à¦¸à§à¦Ÿà¦¾à¦°à¦•à§à¦²à¦¾à¦¸à§‡ à¦œà¦¯à¦¼à§‡à¦¨ à¦•à¦°à¦¤à§‡ à¦¨à¦¿à¦šà§‡à¦° à¦«à¦°à§à¦®à¦Ÿà¦¿ à¦ªà§‚à¦°à¦£ à¦•à¦°à§à¦¨';
+                                    $defOrderFormTitle = !empty($mcSettings['order_form_title']) ? $mcSettings['order_form_title'] : 'মাস্টারক্লাসে জয়েন করতে নিচের ফর্মটি পূরণ করুন';
                                     $defOrderFormSubtitle = !empty($mcSettings['order_form_subtitle']) ? $mcSettings['order_form_subtitle'] : 'Give valid information';
                                     $defNameLabel = !empty($mcSettings['name_label']) ? $mcSettings['name_label'] : 'Your Full Name';
-                                    $defNamePlaceholder = !empty($mcSettings['name_placeholder']) ? $mcSettings['name_placeholder'] : 'à¦†à¦ªà¦¨à¦¾à¦° à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ à¦¨à¦¾à¦®';
+                                    $defNamePlaceholder = !empty($mcSettings['name_placeholder']) ? $mcSettings['name_placeholder'] : 'আপনার সম্পূর্ণ নাম';
                                     $defPhoneLabel = !empty($mcSettings['phone_label']) ? $mcSettings['phone_label'] : 'Mobile Number';
                                     $defPhonePlaceholder = !empty($mcSettings['phone_placeholder']) ? $mcSettings['phone_placeholder'] : '01XXXXXXXXX';
                                     $defEmailLabel = !empty($mcSettings['email_label']) ? $mcSettings['email_label'] : 'Email address';
-                                    $defEmailPlaceholder = !empty($mcSettings['email_placeholder']) ? $mcSettings['email_placeholder'] : 'à¦†à¦ªà¦¨à¦¾à¦° à¦‡à¦®à§‡à¦‡à¦² à¦à¦¡à§à¦°à§‡à¦¸';
+                                    $defEmailPlaceholder = !empty($mcSettings['email_placeholder']) ? $mcSettings['email_placeholder'] : 'আপনার ইমেইল এড্রেস';
                                     $defOrderSummaryTitle = !empty($mcSettings['order_summary_title']) ? $mcSettings['order_summary_title'] : 'Your order';
                                     $defPayNowBtnText = !empty($mcSettings['pay_now_btn_text']) ? $mcSettings['pay_now_btn_text'] : 'PAY NOW';
                                     $defPrivacyNotice = !empty($mcSettings['privacy_notice']) ? $mcSettings['privacy_notice'] : 'Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.';
 
-                                    $defFaqTitle = !empty($mcSettings['faq_title']) ? $mcSettings['faq_title'] : 'à¦•à¦¿à¦›à§ à¦¸à¦¾à¦§à¦¾à¦°à¦£ à¦ªà§à¦°à¦¶à§à¦¨à§‡à¦° à¦‰à¦¤à§à¦¤à¦°';
+                                    $defFaqTitle = !empty($mcSettings['faq_title']) ? $mcSettings['faq_title'] : 'কিছু সাধারণ প্রশ্নের উত্তর';
 
                                     $faqList = [];
                                     if (!empty($mcSettings['faq_list']) && is_array($mcSettings['faq_list'])) {
@@ -582,14 +582,14 @@
                                     }
                                     if (empty($faqList)) {
                                         $faqList = [
-                                            ['question' => 'à¦²à¦¾à¦‡à¦­ à¦•à§à¦²à¦¾à¦¸à§‡ à¦•à¦¿à¦­à¦¾à¦¬à§‡ à¦¯à§à¦•à§à¦¤ à¦¹à¦¬à§‹?', 'answer' => 'à¦†à¦ªà¦¨à¦¿ à¦ªà§‡à¦®à§‡à¦¨à§à¦Ÿ à¦•à¦°à¦¾à¦° à¦ªà¦° à¦†à¦ªà¦¨à¦¾à¦•à§‡ à¦†à¦®à¦¾à¦¦à§‡à¦° à¦à¦•à¦Ÿà¦¾ à¦ªà§à¦°à¦¾à¦‡à¦­à§‡à¦Ÿ à¦—à§à¦°à§à¦ªà§‡ à¦œà¦¯à¦¼à§‡à¦¨ à¦•à¦°à¦¾à¦¨à§‹ à¦¹à¦¬à§‡, à¦à¦¬à¦‚ à¦¯à§‡à¦¦à¦¿à¦¨ à¦²à¦¾à¦‡à¦­ à¦•à§à¦²à¦¾à¦¸à¦—à§à¦²à§‹ à¦¹à¦¬à§‡ à¦¸à§‡à¦¦à¦¿à¦¨ à¦†à¦ªà¦¨à¦¾à¦•à§‡ à¦œà§à¦®à§‡à¦° à¦²à¦¿à¦‚à¦• à¦¶à§‡à¦¯à¦¼à¦¾à¦° à¦•à¦°à¦¾ à¦¹à¦¬à§‡'],
-                                            ['question' => 'à¦²à¦¾à¦‡à¦­ à¦•à§à¦²à¦¾à¦¸à¦—à§à¦²à§‹ à¦•à¦¤ à¦˜à¦¨à§à¦Ÿà¦¾à¦° à¦¹à¦¬à§‡?', 'answer' => 'à¦à¦‡à¦Ÿà¦¾ à¦¸à¦ à¦¿à¦• à¦­à¦¾à¦¬à§‡ à¦¬à¦²à¦¾ à¦¯à¦¾à¦šà§à¦›à§‡ à¦¨à¦¾, à¦¯à§‡ à¦Ÿà¦¾à¦‡à¦® à¦¦à§‡à¦¯à¦¼à¦¾ à¦†à¦›à§‡ à¦ à¦¿à¦• à¦¸à§‡à¦‡ à¦¸à¦®à¦¯à¦¼à§‡à¦‡ à¦¶à§à¦°à§ à¦¹à¦¬à§‡ à¦•à¦¿à¦¨à§à¦¤à§ à¦¶à§‡à¦· à¦¹à¦¬à§‡ à¦†à¦ªà¦¨à¦¾à¦¦à§‡à¦° à¦‡à¦šà§à¦›à¦¾à¦¯à¦¼à¥¤ à¦¯à¦¤à¦•à§à¦·à¦£ à¦†à¦ªà¦¨à¦¾à¦¦à§‡à¦° à¦ªà§à¦°à¦¯à¦¼à§‹à¦œà¦¨ à¦†à¦®à¦¿ à¦²à¦¾à¦‡à¦­à§‡ à¦¥à¦¾à¦•à¦¬à§‹ à¦‡à¦¨à¦¶à¦¾à¦†à¦²à§à¦²à¦¾à¦¹à§'],
-                                            ['question' => 'à¦®à¦¾à¦·à§à¦Ÿà¦¾à¦° à¦•à§à¦²à¦¾à¦¸à¦Ÿà¦¿à¦¤à§‡ à¦¡à¦¿à¦¸à§à¦•à¦¾ã‚¦ãƒ³ãƒˆ à¦¦à§‡à¦¯à¦¼à¦¾ à¦¯à¦¾à¦¬à§‡ à¦¨à¦¾?', 'answer' => 'à¦¬à¦°à§à¦¤à¦®à¦¾à¦¨à§‡ à¦¬à¦¿à¦¶à¦¾à¦² à¦¡à¦¿à¦¸à§à¦•à¦¾à¦‰à¦¨à§à¦Ÿ à¦¦à§‡à¦¯à¦¼à¦¾ à¦†à¦›à§‡ à¦¤à¦¬à§‡ à¦ªà§à¦°à¦¤à¦¿à¦¨à¦¿à¦¯à¦¼à¦¤ à¦ªà§à¦°à§‹à¦—à§à¦°à¦¾à¦®à¦Ÿà¦¿à¦° à¦®à§‚à¦²à§à¦¯ à¦•à¦¿à¦›à§ à¦•à¦¿à¦›à§ à¦•à¦°à§‡ à¦¬à¦¾à¦¡à¦¼à¦¾à¦¨à§‹ à¦¹à¦¬à§‡à¥¤ à¦¤à¦¾à¦‡ à¦¯à¦¤ à¦¦à§à¦°à§à¦¤ à¦¯à§à¦•à§à¦¤ à¦¹à¦¬à§‡à¦¨ à¦¤à¦¤ à¦¬à§‡à¦¶à¦¿ à¦†à¦ªà¦¨à¦¾à¦°à¦‡ à¦²à¦¾à¦­à¥¤'],
+                                            ['question' => 'লাইভ ক্লাসে কিভাবে যুক্ত হবো?', 'answer' => 'আপনি পেমেন্ট করার পর আপনাকে আমাদের একটা প্রাইভেট গ্রুপে জয়েন করানো হবে, এবং যেদিন লাইভ ক্লাসগুলো হবে সেদিন আপনাকে জুমের লিংক শেয়ার করা হবে'],
+                                            ['question' => 'লাইভ ক্লাসগুলো কত ঘন্টার হবে?', 'answer' => 'এইটা সঠিক ভাবে বলা যাচ্ছে না, যে টাইম দেয়া আছে ঠিক সেই সময়েই শুরু হবে কিন্তু শেষ হবে আপনাদের ইচ্ছায়। যতক্ষণ আপনাদের প্রয়োজন আমি লাইভে থাকবো ইনশাআল্লাহ্'],
+                                            ['question' => 'মাষ্টার ক্লাসটিতে ডিস্কাウント দেয়া যাবে না?', 'answer' => 'বর্তমানে বিশাল ডিস্কাউন্ট দেয়া আছে তবে প্রতিনিয়ত প্রোগ্রামটির মূল্য কিছু কিছু করে বাড়ানো হবে। তাই যত দ্রুত যুক্ত হবেন তত বেশি আপনারই লাভ।'],
                                         ];
                                     }
 
-                                    $defDualCtaLeft = !empty($mcSettings['dual_cta_left']) ? $mcSettings['dual_cta_left'] : 'à¦°à§‡à¦œà¦¿à¦¸à§à¦Ÿà§à¦°à§‡à¦¶à¦¨ à¦•à¦°à§à¦¨ à¦à¦–à¦¨à¦‡';
-                                    $defDualCtaSeats = !empty($mcSettings['dual_cta_seats']) ? $mcSettings['dual_cta_seats'] : 'à¦†à¦° à¦®à¦¾à¦¤à§à¦° ' . $defRemainingSeats . ' à¦¸à¦¿à¦Ÿ à¦¬à¦¾à¦•à¦¿';
+                                    $defDualCtaLeft = !empty($mcSettings['dual_cta_left']) ? $mcSettings['dual_cta_left'] : 'রেজিস্ট্রেশন করুন এখনই';
+                                    $defDualCtaSeats = !empty($mcSettings['dual_cta_seats']) ? $mcSettings['dual_cta_seats'] : 'আর মাত্র ' . $defRemainingSeats . ' সিট বাকি';
 
                                     $defOverviewTag = !empty($mcSettings['overview_tag']) ? $mcSettings['overview_tag'] : 'FEATURED COURSE';
                                     $defOverviewTitle = !empty($mcSettings['overview_title']) ? $mcSettings['overview_title'] : 'Master Web Development With Expert Guidance';
@@ -615,7 +615,7 @@
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Benefits Heading</label>
                                                     <input type="text" name="masterclass_settings[benefits_title]" class="form-control rounded-2"
-                                                           value="{{ $defBenefitsTitle }}" placeholder="à¦à¦‡ à¦®à¦¾à¦¸à§à¦Ÿà¦¾à¦°à¦•à§à¦²à¦¾à¦¸ à¦•à¦¾à¦° à¦œà¦¨à§à¦¯?">
+                                                           value="{{ $defBenefitsTitle }}" placeholder="এই মাস্টারক্লাস কার জন্য?">
                                                 </div>
 
                                                 <div class="col-12 mb-2">
@@ -625,7 +625,7 @@
                                                             <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
                                                                 <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">{{ $bIdx + 1 }}</span></span>
                                                                 <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white"
-                                                                       value="{{ $bItem }}" placeholder="à¦¸à§à¦¬à¦¿à¦§à¦¾ / à¦ªà¦¯à¦¼à§‡à¦¨à§à¦Ÿà¦Ÿà¦¿ à¦²à¦¿à¦–à§à¦¨...">
+                                                                       value="{{ $bItem }}" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
                                                                 <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
                                                                     <i class="las la-trash-alt fs-5"></i>
                                                                 </a>
@@ -635,77 +635,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                     </div>
-
-                                     <!-- Section: Feature / Overview Highlight (Image Left, Text Right) -->
-                                     <div class="card border mb-4 rounded-3 shadow-sm">
-                                         <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
-                                             <span class="form-label font-16 fw-normal text-dark m-0">Feature / Overview Highlight Section (Image Left, Text Right)</span>
-                                             <div class="form-check form-switch mb-0">
-                                                 <input class="form-check-input" type="checkbox" name="masterclass_settings[hide_overview_section]" value="1" id="edit_hide_overview" {{ $defHideOverviewSection ? 'checked' : '' }}>
-                                                 <label class="form-check-label text-muted small" for="edit_hide_overview">Hide Section</label>
-                                             </div>
-                                         </div>
-                                         <div class="card-body p-4">
-                                             <div class="row gx-20">
-                                                 <div class="col-lg-6 col-md-6 mb-4">
-                                                     <label class="form-label">Eyebrow / Tag Text</label>
-                                                     <input type="text" name="masterclass_settings[overview_tag]" class="form-control rounded-2"
-                                                            value="{{ $defOverviewTag }}" placeholder="FEATURED COURSE">
-                                                 </div>
-
-                                                 <div class="col-lg-6 col-md-6 mb-4">
-                                                     <label class="form-label">Section Title</label>
-                                                     <input type="text" name="masterclass_settings[overview_title]" class="form-control rounded-2"
-                                                            value="{{ $defOverviewTitle }}" placeholder="Master Web Development With Expert Guidance">
-                                                 </div>
-
-                                                 <div class="col-lg-12 mb-4">
-                                                     <label class="form-label">Description Paragraph 1</label>
-                                                     <textarea name="masterclass_settings[overview_desc1]" class="form-control rounded-2 summernote" rows="2"
-                                                               placeholder="Enter description paragraph 1">{{ $defOverviewDesc1 }}</textarea>
-                                                 </div>
-
-                                                 <div class="col-lg-12 mb-4">
-                                                     <label class="form-label">Description Paragraph 2</label>
-                                                     <textarea name="masterclass_settings[overview_desc2]" class="form-control rounded-2 summernote" rows="2"
-                                                               placeholder="Enter description paragraph 2">{{ $defOverviewDesc2 }}</textarea>
-                                                 </div>
-
-                                                 <div class="col-lg-6 col-md-6 mb-4">
-                                                     <label class="form-label">Button Text</label>
-                                                     <input type="text" name="masterclass_settings[overview_btn_text]" class="form-control rounded-2"
-                                                            value="{{ $defOverviewBtnText }}" placeholder="ENROLL NOW">
-                                                 </div>
-
-                                                 <div class="col-lg-6 col-md-6 mb-4">
-                                                     <label class="form-label">Button Link URL</label>
-                                                     <input type="text" name="masterclass_settings[overview_btn_url]" class="form-control rounded-2"
-                                                            value="{{ $defOverviewBtnUrl }}" placeholder="#register">
-                                                 </div>
-
-                                                 <div class="col-lg-12 mb-4">
-                                                     <label class="form-label mb-2">Section Image (Image on Left Side)</label>
-                                                     <div class="row align-items-center">
-                                                         <div class="col-lg-6 mb-2">
-                                                             <label class="small text-muted mb-1">Upload New Image File:</label>
-                                                             <input type="file" name="overview_image_file" class="form-control rounded-2" accept="image/*">
-                                                         </div>
-                                                         <div class="col-lg-6 mb-2">
-                                                             <label class="small text-muted mb-1">Or Image URL / Link:</label>
-                                                             <input type="text" name="masterclass_settings[overview_image_url_custom]" class="form-control rounded-2"
-                                                                    value="{{ $defOverviewImageUrl }}" placeholder="https://example.com/image.jpg">
-                                                         </div>
-                                                     </div>
-                                                     @if(!empty($defOverviewImageUrl))
-                                                         <div class="mt-2">
-                                                             <label class="small text-muted d-block mb-1">Current Image Preview:</label>
-                                                             <img src="{{ $defOverviewImageUrl }}" alt="Overview Image Preview" class="rounded border" style="max-height: 110px; object-fit: cover;">
-                                                         </div>
-                                                     @endif
-                                                 </div>
-                                             </div>
-                                         </div>
                                      </div>
 
                                     <!-- Section 4: Special Bonus Gift -->
@@ -728,136 +657,49 @@
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Pill / Badge Text</label>
                                                     <input type="text" name="masterclass_settings[gift_badge]" class="form-control rounded-2"
-                                                           value="{{ $defGiftBadge }}" placeholder="ðŸŽ à¦¯à¦¾à¦°à¦¾ join à¦•à¦°à¦¬à§‡à¦¨ à¦¤à¦¾à¦¦à§‡à¦° à¦œà¦¨à§à¦¯ special gift">
+                                                           value="{{ $defGiftBadge }}" placeholder="🎁 যারা join করবেন তাদের জন্য special gift">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Title</label>
                                                     <input type="text" name="masterclass_settings[gift_title]" class="form-control rounded-2"
-                                                           value="{{ $defGiftTitle }}" placeholder="à§³à§§à§¦,à§¦à§¦à§¦ à¦Ÿà¦¾à¦•à¦¾à¦° Ecom Dropshipping Mastery Course â€” à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ FREE à¦•à¦°à¦¾à¦° à¦¸à§à¦¯à§‹à¦—">
+                                                           value="{{ $defGiftTitle }}" placeholder="৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Original Gift Value</label>
                                                     <input type="text" name="masterclass_settings[gift_value]" class="form-control rounded-2"
-                                                           value="{{ $defGiftValue }}" placeholder="à§³à§§à§¦,à§¦à§¦à§¦">
+                                                           value="{{ $defGiftValue }}" placeholder="৳১০,০০০">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Red CTA Text</label>
                                                     <input type="text" name="masterclass_settings[gift_cta_text]" class="form-control rounded-2"
-                                                           value="{{ $defGiftCtaText }}" placeholder="à¦¸à¦¿à¦Ÿ à¦•à¦¨à¦«à¦¾à¦°à§à¦® à¦•à¦°à§à¦¨ â†’">
+                                                           value="{{ $defGiftCtaText }}" placeholder="সিট কনফার্ম করুন →">
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Gift Description</label>
                                                     <textarea name="masterclass_settings[gift_description]" class="form-control rounded-2 summernote" rows="3"
-                                                              placeholder="à¦à¦‡ master class-à¦ à¦¯à¦¾à¦°à¦¾ join à¦•à¦°à¦¬à§‡à¦¨, à¦¤à¦¾à¦°à¦¾ à¦†à¦®à¦¾à¦° à§³à§§à§¦,à§¦à§¦à§¦ à¦Ÿà¦¾à¦•à¦¾à¦° Ecom Dropshipping Mastery Course à¦Ÿà¦¾ free à¦¤à§‡ à¦•à¦°à¦¾à¦° à¦¸à§à¦¯à§‹à¦— à¦ªà¦¾à¦¬à§‡à¦¨...">{{ $defGiftDescription }}</textarea>
+                                                              placeholder="এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন...">{{ $defGiftDescription }}</textarea>
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Gift Quote Callout Box</label>
                                                     <textarea name="masterclass_settings[gift_quote]" class="form-control rounded-2 summernote" rows="3"
-                                                              placeholder="à¦à¦‡ à¦•à§‹à¦°à§à¦¸à§‡ à¦†à¦®à¦¿ à¦‡-à¦•à¦®à¦¾à¦°à§à¦¸ à¦¬à¦¿à¦œà¦¨à§‡à¦¸, à¦¡à¦¿à¦œà¦¿à¦Ÿà¦¾à¦² à¦®à¦¾à¦°à§à¦•à§‡à¦Ÿà¦¿à¦‚ à¦à¦° à¦¬à¦¿à¦­à¦¿à¦¨à§à¦¨ à¦¬à¦¿à¦·à¦¯à¦¼ à¦¨à¦¿à¦¯à¦¼à§‡ à¦†à¦²à§‹à¦šà¦¨à¦¾ à¦•à¦°à§‡à¦›à¦¿...">{{ $defGiftQuote }}</textarea>
+                                                              placeholder="এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় নিয়ে আলোচনা করেছি...">{{ $defGiftQuote }}</textarea>
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Gift Footer Note Text</label>
                                                     <input type="text" name="masterclass_settings[gift_footer_note]" class="form-control rounded-2"
-                                                           value="{{ $defGiftFooterNote }}" placeholder="à¦¯à¦¾à¦°à¦¾ à¦à¦•à¦¦à¦® à¦¨à¦¤à§à¦¨ à¦†à¦›à§‡à¦¨ à¦¤à¦¾à¦°à¦¾à¦“ à¦à¦‡ à¦•à§‹à¦°à§à¦¸ à¦¥à§‡à¦•à§‡ à¦¬à§‡à¦¨à¦¿à¦«à¦¿à¦Ÿà§‡à¦¡ à¦¹à¦¤à§‡ à¦ªà¦¾à¦°à¦¬à§‡à¥¤">
+                                                           value="{{ $defGiftFooterNote }}" placeholder="যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!-- Section 5 & 6: Schedule & Token Fee Explainer -->
-                                    <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-normal text-dark m-0">Schedule & Token Fee Explainer</span>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="row gx-20">
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Schedule Pill Badge Text</label>
-                                                    <input type="text" name="masterclass_settings[schedule_badge]" class="form-control rounded-2"
-                                                           value="{{ $defScheduleBadge }}" placeholder="LIVE ZOOM MASTERCLASS">
-                                                </div>
 
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Live Schedule Headline</label>
-                                                    <input type="text" name="masterclass_settings[class_schedule_title]" class="form-control rounded-2"
-                                                           value="{{ $defClassScheduleTitle }}" placeholder="à§¨ à¦¦à¦¿à¦¨à¦¬à§à¦¯à¦¾à¦ªà§€ e-commerce live masterclass">
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Live Schedule Time</label>
-                                                    <input type="text" name="masterclass_settings[class_schedule_time]" class="form-control rounded-2"
-                                                           value="{{ $defClassScheduleTime }}" placeholder="à§¬ à¦†à¦—à¦¸à§à¦Ÿ à¦¤à¦¾à¦°à¦¿à¦– à¦°à¦¾à¦¤ à§® à¦Ÿà¦¾à¦¯à¦¼ à¦¶à§à¦°à§">
-                                                </div>
-
-                                                <div class="col-12 mb-4">
-                                                    <div class="custom-checkbox">
-                                                        <label class="d-flex align-items-center gap-2 cursor-pointer">
-                                                            <input type="checkbox" name="masterclass_settings[hide_explainer]" value="1" id="hide_exp"
-                                                                {{ !empty($mcSettings['hide_explainer']) ? 'checked' : '' }}>
-                                                            <span class="text-dark font-16">Hide Token Fee Explainer Box</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-12 col-md-12 mb-4">
-                                                    <label class="form-label">Explainer Title</label>
-                                                    <input type="text" name="masterclass_settings[explainer_title]" class="form-control rounded-2"
-                                                           value="{{ $defExplainerTitle }}" placeholder="à¦à¦•à¦Ÿà¦¾ à¦ªà§à¦°à¦¶à§à¦¨ à¦†à¦ªà¦¨à¦¾à¦° à¦®à¦¾à¦¥à¦¾à¦¯à¦¼ à¦†à¦¸à¦¤à§‡ à¦ªà¦¾à¦°à§‡ â€” à¦à¦¤ à¦•à¦¿à¦›à§, à¦®à¦¾à¦¤à§à¦° à§¯à§¯ à¦Ÿà¦¾à¦•à¦¾à¦¯à¦¼ à¦•à§‡à¦¨??">
-                                                </div>
-
-                                                <div class="col-lg-12 col-md-12 mb-4">
-                                                    <div class="editor-wrapper">
-                                                        <label class="form-label mb-1">Explainer Content</label>
-                                                        <textarea name="masterclass_settings[explainer_text]" class="form-control rounded-2 summernote" rows="5">{{ $defExplainerText }}</textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Section 7: Price Breakdown Table -->
-                                    <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-normal text-dark m-0">Price Breakdown Table</span>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="row gx-20">
-                                                <div class="col-12 mb-4">
-                                                    <div class="custom-checkbox">
-                                                        <label class="d-flex align-items-center gap-2 cursor-pointer">
-                                                            <input type="checkbox" name="masterclass_settings[hide_breakdown]" value="1" id="hide_bd"
-                                                                {{ !empty($mcSettings['hide_breakdown']) ? 'checked' : '' }}>
-                                                            <span class="text-dark font-16">Hide Price Breakdown Table</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Breakdown Subheading</label>
-                                                    <input type="text" name="masterclass_settings[breakdown_subheading]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownSubheading }}" placeholder="à¦à¦‡ $15.00 à¦Ÿà¦¾à¦•à¦¾à¦¯à¦¼ à¦†à¦ªà¦¨à¦¿ à¦ªà¦¾à¦šà§à¦›à§‡à¦¨:">
-                                                </div>
-
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Today Token Price Title</label>
-                                                    <input type="text" name="masterclass_settings[breakdown_today_title]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownTodayTitle }}" placeholder="à¦†à¦œà¦•à§‡à¦° à¦®à§‚à¦²à§à¦¯ (token)">
-                                                </div>
-
-                                                <div class="col-lg-12 col-md-12 mb-4">
-                                                    <label class="form-label">Breakdown Items (Item Title | Price Value)</label>
-                                                    <textarea name="masterclass_settings[breakdown_items]" class="form-control rounded-2 summernote" rows="4"
-                                                              placeholder="ðŸŽ“ à§¨ à¦¦à¦¿à¦¨à§‡à¦° live masterclass â€” à¦¸à¦®à§à¦ªà§‚à¦°à§à¦£ roadmap à¦¸à¦¹ | à§³à§©,à§¦à§¦à§¦&#10;ðŸŽ Ecom Dropshipping Mastery Course free à¦ªà¦¾à¦“à§Ÿà¦¾à¦° à¦¸à§à¦¯à§‹à¦— | à§³à§§à§¦,à§¦à§¦à§¦">{{ $defBreakdownItems }}</textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <!-- Section 8 & 9: Registration Order Form & FAQs -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
@@ -869,7 +711,7 @@
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Registration Form Title</label>
                                                     <input type="text" name="masterclass_settings[order_form_title]" class="form-control rounded-2"
-                                                           value="{{ $defOrderFormTitle }}" placeholder="à¦®à¦¾à¦¸à§à¦Ÿà¦¾à¦°à¦•à§à¦²à¦¾à¦¸à§‡ à¦œà¦¯à¦¼à§‡à¦¨ à¦•à¦°à¦¤à§‡ à¦¨à¦¿à¦šà§‡à¦° à¦«à¦°à§à¦®à¦Ÿà¦¿ à¦ªà§‚à¦°à¦£ à¦•à¦°à§à¦¨">
+                                                           value="{{ $defOrderFormTitle }}" placeholder="মাস্টারক্লাসে জয়েন করতে নিচের ফর্মটি পূরণ করুন">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
@@ -1026,14 +868,14 @@
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Support Title / Heading</label>
                                                     <input type="text" name="masterclass_settings[support_title]" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['support_title'] ?? $defSupportTitle }}" placeholder="à¦†à¦° à¦¸à¦¾à¦ªà§‹à¦°à§à¦Ÿ?">
+                                                           value="{{ $mcSettings['support_title'] ?? $defSupportTitle }}" placeholder="আর সাপোর্ট?">
                                                 </div>
 
                                                 <!-- Support Description -->
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Support Description</label>
                                                     <textarea name="masterclass_settings[support_description]" class="form-control rounded-2 summernote" rows="3"
-                                                              placeholder="à¦¸à¦¾à¦ªà§‹à¦°à§à¦Ÿà§‡à¦° à¦¬à¦¿à¦¸à§à¦¤à¦¾à¦°à¦¿à¦¤ à¦²à¦¿à¦–à§à¦¨...">{{ $mcSettings['support_description'] ?? $defSupportDescription }}</textarea>
+                                                              placeholder="সাপোর্টের বিস্তারিত লিখুন...">{{ $mcSettings['support_description'] ?? $defSupportDescription }}</textarea>
                                                 </div>
 
                                                 <!-- Support Image Upload -->
@@ -1925,7 +1767,7 @@
                 let html = `
                     <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
                         <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">${count + 1}</span></span>
-                        <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white" placeholder="à¦¸à§à¦¬à¦¿à¦§à¦¾ / à¦ªà¦¯à¦¼à§‡à¦¨à§à¦Ÿà¦Ÿà¦¿ à¦²à¦¿à¦–à§à¦¨...">
+                        <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
                         <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
                             <i class="las la-trash-alt fs-5"></i>
                         </a>
@@ -1950,7 +1792,7 @@
                 if (goldVal && /\d+/.test(goldVal)) {
                     $('#mc_gold_seats_input').val(goldVal.replace(/\d+/, avail));
                 } else {
-                    $('#mc_gold_seats_input').val('à¦†à¦° à¦®à¦¾à¦¤à§à¦° ' + avail + ' à¦¸à¦¿à¦Ÿ à¦¬à¦¾à¦•à¦¿');
+                    $('#mc_gold_seats_input').val('আর মাত্র ' + avail + ' সিট বাকি');
                 }
             });
 
@@ -1965,12 +1807,12 @@
                             </button>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold small text-dark">Question (à¦ªà§à¦°à¦¶à§à¦¨)</label>
-                            <input type="text" name="masterclass_settings[faq_list][${index}][question]" class="form-control rounded-2 bg-white" placeholder="à¦ªà§à¦°à¦¶à§à¦¨à¦Ÿà¦¿ à¦²à¦¿à¦–à§à¦¨...">
+                            <label class="form-label fw-bold small text-dark">Question (প্রশ্ন)</label>
+                            <input type="text" name="masterclass_settings[faq_list][${index}][question]" class="form-control rounded-2 bg-white" placeholder="প্রশ্নটি লিখুন...">
                         </div>
                         <div>
-                            <label class="form-label fw-bold small text-dark">Answer (à¦‰à¦¤à§à¦¤à¦°)</label>
-                            <textarea name="masterclass_settings[faq_list][${index}][answer]" class="form-control rounded-2 bg-white" rows="2" placeholder="à¦‰à¦¤à§à¦¤à¦°à¦Ÿà¦¿ à¦²à¦¿à¦–à§à¦¨..."></textarea>
+                            <label class="form-label fw-bold small text-dark">Answer (উত্তর)</label>
+                            <textarea name="masterclass_settings[faq_list][${index}][answer]" class="form-control rounded-2 bg-white" rows="2" placeholder="উত্তরটি লিখুন..."></textarea>
                         </div>
                     </div>
                 `;
@@ -2228,12 +2070,12 @@
                             <div class="col-md-4 col-12 mb-2 mb-md-0">
                                 <label class="form-label small text-muted mb-1">Title / Label</label>
                                 <input type="text" name="masterclass_settings[gold_info_points][${idx}][title]" class="form-control rounded-2 bg-white"
-                                       placeholder="à¦¯à§‡à¦®à¦¨: Zoom à¦²à¦¾à¦‡à¦­ 104">
+                                       placeholder="যেমন: Zoom লাইভ 104">
                             </div>
                             <div class="col-md-4 col-12 mb-2 mb-md-0">
                                 <label class="form-label small text-muted mb-1">Subtitle / Value</label>
                                 <input type="text" name="masterclass_settings[gold_info_points][${idx}][value]" class="form-control rounded-2 bg-white"
-                                       placeholder="à¦¯à§‡à¦®à¦¨: à¦…à¦¨à¦²à¦¾à¦‡à¦¨ à¦¸à§‡à¦¶à¦¨ / 4h 40min">
+                                       placeholder="যেমন: অনলাইন সেশন / 4h 40min">
                             </div>
                             <div class="col-md-1 col-12 text-end">
                                 <label class="form-label d-none d-md-block opacity-0 mb-1">Del</label>
@@ -2257,7 +2099,7 @@
                 let html = `
                     <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
                         <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">${count + 1}</span></span>
-                        <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white" placeholder="à¦¸à§à¦¬à¦¿à¦§à¦¾ / à¦ªà¦¯à¦¼à§‡à¦¨à§à¦Ÿà¦Ÿà¦¿ à¦²à¦¿à¦–à§à¦¨...">
+                        <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
                         <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
                             <i class="las la-trash-alt fs-5"></i>
                         </a>

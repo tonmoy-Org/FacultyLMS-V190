@@ -19,7 +19,7 @@
 @endphp
 
 @if($status !== '0')
-<section class="about-me-section p-t-40 p-b-60 position-relative overflow-hidden bg-white">
+<section class="about-me-section p-t-60 p-b-60 position-relative overflow-hidden bg-white">
     <div class="container container-1278">
         <div class="row align-items-center g-4 g-lg-5">
             <!-- Left Side Image Card -->

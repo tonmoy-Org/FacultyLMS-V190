@@ -194,34 +194,6 @@
     <section class="py-4">
         <div class="mc-container">
 
-            {{-- =========================================================
-                 7. LIVE ZOOM EXPLAINER & SEATS PROGRESS
-            ========================================================== --}}
-            <div class="mc-zoom-explainer-section">
-                <div class="text-center mb-0">
-                    <span class="badge px-3 py-2 rounded-pill fs-7 tracking-wider" style="background-color: #10b981; color: #fff;">LIVE ZOOM MASTERCLASS</span>
-                    <h2 class="fw-bold course-section-title text-dark mt-3">{{ $classScheduleTitle }}</h2>
-                    <p class="text-secondary mb-0">
-                        {{ $classScheduleTime }}। Seat সীমিত — বাকি আছে মাত্র <strong class="text-warning fw-bold">{{ $remainingSeats }}</strong> টা।
-                    </p>
-                </div>
-            </div>
-
-            {{-- Blue Explainer Box --}}
-            @if(!$hideExplainer)
-                <div class="mc-blue-explainer">
-                    <h3 class="fw-bold fs-5 text-dark mb-3">{{ $explainerTitle }}</h3>
-                    @if($explainerText)
-                        {!! $explainerText !!}
-                    @else
-                        <p>টু বি অনেস্ট, আমি এই masterclass-টা সম্পূর্ণ free করাতে চেয়েছিলাম।</p>
-                        <p>কিন্তু problem হচ্ছে — আমার free session-গুলোতে দেখা যায় কয়েক হাজার মানুষ register করে বা join করে। যেহেতু এই session-টা Zoom-এ live হবে, তাই আমি চাইলেও এখানে বেশি মানুষ নিতে পারব না। Seat limit থাকবে।</p>
-                        <p>তাই আমি এখানে ছোট্ট একটা token amount রেখেছি — শুধু audience filter করার জন্য। যেন এই masterclass-এ তারাই join করে, যারা সত্যিই e-commerce business শুরু করার ব্যাপারে serious এবং step-by-step process-টা মনোযোগ দিয়ে শিখতে ready।</p>
-                        <p>যদি এই masterclass-এর actual value অনুযায়ী charge করা হতো, তাহলে এর price কয়েক হাজার টাকা হওয়া উচিত ছিল। কিন্তু আমার goal এখানে টাকা নেওয়া না।</p>
-                        <p class="fw-bold text-primary m-0">goal হচ্ছে serious মানুষগুলোকে একটা clear guideline দেওয়া।।</p>
-                    @endif
-                </div>
-            @endif
 
             {{-- =========================================================
                  4. GOLD BORDER MASTERCLASS INFO CARD (100% Admin Sync)
@@ -305,131 +277,7 @@
                 @endif
             </div>
 
-            {{-- =========================================================
-                 5. BENEFITS GRID ("এই মাস্টারক্লাস কার জন্য?")
-                 Field: $course->what_will_learn (From Admin Course Edit)
-            ========================================================== --}}
-            <style>
-                .mc-new-benefit-card {
-                    background: #ffffff;
-                    color: #1e293b;
-                    border-radius: 14px;
-                    padding: 30px;
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-                    border: 1px solid #e2e8f0;
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 15px;
-                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                }
-                .mc-new-benefit-card:hover {
-                    transform: translateY(-4px);
-                    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06) !important;
-                    border-color: #cbd5e1 !important;
-                }
-                .mc-new-benefit-card.dark-theme:hover {
-                    border-color: #3b82f6 !important;
-                    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.12) !important;
-                }
-            </style>
 
-            <div class="mc-benefits-card-wrapper mb-5 pt-3">
-                <h2 class="fw-bold course-section-title text-dark mb-4 text-center px-3" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px;">{{ $benefitsTitle }}</h2>
-                <span class="d-block mx-auto mb-5" style="width: 70px; height: 3px; background: #10b981; border-radius: 10px;"></span>
-
-                <div class="row g-4 justify-content-center">
-                    @php
-                        $benefits = [];
-                        if(!empty($mcSettings['benefits_list']) && is_array($mcSettings['benefits_list'])) {
-                            $benefits = array_values(array_filter(array_map('trim', $mcSettings['benefits_list'])));
-                        }
-                        if(empty($benefits) && !empty($mcSettings['benefits_items'])) {
-                            $lines = array_filter(array_map('trim', explode("\n", $mcSettings['benefits_items'])));
-                            $benefits = array_values($lines);
-                        }
-                        if(empty($benefits) && !empty($course->what_will_learn)) {
-                            $lines = array_filter(array_map('trim', explode("\n", strip_tags($course->what_will_learn))));
-                            $benefits = array_values($lines);
-                        }
-                        if(count($benefits) < 1) {
-                            $benefits = [
-                                'মার্কেটপ্লেস থেকে ক্লায়েন্ট পাওয়ার জন্য সংগ্রাম করছেন? | বিভিন্ন ফ্রিল্যান্সিং মার্কেটপ্লেসে আপনার মতো আরো হাজারো ফ্রিল্যান্সার বা সার্ভিস প্রোভাইডারের প্রোফাইল রয়েছে। আপনাকে সেখানে তাদের সাথে প্রতিযোগিতা করতে হয়। হাজারো প্রোফাইলের ভিড়ে আপনার প্রোফাইলটি যদি ক্লায়েন্টের চোখে না পড়ে, তাহলে সেখান থেকে কাজ পাওয়া কঠিন হয়ে পড়ে। আর আপনি যদি আউট অফ মার্কেটপ্লেস ক্লায়েন্টকে টার্গেট করতে পারেন তবে ক্লায়েন্ট পাওয়া আপনার জন্য অনেক সহজ হয়ে যায়।',
-                                'ক্লায়েন্ট পেতে বারবার রিজেক্ট হচ্ছেন? | বারবার রিজেকশন হওয়া হতাশাজনক তবে এর পেছনে লুকিয়ে থাকতে পারে আপনার প্রাইসিং মডেল, প্রোফাইল অপটিমাইজেশন, বা ড্রাফট পিচিংয়ের ভুল কৌশল। আমরা এই ফানেলগুলো কিভাবে কাটিয়ে উঠতে হয় এবং ক্লায়েন্টের সাথে কিভাবে একটি ট্রাস্টেড সম্পর্ক তৈরি করতে হয়, তা শেখাব।',
-                                'আয়ের উপর মার্কেটপ্লেস অতিরিক্ত ফি কাটছে? | মার্কেটপ্লেসের প্ল্যাটফর্মগুলো প্রতিটি আয়ের একটি বড় অংশ ফি হিসেবে কেটে নেয়। এটি অনেক ফ্রিল্যান্সারের জন্য হতাশার কারণ। আমরা যেহেতু শিখব কিভাবে মার্কেটপ্লেসের বাইরে ক্লায়েন্ট খুঁজে পাওয়া যায়, তা এ ফি গুণা বন্ধ সম্ভব হবে।',
-                                'আপনার আউটরিচ ইমেইল কোনো রেসপন্স পাচ্ছে না? | আউটরিচ ইমেইলগুলোর কোনো জবাব না পাওয়া মানে সেখানে কিছু ঘাটতি আছে। এটা হতে পারে আপনার মেসেজের ভুল টোন, অসম্পূর্ণ মেসেজ, বা ভুল টার্গেটিং। আপনি এ কোর্সে শিখবেন কিভাবে সঠিকভাবে ইমেইল কপি লিখতে হয় যা ক্লায়েন্টের দৃষ্টি আকর্ষণ করবে এবং রিপ্লাই পাওয়ার সম্ভাবনা বাড়াবে।',
-                                'আপনার স্কিল আছে, কিন্তু ক্লায়েন্ট নেই? | ক্লায়েন্ট না থাকার মানে এই নয় যে আপনার স্কিল কম। এটা হতে পারে সঠিক মার্কেটিং ও নেটওয়ার্কিং কৌশলের অভাব। আপনার প্রতিভা বা দক্ষতা থাকা সত্ত্বেও যদি কাজ না পান, তবে এর কারণ হতে পারে আপনার আউটরিচ স্ট্র্যাটেজি বা প্রোফাইল অপটিমাইজেশনের ঘাটতি। আমরা দেখাব কিভাবে সঠিক পদ্ধতিতে ক্লায়েন্টদের কাছে পৌঁছাতে হয় এবং তাদের প্রয়োজন বুঝে অফার করতে হয়।'
-                            ];
-                        }
-                    @endphp
-
-                    @foreach($benefits as $benefit)
-                        @php
-                            $parts = explode('|', $benefit);
-                            $bTitle = trim($parts[0] ?? '');
-                            $bDesc = trim($parts[1] ?? '');
-                            
-                            $idx = $loop->index;
-                            
-                            // 5th item spans full width, others take 6 columns
-                            $colClass = ($idx === 4) ? 'col-lg-12' : 'col-lg-6 col-md-6';
-                            
-                            if ($idx === 0) {
-                                $cardClass = 'mc-new-benefit-card dark-theme';
-                                $cardStyle = 'background: #111029; color: #ffffff; border-color: #111029;';
-                                $titleColor = '#ffffff';
-                                $descColor = '#cbd5e1';
-                                $iconHtml = '<div class="mc-icon-wrapper" style="background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;"><i class="fas fa-handshake" style="color: #60a5fa; font-size: 20px;"></i></div>';
-                            } elseif ($idx === 1) {
-                                $cardClass = 'mc-new-benefit-card';
-                                $cardStyle = '';
-                                $titleColor = '#0f172a';
-                                $descColor = '#475569';
-                                $iconHtml = '<div class="mc-icon-wrapper" style="background: #fef2f2; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;"><i class="fas fa-times-circle" style="color: #ef4444; font-size: 20px;"></i></div>';
-                            } elseif ($idx === 2) {
-                                $cardClass = 'mc-new-benefit-card';
-                                $cardStyle = '';
-                                $titleColor = '#0f172a';
-                                $descColor = '#475569';
-                                $iconHtml = '<div class="mc-icon-wrapper" style="background: #fffbeb; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;"><i class="fas fa-coins" style="color: #f59e0b; font-size: 20px;"></i></div>';
-                            } elseif ($idx === 3) {
-                                $cardClass = 'mc-new-benefit-card';
-                                $cardStyle = '';
-                                $titleColor = '#0f172a';
-                                $descColor = '#475569';
-                                $iconHtml = '<div class="mc-icon-wrapper" style="background: #e6fbf4; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;"><i class="fas fa-envelope-open-text" style="color: #10b981; font-size: 20px;"></i></div>';
-                            } elseif ($idx === 4) {
-                                $cardClass = 'mc-new-benefit-card';
-                                $cardStyle = '';
-                                $titleColor = '#0f172a';
-                                $descColor = '#475569';
-                                $iconHtml = '<div class="mc-icon-wrapper" style="background: #f0f9ff; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;"><i class="fas fa-user-tie" style="color: #0284c7; font-size: 20px;"></i></div>';
-                            } else {
-                                $cardClass = 'mc-new-benefit-card';
-                                $cardStyle = '';
-                                $titleColor = '#0f172a';
-                                $descColor = '#475569';
-                                $iconHtml = '<div class="mc-icon-wrapper" style="background: #f0fdf4; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;"><i class="fas fa-check-circle" style="color: #10b981; font-size: 20px;"></i></div>';
-                                $colClass = 'col-lg-6 col-md-6';
-                            }
-                        @endphp
-
-                        <div class="{{ $colClass }}">
-                            <div class="{{ $cardClass }}" style="{{ $cardStyle }}">
-                                <div class="d-flex align-items-start gap-3">
-                                    {!! $iconHtml !!}
-                                    <div style="flex-grow: 1;">
-                                        <h4 style="font-size: 18px; font-weight: 700; color: {{ $titleColor }}; margin: 0 0 8px 0; line-height: 1.45;">{{ $bTitle }}</h4>
-                                        @if(!empty($bDesc))
-                                            <p style="font-size: 14px; line-height: 1.65; color: {{ $descColor }}; margin: 0;">{{ $bDesc }}</p>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
 
             {{-- =========================================================
                  9. COURSE SYLLABUS / CURRICULUM ACCORDION (100% Admin Sync)
@@ -532,47 +380,7 @@
                 </div>
             @endif
 
-            {{-- =========================================================
-                 6. SPECIAL GIFT BANNER CARD
-            ========================================================== --}}
-            @if(!$hideSpecialGift)
-                <div class="mc-special-gift-card text-center d-flex flex-column align-items-center">
-                    <span class="mc-gift-pill">
-                        {{ $giftBadge }}
-                    </span>
 
-                    <h2 class="fw-bold fs-3 text-dark mb-3 text-center">
-                        {{ $giftTitle }}
-                    </h2>
-
-                    <div class="d-flex align-items-center justify-content-center gap-3 mb-3">
-                        <span class="fs-5 text-muted text-decoration-line-through">{{ $giftValue }}</span>
-                        <span class="badge bg-danger fs-6 px-3 py-2 rounded-pill">FREE</span>
-                    </div>
-
-                    <div class="text-secondary leading-relaxed fs-6 text-center w-100">
-                        {!! $giftDescription !!}
-                    </div>
-
-                    <div class="mc-callout-quote w-100 text-start">
-                        {!! $giftQuote !!}
-                    </div>
-
-                    <p class="small text-muted mb-4 text-center w-100">
-                        {{ $giftFooterNote }}
-                    </p>
-
-                    <div class="text-center">
-                        <a href="#register" class="template-btn">
-                            {{ $giftCtaText }}
-                        </a>
-                        <div class="mc-seats-counter mt-3">
-                            <span class="mc-pulse-dot"><span class="ping"></span><span class="dot"></span></span>
-                            <span>বাকি আছে মাত্র <strong class="text-warning fw-bold">{{ $remainingSeats }}</strong> টা seat</span>
-                        </div>
-                    </div>
-                </div>
-            @endif
 
             {{-- =========================================================
                  FEATURE / OVERVIEW HIGHLIGHT SECTION (Image Left, Text Right)
@@ -648,42 +456,7 @@
 
 
 
-            {{-- Breakdown Table --}}
-            @if(!$hideBreakdown)
-                <div class="mc-breakdown-card">
-                    <h2 class="fw-bold course-section-title text-dark mb-3 text-center">
-                        এই 
-                        @if($course->is_discountable == 1)
-                            {{ get_price($course->discount_amount, userCurrency()) }}
-                        @else
-                            {{ get_price($course->price, userCurrency()) }}
-                        @endif
-                        টাকায় আপনি পাচ্ছেন:
-                    </h2>
-                    <div class="table-responsive">
-                        <table class="table align-middle">
-                            <tbody>
-                                @foreach($breakdownRows as $row)
-                                    <tr>
-                                        <td>{{ $row['title'] }}</td>
-                                        <td class="text-end fw-bold">{{ $row['val'] }}</td>
-                                    </tr>
-                                @endforeach
-                                <tr class="table-success border-top border-2">
-                                    <td class="fw-bold text-success">{{ $breakdownTodayTitle }}</td>
-                                    <td class="text-end fw-black fs-4 text-success">
-                                        @if($course->is_discountable == 1)
-                                            {{ get_price($course->discount_amount, userCurrency()) }}
-                                        @else
-                                            {{ get_price($course->price, userCurrency()) }}
-                                        @endif
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            @endif
+
 
             {{-- =========================================================
                  8. COURSE FULL DESCRIPTION (100% Admin WYSIWYG Editor Sync)

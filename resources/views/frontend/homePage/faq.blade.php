@@ -92,7 +92,7 @@
     }
 </style>
 
-<section class="faq-section p-t-80 p-b-80 position-relative" style="background-color: #F9FAFB;">
+<section class="faq-section p-t-80 p-b-80 position-relative" style="background-color: #ffffff;">
     <div class="container container-1278">
         <div class="row align-items-center g-5">
             
@@ -103,7 +103,7 @@
                         <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
                             {{ __('POPULAR QUESTIONS') }}
                         </span>
-                        <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 38px; line-height: 1.25;">
+                        <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 28px; line-height: 1.25;">
                             {{ __('Frequently Asked Questions') }}
                         </h2>
                     </div>

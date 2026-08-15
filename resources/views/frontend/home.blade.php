@@ -14,6 +14,12 @@
     <!--====== Start About Me Section ======-->
     @include('frontend.homePage.about_me_section')
 
+    <!--====== Start Benefits Section ======-->
+    @include('frontend.homePage.benefits')
+
+    <!--====== Start Special Gift Section ======-->
+    @include('frontend.homePage.special_gift')
+
 
     <!--====== Start Ad Banner 1 (Upper Home Section) ======-->
     @php
@@ -43,43 +49,7 @@
     </section>
     @endif
 
-    <!--====== Promo Banner Restored to Original Position ======-->
-    <section class="promo-banner-section p-t-60 p-b-60 bg-white">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="promo-box rounded-4 p-5 text-center shadow-lg" style="background-color: {{ setting('promo_banner_bg_color') ?: '#fcd34d' }};">
-                        <h2 class="fw-bold mb-4" style="font-size: 2.2rem; color: #1e3a8a;">
-                            {{ setting('promo_banner_title') ?: 'Admission Is Open For The Next Batch. Take Admission And Get 40% Discount' }}
-                        </h2>
-                        
-                        <div class="countdown-container d-flex justify-content-center gap-3 mb-5" id="promoCountdownMain" data-target="{{ setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days')) }}">
-                            <div class="countdown-item bg-white rounded p-3 shadow-sm" style="width: 100px;">
-                                <h3 class="days m-0 fw-bold" style="color: #ea580c; font-size: 2rem;">00</h3>
-                                <span class="small fw-semibold text-secondary text-uppercase">Days</span>
-                            </div>
-                            <div class="countdown-item bg-white rounded p-3 shadow-sm" style="width: 100px;">
-                                <h3 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 2rem;">00</h3>
-                                <span class="small fw-semibold text-secondary text-uppercase">Hours</span>
-                            </div>
-                            <div class="countdown-item bg-white rounded p-3 shadow-sm" style="width: 100px;">
-                                <h3 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 2rem;">00</h3>
-                                <span class="small fw-semibold text-secondary text-uppercase">Minutes</span>
-                            </div>
-                            <div class="countdown-item bg-white rounded p-3 shadow-sm" style="width: 100px;">
-                                <h3 class="seconds m-0 fw-bold" style="color: #ea580c; font-size: 2rem;">00</h3>
-                                <span class="small fw-semibold text-secondary text-uppercase">Seconds</span>
-                            </div>
-                        </div>
 
-                        <a href="{{ setting('promo_banner_btn_link') ?: '#' }}" class="template-btn">
-                            {{ setting('promo_banner_btn_text') ?: 'APPLY NOW' }}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!--====== Start What You Will Learn ======-->
     @if(isset($course) && $course && $course->outcomes)
     <section class="what-you-learn-section p-t-80 p-b-80 position-relative" style="background-color: #F9FAFB;">
@@ -141,17 +111,16 @@
     </section>
     @endif
 
-    <!--====== Start Webinar Section ======-->
-    @include('frontend.homePage.webinar_section')
 
-    <!--====== Start Success Video Section ======-->
-    @include('frontend.homePage.success_video')
+
+
+
+    <!--====== Start Syllabus Section ======-->
+    @include('frontend.homePage.syllabus')
 
     <!--====== Start Success Story Section ======-->
     @include('frontend.homePage.success')
 
-    <!--====== Start Why Choose Me Section ======-->
-    @include('frontend.homePage.why_choose_section')
 
     <!--====== Start FAQ Section ======-->
     @include('frontend.homePage.faq')
