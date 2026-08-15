@@ -81,6 +81,9 @@ return [
         'instructor_stat2_title',
         'instructor_stat3_number',
         'instructor_stat3_title',
+        'success_page_banner_tag',
+        'success_page_banner_title',
+        'success_page_banner_description',
     ],
     'setting_image'                        => [
         'favicon',
@@ -101,6 +104,7 @@ return [
         'home_ad_banner_image',
         'home_ad_banner_image_1',
         'home_ad_banner_image_2',
+        'success_page_banner_image',
         'meta_image',
         'og_image',
         'payment_method_banner',

@@ -1,6 +1,202 @@
 @extends('frontend.layouts.master')
 @section('title', __('Success'))
 @section('content')
+@if((string)setting('success_page_banner_status') !== '0')
+@php
+    $bannerImgSetting = setting('success_page_banner_image');
+    $bannerImgUrl = '';
+    if (is_array($bannerImgSetting)) {
+        if (!empty($bannerImgSetting['original_image'])) {
+            $bannerImgUrl = get_media($bannerImgSetting['original_image'], $bannerImgSetting['storage'] ?? 'local');
+        } elseif (!empty($bannerImgSetting['image_417x384'])) {
+            $bannerImgUrl = get_media($bannerImgSetting['image_417x384'], $bannerImgSetting['storage'] ?? 'local');
+        }
+    } elseif (is_string($bannerImgSetting) && !empty($bannerImgSetting)) {
+        $bannerImgUrl = getFileLink('original_image', $bannerImgSetting);
+    }
+    if (empty($bannerImgUrl) || str_contains($bannerImgUrl, 'default-image')) {
+        $bannerImgUrl = static_asset('frontend/img/banner/success_hero_banner.jpg');
+    }
+@endphp
+<style>
+    .success-hero-banner {
+        background-color: #073527;
+        background-image: url('{{ $bannerImgUrl }}');
+        background-repeat: no-repeat;
+        background-position: center right;
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+        color: #ffffff;
+        min-height: 280px;
+        display: flex;
+        align-items: center;
+        padding: 35px 0 40px;
+    }
+    .success-hero-banner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 65%;
+        background: linear-gradient(90deg, #073527 0%, #0c4333 35%, #2a6851 70%, rgba(42, 104, 81, 0.6) 88%, rgba(42, 104, 81, 0) 100%);
+        z-index: 1;
+    }
+    .success-hero-banner .badge-pill-tag {
+        background: rgba(10, 50, 38, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        padding: 5px 12px;
+        border-radius: 4px;
+        display: inline-block;
+        text-transform: uppercase;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .success-hero-banner .banner-main-title {
+        color: #ffffff;
+        font-size: 36px;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.5px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    .success-hero-banner .banner-sub-text {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 15px;
+        line-height: 1.6;
+        max-width: 480px;
+        margin-bottom: 0;
+        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    }
+    .success-hero-banner .decor-icon-circle {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(16, 185, 129, 0.5);
+        background: rgba(7, 53, 39, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 72%;
+        transform: translateY(-50%);
+        z-index: 3;
+    }
+    .success-hero-banner .decor-icon-left {
+        left: 25px;
+    }
+    .success-hero-banner .decor-icon-right {
+        right: 25px;
+    }
+    .success-hero-banner .center-logo-badge {
+        position: absolute;
+        left: 48%;
+        top: 72%;
+        transform: translate(-50%, -50%);
+        z-index: 4;
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        border-radius: 50%;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.85;
+    }
+    .success-hero-banner .center-logo-badge-inner {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 2px solid rgba(16, 185, 129, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.85);
+    }
+    @media (max-width: 991px) {
+        .success-hero-banner::before {
+            width: 100%;
+            background: linear-gradient(180deg, rgba(7, 53, 39, 0.95) 0%, rgba(42, 104, 81, 0.9) 100%);
+        }
+        .success-hero-banner .banner-main-title {
+            font-size: 30px;
+        }
+        .success-hero-banner .center-logo-badge {
+            display: none !important;
+        }
+    }
+    @media (max-width: 576px) {
+        .success-hero-banner {
+            padding: 35px 0 45px;
+            min-height: auto;
+        }
+        .success-hero-banner .banner-main-title {
+            font-size: 24px;
+        }
+    }
+</style>
+
+<section class="success-hero-banner">
+    <!-- Decorative Left Trophy Icon -->
+    <div class="decor-icon-circle decor-icon-left d-none d-xl-flex">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+            <path d="M4 22h16"></path>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path>
+        </svg>
+    </div>
+
+    <!-- Decorative Right Growth Chart Icon -->
+    <div class="decor-icon-circle decor-icon-right d-none d-xl-flex">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+        </svg>
+    </div>
+
+    <!-- Central White Graduation Cap Badge -->
+    <div class="center-logo-badge d-none d-lg-flex">
+        <div class="center-logo-badge-inner">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container container-1278 position-relative" style="z-index: 2;">
+        <div class="row align-items-center">
+            <!-- Left Text Column -->
+            <div class="col-lg-6 col-md-7 ps-md-4">
+                <div class="banner-text-content">
+                    <span class="badge-pill-tag">
+                        {{ setting('success_page_banner_tag') ?: __('SUCCESS STORIES') }}
+                    </span>
+                    <h1 class="banner-main-title">
+                        {!! nl2br(e(setting('success_page_banner_title') ?: __('Real People. Real Learning. Real Success.'))) !!}
+                    </h1>
+                    <p class="banner-sub-text">
+                        {{ setting('success_page_banner_description') ?: __('Discover how learners are achieving their goals and building better futures with Faculty.') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+
 <section class="support-section p-t-35 p-t-sm-30 p-b-md-50 p-b-80">
     <div class="container container-1278">
 
