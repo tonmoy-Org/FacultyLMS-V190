@@ -52,21 +52,12 @@
                                     </div>
                                 </div>
 
-                                <!-- Description 1 -->
+                                <!-- Description -->
                                 <div class="col-lg-12">
                                     <div class="mb-4">
-                                        <label for="about_me_description" class="form-label">{{ __('description') }} 1</label>
-                                        <textarea class="form-control" id="about_me_description" rows="3"
+                                        <label for="about_me_description" class="form-label">{{ __('description') }}</label>
+                                        <textarea class="form-control summernote" id="about_me_description" rows="5"
                                                   name="about_me_description" placeholder="{{ __('enter_description') }}">{{ setting('about_me_description', $lang) ?: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non.' }}</textarea>
-                                    </div>
-                                </div>
-
-                                <!-- Description 2 -->
-                                <div class="col-lg-12">
-                                    <div class="mb-4">
-                                        <label for="about_me_description_2" class="form-label">{{ __('description') }} 2</label>
-                                        <textarea class="form-control" id="about_me_description_2" rows="3"
-                                                  name="about_me_description_2" placeholder="{{ __('enter_description') }} 2">{{ setting('about_me_description_2', $lang) ?: 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.' }}</textarea>
                                     </div>
                                 </div>
 

@@ -1,4 +1,4 @@
-﻿@extends('frontend.layouts.master')
+@extends('frontend.layouts.master')
 @section('title', __('home'))
 
 @section('base.content')
@@ -9,83 +9,11 @@
 
     <div class="home-page-sections">
     <!--====== Start Feature Cards Section (Life Time Access, Free Course Materials, Dedicated Support) ======-->
-    @include('frontend.homePage.feature_section')
+    {{-- @include('frontend.homePage.feature_section') --}}
 
     <!--====== Start About Me Section ======-->
     @include('frontend.homePage.about_me_section')
 
-    <!--====== Start Stats Counter Section (Dynamic Database System Counts & Theme Green) ======-->
-    @php
-        // 1. Dynamic Enrolled Students Count from DB
-        $total_enrolments = \App\Models\Enroll::count();
-        if ($total_enrolments == 0) {
-            $total_enrolments = \App\Models\User::where('user_type', 'student')->count();
-        }
-        $stat1_number = $total_enrolments > 0 ? number_format($total_enrolments) . '+' : (setting('instructor_stat1_number') ?: '1,200+');
-        $stat1_title  = setting('instructor_stat1_title') ?: 'Students Enrolled';
-
-        // 2. Dynamic Online Courses Count from DB
-        $total_courses = \App\Models\Course::where('status', 1)->count();
-        if ($total_courses == 0) {
-            $total_courses = \App\Models\Course::count();
-        }
-        $stat2_number = $total_courses > 0 ? number_format($total_courses) . '+' : (setting('instructor_stat2_number') ?: '15+');
-        $stat2_title  = setting('instructor_stat2_title') ?: 'Online Courses';
-
-        // 3. Dynamic Success Rate from Ratings / Success Stories or Setting
-        $total_ratings = \App\Models\Rating::count();
-        if ($total_ratings > 0) {
-            $avg_rating = \App\Models\Rating::avg('rating');
-            $stat3_number = round(($avg_rating / 5) * 100) . '%';
-        } else {
-            $stat3_number = setting('instructor_stat3_number') ?: '99%';
-        }
-        $stat3_title = setting('instructor_stat3_title') ?: 'Success Rate';
-    @endphp
-    <section class="stats-counter-section p-t-60 p-b-60 bg-white">
-        <div class="container container-1278">
-            <div class="row justify-content-center align-items-center g-4 text-center">
-                <!-- Stat 1: Students Enrolled -->
-                <div class="col-md-4 col-4" data-aos="fade-up" data-aos-delay="0">
-                    <div class="stat-counter-item">
-                        <h2 class="fw-bold mb-2" style="font-size: 3.4rem; color: #10b981; font-weight: 800; line-height: 1; letter-spacing: -1px;">
-                            {{ $stat1_number }}
-                        </h2>
-                        <h6 class="fw-bold mb-0" style="color: #1a1b4b; font-size: 17px;">
-                            {{ __($stat1_title) }}
-                        </h6>
-                    </div>
-                </div>
-
-                <!-- Stat 2: Online Courses -->
-                <div class="col-md-4 col-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stat-counter-item">
-                        <h2 class="fw-bold mb-2" style="font-size: 3.4rem; color: #10b981; font-weight: 800; line-height: 1; letter-spacing: -1px;">
-                            {{ $stat2_number }}
-                        </h2>
-                        <h6 class="fw-bold mb-0" style="color: #1a1b4b; font-size: 17px;">
-                            {{ __($stat2_title) }}
-                        </h6>
-                    </div>
-                </div>
-
-                <!-- Stat 3: Success Rate -->
-                <div class="col-md-4 col-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stat-counter-item">
-                        <h2 class="fw-bold mb-2" style="font-size: 3.4rem; color: #10b981; font-weight: 800; line-height: 1; letter-spacing: -1px;">
-                            {{ $stat3_number }}
-                        </h2>
-                        <h6 class="fw-bold mb-0" style="color: #1a1b4b; font-size: 17px;">
-                            {{ __($stat3_title) }}
-                        </h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--====== Start Single Course Section ======-->
-    @include('frontend.homePage.single_course_section')
 
     <!--====== Start Ad Banner 1 (Upper Home Section) ======-->
     @php

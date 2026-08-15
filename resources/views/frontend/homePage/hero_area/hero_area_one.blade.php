@@ -61,6 +61,24 @@
     </div>
 </section>
 
+@if(isset($hero_course->description) && !empty(strip_tags($hero_course->description)))
+<section class="course-description-section" style="padding-top: 80px; padding-bottom: 40px;">
+    <div class="container container-1278">
+        <div class="description-card p-4 p-md-5" style="background-color: #eaf7f2; border-radius: 8px;">
+            @if($hero_course->description_subtitle)
+                <h2 class="text-center mb-4" style="color: #111827; font-size: 28px; font-weight: 700;">
+                    {{ $hero_course->description_subtitle }}
+                </h2>
+            @endif
+            
+            <div class="course-description-content" style="color: #4b5563; font-size: 14px; line-height: 1.8; font-weight: 400; text-align: left;">
+                {!! $hero_course->description !!}
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+
 @push('js')
 <script>
     document.addEventListener('DOMContentLoaded', function() {

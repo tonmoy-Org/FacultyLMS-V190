@@ -19,22 +19,22 @@
 @endphp
 
 @if($status !== '0')
-<section class="about-me-section p-t-80 p-b-80 p-t-sm-40 p-b-sm-50 position-relative overflow-hidden bg-white">
+<section class="about-me-section p-t-40 p-b-60 position-relative overflow-hidden bg-white">
     <div class="container container-1278">
         <div class="row align-items-center g-4 g-lg-5">
-            <!-- Left Side Image Card (Matching FacultyLMS section card styles) -->
-            <div class="col-lg-6 col-md-12">
+            <!-- Left Side Image Card -->
+            <div class="col-lg-5 col-md-12">
                 <div class="about-me-card position-relative overflow-hidden shadow-sm" 
-                     style="border-radius: 12px; min-height: 520px; background: linear-gradient(135deg, #FFE485 0%, #FCD34D 100%);">
+                     style="border-radius: 12px; min-height: 400px; background: linear-gradient(135deg, #FFE485 0%, #FCD34D 100%);">
                     
                     <img src="{{ $aboutImgUrl }}" alt="About Me Instructor" 
                          class="img-fluid w-100" 
-                         style="object-fit: cover; width: 100%; height: 100%; min-height: 520px; border-radius: 12px; display: block;">
+                         style="object-fit: cover; width: 100%; height: 100%; min-height: 400px; border-radius: 12px; display: block;">
                 </div>
             </div>
 
-            <!-- Right Side Text Content (Using FacultyLMS common-heading and template-btn) -->
-            <div class="col-lg-6 col-md-12">
+            <!-- Right Side Text Content -->
+            <div class="col-lg-7 col-md-12">
                 <div class="about-me-text-block ps-lg-4">
                     <div class="common-heading">
                         @if($tag)
@@ -44,21 +44,15 @@
                         @endif
 
                         @if($title)
-                            <h3 class="m-b-20" style="color: #1a1b4b;">
+                            <h3 class="m-b-20" style="color: #1a1b4b; font-size: 28px; font-weight: 700;">
                                 {{ __($title) }}
                             </h3>
                         @endif
 
                         @if($desc1)
-                            <p class="m-b-15">
-                                {{ __($desc1) }}
-                            </p>
-                        @endif
-
-                        @if($desc2)
-                            <p class="m-b-25">
-                                {{ __($desc2) }}
-                            </p>
+                            <div class="m-b-25 about-me-description-content" style="font-size: 14px; line-height: 1.8; color: #4b5563;">
+                                {!! __($desc1) !!}
+                            </div>
                         @endif
 
                         @if($btnText)
