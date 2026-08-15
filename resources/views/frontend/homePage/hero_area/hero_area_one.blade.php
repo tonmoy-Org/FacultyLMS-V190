@@ -9,8 +9,17 @@
             <div class="col-xl-9 col-lg-10 col-md-12">
                 <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
                     
+                    {{-- Subject --}}
+                    @if($hero_course->subject)
+                        <div class="mb-3">
+                            <span class="badge" style="background-color: rgba(255,255,255,0.15); color: #2db37c; font-size: 14px; padding: 6px 14px; border-radius: 20px; font-weight: 600;">
+                                {{ $hero_course->subject->title }}
+                            </span>
+                        </div>
+                    @endif
+                    
                     {{-- Title first --}}
-                    <h1 class="hero-title mb-2" style="color: #ffffff; font-size: 36px; font-weight: 700; line-height: 1.3;">{{ $hero_course->title }}</h1>
+                    <h1 class="hero-title mb-2" style="color: #ffffff; font-size: 32px; font-weight: 700; line-height: 1.3;">{{ $hero_course->title }}</h1>
 
                     {{-- Subtitle second --}}
                     @if($hero_course->course_subtitle)
