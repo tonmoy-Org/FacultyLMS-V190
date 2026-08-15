@@ -34,6 +34,7 @@ class AllClear extends Command
         cache()->flush();
 
         $this->delete_directory(base_path('bootstrap/cache/'), false);
+        Artisan::call('package:discover');
         $this->delete_directory(base_path('storage/app/import/'), false);
         $this->delete_directory(base_path('storage/debugbar/'), false);
         $this->delete_directory(base_path('storage/framework/cache/data/'), false);
