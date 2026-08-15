@@ -121,6 +121,8 @@
     <!--====== Start Success Story Section ======-->
     @include('frontend.homePage.success')
 
+    <!--====== Start Support Section ======-->
+    @include('frontend.homePage.support')
 
     <!--====== Start FAQ Section ======-->
     @include('frontend.homePage.faq')
