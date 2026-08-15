@@ -20,7 +20,7 @@
 @endphp
 <style>
     .success-hero-banner {
-        background-color: #073527;
+        background-color: #1e5341;
         background-image: url('{{ $bannerImgUrl }}');
         background-repeat: no-repeat;
         background-position: center right;
@@ -40,12 +40,14 @@
         left: 0;
         bottom: 0;
         width: 65%;
-        background: linear-gradient(90deg, #073527 0%, #0c4333 35%, #2a6851 70%, rgba(42, 104, 81, 0.6) 88%, rgba(42, 104, 81, 0) 100%);
+        background: linear-gradient(90deg, #1e5341 0%, #23614e 35%, #296d58 68%, rgba(41, 109, 88, 0.65) 85%, rgba(41, 109, 88, 0) 100%);
         z-index: 1;
     }
     .success-hero-banner .badge-pill-tag {
-        background: rgba(10, 50, 38, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
         color: #ffffff;
         font-size: 11px;
         font-weight: 700;
@@ -54,7 +56,7 @@
         border-radius: 4px;
         display: inline-block;
         text-transform: uppercase;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
     .success-hero-banner .banner-main-title {
         color: #ffffff;
@@ -100,23 +102,23 @@
         top: 72%;
         transform: translate(-50%, -50%);
         z-index: 4;
-        width: 60px;
-        height: 60px;
+        width: 42px;
+        height: 42px;
         background: rgba(255, 255, 255, 0.75);
         backdrop-filter: blur(6px);
         -webkit-backdrop-filter: blur(6px);
         border-radius: 50%;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
         display: flex;
         align-items: center;
         justify-content: center;
         opacity: 0.85;
     }
     .success-hero-banner .center-logo-badge-inner {
-        width: 48px;
-        height: 48px;
+        width: 34px;
+        height: 34px;
         border-radius: 50%;
-        border: 2px solid rgba(16, 185, 129, 0.8);
+        border: 1.5px solid rgba(16, 185, 129, 0.8);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -141,6 +143,186 @@
         }
         .success-hero-banner .banner-main-title {
             font-size: 24px;
+        }
+    }
+
+    /* Testimonial Form Card Styles */
+    .testimonial-form-card {
+        background: #ffffff;
+        border: none !important;
+        border-radius: 16px;
+        padding: 35px 0;
+        box-shadow: none !important;
+        margin-top: 20px;
+        margin-bottom: 40px;
+        width: 100%;
+    }
+    .testimonial-form-card .card-header-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 18px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .testimonial-form-card .card-header-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0;
+        padding-left: 12px;
+        border-left: 3px solid #10b981;
+        line-height: 1.2;
+    }
+    .testimonial-form-card .card-header-subtitle {
+        font-size: 14px;
+        color: #64748b;
+        margin: 0;
+    }
+    .testimonial-form-card .profile-upload-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 28px;
+    }
+    .testimonial-form-card .avatar-circle {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #e6f4ea;
+        color: #10b981;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+        overflow: hidden;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .testimonial-form-card .profile-photo-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 1.5px solid #10b981;
+        color: #10b981;
+        background: transparent;
+        font-weight: 700;
+        font-size: 12px;
+        padding: 7px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.2s;
+    }
+    .testimonial-form-card .profile-photo-btn:hover {
+        background: #10b981;
+        color: #ffffff;
+    }
+    .testimonial-form-card .section-field-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #1e293b;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .testimonial-form-card .upload-section-title {
+        font-weight: 700;
+    }
+    .testimonial-form-card .upload-drop-zone {
+        border: 1.5px dashed #a7f3d0;
+        background: #f0fdf4;
+        border-radius: 10px;
+        padding: 28px 20px;
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .testimonial-form-card .upload-drop-zone:hover {
+        border-color: #10b981;
+        background: #e6f4ea;
+    }
+    .testimonial-form-card .upload-drop-zone input[type="file"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+    .testimonial-form-card .upload-drop-title {
+        color: #10b981;
+        font-weight: 700;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 6px;
+    }
+    .testimonial-form-card .upload-drop-subtext {
+        color: #64748b;
+        font-size: 13px;
+        margin-top: 2px;
+    }
+    .testimonial-form-card .custom-input-field {
+        background-color: #ffffff;
+        border: 1px solid #d1d5db;
+        color: #111827;
+        border-radius: 8px;
+        padding: 14px;
+        font-size: 14px;
+        width: 100%;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input.custom-input-field {
+        height: 52px !important;
+        padding: 0 16px !important;
+    }
+    .testimonial-form-card .custom-input-field::placeholder {
+        color: #9ca3af !important;
+        opacity: 1 !important;
+    }
+    .testimonial-form-card .custom-input-field:focus {
+        border-color: #10b981;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+    }
+    .testimonial-form-card .btn-submit-green {
+        background: #10b981;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 14px 20px;
+        border-radius: 8px;
+        border: none;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
+    }
+    .testimonial-form-card .btn-submit-green:hover {
+        background: #0d9668;
+        color: #ffffff;
+    }
+    .testimonial-form-card .rating-stars-wrap i {
+        color: #f59e0b;
+        font-size: 22px;
+        cursor: pointer;
+        margin-right: 4px;
+        transition: color 0.15s;
+    }
+    @media (max-width: 576px) {
+        .testimonial-form-card {
+            padding: 20px 16px;
         }
     }
 </style>
@@ -169,7 +351,7 @@
     <!-- Central White Graduation Cap Badge -->
     <div class="center-logo-badge d-none d-lg-flex">
         <div class="center-logo-badge-inner">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
                 <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
             </svg>
@@ -310,104 +492,114 @@
         <hr class="m-b-50">
         @endif
 
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10">
-                
-                <div class="section-title-v3 color-dark m-b-20" style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 10px;">
-                    <h5 style="font-weight: 600; font-size: 18px; margin: 0; color: #333;">{{ __('Your Experience Matters') }}</h5>
-                    <p class="m-0" style="font-size: 14px; color: #666;">{{ __('Share your success story with us.') }}</p>
-                </div>
-
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
+        <div class="row">
+            <div class="col-12">
+                <div class="testimonial-form-card">
+                    <!-- Header Bar -->
+                    <div class="card-header-bar">
+                        <h5 class="card-header-title">{{ __('Your Experience Matters') }}</h5>
+                        <p class="card-header-subtitle">{{ __('Share your success story with us.') }}</p>
                     </div>
-                @endif
 
-                <div class="ticket-replies m-t-30">
-                    <form action="{{ route('store.testimonial') }}" method="POST" enctype="multipart/form-data" class="user-form p-0 row">
+                    @if(session('success'))
+                        <div class="alert alert-success mb-4 rounded-3">
+                            <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+                        </div>
+                    @endif
+
+                    <form action="{{ route('store.testimonial') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        
+
                         <!-- Profile Photo -->
-                        <div class="col-12 m-b-30">
-                            <div class="d-flex align-items-center">
-                                <div class="profile-avatar d-flex align-items-center justify-content-center" style="width: 55px; height: 55px; background-color: #f0f0f0; border-radius: 50%; margin-right: 15px; font-size: 18px; color: #888; overflow: hidden; position: relative;">
-                                    <i class="fas fa-camera-retro" id="profile-avatar-icon"></i>
-                                    <img id="profile-avatar-preview" src="" alt="Profile Preview" style="display: none; width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                                <div class="profile-btn-wrap">
-                                    <label class="btn btn-outline-secondary btn-sm mb-1" style="cursor: pointer; font-size: 13px; font-weight: 500; padding: 5px 12px;">
-                                        <i class="fas fa-cloud-upload-alt m-r-5"></i> {{ __('PROFILE PHOTO') }}
-                                        <input type="file" name="profile_photo" id="profile_photo" style="display: none;" accept="image/*">
-                                    </label>
-                                    <div class="fz-12 color-gray">{{ __('Optional, but recommended') }}</div>
-                                </div>
+                        <div class="profile-upload-row">
+                            <div class="avatar-circle">
+                                <i class="fas fa-camera" id="profile-avatar-icon"></i>
+                                <img id="profile-avatar-preview" src="" alt="Profile Preview" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div>
+                                <label class="profile-photo-btn">
+                                    <i class="fas fa-cloud-upload-alt"></i> {{ __('PROFILE PHOTO') }}
+                                    <input type="file" name="profile_photo" id="profile_photo" class="d-none" accept="image/*">
+                                </label>
+                                <div class="text-muted" style="font-size: 13px; margin-top: 4px; color: #64748b;">{{ __('Optional, but recommended') }}</div>
                             </div>
                         </div>
 
-                        <!-- Media Upload -->
-                        <div class="col-12 m-b-20">
-                            <label for="file" style="font-size: 14px; font-weight: 500; color: #444; margin-bottom: 8px;">{{ __('Add a photo or video to your testimonial') }}</label>
-                            <div class="upload-media-box" style="border: 1px dashed #ccc; border-radius: 4px; padding: 20px; text-align: center; position: relative; background: #fafafa; cursor: pointer;">
-                                <input type="file" name="file" id="file" accept="image/*,video/*" style="opacity: 0; position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;">
-                                <div class="upload-content d-flex align-items-center justify-content-center color-gray fw-500" style="font-size: 13px;">
-                                    <i class="fas fa-video m-r-10 fz-16"></i> <span id="file-name">{{ __('UPLOAD PHOTO/VIDEO') }}</span>
+                        <!-- Add Photo or Video Section -->
+                        <div class="mb-4">
+                            <label class="section-field-label upload-section-title">{{ __('Add a photo or video to your testimonial') }}</label>
+                            <div class="upload-drop-zone">
+                                <input type="file" name="file" id="file" accept="image/*,video/*">
+                                <div class="d-flex flex-column align-items-center justify-content-center">
+                                    <i class="fas fa-video text-success" style="font-size: 26px; color: #10b981;"></i>
+                                    <span class="upload-drop-title" id="file-name">{{ __('UPLOAD PHOTO/VIDEO') }}</span>
+                                    <span class="upload-drop-subtext">{{ __('Click to upload or drag and drop') }}</span>
                                 </div>
                             </div>
-                            <div id="media-preview-container" class="mt-2 text-center" style="display: none; background: #f8fafc; border-radius: 6px; padding: 10px; border: 1px solid #e2e8f0;">
+                            <div id="media-preview-container" class="mt-2 text-center" style="display: none; background: #f8fafc; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
                                 <img id="media-image-preview" src="" alt="Media Preview" style="max-height: 200px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto; object-fit: cover;">
                                 <video id="media-video-preview" src="" controls style="max-height: 220px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto;"></video>
                             </div>
                             @error('file')
-                                <p class="text-danger error" style="font-size: 13px; margin-top: 5px;">{{ $message }}</p>
+                                <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <!-- Name & Position -->
-                        <div class="col-md-6 m-b-20">
-                            <label for="name" style="font-size: 14px; font-weight: 500; color: #444; margin-bottom: 8px;">{{ __('Your Name') }}</label>
-                            <input type="text" class="form-control" name="name" id="name" required>
-                            @error('name')
-                                <p class="text-danger error" style="font-size: 13px; margin-top: 5px;">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 m-b-20">
-                            <label for="position" style="font-size: 14px; font-weight: 500; color: #444; margin-bottom: 8px;">{{ __('Position/Title') }}</label>
-                            <input type="text" class="form-control" name="position" id="position">
-                            @error('position')
-                                <p class="text-danger error" style="font-size: 13px; margin-top: 5px;">{{ $message }}</p>
-                            @enderror
+                        <!-- Name & Position Fields -->
+                        <div class="row gx-3">
+                            <div class="col-md-6 mb-4">
+                                <label for="name" class="section-field-label"><i class="far fa-user text-success" style="color: #10b981;"></i> {{ __('Your Name') }}</label>
+                                <input type="text" class="custom-input-field" name="name" id="name" placeholder="{{ __('Enter your full name') }}" required>
+                                @error('name')
+                                    <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="position" class="section-field-label"><i class="fas fa-briefcase text-success" style="color: #10b981;"></i> {{ __('Position/Title') }}</label>
+                                <input type="text" class="custom-input-field" name="position" id="position" placeholder="{{ __('Enter your position or title') }}">
+                                @error('position')
+                                    <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
 
-                        <!-- Testimonial Text -->
-                        <div class="col-12 m-b-20">
-                            <label for="description" style="font-size: 14px; font-weight: 500; color: #444; margin-bottom: 8px;">{{ __('Your Testimonial') }}</label>
-                            <textarea class="form-control" name="description" id="description" rows="4" required></textarea>
+                        <!-- Testimonial Description -->
+                        <div class="mb-4">
+                            <label for="description" class="section-field-label"><i class="far fa-comment-alt text-success" style="color: #10b981;"></i> {{ __('Your Testimonial') }}</label>
+                            <textarea class="custom-input-field" name="description" id="description" rows="4" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
+                            <div class="text-end text-muted mt-1" style="font-size: 13px; color: #64748b;" id="char-count">0 / 500</div>
                             @error('description')
-                                <p class="text-danger error" style="font-size: 13px; margin-top: 5px;">{{ $message }}</p>
+                                <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <!-- Rating -->
-                        <div class="col-12 m-b-30">
-                            <label style="font-size: 14px; font-weight: 500; color: #444; margin-bottom: 8px;">{{ __('Your Rating') }}</label>
-                            <div class="rating-stars" style="color: #ff9800; font-size: 18px; cursor: pointer;">
-                                <i class="fas fa-star" data-value="1"></i>
-                                <i class="fas fa-star" data-value="2"></i>
-                                <i class="fas fa-star" data-value="3"></i>
-                                <i class="fas fa-star" data-value="4"></i>
-                                <i class="fas fa-star" data-value="5"></i>
+                        <!-- Star Rating -->
+                        <div class="mb-4">
+                            <label class="section-field-label"><i class="far fa-star text-success" style="color: #10b981;"></i> {{ __('Your Rating') }}</label>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="rating-stars-wrap">
+                                    <i class="fas fa-star rating-star-icon" data-value="1"></i>
+                                    <i class="fas fa-star rating-star-icon" data-value="2"></i>
+                                    <i class="fas fa-star rating-star-icon" data-value="3"></i>
+                                    <i class="fas fa-star rating-star-icon" data-value="4"></i>
+                                    <i class="fas fa-star rating-star-icon" data-value="5"></i>
+                                </div>
+                                <span class="text-muted ms-2" style="font-size: 13px; color: #64748b;">{{ __('Click on a star to rate') }}</span>
                             </div>
                             <input type="hidden" name="rating" id="rating-value" value="5">
                         </div>
 
-                        <!-- Submit -->
-                        <div class="col-md-12 m-t-10">
-                            <button class="template-btn" type="submit">{{ __('Submit Testimonial') }}</button>
+                        <!-- Submit Button & Footer -->
+                        <div class="mt-4">
+                            <button type="submit" class="btn-submit-green">
+                                <i class="fas fa-paper-plane"></i> {{ __('Submit Testimonial') }}
+                            </button>
+                            <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
+                                <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
+                            </div>
                         </div>
                     </form>
                 </div>
-                
             </div>
         </div>
     </div>
@@ -464,18 +656,24 @@
         });
 
         // Star rating
-        $('.rating-stars i').on('click', function() {
+        $('.rating-star-icon, .rating-stars i').on('click', function() {
             const value = parseInt($(this).data('value'));
             $('#rating-value').val(value);
             
-            $('.rating-stars i').each(function() {
+            $('.rating-star-icon, .rating-stars i').each(function() {
                 const sValue = parseInt($(this).data('value'));
                 if (sValue <= value) {
-                    $(this).removeClass('fal far').addClass('fas');
+                    $(this).css('color', '#f59e0b').removeClass('fal far').addClass('fas');
                 } else {
-                    $(this).removeClass('fas').addClass('fal'); // using fal as per theme
+                    $(this).css('color', '#cbd5e1').removeClass('fas').addClass('far');
                 }
             });
+        });
+
+        // Character Counter
+        $('#description').on('input', function() {
+            var len = $(this).val().length;
+            $('#char-count').text(len + ' / 500');
         });
     });
 </script>
