@@ -378,6 +378,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
 
         //success-story
         Route::resource('success-stories', SuccessStoryController::class)->except(['show']);
+        Route::post('save-success-banner', [WebsiteSettingController::class, 'saveSuccessBanner'])->name('website.success_banner.save');
 
         //testimonials
         Route::resource('testimonials', TestimonialController::class)->except(['show']);

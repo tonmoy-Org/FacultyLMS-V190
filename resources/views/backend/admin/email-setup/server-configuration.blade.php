@@ -76,7 +76,7 @@
                                                class="form-label">{{__('smtp_server_address') }}</label>
                                         <input type="text" class="form-control rounded-2" id="SMTPServer"
                                                name="smtp_server_address"
-                                               value="{{ old('smtp_server_address',env('MAIL_HOST')) }}">
+                                                value="{{ old('smtp_server_address', config('mail.mailers.smtp.host', env('MAIL_HOST'))) }}">
                                         @if($errors->has('smtp_server_address'))
                                             <div class="nk-block-des text-danger">
                                                 <p>{{ $errors->first('smtp_server_address') }}</p>
@@ -91,7 +91,7 @@
                                         <label for="SMTPUser" class="form-label">{{__('smtp_username') }}</label>
                                         <input type="text" class="form-control rounded-2" id="SMTPUser"
                                                placeholder="{{__('smtp_username')}}" name="smtp_user_name"
-                                               value="{{ stringMasking(old('smtp_user_name',env('MAIL_USERNAME')),'*',3,-3) }}">
+                                               value="{{ stringMasking(old('smtp_user_name', config('mail.mailers.smtp.username', env('MAIL_USERNAME'))),'*',3,-3) }}">
                                         @if($errors->has('smtp_user_name'))
                                             <div class="nk-block-des text-danger">
                                                 <p>{{ $errors->first('smtp_user_name') }}</p>
@@ -106,7 +106,7 @@
                                         <label for="SMTPPassword" class="form-label">{{__('smtp_password') }}</label>
                                         <input type="password" class="form-control rounded-2" id="SMTPPassword"
                                                placeholder="********" name="smtp_password"
-                                               value="{{ stringMasking(old('smtp_password',env('MAIL_PASSWORD')),'*',0) }}">
+                                               value="{{ stringMasking(old('smtp_password', config('mail.mailers.smtp.password', env('MAIL_PASSWORD'))),'*',0) }}">
                                         @if($errors->has('smtp_password'))
                                             <div class="nk-block-des text-danger">
                                                 <p>{{ $errors->first('smtp_password') }}</p>
@@ -121,7 +121,7 @@
                                         <label for="SMTPPort" class="form-label">{{__('smtp_port') }}</label>
                                         <input type="number" class="form-control rounded-2" id="SMTPPort"
                                                placeholder="7684" name="smtp_mail_port"
-                                               value="{{ old('smtp_mail_port',env('MAIL_PORT')) }}">
+                                               value="{{ old('smtp_mail_port', config('mail.mailers.smtp.port', env('MAIL_PORT'))) }}">
                                         @if($errors->has('smtp_mail_port'))
                                             <div class="nk-block-des text-danger">
                                                 <p>{{ $errors->first('smtp_mail_port') }}</p>
@@ -140,9 +140,9 @@
                                                     aria-label=".form-select-lg example" name="smtp_encryption_type">
                                                 <option value="">{{ __('select_encryption_type') }}</option>
                                                 <option
-                                                    {{ env('MAIL_ENCRYPTION') == 'ssl' ? "selected" : "" }} value="ssl">{{__('SSL')}}</option>
+                                                    {{ (config('mail.mailers.smtp.encryption') ?: env('MAIL_ENCRYPTION')) == 'ssl' ? "selected" : "" }} value="ssl">{{__('SSL')}}</option>
                                                 <option
-                                                    {{ env('MAIL_ENCRYPTION') == 'tls' ? "selected" : "" }} value="tls">{{__('TLS')}}</option>
+                                                    {{ (config('mail.mailers.smtp.encryption') ?: env('MAIL_ENCRYPTION')) == 'tls' ? "selected" : "" }} value="tls">{{__('TLS')}}</option>
                                             </select>
                                             @if($errors->has('smtp_encryption_type'))
                                                 <div class="nk-block-des text-danger">
@@ -160,7 +160,7 @@
                                         <input type="text" class="form-control rounded-2" id="MailFName"
                                                placeholder="{{__('mail_from_name') }}"
                                                name="smtp_mail_from_name"
-                                               value="{{ old('smtp_mail_from_name',env('MAIL_FROM_NAME')) }}">
+                                               value="{{ old('smtp_mail_from_name', config('mail.from.name', env('MAIL_FROM_NAME'))) }}">
                                         @if($errors->has('smtp_mail_from_name'))
                                             <div class="nk-block-des text-danger">
                                                 <p>{{ $errors->first('smtp_mail_from_name') }}</p>
@@ -178,7 +178,7 @@
 
                                         <input type="email" class="form-control rounded-2" id="emailAddress"
                                                name="mail_from_address"
-                                               value="{{ stringMasking(old('mail_from_address',env('MAIL_FROM_ADDRESS')),'*',3,-3) }}">
+                                               value="{{ stringMasking(old('mail_from_address', config('mail.from.address', env('MAIL_FROM_ADDRESS'))),'*',3,-3) }}">
                                         @if($errors->has('replay_to'))
                                             <div class="nk-block-des text-danger">
                                                 <p>{{ $errors->first('replay_to') }}</p>

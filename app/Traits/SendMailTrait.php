@@ -9,15 +9,15 @@ trait SendMailTrait
 {
     protected function sendMail($to, $view, $data, $sender = null): bool
     {
-        $engine    = env('MAIL_MAILER');
+        $engine    = config('mail.default', env('MAIL_MAILER'));
 
         if ($sender) {
             $from = $sender;
         } else {
             if ($engine == 'smtp') {
-                $from = env('MAIL_FROM_ADDRESS');
+                $from = config('mail.from.address', env('MAIL_FROM_ADDRESS'));
             } else {
-                $from = env('SENDER_MAIL');
+                $from = config('mail.from.address', env('SENDER_MAIL'));
             }
         }
 
