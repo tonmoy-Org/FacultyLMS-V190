@@ -270,29 +270,7 @@
         font-size: 13px;
         margin-top: 2px;
     }
-    .testimonial-form-card .custom-input-field {
-        background-color: #ffffff;
-        border: 1px solid #d1d5db;
-        color: #111827;
-        border-radius: 8px;
-        padding: 14px;
-        font-size: 14px;
-        width: 100%;
-        transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    input.custom-input-field {
-        height: 52px !important;
-        padding: 0 16px !important;
-    }
-    .testimonial-form-card .custom-input-field::placeholder {
-        color: #9ca3af !important;
-        opacity: 1 !important;
-    }
-    .testimonial-form-card .custom-input-field:focus {
-        border-color: #10b981;
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
-    }
+
 
     .testimonial-form-card .rating-stars-wrap i {
         color: #f59e0b;
@@ -529,14 +507,14 @@
                         <!-- Name & Position Fields -->
                         <div class="row gx-3">
                             <div class="col-md-6 mb-4">
-                                <label for="name" class="section-field-label"><i class="far fa-user text-success" style="color: #10b981;"></i> {{ __('Your Name') }}</label>
+                                <label for="name">{{ __('Your Name') }}</label>
                                 <input type="text" class="form-control" name="name" id="name" placeholder="{{ __('Enter your full name') }}" required>
                                 @error('name')
                                     <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-4">
-                                <label for="position" class="section-field-label"><i class="fas fa-briefcase text-success" style="color: #10b981;"></i> {{ __('Position/Title') }}</label>
+                                <label for="position">{{ __('Position/Title') }}</label>
                                 <input type="text" class="form-control" name="position" id="position" placeholder="{{ __('Enter your position or title') }}">
                                 @error('position')
                                     <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
@@ -546,7 +524,7 @@
 
                         <!-- Testimonial Description -->
                         <div class="mb-4">
-                            <label for="description" class="section-field-label"><i class="far fa-comment-alt text-success" style="color: #10b981;"></i> {{ __('Your Testimonial') }}</label>
+                            <label for="description">{{ __('Your Testimonial') }}</label>
                             <textarea class="form-control" name="description" id="description" rows="4" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
                             <div class="text-end text-muted mt-1" style="font-size: 13px; color: #64748b;" id="char-count">0 / 500</div>
                             @error('description')
@@ -556,8 +534,8 @@
 
                         <!-- Star Rating -->
                         <div class="mb-4">
-                            <label class="section-field-label"><i class="far fa-star text-success" style="color: #10b981;"></i> {{ __('Your Rating') }}</label>
-                            <div class="d-flex align-items-center gap-2">
+                            <label>{{ __('Your Rating') }}</label>
+                            <div class="d-flex align-items-center gap-2 mt-2">
                                 <div class="rating-stars-wrap">
                                     <i class="fas fa-star rating-star-icon" data-value="1"></i>
                                     <i class="fas fa-star rating-star-icon" data-value="2"></i>
