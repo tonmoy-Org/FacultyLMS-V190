@@ -16,6 +16,7 @@ use App\Http\Controllers\Instructor\QuizQuestionController;
 use App\Http\Controllers\Instructor\ResourceController;
 use App\Http\Controllers\Instructor\SectionController;
 use App\Http\Controllers\Instructor\StudentController;
+use App\Http\Controllers\Admin\PayoutController;
 use App\Http\Controllers\Instructor\TicketController;
 use Illuminate\Support\Facades\Route;
 
