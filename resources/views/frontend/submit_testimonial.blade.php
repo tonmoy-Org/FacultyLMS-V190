@@ -485,20 +485,20 @@
                         <!-- 2-Column Grid: Height strictly matches from top of green upload box to bottom of Your Rating -->
                         <div class="row g-4 align-items-stretch mb-4">
                             <!-- Left Column: Fields from green upload box to Your Rating -->
-                            <div class="col-lg-7">
+                            <div class="col-lg-7 d-flex flex-column justify-content-between" style="padding-bottom: 10px;">
                                 <!-- Add Photo or Video Box -->
                                 <div class="mb-2">
-                                    <div class="upload-drop-zone p-3">
+                                    <div class="upload-drop-zone">
                                         <input type="file" name="file" id="file" accept="image/*,video/*">
                                         <div class="d-flex flex-column align-items-center justify-content-center">
-                                            <i class="fas fa-video text-success" style="font-size: 24px; color: #10b981;"></i>
-                                            <span class="upload-drop-title mt-1" id="file-name">{{ __('UPLOAD PHOTO/VIDEO') }}</span>
-                                            <span class="upload-drop-subtext" style="font-size: 12px; margin-top: 1px;">{{ __('Click to upload or drag and drop') }}</span>
+                                            <i class="fas fa-video text-success" style="font-size: 26px; color: #10b981;"></i>
+                                            <span class="upload-drop-title" id="file-name">{{ __('UPLOAD PHOTO/VIDEO') }}</span>
+                                            <span class="upload-drop-subtext">{{ __('Click to upload or drag and drop') }}</span>
                                         </div>
                                     </div>
-                                    <div id="media-preview-container" class="mt-2 text-center" style="display: none; background: #f8fafc; border-radius: 8px; padding: 10px; border: 1px solid #e2e8f0;">
-                                        <img id="media-image-preview" src="" alt="Media Preview" style="max-height: 160px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto; object-fit: cover;">
-                                        <video id="media-video-preview" src="" controls style="max-height: 160px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto;"></video>
+                                    <div id="media-preview-container" class="mt-2 text-center" style="display: none; background: #f8fafc; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
+                                        <img id="media-image-preview" src="" alt="Media Preview" style="max-height: 180px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto; object-fit: cover;">
+                                        <video id="media-video-preview" src="" controls style="max-height: 180px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto;"></video>
                                     </div>
                                     @error('file')
                                         <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
@@ -506,16 +506,16 @@
                                 </div>
 
                                 <!-- Name & Position Fields -->
-                                <div class="row gx-3">
+                                <div class="row gx-3 mb-1">
                                     <div class="col-md-6 mb-2">
-                                        <label for="name" class="mb-1 fw-bold" style="font-size: 14px;">{{ __('Your Name') }}</label>
+                                        <label for="name">{{ __('Your Name') }}</label>
                                         <input type="text" class="form-control" name="name" id="name" placeholder="{{ __('Enter your full name') }}" required>
                                         @error('name')
                                             <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <label for="position" class="mb-1 fw-bold" style="font-size: 14px;">{{ __('Position/Title') }}</label>
+                                        <label for="position">{{ __('Position/Title') }}</label>
                                         <input type="text" class="form-control" name="position" id="position" placeholder="{{ __('Enter your position or title') }}">
                                         @error('position')
                                             <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
@@ -525,9 +525,9 @@
 
                                 <!-- Testimonial Description -->
                                 <div class="mb-2">
-                                    <label for="description" class="mb-1 fw-bold" style="font-size: 14px;">{{ __('Your Testimonial') }}</label>
+                                    <label for="description">{{ __('Your Testimonial') }}</label>
                                     <textarea class="form-control" name="description" id="description" rows="3" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
-                                    <div class="text-end text-muted mt-1" style="font-size: 12px; color: #64748b;" id="char-count">0 / 500</div>
+                                    <div class="text-end text-muted mt-1" style="font-size: 13px; color: #64748b;" id="char-count">0 / 500</div>
                                     @error('description')
                                         <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                                     @enderror
@@ -535,7 +535,7 @@
 
                                 <!-- Star Rating -->
                                 <div class="mt-1">
-                                    <label for="rating-value" class="mb-1 fw-bold" style="font-size: 14px;">{{ __('Your Rating') }}</label>
+                                    <label for="rating-value">{{ __('Your Rating') }}</label>
                                     <div class="d-flex align-items-center gap-2 mt-1">
                                         <div class="rating-stars-wrap">
                                             <i class="fas fa-star rating-star-icon" data-value="1"></i>
