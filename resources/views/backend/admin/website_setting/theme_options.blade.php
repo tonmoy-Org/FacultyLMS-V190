@@ -17,12 +17,12 @@
                             <div class="col-xl-6 col-lg-6 col-sm-12 mb-4">
                                 <label class="form-label fw-bold">Select Website Mode</label>
                                 <select name="website_mode" id="website_mode" class="form-select" onchange="toggleSingleCourseSelect()">
-                                    <option value="multiple_course" {{ setting('website_mode') == 'multiple_course' || !setting('website_mode') ? 'selected' : '' }}>Multiple Course (Marketplace)</option>
-                                    <option value="single_course" {{ setting('website_mode') == 'single_course' ? 'selected' : '' }}>Single Course Website</option>
+                                    <option value="multiple_course" {{ setting('website_mode') == 'multiple_course' ? 'selected' : '' }}>Multiple Course (Marketplace)</option>
+                                    <option value="single_course" {{ setting('website_mode') == 'single_course' || !setting('website_mode') ? 'selected' : '' }}>Single Course Website</option>
                                 </select>
                             </div>
 
-                            <div class="col-xl-6 col-lg-6 col-sm-12 mb-4" id="single_course_select_div" style="display: {{ setting('website_mode') == 'single_course' ? 'block' : 'none' }};">
+                            <div class="col-xl-6 col-lg-6 col-sm-12 mb-4" id="single_course_select_div" style="display: {{ setting('website_mode') == 'single_course' || !setting('website_mode') ? 'block' : 'none' }};">
                                 <label class="form-label fw-bold">Select Featured Course</label>
                                 <select name="single_course_id" class="form-select select2">
                                     <option value="">Select a course...</option>
