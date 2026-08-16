@@ -431,7 +431,7 @@ class CourseController extends Controller
                 $query->where('status', 1);
             })->active()->get();
 
-            $previous_lession = Cache::get('selected_lesson');
+            $previous_lession = session('selected_lesson');
 
             if ($previous_lession && $course->id == $previous_lession['course_id']) {
 

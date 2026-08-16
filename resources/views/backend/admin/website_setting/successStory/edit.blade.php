@@ -6,6 +6,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h3 class="section-title">{{__('edit_success_story') }}</h3>
+                    @include('backend.admin.website_setting.successStory.banner_setting_form')
                     <div class="bg-white redious-border p-20 p-sm-30">
                         <div class="row">
                             <form>
