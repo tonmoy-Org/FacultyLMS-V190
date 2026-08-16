@@ -450,7 +450,15 @@ class FrontendController extends Controller
 
     public function successDetails($slug)
     {
-        $story = \App\Models\SuccessStory::where('slug', $slug)->active()->firstOrFail();
+        $story = \App\Models\SuccessStory::where('slug', $slug)
+            ->orWhere('slug', \Illuminate\Support\Str::slug($slug))
+            ->active()
+            ->first();
+
+        if (!$story) {
+            $story = \App\Models\SuccessStory::where('id', $slug)->active()->firstOrFail();
+        }
+
         return view('frontend.success_details', compact('story'));
     }
 

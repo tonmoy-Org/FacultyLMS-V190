@@ -45,7 +45,7 @@ class SuccessStoryRepository
         if (arrayCheck('success_media_id', $request)) {
             $request['image'] = $this->getImageWithRecommendedSize($request['success_media_id'], '473', '337', true);
         }
-        $request['slug'] = strtolower($request['title']);
+        $request['slug'] = getSlug('success_stories', $request['title']);
         $success         = SuccessStory::create($request);
 
         $this->langStore($request, $success);
@@ -64,6 +64,10 @@ class SuccessStoryRepository
 
         if (arrayCheck('lang', $request) && $request['lang'] != 'en') {
             $request['title'] = $success->title;
+        } else {
+            if (arrayCheck('title', $request) && !empty($request['title'])) {
+                $request['slug'] = getSlug('success_stories', $request['title'], 'slug', $id);
+            }
         }
         $success->update($request);
 

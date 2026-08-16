@@ -434,7 +434,7 @@
                                     </div>
                                     <div class="author-details" style="min-width: 0; flex: 1;">
                                         <h5 class="m-b-0" style="font-size: 15px; font-weight: 600; line-height: 1.2; color: var(--theme-clr);">
-                                            {{ $story->title }}
+                                            <a href="{{ route('success.details', $story->slug) }}" style="color: inherit; text-decoration: none;">{{ $story->title }}</a>
                                         </h5>
                                         <div class="color-gray" style="font-size: 14px; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $story->position ?? __('Student') }}</div>
                                         @if($story->rating)
@@ -470,7 +470,7 @@
                                         </div>
                                         <div class="author-details" style="min-width: 0; flex: 1;">
                                             <h5 class="m-b-0" style="font-size: 14px; font-weight: 600; line-height: 1.2; color: var(--theme-clr);">
-                                                {{ $story->title }}
+                                                <a href="{{ route('success.details', $story->slug) }}" style="color: inherit; text-decoration: none;">{{ $story->title }}</a>
                                             </h5>
                                             <div class="color-gray mt-1" style="font-size: 12px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $story->position ?? __('Student') }}</div>
                                             @if($story->rating)
