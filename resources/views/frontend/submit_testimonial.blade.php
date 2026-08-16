@@ -477,13 +477,17 @@
                             </div>
                         </div>
 
-                        <!-- 2-Column Grid: Height strictly matches from "Add a photo or video" to "Your Rating" -->
+                        <!-- Section Title Above Grid -->
+                        <div class="mb-2">
+                            <label class="upload-section-title mb-2 d-block fw-bold">{{ __('Add a photo or video to your testimonial') }}</label>
+                        </div>
+
+                        <!-- 2-Column Grid: Height strictly matches from top of green upload box to bottom of Your Rating -->
                         <div class="row g-4 align-items-stretch mb-4">
-                            <!-- Left Column: Fields from "Add a photo or video" to "Your Rating" -->
+                            <!-- Left Column: Fields from green upload box to Your Rating -->
                             <div class="col-lg-7">
-                                <!-- Add Photo or Video Section -->
+                                <!-- Add Photo or Video Box -->
                                 <div class="mb-3">
-                                    <label class="upload-section-title mb-2 d-block fw-bold">{{ __('Add a photo or video to your testimonial') }}</label>
                                     <div class="upload-drop-zone">
                                         <input type="file" name="file" id="file" accept="image/*,video/*">
                                         <div class="d-flex flex-column align-items-center justify-content-center">
@@ -546,7 +550,7 @@
                                 </div>
                             </div>
 
-                            <!-- Right Column: Admin Upload Image Only -->
+                            <!-- Right Column: Admin Upload Image Only (Height strictly matches from green box to Your Rating) -->
                             <div class="col-lg-5">
                                 @php
                                     $formRightImgSetting = setting('success_form_right_image');
@@ -574,17 +578,10 @@
                                     }
 
                                     if (empty($formRightImgUrl) || str_contains($formRightImgUrl, 'default-image')) {
-                                        $latestStory = \App\Models\SuccessStory::whereNotNull('image')->latest()->first();
-                                        if ($latestStory && !empty($latestStory->image)) {
-                                            $formRightImgUrl = getFileLink('original_image', $latestStory->image);
-                                        }
-                                    }
-
-                                    if (empty($formRightImgUrl) || str_contains($formRightImgUrl, 'default-image')) {
                                         $formRightImgUrl = static_asset('images/default/default-image-391x541.png');
                                     }
                                 @endphp
-                                <div class="success-form-right-card h-100 w-100 position-relative overflow-hidden" style="border: 1px solid #e2e8f0; border-radius: 16px; min-height: 280px; background: #f8fafc;">
+                                <div class="success-form-right-card h-100 w-100 position-relative overflow-hidden" style="border: 1px solid #e2e8f0; border-radius: 16px; background: #f8fafc;">
                                     <img src="{{ $formRightImgUrl }}" alt="Right Side Image" class="w-100 h-100" style="object-fit: cover; border-radius: 16px; display: block; width: 100%; height: 100%;">
                                 </div>
                             </div>
