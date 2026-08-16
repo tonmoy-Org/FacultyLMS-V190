@@ -469,16 +469,16 @@
                             </div>
                             <div>
                                 <label class="profile-photo-btn">
-                                    <i class="fas fa-cloud-upload-alt"></i> {{ __('PROFILE PHOTO') }}
+                                    <i class="fas fa-cloud-upload-alt"></i> {{ setting('success_form_profile_photo_btn') ?: __('PROFILE PHOTO') }}
                                     <input type="file" name="profile_photo" id="profile_photo" class="d-none" accept="image/*">
                                 </label>
-                                <div class="text-muted" style="font-size: 13px; margin-top: 4px; color: #64748b;">{{ __('Optional, but recommended') }}</div>
+                                <div class="text-muted" style="font-size: 13px; margin-top: 4px; color: #64748b;">{{ setting('success_form_profile_photo_subtext') ?: __('Optional, but recommended') }}</div>
                             </div>
                         </div>
 
                         <!-- Section Title Above Grid -->
                         <div class="mb-2">
-                            <label class="upload-section-title mb-2 d-block fw-bold">{{ __('Add a photo or video to your testimonial') }}</label>
+                            <label class="upload-section-title mb-2 d-block fw-bold">{{ setting('success_form_media_title') ?: __('Add a photo or video to your testimonial') }}</label>
                         </div>
 
                         <!-- 2-Column Grid: Height strictly matches from top of green upload box to bottom of Your Rating -->
@@ -491,8 +491,8 @@
                                         <input type="file" name="file" id="file" accept="image/*,video/*">
                                         <div class="d-flex flex-column align-items-center justify-content-center">
                                             <i class="fas fa-video text-success" style="font-size: 26px; color: #10b981;"></i>
-                                            <span class="upload-drop-title" id="file-name">{{ __('UPLOAD PHOTO/VIDEO') }}</span>
-                                            <span class="upload-drop-subtext">{{ __('Click to upload or drag and drop') }}</span>
+                                            <span class="upload-drop-title" id="file-name">{{ setting('success_form_media_drop_title') ?: __('UPLOAD PHOTO/VIDEO') }}</span>
+                                            <span class="upload-drop-subtext">{{ setting('success_form_media_drop_subtext') ?: __('Click to upload or drag and drop') }}</span>
                                         </div>
                                     </div>
                                     <div id="media-preview-container" class="mt-2 text-center" style="display: none; background: #f8fafc; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
@@ -507,15 +507,15 @@
                                 <!-- Name & Position Fields -->
                                 <div class="row gx-3 mb-2">
                                     <div class="col-md-6 mb-2">
-                                        <label for="name" class="form-label mb-1">{{ __('Your Name') }}</label>
-                                        <input type="text" class="form-control" name="name" id="name" placeholder="{{ __('Enter your full name') }}" required>
+                                        <label for="name" class="form-label mb-1">{{ setting('success_form_name_label') ?: __('Your Name') }}</label>
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="{{ setting('success_form_name_placeholder') ?: __('Enter your full name') }}" required>
                                         @error('name')
                                             <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <label for="position" class="form-label mb-1">{{ __('Position/Title') }}</label>
-                                        <input type="text" class="form-control" name="position" id="position" placeholder="{{ __('Enter your position or title') }}">
+                                        <label for="position" class="form-label mb-1">{{ setting('success_form_position_label') ?: __('Position/Title') }}</label>
+                                        <input type="text" class="form-control" name="position" id="position" placeholder="{{ setting('success_form_position_placeholder') ?: __('Enter your position or title') }}">
                                         @error('position')
                                             <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                                         @enderror
@@ -524,8 +524,8 @@
 
                                 <!-- Testimonial Description -->
                                 <div class="mb-2">
-                                    <label for="description" class="form-label mb-1">{{ __('Your Testimonial') }}</label>
-                                    <textarea class="form-control" name="description" id="description" rows="3" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
+                                    <label for="description" class="form-label mb-1">{{ setting('success_form_testimonial_label') ?: __('Your Testimonial') }}</label>
+                                    <textarea class="form-control" name="description" id="description" rows="3" placeholder="{{ setting('success_form_testimonial_placeholder') ?: __('Share your experience with us...') }}" maxlength="500" required></textarea>
                                     <div class="text-end text-muted mt-1 mb-1" style="font-size: 12.5px; color: #64748b;" id="char-count">0 / 500</div>
                                     @error('description')
                                         <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
@@ -534,7 +534,7 @@
 
                                 <!-- Star Rating -->
                                 <div class="mt-1">
-                                    <label for="rating-value" class="form-label mb-1">{{ __('Your Rating') }}</label>
+                                    <label for="rating-value" class="form-label mb-1">{{ setting('success_form_rating_label') ?: __('Your Rating') }}</label>
                                     <div class="d-flex align-items-center gap-2 mt-0">
                                         <div class="rating-stars-wrap">
                                             <i class="fas fa-star rating-star-icon" data-value="1"></i>
@@ -543,7 +543,7 @@
                                             <i class="fas fa-star rating-star-icon" data-value="4"></i>
                                             <i class="fas fa-star rating-star-icon" data-value="5"></i>
                                         </div>
-                                        <span class="text-muted ms-2" style="font-size: 13px; color: #64748b;">{{ __('Click on a star to rate') }}</span>
+                                        <span class="text-muted ms-2" style="font-size: 13px; color: #64748b;">{{ setting('success_form_rating_subtext') ?: __('Click on a star to rate') }}</span>
                                     </div>
                                     <input type="hidden" name="rating" id="rating-value" value="5">
                                 </div>
@@ -591,7 +591,7 @@
                             <div class="col-lg-7">
                                 <div class="mt-2">
                                     <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
-                                        <span>{{ __('Submit Testimonial') }}</span>
+                                        <span>{{ setting('success_form_submit_btn') ?: __('Submit Testimonial') }}</span>
                                         <i class="fas fa-paper-plane ms-2"></i>
                                     </button>
                                 </div>
