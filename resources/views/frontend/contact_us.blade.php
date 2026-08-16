@@ -434,20 +434,6 @@
     <!--====== Main Section ======-->
     <section class="contact-us-page-section">
         <div class="container container-1278">
-            <!-- Top Header Section -->
-            <div class="text-center mb-5">
-                <div class="contact-top-badge mx-auto mb-3">
-                    <i class="fas fa-paper-plane" style="transform: rotate(-10deg);"></i>
-                </div>
-                <h1 class="fw-bold mb-2" style="color: #0f172a; font-size: 2.2rem; font-family: var(--header-font);">
-                    {{ __($page_title) }}
-                </h1>
-                <p class="text-muted mx-auto mb-3" style="max-width: 580px; font-size: 15px; line-height: 1.6; color: #64748b; font-family: var(--body-font);">
-                    {!! nl2br(e(__($page_subtitle))) !!}
-                </p>
-                <div class="mx-auto" style="width: 36px; height: 3px; background-color: var(--theme-clr, #10b981); border-radius: 2px;"></div>
-            </div>
-
             <!-- Main Content 2-Column Row (Form on Left, Map on Right) -->
             <div class="row g-4 align-items-stretch mb-5">
                 <!-- Left Column: Form -->
