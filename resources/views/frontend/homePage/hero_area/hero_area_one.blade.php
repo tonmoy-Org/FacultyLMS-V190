@@ -6,7 +6,7 @@
 <section class="hero-area p-t-120 p-b-120 text-center" style="background-color: #123e2b;">
     <div class="container container-1278">
         <div class="row justify-content-center">
-            <div class="col-xl-9 col-lg-10 col-md-12">
+            <div class="col-xl-11 col-lg-12 col-md-12">
                 <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
                     
                     {{-- Subject --}}
@@ -34,7 +34,7 @@
                     @endif
 
                     {{-- Video or Image --}}
-                    <div class="video-container position-relative mt-4 shadow-lg mx-auto" style="border-radius: 12px; overflow: hidden; background: #000; max-width: 900px; border: 2px solid rgba(255,255,255,0.15);">
+                    <div class="video-container position-relative mt-4 shadow-lg mx-auto" style="border-radius: 12px; overflow: hidden; background: #000; max-width: 1150px; border: 2px solid rgba(255,255,255,0.15);">
                         @if($hero_course->video_source && $hero_course->video)
                             @include('frontend.components.video', [
                                 'source' => $hero_course->video_source, 
@@ -49,8 +49,8 @@
                     </div>
                     
                     <ul class="hero-btns d-flex justify-content-center align-items-center mt-5">
-                        <li>
-                            <a href="{{ route('course.details', $hero_course->slug) }}" class="template-btn" style="background-color: #2db37c; border-color: #2db37c;">
+                        <li style="width: 100%;">
+                            <a href="{{ route('course.details', $hero_course->slug) }}" class="template-btn">
                                 {{ __('Enroll Now') }} <i class="fas fa-long-arrow-right"></i>
                             </a>
                         </li>

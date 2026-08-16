@@ -30,6 +30,15 @@
         }
         $b1Status = setting('home_ad_banner_status_1') !== '0';
         $b1Link = setting('home_ad_banner_link_1') ?: setting('home_ad_banner_link');
+        
+        if(isset($course) && $course) {
+            $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
+            if(is_array($mcSettings)) {
+                $b1Url = !empty($mcSettings['ad_banner_1_image_url']) ? $mcSettings['ad_banner_1_image_url'] : $b1Url;
+                $b1Status = isset($mcSettings['ad_banner_1_status']) ? !empty($mcSettings['ad_banner_1_status']) : $b1Status;
+                $b1Link = !empty($mcSettings['ad_banner_1_link']) ? $mcSettings['ad_banner_1_link'] : $b1Link;
+            }
+        }
     @endphp
     @if($b1Url && $b1Status && !str_contains($b1Url, 'default'))
     <section class="ad-banner-section-1 p-t-60 p-b-60 bg-white overflow-hidden">
@@ -121,11 +130,11 @@
     <!--====== Start Success Story Section ======-->
     @include('frontend.homePage.success')
 
-    <!--====== Start Support Section ======-->
-    @include('frontend.homePage.support')
-
     <!--====== Start FAQ Section ======-->
     @include('frontend.homePage.faq')
+
+    <!--====== Start Support Section ======-->
+    @include('frontend.homePage.support')
 
     <!--====== Start Ad Banner 2 (Lower Home Section) ======-->
     @php
@@ -136,6 +145,15 @@
         }
         $b2Status = setting('home_ad_banner_status_2') !== '0';
         $b2Link = setting('home_ad_banner_link_2');
+        
+        if(isset($course) && $course) {
+            $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
+            if(is_array($mcSettings)) {
+                $b2Url = !empty($mcSettings['ad_banner_2_image_url']) ? $mcSettings['ad_banner_2_image_url'] : $b2Url;
+                $b2Status = isset($mcSettings['ad_banner_2_status']) ? !empty($mcSettings['ad_banner_2_status']) : $b2Status;
+                $b2Link = !empty($mcSettings['ad_banner_2_link']) ? $mcSettings['ad_banner_2_link'] : $b2Link;
+            }
+        }
     @endphp
 
     @if($b2Url && $b2Status && !str_contains($b2Url, 'default'))
@@ -155,6 +173,9 @@
         </div>
     </section>
     @endif
+
+    <!--====== Start Order Form Section ======-->
+    @include('frontend.homePage.order_form')
 
 
 

@@ -64,7 +64,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-4">
                                             <label for="rating" class="form-label">{{ __('rating') }}</label>
-                                            <input type="number" class="form-control rounded-2" id="rating" name="rating" placeholder="1 to 5" min="1" max="5" value="{{ $success->rating }}">
+                                            <input type="number" class="form-control rounded-2" id="rating" name="rating" placeholder="1 to 5" min="1" max="5" step="0.1" value="{{ $success->rating }}">
                                         </div>
                                     </div>
 

@@ -5,7 +5,7 @@
         if(!is_array($mcSettings)) $mcSettings = [];
     }
 
-    $benefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : 'এই মাস্টারক্লাস কার জন্য?';
+    $benefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : '';
     
     $benefits = [];
     if(!empty($mcSettings['benefits_list']) && is_array($mcSettings['benefits_list'])) {

@@ -101,11 +101,16 @@
                                         <h6>{{ $success->title }}</h6>
                                         <span>{{ $success->position ?? __('Student') }}</span>
                                         <div class="stars">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
+                                            @php $rating = (float)($success->rating ?? 5); @endphp
+                                            @for($i = 1; $i <= 5; $i++)
+                                                @if($rating >= $i)
+                                                    <i class="fas fa-star"></i>
+                                                @elseif($rating >= ($i - 0.5))
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                @else
+                                                    <i class="far fa-star"></i>
+                                                @endif
+                                            @endfor
                                         </div>
                                     </div>
                                 </div>

@@ -3,7 +3,7 @@
 <style>
     .custom-syllabus-accordion .accordion-item {
         border: 1px solid #E5E7EB;
-        border-radius: 14px !important;
+        border-radius: 8px !important;
         margin-bottom: 16px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         overflow: hidden;
@@ -39,8 +39,16 @@
 <section class="syllabus-section p-t-20 p-b-40 position-relative overflow-hidden bg-white">
     <div class="container container-1278">
         <div class="common-heading text-center m-b-40">
+            @php
+                $mcSettings = [];
+                if(isset($course) && $course) {
+                    $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
+                    if(!is_array($mcSettings)) $mcSettings = [];
+                }
+                $curriculumTitle = !empty($mcSettings['curriculum_title']) ? $mcSettings['curriculum_title'] : __('Course Syllabus');
+            @endphp
             <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 28px; line-height: 1.25;">
-                {{ __('Course Syllabus') }}
+                {{ $curriculumTitle }}
             </h2>
         </div>
         

@@ -2,10 +2,10 @@
 <div class="footer-newsletter-wrapper" style="position: relative; z-index: 10; margin-bottom: -65px;">
     <div class="container container-1278">
         <div class="newsletter-card shadow-none" 
-             style="background-color: {{ setting('promo_banner_bg_color') ?: '#fcd34d' }}; border-radius: 20px; padding: 35px 40px;">
+             style="background-color: {{ setting('promo_banner_bg_color') ?: '#eef7f4' }}; border-radius: 8px; padding: 35px 40px;">
             <div class="row align-items-center g-4">
                 <!-- Column 1: Newsletter Title & Description -->
-                <div class="col-lg-4 col-md-12">
+                <div class="col-lg-7 col-md-12">
                     <h3 class="fw-bold mb-2" style="color: #1a1b4b; font-size: 24px; line-height: 1.2;">
                         {{ setting('newsletter_title', app()->getLocale()) ?: __('Subscribe Newsletter') }}
                     </h3>
@@ -14,35 +14,24 @@
                     </p>
                 </div>
 
-                <!-- Column 2: Email Form with Pill Input & Get Access Button -->
-                <div class="col-lg-4 col-md-7 d-flex flex-column align-items-center justify-content-center">
-                    <form action="{{ route('subscribe') }}" method="POST" class="footer-subscription-form ajax_form w-100" style="max-width: 320px;">
-                        @csrf
-                        <div class="d-flex align-items-center bg-white p-1" style="border-radius: 50px; border: 1px solid #e2e8f0;">
-                            <input type="email" name="email" class="form-control border-0 shadow-none px-3" 
-                                   placeholder="{{ __('your_email') ?: 'Email' }}" required 
-                                   style="background: transparent; font-size: 14px; color: #333;">
-                            <button type="submit" class="btn border-0 d-flex align-items-center justify-content-center flex-shrink-0" 
-                                    style="width: 38px; height: 38px; border-radius: 50%; background-color: #111111; color: #ffffff; transition: transform 0.2s ease;">
-                                <i class="fas fa-paper-plane" style="font-size: 13px;"></i>
-                            </button>
-                        </div>
-                    </form>
-
+                <!-- Column 2: Admission Now Countdown Timer -->
+                <div class="col-lg-5 col-md-12 text-center d-flex flex-column align-items-center justify-content-center">
                     @php
                         $getAccessLink = setting('get_access_btn_link') ?: route('register');
                         $getAccessTitle = setting('get_access_btn_title', app()->getLocale()) ?: (setting('get_access_btn_title') ?: __('get_access'));
                     @endphp
-                    <div class="mt-3 text-center">
-                        <a href="{{ url($getAccessLink) }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center" style="padding: 12px 32px; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: 8px;">
+                    <div class="mb-3 text-center">
+                        <a href="{{ url($getAccessLink) }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center" style="padding: 10px 24px; font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 8px;">
                             <span>{{ $getAccessTitle }}</span>
                         </a>
                     </div>
-                </div>
-
-                <!-- Column 3: Admission Now Countdown Timer -->
-                <div class="col-lg-4 col-md-5 text-center d-flex flex-column align-items-center justify-content-center">
-                    <div class="mb-3 fw-bold text-dark text-center" style="font-size: 1.3rem; letter-spacing: 0.5px;">{{ __('Admission Now') }}</div>
+                    
+                    @php
+                        $countdownTitle = setting('promo_banner_countdown_title', app()->getLocale());
+                    @endphp
+                    @if($countdownTitle)
+                    <div class="mb-3 fw-bold text-dark text-center" style="font-size: 1.3rem; letter-spacing: 0.5px;">{{ $countdownTitle }}</div>
+                    @endif
                     <div class="mini-countdown d-flex justify-content-center gap-3" id="promoCountdownFooter" data-target="{{ setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days')) }}">
                         <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
                             <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>

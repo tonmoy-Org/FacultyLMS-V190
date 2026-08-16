@@ -6,8 +6,8 @@
 
     $supportStatus = !empty($mcSettings['support_status']);
     if ($supportStatus) {
-        $supportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : 'আর সাপোর্ট?';
-        $supportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '<p>কোর্সের টপিক রিলেটেড যেকোনো প্রবলেম ফেস করলে সরাসরি সাপোর্ট ফোরাম অথবা আমাদের মেন্টর টিম থেকে ইনস্ট্যান্ট হেল্প পাবেন। লাইভ সাপোর্ট সেশনের মাধ্যমে যেকোনো টেকনিক্যাল প্রবলেম ওয়ান টু ওয়ান সলভ করে দেওয়া হবে।</p><p>এই সাপোর্ট আমাদের টিম মেম্বারদের পক্ষে সরাসরি প্রোভাইড করা হচ্ছে, যাতে করে আপনি ফেস করা যেকোনো সমস্যার দ্রুততম সময়ে নিখুঁত সমাধান পেতে পারেন।</p>';
+        $supportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : '';
+        $supportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '';
         $supportImageUrl = !empty($mcSettings['support_image_url']) ? $mcSettings['support_image_url'] : null;
     }
 @endphp
@@ -39,9 +39,9 @@
 
     .mc-support-title {
         font-family: "Outfit", sans-serif !important;
-        font-size: 32px !important;
-        font-weight: 800 !important;
-        color: #1e1b4b !important;
+        font-size: 28px !important;
+        font-weight: 700 !important;
+        color: #1a1b4b !important;
         margin-bottom: 20px;
         line-height: 1.3 !important;
     }

@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                         </form>
-                        <form action="{{route('website.cta')}}" method="POST" class="form">@csrf
+                        <form action="{{route('website.cta.save')}}" method="POST" class="form">@csrf
                             <div class="row gx-20">
                                 <input type="hidden" value="0" class="is_modal" name="is_modal">
                                 <input type="hidden" value="{{ $lang }}" name="site_lang">

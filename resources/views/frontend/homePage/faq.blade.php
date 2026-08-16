@@ -3,7 +3,7 @@
 <style>
     .custom-faq-accordion .accordion-item {
         border: 1px solid #E5E7EB;
-        border-radius: 14px !important;
+        border-radius: 8px !important;
         margin-bottom: 16px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         overflow: hidden;
@@ -63,9 +63,8 @@
     }
     .faq-image-card {
         position: relative;
-        border-radius: 20px;
+        border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
         border: 6px solid #ffffff;
     }
     .faq-image-card img {
@@ -75,7 +74,7 @@
         max-height: 540px;
         object-fit: cover;
         display: block;
-        border-radius: 14px;
+        border-radius: 8px;
     }
     .faq-badge-floating {
         position: absolute;
@@ -84,15 +83,14 @@
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         padding: 16px 24px;
-        border-radius: 16px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        border-radius: 8px;
         display: flex;
         align-items: center;
         gap: 15px;
     }
 </style>
 
-<section class="faq-section p-t-80 p-b-80 position-relative" style="background-color: #ffffff;">
+<section class="faq-section p-t-30 p-b-80 position-relative" style="background-color: #ffffff;">
     <div class="container container-1278">
         <div class="row align-items-center g-5">
             
@@ -153,7 +151,7 @@
                     
                     <div class="faq-badge-floating d-none d-sm-flex">
                         <div class="faq-badge-icon d-flex align-items-center justify-content-center" 
-                             style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); color: #10b981; font-size: 1.3rem;">
+                             style="width: 46px; height: 46px; border-radius: 8px; background: rgba(16, 185, 129, 0.15); color: #10b981; font-size: 1.3rem;">
                             <i class="fas fa-question-circle"></i>
                         </div>
                         <div>

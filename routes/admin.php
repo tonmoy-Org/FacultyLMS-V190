@@ -315,7 +315,10 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
 
         //website popup setting
         Route::get('call-to-action', [WebsiteSettingController::class, 'callToAction'])->name('website.cta');
-        Route::post('save-call-to-action', [WebsiteSettingController::class, 'saveCtaSetting'])->name('website.cta');
+        Route::post('save-call-to-action', [WebsiteSettingController::class, 'saveCtaSetting'])->name('website.cta.save');
+        Route::get('save-call-to-action', function () {
+            return redirect()->route('website.cta');
+        });
 
         //website popup setting
         Route::get('become-instructor-content', [WebsiteSettingController::class, 'instructorContent'])->name('website.instructor_content');

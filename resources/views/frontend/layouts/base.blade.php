@@ -110,6 +110,34 @@
 
         {{ setting("header_font_size") }}   ', sans-serif; */
         }
+        
+        .template-btn, .template-btn.bordered-btn, .template-btn.bordered-btn-secondary,
+        .btn {
+            border-radius: 4px !important;
+        }
+
+        .card, .course-item, .blog-post-item, .category-item, .testimonial-item,
+        .course-item-thumb, .course-item-thumb img, .blog-post-thumb img,
+        .video-container, .video-banner-card, .video-banner-card img,
+        .faq-accordion .accordion-item, .support-card, .success-video-card,
+        .about-card, .feature-card, .benefit-card, .special-gift-card,
+        .ad-banner-section-1 img, .what-you-learn-card,
+        .rounded, .rounded-1, .rounded-2, .rounded-3, .rounded-lg,
+        .form-control, .nice-select, input, textarea, select {
+            border-radius: 8px !important;
+        }
+        .plyr__control--overlaid {
+            transform: scale(1.5) !important;
+        }
+        .recent-video-slider .template-btn {
+            margin-top: 30px;
+        }
+        .recent-videos-section .plyr, .recent-videos-section video, .recent-videos-section iframe {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 100% !important;
+            height: auto;
+        }
     </style>
     <!--====== Responsive CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/responsive.css') }}">

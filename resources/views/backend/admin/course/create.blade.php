@@ -343,67 +343,72 @@
 <!-- Start Masterclass Landing Tab -->
                             <div class="tab-pane fade" id="courseMasterclass" role="tabpanel" aria-labelledby="masterclass" tabindex="0">
                                 @php
-                                    $defEyebrow = old('masterclass_settings.eyebrow_title', 'E-commerce শুরু করার hidden path');
-                                    $defPrimaryCta = old('masterclass_settings.primary_cta_text', 'রেজিস্ট্রেশন করুন এখনই');
-                                    $defVideoCaption = old('masterclass_settings.video_caption', 'বিস্তারিত জানতে ভিডিওটি দেখুন');
-                                    $defRemainingSeats = old('masterclass_settings.remaining_seats', '100');
+                                    $defEyebrow = old('masterclass_settings.eyebrow_title', '');
+                                    $defPrimaryCta = old('masterclass_settings.primary_cta_text', '');
+                                    $defVideoCaption = old('masterclass_settings.video_caption', '');
+                                    $defRemainingSeats = old('masterclass_settings.remaining_seats', '');
 
-                                    $defGoldBadgeTop = old('masterclass_settings.gold_badge_top', 'এখনই সিট বুক করুন');
-                                    $defZoomTitle = old('masterclass_settings.zoom_title', 'Zoom লাইভ 104');
-                                    $defZoomSubtitle = old('masterclass_settings.zoom_subtitle', 'অনলাইন ইন্টারেক্টিভ সেশন');
-                                    $defScheduleLabel = old('masterclass_settings.schedule_label', 'সময় / সময়সূচী');
-                                    $defScheduleValue = old('masterclass_settings.schedule_value', '2h 40min');
-                                    $defLevelLabel = old('masterclass_settings.level_label', 'Level');
-                                    $defLevelValue = old('masterclass_settings.level_value', 'beginner');
-                                    $defGoldOfferTitle = old('masterclass_settings.gold_offer_title', 'আজকের স্পেশাল অফার');
-                                    $defOriginalPriceLabel = old('masterclass_settings.original_price_label', 'মূল প্রাইস');
-                                    $defGoldCtaText = old('masterclass_settings.gold_cta_text', 'এখনই জয়েন করুন');
-                                    $defGoldSeatsText = old('masterclass_settings.gold_seats_text', 'আর মাত্র ' . $defRemainingSeats . ' ??? ????');
+                                    $defGoldBadgeTop = old('masterclass_settings.gold_badge_top', '');
+                                    $defZoomTitle = old('masterclass_settings.zoom_title', '');
+                                    $defZoomSubtitle = old('masterclass_settings.zoom_subtitle', '');
+                                    $defScheduleLabel = old('masterclass_settings.schedule_label', '');
+                                    $defScheduleValue = old('masterclass_settings.schedule_value', '');
+                                    $defLevelLabel = old('masterclass_settings.level_label', '');
+                                    $defLevelValue = old('masterclass_settings.level_value', '');
+                                    $defGoldOfferTitle = old('masterclass_settings.gold_offer_title', '');
+                                    $defOriginalPriceLabel = old('masterclass_settings.original_price_label', '');
+                                    $defGoldCtaText = old('masterclass_settings.gold_cta_text', '');
+                                    $defGoldSeatsText = old('masterclass_settings.gold_seats_text', '');
 
-                                    $defBenefitsTitle = old('masterclass_settings.benefits_title', 'চলুন একটু খুঁজে বের করার চেষ্টা করি নিচের সমস্যাগুলোর কোনো একটি বা একাধিক সমস্যা আপনার সাথে মিলে কিনা?');
+                                    $defBenefitsTitle = old('masterclass_settings.benefits_title', '');
                                     $benefitsList = old('masterclass_settings.benefits_list', [
                                         'মার্কেটপ্লেস থেকে ক্লায়েন্ট পাওয়ার জন্য সংগ্রাম করছেন? | বিভিন্ন ফ্রিল্যান্সিং মার্কেটপ্লেসে আপনার মতো আরো হাজারো ফ্রিল্যান্সার বা সার্ভিস প্রোভাইডারের প্রোফাইল রয়েছে। আপনাকে সেখানে তাদের সাথে প্রতিযোগিতা করতে হয়। হাজারো প্রোফাইলের ভিড়ে আপনার প্রোফাইলটি যদি ক্লায়েন্টের চোখে না পড়ে, তাহলে সেখান থেকে কাজ পাওয়া কঠিন হয়ে পড়ে। আর আপনি যদি আউট অফ মার্কেটপ্লেস ক্লায়েন্টকে টার্গেট করতে পারেন তবে ক্লায়েন্ট পাওয়া আপনার জন্য অনেক সহজ হয়ে যায়।',
-                                        'ক্লায়েন্ট পেতে বারবার রিজেক্ট হচ্ছেন? | বারবার রিজেকশন হওয়া হতাশাজনক তবে এর পেছনে লুকিয়ে থাকতে পারে আপনার প্রাইসিং মডেল, প্রোফাইল অপটিমাইজেশন, বা ড্রাফট পিচিংয়ের ভুল কৌশল। আমরা এই ফানেলগুলো কিভাবে কাটিয়ে উঠতে হয় এবং ক্লায়েন্টের সাথে কিভাবে একটি ট্রাস্টেড সম্পর্ক তৈরি করতে হয়, তা শেখাব।',
-                                        'আয়ের উপর মার্কেটপ্লেস অতিরিক্ত ফি কাটছে? | মার্কেটপ্লেসের প্ল্যাটফর্মগুলো প্রতিটি আয়ের একটি বড় অংশ ফি হিসেবে কেটে নেয়। এটি অনেক ফ্রিল্যান্সারের জন্য হতাশার কারণ। আমরা যেহেতু শিখব কিভাবে মার্কেটপ্লেসের বাইরে ক্লায়েন্ট খুঁজে পাওয়া যায়, তা এ ফি গুণা বন্ধ সম্ভব হবে।',
-                                        'আপনার আউটরিচ ইমেইল কোনো রেসপন্স পাচ্ছে না? | আউটরিচ ইমেইলগুলোর কোনো জবাব না পাওয়া মানে সেখানে কিছু ঘাটতি আছে। এটা হতে পারে আপনার মেসেজের ভুল টোন, অসম্পূর্ণ মেসেজ, বা ভুল টার্গেটিং। আপনি এ কোর্সে শিখবেন কিভাবে সঠিকভাবে ইমেইল কপি লিখতে হয় যা ক্লায়েন্টের দৃষ্টি আকর্ষণ করবে এবং রিপ্লাই পাওয়ার সম্ভাবনা বাড়াবে।',
-                                        'আপনার স্কিল আছে, কিন্তু ক্লায়েন্ট নেই? | ক্লায়েন্ট না থাকার মানে এই নয় যে আপনার স্কিল কম। এটা হতে পারে সঠিক মার্কেটিং ও নেটওয়ার্কিং কৌশলের অভাব। আপনার প্রতিভা বা দক্ষতা থাকা সত্ত্বেও যদি কাজ না পান, তবে এর কারণ হতে পারে আপনার আউটরিচ স্ট্র্যাটেজি বা প্রোফাইল অপটিমাইজেশনের ঘাটতি। আমরা দেখাব কিভাবে সঠিক পদ্ধতিতে ক্লায়েন্টদের কাছে পৌঁছাতে হয় এবং তাদের প্রয়োজন বুঝে অফার করতে হয়।'
-                                    ]);
+                                        '');
+                                    $defGiftTitle = old('masterclass_settings.gift_title', '');
+                                    $defGiftValue = old('masterclass_settings.gift_value', '');
+                                    $defGiftDescription = old('masterclass_settings.gift_description', '');
+                                    $defGiftQuote = old('masterclass_settings.gift_quote', '');
+                                    $defGiftFooterNote = old('masterclass_settings.gift_footer_note', '');
+                                    $defGiftCtaText = old('masterclass_settings.gift_cta_text', '');
+                                    $defSupportTitle = old('masterclass_settings.support_title', '');
+                                    $defSupportDescription = old('masterclass_settings.support_description', '');
 
-                                    $defGiftBadge = old('masterclass_settings.gift_badge', '🎁 যারা join করবেন তাদের জন্য special gift');
-                                    $defGiftTitle = old('masterclass_settings.gift_title', '৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ');
-                                    $defGiftValue = old('masterclass_settings.gift_value', '৳১০,০০০');
-                                    $defGiftDescription = old('masterclass_settings.gift_description', 'এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন। মাস্টারক্লাসে এই বিষয়ে বিস্তারিত আলোচনা।');
-                                    $defGiftQuote = old('masterclass_settings.gift_quote', '"এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় যেমন Facebook Ads, Google Ads নিয়ে বিস্তারিত শিখিয়েছি। এছাড়াও কিভাবে একটা বিজনেসকে Scale করতে তা নিয়ে ক্লাস আছে।"');
-                                    $defGiftFooterNote = old('masterclass_settings.gift_footer_note', 'যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।');
-                                    $defGiftCtaText = old('masterclass_settings.gift_cta_text', 'সিট কনফার্ম করুন →');
-                                    $defSupportTitle = old('masterclass_settings.support_title', 'আর সাপোর্ট?');
-                                    $defSupportDescription = old('masterclass_settings.support_description', '<p>কোর্সের টপিক রিলেটেড যেকোনো প্রবলেম ফেস করলে সরাসরি সাপোর্ট ফোরাম অথবা আমাদের মেন্টর টিম থেকে ইনস্ট্যান্ট হেল্প পাবেন। লাইভ সাপোর্ট সেশনের মাধ্যমে যেকোনো টেকনিক্যাল প্রবলেম ওয়ান টু ওয়ান সলভ করে দেওয়া হবে।</p><p>এই সাপোর্ট আমাদের টিম মেম্বারদের পক্ষে সরাসরি প্রোভাইড করা হচ্ছে, যাতে করে আপনি ফেস করা যেকোনো সমস্যার দ্রুততম সময়ে নিখুঁত সমাধান পেতে পারেন।</p>');
+                                    $defScheduleBadge = old('masterclass_settings.schedule_badge', '');
+                                    $defClassScheduleTitle = old('masterclass_settings.class_schedule_title', '');
+                                    $defClassScheduleTime = old('masterclass_settings.class_schedule_time', '');
 
-                                    $defScheduleBadge = old('masterclass_settings.schedule_badge', 'LIVE ZOOM MASTERCLASS');
-                                    $defClassScheduleTitle = old('masterclass_settings.class_schedule_title', '২ দিনব্যাপী e-commerce live masterclass');
-                                    $defClassScheduleTime = old('masterclass_settings.class_schedule_time', '৬ আগস্ট তারিখ রাত ৮ টায় শুরু');
+                                    $defExplainerTitle = old('masterclass_settings.explainer_title', '');
+                                    $defExplainerText = old('masterclass_settings.explainer_text', '');
 
-                                    $defExplainerTitle = old('masterclass_settings.explainer_title', 'একটা প্রশ্ন আপনার মাথায় আসতে পারে — এত কিছু, মাত্র ৯৯ টাকায় কেন??');
-                                    $defExplainerText = old('masterclass_settings.explainer_text', '<p>টু বি অনেস্ট, আমি এই masterclass-টা সম্পূর্ণ free করাতে চেয়েছিলাম।</p><p>কিন্তু problem হচ্ছে — আমার free session-গুলোতে দেখা যায় কয়েক হাজার মানুষ register করে বা join করে। যেহেতু এই session-টা Zoom-এ live হবে, তাই আমি চাইলেও এখানে বেশি মানুষ নিতে পারব না। Seat limit থাকবে।</p><p>তাই আমি এখানে ছোট্ট একটা token amount রেখেছি — শুধু audience filter করার জন্য। যেন এই masterclass-এ তারাই join করে, যারা সত্যিই e-commerce business শুরু করার ব্যাপারে serious এবং step-by-step process-টা মনোযোগ দিয়ে শিখতে ready।</p>');
+                                    $defBreakdownSubheading = old('masterclass_settings.breakdown_subheading', '');
+                                    $defBreakdownTodayTitle = old('masterclass_settings.breakdown_today_title', '');
+                                    $defBreakdownItems = old('masterclass_settings.breakdown_items', '');
 
-                                    $defBreakdownSubheading = old('masterclass_settings.breakdown_subheading', 'এই $15.00 টাকায় আপনি পাচ্ছেন:');
-                                    $defBreakdownTodayTitle = old('masterclass_settings.breakdown_today_title', 'আজকের মূল্য (token)');
-                                    $defBreakdownItems = old('masterclass_settings.breakdown_items', "🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০
-🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০");
+                                    $defOrderFormTitle = old('masterclass_settings.order_form_title', '');
+                                    $defOrderFormSubtitle = old('masterclass_settings.order_form_subtitle', '');
+                                    $defNameLabel = old('masterclass_settings.name_label', '');
+                                    $defNamePlaceholder = old('masterclass_settings.name_placeholder', '');
+                                    $defPhoneLabel = old('masterclass_settings.phone_label', '');
+                                    $defPhonePlaceholder = old('masterclass_settings.phone_placeholder', '');
+                                    $defEmailLabel = old('masterclass_settings.email_label', '');
+                                    $defEmailPlaceholder = old('masterclass_settings.email_placeholder', '');
+                                    $defAddressLabel = old('masterclass_settings.address_label', '');
+                                    $defAddressPlaceholder = old('masterclass_settings.address_placeholder', '');
+                                    $defPasswordLabel = old('masterclass_settings.password_label', '');
+                                    $defPasswordPlaceholder = old('masterclass_settings.password_placeholder', '');
+                                    $defTermsLabel = old('masterclass_settings.terms_label', '');
+                                    $defOrderSummaryTitle = old('masterclass_settings.order_summary_title', '');
+                                    $defPayNowBtnText = old('masterclass_settings.pay_now_btn_text', '');
+                                    $defPrivacyNotice = old('masterclass_settings.privacy_notice', '');
+                                    $defFaqTitle = old('masterclass_settings.faq_title', '');
 
-                                    $defOrderFormTitle = old('masterclass_settings.order_form_title', 'মাস্টারক্লাসে জয়েন করতে নিচের ফর্মটি পূরণ করুন');
-                                    $defOrderFormSubtitle = old('masterclass_settings.order_form_subtitle', 'Give valid information');
-                                    $defNameLabel = old('masterclass_settings.name_label', 'Your Full Name');
-                                    $defNamePlaceholder = old('masterclass_settings.name_placeholder', 'আপনার সম্পূর্ণ নাম');
-                                    $defPhoneLabel = old('masterclass_settings.phone_label', 'Mobile Number');
-
-                                    $defOverviewTag = old('masterclass_settings.overview_tag', 'FEATURED COURSE');
-                                    $defOverviewTitle = old('masterclass_settings.overview_title', 'Master Web Development With Expert Guidance');
-                                    $defOverviewDesc1 = old('masterclass_settings.overview_desc1', 'Join our comprehensive single course program designed to take you from beginner to advanced level with real-world projects and direct mentor support.');
-                                    $defOverviewDesc2 = old('masterclass_settings.overview_desc2', 'Get lifetime access to premium curriculum, practical assignments, downloadable resources, and a verified completion certificate.');
-                                    $defOverviewBtnText = old('masterclass_settings.overview_btn_text', 'ENROLL NOW');
-                                    $defOverviewBtnUrl = old('masterclass_settings.overview_btn_url', '#register');
-                                    $defOverviewImageUrl = old('masterclass_settings.overview_image_url', 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop');
+                                    $defOverviewTag = old('masterclass_settings.overview_tag', '');
+                                    $defOverviewTitle = old('masterclass_settings.overview_title', '');
+                                    $defOverviewDesc1 = old('masterclass_settings.overview_desc1', '');
+                                    $defOverviewDesc2 = old('masterclass_settings.overview_desc2', '');
+                                    $defOverviewBtnText = old('masterclass_settings.overview_btn_text', '');
+                                    $defOverviewBtnUrl = old('masterclass_settings.overview_btn_url', '');
+                                    $defOverviewImageUrl = old('masterclass_settings.overview_image_url', '');
                                     $defHideOverviewSection = old('masterclass_settings.hide_overview_section');
                                 @endphp
                                  <div class="masterclass-single-page-wrapper">
@@ -504,82 +509,7 @@
 
 
 
-                                    <!-- Section 8: Registration Order Form -->
-                                    <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-normal text-dark m-0"> Registration Order Form Section
-                                            </span>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="row gx-20">
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Registration Form Title</label>
-                                                    <input type="text" name="masterclass_settings[order_form_title]" class="form-control rounded-2"
-                                                           value="{{ $defOrderFormTitle }}" placeholder="মাস্টারক্লাসে জয়েন করতে নিচের ফর্মটি পূরণ করুন">
-                                                </div>
 
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Registration Form Subtitle</label>
-                                                    <input type="text" name="masterclass_settings[order_form_subtitle]" class="form-control rounded-2"
-                                                           value="{{ $defOrderFormSubtitle }}" placeholder="Give valid information">
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Full Name Field Label</label>
-                                                    <input type="text" name="masterclass_settings[name_label]" class="form-control rounded-2"
-                                                           value="{{ $defNameLabel }}" placeholder="Your Full Name">
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Full Name Field Placeholder</label>
-                                                    <input type="text" name="masterclass_settings[name_placeholder]" class="form-control rounded-2"
-                                                           value="{{ $defNamePlaceholder }}" placeholder="আপনার সম্পূর্ণ নাম">
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Mobile Number Field Label</label>
-                                                    <input type="text" name="masterclass_settings[phone_label]" class="form-control rounded-2"
-                                                           value="{{ $defPhoneLabel }}" placeholder="Mobile Number">
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Mobile Number Field Placeholder</label>
-                                                    <input type="text" name="masterclass_settings[phone_placeholder]" class="form-control rounded-2"
-                                                           value="{{ $defPhonePlaceholder }}" placeholder="01XXXXXXXXX">
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Email Address Field Label</label>
-                                                    <input type="text" name="masterclass_settings[email_label]" class="form-control rounded-2"
-                                                           value="{{ $defEmailLabel }}" placeholder="Email address">
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Email Address Field Placeholder</label>
-                                                    <input type="text" name="masterclass_settings[email_placeholder]" class="form-control rounded-2"
-                                                           value="{{ $defEmailPlaceholder }}" placeholder="আপনার ইমেইল এড্রেস">
-                                                </div>
-
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Order Summary Heading</label>
-                                                    <input type="text" name="masterclass_settings[order_summary_title]" class="form-control rounded-2"
-                                                           value="{{ $defOrderSummaryTitle }}" placeholder="Your order">
-                                                </div>
-
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Pay Now Button Text</label>
-                                                    <input type="text" name="masterclass_settings[pay_now_btn_text]" class="form-control rounded-2"
-                                                           value="{{ $defPayNowBtnText }}" placeholder="PAY NOW">
-                                                </div>
-
-                                                <div class="col-lg-12 col-md-12 mb-4">
-                                                    <label class="form-label">Privacy Policy Notice Text</label>
-                                                    <textarea name="masterclass_settings[privacy_notice]" class="form-control rounded-2 summernote" rows="2"
-                                                              placeholder="Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.">{{ $defPrivacyNotice }}</textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <!-- Section 10: Masterclass Ad Banners (1 & 2) -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
@@ -795,10 +725,7 @@
 
                                     @include('backend.common.media-input', [
                                         'title' => 'Slider Image',
-                                        'name' => 'image_media_id',
-                                        'col' => 'col-12',
-                                        'size' => '(402x248)',
-                                        'image' => old('image_media_id'),
+                                        ''),
                                         'label' => __('thumbnail'),
                                     ])
                                     <div class="col-lg-6">
@@ -964,7 +891,7 @@
                                                 class="btn sg-btn-outline-primary btn_action"
                                                 data-bs-target="#coursePricing">{{ __('back') }}</a>
 
-                                            <button type="submit" class="btn sg-btn-primary">{{ __(\'submit\') }}</button>
+                                            <button type="submit" class="btn sg-btn-primary">{{ __('submit') }}</button>
                                         </div>
                                     </div>
                                     <!-- End Next Page BTN -->

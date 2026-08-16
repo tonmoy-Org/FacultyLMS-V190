@@ -480,22 +480,22 @@
                                     $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
                                     if(!is_array($mcSettings)) $mcSettings = [];
 
-                                    $defEyebrow = !empty($mcSettings['eyebrow_title']) ? $mcSettings['eyebrow_title'] : ($category ? $category->lang_title : 'E-commerce শুরু করার hidden path');
-                                    $defPrimaryCta = !empty($mcSettings['primary_cta_text']) ? $mcSettings['primary_cta_text'] : 'রেজিস্ট্রেশন করুন এখনই';
-                                    $defVideoCaption = !empty($mcSettings['video_caption']) ? $mcSettings['video_caption'] : 'বিস্তারিত জানতে ভিডিওটি দেখুন';
+                                    $defEyebrow = !empty($mcSettings['eyebrow_title']) ? $mcSettings['eyebrow_title'] : ($category ? $category->lang_title : '');
+                                    $defPrimaryCta = !empty($mcSettings['primary_cta_text']) ? $mcSettings['primary_cta_text'] : '';
+                                    $defVideoCaption = !empty($mcSettings['video_caption']) ? $mcSettings['video_caption'] : '';
                                     $defRemainingSeats = !empty($mcSettings['remaining_seats']) ? $mcSettings['remaining_seats'] : ($course->capacity > 0 ? $course->capacity : '100');
                                     $availSeatsCount = max(0, (int)$defRemainingSeats - (int)($course->total_enrolled ?? 0));
 
-                                    $defGoldBadgeTop = !empty($mcSettings['gold_badge_top']) ? $mcSettings['gold_badge_top'] : 'এখনই সিট বুক করুন';
-                                    $defZoomTitle = !empty($mcSettings['zoom_title']) ? $mcSettings['zoom_title'] : 'Zoom লাইভ 104';
-                                    $defZoomSubtitle = !empty($mcSettings['zoom_subtitle']) ? $mcSettings['zoom_subtitle'] : 'অনলাইন ইন্টারেক্টিভ সেশন';
-                                    $defScheduleLabel = !empty($mcSettings['schedule_label']) ? $mcSettings['schedule_label'] : 'সময় / সময়সূচী';
-                                    $defScheduleValue = !empty($mcSettings['schedule_value']) ? $mcSettings['schedule_value'] : (!empty($course->duration) ? $course->duration : '2h 40min');
-                                    $defLevelLabel = !empty($mcSettings['level_label']) ? $mcSettings['level_label'] : 'Level';
-                                    $defLevelValue = !empty($mcSettings['level_value']) ? $mcSettings['level_value'] : ($level ? $level->lang_title : 'beginner');
-                                    $defGoldOfferTitle = !empty($mcSettings['gold_offer_title']) ? $mcSettings['gold_offer_title'] : 'আজকের স্পেশাল অফার';
-                                    $defOriginalPriceLabel = !empty($mcSettings['original_price_label']) ? $mcSettings['original_price_label'] : 'মূল প্রাইস';
-                                    $defGoldCtaText = !empty($mcSettings['gold_cta_text']) ? $mcSettings['gold_cta_text'] : 'এখনই জয়েন করুন';
+                                    $defGoldBadgeTop = !empty($mcSettings['gold_badge_top']) ? $mcSettings['gold_badge_top'] : '';
+                                    $defZoomTitle = !empty($mcSettings['zoom_title']) ? $mcSettings['zoom_title'] : '';
+                                    $defZoomSubtitle = !empty($mcSettings['zoom_subtitle']) ? $mcSettings['zoom_subtitle'] : '';
+                                    $defScheduleLabel = !empty($mcSettings['schedule_label']) ? $mcSettings['schedule_label'] : '';
+                                    $defScheduleValue = !empty($mcSettings['schedule_value']) ? $mcSettings['schedule_value'] : (!empty($course->duration) ? $course->duration : '');
+                                    $defLevelLabel = !empty($mcSettings['level_label']) ? $mcSettings['level_label'] : '';
+                                    $defLevelValue = !empty($mcSettings['level_value']) ? $mcSettings['level_value'] : ($level ? $level->lang_title : '');
+                                    $defGoldOfferTitle = !empty($mcSettings['gold_offer_title']) ? $mcSettings['gold_offer_title'] : '';
+                                    $defOriginalPriceLabel = !empty($mcSettings['original_price_label']) ? $mcSettings['original_price_label'] : '';
+                                    $defGoldCtaText = !empty($mcSettings['gold_cta_text']) ? $mcSettings['gold_cta_text'] : '';
                                     
                                     if (!empty($mcSettings['gold_seats_text'])) {
                                         $defGoldSeatsText = preg_match('/\d+/', $mcSettings['gold_seats_text'])
@@ -505,7 +505,7 @@
                                         $defGoldSeatsText = 'আর মাত্র ' . $availSeatsCount . ' সিট বাকি';
                                     }
 
-                                    $defBenefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : 'এই মাস্টারক্লাস কার জন্য?';
+                                    $defBenefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : '';
                                     
                                     $benefitsList = [];
                                     if (!empty($mcSettings['benefits_list']) && is_array($mcSettings['benefits_list'])) {
@@ -528,41 +528,45 @@
                                         ];
                                     }
 
-                                    $defGiftBadge = !empty($mcSettings['gift_badge']) ? $mcSettings['gift_badge'] : '🎁 যারা join করবেন তাদের জন্য special gift';
-                                    $defGiftTitle = !empty($mcSettings['gift_title']) ? $mcSettings['gift_title'] : '৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ';
-                                    $defGiftValue = !empty($mcSettings['gift_value']) ? $mcSettings['gift_value'] : '৳১০,০০০';
-                                    $defGiftDescription = !empty($mcSettings['gift_description']) ? $mcSettings['gift_description'] : 'এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন। মাস্টারক্লাসে এই বিষয়ে বিস্তারিত আলোচনা।';
-                                    $defGiftQuote = !empty($mcSettings['gift_quote']) ? $mcSettings['gift_quote'] : '"এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় যেমন Facebook Ads, Google Ads নিয়ে বিস্তারিত শিখিয়েছি। এছাড়াও কিভাবে একটা বিজনেসকে Scale করতে তা নিয়ে ক্লাস আছে।"';
-                                    $defGiftFooterNote = !empty($mcSettings['gift_footer_note']) ? $mcSettings['gift_footer_note'] : 'যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।';
-                                    $defSupportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : 'আর সাপোর্ট?';
-                                    $defSupportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '<p>কোর্সের টপিক রিলেটেড যেকোনো প্রবলেম ফেস করলে সরাসরি সাপোর্ট ফোরাম অথবা আমাদের মেন্টর টিম থেকে ইনস্ট্যান্ট হেল্প পাবেন। লাইভ সাপোর্ট সেশনের মাধ্যমে যেকোনো টেকনিক্যাল প্রবলেম ওয়ান টু ওয়ান সলভ করে দেওয়া হবে।</p><p>এই সাপোর্ট আমাদের টিম মেম্বারদের পক্ষে সরাসরি প্রোভাইড করা হচ্ছে, যাতে করে আপনি ফেস করা যেকোনো সমস্যার দ্রুততম সময়ে নিখুঁত সমাধান পেতে পারেন।</p>';
-                                    $defGiftCtaText = !empty($mcSettings['gift_cta_text']) ? $mcSettings['gift_cta_text'] : 'সিট কনফার্ম করুন →';
+                                    $defGiftBadge = !empty($mcSettings['gift_badge']) ? $mcSettings['gift_badge'] : '';
+                                    $defGiftTitle = !empty($mcSettings['gift_title']) ? $mcSettings['gift_title'] : '';
+                                    $defGiftValue = !empty($mcSettings['gift_value']) ? $mcSettings['gift_value'] : '';
+                                    $defGiftDescription = !empty($mcSettings['gift_description']) ? $mcSettings['gift_description'] : '';
+                                    $defGiftQuote = !empty($mcSettings['gift_quote']) ? $mcSettings['gift_quote'] : '';
+                                    $defGiftFooterNote = !empty($mcSettings['gift_footer_note']) ? $mcSettings['gift_footer_note'] : '';
+                                    $defSupportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : '';
+                                    $defSupportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '';
+                                    $defGiftCtaText = !empty($mcSettings['gift_cta_text']) ? $mcSettings['gift_cta_text'] : '';
 
-                                    $defScheduleBadge = !empty($mcSettings['schedule_badge']) ? $mcSettings['schedule_badge'] : 'LIVE ZOOM MASTERCLASS';
-                                    $defClassScheduleTitle = !empty($mcSettings['class_schedule_title']) ? $mcSettings['class_schedule_title'] : '২ দিনব্যাপী e-commerce live masterclass';
-                                    $defClassScheduleTime = !empty($mcSettings['class_schedule_time']) ? $mcSettings['class_schedule_time'] : '৬ আগস্ট তারিখ রাত ৮ টায় শুরু';
+                                    $defScheduleBadge = !empty($mcSettings['schedule_badge']) ? $mcSettings['schedule_badge'] : '';
+                                    $defClassScheduleTitle = !empty($mcSettings['class_schedule_title']) ? $mcSettings['class_schedule_title'] : '';
+                                    $defClassScheduleTime = !empty($mcSettings['class_schedule_time']) ? $mcSettings['class_schedule_time'] : '';
 
-                                    $defExplainerTitle = !empty($mcSettings['explainer_title']) ? $mcSettings['explainer_title'] : 'একটা প্রশ্ন আপনার মাথায় আসতে পারে — এত কিছু, মাত্র ৯৯ টাকায় কেন??';
-                                    $defExplainerText = !empty($mcSettings['explainer_text']) ? $mcSettings['explainer_text'] : '<p>টু বি অনেস্ট, আমি এই masterclass-টা সম্পূর্ণ free করাতে চেয়েছিলাম।</p><p>কিন্তু problem হচ্ছে — আমার free session-গুলোতে দেখা যায় কয়েক হাজার মানুষ register করে বা join করে। যেহেতু এই session-টা Zoom-এ live হবে, তাই আমি চাইলেও এখানে বেশি মানুষ নিতে পারব না। Seat limit থাকবে।</p><p>তাই আমি এখানে ছোট্ট একটা token amount রেখেছি — শুধু audience filter করার জন্য। যেন এই masterclass-এ তারাই join করে, যারা সত্যিই e-commerce business শুরু করার ব্যাপারে serious এবং step-by-step process-টা মনোযোগ দিয়ে শিখতে ready।</p>';
+                                    $defExplainerTitle = !empty($mcSettings['explainer_title']) ? $mcSettings['explainer_title'] : '';
+                                    $defExplainerText = !empty($mcSettings['explainer_text']) ? $mcSettings['explainer_text'] : '';
 
-                                    $defBreakdownSubheading = !empty($mcSettings['breakdown_subheading']) ? $mcSettings['breakdown_subheading'] : 'এই $15.00 টাকায় আপনি পাচ্ছেন:';
-                                    $defBreakdownTodayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : 'আজকের মূল্য (token)';
-                                    $defBreakdownItems = !empty($mcSettings['breakdown_items']) ? $mcSettings['breakdown_items'] : "🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০
-🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০";
+                                    $defBreakdownSubheading = !empty($mcSettings['breakdown_subheading']) ? $mcSettings['breakdown_subheading'] : '';
+                                    $defBreakdownTodayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : '';
+                                    $defBreakdownItems = !empty($mcSettings['breakdown_items']) ? $mcSettings['breakdown_items'] : '';
 
-                                    $defOrderFormTitle = !empty($mcSettings['order_form_title']) ? $mcSettings['order_form_title'] : 'মাস্টারক্লাসে জয়েন করতে নিচের ফর্মটি পূরণ করুন';
-                                    $defOrderFormSubtitle = !empty($mcSettings['order_form_subtitle']) ? $mcSettings['order_form_subtitle'] : 'Give valid information';
-                                    $defNameLabel = !empty($mcSettings['name_label']) ? $mcSettings['name_label'] : 'Your Full Name';
-                                    $defNamePlaceholder = !empty($mcSettings['name_placeholder']) ? $mcSettings['name_placeholder'] : 'আপনার সম্পূর্ণ নাম';
-                                    $defPhoneLabel = !empty($mcSettings['phone_label']) ? $mcSettings['phone_label'] : 'Mobile Number';
-                                    $defPhonePlaceholder = !empty($mcSettings['phone_placeholder']) ? $mcSettings['phone_placeholder'] : '01XXXXXXXXX';
-                                    $defEmailLabel = !empty($mcSettings['email_label']) ? $mcSettings['email_label'] : 'Email address';
-                                    $defEmailPlaceholder = !empty($mcSettings['email_placeholder']) ? $mcSettings['email_placeholder'] : 'আপনার ইমেইল এড্রেস';
-                                    $defOrderSummaryTitle = !empty($mcSettings['order_summary_title']) ? $mcSettings['order_summary_title'] : 'Your order';
-                                    $defPayNowBtnText = !empty($mcSettings['pay_now_btn_text']) ? $mcSettings['pay_now_btn_text'] : 'PAY NOW';
-                                    $defPrivacyNotice = !empty($mcSettings['privacy_notice']) ? $mcSettings['privacy_notice'] : 'Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.';
+                                    $defOrderFormTitle = !empty($mcSettings['order_form_title']) ? $mcSettings['order_form_title'] : '';
+                                    $defOrderFormSubtitle = !empty($mcSettings['order_form_subtitle']) ? $mcSettings['order_form_subtitle'] : '';
+                                    $defNameLabel = !empty($mcSettings['name_label']) ? $mcSettings['name_label'] : '';
+                                    $defNamePlaceholder = !empty($mcSettings['name_placeholder']) ? $mcSettings['name_placeholder'] : '';
+                                    $defPhoneLabel = !empty($mcSettings['phone_label']) ? $mcSettings['phone_label'] : '';
+                                    $defPhonePlaceholder = !empty($mcSettings['phone_placeholder']) ? $mcSettings['phone_placeholder'] : '';
+                                    $defEmailLabel = !empty($mcSettings['email_label']) ? $mcSettings['email_label'] : '';
+                                    $defEmailPlaceholder = !empty($mcSettings['email_placeholder']) ? $mcSettings['email_placeholder'] : '';
+                                    $defAddressLabel = !empty($mcSettings['address_label']) ? $mcSettings['address_label'] : '';
+                                    $defAddressPlaceholder = !empty($mcSettings['address_placeholder']) ? $mcSettings['address_placeholder'] : '';
+                                    $defPasswordLabel = !empty($mcSettings['password_label']) ? $mcSettings['password_label'] : '';
+                                    $defPasswordPlaceholder = !empty($mcSettings['password_placeholder']) ? $mcSettings['password_placeholder'] : '';
+                                    $defTermsLabel = !empty($mcSettings['terms_label']) ? $mcSettings['terms_label'] : '';
+                                    $defOrderSummaryTitle = !empty($mcSettings['order_summary_title']) ? $mcSettings['order_summary_title'] : '';
+                                    $defPayNowBtnText = !empty($mcSettings['pay_now_btn_text']) ? $mcSettings['pay_now_btn_text'] : '';
+                                    $defPrivacyNotice = !empty($mcSettings['privacy_notice']) ? $mcSettings['privacy_notice'] : '';
 
-                                    $defFaqTitle = !empty($mcSettings['faq_title']) ? $mcSettings['faq_title'] : 'কিছু সাধারণ প্রশ্নের উত্তর';
+                                    $defFaqTitle = !empty($mcSettings['faq_title']) ? $mcSettings['faq_title'] : '';
 
                                     $faqList = [];
                                     if (!empty($mcSettings['faq_list']) && is_array($mcSettings['faq_list'])) {
@@ -588,16 +592,16 @@
                                         ];
                                     }
 
-                                    $defDualCtaLeft = !empty($mcSettings['dual_cta_left']) ? $mcSettings['dual_cta_left'] : 'রেজিস্ট্রেশন করুন এখনই';
-                                    $defDualCtaSeats = !empty($mcSettings['dual_cta_seats']) ? $mcSettings['dual_cta_seats'] : 'আর মাত্র ' . $defRemainingSeats . ' সিট বাকি';
+                                    $defDualCtaLeft = !empty($mcSettings['dual_cta_left']) ? $mcSettings['dual_cta_left'] : '';
+                                    $defDualCtaSeats = !empty($mcSettings['dual_cta_seats']) ? $mcSettings['dual_cta_seats'] : '' . $defRemainingSeats . ' সিট বাকি';
 
-                                    $defOverviewTag = !empty($mcSettings['overview_tag']) ? $mcSettings['overview_tag'] : 'FEATURED COURSE';
-                                    $defOverviewTitle = !empty($mcSettings['overview_title']) ? $mcSettings['overview_title'] : 'Master Web Development With Expert Guidance';
-                                    $defOverviewDesc1 = !empty($mcSettings['overview_desc1']) ? $mcSettings['overview_desc1'] : 'Join our comprehensive single course program designed to take you from beginner to advanced level with real-world projects and direct mentor support.';
-                                    $defOverviewDesc2 = !empty($mcSettings['overview_desc2']) ? $mcSettings['overview_desc2'] : 'Get lifetime access to premium curriculum, practical assignments, downloadable resources, and a verified completion certificate.';
-                                    $defOverviewBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : 'ENROLL NOW';
-                                    $defOverviewBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : '#register';
-                                    $defOverviewImageUrl = !empty($mcSettings['overview_image_url']) ? $mcSettings['overview_image_url'] : 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop';
+                                    $defOverviewTag = !empty($mcSettings['overview_tag']) ? $mcSettings['overview_tag'] : '';
+                                    $defOverviewTitle = !empty($mcSettings['overview_title']) ? $mcSettings['overview_title'] : '';
+                                    $defOverviewDesc1 = !empty($mcSettings['overview_desc1']) ? $mcSettings['overview_desc1'] : '';
+                                    $defOverviewDesc2 = !empty($mcSettings['overview_desc2']) ? $mcSettings['overview_desc2'] : '';
+                                    $defOverviewBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : '';
+                                    $defOverviewBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : '';
+                                    $defOverviewImageUrl = !empty($mcSettings['overview_image_url']) ? $mcSettings['overview_image_url'] : '';
                                     $defHideOverviewSection = !empty($mcSettings['hide_overview_section']);
                                 @endphp
                                 
@@ -685,90 +689,62 @@
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
-                                                    <label class="form-label">Gift Quote Callout Box</label>
-                                                    <textarea name="masterclass_settings[gift_quote]" class="form-control rounded-2 summernote" rows="3"
-                                                              placeholder="এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় নিয়ে আলোচনা করেছি...">{{ $defGiftQuote }}</textarea>
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <label class="form-label mb-0">Gift Quotes / Items</label>
+                                                        <button type="button" class="btn sg-btn-primary btn-sm" id="add_gift_quote_btn">
+                                                            <i class="las la-plus"></i> Add Item
+                                                        </button>
+                                                    </div>
+                                                    <div id="gift_quotes_container">
+                                                        @php
+                                                            $giftQuotesList = !empty($mcSettings['gift_quotes_list']) ? $mcSettings['gift_quotes_list'] : [];
+                                                            if (!is_array($giftQuotesList)) $giftQuotesList = [];
+                                                            if (empty($giftQuotesList) && !empty($defGiftQuote)) {
+                                                                $giftQuotesList = [['text' => strip_tags($defGiftQuote), 'price' => '']];
+                                                            }
+                                                        @endphp
+                                                        @foreach($giftQuotesList as $gqIdx => $gqItem)
+                                                            <div class="gift-quote-single-item p-3 mb-3 border rounded bg-light position-relative">
+                                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                                    <span class="fw-bold">Item <span class="gift-quote-num">{{ $gqIdx + 1 }}</span></span>
+                                                                    <button type="button" class="btn btn-sm text-danger remove-gift-quote-btn p-0 bg-transparent border-0">
+                                                                        <i class="las la-trash-alt fs-5"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-8">
+                                                                        <label class="form-label small">Text/Quote</label>
+                                                                        <textarea name="masterclass_settings[gift_quotes_list][{{ $gqIdx }}][text]" class="form-control rounded-2 bg-white" rows="2">{{ $gqItem['text'] ?? '' }}</textarea>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="form-label small">Price</label>
+                                                                        <input type="text" name="masterclass_settings[gift_quotes_list][{{ $gqIdx }}][price]" class="form-control rounded-2 bg-white" value="{{ $gqItem['price'] ?? '' }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
                                                 </div>
 
-                                                <div class="col-lg-12 col-md-12 mb-4">
-                                                    <label class="form-label">Gift Footer Note Text</label>
-                                                    <input type="text" name="masterclass_settings[gift_footer_note]" class="form-control rounded-2"
-                                                           value="{{ $defGiftFooterNote }}" placeholder="যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।">
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
 
 
 
-                                    <!-- Section 8 & 9: Registration Order Form & FAQs -->
-                                    <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-normal text-dark m-0">Registration Order Form & FAQs</span>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="row gx-20">
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Registration Form Title</label>
-                                                    <input type="text" name="masterclass_settings[order_form_title]" class="form-control rounded-2"
-                                                           value="{{ $defOrderFormTitle }}" placeholder="মাস্টারক্লাসে জয়েন করতে নিচের ফর্মটি পূরণ করুন">
-                                                </div>
 
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Registration Form Subtitle</label>
-                                                    <input type="text" name="masterclass_settings[order_form_subtitle]" class="form-control rounded-2"
-                                                           value="{{ $defOrderFormSubtitle }}" placeholder="Give valid information">
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Full Name Label</label>
-                                                    <input type="text" name="masterclass_settings[name_label]" class="form-control rounded-2"
-                                                           value="{{ $defNameLabel }}" placeholder="Your Full Name">
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Mobile Number Label</label>
-                                                    <input type="text" name="masterclass_settings[phone_label]" class="form-control rounded-2"
-                                                           value="{{ $defPhoneLabel }}" placeholder="Mobile Number">
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <label class="form-label">Email Address Label</label>
-                                                    <input type="text" name="masterclass_settings[email_label]" class="form-control rounded-2"
-                                                           value="{{ $defEmailLabel }}" placeholder="Email address">
-                                                </div>
-
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Order Summary Heading</label>
-                                                    <input type="text" name="masterclass_settings[order_summary_title]" class="form-control rounded-2"
-                                                           value="{{ $defOrderSummaryTitle }}" placeholder="Your order">
-                                                </div>
-
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Pay Now Button Text</label>
-                                                    <input type="text" name="masterclass_settings[pay_now_btn_text]" class="form-control rounded-2"
-                                                           value="{{ $defPayNowBtnText }}" placeholder="PAY NOW">
-                                                </div>
-
-                                                <div class="col-lg-12 col-md-12 mb-4">
-                                                    <label class="form-label">Privacy Policy Notice</label>
-                                                    <textarea name="masterclass_settings[privacy_notice]" class="form-control rounded-2 summernote" rows="2"
-                                                              placeholder="Your personal data will be used to process your order...">{{ $defPrivacyNotice }}</textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <!-- Section 10: Masterclass Ad Banners (1 & 2) -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-semibold text-dark m-0">Ad Banners (Masterclass Landing Page)</span>
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Ad Banners</span>
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
                                                 <!-- Banner 1 -->
                                                 <div class="col-12">
-                                                    <label class="form-label font-15 fw-semibold mb-3 border-bottom pb-2 w-100">Ad Banner 1</label>
+                                                    <label class="form-label font-15  mb-3 border-bottom pb-2 w-100">Ad Banner 1</label>
                                                 </div>
                                                 <div class="col-lg-12 mb-4">
                                                     <div class="custom-checkbox">
@@ -807,7 +783,7 @@
 
                                                 <!-- Banner 2 -->
                                                 <div class="col-12 mt-3">
-                                                    <label class="form-label font-15 fw-semibold mb-3 border-bottom pb-2 w-100">Ad Banner 2</label>
+                                                    <label class="form-label font-15  mb-3 border-bottom pb-2 w-100">Ad Banner 2</label>
                                                 </div>
                                                 <div class="col-lg-12 mb-4">
                                                     <div class="custom-checkbox">
@@ -1161,6 +1137,15 @@
                                 class="tab-pane fade {{ $step_3_error || $step_1_error || $step_2_error }} {{ $request_tab == 'curriculum' ? 'show active' : '' }}"
                                 id="courseCurriculum" role="tabpanel" aria-labelledby="curriculum" tabindex="0">
                                 <div class="row">
+
+                                    <div class="col-lg-12 mb-4">
+                                        <div class="form-group">
+                                            <label for="curriculum_title" class="form-label">{{ __('Curriculum Section Title') }}</label>
+                                            <input type="text" name="masterclass_settings[curriculum_title]" id="curriculum_title" class="form-control rounded-2"
+                                                   value="{{ $mcSettings['curriculum_title'] ?? '' }}"
+                                                   placeholder="{{ __('e.g. Course Syllabus') }}">
+                                        </div>
+                                    </div>
 
                                     <div class="col-lg-12">
                                         <div class="d-flex justify-content-between align-items-center mb-20">
@@ -1825,6 +1810,39 @@
                     $(this).find('.faq-num').text(i + 1);
                 });
             });
+            // Add Gift Quote Item
+            $(document).on('click', '#add_gift_quote_btn', function () {
+                let index = $('#gift_quotes_container .gift-quote-single-item').length;
+                let html = `
+                    <div class="gift-quote-single-item p-3 mb-3 border rounded bg-light position-relative">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="fw-bold">Item <span class="gift-quote-num">${index + 1}</span></span>
+                            <button type="button" class="btn btn-sm text-danger remove-gift-quote-btn p-0 bg-transparent border-0">
+                                <i class="las la-trash-alt fs-5"></i>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label class="form-label small">Text/Quote</label>
+                                <textarea name="masterclass_settings[gift_quotes_list][${index}][text]" class="form-control rounded-2 bg-white" rows="2"></textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small">Price</label>
+                                <input type="text" name="masterclass_settings[gift_quotes_list][${index}][price]" class="form-control rounded-2 bg-white">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $('#gift_quotes_container').append(html);
+            });
+
+            $(document).on('click', '.remove-gift-quote-btn', function () {
+                $(this).closest('.gift-quote-single-item').remove();
+                $('#gift_quotes_container .gift-quote-single-item').each(function (i) {
+                    $(this).find('.gift-quote-num').text(i + 1);
+                });
+            });
+
             /*$(document).on('click', "#select_subject", function () {
                 searchSubjects($('#select_subject'));
             });*/

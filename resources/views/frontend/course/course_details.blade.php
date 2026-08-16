@@ -8,13 +8,13 @@
 
 @php
     $mcSettings = $course->masterclass_settings ?? [];
-    $eyebrowTitle = !empty($mcSettings['eyebrow_title']) ? $mcSettings['eyebrow_title'] : ($category ? $category->lang_title : 'E-commerce শুরু করার hidden path');
-    $classScheduleTitle = !empty($mcSettings['class_schedule_title']) ? $mcSettings['class_schedule_title'] : '২ দিনব্যাপী e-commerce live masterclass';
-    $classScheduleTime = !empty($mcSettings['class_schedule_time']) ? $mcSettings['class_schedule_time'] : '৬ আগস্ট তারিখ রাত ৮ টায় শুরু';
-    $videoCaption = !empty($mcSettings['video_caption']) ? $mcSettings['video_caption'] : 'বিস্তারিত জানতে ভিডিওটি দেখুন';
-    $goldBadgeTop = !empty($mcSettings['gold_badge_top']) ? $mcSettings['gold_badge_top'] : 'এখনই সিট বুক করুন';
-    $scheduleBadge = !empty($mcSettings['schedule_badge']) ? $mcSettings['schedule_badge'] : 'LIVE ZOOM MASTERCLASS';
-    $dualCtaLeft = !empty($mcSettings['dual_cta_left']) ? $mcSettings['dual_cta_left'] : 'রেজিস্ট্রেশন করুন এখনই';
+    $eyebrowTitle = !empty($mcSettings['eyebrow_title']) ? $mcSettings['eyebrow_title'] : ($category ? $category->lang_title : '');
+    $classScheduleTitle = !empty($mcSettings['class_schedule_title']) ? $mcSettings['class_schedule_title'] : '';
+    $classScheduleTime = !empty($mcSettings['class_schedule_time']) ? $mcSettings['class_schedule_time'] : '';
+    $videoCaption = !empty($mcSettings['video_caption']) ? $mcSettings['video_caption'] : '';
+    $goldBadgeTop = !empty($mcSettings['gold_badge_top']) ? $mcSettings['gold_badge_top'] : '';
+    $scheduleBadge = !empty($mcSettings['schedule_badge']) ? $mcSettings['schedule_badge'] : '';
+    $dualCtaLeft = !empty($mcSettings['dual_cta_left']) ? $mcSettings['dual_cta_left'] : '';
     
     $totalCapacity = !empty($mcSettings['remaining_seats']) && is_numeric($mcSettings['remaining_seats']) 
         ? (int)$mcSettings['remaining_seats'] 
@@ -31,19 +31,19 @@
         $dualCtaSeats = 'আর মাত্র ' . $remainingSeats . ' সিট বাকি';
     }
 
-    $benefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : 'এই মাস্টারক্লাস কার জন্য?';
-    $orderFormTitle = !empty($mcSettings['order_form_title']) ? $mcSettings['order_form_title'] : 'মাস্টারক্লাসে জয়েন করতে নিচের<br><span class="text-primary">ফর্মটি পূরণ করুন</span>';
-    $orderFormSubtitle = !empty($mcSettings['order_form_subtitle']) ? $mcSettings['order_form_subtitle'] : 'Give valid information';
-    $faqTitle = !empty($mcSettings['faq_title']) ? $mcSettings['faq_title'] : 'কিছু সাধারণ প্রশ্নের উত্তর';
+    $benefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : '';
+    $orderFormTitle = !empty($mcSettings['order_form_title']) ? $mcSettings['order_form_title'] : '';
+    $orderFormSubtitle = !empty($mcSettings['order_form_subtitle']) ? $mcSettings['order_form_subtitle'] : '';
+    $faqTitle = !empty($mcSettings['faq_title']) ? $mcSettings['faq_title'] : '';
 
-    $zoomTitle = !empty($mcSettings['zoom_title']) ? $mcSettings['zoom_title'] : 'Zoom লাইভ 104';
-    $zoomSubtitle = !empty($mcSettings['zoom_subtitle']) ? $mcSettings['zoom_subtitle'] : 'অনলাইন ইন্টারেক্টিভ সেশন';
-    $goldOfferTitle = !empty($mcSettings['gold_offer_title']) ? $mcSettings['gold_offer_title'] : 'আজকের স্পেশাল অফার';
-    $primaryCtaText = !empty($mcSettings['primary_cta_text']) ? $mcSettings['primary_cta_text'] : 'রেজিস্ট্রেশন করুন এখনই';
-    $scheduleValue = !empty($mcSettings['schedule_value']) ? $mcSettings['schedule_value'] : (!empty($course->duration) ? $course->duration : '2h 40min');
-    $levelLabel = !empty($mcSettings['level_label']) ? $mcSettings['level_label'] : __('level');
-    $levelValue = !empty($mcSettings['level_value']) ? $mcSettings['level_value'] : ($level ? $level->lang_title : 'beginner');
-    $goldCtaText = !empty($mcSettings['gold_cta_text']) ? $mcSettings['gold_cta_text'] : 'এখনই জয়েন করুন';
+    $zoomTitle = !empty($mcSettings['zoom_title']) ? $mcSettings['zoom_title'] : '';
+    $zoomSubtitle = !empty($mcSettings['zoom_subtitle']) ? $mcSettings['zoom_subtitle'] : '';
+    $goldOfferTitle = !empty($mcSettings['gold_offer_title']) ? $mcSettings['gold_offer_title'] : '';
+    $primaryCtaText = !empty($mcSettings['primary_cta_text']) ? $mcSettings['primary_cta_text'] : '';
+    $scheduleValue = !empty($mcSettings['schedule_value']) ? $mcSettings['schedule_value'] : (!empty($course->duration) ? $course->duration : '');
+    $levelLabel = !empty($mcSettings['level_label']) ? $mcSettings['level_label'] : '';
+    $levelValue = !empty($mcSettings['level_value']) ? $mcSettings['level_value'] : ($level ? $level->lang_title : '');
+    $goldCtaText = !empty($mcSettings['gold_cta_text']) ? $mcSettings['gold_cta_text'] : '';
     
     if (!empty($mcSettings['gold_seats_text'])) {
         $goldSeatsText = preg_match('/\d+/', $mcSettings['gold_seats_text'])
@@ -60,21 +60,21 @@
     $hideRelated = !empty($mcSettings['hide_related_courses']);
     $hideOverviewSection = !empty($mcSettings['hide_overview_section']);
 
-    $overviewTag = !empty($mcSettings['overview_tag']) ? $mcSettings['overview_tag'] : 'FEATURED COURSE';
-    $overviewTitle = !empty($mcSettings['overview_title']) ? $mcSettings['overview_title'] : 'Master Your Skills With Expert Guidance';
-    $overviewDesc1 = !empty($mcSettings['overview_desc1']) ? $mcSettings['overview_desc1'] : 'Join our comprehensive single course program designed to take you from beginner to advanced level with real-world projects and direct mentor support.';
-    $overviewDesc2 = !empty($mcSettings['overview_desc2']) ? $mcSettings['overview_desc2'] : 'Get lifetime access to premium curriculum, practical assignments, downloadable resources, and a verified completion certificate.';
-    $overviewBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : 'ENROLL NOW';
-    $overviewBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : '#register';
+    $overviewTag = !empty($mcSettings['overview_tag']) ? $mcSettings['overview_tag'] : '';
+    $overviewTitle = !empty($mcSettings['overview_title']) ? $mcSettings['overview_title'] : '';
+    $overviewDesc1 = !empty($mcSettings['overview_desc1']) ? $mcSettings['overview_desc1'] : '';
+    $overviewDesc2 = !empty($mcSettings['overview_desc2']) ? $mcSettings['overview_desc2'] : '';
+    $overviewBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : '';
+    $overviewBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : '';
     $overviewImageUrl = !empty($mcSettings['overview_image_url']) ? $mcSettings['overview_image_url'] : ($course->image ? getFileLink('original_image', $course->image) : 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop');
 
-    $giftBadge = !empty($mcSettings['gift_badge']) ? $mcSettings['gift_badge'] : '🎁 যারা join করবেন তাদের জন্য special gift';
-    $giftTitle = !empty($mcSettings['gift_title']) ? $mcSettings['gift_title'] : '৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ';
-    $giftValue = !empty($mcSettings['gift_value']) ? $mcSettings['gift_value'] : '৳১০,০০০';
-    $giftDescription = !empty($mcSettings['gift_description']) ? $mcSettings['gift_description'] : 'এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন। মাস্টারক্লাসে এই বিষয়ে বিস্তারিত আলোচনা।';
-    $giftQuote = !empty($mcSettings['gift_quote']) ? $mcSettings['gift_quote'] : '"এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় যেমন Facebook Ads, Google Ads নিয়ে বিস্তারিত শিখিয়েছি। এছাড়াও কিভাবে একটা বিজনেসকে Scale করতে তা নিয়ে ক্লাস আছে।"';
-    $giftFooterNote = !empty($mcSettings['gift_footer_note']) ? $mcSettings['gift_footer_note'] : 'যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।';
-    $giftCtaText = !empty($mcSettings['gift_cta_text']) ? $mcSettings['gift_cta_text'] : 'সিট কনফার্ম করুন →';
+    $giftBadge = !empty($mcSettings['gift_badge']) ? $mcSettings['gift_badge'] : '';
+    $giftTitle = !empty($mcSettings['gift_title']) ? $mcSettings['gift_title'] : '';
+    $giftValue = !empty($mcSettings['gift_value']) ? $mcSettings['gift_value'] : '';
+    $giftDescription = !empty($mcSettings['gift_description']) ? $mcSettings['gift_description'] : '';
+    $giftQuote = !empty($mcSettings['gift_quote']) ? $mcSettings['gift_quote'] : '';
+    $giftFooterNote = !empty($mcSettings['gift_footer_note']) ? $mcSettings['gift_footer_note'] : '';
+    $giftCtaText = !empty($mcSettings['gift_cta_text']) ? $mcSettings['gift_cta_text'] : '';
     if (!empty($mcSettings['gift_seats_text'])) {
         $giftSeatsText = preg_match('/\d+/', $mcSettings['gift_seats_text'])
             ? preg_replace('/\d+/', $remainingSeats, $mcSettings['gift_seats_text'])
@@ -83,27 +83,27 @@
         $giftSeatsText = 'বাকি আছে মাত্র ' . $remainingSeats . ' টা seat';
     }
 
-    $explainerTitle = !empty($mcSettings['explainer_title']) ? $mcSettings['explainer_title'] : 'একটা প্রশ্ন আপনার মাথায় আসতে পারে — এত কিছু, মাত্র ৯৯ টাকায় কেন??';
+    $explainerTitle = !empty($mcSettings['explainer_title']) ? $mcSettings['explainer_title'] : '';
     $explainerText = !empty($mcSettings['explainer_text']) ? $mcSettings['explainer_text'] : null;
     $breakdownSubheading = !empty($mcSettings['breakdown_subheading']) ? $mcSettings['breakdown_subheading'] : null;
     $breakdownItemsRaw = !empty($mcSettings['breakdown_items']) ? $mcSettings['breakdown_items'] : null;
-    $breakdownTodayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : 'আজকের মূল্য (token)';
-    $originalPriceLabel = !empty($mcSettings['original_price_label']) ? $mcSettings['original_price_label'] : 'মূল প্রাইস';
-    $scheduleLabel = !empty($mcSettings['schedule_label']) ? $mcSettings['schedule_label'] : 'সময় / সময়সূচী';
+    $breakdownTodayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : '';
+    $originalPriceLabel = !empty($mcSettings['original_price_label']) ? $mcSettings['original_price_label'] : '';
+    $scheduleLabel = !empty($mcSettings['schedule_label']) ? $mcSettings['schedule_label'] : '';
 
-    $nameLabel = !empty($mcSettings['name_label']) ? $mcSettings['name_label'] : 'Your Full Name';
-    $namePlaceholder = !empty($mcSettings['name_placeholder']) ? $mcSettings['name_placeholder'] : 'আপনার সম্পূর্ণ নাম';
-    $phoneLabel = !empty($mcSettings['phone_label']) ? $mcSettings['phone_label'] : 'Mobile Number';
-    $phonePlaceholder = !empty($mcSettings['phone_placeholder']) ? $mcSettings['phone_placeholder'] : '01XXXXXXXXX';
-    $emailLabel = !empty($mcSettings['email_label']) ? $mcSettings['email_label'] : 'Email address';
-    $emailPlaceholder = !empty($mcSettings['email_placeholder']) ? $mcSettings['email_placeholder'] : 'আপনার ইমেইল এড্রেস';
-    $orderSummaryTitle = !empty($mcSettings['order_summary_title']) ? $mcSettings['order_summary_title'] : 'Your order';
-    $privacyNotice = !empty($mcSettings['privacy_notice']) ? $mcSettings['privacy_notice'] : 'Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.';
-    $payNowBtnText = !empty($mcSettings['pay_now_btn_text']) ? $mcSettings['pay_now_btn_text'] : 'PAY NOW';
+    $nameLabel = !empty($mcSettings['name_label']) ? $mcSettings['name_label'] : '';
+    $namePlaceholder = !empty($mcSettings['name_placeholder']) ? $mcSettings['name_placeholder'] : '';
+    $phoneLabel = !empty($mcSettings['phone_label']) ? $mcSettings['phone_label'] : '';
+    $phonePlaceholder = !empty($mcSettings['phone_placeholder']) ? $mcSettings['phone_placeholder'] : '';
+    $emailLabel = !empty($mcSettings['email_label']) ? $mcSettings['email_label'] : '';
+    $emailPlaceholder = !empty($mcSettings['email_placeholder']) ? $mcSettings['email_placeholder'] : '';
+    $orderSummaryTitle = !empty($mcSettings['order_summary_title']) ? $mcSettings['order_summary_title'] : '';
+    $privacyNotice = !empty($mcSettings['privacy_notice']) ? $mcSettings['privacy_notice'] : '';
+    $payNowBtnText = !empty($mcSettings['pay_now_btn_text']) ? $mcSettings['pay_now_btn_text'] : '';
 
     $supportStatus = !empty($mcSettings['support_status']);
-    $supportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : 'আর সাপোর্ট?';
-    $supportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '<p>কোর্সের টপিক রিলেটেড যেকোনো প্রবলেম ফেস করলে সরাসরি সাপোর্ট ফোরাম অথবা আমাদের মেন্টর টিম থেকে ইনস্ট্যান্ট হেল্প পাবেন। লাইভ সাপোর্ট সেশনের মাধ্যমে যেকোনো টেকনিক্যাল প্রবলেম ওয়ান টু ওয়ান সলভ করে দেওয়া হবে।</p><p>এই সাপোর্ট আমাদের টিম মেম্বারদের পক্ষে সরাসরি প্রোভাইড করা হচ্ছে, যাতে করে আপনি ফেস করা যেকোনো সমস্যার দ্রুততম সময়ে নিখুঁত সমাধান পেতে পারেন।</p>';
+    $supportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : '';
+    $supportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '';
     $supportImageUrl = !empty($mcSettings['support_image_url']) ? $mcSettings['support_image_url'] : null;
 
     $breakdownRows = [];
@@ -213,7 +213,7 @@
                 @foreach($goldInfoPointsList as $gItem)
                     @if(!empty($gItem['title']) || !empty($gItem['value']))
                         <div class="mc-gold-item-row">
-                            <div class="mc-gold-icon-circle"><i class="{{ !empty($gItem['icon']) ? $gItem['icon'] : 'fas fa-check-circle' }}"></i></div>
+                            <div class="mc-gold-icon-circle"><i class="{{ !empty($gItem['icon']) ? $gItem['icon'] : '' }}"></i></div>
                             <div>
                                 @if(!empty($gItem['title']))
                                     <p class="m-0 fw-bold fs-5 text-dark">{{ $gItem['title'] }}</p>
@@ -549,71 +549,7 @@
 
         <div class="mc-container">
 
-            {{-- =========================================================
-                 10. REGISTRATION ORDER FORM SECTION (`#register`)
-            ========================================================== --}}
-            @if(!$is_enrolled)
-                <div class="mc-registration-section" id="register">
-                    <h2 class="text-center fw-bold course-section-title text-dark mb-2">
-                        {!! $orderFormTitle !!}
-                    </h2>
-                    <p class="text-center text-muted small mb-4">{{ $orderFormSubtitle }}</p>
-                    
-                    <div class="mc-form-wrapper user-form mx-auto" style="max-width: 700px;">
-                        
-                        <div class="mb-5">
-                            <h4 class="fw-bold mb-4" style="color: #10b981; font-size: 20px;">Give valid information</h4>
-                            
-                            <form action="{{ route('masterclass.checkout') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ $course->id }}">
-                                <input type="hidden" name="type" value="course">
-                                <input type="hidden" name="quantity" value="1">
-
-                                <div class="mb-4">
-                                    <label class="form-label fw-semibold text-dark mb-2">{{ $nameLabel ?? 'Your Full Name' }} <span class="text-danger">*</span></label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', auth()->check() ? auth()->user()->name : '') }}" placeholder="{{ $namePlaceholder }}" required style="background-color: #fff; border: 1px solid #d1d5db; color: #111827; padding: 14px; border-radius: 8px;">
-                                    @error('name')
-                                        <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-4">
-                                    <label class="form-label fw-semibold text-dark mb-2">{{ $phoneLabel ?? 'Mobile Number' }} <span class="text-danger">*</span></label>
-                                    <input type="tel" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone', auth()->check() ? auth()->user()->phone : '') }}" placeholder="{{ $phonePlaceholder }}" required style="background-color: #fff; border: 1px solid #d1d5db; color: #111827; padding: 14px; border-radius: 8px;">
-                                    @error('phone')
-                                        <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-4">
-                                    <label class="form-label fw-semibold text-dark mb-2">{{ $emailLabel ?? 'Email address' }} <span class="text-danger">*</span></label>
-                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', auth()->check() ? auth()->user()->email : '') }}" placeholder="{{ $emailPlaceholder }}" required style="background-color: #fff; border: 1px solid #d1d5db; color: #111827; padding: 14px; border-radius: 8px;">
-                                    @error('email')
-                                        <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-
-
-                                <div class="mb-4 text-start" style="color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-                                    {!! $privacyNotice !!}
-                                </div>
-
-                                <button type="submit" class="template-btn w-100 text-center border-0">
-                                    {{ $payNowBtnText ?? 'PAY NOW' }}
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            @endif
+            {{-- REGISTRATION ORDER FORM SECTION has been moved to home.blade.php --}}
 
             {{-- =========================================================
                  11. FAQ ACCORDION SECTION (100% Admin Sync)

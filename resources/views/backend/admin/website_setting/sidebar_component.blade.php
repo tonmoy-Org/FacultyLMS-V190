@@ -134,13 +134,7 @@
                         <span>{{ __('success_video_section') }}</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('website.ad_banner_section') }}"
-                       class="{{ request()->routeIs('website.ad_banner_section') ? 'active' : '' }}">
-                        <span class="icon"><i class="las la-ad"></i></span>
-                        <span>{{ __('ad_banner_section') }}</span>
-                    </a>
-                </li>
+
                 <li>
                     <a href="{{ route('website.single_course_section') }}"
                        class="{{ request()->routeIs('website.single_course_section') ? 'active' : '' }}">
