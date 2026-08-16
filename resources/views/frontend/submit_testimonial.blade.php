@@ -529,7 +529,7 @@
                                 </div>
 
                                 <!-- Star Rating -->
-                                <div class="mb-2">
+                                <div class="mb-4">
                                     <label for="rating-value">{{ __('Your Rating') }}</label>
                                     <div class="d-flex align-items-center gap-2 mt-1">
                                         <div class="rating-stars-wrap">
@@ -543,9 +543,20 @@
                                     </div>
                                     <input type="hidden" name="rating" id="rating-value" value="5">
                                 </div>
+
+                                <!-- Submit Button & Footer inside Left Column -->
+                                <div class="mt-4">
+                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
+                                        <span>{{ __('Submit Testimonial') }}</span>
+                                        <i class="fas fa-paper-plane ms-2"></i>
+                                    </button>
+                                    <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
+                                        <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
+                                    </div>
+                                </div>
                             </div>
 
-                            <!-- Right Column: Admin Upload Image Card (Height spans from "Add a photo/video" to "Your Rating") -->
+                            <!-- Right Column: Admin Upload Image Card -->
                             <div class="col-lg-5">
                                 @php
                                     $formRightImgSetting = setting('success_form_right_image');
@@ -586,17 +597,6 @@
                                         </div>
                                     @endif
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Submit Button & Security Footer (Full Width Below) -->
-                        <div class="mt-4">
-                            <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
-                                <span>{{ __('Submit Testimonial') }}</span>
-                                <i class="fas fa-paper-plane ms-2"></i>
-                            </button>
-                            <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
-                                <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
                             </div>
                         </div>
                     </form>
