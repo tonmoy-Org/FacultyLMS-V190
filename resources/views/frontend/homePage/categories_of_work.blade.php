@@ -125,7 +125,7 @@
                         @if($onlyImage)
                             <div class="cow-card cow-card-only-image h-100">
                                 @if($hasLink)
-                                    <a href="{{ $card['link'] }}" target="_blank">
+                                    <a href="{{ $card['link'] }}" {{ str_starts_with($card['link'], '#') ? '' : 'target="_blank"' }}>
                                         <img src="{{ asset($card['image']) }}" alt="Category Image">
                                     </a>
                                 @else
@@ -149,7 +149,7 @@
 
                                     @if($hasImage)
                                         @if($hasLink)
-                                            <a href="{{ $card['link'] }}" target="_blank" class="cow-card-img-floating-wrapper">
+                                            <a href="{{ $card['link'] }}" {{ str_starts_with($card['link'], '#') ? '' : 'target="_blank"' }} class="cow-card-img-floating-wrapper">
                                                 <img src="{{ asset($card['image']) }}" class="cow-card-img-floating" alt="{{ $card['title'] ?? 'Category Image' }}">
                                             </a>
                                         @else

@@ -117,7 +117,7 @@
                             <img src="{{ static_asset('frontend/img/particle/ellipse-fill-large.svg') }} " alt="Ellipse" class="image-3">
                         </div>
                         <div class="form-title text-align-center m-b-40">
-                            <h3 class="m-0 text-uppercase">{{__('Confirm Your Registration') }}</h3>
+                            <h3 class="m-0">{{__('Confirm Your Registration') }}</h3>
                             <p>{{__('An OTP has been sent to your phone number:') }} {{ $phone }}</p>
                         </div>
                         <form action="{{ route('register.otp.submit') }}" method="POST" class="form otp-form needs-validation" novalidate>

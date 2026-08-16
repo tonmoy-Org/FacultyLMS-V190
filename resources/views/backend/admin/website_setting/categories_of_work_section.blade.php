@@ -42,7 +42,7 @@
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label">{{ __('Link (Optional)') }}</label>
-                                                            <input type="url" class="form-control" name="categories_of_work_cards[{{ $index }}][link]" value="{{ $card['link'] ?? '' }}" placeholder="https://...">
+                                                            <input type="text" class="form-control" name="categories_of_work_cards[{{ $index }}][link]" value="{{ $card['link'] ?? '' }}" placeholder="#register or https://...">
                                                         </div>
                                                         <div class="col-md-12 mb-3">
                                                             <label class="form-label">{{ __('Content (Modules/Text)') }}</label>
@@ -102,7 +102,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">{{ __('Link (Optional)') }}</label>
-                            <input type="url" class="form-control" name="categories_of_work_cards[${cardIndex}][link]" placeholder="https://...">
+                            <input type="text" class="form-control" name="categories_of_work_cards[${cardIndex}][link]" placeholder="#register or https://...">
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">{{ __('Content (Modules/Text)') }}</label>

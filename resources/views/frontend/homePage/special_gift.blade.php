@@ -22,6 +22,7 @@
     $giftQuote = !empty($mcSettings['gift_quote']) ? $mcSettings['gift_quote'] : '';
     $giftFooterNote = !empty($mcSettings['gift_footer_note']) ? $mcSettings['gift_footer_note'] : '';
     $giftCtaText = !empty($mcSettings['gift_cta_text']) ? $mcSettings['gift_cta_text'] : '';
+    $giftCtaLink = !empty($mcSettings['gift_cta_link']) ? $mcSettings['gift_cta_link'] : '';
 @endphp
 
 @if(!$hideSpecialGift)
@@ -112,7 +113,7 @@
 
 
                     <div class="text-center w-100">
-                        <a href="{{ isset($course) ? route('course.details', $course->slug) : '#' }}" class="template-btn">
+                        <a href="{{ !empty($giftCtaLink) ? $giftCtaLink : (isset($course) ? route('course.details', $course->slug) : '#') }}" class="template-btn">
                             {{ $giftCtaText }}
                         </a>
                     </div>

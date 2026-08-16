@@ -34,6 +34,7 @@
 
 @if(!$is_enrolled && isset($course))
 <section class="order-form-section p-t-60 p-b-60" style="background: #ffffff;">
+    @include('frontend.homePage.sticky_promo_bar')
     <div class="container container-1278">
         <div class="mc-registration-section" id="register">
             
@@ -88,30 +89,7 @@
                             @enderror
                         </div>
                         
-                        @if(!auth()->check())
-                        <div class="mb-4">
-                            <label class="form-label fw-semibold text-dark mb-2">{{ $passwordLabel }} <span class="text-danger">*</span></label>
-                            <div class="position-relative">
-                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" placeholder="{{ $passwordPlaceholder }}" required style="height: 50px; padding: 10px 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                                <span class="position-absolute" style="right: 15px; top: 15px; cursor: pointer;">
-                                    <i class="fas fa-eye text-muted"></i>
-                                </span>
-                            </div>
-                            <div class="d-flex justify-content-between mt-2">
-                                <span class="small text-muted" style="font-size: 12px;">Password strength:</span>
-                                <span class="small text-success fw-bold" style="font-size: 12px;">Strong</span>
-                            </div>
-                            <div class="progress mt-1" style="height: 4px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <span class="small text-success mt-1 d-block" style="font-size: 12px;">All requirements met!</span>
-                            @error('password')
-                                <span class="invalid-feedback d-block text-danger small mt-1" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        @endif
+
                     </div>
                     
                     <!-- Right Column: Your Order -->

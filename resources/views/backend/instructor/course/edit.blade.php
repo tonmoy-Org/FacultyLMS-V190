@@ -353,6 +353,26 @@
                                     </div>
                                     <!-- End Description Subtitle -->
 
+                                    @php
+                                        $mc_settings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings, true);
+                                        $mc_settings = $mc_settings ?: [];
+                                    @endphp
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="mb-4">
+                                            <label for="overview_btn_text" class="form-label">Hero Button Text</label>
+                                            <input type="text" class="form-control" name="masterclass_settings[overview_btn_text]" id="overview_btn_text" placeholder="Enroll Now" value="{{ old('masterclass_settings.overview_btn_text', $mc_settings['overview_btn_text'] ?? '') }}">
+                                        </div>
+                                    </div>
+                                    <!-- End Hero Button Text -->
+
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="mb-4">
+                                            <label for="overview_btn_url" class="form-label">Hero Button Link</label>
+                                            <input type="text" class="form-control" name="masterclass_settings[overview_btn_url]" id="overview_btn_url" placeholder="#register" value="{{ old('masterclass_settings.overview_btn_url', $mc_settings['overview_btn_url'] ?? '') }}">
+                                        </div>
+                                    </div>
+                                    <!-- End Hero Button Link -->
+
                                     <div class="col-lg-12">
                                         <div class="editor-wrapper">
                                             <div class="d-flex justify-content-between">

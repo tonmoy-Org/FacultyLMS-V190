@@ -366,6 +366,8 @@
                                         '');
                                     $defGiftTitle = old('masterclass_settings.gift_title', '');
                                     $defGiftValue = old('masterclass_settings.gift_value', '');
+                                    $defGiftCtaText = old('masterclass_settings.gift_cta_text', '');
+                                    $defGiftCtaLink = old('masterclass_settings.gift_cta_link', '');
                                     $defGiftDescription = old('masterclass_settings.gift_description', '');
                                     $defGiftQuote = old('masterclass_settings.gift_quote', '');
                                     $defGiftFooterNote = old('masterclass_settings.gift_footer_note', '');
@@ -502,6 +504,12 @@
                                                     <label class="form-label">Gift Red CTA Button Text</label>
                                                     <input type="text" name="masterclass_settings[gift_cta_text]" class="form-control rounded-2"
                                                            value="{{ $defGiftCtaText }}" placeholder="সিট কনফার্ম করুন →">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Gift Red CTA Button Link</label>
+                                                    <input type="text" name="masterclass_settings[gift_cta_link]" class="form-control rounded-2"
+                                                           value="{{ $defGiftCtaLink }}" placeholder="e.g. #register or https://...">
                                                 </div>
                                             </div>
                                         </div>

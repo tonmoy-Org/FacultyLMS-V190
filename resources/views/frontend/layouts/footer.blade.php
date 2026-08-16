@@ -255,7 +255,8 @@
             if(countdownEl) {
                 const targetDateStr = countdownEl.getAttribute('data-target');
                 if(!targetDateStr) return;
-                const targetDate = new Date(targetDateStr.replace(/-/g, '/')).getTime();
+                const safeDateStr = targetDateStr.replace('T', ' ').replace(/-/g, '/');
+                const targetDate = new Date(safeDateStr).getTime();
 
                 const timer = setInterval(function() {
                     const now = new Date().getTime();

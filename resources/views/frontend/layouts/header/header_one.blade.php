@@ -10,8 +10,11 @@
                 .template-header.header-layout-1 .header-inner .brand-logo { max-height: 50px !important; }
                 .template-header.header-layout-1 .header-inner .brand-logo img { max-height: 35px !important; }
                 .template-header.header-layout-1 .header-inner .nav-menu > ul > li > a { line-height: 60px !important; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul { padding-left: 0 !important; margin-left: 0 !important; justify-content: center; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul > li { flex: 1 1 0px; text-align: center; min-width: 100px; display: flex; justify-content: center; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul > li:last-child { margin-inline-end: 0 !important; }
             </style>
-            <div class="header-inner d-flex align-items-center justify-content-between py-0">
+            <div class="header-inner d-flex align-items-center justify-content-between py-0 position-relative">
                 <div class="header-left" style="flex: 1;">
                     <div class="brand-logo d-flex align-items-center">
                         @if(config('app.demo_mode'))
@@ -44,9 +47,9 @@
                         @endif
                     </div>
                 </div>
-                <div class="header-center d-flex justify-content-center align-items-center mx-3" style="flex: 1;">
-                    <nav class="nav-menu d-none d-lg-block">
-                        <ul class="mb-0 d-flex align-items-center">
+                <div class="header-center position-absolute start-50 translate-middle-x d-none d-lg-flex justify-content-center align-items-center" style="z-index: 10;">
+                    <nav class="nav-menu">
+                        <ul class="mb-0 d-flex align-items-center p-0">
                             @if (setting('show_default_courses_link') != 0)
                                 @if (setting('website_mode') == 'single_course')
                                     @php

@@ -42,6 +42,12 @@
                                                       placeholder="{{ __('Enter Newsletter Description') }}">{{ setting('newsletter_description',$lang) ?: '' }}</textarea>
                                         </div>
 
+                                        <div class="col-md-6 col-12">
+                                            <label for="promo_banner_countdown" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Global Promo Countdown Date (Applies to Footer & Sticky Banner)') }}</label>
+                                            <input type="datetime-local" class="form-control rounded-2 py-2" id="promo_banner_countdown" name="promo_banner_countdown"
+                                                   value="{{ setting('promo_banner_countdown') }}">
+                                        </div>
+
                                         <div class="col-12">
                                             <label for="promo_banner_countdown_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Countdown Title') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="promo_banner_countdown_title" name="promo_banner_countdown_title"
@@ -182,6 +188,44 @@
                                             <input type="text" class="form-control rounded-2 py-2" id="contact_map_url" name="contact_map_url"
                                                    placeholder="{{ __('e.g. https://maps.google.com/maps?q=99+Roving+St+Big+City or full embed code') }}" value="{{ setting('contact_map_url') ?: (setting('contact_map_iframe') ?: '') }}">
                                             <small class="text-muted mt-1 d-block" style="font-size: 12px;">{{ __('Paste any Google Maps share link, location address, or iframe embed code. Location will update dynamically on the frontend map based on this input.') }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SECTION 4: STICKY PROMO BAR SETTINGS -->
+                            <div class="card border mb-4 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+                                <div class="card-header bg-light py-3 px-4 d-flex align-items-center justify-content-between">
+                                    <h6 class="m-0 text-dark" style="font-size: 15px; font-weight: 500;">
+                                        {{ __('Sticky Promo Bar Settings') }}
+                                    </h6>
+                                    <div class="d-flex align-items-center gap-2 m-0">
+                                        <input type="hidden" name="show_sticky_promo_bar" value="0">
+                                        <label class="form-label m-0" for="show_sticky_promo_bar" style="font-size: 13px; font-weight: 400;">{{ __('Enable Promo Bar') }}</label>
+                                        <div class="setting-check m-0">
+                                            <input type="checkbox" name="show_sticky_promo_bar" value="1" id="show_sticky_promo_bar" class="sandbox_mode" {{ setting('show_sticky_promo_bar') == 1 ? 'checked' : '' }}>
+                                            <label for="show_sticky_promo_bar"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-4">
+                                    <div class="row gx-20 gy-3">
+                                        <div class="col-md-6 col-12">
+                                            <label for="sticky_promo_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Promo Title') }}</label>
+                                            <input type="text" class="form-control rounded-2 py-2" id="sticky_promo_title" name="sticky_promo_title"
+                                                   placeholder="{{ __('e.g. অফার শেষ হওয়ার আগেই কিনুন') }}" value="{{ setting('sticky_promo_title', $lang) ?: '' }}">
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <label for="sticky_promo_btn_text" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Button Text') }}</label>
+                                            <input type="text" class="form-control rounded-2 py-2" id="sticky_promo_btn_text" name="sticky_promo_btn_text"
+                                                   placeholder="{{ __('e.g. Enroll Now') }}" value="{{ setting('sticky_promo_btn_text', $lang) ?: '' }}">
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <label for="sticky_promo_btn_link" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Button Link') }}</label>
+                                            <input type="text" class="form-control rounded-2 py-2" id="sticky_promo_btn_link" name="sticky_promo_btn_link"
+                                                   placeholder="{{ __('Enter Button Link') }}" value="{{ setting('sticky_promo_btn_link') ?: '' }}">
                                         </div>
                                     </div>
                                 </div>

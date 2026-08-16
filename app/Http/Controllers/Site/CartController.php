@@ -13,6 +13,7 @@ use App\Repositories\CheckoutRepository;
 use App\Repositories\CouponRepository;
 use App\Repositories\CourseRepository;
 use App\Traits\PaymentTrait;
+use App\Traits\SmsSenderTrait;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
-    use PaymentTrait;
+    use PaymentTrait, SmsSenderTrait;
 
     protected $courseRepository;
 
@@ -410,17 +411,24 @@ class CartController extends Controller
                     ->first();
 
                 if (!$user) {
+                    $password = '123456';
                     $user = User::create([
                         'first_name'        => $request->name,
                         'email'             => $request->email,
                         'phone'             => $request->phone,
-                        'password'          => Hash::make($request->phone ?: Str::random(8)),
+                        'password'          => Hash::make($password),
                         'user_type'         => 'student',
                         'role_id'           => 3,
                         'status'            => 1,
                         'is_user_banned'    => 0,
                         'email_verified_at' => now(),
                     ]);
+
+                    if (!empty($request->phone)) {
+                        $systemName = setting('system_name') ?: 'Our Platform';
+                        $sms_body = "Hello {$request->name}, welcome to {$systemName}! Registration successful. Phone: {$request->phone}, Pass: {$password}.";
+                        $this->send($request->phone, $sms_body);
+                    }
                 } else {
                     if (empty($user->phone) && !empty($request->phone)) {
                         $user->phone = $request->phone;

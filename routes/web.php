@@ -161,7 +161,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
     Route::get('category/{slug}', [CourseController::class, 'categoryCourses'])->name('category.courses');
     Route::get('load-category', [CourseController::class, 'loadCategory'])->name('load.category');
     Route::get('load.levels', [CourseController::class, 'loadLevel'])->name('load.levels');
-    Route::get('course/{slug}', [CourseController::class, 'courseDetails'])->name('course.details');
+    Route::get('course/{slug}', function() { return redirect('/'); })->name('course.details');
     Route::post('store-comment', [ReviewController::class, 'storeComment'])->name('store.comment');
     Route::get('load-more-reviews', [ReviewController::class, 'reviews'])->name('load.reviews');
     Route::get('load-subject', [CourseController::class, 'loadSubject'])->name('load.subject');

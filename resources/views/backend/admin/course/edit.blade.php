@@ -409,6 +409,26 @@
                                     </div>
                                     <!-- End Description Subtitle -->
 
+                                    @php
+                                        $mc_settings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings, true);
+                                        $mc_settings = $mc_settings ?: [];
+                                    @endphp
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="mb-4">
+                                            <label for="overview_btn_text" class="form-label">Hero Button Text</label>
+                                            <input type="text" class="form-control" name="masterclass_settings[overview_btn_text]" id="overview_btn_text" placeholder="Enroll Now" value="{{ old('masterclass_settings.overview_btn_text', $mc_settings['overview_btn_text'] ?? '') }}">
+                                        </div>
+                                    </div>
+                                    <!-- End Hero Button Text -->
+
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="mb-4">
+                                            <label for="overview_btn_url" class="form-label">Hero Button Link</label>
+                                            <input type="text" class="form-control" name="masterclass_settings[overview_btn_url]" id="overview_btn_url" placeholder="#register" value="{{ old('masterclass_settings.overview_btn_url', $mc_settings['overview_btn_url'] ?? '') }}">
+                                        </div>
+                                    </div>
+                                    <!-- End Hero Button Link -->
+
                                     <div class="col-lg-12">
                                         <div class="editor-wrapper">
                                             <div class="d-flex justify-content-between">
@@ -537,6 +557,7 @@
                                     $defSupportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : '';
                                     $defSupportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '';
                                     $defGiftCtaText = !empty($mcSettings['gift_cta_text']) ? $mcSettings['gift_cta_text'] : '';
+                                    $defGiftCtaLink = !empty($mcSettings['gift_cta_link']) ? $mcSettings['gift_cta_link'] : '';
 
                                     $defScheduleBadge = !empty($mcSettings['schedule_badge']) ? $mcSettings['schedule_badge'] : '';
                                     $defClassScheduleTitle = !empty($mcSettings['class_schedule_title']) ? $mcSettings['class_schedule_title'] : '';
@@ -724,6 +745,12 @@
                                                     <label class="form-label">Gift Red CTA Text</label>
                                                     <input type="text" name="masterclass_settings[gift_cta_text]" class="form-control rounded-2"
                                                            value="{{ $defGiftCtaText }}" placeholder="সিট কনফার্ম করুন →">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Gift Red CTA Link</label>
+                                                    <input type="text" name="masterclass_settings[gift_cta_link]" class="form-control rounded-2"
+                                                           value="{{ $defGiftCtaLink }}" placeholder="e.g. #register or https://...">
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">

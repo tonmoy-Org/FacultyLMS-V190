@@ -48,10 +48,20 @@
                         @endif
                     </div>
                     
+                    @php
+                        $mcSettings = [];
+                        if (isset($hero_course) && $hero_course->masterclass_settings) {
+                            $mcSettings = is_array($hero_course->masterclass_settings) 
+                                ? $hero_course->masterclass_settings 
+                                : json_decode($hero_course->masterclass_settings, true);
+                        }
+                        $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : __('Enroll Now');
+                        $heroBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : route('course.details', $hero_course->slug);
+                    @endphp
                     <ul class="hero-btns d-flex justify-content-center align-items-center mt-5">
                         <li style="width: 100%;">
-                            <a href="{{ route('course.details', $hero_course->slug) }}" class="template-btn">
-                                {{ __('Enroll Now') }} <i class="fas fa-long-arrow-right"></i>
+                            <a href="{{ $heroBtnUrl }}" class="template-btn">
+                                {{ $heroBtnText }}
                             </a>
                         </li>
                     </ul>

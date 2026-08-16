@@ -28,8 +28,13 @@ class SystemSettingController extends Controller
     {
         try {
             if (setting('time_zone')) {
-                $time_zone = Timezone::where('id', setting('time_zone'))->first()->timezone;
-                envWrite('APP_TIMEZONE', $time_zone);
+                $timezone_record = Timezone::where('id', setting('time_zone'))->first();
+                if ($timezone_record) {
+                    $time_zone = $timezone_record->timezone;
+                    if (env('APP_TIMEZONE') !== $time_zone) {
+                        envWrite('APP_TIMEZONE', $time_zone);
+                    }
+                }
                 session()->forget('time_zone');
             }
 
