@@ -70,6 +70,26 @@ class FrontendController extends Controller
             $data['hero_course'] = \App\Models\Course::where('status', 'approved')->latest()->first();
             $data['success_stories'] = $successStoriesRepository->activeStories();
 
+            // Fetch active coupon for banner display
+            $activeCoupons = \App\Models\Coupon::active()
+                ->where('start_date', '<=', now())
+                ->where('end_date', '>', now())
+                ->whereNotNull('image')
+                ->latest()
+                ->get();
+            
+            $validCoupon = null;
+            foreach ($activeCoupons as $coupon) {
+                if ($coupon->type == 'global') {
+                    $validCoupon = $coupon;
+                    break;
+                } elseif ($coupon->type == 'course' && isset($data['course']) && in_array($data['course']->id, $coupon->course_ids ?? [])) {
+                    $validCoupon = $coupon;
+                    break;
+                }
+            }
+            $data['active_banner_coupon'] = $validCoupon;
+
             // dd($data);
 
             return view('frontend.home', $data);

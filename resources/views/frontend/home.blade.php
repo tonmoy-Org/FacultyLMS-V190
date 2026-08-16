@@ -133,14 +133,7 @@
     <!--====== Start Offer Breakdown Section ======-->
     @include('frontend.homePage.offer_breakdown')
 
-    <!--====== Start Success Story Section ======-->
-    @include('frontend.homePage.success')
 
-    <!--====== Start FAQ Section ======-->
-    @include('frontend.homePage.faq')
-
-    <!--====== Start Support Section ======-->
-    @include('frontend.homePage.support')
 
     <!--====== Start Ad Banner 2 (Lower Home Section) ======-->
     @php
@@ -163,7 +156,7 @@
     @endphp
 
     @if($b2Url && $b2Status && !str_contains($b2Url, 'default'))
-    <section class="ad-banner-section-2 p-t-60 p-b-60 bg-white overflow-hidden">
+    <section class="ad-banner-section-2 p-t-60 p-b-20 bg-white overflow-hidden">
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-12 text-center">
@@ -174,6 +167,69 @@
                     @if($b2Link)
                         </a>
                     @endif
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!--====== Start Success Banner Section ======-->
+    @php
+        $successBannerImg = setting('success_page_banner_image');
+        $successBannerUrl = '';
+        if (is_array($successBannerImg) && !empty($successBannerImg['original_image'])) {
+            $successBannerUrl = get_media($successBannerImg['original_image'], $successBannerImg['storage'] ?? 'local');
+        } elseif ($successBannerImg) {
+            $successBannerUrl = getFileLink('original_image', $successBannerImg);
+        }
+    @endphp
+    @if($successBannerUrl && !str_contains($successBannerUrl, 'default'))
+    <section class="success-banner-section p-t-60 p-b-20 bg-white overflow-hidden">
+        <div class="container container-1278">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <div class="common-heading text-center m-b-40">
+                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                            {{ setting('success_page_banner_tag') ?: 'Success Stories' }}
+                        </span>
+                        <h2 class="fw-bold m-b-20" style="color: #1a1b4b; font-size: 38px; line-height: 1.25;">
+                            {{ setting('success_page_banner_title') ?: 'Real People. Real Learning. Real Success.' }}
+                        </h2>
+                        <p class="text-muted font-16">{{ setting('success_page_banner_description') ?: 'Discover how learners are achieving their goals and building better futures with Faculty.' }}</p>
+                    </div>
+                    <img src="{{ $successBannerUrl }}" alt="Success Banner" class="img-fluid w-100" style="border-radius: 20px; max-height: 500px; object-fit: cover; display: block; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!--====== Start Success Story Section ======-->
+    @include('frontend.homePage.success')
+
+    <!--====== Start FAQ Section ======-->
+    @include('frontend.homePage.faq')
+
+    <!--====== Start Support Section ======-->
+    @include('frontend.homePage.support')
+
+
+
+
+
+    <!--====== Start Coupon Banner Section ======-->
+    @if(isset($active_banner_coupon) && $active_banner_coupon && $active_banner_coupon->image)
+    <section class="coupon-banner-section p-t-40 p-b-40 bg-white overflow-hidden">
+        <div class="container container-1278">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <div class="coupon-banner-wrapper position-relative d-inline-block">
+                        <img src="{{ getFileLink('original_image', $active_banner_coupon->image) }}" alt="Special Offer Coupon" class="img-fluid rounded shadow-sm" style="max-width: 100%; max-height: 400px; object-fit: cover; border: 2px dashed #10b981;">
+                        <div class="coupon-code-badge position-absolute" style="bottom: -15px; left: 50%; transform: translateX(-50%); background: #1a1b4b; color: white; padding: 8px 24px; border-radius: 30px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 2px solid #10b981;">
+                            CODE: <span style="color: #10b981;">{{ $active_banner_coupon->code }}</span>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-muted font-15">Use this code at checkout to get {{ $active_banner_coupon->discount_type == 'percent' ? $active_banner_coupon->discount . '%' : get_price($active_banner_coupon->discount, userCurrency()) }} off!</p>
                 </div>
             </div>
         </div>
