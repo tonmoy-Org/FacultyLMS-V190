@@ -574,6 +574,13 @@
                                     }
 
                                     if (empty($formRightImgUrl) || str_contains($formRightImgUrl, 'default-image')) {
+                                        $latestStory = \App\Models\SuccessStory::whereNotNull('image')->latest()->first();
+                                        if ($latestStory && !empty($latestStory->image)) {
+                                            $formRightImgUrl = getFileLink('original_image', $latestStory->image);
+                                        }
+                                    }
+
+                                    if (empty($formRightImgUrl) || str_contains($formRightImgUrl, 'default-image')) {
                                         $formRightImgUrl = static_asset('images/default/default-image-391x541.png');
                                     }
                                 @endphp
