@@ -818,26 +818,64 @@
 }
 @media (max-width: 767px) {
   .template-header.header-layout-1 .header-navigation {
-    padding: 25px 0;
+    padding: 10px 0;
   }
   .template-header.header-layout-1 .header-inner {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    min-height: 60px;
   }
   .template-header.header-layout-1 .header-inner .header-left .brand-logo {
     margin-inline-end: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .template-header.header-layout-1 .header-left .brand-logo a.sticky-logo {
+    display: none !important;
+  }
+  .template-header.header-layout-1 .header-navigation.sticky-on .header-left .brand-logo a.sticky-logo {
+    display: flex !important;
+  }
+  .template-header.header-layout-1 .header-navigation.sticky-on .header-left .brand-logo a.main-logo {
+    display: none !important;
   }
   .template-header.header-layout-1 .navbar-toggler {
     position: absolute;
     inset-inline-start: 0px;
-    top: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .template-header.header-layout-1 .header-right {
+    position: relative;
     margin-inline-start: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 20;
+    height: 100%;
   }
   .template-header.header-layout-1 .header-left {
-    width: 100%;
-    justify-content: center;
     position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    max-width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
   }
   .template-header.header-layout-1 .header-extra .login-btn .template-btn {
     padding: 0;
@@ -2298,7 +2336,7 @@
 @media (max-width: 767px) {
   /* Hero Area Mobile Optimization */
   .hero-area {
-    padding-top: 50px !important;
+    padding-top: 90px !important;
     padding-bottom: 50px !important;
   }
   .hero-area .hero-title {
@@ -2316,15 +2354,25 @@
   }
   .hero-area .hero-btns {
     margin-top: 25px !important;
+    display: flex !important;
+    justify-content: center !important;
   }
   .hero-area .hero-btns li {
-    width: 100% !important;
+    width: auto !important;
+    display: flex !important;
+    justify-content: center !important;
   }
   .hero-area .hero-btns .template-btn {
-    width: 100% !important;
+    width: auto !important;
+    min-width: 200px !important;
+    max-width: 280px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     text-align: center !important;
-    font-size: 15px !important;
-    padding: 12px 20px !important;
+    font-size: 16px !important;
+    padding: 12px 28px !important;
+    border-radius: 8px !important;
   }
   .course-description-section {
     padding-top: 40px !important;

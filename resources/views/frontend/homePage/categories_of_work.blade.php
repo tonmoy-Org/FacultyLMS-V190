@@ -87,13 +87,11 @@
     }
     @media (max-width: 768px) {
         .cow-wrapper {
-            padding: 30px 16px;
-            border-radius: 12px;
+            padding: 40px 20px;
+            border-radius: 0;
         }
-        .cow-card-content,
-        .cow-card-content.has-image {
-            padding-left: 0 !important;
-            padding-right: 0 !important;
+        .cow-card-content {
+            padding-right: 0;
         }
         .cow-card-img-floating-wrapper {
             position: relative;

@@ -13,6 +13,22 @@
                 .template-header.header-layout-1 .header-inner .nav-menu > ul { padding-left: 0 !important; margin-left: 0 !important; justify-content: center; }
                 .template-header.header-layout-1 .header-inner .nav-menu > ul > li { flex: 1 1 0px; text-align: center; min-width: 100px; display: flex; justify-content: center; }
                 .template-header.header-layout-1 .header-inner .nav-menu > ul > li:last-child { margin-inline-end: 0 !important; }
+                @media (max-width: 991px) {
+                    .template-header.header-layout-1 .header-navigation { padding: 10px 0 !important; }
+                    .template-header.header-layout-1 .header-inner { position: relative !important; display: flex !important; align-items: center !important; justify-content: space-between !important; height: 60px !important; min-height: 60px !important; }
+                    .template-header.header-layout-1 .navbar-toggler { position: absolute !important; inset-inline-start: 0px !important; top: 50% !important; transform: translateY(-50%) !important; margin: 0 !important; z-index: 20 !important; display: flex !important; flex-direction: column !important; justify-content: center !important; }
+                    .template-header.header-layout-1 .header-left { position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; width: auto !important; max-width: 60% !important; display: flex !important; align-items: center !important; justify-content: center !important; z-index: 10 !important; margin: 0 !important; padding: 0 !important; }
+                    .template-header.header-layout-1 .header-left .brand-logo { margin-inline-end: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; margin: 0 !important; }
+                    .template-header.header-layout-1 .header-left .brand-logo a { align-items: center; }
+                    .template-header.header-layout-1 .header-left .brand-logo a.sticky-logo { display: none !important; }
+                    .template-header.header-layout-1 .header-navigation.sticky-on .header-left .brand-logo a.sticky-logo { display: flex !important; }
+                    .template-header.header-layout-1 .header-navigation.sticky-on .header-left .brand-logo a.main-logo { display: none !important; }
+                    .template-header.header-layout-1 .header-left .brand-logo img { max-height: 32px !important; width: auto !important; object-fit: contain !important; }
+                    .template-header.header-layout-1 .header-right { position: relative !important; margin-inline-start: auto !important; display: flex !important; align-items: center !important; justify-content: flex-end !important; z-index: 20 !important; height: 100% !important; }
+                    .template-header.header-layout-1 .header-extra { padding: 0 !important; display: flex !important; align-items: center !important; }
+                    .template-header.header-layout-1 .header-extra > ul { display: flex !important; align-items: center !important; margin: 0 !important; padding: 0 !important; }
+                    .template-header.header-layout-1 .header-extra > ul > li { display: flex !important; align-items: center !important; }
+                }
             </style>
             <div class="header-inner d-flex align-items-center justify-content-between py-0 position-relative">
                 <div class="header-left" style="flex: 1;">
