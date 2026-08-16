@@ -329,23 +329,7 @@
             outline: none !important;
         }
 
-        .contact-submit-btn {
-            height: 50px !important;
-            background-color: var(--theme-clr, #10b981) !important;
-            color: #ffffff !important;
-            border: none !important;
-            border-radius: 10px !important;
-            font-size: 15px !important;
-            font-weight: 600 !important;
-            font-family: var(--body-font) !important;
-            transition: all 0.3s ease !important;
-        }
-        .contact-submit-btn:hover {
-            background-color: var(--theme-hover-clr, #059669) !important;
-            color: #ffffff !important;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3) !important;
-        }
+
 
         .contact-info-card {
             background: #ffffff;
@@ -478,7 +462,7 @@
 
                                 <!-- Submit Button -->
                                 <div class="col-12 mt-4">
-                                    <button type="submit" class="btn contact-submit-btn w-100 d-flex align-items-center justify-content-center">
+                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
                                         <span>{{ __('Send Message') }}</span>
                                         <i class="fas fa-paper-plane ms-2"></i>
                                     </button>
