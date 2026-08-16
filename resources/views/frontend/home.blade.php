@@ -127,6 +127,9 @@
     <!--====== Start Syllabus Section ======-->
     @include('frontend.homePage.syllabus')
 
+    <!--====== Start Offer Breakdown Section ======-->
+    @include('frontend.homePage.offer_breakdown')
+
     <!--====== Start Success Story Section ======-->
     @include('frontend.homePage.success')
 
