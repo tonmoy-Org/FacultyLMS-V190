@@ -534,7 +534,7 @@
                                 </div>
 
                                 <!-- Star Rating -->
-                                <div>
+                                <div class="mb-3">
                                     <label for="rating-value">{{ __('Your Rating') }}</label>
                                     <div class="d-flex align-items-center gap-2 mt-1">
                                         <div class="rating-stars-wrap">
@@ -548,9 +548,20 @@
                                     </div>
                                     <input type="hidden" name="rating" id="rating-value" value="5">
                                 </div>
+
+                                <!-- Submit Button & Footer inside Left Column -->
+                                <div class="mt-4">
+                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
+                                        <span>{{ __('Submit Testimonial') }}</span>
+                                        <i class="fas fa-paper-plane ms-2"></i>
+                                    </button>
+                                    <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
+                                        <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
+                                    </div>
+                                </div>
                             </div>
 
-                            <!-- Right Column: Admin Upload Image Only (Height strictly matches from green box to Your Rating) -->
+                            <!-- Right Column: Admin Upload Image Only (Stretches to match full height of left side including submit button) -->
                             <div class="col-lg-5">
                                 @php
                                     $formRightImgSetting = setting('success_form_right_image');
@@ -583,21 +594,6 @@
                                 @endphp
                                 <div class="success-form-right-card h-100 w-100 position-relative overflow-hidden" style="border: 1px solid #e2e8f0; border-radius: 16px; background: #f8fafc;">
                                     <img src="{{ $formRightImgUrl }}" alt="Right Side Image" class="w-100 h-100" style="object-fit: cover; border-radius: 16px; display: block; width: 100%; height: 100%;">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Submit Button Row (In Left Side Grid Column width below) -->
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="mt-2">
-                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
-                                        <span>{{ __('Submit Testimonial') }}</span>
-                                        <i class="fas fa-paper-plane ms-2"></i>
-                                    </button>
-                                    <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
-                                        <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
-                                    </div>
                                 </div>
                             </div>
                         </div>
