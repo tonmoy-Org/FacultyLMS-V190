@@ -477,17 +477,13 @@
                             </div>
                         </div>
 
-                        <!-- Section Title Above Grid -->
-                        <div class="mb-2">
-                            <label class="upload-section-title mb-2 d-block fw-bold">{{ __('Add a photo or video to your testimonial') }}</label>
-                        </div>
-
-                        <!-- 2-Column Grid: Height strictly matches from top of green upload box to bottom of Your Rating -->
-                        <div class="row g-4 align-items-stretch mb-4">
-                            <!-- Left Column: Fields from green upload box to Your Rating -->
+                        <!-- 2-Column Grid: Left side full form height matches right side image -->
+                        <div class="row g-4 align-items-stretch">
+                            <!-- Left Column: Complete Testimonial Form -->
                             <div class="col-lg-7">
-                                <!-- Add Photo or Video Box -->
+                                <!-- Add Photo or Video Section -->
                                 <div class="mb-3">
+                                    <label class="upload-section-title mb-2 d-block fw-bold">{{ __('Add a photo or video to your testimonial') }}</label>
                                     <div class="upload-drop-zone">
                                         <input type="file" name="file" id="file" accept="image/*,video/*">
                                         <div class="d-flex flex-column align-items-center justify-content-center">
@@ -526,7 +522,7 @@
                                 <!-- Testimonial Description -->
                                 <div class="mb-3">
                                     <label for="description">{{ __('Your Testimonial') }}</label>
-                                    <textarea class="form-control" name="description" id="description" rows="4" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
+                                    <textarea class="form-control" name="description" id="description" rows="5" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
                                     <div class="text-end text-muted mt-1" style="font-size: 13px; color: #64748b;" id="char-count">0 / 500</div>
                                     @error('description')
                                         <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
@@ -534,7 +530,7 @@
                                 </div>
 
                                 <!-- Star Rating -->
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label for="rating-value">{{ __('Your Rating') }}</label>
                                     <div class="d-flex align-items-center gap-2 mt-1">
                                         <div class="rating-stars-wrap">
@@ -561,7 +557,7 @@
                                 </div>
                             </div>
 
-                            <!-- Right Column: Admin Upload Image Only (Stretches to match full height of left side including submit button) -->
+                            <!-- Right Column: Admin Upload Image Only -->
                             <div class="col-lg-5">
                                 @php
                                     $formRightImgSetting = setting('success_form_right_image');
@@ -592,7 +588,7 @@
                                         $formRightImgUrl = static_asset('images/default/default-image-391x541.png');
                                     }
                                 @endphp
-                                <div class="success-form-right-card h-100 w-100 position-relative overflow-hidden" style="border: 1px solid #e2e8f0; border-radius: 16px; background: #f8fafc;">
+                                <div class="success-form-right-card h-100 w-100 position-relative overflow-hidden" style="border: 1px solid #e2e8f0; border-radius: 16px; background: #f8fafc; min-height: 380px;">
                                     <img src="{{ $formRightImgUrl }}" alt="Right Side Image" class="w-100 h-100" style="object-fit: cover; border-radius: 16px; display: block; width: 100%; height: 100%;">
                                 </div>
                             </div>
