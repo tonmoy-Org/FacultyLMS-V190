@@ -546,36 +546,50 @@
                                 </div>
                             </div>
 
-                            <!-- Right Column: Admin Upload Image Card (Height matches EXACTLY from "Add a photo/video" to "Your Rating") -->
+                            <!-- Right Column: Admin Upload Image Card -->
                             <div class="col-lg-5">
                                 @php
                                     $formRightImgSetting = setting('success_form_right_image');
                                     $formRightImgUrl = '';
-                                    if (is_array($formRightImgSetting)) {
-                                        if (!empty($formRightImgSetting['original_image'])) {
-                                            $formRightImgUrl = get_media($formRightImgSetting['original_image'], $formRightImgSetting['storage'] ?? 'local');
-                                        } elseif (!empty($formRightImgSetting['image_417x384'])) {
-                                            $formRightImgUrl = get_media($formRightImgSetting['image_417x384'], $formRightImgSetting['storage'] ?? 'local');
+
+                                    if (!empty($formRightImgSetting)) {
+                                        if (is_array($formRightImgSetting)) {
+                                            if (!empty($formRightImgSetting['original_image'])) {
+                                                $formRightImgUrl = get_media($formRightImgSetting['original_image'], $formRightImgSetting['storage'] ?? 'local');
+                                            } elseif (!empty($formRightImgSetting['image_417x384'])) {
+                                                $formRightImgUrl = get_media($formRightImgSetting['image_417x384'], $formRightImgSetting['storage'] ?? 'local');
+                                            } elseif (!empty($formRightImgSetting['image_320x320'])) {
+                                                $formRightImgUrl = get_media($formRightImgSetting['image_320x320'], $formRightImgSetting['storage'] ?? 'local');
+                                            }
+                                        } elseif (is_string($formRightImgSetting)) {
+                                            $unserialized = @unserialize($formRightImgSetting);
+                                            if ($unserialized && is_array($unserialized)) {
+                                                $formRightImgUrl = getFileLink('original_image', $unserialized);
+                                            } elseif (str_starts_with($formRightImgSetting, 'http://') || str_starts_with($formRightImgSetting, 'https://') || str_starts_with($formRightImgSetting, '/')) {
+                                                $formRightImgUrl = $formRightImgSetting;
+                                            } else {
+                                                $formRightImgUrl = static_asset($formRightImgSetting);
+                                            }
                                         }
-                                    } elseif (is_string($formRightImgSetting) && !empty($formRightImgSetting)) {
-                                        $formRightImgUrl = getFileLink('original_image', $formRightImgSetting);
                                     }
                                 @endphp
-                                <div class="success-form-right-card h-100 p-4 d-flex flex-column align-items-center justify-content-center text-center" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; position: relative; overflow: hidden; min-height: 100%;">
+                                <div class="success-form-right-card h-100 d-flex flex-column align-items-center justify-content-center text-center position-relative overflow-hidden" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; min-height: 100%;">
                                     @if(!empty($formRightImgUrl) && !str_contains($formRightImgUrl, 'default-image'))
-                                        <div class="w-100 h-100 position-relative rounded-3 overflow-hidden d-flex flex-column justify-content-center align-items-center">
-                                            <img src="{{ $formRightImgUrl }}" alt="{{ setting('success_form_right_title') ?: __('Share Your Journey') }}" class="w-100 rounded-3 mb-2" style="max-height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                                        <div class="w-100 h-100 position-relative rounded-3 overflow-hidden d-flex flex-column justify-content-center align-items-center" style="min-height: 280px;">
+                                            <img src="{{ $formRightImgUrl }}" alt="{{ setting('success_form_right_title') ?: __('Share Your Journey') }}" class="w-100 h-100" style="object-fit: cover; border-radius: 16px; min-height: 280px;">
                                             @if(setting('success_form_right_title'))
-                                                <h4 class="fw-bold mb-0" style="color: #0f172a; font-size: 18px; font-family: var(--header-font);">
-                                                    {{ setting('success_form_right_title') }}
-                                                </h4>
+                                                <div class="position-absolute bottom-0 start-0 end-0 p-3 text-center" style="background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%); z-index: 2; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
+                                                    <h4 class="fw-bold mb-0 text-white" style="font-size: 18px; font-family: var(--header-font);">
+                                                        {{ setting('success_form_right_title') }}
+                                                    </h4>
+                                                </div>
                                             @endif
                                         </div>
                                     @else
                                         <!-- Professional Upload Graphic Illustration Card -->
-                                        <div class="p-2 w-100 d-flex flex-column align-items-center justify-content-center">
-                                            <div class="upload-icon-badge mx-auto mb-3" style="width: 76px; height: 76px; border-radius: 50%; background: rgba(16, 185, 129, 0.1); color: #10b981; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(16, 185, 129, 0.2); transition: transform 0.3s ease;">
-                                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <div class="p-4 w-100 d-flex flex-column align-items-center justify-content-center">
+                                            <div class="upload-icon-badge mx-auto mb-3" style="width: 80px; height: 80px; border-radius: 50%; background: rgba(16, 185, 129, 0.1); color: #10b981; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(16, 185, 129, 0.2); transition: transform 0.3s ease;">
+                                                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                                     <polyline points="17 8 12 3 7 8"></polyline>
                                                     <line x1="12" y1="3" x2="12" y2="15"></line>
