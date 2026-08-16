@@ -232,7 +232,7 @@
         border: 1.5px dashed #a7f3d0;
         background: #f0fdf4;
         border-radius: 10px;
-        padding: 14px 15px;
+        padding: 28px 20px;
         text-align: center;
         position: relative;
         cursor: pointer;
@@ -254,31 +254,15 @@
     .testimonial-form-card .upload-drop-title {
         color: #10b981;
         font-weight: 700;
-        font-size: 12px;
+        font-size: 13px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        margin-top: 3px;
+        margin-top: 6px;
     }
     .testimonial-form-card .upload-drop-subtext {
         color: #64748b;
-        font-size: 12px;
-        margin-top: 1px;
-    }
-    .testimonial-form-card .user-form label {
-        margin-bottom: 4px !important;
-        font-size: 13.5px !important;
-        font-weight: 500;
-    }
-    .testimonial-form-card .user-form input.form-control {
-        height: 42px !important;
-        font-size: 13.5px !important;
-        padding: 0 12px !important;
-    }
-    .testimonial-form-card .user-form textarea.form-control {
-        height: 95px !important;
-        min-height: 95px !important;
-        font-size: 13.5px !important;
-        padding: 8px 12px !important;
+        font-size: 13px;
+        margin-top: 2px;
     }
 
     .testimonial-form-card .rating-stars-wrap i {
@@ -493,80 +477,89 @@
                             </div>
                         </div>
 
-                        <!-- Section Title Above Grid -->
-                        <div class="mb-2">
-                            <label class="upload-section-title mb-2 d-block fw-bold">{{ __('Add a photo or video to your testimonial') }}</label>
-                        </div>
-
-                        <!-- 2-Column Grid: Height strictly matches from top of green upload box to bottom of Your Rating -->
-                        <div class="row g-4 align-items-stretch mb-4">
-                            <!-- Left Column: Fields from green upload box to Your Rating -->
-                            <div class="col-lg-7">
-                                <!-- Add Photo or Video Box -->
-                                <div class="mb-2">
-                                    <div class="upload-drop-zone">
-                                        <input type="file" name="file" id="file" accept="image/*,video/*">
-                                        <div class="d-flex flex-column align-items-center justify-content-center">
-                                            <i class="fas fa-video text-success" style="font-size: 22px; color: #10b981;"></i>
-                                            <span class="upload-drop-title" id="file-name">{{ __('UPLOAD PHOTO/VIDEO') }}</span>
-                                            <span class="upload-drop-subtext">{{ __('Click to upload or drag and drop') }}</span>
+                        <!-- 2-Column Grid: Left Side Form & Full Height Right Side Image -->
+                        <div class="row g-4 align-items-stretch">
+                            <!-- Left Column: All Form Elements (From Add Photo/Video Title down to Submit Button) -->
+                            <div class="col-lg-7 d-flex flex-column justify-content-between">
+                                <div class="d-flex flex-column justify-content-between h-100">
+                                    <!-- Add Photo or Video Section -->
+                                    <div class="mb-3">
+                                        <label class="upload-section-title mb-2 d-block fw-bold">{{ __('Add a photo or video to your testimonial') }}</label>
+                                        <div class="upload-drop-zone">
+                                            <input type="file" name="file" id="file" accept="image/*,video/*">
+                                            <div class="d-flex flex-column align-items-center justify-content-center py-2">
+                                                <i class="fas fa-video text-success" style="font-size: 24px; color: #10b981;"></i>
+                                                <span class="upload-drop-title" id="file-name">{{ __('UPLOAD PHOTO/VIDEO') }}</span>
+                                                <span class="upload-drop-subtext">{{ __('Click to upload or drag and drop') }}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div id="media-preview-container" class="mt-1 text-center" style="display: none; background: #f8fafc; border-radius: 8px; padding: 8px; border: 1px solid #e2e8f0;">
-                                        <img id="media-image-preview" src="" alt="Media Preview" style="max-height: 140px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto; object-fit: cover;">
-                                        <video id="media-video-preview" src="" controls style="max-height: 140px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto;"></video>
-                                    </div>
-                                    @error('file')
-                                        <p class="text-danger mt-1" style="font-size: 12px;">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <!-- Name & Position Fields -->
-                                <div class="row gx-3 mb-2">
-                                    <div class="col-md-6 mb-2 mb-md-0">
-                                        <label for="name">{{ __('Your Name') }}</label>
-                                        <input type="text" class="form-control" name="name" id="name" placeholder="{{ __('Enter your full name') }}" required>
-                                        @error('name')
-                                            <p class="text-danger mt-1" style="font-size: 12px;">{{ $message }}</p>
+                                        <div id="media-preview-container" class="mt-2 text-center" style="display: none; background: #f8fafc; border-radius: 8px; padding: 10px; border: 1px solid #e2e8f0;">
+                                            <img id="media-image-preview" src="" alt="Media Preview" style="max-height: 160px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto; object-fit: cover;">
+                                            <video id="media-video-preview" src="" controls style="max-height: 160px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto;"></video>
+                                        </div>
+                                        @error('file')
+                                            <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="position">{{ __('Position/Title') }}</label>
-                                        <input type="text" class="form-control" name="position" id="position" placeholder="{{ __('Enter your position or title') }}">
-                                        @error('position')
-                                            <p class="text-danger mt-1" style="font-size: 12px;">{{ $message }}</p>
+
+                                    <!-- Name & Position Fields -->
+                                    <div class="row gx-3 mb-3">
+                                        <div class="col-md-6 mb-2 mb-md-0">
+                                            <label for="name">{{ __('Your Name') }}</label>
+                                            <input type="text" class="form-control" name="name" id="name" placeholder="{{ __('Enter your full name') }}" required>
+                                            @error('name')
+                                                <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="position">{{ __('Position/Title') }}</label>
+                                            <input type="text" class="form-control" name="position" id="position" placeholder="{{ __('Enter your position or title') }}">
+                                            @error('position')
+                                                <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <!-- Testimonial Description -->
+                                    <div class="mb-3">
+                                        <label for="description">{{ __('Your Testimonial') }}</label>
+                                        <textarea class="form-control" name="description" id="description" rows="3" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
+                                        <div class="text-end text-muted mt-1" style="font-size: 12px; color: #64748b;" id="char-count">0 / 500</div>
+                                        @error('description')
+                                            <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                </div>
 
-                                <!-- Testimonial Description -->
-                                <div class="mb-2">
-                                    <label for="description">{{ __('Your Testimonial') }}</label>
-                                    <textarea class="form-control" name="description" id="description" rows="3" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
-                                    <div class="text-end text-muted" style="font-size: 12px; color: #64748b; margin-top: 2px;" id="char-count">0 / 500</div>
-                                    @error('description')
-                                        <p class="text-danger mt-1" style="font-size: 12px;">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <!-- Star Rating -->
-                                <div>
-                                    <label for="rating-value">{{ __('Your Rating') }}</label>
-                                    <div class="d-flex align-items-center gap-2 mt-1">
-                                        <div class="rating-stars-wrap">
-                                            <i class="fas fa-star rating-star-icon" data-value="1"></i>
-                                            <i class="fas fa-star rating-star-icon" data-value="2"></i>
-                                            <i class="fas fa-star rating-star-icon" data-value="3"></i>
-                                            <i class="fas fa-star rating-star-icon" data-value="4"></i>
-                                            <i class="fas fa-star rating-star-icon" data-value="5"></i>
+                                    <!-- Star Rating -->
+                                    <div class="mb-3">
+                                        <label for="rating-value">{{ __('Your Rating') }}</label>
+                                        <div class="d-flex align-items-center gap-2 mt-1">
+                                            <div class="rating-stars-wrap">
+                                                <i class="fas fa-star rating-star-icon" data-value="1"></i>
+                                                <i class="fas fa-star rating-star-icon" data-value="2"></i>
+                                                <i class="fas fa-star rating-star-icon" data-value="3"></i>
+                                                <i class="fas fa-star rating-star-icon" data-value="4"></i>
+                                                <i class="fas fa-star rating-star-icon" data-value="5"></i>
+                                            </div>
+                                            <span class="text-muted ms-2" style="font-size: 13px; color: #64748b;">{{ __('Click on a star to rate') }}</span>
                                         </div>
-                                        <span class="text-muted ms-2" style="font-size: 12px; color: #64748b;">{{ __('Click on a star to rate') }}</span>
+                                        <input type="hidden" name="rating" id="rating-value" value="5">
                                     </div>
-                                    <input type="hidden" name="rating" id="rating-value" value="5">
+
+                                    <!-- Submit Button & Security Note -->
+                                    <div class="mt-2">
+                                        <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
+                                            <span>{{ __('Submit Testimonial') }}</span>
+                                            <i class="fas fa-paper-plane ms-2"></i>
+                                        </button>
+                                        <div class="text-center mt-2 text-muted" style="font-size: 13px; color: #64748b;">
+                                            <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- Right Column: Admin Upload Image Only (Height strictly matches from green box to Your Rating) -->
+                            <!-- Right Column: Full Height Banner Image (Min height 480px) -->
                             <div class="col-lg-5">
                                 @php
                                     $formRightImgSetting = setting('success_form_right_image');
@@ -597,23 +590,8 @@
                                         $formRightImgUrl = static_asset('images/default/default-image-391x541.png');
                                     }
                                 @endphp
-                                <div class="success-form-right-card h-100 w-100 position-relative overflow-hidden" style="border: 1px solid #e2e8f0; border-radius: 16px; background: #f8fafc;">
-                                    <img src="{{ $formRightImgUrl }}" alt="Right Side Image" class="w-100 h-100" style="object-fit: cover; border-radius: 16px; display: block; width: 100%; height: 100%;">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Submit Button Row (In Left Side Grid Column width below) -->
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="mt-2">
-                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
-                                        <span>{{ __('Submit Testimonial') }}</span>
-                                        <i class="fas fa-paper-plane ms-2"></i>
-                                    </button>
-                                    <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
-                                        <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
-                                    </div>
+                                <div class="success-form-right-card h-100 w-100 position-relative overflow-hidden" style="border: 1px solid #e2e8f0; border-radius: 16px; min-height: 480px; background: #f8fafc;">
+                                    <img src="{{ $formRightImgUrl }}" alt="Right Side Image" class="w-100 h-100" style="object-fit: cover; border-radius: 16px; display: block; width: 100%; height: 100%; min-height: 480px;">
                                 </div>
                             </div>
                         </div>
