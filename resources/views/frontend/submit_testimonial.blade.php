@@ -222,17 +222,10 @@
         background: #10b981;
         color: #ffffff;
     }
-    .testimonial-form-card .section-field-label {
-        font-size: 14px;
-        font-weight: 500;
-        color: #1e293b;
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
     .testimonial-form-card .upload-section-title {
         font-weight: 700;
+        font-size: 14px;
+        color: #1e293b;
     }
     .testimonial-form-card .upload-drop-zone {
         border: 1.5px dashed #a7f3d0;
@@ -270,7 +263,6 @@
         font-size: 13px;
         margin-top: 2px;
     }
-
 
     .testimonial-form-card .rating-stars-wrap i {
         color: #f59e0b;
@@ -466,7 +458,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('store.testimonial') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('store.testimonial') }}" method="POST" enctype="multipart/form-data" class="user-form">
                         @csrf
 
                         <!-- Profile Photo -->
@@ -486,7 +478,7 @@
 
                         <!-- Add Photo or Video Section -->
                         <div class="mb-4">
-                            <label class="section-field-label upload-section-title">{{ __('Add a photo or video to your testimonial') }}</label>
+                            <label class="upload-section-title mb-2 d-block fw-bold">{{ __('Add a photo or video to your testimonial') }}</label>
                             <div class="upload-drop-zone">
                                 <input type="file" name="file" id="file" accept="image/*,video/*">
                                 <div class="d-flex flex-column align-items-center justify-content-center">
@@ -506,14 +498,14 @@
 
                         <!-- Name & Position Fields -->
                         <div class="row gx-3">
-                            <div class="col-md-6 mb-4">
+                            <div class="col-md-6 mb-3">
                                 <label for="name">{{ __('Your Name') }}</label>
                                 <input type="text" class="form-control" name="name" id="name" placeholder="{{ __('Enter your full name') }}" required>
                                 @error('name')
                                     <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="col-md-6 mb-4">
+                            <div class="col-md-6 mb-3">
                                 <label for="position">{{ __('Position/Title') }}</label>
                                 <input type="text" class="form-control" name="position" id="position" placeholder="{{ __('Enter your position or title') }}">
                                 @error('position')
@@ -523,9 +515,9 @@
                         </div>
 
                         <!-- Testimonial Description -->
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label for="description">{{ __('Your Testimonial') }}</label>
-                            <textarea class="form-control" name="description" id="description" rows="4" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
+                            <textarea class="form-control" name="description" id="description" rows="5" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
                             <div class="text-end text-muted mt-1" style="font-size: 13px; color: #64748b;" id="char-count">0 / 500</div>
                             @error('description')
                                 <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
@@ -534,8 +526,8 @@
 
                         <!-- Star Rating -->
                         <div class="mb-4">
-                            <label class="section-field-label"><i class="far fa-star text-success" style="color: #10b981;"></i> {{ __('Your Rating') }}</label>
-                            <div class="d-flex align-items-center gap-2">
+                            <label for="rating-value">{{ __('Your Rating') }}</label>
+                            <div class="d-flex align-items-center gap-2 mt-1">
                                 <div class="rating-stars-wrap">
                                     <i class="fas fa-star rating-star-icon" data-value="1"></i>
                                     <i class="fas fa-star rating-star-icon" data-value="2"></i>
