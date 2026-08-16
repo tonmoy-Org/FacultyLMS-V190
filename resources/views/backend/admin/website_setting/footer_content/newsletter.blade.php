@@ -10,7 +10,7 @@
                     <div class="default-tab-list default-tab-list-v2 bg-white redious-border website-setting-social-link p-20 p-sm-30">
                         @include('backend.admin.website_setting.component.footer_setting_sidebar')
                         
-                        <form action="{{ route('footer.update-setting') }}" method="POST" class="form">@csrf
+                        <form action="{{ route('footer.update-setting') }}" method="POST" class="form" enctype="multipart/form-data">@csrf
                             <input type="hidden" name="site_lang" value="{{$lang}}">
 
                             <!-- SECTION 1: FLOATING NEWSLETTER SETTINGS -->
@@ -40,6 +40,15 @@
                                             <label for="newsletter_description" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Newsletter Description') }}</label>
                                             <textarea class="form-control rounded-2 py-2" id="newsletter_description" name="newsletter_description" rows="2"
                                                       placeholder="{{ __('Enter Newsletter Description') }}">{{ setting('newsletter_description',$lang) ?: '' }}</textarea>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="promo_banner_countdown_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Countdown Title') }}</label>
+                                            <input type="text" class="form-control rounded-2 py-2" id="promo_banner_countdown_title" name="promo_banner_countdown_title"
+                                                   placeholder="{{ __('Enter Countdown Title (Leave blank to remove)') }}" value="{{ setting('promo_banner_countdown_title', $lang) }}">
+                                            <div class="nk-block-des text-muted mt-1" style="font-size: 12px;">
+                                                <p>{{ __('If left blank, the title text above the timer will be completely removed.') }}</p>
+                                            </div>
                                         </div>
 
                                         <div class="col-md-6 col-12">
@@ -137,7 +146,77 @@
                                 </div>
                             </div>
 
-                            <!-- SECTION 3: CONTACT US PAGE SETTINGS -->
+                            <!-- SECTION 3: CONTACT US PAGE HERO BANNER SETTINGS -->
+                            <div class="card border mb-4 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+                                <div class="card-header bg-light py-3 px-4 d-flex align-items-center justify-content-between">
+                                    <h6 class="m-0 text-dark" style="font-size: 15px; font-weight: 500;">
+                                        {{ __('Contact Us Hero Banner Settings') }}
+                                    </h6>
+                                    <div class="d-flex align-items-center gap-2 m-0">
+                                        <input type="hidden" name="contact_page_banner_status" value="{{ setting('contact_page_banner_status') == 0 ? 0 : 1 }}">
+                                        <label class="form-label m-0" for="contact_page_banner_status" style="font-size: 13px; font-weight: 400;">{{ __('Enable Hero Banner') }}</label>
+                                        <div class="setting-check m-0">
+                                            <input type="checkbox" value="1" id="contact_page_banner_status" class="sandbox_mode" {{ setting('contact_page_banner_status') == 0 ? '' : 'checked' }}>
+                                            <label for="contact_page_banner_status"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-4">
+                                    <div class="row gx-20 gy-3">
+                                        <!-- Banner Tag -->
+                                        <div class="col-md-6 col-12">
+                                            <label for="contact_page_banner_tag" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Hero Banner Tag') }}</label>
+                                            <input type="text" class="form-control rounded-2 py-2" id="contact_page_banner_tag" name="contact_page_banner_tag"
+                                                   placeholder="{{ __('GET IN TOUCH') }}" value="{{ setting('contact_page_banner_tag', $lang) ?: (setting('contact_page_banner_tag') ?: 'GET IN TOUCH') }}">
+                                        </div>
+
+                                        <!-- Banner Main Title -->
+                                        <div class="col-md-6 col-12">
+                                            <label for="contact_page_banner_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Hero Banner Main Title') }}</label>
+                                            <input type="text" class="form-control rounded-2 py-2" id="contact_page_banner_title" name="contact_page_banner_title"
+                                                   placeholder="{{ __('We\'d Love to Hear From You') }}" value="{{ setting('contact_page_banner_title', $lang) ?: (setting('contact_page_banner_title') ?: 'We\'d Love to Hear From You') }}">
+                                        </div>
+
+                                        <!-- Banner Description -->
+                                        <div class="col-12">
+                                            <label for="contact_page_banner_description" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Hero Banner Description') }}</label>
+                                            <textarea class="form-control rounded-2 py-2" id="contact_page_banner_description" name="contact_page_banner_description" rows="2"
+                                                      placeholder="{{ __('Enter Description') }}">{{ setting('contact_page_banner_description', $lang) ?: (setting('contact_page_banner_description') ?: 'Have questions, feedback, or need support? Reach out to our team and we will get back to you promptly.') }}</textarea>
+                                        </div>
+
+                                        <!-- Banner Image Upload -->
+                                        <div class="col-12 input_file_div">
+                                            <label for="contact_page_banner_image" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Hero Banner Background Image (1200x500)') }}</label>
+                                            <label for="contact_page_banner_image" class="file-upload-text w-100 p-2 border rounded-2 d-flex align-items-center justify-content-between" style="cursor: pointer; background-color: #f8fafc;">
+                                                <span class="text-muted" style="font-size: 13px;">{{ __('Choose Banner Image File') }}</span>
+                                                <span class="btn btn-sm btn-outline-secondary">{{ __('choose_file') }}</span>
+                                            </label>
+                                            <input class="d-none file_picker" type="file" name="contact_page_banner_image" id="contact_page_banner_image" accept="image/*">
+                                            <div class="selected-files mt-2">
+                                                @php
+                                                    $contactBannerImg = setting('contact_page_banner_image');
+                                                    $contactPreviewUrl = '';
+                                                    if (is_array($contactBannerImg)) {
+                                                        if (!empty($contactBannerImg['image_80x80'])) {
+                                                            $contactPreviewUrl = get_media($contactBannerImg['image_80x80'], $contactBannerImg['storage'] ?? 'local');
+                                                        } elseif (!empty($contactBannerImg['original_image'])) {
+                                                            $contactPreviewUrl = get_media($contactBannerImg['original_image'], $contactBannerImg['storage'] ?? 'local');
+                                                        }
+                                                    } elseif (is_string($contactBannerImg) && !empty($contactBannerImg)) {
+                                                        $contactPreviewUrl = getFileLink('80x80', $contactBannerImg);
+                                                    }
+                                                    if (empty($contactPreviewUrl) || str_contains($contactPreviewUrl, 'default-image')) {
+                                                        $contactPreviewUrl = static_asset('frontend/img/banner/success_hero_banner.jpg');
+                                                    }
+                                                @endphp
+                                                <img class="selected-img rounded border" src="{{ $contactPreviewUrl }}" alt="Contact Banner Image" style="max-height: 90px; object-fit: cover;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SECTION 4: CONTACT US PAGE DYNAMIC CONTENT SETTINGS -->
                             <div class="card border mb-4 shadow-sm" style="border-radius: 12px; overflow: hidden;">
                                 <div class="card-header bg-light py-3 px-4">
                                     <h6 class="m-0 text-dark" style="font-size: 15px; font-weight: 500;">

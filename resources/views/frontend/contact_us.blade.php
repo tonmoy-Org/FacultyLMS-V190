@@ -68,27 +68,212 @@
         }
     @endphp
 
-    <!--====== Page Header ======-->
-    <section class="page-header-area p-t-80 p-b-80" style="background-color: #110B3A;">
-        <div class="container container-1278">
-            <div class="row align-items-center text-center">
-                <div class="col-12">
-                    <span class="sub-title text-uppercase fw-bold mb-2 d-inline-block" style="color: var(--theme-clr, var(--color-secondary-4)); letter-spacing: 1.5px; font-size: 14px; font-family: var(--header-font);">
-                        {{ __($banner_sub) }}
+@if((string)setting('contact_page_banner_status') !== '0')
+@php
+    $contactBannerSetting = setting('contact_page_banner_image');
+    $contactBannerUrl = '';
+    if (is_array($contactBannerSetting)) {
+        if (!empty($contactBannerSetting['original_image'])) {
+            $contactBannerUrl = get_media($contactBannerSetting['original_image'], $contactBannerSetting['storage'] ?? 'local');
+        } elseif (!empty($contactBannerSetting['image_417x384'])) {
+            $contactBannerUrl = get_media($contactBannerSetting['image_417x384'], $contactBannerSetting['storage'] ?? 'local');
+        }
+    } elseif (is_string($contactBannerSetting) && !empty($contactBannerSetting)) {
+        $contactBannerUrl = getFileLink('original_image', $contactBannerSetting);
+    }
+    if (empty($contactBannerUrl) || str_contains($contactBannerUrl, 'default-image')) {
+        $contactBannerUrl = static_asset('frontend/img/banner/success_hero_banner.jpg');
+    }
+@endphp
+<style>
+    .contact-hero-banner {
+        background-color: #1e5341;
+        background-image: url('{{ $contactBannerUrl }}');
+        background-repeat: no-repeat;
+        background-position: center right;
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+        color: #ffffff;
+        min-height: 280px;
+        display: flex;
+        align-items: center;
+        padding: 35px 0 40px;
+    }
+    .contact-hero-banner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 65%;
+        background: linear-gradient(90deg, #1e5341 0%, #23614e 35%, #296d58 68%, rgba(41, 109, 88, 0.65) 85%, rgba(41, 109, 88, 0) 100%);
+        z-index: 1;
+    }
+    .contact-hero-banner .badge-pill-tag {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        color: #ffffff;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        padding: 5px 12px;
+        border-radius: 4px;
+        display: inline-block;
+        text-transform: uppercase;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .contact-hero-banner .banner-main-title {
+        color: #ffffff;
+        font-size: 36px;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.5px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    .contact-hero-banner .banner-sub-text {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 15px;
+        line-height: 1.6;
+        max-width: 480px;
+        margin-bottom: 14px;
+        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    }
+    .contact-hero-banner .decor-icon-circle {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(16, 185, 129, 0.5);
+        background: rgba(7, 53, 39, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 72%;
+        transform: translateY(-50%);
+        z-index: 3;
+    }
+    .contact-hero-banner .decor-icon-left {
+        left: 25px;
+    }
+    .contact-hero-banner .decor-icon-right {
+        right: 25px;
+    }
+    .contact-hero-banner .center-logo-badge {
+        position: absolute;
+        left: 48%;
+        top: 72%;
+        transform: translate(-50%, -50%);
+        z-index: 4;
+        width: 42px;
+        height: 42px;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        border-radius: 50%;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.85;
+    }
+    .contact-hero-banner .center-logo-badge-inner {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(16, 185, 129, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.85);
+    }
+    .contact-hero-banner .breadcrumb-link {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .contact-hero-banner .breadcrumb-link:hover {
+        color: #ffffff;
+    }
+    @media (max-width: 991px) {
+        .contact-hero-banner::before {
+            width: 100%;
+            background: linear-gradient(180deg, rgba(7, 53, 39, 0.95) 0%, rgba(42, 104, 81, 0.9) 100%);
+        }
+        .contact-hero-banner .banner-main-title {
+            font-size: 30px;
+        }
+        .contact-hero-banner .center-logo-badge {
+            display: none !important;
+        }
+    }
+    @media (max-width: 576px) {
+        .contact-hero-banner {
+            padding: 35px 0 45px;
+            min-height: auto;
+        }
+        .contact-hero-banner .banner-main-title {
+            font-size: 24px;
+        }
+    }
+</style>
+
+<section class="contact-hero-banner">
+    <!-- Decorative Left Support Headset Icon -->
+    <div class="decor-icon-circle decor-icon-left d-none d-xl-flex">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+        </svg>
+    </div>
+
+    <!-- Decorative Right Chat/Message Icon -->
+    <div class="decor-icon-circle decor-icon-right d-none d-xl-flex">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </div>
+
+    <!-- Central White Location Pin Badge -->
+    <div class="center-logo-badge d-none d-lg-flex">
+        <div class="center-logo-badge-inner">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container container-1278 position-relative" style="z-index: 2;">
+        <div class="row align-items-center">
+            <!-- Left Text Column -->
+            <div class="col-lg-7 col-md-8 ps-md-4">
+                <div class="banner-text-content">
+                    <span class="badge-pill-tag">
+                        {{ setting('contact_page_banner_tag') ?: __('GET IN TOUCH') }}
                     </span>
-                    <h1 class="title fw-bold text-white mb-3" style="font-size: 2.2rem; font-family: var(--header-font);">
-                        {{ __($banner_title) }}
+                    <h1 class="banner-main-title">
+                        {!! nl2br(e(setting('contact_page_banner_title') ?: (setting('contact_banner_title') ?: __('We’d Love to Hear From You')))) !!}
                     </h1>
+                    <p class="banner-sub-text">
+                        {{ setting('contact_page_banner_description') ?: __('Have questions, feedback, or need support? Reach out to our team and we will get back to you promptly.') }}
+                    </p>
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-center bg-transparent p-0 m-0">
-                            <li class="breadcrumb-item"><a href="{{ url('/') }}" style="color: #94a3b8; text-decoration: none; font-family: var(--body-font);">{{ __('Home') }}</a></li>
-                            <li class="breadcrumb-item active text-white" aria-current="page" style="font-family: var(--body-font);">{{ __($banner_title) }}</li>
+                        <ol class="breadcrumb bg-transparent p-0 m-0">
+                            <li class="breadcrumb-item"><a href="{{ url('/') }}" class="breadcrumb-link">{{ __('Home') }}</a></li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">{{ setting('contact_page_banner_title') ?: (setting('contact_banner_title') ?: __('Contact Us')) }}</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+@endif
 
     <style>
         .contact-us-page-section {
@@ -109,58 +294,9 @@
             font-size: 20px;
         }
 
-        .contact-input-field {
-            height: 50px !important;
-            background-color: #ffffff !important;
-            border: 1px solid #cbd5e1 !important;
-            border-radius: 10px !important;
-            padding: 0 16px !important;
-            font-size: 14px !important;
-            color: #1e293b !important;
-            font-family: var(--body-font) !important;
-            transition: all 0.2s ease-in-out;
-        }
-        .contact-input-field:focus {
-            border-color: var(--theme-clr, #10b981) !important;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12) !important;
-            outline: none !important;
-        }
 
-        .contact-textarea-field {
-            background-color: #ffffff !important;
-            border: 1px solid #cbd5e1 !important;
-            border-radius: 10px !important;
-            padding: 14px 16px !important;
-            font-size: 14px !important;
-            color: #1e293b !important;
-            font-family: var(--body-font) !important;
-            transition: all 0.2s ease-in-out;
-            resize: vertical;
-            min-height: 140px;
-        }
-        .contact-textarea-field:focus {
-            border-color: var(--theme-clr, #10b981) !important;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12) !important;
-            outline: none !important;
-        }
 
-        .contact-submit-btn {
-            height: 50px !important;
-            background-color: var(--theme-clr, #10b981) !important;
-            color: #ffffff !important;
-            border: none !important;
-            border-radius: 10px !important;
-            font-size: 15px !important;
-            font-weight: 600 !important;
-            font-family: var(--body-font) !important;
-            transition: all 0.3s ease !important;
-        }
-        .contact-submit-btn:hover {
-            background-color: var(--theme-hover-clr, #059669) !important;
-            color: #ffffff !important;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3) !important;
-        }
+
 
         .contact-info-card {
             background: #ffffff;
@@ -249,20 +385,6 @@
     <!--====== Main Section ======-->
     <section class="contact-us-page-section">
         <div class="container container-1278">
-            <!-- Top Header Section -->
-            <div class="text-center mb-5">
-                <div class="contact-top-badge mx-auto mb-3">
-                    <i class="fas fa-paper-plane" style="transform: rotate(-10deg);"></i>
-                </div>
-                <h1 class="fw-bold mb-2" style="color: #0f172a; font-size: 2.2rem; font-family: var(--header-font);">
-                    {{ __($page_title) }}
-                </h1>
-                <p class="text-muted mx-auto mb-3" style="max-width: 580px; font-size: 15px; line-height: 1.6; color: #64748b; font-family: var(--body-font);">
-                    {!! nl2br(e(__($page_subtitle))) !!}
-                </p>
-                <div class="mx-auto" style="width: 36px; height: 3px; background-color: var(--theme-clr, #10b981); border-radius: 2px;"></div>
-            </div>
-
             <!-- Main Content 2-Column Row (Form on Left, Map on Right) -->
             <div class="row g-4 align-items-stretch mb-5">
                 <!-- Left Column: Form -->
@@ -273,41 +395,29 @@
                             <div class="row g-3">
                                 <!-- Your Name & Your Email -->
                                 <div class="col-md-6">
-                                    <label class="form-label fw-semibold d-flex align-items-center mb-2" style="font-size: 14px; color: #0f172a;">
-                                        <i class="fal fa-user me-2" style="color: var(--theme-clr, #10b981); font-size: 15px;"></i>
-                                        {{ __('Your Name') }}
-                                    </label>
-                                    <input type="text" name="name" class="form-control contact-input-field" placeholder="{{ __('Enter your full name') }}" required>
+                                    <label for="name">{{ __('Your Name') }}</label>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="{{ __('Enter your full name') }}" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label fw-semibold d-flex align-items-center mb-2" style="font-size: 14px; color: #0f172a;">
-                                        <i class="fal fa-envelope me-2" style="color: var(--theme-clr, #10b981); font-size: 15px;"></i>
-                                        {{ __('Your Email') }}
-                                    </label>
-                                    <input type="email" name="email" class="form-control contact-input-field" placeholder="{{ __('Enter your email address') }}" required>
+                                    <label for="email">{{ __('Your Email') }}</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="{{ __('Enter your email address') }}" required>
                                 </div>
 
                                 <!-- Subject -->
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold d-flex align-items-center mb-2" style="font-size: 14px; color: #0f172a;">
-                                        <i class="fal fa-tag me-2" style="color: var(--theme-clr, #10b981); font-size: 15px;"></i>
-                                        {{ __('Subject') }}
-                                    </label>
-                                    <input type="text" name="subject" class="form-control contact-input-field" placeholder="{{ __('Enter subject') }}" required>
+                                    <label for="subject">{{ __('Subject') }}</label>
+                                    <input type="text" name="subject" id="subject" class="form-control" placeholder="{{ __('Enter subject') }}" required>
                                 </div>
 
                                 <!-- Message -->
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold d-flex align-items-center mb-2" style="font-size: 14px; color: #0f172a;">
-                                        <i class="fal fa-comment-alt me-2" style="color: var(--theme-clr, #10b981); font-size: 15px;"></i>
-                                        {{ __('Message') }}
-                                    </label>
-                                    <textarea name="message" class="form-control contact-textarea-field" rows="5" placeholder="{{ __('Write your message here...') }}" required></textarea>
+                                    <label for="message">{{ __('Message') }}</label>
+                                    <textarea name="message" id="message" class="form-control" rows="5" placeholder="{{ __('Write your message here...') }}" required></textarea>
                                 </div>
 
                                 <!-- Submit Button -->
                                 <div class="col-12 mt-4">
-                                    <button type="submit" class="btn contact-submit-btn w-100 d-flex align-items-center justify-content-center">
+                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
                                         <span>{{ __('Send Message') }}</span>
                                         <i class="fas fa-paper-plane ms-2"></i>
                                     </button>
