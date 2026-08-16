@@ -225,7 +225,7 @@
     }
     .testimonial-form-card .upload-section-title {
         font-weight: 700;
-        font-size: 13.5px;
+        font-size: 14px;
         color: #1e293b;
     }
     .testimonial-form-card .upload-drop-zone {
@@ -237,19 +237,6 @@
         position: relative;
         cursor: pointer;
         transition: all 0.2s;
-    }
-    .testimonial-form-card .user-form .form-control {
-        height: 44px !important;
-        font-size: 13.5px;
-    }
-    .testimonial-form-card .user-form textarea.form-control {
-        height: 85px !important;
-        min-height: 85px !important;
-        padding-top: 8px;
-    }
-    .testimonial-form-card label {
-        font-size: 13.5px;
-        margin-bottom: 5px;
     }
     .testimonial-form-card .upload-drop-zone:hover {
         border-color: #10b981;
@@ -267,15 +254,31 @@
     .testimonial-form-card .upload-drop-title {
         color: #10b981;
         font-weight: 700;
-        font-size: 13px;
+        font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        margin-top: 6px;
+        margin-top: 3px;
     }
     .testimonial-form-card .upload-drop-subtext {
         color: #64748b;
-        font-size: 13px;
-        margin-top: 2px;
+        font-size: 12px;
+        margin-top: 1px;
+    }
+    .testimonial-form-card .user-form label {
+        margin-bottom: 4px !important;
+        font-size: 13.5px !important;
+        font-weight: 500;
+    }
+    .testimonial-form-card .user-form input.form-control {
+        height: 42px !important;
+        font-size: 13.5px !important;
+        padding: 0 12px !important;
+    }
+    .testimonial-form-card .user-form textarea.form-control {
+        height: 95px !important;
+        min-height: 95px !important;
+        font-size: 13.5px !important;
+        padding: 8px 12px !important;
     }
 
     .testimonial-form-card .rating-stars-wrap i {
@@ -505,11 +508,11 @@
                                         <input type="file" name="file" id="file" accept="image/*,video/*">
                                         <div class="d-flex flex-column align-items-center justify-content-center">
                                             <i class="fas fa-video text-success" style="font-size: 22px; color: #10b981;"></i>
-                                            <span class="upload-drop-title" id="file-name" style="font-size: 12px; margin-top: 4px;">{{ __('UPLOAD PHOTO/VIDEO') }}</span>
-                                            <span class="upload-drop-subtext" style="font-size: 12px; margin-top: 1px;">{{ __('Click to upload or drag and drop') }}</span>
+                                            <span class="upload-drop-title" id="file-name">{{ __('UPLOAD PHOTO/VIDEO') }}</span>
+                                            <span class="upload-drop-subtext">{{ __('Click to upload or drag and drop') }}</span>
                                         </div>
                                     </div>
-                                    <div id="media-preview-container" class="mt-2 text-center" style="display: none; background: #f8fafc; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
+                                    <div id="media-preview-container" class="mt-1 text-center" style="display: none; background: #f8fafc; border-radius: 8px; padding: 8px; border: 1px solid #e2e8f0;">
                                         <img id="media-image-preview" src="" alt="Media Preview" style="max-height: 140px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto; object-fit: cover;">
                                         <video id="media-video-preview" src="" controls style="max-height: 140px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto;"></video>
                                     </div>
@@ -519,15 +522,15 @@
                                 </div>
 
                                 <!-- Name & Position Fields -->
-                                <div class="row gx-3">
-                                    <div class="col-md-6 mb-2">
+                                <div class="row gx-3 mb-2">
+                                    <div class="col-md-6 mb-2 mb-md-0">
                                         <label for="name">{{ __('Your Name') }}</label>
                                         <input type="text" class="form-control" name="name" id="name" placeholder="{{ __('Enter your full name') }}" required>
                                         @error('name')
                                             <p class="text-danger mt-1" style="font-size: 12px;">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    <div class="col-md-6 mb-2">
+                                    <div class="col-md-6">
                                         <label for="position">{{ __('Position/Title') }}</label>
                                         <input type="text" class="form-control" name="position" id="position" placeholder="{{ __('Enter your position or title') }}">
                                         @error('position')
@@ -540,7 +543,7 @@
                                 <div class="mb-2">
                                     <label for="description">{{ __('Your Testimonial') }}</label>
                                     <textarea class="form-control" name="description" id="description" rows="3" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
-                                    <div class="text-end text-muted mt-1" style="font-size: 12px; color: #64748b;" id="char-count">0 / 500</div>
+                                    <div class="text-end text-muted" style="font-size: 12px; color: #64748b; margin-top: 2px;" id="char-count">0 / 500</div>
                                     @error('description')
                                         <p class="text-danger mt-1" style="font-size: 12px;">{{ $message }}</p>
                                     @enderror
