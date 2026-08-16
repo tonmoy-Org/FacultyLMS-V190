@@ -546,7 +546,7 @@
                                 </div>
                             </div>
 
-                            <!-- Right Column: Admin Upload Image Card -->
+                            <!-- Right Column: Admin Upload Image Only -->
                             <div class="col-lg-5">
                                 @php
                                     $formRightImgSetting = setting('success_form_right_image');
@@ -572,34 +572,13 @@
                                             }
                                         }
                                     }
+
+                                    if (empty($formRightImgUrl) || str_contains($formRightImgUrl, 'default-image')) {
+                                        $formRightImgUrl = static_asset('images/default/default-image-391x541.png');
+                                    }
                                 @endphp
-                                <div class="success-form-right-card h-100 d-flex flex-column align-items-center justify-content-center text-center position-relative overflow-hidden" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; min-height: 100%;">
-                                    @if(!empty($formRightImgUrl) && !str_contains($formRightImgUrl, 'default-image'))
-                                        <div class="w-100 h-100 position-relative rounded-3 overflow-hidden d-flex flex-column justify-content-center align-items-center" style="min-height: 280px;">
-                                            <img src="{{ $formRightImgUrl }}" alt="{{ setting('success_form_right_title') ?: __('Share Your Journey') }}" class="w-100 h-100" style="object-fit: cover; border-radius: 16px; min-height: 280px;">
-                                            @if(setting('success_form_right_title'))
-                                                <div class="position-absolute bottom-0 start-0 end-0 p-3 text-center" style="background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%); z-index: 2; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
-                                                    <h4 class="fw-bold mb-0 text-white" style="font-size: 18px; font-family: var(--header-font);">
-                                                        {{ setting('success_form_right_title') }}
-                                                    </h4>
-                                                </div>
-                                            @endif
-                                        </div>
-                                    @else
-                                        <!-- Professional Upload Graphic Illustration Card -->
-                                        <div class="p-4 w-100 d-flex flex-column align-items-center justify-content-center">
-                                            <div class="upload-icon-badge mx-auto mb-3" style="width: 80px; height: 80px; border-radius: 50%; background: rgba(16, 185, 129, 0.1); color: #10b981; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(16, 185, 129, 0.2); transition: transform 0.3s ease;">
-                                                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                                    <polyline points="17 8 12 3 7 8"></polyline>
-                                                    <line x1="12" y1="3" x2="12" y2="15"></line>
-                                                </svg>
-                                            </div>
-                                            <h4 class="fw-bold mb-0" style="color: #0f172a; font-size: 20px; font-family: var(--header-font);">
-                                                {{ setting('success_form_right_title') ?: __('Share Your Inspiring Journey') }}
-                                            </h4>
-                                        </div>
-                                    @endif
+                                <div class="success-form-right-card h-100 w-100 position-relative overflow-hidden" style="border: 1px solid #e2e8f0; border-radius: 16px; min-height: 280px; background: #f8fafc;">
+                                    <img src="{{ $formRightImgUrl }}" alt="Right Side Image" class="w-100 h-100" style="object-fit: cover; border-radius: 16px; display: block; width: 100%; height: 100%;">
                                 </div>
                             </div>
                         </div>
