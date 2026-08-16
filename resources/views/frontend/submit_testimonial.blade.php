@@ -485,9 +485,9 @@
                         <!-- 2-Column Grid: Height strictly matches from top of green upload box to bottom of Your Rating -->
                         <div class="row g-4 align-items-stretch mb-4">
                             <!-- Left Column: Fields from green upload box to Your Rating -->
-                            <div class="col-lg-7 d-flex flex-column justify-content-between" style="padding-bottom: 10px;">
+                            <div class="col-lg-7" style="padding-bottom: 10px;">
                                 <!-- Add Photo or Video Box -->
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <div class="upload-drop-zone">
                                         <input type="file" name="file" id="file" accept="image/*,video/*">
                                         <div class="d-flex flex-column align-items-center justify-content-center">
@@ -506,7 +506,7 @@
                                 </div>
 
                                 <!-- Name & Position Fields -->
-                                <div class="row gx-3 mb-1">
+                                <div class="row gx-3 mb-2">
                                     <div class="col-md-6 mb-2">
                                         <label for="name">{{ __('Your Name') }}</label>
                                         <input type="text" class="form-control" name="name" id="name" placeholder="{{ __('Enter your full name') }}" required>
@@ -524,7 +524,7 @@
                                 </div>
 
                                 <!-- Testimonial Description -->
-                                <div class="mb-2">
+                                <div class="mb-1">
                                     <label for="description">{{ __('Your Testimonial') }}</label>
                                     <textarea class="form-control" name="description" id="description" rows="3" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
                                     <div class="text-end text-muted mt-1" style="font-size: 13px; color: #64748b;" id="char-count">0 / 500</div>
@@ -534,9 +534,9 @@
                                 </div>
 
                                 <!-- Star Rating -->
-                                <div class="mt-1">
-                                    <label for="rating-value">{{ __('Your Rating') }}</label>
-                                    <div class="d-flex align-items-center gap-2 mt-1">
+                                <div class="mt-0 pt-0">
+                                    <label for="rating-value" class="mb-1">{{ __('Your Rating') }}</label>
+                                    <div class="d-flex align-items-center gap-2">
                                         <div class="rating-stars-wrap">
                                             <i class="fas fa-star rating-star-icon" data-value="1"></i>
                                             <i class="fas fa-star rating-star-icon" data-value="2"></i>
