@@ -74,70 +74,58 @@
                 </div>
             </div>
 
-            <!-- Section Divider -->
-            <div class="col-lg-12">
-                <hr class="my-4">
-                <h3 class="section-title mb-4" style="color: #000000; font-weight: 500; font-size: 15px;">{{ __('Testimonial Form Side Image & Content Setting') }}</h3>
+            <!-- Form Right Side Image Settings Divider -->
+            <div class="col-12 my-3">
+                <hr style="border-top: 1px dashed #e2e8f0;">
+                <h4 class="section-title my-3" style="color: #000000; font-weight: 600; font-size: 15px;">{{ __('Form Right Side Upload Image & Card Settings') }}</h4>
             </div>
 
-            <!-- Side Title -->
+            <!-- Form Right Title -->
             <div class="col-lg-12">
                 <div class="mb-4">
-                    <label for="success_form_side_title" class="form-label">{{ __('Side Card Title') }}</label>
-                    <input type="text" class="form-control rounded-2" id="success_form_side_title" name="success_form_side_title" placeholder="{{ __('Side Card Title') }}" value="{{ setting('success_form_side_title') ?: 'Inspire Millions of Learners' }}">
+                    <label for="success_form_right_title" class="form-label">{{ __('Right Side Card Title') }}</label>
+                    <input type="text" class="form-control rounded-2" id="success_form_right_title" name="success_form_right_title" placeholder="{{ __('e.g., Share Your Inspiring Journey') }}" value="{{ setting('success_form_right_title') ?: 'Share Your Inspiring Journey' }}">
                 </div>
             </div>
 
-            <!-- Side Subtitle -->
+            <!-- Form Right Subtitle -->
             <div class="col-lg-12">
                 <div class="mb-4">
-                    <label for="success_form_side_subtitle" class="form-label">{{ __('Side Card Subtitle') }}</label>
-                    <textarea class="form-control" id="success_form_side_subtitle" name="success_form_side_subtitle" rows="3" placeholder="{{ __('Side Card Subtitle') }}">{{ setting('success_form_side_subtitle') ?: 'Your journey can motivate students around the globe to achieve their dreams. Share your experience today!' }}</textarea>
+                    <label for="success_form_right_subtitle" class="form-label">{{ __('Right Side Card Subtitle') }}</label>
+                    <input type="text" class="form-control rounded-2" id="success_form_right_subtitle" name="success_form_right_subtitle" placeholder="{{ __('e.g., Inspire thousands of students around the world by sharing your story.') }}" value="{{ setting('success_form_right_subtitle') ?: 'Inspire thousands of students around the world by sharing your story.' }}">
                 </div>
             </div>
 
-            <!-- Side Image Upload -->
+            <!-- Form Right Image Upload -->
             <div class="col-lg-12 input_file_div mb-4">
                 <div class="mb-3">
-                    <label for="success_form_side_image" class="form-label mb-1">{{ __('Side Image') }} (600x600)</label>
-                    <label for="success_form_side_image" class="file-upload-text">
+                    <label for="success_form_right_image" class="form-label mb-1">{{ __('Right Side Image') }} (600x750)</label>
+                    <label for="success_form_right_image" class="file-upload-text">
                         <p></p>
                         <span class="file-btn">{{ __('choose_file') }}</span>
                     </label>
-                    <input class="d-none file_picker" type="file" name="success_form_side_image" id="success_form_side_image" accept="image/*">
+                    <input class="d-none file_picker" type="file" name="success_form_right_image" id="success_form_right_image" accept="image/*">
                 </div>
                 <div class="selected-files d-flex flex-wrap gap-20">
                     <div class="selected-files-item">
                         @php
-                            $sideImgSetting = setting('success_form_side_image');
-                            $sidePreviewUrl = '';
-                            if (is_array($sideImgSetting)) {
-                                if (!empty($sideImgSetting['image_80x80'])) {
-                                    $sidePreviewUrl = get_media($sideImgSetting['image_80x80'], $sideImgSetting['storage'] ?? 'local');
-                                } elseif (!empty($sideImgSetting['original_image'])) {
-                                    $sidePreviewUrl = get_media($sideImgSetting['original_image'], $sideImgSetting['storage'] ?? 'local');
+                            $formRightImgSetting = setting('success_form_right_image');
+                            $rightPreviewUrl = '';
+                            if (is_array($formRightImgSetting)) {
+                                if (!empty($formRightImgSetting['image_80x80'])) {
+                                    $rightPreviewUrl = get_media($formRightImgSetting['image_80x80'], $formRightImgSetting['storage'] ?? 'local');
+                                } elseif (!empty($formRightImgSetting['original_image'])) {
+                                    $rightPreviewUrl = get_media($formRightImgSetting['original_image'], $formRightImgSetting['storage'] ?? 'local');
                                 }
-                            } elseif (is_string($sideImgSetting) && !empty($sideImgSetting)) {
-                                $sidePreviewUrl = getFileLink('80x80', $sideImgSetting);
-                            }
-                            if (empty($sidePreviewUrl) || str_contains($sidePreviewUrl, 'default-image')) {
-                                $sidePreviewUrl = static_asset('frontend/img/banner/success_hero_banner.jpg');
+                            } elseif (is_string($formRightImgSetting) && !empty($formRightImgSetting)) {
+                                $rightPreviewUrl = getFileLink('80x80', $formRightImgSetting);
                             }
                         @endphp
-                        <img class="selected-img" src="{{ $sidePreviewUrl }}" alt="Side Image">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Side Section Status -->
-            <div class="col-lg-12">
-                <div class="d-flex gap-12 sandbox_mode_div mb-4">
-                    <label class="form-label" for="success_form_side_status">{{ __('Side Card Status') }}</label>
-                    <div class="setting-check">
-                        <input type="hidden" name="success_form_side_status" value="{{ setting('success_form_side_status') == 0 ? 0 : 1 }}">
-                        <input type="checkbox" value="1" id="success_form_side_status"
-                               class="sandbox_mode" {{ setting('success_form_side_status') == 0 ? '' : 'checked' }}>
-                        <label for="success_form_side_status"></label>
+                        @if(!empty($rightPreviewUrl))
+                            <img class="selected-img" src="{{ $rightPreviewUrl }}" alt="Right Side Image">
+                        @else
+                            <div class="p-3 bg-light text-muted border rounded text-center" style="font-size: 12px;">{{ __('No custom image uploaded yet (using default illustration)') }}</div>
+                        @endif
                     </div>
                 </div>
             </div>
