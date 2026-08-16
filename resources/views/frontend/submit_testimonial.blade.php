@@ -458,29 +458,30 @@
                         </div>
                     @endif
 
-                    <div class="row g-4 align-items-stretch">
-                        <!-- Left Column: Form As It Is -->
-                        <div class="col-lg-7">
-                            <form action="{{ route('store.testimonial') }}" method="POST" enctype="multipart/form-data" class="user-form p-0">
-                                @csrf
+                    <form action="{{ route('store.testimonial') }}" method="POST" enctype="multipart/form-data" class="user-form p-0">
+                        @csrf
 
-                                <!-- Profile Photo -->
-                                <div class="profile-upload-row">
-                                    <div class="avatar-circle">
-                                        <i class="fas fa-camera" id="profile-avatar-icon"></i>
-                                        <img id="profile-avatar-preview" src="" alt="Profile Preview" style="display: none; width: 100%; height: 100%; object-fit: cover;">
-                                    </div>
-                                    <div>
-                                        <label class="profile-photo-btn">
-                                            <i class="fas fa-cloud-upload-alt"></i> {{ __('PROFILE PHOTO') }}
-                                            <input type="file" name="profile_photo" id="profile_photo" class="d-none" accept="image/*">
-                                        </label>
-                                        <div class="text-muted" style="font-size: 13px; margin-top: 4px; color: #64748b;">{{ __('Optional, but recommended') }}</div>
-                                    </div>
-                                </div>
+                        <!-- Top: Profile Photo -->
+                        <div class="profile-upload-row mb-4">
+                            <div class="avatar-circle">
+                                <i class="fas fa-camera" id="profile-avatar-icon"></i>
+                                <img id="profile-avatar-preview" src="" alt="Profile Preview" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div>
+                                <label class="profile-photo-btn">
+                                    <i class="fas fa-cloud-upload-alt"></i> {{ __('PROFILE PHOTO') }}
+                                    <input type="file" name="profile_photo" id="profile_photo" class="d-none" accept="image/*">
+                                </label>
+                                <div class="text-muted" style="font-size: 13px; margin-top: 4px; color: #64748b;">{{ __('Optional, but recommended') }}</div>
+                            </div>
+                        </div>
 
+                        <!-- 2-Column Grid: From "Add a photo or video" to "Your Rating" -->
+                        <div class="row g-4 align-items-stretch mb-2">
+                            <!-- Left Column: Fields -->
+                            <div class="col-lg-7">
                                 <!-- Add Photo or Video Section -->
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <label class="upload-section-title mb-2 d-block fw-bold">{{ __('Add a photo or video to your testimonial') }}</label>
                                     <div class="upload-drop-zone">
                                         <input type="file" name="file" id="file" accept="image/*,video/*">
@@ -491,8 +492,8 @@
                                         </div>
                                     </div>
                                     <div id="media-preview-container" class="mt-2 text-center" style="display: none; background: #f8fafc; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
-                                        <img id="media-image-preview" src="" alt="Media Preview" style="max-height: 200px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto; object-fit: cover;">
-                                        <video id="media-video-preview" src="" controls style="max-height: 220px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto;"></video>
+                                        <img id="media-image-preview" src="" alt="Media Preview" style="max-height: 180px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto; object-fit: cover;">
+                                        <video id="media-video-preview" src="" controls style="max-height: 180px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto;"></video>
                                     </div>
                                     @error('file')
                                         <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
@@ -520,7 +521,7 @@
                                 <!-- Testimonial Description -->
                                 <div class="mb-3">
                                     <label for="description">{{ __('Your Testimonial') }}</label>
-                                    <textarea class="form-control" name="description" id="description" rows="5" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
+                                    <textarea class="form-control" name="description" id="description" rows="4" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
                                     <div class="text-end text-muted mt-1" style="font-size: 13px; color: #64748b;" id="char-count">0 / 500</div>
                                     @error('description')
                                         <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
@@ -528,7 +529,7 @@
                                 </div>
 
                                 <!-- Star Rating -->
-                                <div class="mb-4">
+                                <div class="mb-2">
                                     <label for="rating-value">{{ __('Your Rating') }}</label>
                                     <div class="d-flex align-items-center gap-2 mt-1">
                                         <div class="rating-stars-wrap">
@@ -542,63 +543,63 @@
                                     </div>
                                     <input type="hidden" name="rating" id="rating-value" value="5">
                                 </div>
+                            </div>
 
-                                <!-- Submit Button & Footer -->
-                                <div class="mt-4">
-                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
-                                        <span>{{ __('Submit Testimonial') }}</span>
-                                        <i class="fas fa-paper-plane ms-2"></i>
-                                    </button>
-                                    <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
-                                        <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                        <!-- Right Column: Admin Controlled Banner Card with Professional Upload Icon -->
-                        <div class="col-lg-5">
-                            @php
-                                $formRightImgSetting = setting('success_form_right_image');
-                                $formRightImgUrl = '';
-                                if (is_array($formRightImgSetting)) {
-                                    if (!empty($formRightImgSetting['original_image'])) {
-                                        $formRightImgUrl = get_media($formRightImgSetting['original_image'], $formRightImgSetting['storage'] ?? 'local');
-                                    } elseif (!empty($formRightImgSetting['image_417x384'])) {
-                                        $formRightImgUrl = get_media($formRightImgSetting['image_417x384'], $formRightImgSetting['storage'] ?? 'local');
+                            <!-- Right Column: Admin Upload Image Card (Height spans from "Add a photo/video" to "Your Rating") -->
+                            <div class="col-lg-5">
+                                @php
+                                    $formRightImgSetting = setting('success_form_right_image');
+                                    $formRightImgUrl = '';
+                                    if (is_array($formRightImgSetting)) {
+                                        if (!empty($formRightImgSetting['original_image'])) {
+                                            $formRightImgUrl = get_media($formRightImgSetting['original_image'], $formRightImgSetting['storage'] ?? 'local');
+                                        } elseif (!empty($formRightImgSetting['image_417x384'])) {
+                                            $formRightImgUrl = get_media($formRightImgSetting['image_417x384'], $formRightImgSetting['storage'] ?? 'local');
+                                        }
+                                    } elseif (is_string($formRightImgSetting) && !empty($formRightImgSetting)) {
+                                        $formRightImgUrl = getFileLink('original_image', $formRightImgSetting);
                                     }
-                                } elseif (is_string($formRightImgSetting) && !empty($formRightImgSetting)) {
-                                    $formRightImgUrl = getFileLink('original_image', $formRightImgSetting);
-                                }
-                            @endphp
-                            <div class="success-form-right-card p-3 p-md-4 d-flex flex-column align-items-center justify-content-center text-center" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; min-height: 260px; height: auto; position: relative; overflow: hidden;">
-                                @if(!empty($formRightImgUrl) && !str_contains($formRightImgUrl, 'default-image'))
-                                    <div class="w-100 position-relative rounded-3 overflow-hidden d-flex flex-column justify-content-center align-items-center">
-                                        <img src="{{ $formRightImgUrl }}" alt="{{ setting('success_form_right_title') ?: __('Share Your Journey') }}" class="w-100 rounded-3 mb-2" style="max-height: 280px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);">
-                                        @if(setting('success_form_right_title'))
-                                            <h4 class="fw-bold mb-0" style="color: #0f172a; font-size: 18px; font-family: var(--header-font);">
-                                                {{ setting('success_form_right_title') }}
-                                            </h4>
-                                        @endif
-                                    </div>
-                                @else
-                                    <!-- Professional Upload Graphic Illustration Card -->
-                                    <div class="p-2 w-100 d-flex flex-column align-items-center justify-content-center">
-                                        <div class="upload-icon-badge mx-auto mb-3" style="width: 72px; height: 72px; border-radius: 50%; background: rgba(16, 185, 129, 0.1); color: #10b981; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(16, 185, 129, 0.2); transition: transform 0.3s ease;">
-                                            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                                <polyline points="17 8 12 3 7 8"></polyline>
-                                                <line x1="12" y1="3" x2="12" y2="15"></line>
-                                            </svg>
+                                @endphp
+                                <div class="success-form-right-card h-100 p-4 d-flex flex-column align-items-center justify-content-center text-center" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; position: relative; overflow: hidden; min-height: 300px;">
+                                    @if(!empty($formRightImgUrl) && !str_contains($formRightImgUrl, 'default-image'))
+                                        <div class="w-100 h-100 position-relative rounded-3 overflow-hidden d-flex flex-column justify-content-center align-items-center">
+                                            <img src="{{ $formRightImgUrl }}" alt="{{ setting('success_form_right_title') ?: __('Share Your Journey') }}" class="w-100 rounded-3 mb-2" style="max-height: 320px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                                            @if(setting('success_form_right_title'))
+                                                <h4 class="fw-bold mb-0" style="color: #0f172a; font-size: 18px; font-family: var(--header-font);">
+                                                    {{ setting('success_form_right_title') }}
+                                                </h4>
+                                            @endif
                                         </div>
-                                        <h4 class="fw-bold mb-0" style="color: #0f172a; font-size: 19px; font-family: var(--header-font);">
-                                            {{ setting('success_form_right_title') ?: __('Share Your Inspiring Journey') }}
-                                        </h4>
-                                    </div>
-                                @endif
+                                    @else
+                                        <!-- Professional Upload Graphic Illustration Card -->
+                                        <div class="p-2 w-100 d-flex flex-column align-items-center justify-content-center">
+                                            <div class="upload-icon-badge mx-auto mb-3" style="width: 76px; height: 76px; border-radius: 50%; background: rgba(16, 185, 129, 0.1); color: #10b981; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(16, 185, 129, 0.2); transition: transform 0.3s ease;">
+                                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                                </svg>
+                                            </div>
+                                            <h4 class="fw-bold mb-0" style="color: #0f172a; font-size: 20px; font-family: var(--header-font);">
+                                                {{ setting('success_form_right_title') ?: __('Share Your Inspiring Journey') }}
+                                            </h4>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                        <!-- Submit Button & Security Footer (Full Width Below) -->
+                        <div class="mt-4">
+                            <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
+                                <span>{{ __('Submit Testimonial') }}</span>
+                                <i class="fas fa-paper-plane ms-2"></i>
+                            </button>
+                            <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
+                                <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
