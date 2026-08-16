@@ -443,9 +443,10 @@
         <hr class="m-b-50">
         @endif
 
-        <div class="row">
-            <div class="col-12">
-                <div class="testimonial-form-card">
+        <div class="row g-4 align-items-stretch">
+            <!-- Left Column: Testimonial Form -->
+            <div class="{{ (string)setting('success_form_side_status') !== '0' ? 'col-lg-7' : 'col-12' }}">
+                <div class="testimonial-form-card h-100">
                     <!-- Header Bar -->
                     <div class="card-header-bar">
                         <h3 class="card-header-title">{{ __('Your Experience Matters') }}</h3>
@@ -553,6 +554,48 @@
                     </form>
                 </div>
             </div>
+
+            <!-- Right Column: Admin Controllable Side Image Card -->
+            @if((string)setting('success_form_side_status') !== '0')
+                @php
+                    $sideImgSetting = setting('success_form_side_image');
+                    $sideImgUrl = '';
+                    if (is_array($sideImgSetting)) {
+                        if (!empty($sideImgSetting['original_image'])) {
+                            $sideImgUrl = get_media($sideImgSetting['original_image'], $sideImgSetting['storage'] ?? 'local');
+                        } elseif (!empty($sideImgSetting['image_417x384'])) {
+                            $sideImgUrl = get_media($sideImgSetting['image_417x384'], $sideImgSetting['storage'] ?? 'local');
+                        }
+                    } elseif (is_string($sideImgSetting) && !empty($sideImgSetting)) {
+                        $sideImgUrl = getFileLink('original_image', $sideImgSetting);
+                    }
+                    if (empty($sideImgUrl) || str_contains($sideImgUrl, 'default-image')) {
+                        $sideImgUrl = static_asset('frontend/img/banner/success_hero_banner.jpg');
+                    }
+                @endphp
+                <div class="col-lg-5">
+                    <div class="side-card-wrapper h-100 position-relative" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04); min-height: 480px; display: flex; flex-direction: column;">
+                        <!-- Side Image Container -->
+                        <div class="side-img-box position-relative flex-grow-1" style="width: 100%; min-height: 480px; background-image: url('{{ $sideImgUrl }}'); background-size: cover; background-position: center; border-radius: 16px; overflow: hidden;">
+                            <!-- Dark/Green Gradient Overlay -->
+                            <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16, 185, 129, 0.1) 0%, rgba(15, 23, 42, 0.85) 100%);"></div>
+                            
+                            <!-- Bottom Text Overlay Badge -->
+                            <div class="position-absolute bottom-0 start-0 w-100 p-4 p-md-5 text-white" style="z-index: 2;">
+                                <span class="badge-pill-tag mb-3 d-inline-block" style="background: rgba(16, 185, 129, 0.9); color: #ffffff; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 4px; letter-spacing: 1.2px; text-transform: uppercase;">
+                                    {{ __('INSPIRE OTHERS') }}
+                                </span>
+                                <h4 class="fw-bold text-white mb-2" style="font-size: 24px; line-height: 1.3; font-family: var(--header-font);">
+                                    {{ setting('success_form_side_title') ?: __('Inspire Millions of Learners') }}
+                                </h4>
+                                <p class="mb-0" style="font-size: 14px; line-height: 1.6; color: rgba(255, 255, 255, 0.85); font-family: var(--body-font);">
+                                    {{ setting('success_form_side_subtitle') ?: __('Your journey can motivate students around the globe to achieve their dreams. Share your experience today!') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </section>
