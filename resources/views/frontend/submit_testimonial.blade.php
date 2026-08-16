@@ -292,27 +292,7 @@
         outline: none;
         box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
     }
-    .testimonial-form-card .btn-submit-green {
-        background: #10b981;
-        color: #ffffff;
-        font-size: 16px;
-        font-weight: 700;
-        padding: 14px 20px;
-        border-radius: 8px;
-        border: none;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
-        cursor: pointer;
-        transition: background 0.2s, transform 0.1s;
-    }
-    .testimonial-form-card .btn-submit-green:hover {
-        background: #0d9668;
-        color: #ffffff;
-    }
+
     .testimonial-form-card .rating-stars-wrap i {
         color: #f59e0b;
         font-size: 22px;
@@ -549,14 +529,14 @@
                         <div class="row gx-3">
                             <div class="col-md-6 mb-4">
                                 <label for="name" class="section-field-label"><i class="far fa-user text-success" style="color: #10b981;"></i> {{ __('Your Name') }}</label>
-                                <input type="text" class="custom-input-field" name="name" id="name" placeholder="{{ __('Enter your full name') }}" required>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="{{ __('Enter your full name') }}" required>
                                 @error('name')
                                     <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-4">
                                 <label for="position" class="section-field-label"><i class="fas fa-briefcase text-success" style="color: #10b981;"></i> {{ __('Position/Title') }}</label>
-                                <input type="text" class="custom-input-field" name="position" id="position" placeholder="{{ __('Enter your position or title') }}">
+                                <input type="text" class="form-control" name="position" id="position" placeholder="{{ __('Enter your position or title') }}">
                                 @error('position')
                                     <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                                 @enderror
@@ -566,7 +546,7 @@
                         <!-- Testimonial Description -->
                         <div class="mb-4">
                             <label for="description" class="section-field-label"><i class="far fa-comment-alt text-success" style="color: #10b981;"></i> {{ __('Your Testimonial') }}</label>
-                            <textarea class="custom-input-field" name="description" id="description" rows="4" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
+                            <textarea class="form-control" name="description" id="description" rows="4" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
                             <div class="text-end text-muted mt-1" style="font-size: 13px; color: #64748b;" id="char-count">0 / 500</div>
                             @error('description')
                                 <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
@@ -591,8 +571,9 @@
 
                         <!-- Submit Button & Footer -->
                         <div class="mt-4">
-                            <button type="submit" class="btn-submit-green">
-                                <i class="fas fa-paper-plane"></i> {{ __('Submit Testimonial') }}
+                            <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
+                                <span>{{ __('Submit Testimonial') }}</span>
+                                <i class="fas fa-paper-plane ms-2"></i>
                             </button>
                             <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
                                 <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
