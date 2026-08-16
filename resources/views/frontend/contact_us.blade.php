@@ -395,23 +395,23 @@
                             <div class="row g-3">
                                 <!-- Your Name & Your Email -->
                                 <div class="col-md-6">
-                                    <label for="name">{{ __('Your Name') }}*</label>
+                                    <label for="name">{{ __('Your Name') }}</label>
                                     <input type="text" name="name" id="name" class="form-control" placeholder="{{ __('Enter your full name') }}" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="email">{{ __('Your Email') }}*</label>
+                                    <label for="email">{{ __('Your Email') }}</label>
                                     <input type="email" name="email" id="email" class="form-control" placeholder="{{ __('Enter your email address') }}" required>
                                 </div>
 
                                 <!-- Subject -->
                                 <div class="col-12">
-                                    <label for="subject">{{ __('Subject') }}*</label>
+                                    <label for="subject">{{ __('Subject') }}</label>
                                     <input type="text" name="subject" id="subject" class="form-control" placeholder="{{ __('Enter subject') }}" required>
                                 </div>
 
                                 <!-- Message -->
                                 <div class="col-12">
-                                    <label for="message">{{ __('Message') }}*</label>
+                                    <label for="message">{{ __('Message') }}</label>
                                     <textarea name="message" id="message" class="form-control" rows="5" placeholder="{{ __('Write your message here...') }}" required></textarea>
                                 </div>
 
