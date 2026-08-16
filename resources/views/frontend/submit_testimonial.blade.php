@@ -476,9 +476,9 @@
                             </div>
                         </div>
 
-                        <!-- 2-Column Grid: From "Add a photo or video" to "Your Rating" -->
-                        <div class="row g-4 align-items-stretch mb-2">
-                            <!-- Left Column: Fields -->
+                        <!-- 2-Column Grid: Height strictly matches from "Add a photo or video" to "Your Rating" -->
+                        <div class="row g-4 align-items-stretch mb-4">
+                            <!-- Left Column: Fields from "Add a photo or video" to "Your Rating" -->
                             <div class="col-lg-7">
                                 <!-- Add Photo or Video Section -->
                                 <div class="mb-3">
@@ -529,7 +529,7 @@
                                 </div>
 
                                 <!-- Star Rating -->
-                                <div class="mb-4">
+                                <div>
                                     <label for="rating-value">{{ __('Your Rating') }}</label>
                                     <div class="d-flex align-items-center gap-2 mt-1">
                                         <div class="rating-stars-wrap">
@@ -543,20 +543,9 @@
                                     </div>
                                     <input type="hidden" name="rating" id="rating-value" value="5">
                                 </div>
-
-                                <!-- Submit Button & Footer inside Left Column -->
-                                <div class="mt-4">
-                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
-                                        <span>{{ __('Submit Testimonial') }}</span>
-                                        <i class="fas fa-paper-plane ms-2"></i>
-                                    </button>
-                                    <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
-                                        <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
-                                    </div>
-                                </div>
                             </div>
 
-                            <!-- Right Column: Admin Upload Image Card -->
+                            <!-- Right Column: Admin Upload Image Card (Height matches EXACTLY from "Add a photo/video" to "Your Rating") -->
                             <div class="col-lg-5">
                                 @php
                                     $formRightImgSetting = setting('success_form_right_image');
@@ -571,10 +560,10 @@
                                         $formRightImgUrl = getFileLink('original_image', $formRightImgSetting);
                                     }
                                 @endphp
-                                <div class="success-form-right-card h-100 p-4 d-flex flex-column align-items-center justify-content-center text-center" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; position: relative; overflow: hidden; min-height: 300px;">
+                                <div class="success-form-right-card h-100 p-4 d-flex flex-column align-items-center justify-content-center text-center" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; position: relative; overflow: hidden; min-height: 100%;">
                                     @if(!empty($formRightImgUrl) && !str_contains($formRightImgUrl, 'default-image'))
                                         <div class="w-100 h-100 position-relative rounded-3 overflow-hidden d-flex flex-column justify-content-center align-items-center">
-                                            <img src="{{ $formRightImgUrl }}" alt="{{ setting('success_form_right_title') ?: __('Share Your Journey') }}" class="w-100 rounded-3 mb-2" style="max-height: 320px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                                            <img src="{{ $formRightImgUrl }}" alt="{{ setting('success_form_right_title') ?: __('Share Your Journey') }}" class="w-100 rounded-3 mb-2" style="max-height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
                                             @if(setting('success_form_right_title'))
                                                 <h4 class="fw-bold mb-0" style="color: #0f172a; font-size: 18px; font-family: var(--header-font);">
                                                     {{ setting('success_form_right_title') }}
@@ -596,6 +585,21 @@
                                             </h4>
                                         </div>
                                     @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button Row (In Left Side Grid Column width below) -->
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="mt-2">
+                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
+                                        <span>{{ __('Submit Testimonial') }}</span>
+                                        <i class="fas fa-paper-plane ms-2"></i>
+                                    </button>
+                                    <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
+                                        <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
