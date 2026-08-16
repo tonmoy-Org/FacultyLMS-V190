@@ -74,6 +74,26 @@
                 </div>
             </div>
 
+            <!-- Form Header Title & Subtitle Settings -->
+            <div class="col-12 my-3">
+                <hr style="border-top: 1px dashed #e2e8f0;">
+                <h4 class="section-title my-3" style="color: #000000; font-weight: 400; font-size: 15px;">{{ __('Form Header Settings') }}</h4>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="mb-4">
+                    <label for="success_form_header_title" class="form-label">{{ __('Form Header Title') }}</label>
+                    <input type="text" class="form-control rounded-2" id="success_form_header_title" name="success_form_header_title" placeholder="{{ __('Form Header Title') }}" value="{{ setting('success_form_header_title') ?: 'Your Experience Matters' }}">
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="mb-4">
+                    <label for="success_form_header_subtitle" class="form-label">{{ __('Form Header Subtitle') }}</label>
+                    <input type="text" class="form-control rounded-2" id="success_form_header_subtitle" name="success_form_header_subtitle" placeholder="{{ __('Form Header Subtitle') }}" value="{{ setting('success_form_header_subtitle') ?: 'Share your success story with us.' }}">
+                </div>
+            </div>
+
             <!-- Form Right Side Image Settings Divider -->
             <div class="col-12 my-3">
                 <hr style="border-top: 1px dashed #e2e8f0;">

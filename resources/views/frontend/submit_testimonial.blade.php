@@ -448,8 +448,8 @@
                 <div class="testimonial-form-card px-0 py-3">
                     <!-- Header Bar -->
                     <div class="card-header-bar mb-4">
-                        <h3 class="card-header-title">{{ __('Your Experience Matters') }}</h3>
-                        <p class="card-header-subtitle">{{ __('Share your success story with us.') }}</p>
+                        <h3 class="card-header-title">{{ setting('success_form_header_title') ?: __('Your Experience Matters') }}</h3>
+                        <p class="card-header-subtitle">{{ setting('success_form_header_subtitle') ?: __('Share your success story with us.') }}</p>
                     </div>
 
                     @if(session('success'))
