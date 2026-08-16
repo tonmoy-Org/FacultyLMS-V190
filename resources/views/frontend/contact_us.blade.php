@@ -294,40 +294,7 @@
             font-size: 20px;
         }
 
-        .contact-input-field {
-            height: 50px !important;
-            background-color: #ffffff !important;
-            border: 1px solid #cbd5e1 !important;
-            border-radius: 10px !important;
-            padding: 0 16px !important;
-            font-size: 14px !important;
-            color: #1e293b !important;
-            font-family: var(--body-font) !important;
-            transition: all 0.2s ease-in-out;
-        }
-        .contact-input-field:focus {
-            border-color: var(--theme-clr, #10b981) !important;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12) !important;
-            outline: none !important;
-        }
 
-        .contact-textarea-field {
-            background-color: #ffffff !important;
-            border: 1px solid #cbd5e1 !important;
-            border-radius: 10px !important;
-            padding: 14px 16px !important;
-            font-size: 14px !important;
-            color: #1e293b !important;
-            font-family: var(--body-font) !important;
-            transition: all 0.2s ease-in-out;
-            resize: vertical;
-            min-height: 140px;
-        }
-        .contact-textarea-field:focus {
-            border-color: var(--theme-clr, #10b981) !important;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12) !important;
-            outline: none !important;
-        }
 
 
 
@@ -428,36 +395,24 @@
                             <div class="row g-3">
                                 <!-- Your Name & Your Email -->
                                 <div class="col-md-6">
-                                    <label class="form-label fw-semibold d-flex align-items-center mb-2" style="font-size: 14px; color: #0f172a;">
-                                        <i class="fal fa-user me-2" style="color: var(--theme-clr, #10b981); font-size: 15px;"></i>
-                                        {{ __('Your Name') }}
-                                    </label>
-                                    <input type="text" name="name" class="form-control contact-input-field" placeholder="{{ __('Enter your full name') }}" required>
+                                    <label for="name">{{ __('Your Name') }}*</label>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="{{ __('Enter your full name') }}" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label fw-semibold d-flex align-items-center mb-2" style="font-size: 14px; color: #0f172a;">
-                                        <i class="fal fa-envelope me-2" style="color: var(--theme-clr, #10b981); font-size: 15px;"></i>
-                                        {{ __('Your Email') }}
-                                    </label>
-                                    <input type="email" name="email" class="form-control contact-input-field" placeholder="{{ __('Enter your email address') }}" required>
+                                    <label for="email">{{ __('Your Email') }}*</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="{{ __('Enter your email address') }}" required>
                                 </div>
 
                                 <!-- Subject -->
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold d-flex align-items-center mb-2" style="font-size: 14px; color: #0f172a;">
-                                        <i class="fal fa-tag me-2" style="color: var(--theme-clr, #10b981); font-size: 15px;"></i>
-                                        {{ __('Subject') }}
-                                    </label>
-                                    <input type="text" name="subject" class="form-control contact-input-field" placeholder="{{ __('Enter subject') }}" required>
+                                    <label for="subject">{{ __('Subject') }}*</label>
+                                    <input type="text" name="subject" id="subject" class="form-control" placeholder="{{ __('Enter subject') }}" required>
                                 </div>
 
                                 <!-- Message -->
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold d-flex align-items-center mb-2" style="font-size: 14px; color: #0f172a;">
-                                        <i class="fal fa-comment-alt me-2" style="color: var(--theme-clr, #10b981); font-size: 15px;"></i>
-                                        {{ __('Message') }}
-                                    </label>
-                                    <textarea name="message" class="form-control contact-textarea-field" rows="5" placeholder="{{ __('Write your message here...') }}" required></textarea>
+                                    <label for="message">{{ __('Message') }}*</label>
+                                    <textarea name="message" id="message" class="form-control" rows="5" placeholder="{{ __('Write your message here...') }}" required></textarea>
                                 </div>
 
                                 <!-- Submit Button -->
