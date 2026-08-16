@@ -84,6 +84,7 @@ class CourseRepository
             $mc['ad_banner_1_status'] = isset($mc['ad_banner_1_status']) ? 1 : 0;
             $mc['ad_banner_2_status'] = isset($mc['ad_banner_2_status']) ? 1 : 0;
             $mc['support_status'] = isset($mc['support_status']) ? 1 : 0;
+            $mc['breakdown_status'] = isset($mc['breakdown_status']) ? 1 : 0;
 
             if (request()->hasFile('overview_image_file')) {
                 $response = $this->saveImage(request()->file('overview_image_file'), 'course');
@@ -226,6 +227,7 @@ class CourseRepository
             $mc['ad_banner_1_status'] = isset($mc['ad_banner_1_status']) ? 1 : 0;
             $mc['ad_banner_2_status'] = isset($mc['ad_banner_2_status']) ? 1 : 0;
             $mc['support_status'] = isset($mc['support_status']) ? 1 : 0;
+            $mc['breakdown_status'] = isset($mc['breakdown_status']) ? 1 : 0;
 
             if (request()->hasFile('overview_image_file')) {
                 $response = $this->saveImage(request()->file('overview_image_file'), 'course');

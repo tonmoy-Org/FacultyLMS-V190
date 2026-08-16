@@ -455,12 +455,13 @@
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
                                                 <div class="col-12 mb-4">
-                                                    <div class="custom-checkbox">
-                                                        <label class="d-flex align-items-center gap-2 cursor-pointer">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="setting-check">
                                                             <input type="checkbox" name="masterclass_settings[hide_special_gift]" value="1" id="create_hide_gift"
                                                                 {{ old('masterclass_settings.hide_special_gift') == '1' ? 'checked' : '' }}>
-                                                            <span class="text-dark font-16">Hide Special Gift Banner Card</span>
-                                                        </label>
+                                                            <label for="create_hide_gift"></label>
+                                                        </div>
+                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="create_hide_gift">Hide Special Gift Banner Card</label>
                                                     </div>
                                                 </div>
 
@@ -531,12 +532,13 @@
                                                     <label class="form-label font-15 fw-semibold mb-3 border-bottom pb-2 w-100">Ad Banner 1</label>
                                                 </div>
                                                 <div class="col-lg-12 mb-4">
-                                                    <div class="custom-checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="masterclass_settings[ad_banner_1_status]" value="1"
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="setting-check">
+                                                            <input type="checkbox" name="masterclass_settings[ad_banner_1_status]" value="1" id="create_ad_banner_1_status"
                                                                 {{ !empty($mcSettings['ad_banner_1_status']) ? 'checked' : '' }}>
-                                                            <span>Enable Ad Banner 1</span>
-                                                        </label>
+                                                            <label for="create_ad_banner_1_status"></label>
+                                                        </div>
+                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="create_ad_banner_1_status">Enable Ad Banner 1</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
@@ -570,12 +572,13 @@
                                                     <label class="form-label font-15 fw-semibold mb-3 border-bottom pb-2 w-100">Ad Banner 2</label>
                                                 </div>
                                                 <div class="col-lg-12 mb-4">
-                                                    <div class="custom-checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="masterclass_settings[ad_banner_2_status]" value="1"
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="setting-check">
+                                                            <input type="checkbox" name="masterclass_settings[ad_banner_2_status]" value="1" id="create_ad_banner_2_status"
                                                                 {{ !empty($mcSettings['ad_banner_2_status']) ? 'checked' : '' }}>
-                                                            <span>Enable Ad Banner 2</span>
-                                                        </label>
+                                                            <label for="create_ad_banner_2_status"></label>
+                                                        </div>
+                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="create_ad_banner_2_status">Enable Ad Banner 2</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
@@ -616,11 +619,14 @@
                                             <div class="row gx-20">
                                                 <!-- Status -->
                                                 <div class="col-12 mb-3">
-                                                    <div class="form-check form-switch mb-0">
-                                                        <input type="checkbox" name="masterclass_settings[support_status]" value="1"
-                                                               class="form-check-input" id="support_status"
-                                                               {{ !empty($mcSettings['support_status']) ? 'checked' : '' }}>
-                                                        <label class="form-label mb-0 ms-2 fw-semibold" for="support_status">Show Support Section</label>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="setting-check">
+                                                            <input type="checkbox" name="masterclass_settings[support_status]" value="1"
+                                                                   id="create_support_status"
+                                                                   {{ !empty($mcSettings['support_status']) ? 'checked' : '' }}>
+                                                            <label for="create_support_status"></label>
+                                                        </div>
+                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="create_support_status">Show Support Section</label>
                                                     </div>
                                                 </div>
 

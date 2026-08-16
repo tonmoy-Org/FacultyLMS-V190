@@ -10,7 +10,7 @@
                     <span class="sub-title text-uppercase fw-bold mb-2 d-inline-block" style="color: var(--theme-clr, var(--color-secondary-4)); letter-spacing: 1.5px; font-size: 14px; font-family: var(--header-font);">
                         {{ __('TERMS OF SERVICE') }}
                     </span>
-                    <h1 class="title fw-bold text-white mb-3" style="font-size: 2.5rem; font-family: var(--header-font);">
+                    <h1 class="title fw-bold text-white mb-3" style="font-size: 28px; font-family: var(--header-font);">
                         {{ __('Terms & Conditions') }}
                     </h1>
                     <nav aria-label="breadcrumb">
