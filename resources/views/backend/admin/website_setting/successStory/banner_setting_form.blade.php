@@ -77,7 +77,7 @@
             <!-- Form Right Side Image Settings Divider -->
             <div class="col-12 my-3">
                 <hr style="border-top: 1px dashed #e2e8f0;">
-                <h4 class="section-title my-3" style="color: #000000; font-weight: 600; font-size: 15px;">{{ __('Form Right Side Image Settings') }}</h4>
+                <h4 class="section-title my-3" style="color: #000000; font-weight: 400; font-size: 15px;">{{ __('Form Right Side Image Settings') }}</h4>
             </div>
 
             <!-- Form Right Image Upload -->
