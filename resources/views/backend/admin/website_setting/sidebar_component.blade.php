@@ -121,6 +121,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('website.categories_of_work_section') }}"
+                       class="{{ request()->routeIs('website.categories_of_work_section') ? 'active' : '' }}">
+                        <span class="icon"><i class="las la-list"></i></span>
+                        <span>{{ __('Categories of Work Section') }}</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('website.why_choose_section') }}"
                        class="{{ request()->routeIs('website.why_choose_section') ? 'active' : '' }}">
                         <span class="icon"><i class="las la-check-circle"></i></span>

@@ -336,6 +336,10 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::get('about-section', [WebsiteSettingController::class, 'aboutSection'])->name('website.about_section');
         Route::match(['get', 'post'], 'save-about-section', [WebsiteSettingController::class, 'saveAboutSection'])->name('website.about_section.save');
 
+        //website categories of work section setting
+        Route::get('categories-of-work-section', [WebsiteSettingController::class, 'categoriesOfWorkSection'])->name('website.categories_of_work_section');
+        Route::match(['get', 'post'], 'save-categories-of-work-section', [WebsiteSettingController::class, 'saveCategoriesOfWorkSection'])->name('website.categories_of_work_section.save');
+
         //website why choose section setting
         Route::get('why-choose-section', [WebsiteSettingController::class, 'whyChooseSection'])->name('website.why_choose_section');
         Route::match(['get', 'post'], 'save-why-choose-section', [WebsiteSettingController::class, 'saveWhyChooseSection'])->name('website.why_choose_section.save');

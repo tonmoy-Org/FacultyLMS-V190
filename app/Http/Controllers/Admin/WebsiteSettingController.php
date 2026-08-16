@@ -523,6 +523,111 @@ class WebsiteSettingController extends Controller
         }
     }
 
+    public function categoriesOfWorkSection(Request $request)
+    {
+        try {
+            $data = [
+                'languages' => $this->language->all(),
+                'lang'      => $request->lang == '' ? app()->getLocale() : $request->lang,
+            ];
+
+            return view('backend.admin.website_setting.categories_of_work_section', $data);
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+
+            return back();
+        }
+    }
+
+    public function saveCategoriesOfWorkSection(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            return redirect()->route('website.categories_of_work_section');
+        }
+
+        if (config('app.demo_mode')) {
+            $data = [
+                'status' => 'danger',
+                'error'  => __('this_function_is_disabled_in_demo_server'),
+                'title'  => 'error',
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+            Toastr::error(__('this_function_is_disabled_in_demo_server'));
+            return back();
+        }
+
+        try {
+            // Process cards and images
+            $cards = $request->input('categories_of_work_cards', []);
+            $existing_cards = setting('categories_of_work_cards');
+            $existing_cards = is_array($existing_cards) ? $existing_cards : [];
+
+            if (is_array($cards)) {
+                foreach ($cards as $key => $card) {
+                    if ($request->hasFile("categories_of_work_cards.{$key}.image")) {
+                        $image = $request->file("categories_of_work_cards.{$key}.image");
+                        $filename = time() . '_' . $key . '.' . $image->getClientOriginalExtension();
+                        $image->move(public_path('images/home_sections'), $filename);
+                        $cards[$key]['image'] = 'images/home_sections/' . $filename;
+                    } elseif (isset($existing_cards[$key]['image'])) {
+                        // Keep existing image if not uploaded new
+                        $cards[$key]['image'] = $existing_cards[$key]['image'];
+                    }
+
+                    // Remove any remaining UploadedFile objects to prevent serialization errors
+                    if (isset($cards[$key]) && is_array($cards[$key])) {
+                        foreach ($cards[$key] as $field => $val) {
+                            if ($val instanceof \Illuminate\Http\UploadedFile || $val instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
+                                unset($cards[$key][$field]);
+                            }
+                        }
+                    }
+                }
+                
+                // Manually save the setting to avoid SettingRepository serialization issues with UploadedFile
+                $setting = \App\Models\Setting::where('title', 'categories_of_work_cards')->first();
+                if (!$setting) {
+                    $setting = new \App\Models\Setting();
+                    $setting->title = 'categories_of_work_cards';
+                    $setting->lang = 'en';
+                }
+                $setting->value = serialize($cards);
+                $setting->save();
+
+                // Remove from request entirely so SettingRepository ignores it
+                $request->request->remove('categories_of_work_cards');
+                $request->files->remove('categories_of_work_cards');
+            }
+
+            // Create a new request entirely devoid of the cards field to absolutely guarantee SettingRepository won't see it
+            $cleanRequest = new \Illuminate\Http\Request();
+            $cleanRequest->replace($request->except('categories_of_work_cards'));
+
+            $this->setting->update($cleanRequest);
+            Toastr::success(__('update_successful'));
+            $data = [
+                'success' => __('update_successful'),
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+
+            return back();
+        } catch (\Exception $e) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'error' => $e->getMessage(),
+                ]);
+            }
+            Toastr::error($e->getMessage());
+            return back();
+        }
+    }
+
     public function whyChooseSection(Request $request)
     {
         try {

@@ -14,6 +14,9 @@
     <!--====== Start About Me Section ======-->
     @include('frontend.homePage.about_me_section')
 
+    <!--====== Start Categories of Work Section ======-->
+    @include('frontend.homePage.categories_of_work')
+
     <!--====== Start Benefits Section ======-->
     @include('frontend.homePage.benefits')
 
