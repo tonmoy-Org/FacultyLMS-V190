@@ -58,8 +58,8 @@
                         $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : __('Enroll Now');
                         $heroBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : route('course.details', $hero_course->slug);
                     @endphp
-                    <ul class="hero-btns d-flex justify-content-center align-items-center mt-5">
-                        <li style="width: 100%;">
+                    <ul class="hero-btns d-flex justify-content-center align-items-center mt-4">
+                        <li>
                             <a href="{{ $heroBtnUrl }}" class="template-btn">
                                 {{ $heroBtnText }}
                             </a>
