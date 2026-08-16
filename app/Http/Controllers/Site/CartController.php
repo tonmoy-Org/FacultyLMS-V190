@@ -491,6 +491,45 @@ class CartController extends Controller
                 $trx_id = $existingCart->trx_id;
             }
 
+            // 3.5 Apply Coupon if provided
+            if ($request->filled('coupon_code')) {
+                $couponRepo = app(\App\Repositories\CouponRepository::class);
+                $coupon = $couponRepo->couponByCode($request->coupon_code);
+                
+                if ($coupon && $coupon->start_date <= now() && $coupon->end_date > now()) {
+                    $is_coupon_applied = $couponRepo->isCouponApplied([
+                        'id'      => $coupon->id,
+                        'user_id' => $user_id,
+                    ]);
+
+                    if (!$is_coupon_applied) {
+                        $success = false;
+                        if ($coupon->type == 'course' && in_array($course->id, $coupon->course_ids ?? [])) {
+                            $success = true;
+                        } elseif ($coupon->type == 'instructor') {
+                            $instructor_ids = is_array($course->instructor_ids) ? $course->instructor_ids : (json_decode($course->instructor_ids ?? '[]', true) ?? []);
+                            if (count(array_intersect($coupon->instructor_ids ?? [], $instructor_ids)) > 0) {
+                                $success = true;
+                            }
+                        } elseif ($coupon->type == 'global') {
+                            $success = true;
+                        }
+
+                        if ($success) {
+                            $price = $course->is_free ? 0 : $course->price;
+                            $discount_amount = $coupon->discount_type == 'percent' ? ($price * $coupon->discount) / 100 : $coupon->discount;
+                            
+                            $couponRepo->couponApply([
+                                'user_id'         => $user_id,
+                                'coupon_id'       => $coupon->id,
+                                'trx_id'          => $trx_id,
+                                'coupon_discount' => $discount_amount,
+                            ]);
+                        }
+                    }
+                }
+            }
+
             // 4. Create/Update Checkout Session
             $this->studentCheckout($user_id, $trx_id);
 
@@ -499,6 +538,79 @@ class CartController extends Controller
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());
             return back()->withInput();
+        }
+    }
+    public function checkGuestCoupon(Request $request, CouponRepository $couponRepository): \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'code'      => 'required',
+            'course_id' => 'required',
+        ]);
+
+        try {
+            $coupon = $couponRepository->couponByCode($request->code);
+
+            if (!$coupon) {
+                return response()->json(['error' => __('invalid_coupon')]);
+            }
+
+            if (auth()->check() || $request->filled('email')) {
+                $user = auth()->user() ?? \App\Models\User::where('email', $request->email)->first();
+                if ($user) {
+                    $is_coupon_applied = $couponRepository->isCouponApplied([
+                        'id'      => $coupon->id,
+                        'user_id' => $user->id,
+                    ]);
+                    if ($is_coupon_applied) {
+                        return response()->json(['error' => 'You have already used this coupon.']);
+                    }
+                }
+            }
+
+            if ($coupon->start_date <= now() && $coupon->end_date > now()) {
+                $course = $this->courseRepository->find($request->course_id);
+
+                if (!$course) {
+                    return response()->json(['error' => __('course_not_found')]);
+                }
+
+                $success = false;
+
+                if ($coupon->type == 'course') {
+                    if (in_array($course->id, $coupon->course_ids ?? [])) {
+                        $success = true;
+                    }
+                } elseif ($coupon->type == 'instructor') {
+                    $instructor_ids = is_array($course->instructor_ids) ? $course->instructor_ids : (json_decode($course->instructor_ids ?? '[]', true) ?? []);
+                    $duplicates = array_intersect($coupon->instructor_ids ?? [], $instructor_ids);
+                    if (count($duplicates) > 0) {
+                        $success = true;
+                    }
+                } elseif ($coupon->type == 'global') {
+                    $success = true;
+                }
+
+                if ($success) {
+                    $price = $course->is_free ? 0 : $course->price;
+                    $discount_amount = $coupon->discount_type == 'percent' ? ($price * $coupon->discount) / 100 : $coupon->discount;
+                    
+                    return response()->json([
+                        'success'                   => __('coupon_applied_successfully'),
+                        'discount_amount'           => $discount_amount,
+                        'total'                     => max(0, $price - $discount_amount),
+                        'discount_amount_formatted' => get_price($discount_amount, userCurrency()),
+                        'total_formatted'           => get_price(max(0, $price - $discount_amount), userCurrency()),
+                    ]);
+                } else {
+                    return response()->json(['error' => __('invalid_coupon')]);
+                }
+
+            } else {
+                return response()->json(['error' => __('coupon_expired')]);
+            }
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
         }
     }
 }

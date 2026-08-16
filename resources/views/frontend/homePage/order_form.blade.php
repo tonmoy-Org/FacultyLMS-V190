@@ -43,10 +43,28 @@
                 <input type="hidden" name="id" value="{{ $course->id }}">
                 <input type="hidden" name="type" value="course">
                 <input type="hidden" name="quantity" value="1">
+                <input type="hidden" name="coupon_code" id="applied_coupon_code">
                 
                 <div class="row gx-lg-5">
                     <!-- Left Column: Billing Details -->
                     <div class="col-lg-6 mb-5 mb-lg-0">
+                        
+                        <!-- Coupon Section -->
+                        <div class="coupon-section mb-5">
+                            <div class="d-flex align-items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                                <span class="text-dark" style="font-weight: 500;">Have a coupon?</span>
+                                <a href="javascript:void(0)" class="text-decoration-none coupon-toggle" style="color: #10b981; font-weight: 500;" onclick="document.querySelector('.coupon-form-wrapper').style.display = document.querySelector('.coupon-form-wrapper').style.display === 'none' ? 'block' : 'none'">Click here to enter your code</a>
+                            </div>
+                            <div class="coupon-form-wrapper mt-4 p-4 shadow-sm" style="display: none; transition: all 0.3s ease; border: 1px dashed #e2e8f0; border-radius: 4px;">
+                                <p class="text-muted small mb-3">If you have a coupon code, please apply it below.</p>
+                                <div class="d-flex gap-2">
+                                    <input type="text" id="guest_coupon_code" class="form-control" placeholder="Coupon code" style="height: 45px; border: 1px solid #e2e8f0; border-radius: 4px; max-width: 300px;">
+                                    <button type="button" class="template-btn apply-coupon-btn px-4 border-0" id="apply_guest_coupon_btn" style="height: 45px; border-radius: 4px; line-height: 1;">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+
                         <h4 class="fw-bold mb-4" style="color: #1a1b4b; font-size: 22px;">Billing Details</h4>
                         
                         <div class="mb-4">
@@ -125,9 +143,15 @@
                                             {{ $course->is_free ? __('free') : get_price($course->price, userCurrency()) }}
                                         </td>
                                     </tr>
+                                    <tr class="border-top coupon-discount-row" style="display: none;">
+                                        <td class="py-3 border-0 fw-bold text-dark" style="padding-left: 0;">Discount</td>
+                                        <td class="py-3 border-0 text-end fw-semibold text-danger" style="padding-right: 0;" id="order_discount">
+                                            -
+                                        </td>
+                                    </tr>
                                     <tr class="border-top">
                                         <td class="py-3 border-0 fw-bold text-dark" style="padding-left: 0;">Total</td>
-                                        <td class="py-3 border-0 text-end fw-bold" style="padding-right: 0; font-size: 20px; color: #10b981;">
+                                        <td class="py-3 border-0 text-end fw-bold" style="padding-right: 0; font-size: 20px; color: #10b981;" id="order_total">
                                             {{ $course->is_free ? __('free') : get_price($course->price, userCurrency()) }}
                                         </td>
                                     </tr>
@@ -144,13 +168,13 @@
                             <div class="d-flex align-items-start gap-2">
                                 <input type="checkbox" name="agree" id="agree_terms" required style="margin-top: 4px; width: 16px; height: 16px;">
                                 <label for="agree_terms" class="fw-semibold text-dark small" style="cursor: pointer;">
-                                    {!! $termsLabel !!} <a href="#" class="text-primary text-decoration-none">Terms</a> and <a href="#" class="text-primary text-decoration-none">Refund Policy</a>
+                                    {!! $termsLabel !!} <a href="{{ route('terms.conditions') }}" target="_blank" class="text-primary text-decoration-none">Terms</a> and <a href="{{ route('refund.policy') }}" target="_blank" class="text-primary text-decoration-none">Refund Policy</a>
                                 </label>
                             </div>
                         </div>
 
                         <button type="submit" class="template-btn w-100 text-center border-0" style="border-radius: 4px;">
-                            {{ $payNowBtnText }} {{ $course->is_free ? __('free') : get_price($course->price, userCurrency()) }}
+                            {{ $payNowBtnText }} <span id="pay_now_btn_price">{{ $course->is_free ? __('free') : get_price($course->price, userCurrency()) }}</span>
                         </button>
                     </div>
                 </div>
@@ -158,4 +182,70 @@
         </div>
     </div>
 </section>
+
+@push('js')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const applyBtn = document.getElementById('apply_guest_coupon_btn');
+        if (applyBtn) {
+            applyBtn.addEventListener('click', function() {
+                const code = document.getElementById('guest_coupon_code').value;
+                const courseId = '{{ $course->id }}';
+                
+                // Get email if provided (it will be validated on backend)
+                const emailInput = document.querySelector('input[name="email"]');
+                const email = emailInput ? emailInput.value : '';
+                
+                if (!code) {
+                    if (typeof toastr !== 'undefined') toastr.error("Please enter a coupon code");
+                    else alert("Please enter a coupon code");
+                    return;
+                }
+                
+                applyBtn.disabled = true;
+                applyBtn.innerText = 'Applying...';
+                
+                fetch('{{ route('check.guest.coupon') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ code: code, course_id: courseId, email: email })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    applyBtn.disabled = false;
+                    applyBtn.innerText = 'Apply';
+                    
+                    if (data.success) {
+                        if (typeof toastr !== 'undefined') toastr.success(data.success);
+                        
+                        document.getElementById('applied_coupon_code').value = code;
+                        
+                        // Update UI
+                        document.querySelector('.coupon-discount-row').style.display = 'table-row';
+                        document.getElementById('order_discount').innerText = '-' + data.discount_amount_formatted;
+                        document.getElementById('order_total').innerText = data.total_formatted;
+                        
+                        const payNowBtnPrice = document.getElementById('pay_now_btn_price');
+                        if (payNowBtnPrice) {
+                            payNowBtnPrice.innerText = data.total_formatted;
+                        }
+                    } else if (data.error) {
+                        if (typeof toastr !== 'undefined') toastr.error(data.error);
+                        else alert(data.error);
+                    }
+                })
+                .catch(error => {
+                    applyBtn.disabled = false;
+                    applyBtn.innerText = 'Apply';
+                    console.error('Error:', error);
+                });
+            });
+        }
+    });
+</script>
+@endpush
+
 @endif
