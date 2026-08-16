@@ -483,7 +483,7 @@
                         </div>
 
                         <!-- 2-Column Grid: Height strictly matches from top of green upload box to bottom of Your Rating -->
-                        <div class="row g-4 align-items-stretch mb-4">
+                        <div class="row g-4 align-items-stretch mb-2">
                             <!-- Left Column: Fields from green upload box to Your Rating -->
                             <div class="col-lg-7">
                                 <!-- Add Photo or Video Box -->
@@ -506,16 +506,16 @@
                                 </div>
 
                                 <!-- Name & Position Fields -->
-                                <div class="row gx-3 mb-1">
-                                    <div class="col-md-6 mb-1">
-                                        <label for="name">{{ __('Your Name') }}</label>
+                                <div class="row gx-3 mb-2">
+                                    <div class="col-md-6 mb-2">
+                                        <label for="name" class="form-label mb-1">{{ __('Your Name') }}</label>
                                         <input type="text" class="form-control" name="name" id="name" placeholder="{{ __('Enter your full name') }}" required>
                                         @error('name')
                                             <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    <div class="col-md-6 mb-1">
-                                        <label for="position">{{ __('Position/Title') }}</label>
+                                    <div class="col-md-6 mb-2">
+                                        <label for="position" class="form-label mb-1">{{ __('Position/Title') }}</label>
                                         <input type="text" class="form-control" name="position" id="position" placeholder="{{ __('Enter your position or title') }}">
                                         @error('position')
                                             <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
@@ -525,18 +525,18 @@
 
                                 <!-- Testimonial Description -->
                                 <div class="mb-2">
-                                    <label for="description">{{ __('Your Testimonial') }}</label>
+                                    <label for="description" class="form-label mb-1">{{ __('Your Testimonial') }}</label>
                                     <textarea class="form-control" name="description" id="description" rows="3" placeholder="{{ __('Share your experience with us...') }}" maxlength="500" required></textarea>
-                                    <div class="text-end text-muted" style="font-size: 12px; color: #64748b; margin-top: 2px;" id="char-count">0 / 500</div>
+                                    <div class="text-end text-muted mt-1 mb-1" style="font-size: 12.5px; color: #64748b;" id="char-count">0 / 500</div>
                                     @error('description')
                                         <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <!-- Star Rating -->
-                                <div class="mb-1">
-                                    <label for="rating-value">{{ __('Your Rating') }}</label>
-                                    <div class="d-flex align-items-center gap-2 mt-1">
+                                <div class="mt-1">
+                                    <label for="rating-value" class="form-label mb-1">{{ __('Your Rating') }}</label>
+                                    <div class="d-flex align-items-center gap-2 mt-0">
                                         <div class="rating-stars-wrap">
                                             <i class="fas fa-star rating-star-icon" data-value="1"></i>
                                             <i class="fas fa-star rating-star-icon" data-value="2"></i>
@@ -590,12 +590,12 @@
                         <!-- Submit Button Row (In Left Side Grid Column width below) -->
                         <div class="row">
                             <div class="col-lg-7">
-                                <div class="mt-1">
+                                <div class="mt-2">
                                     <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
                                         <span>{{ __('Submit Testimonial') }}</span>
                                         <i class="fas fa-paper-plane ms-2"></i>
                                     </button>
-                                    <div class="text-center mt-2 text-muted" style="font-size: 13px; color: #64748b;">
+                                    <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
                                         <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
                                     </div>
                                 </div>
