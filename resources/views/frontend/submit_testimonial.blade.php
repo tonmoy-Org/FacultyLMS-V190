@@ -149,11 +149,10 @@
     /* Testimonial Form Card Styles */
     .testimonial-form-card {
         background: #ffffff;
-        border: none !important;
+        border: 1px solid #e2e8f0;
         border-radius: 8px;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        box-shadow: none !important;
+        padding: 30px !important;
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
         margin-top: 20px;
         margin-bottom: 40px;
         width: 100%;
