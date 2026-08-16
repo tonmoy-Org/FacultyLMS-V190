@@ -36,11 +36,20 @@
                                                    placeholder="{{ __('enter_title') }}" value="{{ setting('newsletter_title',$lang) ?: 'Subscribe Newsletter' }}">
                                         </div>
 
-                                    <div class="col-12 mb-3">
-                                        <label for="newsletter_description" class="form-label">{{ __('Newsletter Description') }}</label>
-                                        <textarea class="form-control rounded-2" id="newsletter_description" name="newsletter_description" rows="2"
-                                                  placeholder="{{ __('Enter Newsletter Description') }}">{{ setting('newsletter_description',$lang) ?: '' }}</textarea>
-                                    </div>
+                                        <div class="col-12">
+                                            <label for="newsletter_description" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Newsletter Description') }}</label>
+                                            <textarea class="form-control rounded-2 py-2" id="newsletter_description" name="newsletter_description" rows="2"
+                                                      placeholder="{{ __('Enter Newsletter Description') }}">{{ setting('newsletter_description',$lang) ?: '' }}</textarea>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="promo_banner_countdown_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Countdown Title') }}</label>
+                                            <input type="text" class="form-control rounded-2 py-2" id="promo_banner_countdown_title" name="promo_banner_countdown_title"
+                                                   placeholder="{{ __('Enter Countdown Title (Leave blank to remove)') }}" value="{{ setting('promo_banner_countdown_title', $lang) }}">
+                                            <div class="nk-block-des text-muted mt-1" style="font-size: 12px;">
+                                                <p>{{ __('If left blank, the title text above the timer will be completely removed.') }}</p>
+                                            </div>
+                                        </div>
 
                                         <div class="col-md-6 col-12">
                                             <label for="get_access_btn_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Get Access Button Title') }}</label>
