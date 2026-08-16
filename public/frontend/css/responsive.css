@@ -2290,4 +2290,232 @@
   .template-header .header-extra .d-xs-block {
     display: block !important;
   }
-}/*# sourceMappingURL=responsive.css.map */
+}
+
+/*-----------------------------------------------------------------------------------
+    Masterclass Home Page Mobile Responsiveness Enhancements (max-width: 767px)
+-----------------------------------------------------------------------------------*/
+@media (max-width: 767px) {
+  /* Hero Area Mobile Optimization */
+  .hero-area {
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+  }
+  .hero-area .hero-title {
+    font-size: 22px !important;
+    line-height: 1.35 !important;
+  }
+  .hero-area h4 {
+    font-size: 17px !important;
+  }
+  .hero-area p {
+    font-size: 14px !important;
+  }
+  .hero-area .video-container {
+    max-height: 280px !important;
+  }
+  .hero-area .hero-btns {
+    margin-top: 25px !important;
+  }
+  .hero-area .hero-btns li {
+    width: 100% !important;
+  }
+  .hero-area .hero-btns .template-btn {
+    width: 100% !important;
+    text-align: center !important;
+    font-size: 15px !important;
+    padding: 12px 20px !important;
+  }
+  .course-description-section {
+    padding-top: 40px !important;
+    padding-bottom: 25px !important;
+  }
+  .course-description-section .description-card {
+    padding: 20px 16px !important;
+  }
+  .course-description-section h2 {
+    font-size: 20px !important;
+  }
+
+  /* About Me Section Mobile */
+  .about-me-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+  .about-me-card {
+    min-height: 250px !important;
+  }
+  .about-me-card img {
+    min-height: 250px !important;
+  }
+  .about-me-text-block h3 {
+    font-size: 20px !important;
+  }
+  .about-me-text-block .about-me-description-content {
+    font-size: 13.5px !important;
+  }
+
+  /* Categories of Work Section Mobile */
+  .cow-wrapper {
+    padding: 30px 16px !important;
+    border-radius: 12px !important;
+  }
+  .cow-title {
+    font-size: 22px !important;
+    margin-bottom: 30px !important;
+  }
+  .cow-card {
+    padding: 20px 16px !important;
+  }
+  .cow-card-title {
+    font-size: 16px !important;
+    padding: 12px 16px !important;
+    margin-bottom: 16px !important;
+  }
+  .cow-card-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+  }
+  .cow-card-content.has-image {
+    padding-right: 0 !important;
+  }
+
+  /* Benefits Section Mobile */
+  .benefits-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+  .benefits-section .course-section-title {
+    font-size: 20px !important;
+    margin-bottom: 30px !important;
+  }
+  .mc-new-benefit-card {
+    padding: 20px 16px !important;
+  }
+
+  /* Special Gift Section Mobile */
+  .special-gift-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+  .mc-special-gift-card {
+    padding: 24px 16px !important;
+  }
+  .mc-special-gift-card h2 {
+    font-size: 20px !important;
+  }
+  .mc-callout-quote {
+    padding: 12px 14px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+  .mc-callout-quote .quote-price {
+    font-size: 1rem !important;
+  }
+
+  /* Outcomes & Instructor Section Mobile */
+  .what-you-learn-section, .instructor-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+  .common-heading h2 {
+    font-size: 22px !important;
+  }
+  .instructor-card {
+    padding: 24px 16px !important;
+  }
+  .instructor-card img {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  /* Syllabus Section Mobile */
+  .syllabus-section {
+    padding-top: 20px !important;
+    padding-bottom: 30px !important;
+  }
+  .custom-syllabus-accordion .accordion-button {
+    padding: 14px 16px !important;
+    font-size: 14px !important;
+  }
+  .custom-syllabus-accordion .accordion-body ul {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  .custom-syllabus-accordion .accordion-body a {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* Offer Breakdown Section Mobile */
+  .offer-breakdown-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+  .offer-breakdown-section .mc-content-card {
+    padding: 16px !important;
+  }
+  .offer-breakdown-section h3 {
+    font-size: 20px !important;
+  }
+  .offer-breakdown-section .breakdown-list .d-flex {
+    flex-direction: row !important;
+    align-items: center !important;
+    font-size: 13.5px !important;
+  }
+
+  /* Support Section Mobile */
+  .mc-support-section-wrapper {
+    padding-top: 30px !important;
+  }
+  .mc-support-title {
+    font-size: 20px !important;
+  }
+  .mc-support-img {
+    max-height: 260px !important;
+  }
+
+  /* Order Form Section Mobile */
+  .order-form-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+  .order-form-section h4 {
+    font-size: 18px !important;
+  }
+  .coupon-form-wrapper input {
+    max-width: 100% !important;
+  }
+  .order-summary-box table th, .order-summary-box table td {
+    font-size: 13px !important;
+  }
+
+  /* Ad Banners Mobile */
+  .ad-banner-section-1 img, .ad-banner-section-2 img {
+    max-height: 180px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-area .hero-title {
+    font-size: 20px !important;
+  }
+  .template-btn {
+    padding: 10px 18px !important;
+    font-size: 14px !important;
+  }
+  .sp-countdown {
+    gap: 4px !important;
+  }
+  .sp-cd-item {
+    min-width: 40px !important;
+    padding: 4px 6px !important;
+  }
+  .sp-cd-item .num {
+    font-size: 14px !important;
+  }
+}
+/*# sourceMappingURL=responsive.css.map */
