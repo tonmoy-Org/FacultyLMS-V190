@@ -168,12 +168,13 @@
         gap: 10px;
     }
     .testimonial-form-card .card-header-title {
-        font-size: 20px;
+        font-size: 28px !important;
         font-weight: 700;
-        color: #0f172a;
+        color: #111827;
+        font-family: var(--header-font);
         margin: 0;
         padding-left: 12px;
-        border-left: 3px solid #10b981;
+        border-left: 3.5px solid #10b981;
         line-height: 1.2;
     }
     .testimonial-form-card .card-header-subtitle {
@@ -477,7 +478,7 @@
                 <div class="testimonial-form-card">
                     <!-- Header Bar -->
                     <div class="card-header-bar">
-                        <h5 class="card-header-title">{{ __('Your Experience Matters') }}</h5>
+                        <h3 class="card-header-title">{{ __('Your Experience Matters') }}</h3>
                         <p class="card-header-subtitle">{{ __('Share your success story with us.') }}</p>
                     </div>
 
