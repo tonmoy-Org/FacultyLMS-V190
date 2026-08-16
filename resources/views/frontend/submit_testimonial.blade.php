@@ -571,27 +571,27 @@
                                     $formRightImgUrl = getFileLink('original_image', $formRightImgSetting);
                                 }
                             @endphp
-                            <div class="success-form-right-card h-100 p-4 p-md-5 d-flex flex-column align-items-center justify-content-center text-center" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; min-height: 480px; position: relative; overflow: hidden;">
+                            <div class="success-form-right-card p-3 p-md-4 d-flex flex-column align-items-center justify-content-center text-center" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; min-height: 260px; position: relative; overflow: hidden;">
                                 @if(!empty($formRightImgUrl) && !str_contains($formRightImgUrl, 'default-image'))
-                                    <div class="w-100 h-100 position-relative rounded-3 overflow-hidden d-flex flex-column justify-content-center align-items-center">
-                                        <img src="{{ $formRightImgUrl }}" alt="{{ setting('success_form_right_title') ?: __('Share Your Journey') }}" class="w-100 rounded-3 mb-3" style="max-height: 380px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                                    <div class="w-100 position-relative rounded-3 overflow-hidden d-flex flex-column justify-content-center align-items-center">
+                                        <img src="{{ $formRightImgUrl }}" alt="{{ setting('success_form_right_title') ?: __('Share Your Journey') }}" class="w-100 rounded-3 mb-2" style="max-height: 240px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);">
                                         @if(setting('success_form_right_title'))
-                                            <h4 class="fw-bold mb-0" style="color: #0f172a; font-size: 20px; font-family: var(--header-font);">
+                                            <h4 class="fw-bold mb-0" style="color: #0f172a; font-size: 17px; font-family: var(--header-font);">
                                                 {{ setting('success_form_right_title') }}
                                             </h4>
                                         @endif
                                     </div>
                                 @else
-                                    <!-- Professional Upload Graphic Illustration Card -->
-                                    <div class="p-3 w-100 d-flex flex-column align-items-center justify-content-center">
-                                        <div class="upload-icon-badge mx-auto mb-4" style="width: 88px; height: 88px; border-radius: 50%; background: rgba(16, 185, 129, 0.1); color: #10b981; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(16, 185, 129, 0.2); transition: transform 0.3s ease;">
-                                            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <!-- Compact Professional Upload Graphic Illustration Card -->
+                                    <div class="p-2 w-100 d-flex flex-column align-items-center justify-content-center">
+                                        <div class="upload-icon-badge mx-auto mb-3" style="width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.1); color: #10b981; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(16, 185, 129, 0.2); transition: transform 0.3s ease;">
+                                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                                 <polyline points="17 8 12 3 7 8"></polyline>
                                                 <line x1="12" y1="3" x2="12" y2="15"></line>
                                             </svg>
                                         </div>
-                                        <h4 class="fw-bold mb-0" style="color: #0f172a; font-size: 22px; font-family: var(--header-font);">
+                                        <h4 class="fw-bold mb-0" style="color: #0f172a; font-size: 18px; font-family: var(--header-font);">
                                             {{ setting('success_form_right_title') ?: __('Share Your Inspiring Journey') }}
                                         </h4>
                                     </div>
