@@ -441,7 +441,6 @@
                 @endif
             @endforeach
         </div>
-        <hr class="m-b-50">
         @endif
 
         <div class="row">
@@ -595,9 +594,6 @@
                                         <span>{{ __('Submit Testimonial') }}</span>
                                         <i class="fas fa-paper-plane ms-2"></i>
                                     </button>
-                                    <div class="text-center mt-3 text-muted" style="font-size: 13px; color: #64748b;">
-                                        <i class="fas fa-lock me-1"></i> {{ __("Your testimonial will be reviewed before it's published.") }}
-                                    </div>
                                 </div>
                             </div>
                         </div>
