@@ -534,8 +534,8 @@
 
                         <!-- Star Rating -->
                         <div class="mb-4">
-                            <label>{{ __('Your Rating') }}</label>
-                            <div class="d-flex align-items-center gap-2 mt-2">
+                            <label class="section-field-label"><i class="far fa-star text-success" style="color: #10b981;"></i> {{ __('Your Rating') }}</label>
+                            <div class="d-flex align-items-center gap-2">
                                 <div class="rating-stars-wrap">
                                     <i class="fas fa-star rating-star-icon" data-value="1"></i>
                                     <i class="fas fa-star rating-star-icon" data-value="2"></i>
