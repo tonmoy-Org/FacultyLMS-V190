@@ -380,6 +380,19 @@
             min-height: 480px !important;
             border: 0 !important;
         }
+        
+        .contact-us-page-section .form-control {
+            font-size: 14px;
+            padding: 10px 15px;
+            border-radius: 8px !important;
+        }
+        
+        .contact-us-page-section label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #334155;
+            margin-bottom: 4px;
+        }
     </style>
 
     <!--====== Main Section ======-->
@@ -389,7 +402,7 @@
             <div class="row g-4 align-items-stretch mb-5">
                 <!-- Left Column: Form -->
                 <div class="col-lg-6">
-                    <div class="contact-form-card h-100 p-4 p-md-5" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);">
+                    <div class="contact-form-card h-100 p-4" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);">
                         <form action="{{ route('instructor.contact') }}" method="POST" class="user-form">
                             @csrf
                             <div class="row g-3">
@@ -417,9 +430,8 @@
 
                                 <!-- Submit Button -->
                                 <div class="col-12 mt-4">
-                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
+                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center" style="font-size: 15px; padding: 12px 20px; font-weight: 500; border-radius: 8px;">
                                         <span>{{ __('Send Message') }}</span>
-                                        <i class="fas fa-paper-plane ms-2"></i>
                                     </button>
                                 </div>
                             </div>
@@ -429,9 +441,9 @@
 
                 <!-- Right Column: Map with Floating Card Overlay -->
                 <div class="col-lg-6">
-                    <div class="map-card-wrapper h-100 position-relative" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04); min-height: 480px;">
+                    <div class="map-card-wrapper h-100 position-relative" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04); min-height: 480px;">
                         <!-- Floating Location Overlay -->
-                        <div class="map-location-badge position-absolute" style="top: 24px; left: 24px; z-index: 10; background: #ffffff; border-radius: 12px; padding: 16px 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08); border: 1px solid #f1f5f9; max-width: 260px;">
+                        <div class="map-location-badge position-absolute" style="top: 24px; left: 24px; z-index: 10; background: #ffffff; border-radius: 8px; padding: 16px 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08); border: 1px solid #f1f5f9; max-width: 260px;">
                             <h6 class="fw-bold mb-1" style="color: #0f172a; font-size: 15px; font-family: var(--header-font);">{{ __($location_title) }}</h6>
                             <p class="mb-1 text-secondary" style="font-size: 13px; line-height: 1.4; color: #64748b; font-family: var(--body-font);">{{ $address }}</p>
                             <span style="font-size: 12.5px; color: #64748b; font-family: var(--body-font);">{{ __($location_subtitle) }}</span>

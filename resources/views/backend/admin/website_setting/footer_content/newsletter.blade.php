@@ -163,12 +163,7 @@
                                 </div>
                                 <div class="card-body p-4">
                                     <div class="row gx-20 gy-3">
-                                        <!-- Banner Tag -->
-                                        <div class="col-md-6 col-12">
-                                            <label for="contact_page_banner_tag" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Hero Banner Tag') }}</label>
-                                            <input type="text" class="form-control rounded-2 py-2" id="contact_page_banner_tag" name="contact_page_banner_tag"
-                                                   placeholder="{{ __('GET IN TOUCH') }}" value="{{ setting('contact_page_banner_tag', $lang) ?: (setting('contact_page_banner_tag') ?: 'GET IN TOUCH') }}">
-                                        </div>
+
 
                                         <!-- Banner Main Title -->
                                         <div class="col-md-6 col-12">
@@ -225,29 +220,14 @@
                                 </div>
                                 <div class="card-body p-4">
                                     <div class="row gx-20 gy-3">
-                                        <!-- Top Banner Subtitle & Title -->
-                                        <div class="col-md-6 col-12">
-                                            <label for="contact_banner_sub_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Top Banner Subtitle') }}</label>
-                                            <input type="text" class="form-control rounded-2 py-2" id="contact_banner_sub_title" name="contact_banner_sub_title"
-                                                   placeholder="{{ __('WE\'D LOVE TO HEAR FROM YOU') }}" value="{{ setting('contact_banner_sub_title', $lang) ?: (setting('contact_banner_sub_title') ?: 'WE\'D LOVE TO HEAR FROM YOU') }}">
-                                        </div>
+                                        <!-- Top Banner Title -->
                                         <div class="col-md-6 col-12">
                                             <label for="contact_banner_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Top Banner Title') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="contact_banner_title" name="contact_banner_title"
                                                    placeholder="{{ __('Contact Us') }}" value="{{ setting('contact_banner_title', $lang) ?: (setting('contact_banner_title') ?: 'Contact Us') }}">
                                         </div>
 
-                                        <!-- Get In Touch Section Title & Subtitle -->
-                                        <div class="col-md-6 col-12">
-                                            <label for="contact_page_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Get In Touch Section Title') }}</label>
-                                            <input type="text" class="form-control rounded-2 py-2" id="contact_page_title" name="contact_page_title"
-                                                   placeholder="{{ __('Get In Touch') }}" value="{{ setting('contact_page_title', $lang) ?: (setting('contact_page_title') ?: 'Get In Touch') }}">
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <label for="contact_page_subtitle" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Get In Touch Section Subtitle') }}</label>
-                                            <textarea class="form-control rounded-2 py-2" id="contact_page_subtitle" name="contact_page_subtitle" rows="2"
-                                                      placeholder="{{ __('Enter Description') }}">{{ setting('contact_page_subtitle', $lang) ?: (setting('contact_page_subtitle') ?: 'Feel free to reach out to us with any questions or inquiries. We will get back to you as soon as possible.') }}</textarea>
-                                        </div>
+
 
                                         <!-- Map Card Badge Title & Subtitle -->
                                         <div class="col-md-6 col-12">

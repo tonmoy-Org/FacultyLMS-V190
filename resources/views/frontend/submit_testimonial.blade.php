@@ -150,7 +150,7 @@
     .testimonial-form-card {
         background: #ffffff;
         border: none !important;
-        border-radius: 16px;
+        border-radius: 8px;
         padding-left: 0 !important;
         padding-right: 0 !important;
         box-shadow: none !important;
@@ -213,7 +213,7 @@
         font-weight: 700;
         font-size: 12px;
         padding: 7px 16px;
-        border-radius: 6px;
+        border-radius: 8px;
         cursor: pointer;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -231,7 +231,7 @@
     .testimonial-form-card .upload-drop-zone {
         border: 1.5px dashed #a7f3d0;
         background: #f0fdf4;
-        border-radius: 10px;
+        border-radius: 8px;
         padding: 28px 20px;
         text-align: center;
         position: relative;
@@ -265,9 +265,21 @@
         margin-top: 2px;
     }
 
+    .testimonial-form-card .form-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #334155;
+    }
+    
+    .testimonial-form-card .form-control {
+        font-size: 14px;
+        padding: 10px 15px;
+        border-radius: 8px !important;
+    }
+
     .testimonial-form-card .rating-stars-wrap i {
         color: #f59e0b;
-        font-size: 22px;
+        font-size: 18px;
         cursor: pointer;
         margin-right: 4px;
         transition: color 0.15s;
@@ -496,8 +508,8 @@
                                         </div>
                                     </div>
                                     <div id="media-preview-container" class="mt-2 text-center" style="display: none; background: #f8fafc; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
-                                        <img id="media-image-preview" src="" alt="Media Preview" style="max-height: 180px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto; object-fit: cover;">
-                                        <video id="media-video-preview" src="" controls style="max-height: 180px; max-width: 100%; border-radius: 6px; display: none; margin: 0 auto;"></video>
+                                        <img id="media-image-preview" src="" alt="Media Preview" style="max-height: 180px; max-width: 100%; border-radius: 8px; display: none; margin: 0 auto; object-fit: cover;">
+                                        <video id="media-video-preview" src="" controls style="max-height: 180px; max-width: 100%; border-radius: 8px; display: none; margin: 0 auto;"></video>
                                     </div>
                                     @error('file')
                                         <p class="text-danger mt-1" style="font-size: 13px;">{{ $message }}</p>
@@ -580,8 +592,8 @@
                                         $formRightImgUrl = static_asset('images/default/default-image-391x541.png');
                                     }
                                 @endphp
-                                <div class="success-form-right-card h-100 w-100 position-relative overflow-hidden" style="border: 1px solid #e2e8f0; border-radius: 16px; background: #f8fafc;">
-                                    <img src="{{ $formRightImgUrl }}" alt="Right Side Image" class="w-100 h-100" style="object-fit: cover; border-radius: 16px; display: block; width: 100%; height: 100%;">
+                                <div class="success-form-right-card h-100 w-100 position-relative overflow-hidden" style="border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc;">
+                                    <img src="{{ $formRightImgUrl }}" alt="Right Side Image" class="w-100 h-100" style="object-fit: cover; border-radius: 8px; display: block; width: 100%; height: 100%;">
                                 </div>
                             </div>
                         </div>
@@ -590,9 +602,8 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="mt-2">
-                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center">
+                                    <button type="submit" class="template-btn w-100 d-flex align-items-center justify-content-center" style="font-size: 15px; padding: 12px 20px; font-weight: 500; border-radius: 8px;">
                                         <span>{{ setting('success_form_submit_btn') ?: __('Submit Testimonial') }}</span>
-                                        <i class="fas fa-paper-plane ms-2"></i>
                                     </button>
                                 </div>
                             </div>
