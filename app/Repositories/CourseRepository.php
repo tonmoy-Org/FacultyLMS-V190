@@ -59,8 +59,8 @@ class CourseRepository
 
         if (arrayCheck('discount_period', $request)) {
             $dates                        = explode(' - ', $request['discount_period']);
-            $request['discount_start_at'] = Carbon::parse($dates[0])->startOfDay();
-            $request['discount_end_at']   = Carbon::parse($dates[1])->endOfDay();
+            $request['discount_start_at'] = Carbon::parse($dates[0])->startOfDay()->format('Y-m-d H:i:s');
+            $request['discount_end_at']   = Carbon::parse($dates[1])->endOfDay()->format('Y-m-d H:i:s');
         }
 
         $request['user_id'] = auth()->id();
@@ -191,8 +191,8 @@ class CourseRepository
 
         if (arrayCheck('discount_period', $request)) {
             $dates                        = explode(' - ', $request['discount_period']);
-            $request['discount_start_at'] = Carbon::parse($dates[0])->startOfDay();
-            $request['discount_end_at']   = Carbon::parse($dates[1])->endOfDay();
+            $request['discount_start_at'] = Carbon::parse($dates[0])->startOfDay()->format('Y-m-d H:i:s');
+            $request['discount_end_at']   = Carbon::parse($dates[1])->endOfDay()->format('Y-m-d H:i:s');
         }
         if (arrayCheck('is_free', $request) && $request['is_free'] == 1) {
             $request['price'] = 0;
