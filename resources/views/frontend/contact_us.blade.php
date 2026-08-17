@@ -217,7 +217,7 @@
             min-height: auto;
         }
         .contact-hero-banner .banner-main-title {
-            font-size: 24px;
+            font-size: 22px;
         }
     }
 </style>
