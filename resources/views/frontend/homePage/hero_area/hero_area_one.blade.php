@@ -203,6 +203,7 @@
 </script>
 @endpush
 
+<<<<<<< Updated upstream
 @push('css')
 <style>
 /* Desktop Default Typography */
@@ -502,6 +503,8 @@
 </style>
 @endpush
 
+=======
+>>>>>>> Stashed changes
 @else
 <section class="hero-area hero-area-v5 p-t-120 p-b-60 p-b-md-40 text-center">
     <div class="container container-1278">

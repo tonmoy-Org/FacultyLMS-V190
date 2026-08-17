@@ -66,38 +66,4 @@
         </div>
     </div>
 </section>
-
-@push('css')
-<style>
-@media (max-width: 767.98px) {
-    .about-me-section {
-        padding-top: 25px !important;
-        padding-bottom: 30px !important;
-    }
-    .about-me-card {
-        min-height: 280px !important;
-        height: 280px !important;
-        margin-bottom: 15px !important;
-    }
-    .about-me-card img {
-        min-height: 280px !important;
-        max-height: 280px !important;
-    }
-    .about-me-text-block .sub-title {
-        font-size: 13px !important;
-        margin-bottom: 8px !important;
-    }
-    .about-me-text-block h3 {
-        font-size: 20px !important;
-        line-height: 1.4 !important;
-        margin-bottom: 12px !important;
-    }
-    .about-me-description-content {
-        font-size: 14px !important;
-        line-height: 1.65 !important;
-        margin-bottom: 16px !important;
-    }
-}
-</style>
-@endpush
 @endif
