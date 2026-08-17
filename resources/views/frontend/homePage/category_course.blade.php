@@ -1,5 +1,5 @@
 <div class="tab-pane fade show active" id="1" role="tabpanel" aria-labelledby="all-courses-tab">
-    <div class="row course-items-v3">
+    <div class="row course-items-v3 px-3 px-md-0">
         @if (count($courses) > 0)
             @foreach ($courses as $course)
                 <div class="col-lg-4 col-sm-6">

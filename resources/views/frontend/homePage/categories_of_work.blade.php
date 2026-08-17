@@ -62,6 +62,15 @@
     .cow-card-content p {
         margin-bottom: 12px;
     }
+    .cow-card-content ul, .cow-card-content ol {
+        padding-left: 0 !important; 
+        margin-bottom: 15px !important;
+    }
+    .cow-card-content li {
+        margin-left: 25px !important; /* Pushes the li to the right, giving space for the outside bullet */
+        margin-bottom: 8px !important;
+        list-style-position: outside !important;
+    }
     .cow-card-img-floating-wrapper {
         position: absolute;
         right: 0;

@@ -1,4 +1,17 @@
 <section class="hero-area hero-area-v5 p-t-120 p-b-60 p-b-md-40">
+    <style>
+        @media (min-width: 992px) {
+            .hero-area.hero-area-v5 .hero-content .hero-title {
+                font-size: 50px !important;
+                line-height: 1.2 !important;
+            }
+        }
+        @media (min-width: 1400px) {
+            .hero-area.hero-area-v5 .hero-content .hero-title {
+                font-size: 58px !important;
+            }
+        }
+    </style>
     <div class="container container-1278">
         <div class="row justify-content-center align-items-center">
             <div class="col-xl-6 col-lg-6 col-md-10">
