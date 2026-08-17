@@ -19,7 +19,7 @@
                 .template-header.header-layout-1 .brand-logo a.sticky-logo { display: none !important; }
                 .template-header.header-layout-1 .header-navigation.sticky-on .brand-logo a.sticky-logo { display: inline-flex !important; }
                 .template-header.header-layout-1 .header-navigation.sticky-on .brand-logo a.main-logo { display: none !important; }
-                .template-header.header-layout-1 .header-center { pointer-events: none !important; }
+                .template-header.header-layout-1 .header-center { pointer-events: none !important; margin-left: 14px !important; }
                 .template-header.header-layout-1 .header-center .nav-menu { pointer-events: auto !important; }
                 @media (max-width: 991.98px) {
                     .template-header.header-layout-1 .header-navigation { padding: 6px 0 !important; }
