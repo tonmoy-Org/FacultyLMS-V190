@@ -203,7 +203,6 @@
 </script>
 @endpush
 
-<<<<<<< Updated upstream
 @push('css')
 <style>
 /* Desktop Default Typography */
