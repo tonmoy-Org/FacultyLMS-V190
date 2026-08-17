@@ -159,41 +159,56 @@
 
     @media (max-width: 768px) {
         .sp-inner-container {
-            flex-direction: column;
-            text-align: center;
-            padding: 4px 0;
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding: 8px 10px;
+            align-items: center;
         }
-        .sp-left, .sp-middle, .sp-right {
+        .sp-left {
             width: 100%;
             justify-content: center;
-            padding: 4px 8px;
+            padding: 0 0 8px 0;
+            min-width: auto;
+        }
+        .sp-middle {
+            width: 55%;
+            justify-content: flex-start;
+            padding: 0;
+            min-width: auto;
+        }
+        .sp-right {
+            width: 45%;
+            justify-content: flex-end;
+            padding: 0;
             min-width: auto;
         }
         .sp-left h3 {
-            font-size: 15px;
+            font-size: 14px;
             text-align: center;
             line-height: 1.2;
+            margin: 0;
+        }
+        .sp-countdown {
+            gap: 4px;
         }
         .sp-cd-item {
-            padding: 4px 8px;
-            min-width: 45px;
+            padding: 4px;
+            min-width: 38px;
         }
         .sp-cd-item .num {
-            font-size: 14px;
+            font-size: 13px;
         }
         .sp-cd-item span.label {
             font-size: 8px;
             margin-top: 2px;
         }
-        .sp-right {
-            padding-bottom: 6px;
-        }
         .sp-right .btn-enroll {
-            padding: 6px 12px;
-            font-size: 14px;
+            padding: 6px 8px;
+            font-size: 12px;
+            gap: 4px;
         }
         .sp-right .btn-enroll i {
-            font-size: 14px;
+            font-size: 12px;
         }
         .sticky-promo-wrapper.is-sticky {
             border-radius: 0;
