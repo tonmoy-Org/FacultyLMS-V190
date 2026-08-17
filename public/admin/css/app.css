@@ -12937,8 +12937,10 @@ textarea.form-control::-webkit-scrollbar-thumb,
 }
 .dashboard-logo .logo img,
 .dashboard-logo .logo svg {
-  width: 105px;
-  height: 40px;
+  max-height: 34px;
+  width: auto;
+  max-width: 170px;
+  object-fit: contain;
 }
 .dashboard-logo .logo-icon {
   display: none;

@@ -23,7 +23,15 @@
     padding-left: 50px;
 }
 
-/* Dashboard Logo Sizing for Mobile Devices */
+/* Dashboard Logo Sizing */
+.dashboard-logo .logo img,
+.dashboard-logo .logo svg {
+    max-height: 34px !important;
+    width: auto !important;
+    max-width: 170px !important;
+    object-fit: contain !important;
+}
+
 @media screen and (max-width: 575px) {
     .dashboard-logo .logo img,
     .dashboard-logo .logo svg {
