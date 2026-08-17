@@ -12,23 +12,23 @@
                     {{-- Subject --}}
                     @if($hero_course->subject)
                         <div class="mb-3">
-                            <span class="badge" style="background-color: rgba(255,255,255,0.15); color: #2db37c; font-size: 14px; padding: 6px 14px; border-radius: 20px; font-weight: 600;">
+                            <span class="badge hero-badge" style="background-color: rgba(255,255,255,0.15); color: #2db37c; padding: 6px 14px; border-radius: 20px;">
                                 {{ $hero_course->subject->title }}
                             </span>
                         </div>
                     @endif
                     
                     {{-- Title first --}}
-                    <h1 class="hero-title mb-2" style="color: #ffffff; font-size: 32px; font-weight: 700; line-height: 1.3;">{{ $hero_course->title }}</h1>
+                    <h1 class="hero-title mb-2" style="color: #ffffff;">{{ $hero_course->title }}</h1>
 
                     {{-- Subtitle second --}}
                     @if($hero_course->course_subtitle)
-                        <h4 class="mb-3" style="color: #ffffff; font-size: 24px; font-weight: 500;">{{ $hero_course->course_subtitle }}</h4>
+                        <h4 class="hero-subtitle mb-3" style="color: #ffffff;">{{ $hero_course->course_subtitle }}</h4>
                     @endif
                     
                     {{-- Description --}}
                     @if($hero_course->short_description)
-                        <p class="mb-4 mx-auto" style="color: #cbd5e1; font-size: 16px; line-height: 1.6; max-width: 750px;">
+                        <p class="hero-description mb-4 mx-auto" style="color: #cbd5e1; max-width: 750px;">
                             {{ $hero_course->short_description }}
                         </p>
                     @endif
@@ -60,7 +60,7 @@
                     @endphp
                     <ul class="hero-btns d-flex justify-content-center align-items-center mt-4">
                         <li>
-                            <a href="{{ $heroBtnUrl }}" class="template-btn">
+                            <a href="{{ $heroBtnUrl }}" class="template-btn hero-btn">
                                 {{ $heroBtnText }}
                             </a>
                         </li>
@@ -104,6 +104,100 @@
         }
     });
 </script>
+@endpush
+
+@push('css')
+<style>
+/* Desktop Default Typography */
+.hero-badge {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.hero-title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.hero-description {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.hero-btn {
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 600;
+    min-height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile Viewport Styles (< 768px) */
+@media (max-width: 767.98px) {
+    .hero-area {
+        padding-top: 100px !important;
+        padding-bottom: 30px !important;
+    }
+
+    .hero-badge {
+        font-size: 12px !important;
+        line-height: 1.2 !important;
+        font-weight: 600 !important;
+    }
+
+    .hero-title {
+        font-size: 24px !important;
+        line-height: 1.4 !important;
+        font-weight: 700 !important;
+        margin-bottom: 8px !important;
+    }
+
+    .hero-subtitle {
+        font-size: 16px !important;
+        line-height: 1.45 !important;
+        font-weight: 600 !important;
+        margin-bottom: 12px !important;
+    }
+
+    .hero-description {
+        font-size: 14px !important;
+        line-height: 1.65 !important;
+        font-weight: 400 !important;
+        margin-bottom: 16px !important;
+    }
+
+    .hero-btn {
+        font-size: 15px !important;
+        line-height: 1.2 !important;
+        font-weight: 600 !important;
+        height: 48px !important;
+        min-height: 48px !important;
+        padding: 12px 28px !important;
+    }
+
+    .course-description-section {
+        padding-top: 25px !important;
+        padding-bottom: 20px !important;
+    }
+
+    .description-card {
+        padding: 20px 16px !important;
+    }
+
+    .description-card h2 {
+        font-size: 20px !important;
+        margin-bottom: 12px !important;
+    }
+}
+</style>
 @endpush
 
 @else

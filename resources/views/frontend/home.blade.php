@@ -183,7 +183,7 @@
             $successBannerUrl = getFileLink('original_image', $successBannerImg);
         }
     @endphp
-    @if($successBannerUrl && !str_contains($successBannerUrl, 'default'))
+    @if((string)setting('success_page_banner_status') !== '0' && $successBannerUrl && !str_contains($successBannerUrl, 'default'))
     <section class="success-banner-section p-t-60 p-b-20 bg-white overflow-hidden">
         <div class="container container-1278">
             <div class="row justify-content-center">
