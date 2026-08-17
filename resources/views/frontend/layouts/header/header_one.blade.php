@@ -9,11 +9,16 @@
                 .template-header.header-layout-1 .header-inner { height: 70px !important; }
                 .template-header.header-layout-1 .header-inner .brand-logo { max-height: 60px !important; }
                 .template-header.header-layout-1 .header-inner .brand-logo img { max-height: 45px !important; }
-                .template-header.header-layout-1 .header-inner .nav-menu > ul > li > a { line-height: 60px !important; }
-                .template-header.header-layout-1 .header-inner .nav-menu > ul { padding-left: 0 !important; margin-left: 0 !important; justify-content: center; }
-                .template-header.header-layout-1 .header-inner .nav-menu > ul > li { flex: 1 1 0px; text-align: center; min-width: 100px; display: flex; justify-content: center; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul { padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 0 !important; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul > li { flex: 0 0 110px !important; width: 110px !important; min-width: 110px !important; margin: 0 !important; padding: 0 !important; display: flex !important; justify-content: center !important; align-items: center !important; text-align: center !important; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul > li:first-child { margin-inline-start: 0 !important; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul > li:last-child { margin-inline-end: 0 !important; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul > li > a { line-height: 60px !important; text-align: center !important; width: 100% !important; margin: 0 !important; padding-left: 0 !important; padding-right: 0 !important; }
                 .template-header.header-layout-1 .brand-logo { position: relative !important; z-index: 35 !important; }
                 .template-header.header-layout-1 .brand-logo a { position: relative !important; z-index: 35 !important; pointer-events: auto !important; cursor: pointer !important; display: inline-flex !important; align-items: center !important; }
+                .template-header.header-layout-1 .brand-logo a.sticky-logo { display: none !important; }
+                .template-header.header-layout-1 .header-navigation.sticky-on .brand-logo a.sticky-logo { display: inline-flex !important; }
+                .template-header.header-layout-1 .header-navigation.sticky-on .brand-logo a.main-logo { display: none !important; }
                 .template-header.header-layout-1 .header-center { pointer-events: none !important; }
                 .template-header.header-layout-1 .header-center .nav-menu { pointer-events: auto !important; }
                 @media (max-width: 991.98px) {
@@ -23,9 +28,6 @@
                     .template-header.header-layout-1 .header-left { position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; width: auto !important; max-width: 48% !important; display: flex !important; align-items: center !important; justify-content: center !important; z-index: 35 !important; margin: 0 !important; padding: 0 !important; }
                     .template-header.header-layout-1 .header-left .brand-logo { margin-inline-end: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; margin: 0 !important; }
                     .template-header.header-layout-1 .header-left .brand-logo a { align-items: center; display: flex; cursor: pointer !important; z-index: 35 !important; }
-                    .template-header.header-layout-1 .header-left .brand-logo a.sticky-logo { display: none !important; }
-                    .template-header.header-layout-1 .header-navigation.sticky-on .header-left .brand-logo a.sticky-logo { display: flex !important; }
-                    .template-header.header-layout-1 .header-navigation.sticky-on .header-left .brand-logo a.main-logo { display: none !important; }
                     .template-header.header-layout-1 .header-left .brand-logo img { max-height: 32px !important; width: auto !important; object-fit: contain !important; cursor: pointer !important; }
                     .template-header.header-layout-1 .header-right { position: relative !important; margin-inline-start: auto !important; margin-inline-end: 0 !important; display: flex !important; align-items: center !important; justify-content: flex-end !important; z-index: 20 !important; height: 100% !important; padding-right: 0 !important; }
                     .template-header.header-layout-1 .header-extra { padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; }
