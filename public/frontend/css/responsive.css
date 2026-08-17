@@ -816,23 +816,25 @@
     padding: 3px 10px;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .template-header.header-layout-1 .header-navigation {
-    padding: 10px 0;
+    padding: 8px 0 !important;
   }
   .template-header.header-layout-1 .header-inner {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-    min-height: 60px;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 60px !important;
+    min-height: 60px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
   .template-header.header-layout-1 .header-inner .header-left .brand-logo {
-    margin-inline-end: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-inline-end: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   .template-header.header-layout-1 .header-left .brand-logo a.sticky-logo {
     display: none !important;
@@ -844,61 +846,94 @@
     display: none !important;
   }
   .template-header.header-layout-1 .navbar-toggler {
-    position: absolute;
-    inset-inline-start: 0px;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0;
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    position: absolute !important;
+    inset-inline-start: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+    z-index: 25 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 6px !important;
   }
   .template-header.header-layout-1 .header-right {
-    position: relative;
-    margin-inline-start: auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    z-index: 20;
-    height: 100%;
+    position: relative !important;
+    margin-inline-start: auto !important;
+    margin-inline-end: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    z-index: 20 !important;
+    height: 100% !important;
+    padding-right: 0 !important;
   }
   .template-header.header-layout-1 .header-left {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: auto;
-    max-width: 60%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    margin: 0;
-    padding: 0;
-  }
-  .template-header.header-layout-1 .header-extra .login-btn .template-btn {
-    padding: 0;
-    background-color: transparent;
-    border: 0;
-  }
-  .template-header.header-layout-1 .header-extra .login-btn .template-btn span {
-    display: none;
-  }
-  .template-header.header-layout-1 .header-extra .login-btn .template-btn i {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: auto !important;
+    max-width: 55% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10 !important;
     margin: 0 !important;
+    padding: 0 !important;
   }
-  .template-header.header-layout-1 .header-extra .login-btn .template-btn {
-    color: var(--color-body);
+  .template-header.header-layout-1 .header-extra {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
   }
-  .template-header.header-layout-1 .header-extra > li:not(:first-child) {
-    margin-inline-start: 0;
+  .template-header.header-layout-1 .header-extra > ul {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 8px !important;
   }
-  .template-header.header-layout-1 .header-extra > li:not(:nth-last-of-type(-n + 2)) {
-    margin-inline-end: 25px;
+  .template-header .header-right .header-extra .user-profile-dropdown .dropdown-toggle {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  .template-header .header-right .header-extra .user-profile-dropdown .dropdown-toggle::after {
+    display: none !important;
   }
   .template-header .header-right .header-extra .user-profile-dropdown .dropdown-toggle span {
-    display: none;
+    display: none !important;
+  }
+  .template-header .header-right .header-extra .user-profile-dropdown .dropdown-toggle img {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    margin-inline-end: 0 !important;
+    border: 2px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
+    background-color: #ffffff !important;
+  }
+  .template-header.header-layout-1 .header-extra .login-btn .get-access-btn {
+    padding: 6px 14px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    border-radius: 20px !important;
+    white-space: nowrap !important;
+    color: #ffffff !important;
+    background-color: var(--theme-clr, #10b981) !important;
+    border: none !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+  .template-header.header-layout-1 .header-extra .login-btn .get-access-btn span {
+    display: inline-block !important;
   }
   .off-canvas-wrapper .canvas-inner {
     padding-block: 70px 40px;
@@ -2333,27 +2368,129 @@
 /*-----------------------------------------------------------------------------------
     Masterclass Home Page Mobile Responsiveness Enhancements (max-width: 767px)
 -----------------------------------------------------------------------------------*/
-@media (max-width: 767px) {
-  /* Hero Area Mobile Optimization */
-  .hero-area {
-    padding-top: 90px !important;
-    padding-bottom: 50px !important;
+@media (max-width: 767.98px) {
+  :root, body {
+    --mobile-font-heading-main: 22px;
+    --mobile-font-heading-sub: 17px;
+    --mobile-font-badge: 13px;
+    --mobile-font-body: 13.5px;
+    --mobile-line-height-body: 1.75;
+    --mobile-weight-heading-main: 700;
+    --mobile-weight-heading-sub: 600;
   }
-  .hero-area .hero-title {
-    font-size: 22px !important;
+
+  /* Universal Mobile Primary Typography Declarations & Overrides */
+  /* 1. Main Heading (22px, Font-Weight 700) */
+  .hero-area .hero-title,
+  .hero-content .hero-title,
+  .common-heading h1,
+  .common-heading h2,
+  .course-section-title,
+  .section-title,
+  .cow-title,
+  .about-me-text-block h3,
+  .offer-breakdown-section h3,
+  .mc-support-title,
+  .course-description-section h2,
+  .mc-special-gift-card h2,
+  .webinar-section h2,
+  .why-choose-section .common-heading h2,
+  .success-banner-section h2,
+  .faq-section h2,
+  .testimonial-section h2,
+  .pricing-section h2,
+  .syllabus-section h2 {
+    font-size: var(--mobile-font-heading-main, 22px) !important;
+    font-weight: var(--mobile-weight-heading-main, 700) !important;
     line-height: 1.35 !important;
   }
-  .hero-area h4 {
-    font-size: 17px !important;
+
+  /* 2. Card / Sub-heading (17px, Font-Weight 600) */
+  .cow-card-title,
+  .mc-new-benefit-card h4,
+  .instructor-card h3,
+  .instructor-name,
+  .feature-text h4,
+  .feature-item h4,
+  .why-choose-features h4,
+  .why-choose-section .feature-text h4,
+  .why-choose-section .feature-item h4,
+  .custom-syllabus-accordion .accordion-button,
+  .faq-accordion .accordion-button,
+  .accordion-button,
+  .order-form-section h4,
+  .order-summary-box h4,
+  .order-form-title,
+  .pricing-table .plan-title,
+  .solution-package-title,
+  .pricing-box h4,
+  .hero-area h4,
+  .card-title,
+  .sub-heading {
+    font-size: var(--mobile-font-heading-sub, 17px) !important;
+    font-weight: var(--mobile-weight-heading-sub, 600) !important;
+    line-height: 1.45 !important;
   }
+
+  /* 3. Badge / Tag (13px) */
+  .hero-subtitle,
+  .badge,
+  .tag,
+  .mc-tag,
+  .badge-text,
+  .sub-title,
+  .badge-pill,
+  .pill-tag,
+  .sp-badge,
+  .category-tag,
+  .meta-info,
+  .rating-text,
+  .discount-badge,
+  .course-badge,
+  .badge-sm,
+  .tag-sm {
+    font-size: var(--mobile-font-badge, 13px) !important;
+  }
+
+  /* 4. Body Text (13.5px) & Line-height (1.75) */
+  body,
+  p,
+  .body-text,
+  .feature-text p,
+  .feature-item p,
+  .mc-new-benefit-card p,
+  .cow-card-content,
+  .about-me-description-content,
+  .breakdown-list,
+  .breakdown-list .d-flex,
+  .breakdown-item,
+  .breakdown-text,
+  .accordion-body,
+  .accordion-body p,
+  .accordion-body ul li,
+  .testimonial-content,
+  .testimonial-text,
+  .counter-title,
+  .solution-package-body p,
+  .pricing-feature-list li,
   .hero-area p {
-    font-size: 14px !important;
+    font-size: var(--mobile-font-body, 13.5px) !important;
+    line-height: var(--mobile-line-height-body, 1.75) !important;
+  }
+
+  /* Hero Area Mobile Optimization */
+  .hero-area {
+    padding-top: 75px !important;
+    padding-bottom: 15px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
   .hero-area .video-container {
     max-height: 280px !important;
   }
   .hero-area .hero-btns {
-    margin-top: 25px !important;
+    margin-top: 20px !important;
+    margin-bottom: 0 !important;
     display: flex !important;
     justify-content: center !important;
   }
@@ -2374,86 +2511,113 @@
     padding: 12px 28px !important;
     border-radius: 8px !important;
   }
-  .course-description-section {
-    padding-top: 40px !important;
-    padding-bottom: 25px !important;
+
+  /* Universal Mobile Container & Section Side Padding (16px Left & Right) */
+  .container,
+  .container-1278,
+  .container-fluid {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
   }
-  .course-description-section .description-card {
-    padding: 20px 16px !important;
+
+  /* Universal Mobile Section Outer Gaps & Horizontal Overflow Constraint */
+  .course-description-section,
+  .about-me-section,
+  .categories-of-work-section,
+  .benefits-section,
+  .special-gift-section,
+  .ad-banner-section-1,
+  .what-you-learn-section,
+  .instructor-section,
+  .syllabus-section,
+  .offer-breakdown-section,
+  .ad-banner-section-2,
+  .success-banner-section,
+  .success-story-section,
+  .faq-section,
+  .mc-support-section-wrapper,
+  .coupon-banner-section,
+  .order-form-section,
+  .why-choose-section,
+  .webinar-section,
+  .testimonial-section,
+  .pricing-section,
+  .counter-section,
+  .hero-area {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    overflow-x: hidden !important;
   }
-  .course-description-section h2 {
-    font-size: 20px !important;
+
+  /* Mobile Row Gutter & Side Alignment Constraint */
+  .row {
+    margin-left: -8px !important;
+    margin-right: -8px !important;
+  }
+  .row > * {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  /* Section Card & Component Container Inner Side Padding (Uniform 16px) */
+  .course-description-section .description-card,
+  .about-me-card,
+  .about-me-text-block,
+  .cow-wrapper,
+  .cow-card,
+  .mc-new-benefit-card,
+  .mc-special-gift-card,
+  .instructor-card,
+  .offer-breakdown-section .mc-content-card,
+  .order-summary-box,
+  .coupon-form-wrapper,
+  .custom-syllabus-accordion .accordion-button,
+  .custom-syllabus-accordion .accordion-body,
+  .faq-accordion .accordion-button,
+  .faq-accordion .accordion-body,
+  .mc-support-section-wrapper,
+  .why-choose-content,
+  .webinar-frame-wrapper,
+  .solution-package-item .solution-package-body,
+  .testimonial-items-v1 .testimonial-item,
+  .pricing-table .plan-title,
+  .pricing-table .plan-feature,
+  .cta-wrapper {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
   }
 
   /* About Me Section Mobile */
-  .about-me-section {
-    padding-top: 40px !important;
-    padding-bottom: 40px !important;
-  }
   .about-me-card {
     min-height: 250px !important;
   }
   .about-me-card img {
     min-height: 250px !important;
   }
-  .about-me-text-block h3 {
-    font-size: 20px !important;
-  }
-  .about-me-text-block .about-me-description-content {
-    font-size: 13.5px !important;
-  }
 
   /* Categories of Work Section Mobile */
   .cow-wrapper {
-    padding: 30px 16px !important;
     border-radius: 12px !important;
-  }
-  .cow-title {
-    font-size: 22px !important;
-    margin-bottom: 30px !important;
-  }
-  .cow-card {
-    padding: 20px 16px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
   .cow-card-title {
-    font-size: 16px !important;
-    padding: 12px 16px !important;
-    margin-bottom: 16px !important;
+    padding: 10px 14px !important;
+    margin-bottom: 14px !important;
   }
   .cow-card-content {
     padding-left: 0 !important;
     padding-right: 0 !important;
-    font-size: 14px !important;
-    line-height: 1.8 !important;
   }
   .cow-card-content.has-image {
     padding-right: 0 !important;
   }
 
-  /* Benefits Section Mobile */
-  .benefits-section {
-    padding-top: 40px !important;
-    padding-bottom: 40px !important;
-  }
-  .benefits-section .course-section-title {
-    font-size: 20px !important;
-    margin-bottom: 30px !important;
-  }
-  .mc-new-benefit-card {
-    padding: 20px 16px !important;
-  }
-
   /* Special Gift Section Mobile */
-  .special-gift-section {
-    padding-top: 40px !important;
-    padding-bottom: 40px !important;
-  }
-  .mc-special-gift-card {
-    padding: 24px 16px !important;
-  }
-  .mc-special-gift-card h2 {
-    font-size: 20px !important;
-  }
   .mc-callout-quote {
     padding: 12px 14px !important;
     flex-direction: column !important;
@@ -2465,30 +2629,12 @@
   }
 
   /* Outcomes & Instructor Section Mobile */
-  .what-you-learn-section, .instructor-section {
-    padding-top: 40px !important;
-    padding-bottom: 40px !important;
-  }
-  .common-heading h2 {
-    font-size: 22px !important;
-  }
-  .instructor-card {
-    padding: 24px 16px !important;
-  }
   .instructor-card img {
     width: 100px !important;
     height: 100px !important;
   }
 
   /* Syllabus Section Mobile */
-  .syllabus-section {
-    padding-top: 20px !important;
-    padding-bottom: 30px !important;
-  }
-  .custom-syllabus-accordion .accordion-button {
-    padding: 14px 16px !important;
-    font-size: 14px !important;
-  }
   .custom-syllabus-accordion .accordion-body ul {
     padding-left: 12px !important;
     padding-right: 12px !important;
@@ -2499,46 +2645,22 @@
   }
 
   /* Offer Breakdown Section Mobile */
-  .offer-breakdown-section {
-    padding-top: 40px !important;
-    padding-bottom: 40px !important;
-  }
-  .offer-breakdown-section .mc-content-card {
-    padding: 16px !important;
-  }
-  .offer-breakdown-section h3 {
-    font-size: 20px !important;
-  }
   .offer-breakdown-section .breakdown-list .d-flex {
     flex-direction: row !important;
     align-items: center !important;
-    font-size: 13.5px !important;
   }
 
   /* Support Section Mobile */
-  .mc-support-section-wrapper {
-    padding-top: 30px !important;
-  }
-  .mc-support-title {
-    font-size: 20px !important;
-  }
   .mc-support-img {
     max-height: 260px !important;
   }
 
   /* Order Form Section Mobile */
-  .order-form-section {
-    padding-top: 40px !important;
-    padding-bottom: 40px !important;
-  }
-  .order-form-section h4 {
-    font-size: 18px !important;
-  }
   .coupon-form-wrapper input {
     max-width: 100% !important;
   }
   .order-summary-box table th, .order-summary-box table td {
-    font-size: 13px !important;
+    font-size: var(--mobile-font-badge, 13px) !important;
   }
 
   /* Ad Banners Mobile */
@@ -2548,9 +2670,6 @@
 }
 
 @media (max-width: 480px) {
-  .hero-area .hero-title {
-    font-size: 20px !important;
-  }
   .template-btn {
     padding: 10px 18px !important;
     font-size: 14px !important;
