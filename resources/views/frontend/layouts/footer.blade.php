@@ -6,7 +6,7 @@
 
 @if($showNewsletter)
 <!--====== Start Floating Newsletter Section ======-->
-<div class="footer-newsletter-wrapper" style="position: relative; z-index: 10; margin-bottom: -65px;">
+<div class="footer-newsletter-wrapper" style="position: relative; z-index: 10; margin-top: -35px; margin-bottom: -65px;">
     <div class="container container-1278">
         <div class="newsletter-card shadow-none" 
              style="background-color: {{ setting('promo_banner_bg_color') ?: '#eef7f4' }}; border-radius: 8px; padding: 35px 40px;">
