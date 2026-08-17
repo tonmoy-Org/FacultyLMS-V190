@@ -3,7 +3,7 @@
 @endphp
 
 @if(isset($hero_course) && $hero_course)
-<section class="hero-area p-t-120 p-b-120 text-center position-relative overflow-hidden" style="background-color: #123e2b;">
+<section class="hero-area p-t-120 p-b-40 text-center position-relative overflow-hidden" style="background-color: #123e2b;">
     <!-- Floating background decorative shapes -->
     <div class="hero-bg-shapes">
         <div class="hero-shape hero-shape-1" data-speed="1.5"></div>
@@ -78,7 +78,7 @@
                         $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : __('Enroll Now');
                         $heroBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : route('course.details', $hero_course->slug);
                     @endphp
-                    <ul class="hero-btns d-flex justify-content-center align-items-center mt-4">
+                    <ul class="hero-btns d-flex justify-content-center align-items-center mt-4 mb-0">
                         <li>
                             <a href="{{ $heroBtnUrl }}" class="template-btn hero-btn">
                                 {{ $heroBtnText }}
