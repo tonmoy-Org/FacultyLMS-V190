@@ -154,7 +154,7 @@
         padding: 30px !important;
         box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
         margin-top: 20px;
-        margin-bottom: 15px;
+        margin-bottom: 2px;
         width: 100%;
     }
     .testimonial-form-card .card-header-bar {
@@ -342,7 +342,7 @@
 </section>
 @endif
 
-<section class="support-section p-t-35 p-t-sm-30 p-b-md-20 p-b-20">
+<section class="support-section p-t-35 p-t-sm-30" style="padding-bottom: 2px !important;">
     <div class="container container-1278">
 
         @if(isset($successStories) && $successStories->count() > 0)

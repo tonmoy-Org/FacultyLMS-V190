@@ -279,7 +279,7 @@
         .contact-us-page-section {
             background-color: #ffffff;
             padding-top: 60px;
-            padding-bottom: 15px;
+            padding-bottom: 2px;
         }
 
         .contact-top-badge {
