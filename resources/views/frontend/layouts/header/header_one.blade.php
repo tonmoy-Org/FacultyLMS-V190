@@ -2,9 +2,54 @@
     class="template-header header-layout-1 course-item-active {{ isHome() ? 'nav-white-color position-absolute' : (isAuth() ? 'bg-white' : '')}}">
     <div class="header-navigation sticky-header {{ isHome() ? '': 'header-shadow'}}">
         <div class="container container-1278">
-            <div class="header-inner">
-                <div class="header-left">
-                    <div class="brand-logo">
+            <style>
+                .template-header.header-layout-1 .header-inner { padding-top: 5px !important; padding-bottom: 5px !important; min-height: auto !important; }
+                .template-header .nav-menu > ul > li > a { padding-top: 8px !important; padding-bottom: 8px !important; }
+                .header-extra { padding-top: 5px !important; padding-bottom: 5px !important; }
+                .template-header.header-layout-1 .header-inner { height: 70px !important; }
+                .template-header.header-layout-1 .header-inner .brand-logo { max-height: 60px !important; }
+                .template-header.header-layout-1 .header-inner .brand-logo img { max-height: 45px !important; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul { padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 0 !important; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul > li { flex: 0 0 110px !important; width: 110px !important; min-width: 110px !important; margin: 0 !important; padding: 0 !important; display: flex !important; justify-content: center !important; align-items: center !important; text-align: center !important; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul > li:first-child { margin-inline-start: 0 !important; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul > li:last-child { margin-inline-end: 0 !important; }
+                .template-header.header-layout-1 .header-inner .nav-menu > ul > li > a { line-height: 60px !important; text-align: center !important; width: 100% !important; margin: 0 !important; padding-left: 0 !important; padding-right: 0 !important; }
+                .template-header.header-layout-1 .brand-logo { position: relative !important; z-index: 35 !important; }
+                .template-header.header-layout-1 .brand-logo a { position: relative !important; z-index: 35 !important; pointer-events: auto !important; cursor: pointer !important; display: inline-flex !important; align-items: center !important; }
+                .template-header.header-layout-1 .brand-logo a.sticky-logo { display: none !important; }
+                .template-header.header-layout-1 .header-navigation.sticky-on .brand-logo a.sticky-logo { display: inline-flex !important; }
+                .template-header.header-layout-1 .header-navigation.sticky-on .brand-logo a.main-logo { display: none !important; }
+                .template-header.header-layout-1 .header-center { pointer-events: none !important; margin-left: 14px !important; }
+                .template-header.header-layout-1 .header-center .nav-menu { pointer-events: auto !important; }
+                @media (max-width: 991.98px) {
+                    .template-header.header-layout-1 .header-navigation { padding: 6px 0 !important; }
+                    .template-header.header-layout-1 .header-inner { position: relative !important; display: flex !important; align-items: center !important; justify-content: space-between !important; height: 56px !important; min-height: 56px !important; padding-left: 0px !important; padding-right: 0px !important; }
+                    .template-header.header-layout-1 .navbar-toggler { position: absolute !important; inset-inline-start: -4px !important; top: 50% !important; transform: translateY(-50%) !important; margin: 0 !important; z-index: 25 !important; display: flex !important; flex-direction: column !important; justify-content: center !important; padding: 4px !important; }
+                    .template-header.header-layout-1 .header-left { position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; width: auto !important; max-width: 48% !important; display: flex !important; align-items: center !important; justify-content: center !important; z-index: 35 !important; margin: 0 !important; padding: 0 !important; }
+                    .template-header.header-layout-1 .header-left .brand-logo { margin-inline-end: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; margin: 0 !important; }
+                    .template-header.header-layout-1 .header-left .brand-logo a { align-items: center; display: flex; cursor: pointer !important; z-index: 35 !important; }
+                    .template-header.header-layout-1 .header-left .brand-logo img { max-height: 32px !important; width: auto !important; object-fit: contain !important; cursor: pointer !important; }
+                    .template-header.header-layout-1 .header-right { position: relative !important; margin-inline-start: auto !important; margin-inline-end: 0 !important; display: flex !important; align-items: center !important; justify-content: flex-end !important; z-index: 20 !important; height: 100% !important; padding-right: 0 !important; }
+                    .template-header.header-layout-1 .header-extra { padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; }
+                    .template-header.header-layout-1 .header-extra > ul { display: flex !important; align-items: center !important; margin: 0 !important; padding: 0 !important; gap: 6px !important; list-style: none !important; }
+                    .template-header.header-layout-1 .header-extra > ul > li { display: flex !important; align-items: center !important; margin: 0 !important; }
+                    .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle { padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; text-decoration: none !important; }
+                    .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle::after { display: none !important; }
+                    .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle span { display: none !important; }
+                    .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle img { width: 34px !important; height: 34px !important; min-width: 34px !important; min-height: 34px !important; border-radius: 50% !important; object-fit: cover !important; margin-inline-end: 0 !important; border: 2px solid rgba(255, 255, 255, 0.5) !important; box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important; background-color: #ffffff !important; }
+                    .template-header.header-layout-1 .header-extra .login-btn .get-access-btn { padding: 6px 14px !important; font-size: 12px !important; font-weight: 600 !important; border-radius: 5px !important; white-space: nowrap !important; color: #ffffff !important; background-color: var(--theme-clr, #10b981) !important; border: none !important; box-shadow: none !important; display: inline-flex !important; align-items: center !important; }
+                    .template-header.header-layout-1 .header-extra .login-btn .get-access-btn span { display: inline-block !important; }
+                }
+                @media (max-width: 576px) {
+                    .template-header.header-layout-1 .header-left { max-width: 40% !important; }
+                    .template-header.header-layout-1 .header-left .brand-logo img { max-height: 26px !important; }
+                    .template-header.header-layout-1 .header-extra .login-btn .get-access-btn { padding: 5px 10px !important; font-size: 11px !important; border-radius: 5px !important; }
+                    .template-header.header-layout-1 .header-extra > ul { gap: 4px !important; }
+                }
+            </style>
+            <div class="header-inner d-flex align-items-center justify-content-between py-0 position-relative">
+                <div class="header-left" style="flex: 1;">
+                    <div class="brand-logo d-flex align-items-center">
                         @if(config('app.demo_mode'))
 
                             @php
@@ -35,9 +80,9 @@
                         @endif
                     </div>
                 </div>
-                <div class="header-center flex-grow-1 d-flex justify-content-center mx-3">
-                    <nav class="nav-menu d-none d-lg-block">
-                        <ul>
+                <div class="header-center position-absolute start-50 translate-middle-x d-none d-lg-flex justify-content-center align-items-center" style="z-index: 10;">
+                    <nav class="nav-menu">
+                        <ul class="mb-0 d-flex align-items-center p-0">
                             @if (setting('show_default_courses_link') != 0)
                                 @if (setting('website_mode') == 'single_course')
                                     @php
