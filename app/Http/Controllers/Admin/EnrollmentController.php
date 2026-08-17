@@ -79,4 +79,41 @@ class EnrollmentController extends Controller
             return response()->json($data);
         }
     }
+
+    public function destroy($id): \Illuminate\Http\JsonResponse
+    {
+        if (config('app.demo_mode')) {
+            $data = [
+                'status'  => 'danger',
+                'message' => __('this_function_is_disabled_in_demo_server'),
+                'title'   => 'error',
+            ];
+            return response()->json($data);
+        }
+        try {
+            $checkout = \App\Models\Checkout::find($id);
+            if ($checkout) {
+                \App\Models\Enroll::where('checkout_id', $checkout->id)->delete();
+                $checkout->delete();
+            }
+
+            $data = [
+                'status'  => 'success',
+                'message' => __('deleted_successfully'),
+                'title'   => __('success'),
+            ];
+
+            return response()->json($data);
+
+        } catch (\Exception $e) {
+
+            $data = [
+                'status'  => 400,
+                'message' => $e->getMessage(),
+                'title'   => 'error',
+            ];
+
+            return response()->json($data);
+        }
+    }
 }

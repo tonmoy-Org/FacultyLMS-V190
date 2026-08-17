@@ -443,6 +443,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::get('enrollments', [EnrollmentController::class, 'index'])->name('admin.enrollments');
         Route::post('bulk-enrollments', [EnrollmentController::class, 'store'])->name('bulk.enrollments');
         Route::delete('change/enrollment-status/{id}', [EnrollmentController::class, 'statusChange'])->name('enrollments.status');
+        Route::delete('enrollments/{id}', [EnrollmentController::class, 'destroy'])->name('enrollments.destroy');
         Route::get('enrollments/{id}', [EnrollmentController::class, 'statusChange'])->name('enrollments.show');
     });
 

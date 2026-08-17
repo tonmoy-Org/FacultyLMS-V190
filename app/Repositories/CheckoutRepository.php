@@ -217,7 +217,7 @@ class CheckoutRepository
     public function bulkEnrolls($data): bool
     {
         $students = User::whereIn('id', $data['student_id'])->get();
-        $data['payment_type'] = __('added_by_admin');
+        $data['payment_type'] = isset($data['payment_type']) ? $data['payment_type'] : __('added_by_admin');
 
         $enrolls = [];
         foreach ($students as $student) {

@@ -36,6 +36,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-4">
+                            <label for="payment_type" class="form-label">{{__('payment_type') }}</label>
+                            <div class="select-type-v2">
+                                <select class="form-select form-select-lg" name="payment_type" id="payment_type">
+                                    <option value="added_by_admin">{{ __('added_by_admin') }}</option>
+                                    <option value="paid">{{ __('paid') }}</option>
+                                    <option value="free">{{ __('free') }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="d-flex justify-content-end align-items-center">
                     <button type="submit" class="btn sg-btn-primary">{{ __('save') }}</button>
                     @include('backend.common.loading-btn',['class' => 'btn sg-btn-primary'])
