@@ -920,15 +920,15 @@
     background-color: #ffffff !important;
   }
   .template-header.header-layout-1 .header-extra .login-btn .get-access-btn {
-    padding: 6px 12px !important;
-    font-size: 12px !important;
+    padding: 6px 14px !important;
+    font-size: 13px !important;
     font-weight: 600 !important;
-    border-radius: 4px !important;
+    border-radius: 5px !important;
     white-space: nowrap !important;
     color: #ffffff !important;
     background-color: var(--theme-clr, #10b981) !important;
     border: none !important;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.12) !important;
+    box-shadow: none !important;
     display: inline-flex !important;
     align-items: center !important;
   }

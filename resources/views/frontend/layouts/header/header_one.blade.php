@@ -35,13 +35,13 @@
                     .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle::after { display: none !important; }
                     .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle span { display: none !important; }
                     .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle img { width: 34px !important; height: 34px !important; min-width: 34px !important; min-height: 34px !important; border-radius: 50% !important; object-fit: cover !important; margin-inline-end: 0 !important; border: 2px solid rgba(255, 255, 255, 0.5) !important; box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important; background-color: #ffffff !important; }
-                    .template-header.header-layout-1 .header-extra .login-btn .get-access-btn { padding: 6px 12px !important; font-size: 12px !important; font-weight: 600 !important; border-radius: 4px !important; white-space: nowrap !important; color: #ffffff !important; background-color: var(--theme-clr, #10b981) !important; border: none !important; box-shadow: 0 2px 5px rgba(0,0,0,0.12) !important; display: inline-flex !important; align-items: center !important; }
+                    .template-header.header-layout-1 .header-extra .login-btn .get-access-btn { padding: 6px 14px !important; font-size: 12px !important; font-weight: 600 !important; border-radius: 5px !important; white-space: nowrap !important; color: #ffffff !important; background-color: var(--theme-clr, #10b981) !important; border: none !important; box-shadow: none !important; display: inline-flex !important; align-items: center !important; }
                     .template-header.header-layout-1 .header-extra .login-btn .get-access-btn span { display: inline-block !important; }
                 }
                 @media (max-width: 576px) {
                     .template-header.header-layout-1 .header-left { max-width: 40% !important; }
                     .template-header.header-layout-1 .header-left .brand-logo img { max-height: 26px !important; }
-                    .template-header.header-layout-1 .header-extra .login-btn .get-access-btn { padding: 5px 10px !important; font-size: 11px !important; border-radius: 4px !important; }
+                    .template-header.header-layout-1 .header-extra .login-btn .get-access-btn { padding: 5px 10px !important; font-size: 11px !important; border-radius: 5px !important; }
                     .template-header.header-layout-1 .header-extra > ul { gap: 4px !important; }
                 }
             </style>
