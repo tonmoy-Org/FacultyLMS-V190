@@ -65,15 +65,23 @@
     <link rel="stylesheet" href="{{ static_asset('admin/css/responsive.min.css') }}">
     @stack('css')
     <style>
-        .note-editable ul {
+        .note-editor .note-editable ul {
             list-style: disc !important;
-            list-style-position: inside !important;
-            padding-left: 1.5rem !important;
+            padding-left: 2rem !important;
         }
-        .note-editable ol {
+        .note-editor .note-editable ol {
             list-style: decimal !important;
+            padding-left: 2rem !important;
+        }
+        .note-editor .note-editable ul li {
+            list-style: disc !important;
+            display: list-item !important;
             list-style-position: inside !important;
-            padding-left: 1.5rem !important;
+        }
+        .note-editor .note-editable ol li {
+            list-style: decimal !important;
+            display: list-item !important;
+            list-style-position: inside !important;
         }
     </style>
 </head>
