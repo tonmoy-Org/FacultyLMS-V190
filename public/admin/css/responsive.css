@@ -400,6 +400,12 @@
   .sidebar-collapse .dashboard-logo .logo {
     display: block;
   }
+  .sidebar-collapse .dashboard-logo .logo img {
+    max-height: 28px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+  }
   .sidebar-collapse .dashboard-logo .logo-icon {
     display: none;
   }

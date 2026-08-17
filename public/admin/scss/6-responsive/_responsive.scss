@@ -107,6 +107,12 @@
     }
     .dashboard-logo .logo {
       display: block;
+      img {
+        max-height: 28px;
+        width: auto;
+        max-width: 140px;
+        object-fit: contain;
+      }
     }
     .dashboard-logo .logo-icon {
       display: none;
