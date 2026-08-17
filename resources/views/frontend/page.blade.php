@@ -64,6 +64,33 @@
                                 .dynamic-page-content a:hover {
                                     text-decoration: underline;
                                 }
+                                @media (max-width: 767.98px) {
+                                    .course-details-header .title {
+                                        font-size: 22px !important;
+                                    }
+                                    .dynamic-page-content h1, 
+                                    .dynamic-page-content h2, 
+                                    .dynamic-page-content h3, 
+                                    .dynamic-page-content h4, 
+                                    .dynamic-page-content h5, 
+                                    .dynamic-page-content h6 {
+                                        font-size: 17px !important;
+                                    }
+                                    .dynamic-page-content .sub-title,
+                                    .dynamic-page-content .badge,
+                                    .dynamic-page-content .tag {
+                                        font-size: 13px !important;
+                                    }
+                                    .dynamic-page-content p,
+                                    .dynamic-page-content ul,
+                                    .dynamic-page-content ol,
+                                    .dynamic-page-content li,
+                                    .dynamic-page-content span,
+                                    .dynamic-page-content div {
+                                        font-size: 13.5px !important;
+                                        line-height: 1.75 !important;
+                                    }
+                                }
                             </style>
                         </div>
                     </div>
