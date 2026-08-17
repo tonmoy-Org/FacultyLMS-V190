@@ -2399,7 +2399,16 @@
   .faq-section h2,
   .testimonial-section h2,
   .pricing-section h2,
-  .syllabus-section h2 {
+  .syllabus-section h2,
+  .page-header-area .title,
+  .course-details-header .title,
+  .policy-wrapper h1,
+  .contact-hero-banner .banner-main-title,
+  .success-hero-banner .banner-main-title,
+  .contact-us-page-section h1,
+  .contact-us-page-section h2,
+  .sucessful-order-section h4,
+  .section-title-with-progress-bar h4 {
     font-size: var(--mobile-font-heading-main, 22px) !important;
     font-weight: var(--mobile-weight-heading-main, 700) !important;
     line-height: 1.35 !important;
@@ -2426,7 +2435,37 @@
   .pricing-box h4,
   .hero-area h4,
   .card-title,
-  .sub-heading {
+  .sub-heading,
+  .policy-section h2,
+  .policy-section h3,
+  .policy-section h4,
+  .policy-section h5,
+  .policy-section h6,
+  .policy-wrapper h2,
+  .policy-wrapper h3,
+  .policy-wrapper h4,
+  .policy-wrapper h5,
+  .policy-wrapper h6,
+  .dynamic-page-content h1,
+  .dynamic-page-content h2,
+  .dynamic-page-content h3,
+  .dynamic-page-content h4,
+  .dynamic-page-content h5,
+  .dynamic-page-content h6,
+  .contact-card-title,
+  .contact-form-card h4,
+  .map-location-badge h6,
+  .contact-us-page-section h3,
+  .contact-us-page-section h4,
+  .contact-us-page-section h5,
+  .simple-text-infobox h6,
+  .course-details-overview-content h4,
+  .course-details-sidebar .single-course-info h4,
+  .testimonial-form-card h4,
+  .testimonial-form-card h5,
+  .footer-widget-item .widget-title,
+  .footer-area-v2 .widget-title,
+  .footer-bottom .fw-bold {
     font-size: var(--mobile-font-heading-sub, 17px) !important;
     font-weight: var(--mobile-weight-heading-sub, 600) !important;
     line-height: 1.45 !important;
@@ -2448,7 +2487,15 @@
   .discount-badge,
   .course-badge,
   .badge-sm,
-  .tag-sm {
+  .tag-sm,
+  .page-header-area .sub-title,
+  .policy-wrapper .sub-title,
+  .dynamic-page-content .sub-title,
+  .dynamic-page-content .badge,
+  .dynamic-page-content .tag,
+  .contact-hero-banner .badge-pill-tag,
+  .success-hero-banner .badge-pill-tag,
+  .contact-top-badge {
     font-size: var(--mobile-font-badge, 13px) !important;
   }
 
@@ -2473,9 +2520,130 @@
   .counter-title,
   .solution-package-body p,
   .pricing-feature-list li,
-  .hero-area p {
+  .hero-area p,
+  .policy-content-area p,
+  .policy-content-area li,
+  .policy-content-area ul,
+  .policy-content-area ol,
+  .policy-wrapper p,
+  .policy-wrapper li,
+  .policy-wrapper ul,
+  .policy-wrapper ol,
+  .policy-section p,
+  .policy-section li,
+  .dynamic-page-content p,
+  .dynamic-page-content li,
+  .dynamic-page-content ul,
+  .dynamic-page-content ol,
+  .dynamic-page-content span,
+  .breadcrumb-item,
+  .breadcrumb-item a,
+  .contact-card-text,
+  .contact-card-text a,
+  .contact-hero-banner .banner-sub-text,
+  .success-hero-banner .banner-sub-text,
+  .map-location-badge p,
+  .map-location-badge span,
+  .contact-us-page-section p,
+  .contact-us-page-section label,
+  .contact-us-page-section input,
+  .contact-us-page-section textarea,
+  .contact-us-page-section span,
+  .simple-text-infobox ul li,
+  .cart-product-table td,
+  .cart-product-calculation table td,
+  .border-soft-white,
+  .footer-widget-item p,
+  .footer-widget-item ul li a,
+  .contact-info-list span,
+  .contact-info-list div,
+  .footer-bottom span {
     font-size: var(--mobile-font-body, 13.5px) !important;
     line-height: var(--mobile-line-height-body, 1.75) !important;
+  }
+
+  /* Footer Mobile Height Optimization & Compact Layout Rules (<768px) */
+  .footer-newsletter-wrapper {
+    margin-bottom: -35px !important;
+  }
+  .footer-newsletter-wrapper .newsletter-card {
+    padding: 18px 14px !important;
+  }
+  .footer-newsletter-wrapper .newsletter-card h3 {
+    font-size: var(--mobile-font-heading-sub, 17px) !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    margin-bottom: 6px !important;
+  }
+  .footer-newsletter-wrapper .newsletter-card p {
+    font-size: var(--mobile-font-body, 13.5px) !important;
+    line-height: var(--mobile-line-height-body, 1.75) !important;
+  }
+  .footer-newsletter-wrapper .mini-countdown {
+    gap: 6px !important;
+  }
+  .footer-newsletter-wrapper .mini-countdown > div {
+    width: 46px !important;
+    height: 52px !important;
+    padding: 3px !important;
+  }
+  .footer-newsletter-wrapper .mini-countdown h4 {
+    font-size: 1.15rem !important;
+  }
+  .footer-newsletter-wrapper .mini-countdown span {
+    font-size: 9px !important;
+  }
+
+  .footer-area.footer-area-v2 {
+    padding-top: 55px !important;
+    padding-bottom: 20px !important;
+  }
+  .footer-area.footer-area-v2 .footer-widget {
+    padding-top: 0 !important;
+  }
+  .footer-area.footer-area-v2 .footer-widget-item {
+    margin-bottom: 14px !important;
+  }
+  .footer-area.footer-area-v2 .brand-logo {
+    margin-bottom: 8px !important;
+  }
+  .footer-area.footer-area-v2 .brand-logo img {
+    max-width: 130px !important;
+  }
+  .footer-area.footer-area-v2 .footer-widget-item p {
+    font-size: var(--mobile-font-body, 13.5px) !important;
+    line-height: var(--mobile-line-height-body, 1.75) !important;
+    margin-bottom: 10px !important;
+  }
+  .footer-area.footer-area-v2 .widget-title {
+    font-size: var(--mobile-font-heading-sub, 17px) !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+  }
+  .footer-area.footer-area-v2 .footer-widget-item ul li {
+    margin-bottom: 4px !important;
+  }
+  .footer-area.footer-area-v2 .footer-widget-item ul li a {
+    font-size: var(--mobile-font-body, 13.5px) !important;
+    line-height: var(--mobile-line-height-body, 1.75) !important;
+  }
+  .footer-area.footer-area-v2 .contact-info-list {
+    font-size: var(--mobile-font-body, 13.5px) !important;
+    line-height: var(--mobile-line-height-body, 1.75) !important;
+  }
+  .footer-area.footer-area-v2 .contact-info-list > div {
+    margin-bottom: 4px !important;
+  }
+  .footer-area.footer-area-v2 .footer-bottom {
+    margin-top: 16px !important;
+    padding-top: 12px !important;
+  }
+  .footer-area.footer-area-v2 .footer-bottom span {
+    font-size: var(--mobile-font-body, 13.5px) !important;
+    line-height: var(--mobile-line-height-body, 1.75) !important;
+  }
+  .footer-area.footer-area-v2 .footer-bottom .fw-bold {
+    font-size: var(--mobile-font-heading-sub, 17px) !important;
   }
 
   /* Hero Area Mobile Optimization */
