@@ -19,9 +19,9 @@
                     {{-- Subject --}}
                     @if($hero_course->subject)
                         <div class="mb-3">
-                            <span class="badge hero-badge hero-badge-animated" style="background-color: rgba(255,255,255,0.15); color: #2db37c; padding: 6px 14px; border-radius: 20px; cursor: pointer;">
-                                {{ $hero_course->subject->title }}
-                            </span>
+                            <a href="{{ route('courses', ['subject' => $hero_course->subject->id]) }}" style="text-decoration: none; display: inline-block;">
+                                <span class="badge hero-badge hero-badge-animated" style="background-color: rgba(255,255,255,0.15); color: #2db37c; padding: 6px 14px; border-radius: 20px; cursor: pointer;">{{ trim($hero_course->subject->title) }}</span>
+                            </a>
                         </div>
                     @endif
                     
@@ -209,6 +209,7 @@
 .hero-badge {
     font-size: 14px;
     font-weight: 600;
+    line-height: 1 !important;
 }
 
 .hero-title {
@@ -408,7 +409,9 @@
 
 /* Badge hover transition */
 .hero-badge-animated {
-    display: inline-block;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .hero-badge-animated:hover {
