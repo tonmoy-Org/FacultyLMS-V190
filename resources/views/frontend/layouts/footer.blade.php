@@ -22,39 +22,41 @@
                 </div>
 
                 <!-- Column 2: Admission Now Countdown Timer -->
-                <div class="col-lg-5 col-md-12 text-center d-flex flex-column align-items-center justify-content-center">
-                    @php
-                        $getAccessLink = setting('get_access_btn_link') ?: route('register');
-                        $getAccessTitle = setting('get_access_btn_title', app()->getLocale()) ?: (setting('get_access_btn_title') ?: __('get_access'));
-                    @endphp
-                    <div class="mb-3 text-center">
-                        <a href="{{ url($getAccessLink) }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center" style="padding: 10px 24px; font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 8px;">
-                            <span>{{ $getAccessTitle }}</span>
-                        </a>
-                    </div>
-                    
-                    @php
-                        $countdownTitle = setting('promo_banner_countdown_title', app()->getLocale());
-                    @endphp
-                    @if($countdownTitle)
-                    <div class="mb-3 fw-bold text-dark text-center" style="font-size: 1.3rem; letter-spacing: 0.5px;">{{ $countdownTitle }}</div>
-                    @endif
-                    <div class="mini-countdown d-flex justify-content-center gap-3" id="promoCountdownFooter" data-target="{{ setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days')) }}">
-                        <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
-                            <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
-                            <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">DAYS</span>
+                <div class="col-lg-5 col-md-12 text-center d-flex flex-column align-items-lg-end align-items-center justify-content-center">
+                    <div class="d-inline-flex flex-column align-items-center">
+                        @php
+                            $getAccessLink = setting('get_access_btn_link') ?: route('register');
+                            $getAccessTitle = setting('get_access_btn_title', app()->getLocale()) ?: (setting('get_access_btn_title') ?: __('get_access'));
+                        @endphp
+                        <div class="mb-3 text-center">
+                            <a href="{{ url($getAccessLink) }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center" style="padding: 10px 24px; font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 8px;">
+                                <span>{{ $getAccessTitle }}</span>
+                            </a>
                         </div>
-                        <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
-                            <h4 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
-                            <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">HRS</span>
-                        </div>
-                        <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
-                            <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
-                            <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">MIN</span>
-                        </div>
-                        <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
-                            <h4 class="seconds m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
-                            <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">SEC</span>
+                        
+                        @php
+                            $countdownTitle = setting('promo_banner_countdown_title', app()->getLocale());
+                        @endphp
+                        @if($countdownTitle)
+                        <div class="mb-3 fw-bold text-dark text-center" style="font-size: 1.3rem; letter-spacing: 0.5px;">{{ $countdownTitle }}</div>
+                        @endif
+                        <div class="mini-countdown d-flex justify-content-center gap-3" id="promoCountdownFooter" data-target="{{ setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days')) }}">
+                            <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
+                                <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
+                                <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">DAYS</span>
+                            </div>
+                            <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
+                                <h4 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
+                                <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">HRS</span>
+                            </div>
+                            <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
+                                <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
+                                <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">MIN</span>
+                            </div>
+                            <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
+                                <h4 class="seconds m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
+                                <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">SEC</span>
+                            </div>
                         </div>
                     </div>
                 </div>
