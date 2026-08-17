@@ -33,7 +33,7 @@
 @endphp
 
 @if(!$is_enrolled && isset($course))
-<section class="order-form-section p-t-60 p-b-25" style="background: #ffffff;">
+<section class="order-form-section p-t-60 p-b-0" style="background: #ffffff;">
     @include('frontend.homePage.sticky_promo_bar')
     <div class="container container-1278">
         <div class="mc-registration-section" id="register">

@@ -2564,7 +2564,7 @@
 
   /* Footer Mobile Height Optimization & Compact Layout Rules (<768px) */
   .footer-newsletter-wrapper {
-    margin-top: -20px !important;
+    margin-top: -35px !important;
     margin-bottom: -35px !important;
   }
   .footer-newsletter-wrapper .newsletter-card {
