@@ -129,16 +129,24 @@
                         $hasImage = !empty($card['image']);
                         $hasLink = !empty($card['link']);
                         $onlyImage = !$hasTitle && !$hasContent && $hasImage;
+                        
+                        $imagePath = '';
+                        if ($hasImage) {
+                            $imagePath = $card['image'];
+                            if (!str_starts_with($imagePath, 'public/') && !str_starts_with($imagePath, 'http')) {
+                                $imagePath = 'public/' . ltrim($imagePath, '/');
+                            }
+                        }
                     @endphp
                     <div class="col-lg-6 col-md-12" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         @if($onlyImage)
                             <div class="cow-card cow-card-only-image h-100">
                                 @if($hasLink)
                                     <a href="{{ $card['link'] }}" {{ str_starts_with($card['link'], '#') ? '' : 'target="_blank"' }}>
-                                        <img src="{{ asset($card['image']) }}" alt="Category Image">
+                                        <img src="{{ asset($imagePath) }}" alt="Category Image">
                                     </a>
                                 @else
-                                    <img src="{{ asset($card['image']) }}" alt="Category Image">
+                                    <img src="{{ asset($imagePath) }}" alt="Category Image">
                                 @endif
                             </div>
                         @else
@@ -159,11 +167,11 @@
                                     @if($hasImage)
                                         @if($hasLink)
                                             <a href="{{ $card['link'] }}" {{ str_starts_with($card['link'], '#') ? '' : 'target="_blank"' }} class="cow-card-img-floating-wrapper">
-                                                <img src="{{ asset($card['image']) }}" class="cow-card-img-floating" alt="{{ $card['title'] ?? 'Category Image' }}">
+                                                <img src="{{ asset($imagePath) }}" class="cow-card-img-floating" alt="{{ $card['title'] ?? 'Category Image' }}">
                                             </a>
                                         @else
                                             <div class="cow-card-img-floating-wrapper">
-                                                <img src="{{ asset($card['image']) }}" class="cow-card-img-floating" alt="{{ $card['title'] ?? 'Category Image' }}">
+                                                <img src="{{ asset($imagePath) }}" class="cow-card-img-floating" alt="{{ $card['title'] ?? 'Category Image' }}">
                                             </div>
                                         @endif
                                     @endif
