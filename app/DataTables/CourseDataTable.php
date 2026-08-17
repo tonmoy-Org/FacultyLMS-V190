@@ -13,6 +13,8 @@ class CourseDataTable extends DataTable
 {
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        $total_courses = Course::count();
+
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('is_published', function ($course) {
@@ -25,8 +27,8 @@ class CourseDataTable extends DataTable
                 return @$course->category->language->title;
 
             })
-            ->addColumn('action', function ($course) {
-                return view('backend.admin.course.action', compact('course'));
+            ->addColumn('action', function ($course) use ($total_courses) {
+                return view('backend.admin.course.action', compact('course', 'total_courses'));
             })
             ->addColumn('enrolled_student', function ($course) {
                 return $course->enrolls_count;
