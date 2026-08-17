@@ -28,7 +28,7 @@
 @if(!empty($mcSettings['breakdown_status']))
 <section class="offer-breakdown-section p-t-60 p-b-60 bg-white position-relative">
     <div class="container container-1278">
-        <div class="mc-content-card" style="border: 2px solid #10b981; border-radius: 8px; padding: 24px; background: #ffffff;">
+        <div class="mc-content-card" data-aos="fade-up" style="border: 2px solid #10b981; border-radius: 8px; padding: 24px; background: #ffffff;">
             <h3 class="fw-bold text-center mb-4" style="color: #1a1b4b; font-size: 28px;">
                         {{ !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : 'এই $1,000.00 টাকায় আপনি পাচ্ছেন:' }}
                     </h3>

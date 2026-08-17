@@ -109,7 +109,7 @@
     <div class="container container-1278">
         <div class="cow-wrapper">
             @if($title)
-                <h3 class="cow-title">{{ __($title) }}</h3>
+                <h3 class="cow-title" data-aos="fade-up">{{ __($title) }}</h3>
             @endif
 
             <div class="row g-4 justify-content-center">
@@ -121,7 +121,7 @@
                         $hasLink = !empty($card['link']);
                         $onlyImage = !$hasTitle && !$hasContent && $hasImage;
                     @endphp
-                    <div class="col-lg-6 col-md-12">
+                    <div class="col-lg-6 col-md-12" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         @if($onlyImage)
                             <div class="cow-card cow-card-only-image h-100">
                                 @if($hasLink)

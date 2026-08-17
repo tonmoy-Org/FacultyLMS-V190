@@ -47,7 +47,7 @@
     <section class="ad-banner-section-1 p-t-60 p-b-60 bg-white overflow-hidden">
         <div class="container container-1278">
             <div class="row justify-content-center">
-                <div class="col-12 text-center">
+                <div class="col-12 text-center" data-aos="fade-up">
                     @if($b1Link)
                         <a href="{{ $b1Link }}" target="_blank" class="d-block w-100 overflow-hidden">
                     @endif
@@ -68,7 +68,7 @@
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <div class="common-heading text-center m-b-40">
+                    <div class="common-heading text-center m-b-40" data-aos="fade-up">
                         <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
                             {{ __('WHAT YOU WILL LEARN') }}
                         </span>
@@ -76,7 +76,7 @@
                             {{ __('Course Outcomes & Key Takeaways') }}
                         </h2>
                     </div>
-                    <div class="card shadow-lg border-0 p-4 p-md-5" style="border-radius: 20px; background: #ffffff;">
+                    <div class="card shadow-lg border-0 p-4 p-md-5" data-aos="fade-up" data-aos-delay="100" style="border-radius: 20px; background: #ffffff;">
                         <div class="learn-outcomes-content" style="color: #475569; font-size: 16px; line-height: 1.8;">
                             {!! $course->outcomes !!}
                         </div>
@@ -93,7 +93,7 @@
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <div class="common-heading text-center m-b-40">
+                    <div class="common-heading text-center m-b-40" data-aos="fade-up">
                         <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
                             {{ __('MEET YOUR INSTRUCTOR') }}
                         </span>
@@ -102,7 +102,7 @@
                         </h2>
                     </div>
 
-                    <div class="instructor-card p-4 p-md-5 bg-white shadow-lg border border-light" style="border-radius: 20px;">
+                    <div class="instructor-card p-4 p-md-5 bg-white shadow-lg border border-light" data-aos="fade-up" data-aos-delay="100" style="border-radius: 20px;">
                         <img src="{{ getFileLink('100x100', $course->instructor->image) }}" 
                              class="rounded-circle mb-4 shadow" 
                              alt="{{ $course->instructor->name }}" 
@@ -159,7 +159,7 @@
     <section class="ad-banner-section-2 p-t-60 p-b-20 bg-white overflow-hidden">
         <div class="container container-1278">
             <div class="row justify-content-center">
-                <div class="col-12 text-center">
+                <div class="col-12 text-center" data-aos="fade-up">
                     @if($b2Link)
                         <a href="{{ $b2Link }}" target="_blank" class="d-block w-100 overflow-hidden">
                     @endif
@@ -188,7 +188,7 @@
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-12 text-center">
-                    <div class="common-heading text-center m-b-40">
+                    <div class="common-heading text-center m-b-40" data-aos="fade-up">
                         <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
                             {{ setting('success_page_banner_tag') ?: 'Success Stories' }}
                         </span>
@@ -197,7 +197,7 @@
                         </h2>
                         <p class="text-muted font-16">{{ setting('success_page_banner_description') ?: 'Discover how learners are achieving their goals and building better futures with Faculty.' }}</p>
                     </div>
-                    <img src="{{ $successBannerUrl }}" alt="Success Banner" class="img-fluid w-100" style="border-radius: 20px; max-height: 500px; object-fit: cover; display: block; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
+                    <img src="{{ $successBannerUrl }}" alt="Success Banner" class="img-fluid w-100" data-aos="fade-up" data-aos-delay="100" style="border-radius: 20px; max-height: 500px; object-fit: cover; display: block; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
                 </div>
             </div>
         </div>
@@ -222,7 +222,7 @@
     <section class="coupon-banner-section p-t-40 p-b-40 bg-white overflow-hidden">
         <div class="container container-1278">
             <div class="row justify-content-center">
-                <div class="col-12 text-center">
+                <div class="col-12 text-center" data-aos="fade-up">
                     <div class="coupon-banner-wrapper position-relative d-inline-block">
                         <img src="{{ getFileLink('original_image', $active_banner_coupon->image) }}" alt="Special Offer Coupon" class="img-fluid rounded shadow-sm" style="max-width: 100%; max-height: 400px; object-fit: cover; border: 2px dashed #10b981;">
                         <div class="coupon-code-badge position-absolute" style="bottom: -15px; left: 50%; transform: translateX(-50%); background: #1a1b4b; color: white; padding: 8px 24px; border-radius: 30px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 2px solid #10b981;">

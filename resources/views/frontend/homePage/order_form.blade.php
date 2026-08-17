@@ -47,7 +47,7 @@
                 
                 <div class="row gx-lg-5">
                     <!-- Left Column: Billing Details -->
-                    <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
                         
                         <!-- Coupon Section -->
                         <div class="coupon-section mb-5">
@@ -111,7 +111,7 @@
                     </div>
                     
                     <!-- Right Column: Your Order -->
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
                         <h4 class="fw-bold mb-4" style="color: #1a1b4b; font-size: 22px;">Your Order</h4>
                         
                         <div class="order-summary-box mb-4">

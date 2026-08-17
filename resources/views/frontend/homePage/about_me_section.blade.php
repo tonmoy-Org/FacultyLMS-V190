@@ -23,7 +23,7 @@
     <div class="container container-1278">
         <div class="row align-items-center g-4 g-lg-5">
             <!-- Left Side Image Card -->
-            <div class="col-lg-5 col-md-12">
+            <div class="col-lg-5 col-md-12" data-aos="fade-right">
                 <div class="about-me-card position-relative overflow-hidden shadow-sm" 
                      style="border-radius: 12px; min-height: 400px; background: linear-gradient(135deg, #FFE485 0%, #FCD34D 100%);">
                     
@@ -34,7 +34,7 @@
             </div>
 
             <!-- Right Side Text Content -->
-            <div class="col-lg-7 col-md-12">
+            <div class="col-lg-7 col-md-12" data-aos="fade-left" data-aos-delay="100">
                 <div class="about-me-text-block ps-lg-4">
                     <div class="common-heading">
                         @if($tag)
