@@ -36,9 +36,9 @@
     }
 </style>
 
-<section class="syllabus-section p-t-20 p-b-40 position-relative overflow-hidden bg-white">
+<section class="syllabus-section p-t-60 p-b-60 position-relative overflow-hidden bg-white">
     <div class="container container-1278">
-        <div class="common-heading text-center m-b-40">
+        <div class="common-heading text-center m-b-40" data-aos="fade-up">
             @php
                 $mcSettings = [];
                 if(isset($course) && $course) {
@@ -54,7 +54,7 @@
         
         <div class="accordion custom-syllabus-accordion accordion-flush" id="curriculumAccordion">
             @foreach($course->sections as $key => $section)
-                <div class="accordion-item">
+                <div class="accordion-item" data-aos="fade-up" data-aos-delay="{{ min($key * 80, 400) }}">
                     <div class="accordion-header" id="course-curriculum-heading{{ $key }}">
                         <div class="accordion-button {{ $key == 0 && (count($course->lessons->where('section_id', $section->id)) > 0 || count($section->quizzes) > 0) ? '' : 'collapsed' }}"
                              role="button" 

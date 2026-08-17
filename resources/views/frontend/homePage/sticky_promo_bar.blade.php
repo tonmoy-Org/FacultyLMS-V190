@@ -18,7 +18,7 @@
         width: 100%;
         background: #d1fae5; /* Match light green bg from above */
         border: 2px solid #10b981;
-        border-radius: 8px;
+        border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         transition: all 0.3s ease;
         z-index: 1040;
@@ -116,10 +116,40 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
+        border-radius: 8px !important;
+        overflow: visible !important;
     }
 
     .sp-right .btn-enroll i {
         font-size: 16px;
+    }
+
+    /* Button Border Beam Animation styles */
+    .btn-border-beam-svg {
+        position: absolute;
+        top: -2px !important;
+        left: -2px !important;
+        width: calc(100% + 4px) !important;
+        height: calc(100% + 4px) !important;
+        pointer-events: none;
+        z-index: 1;
+        overflow: visible !important;
+    }
+
+    .btn-border-beam-rect {
+        stroke-linecap: round;
+        animation: btn-border-beam-travel 6s linear infinite;
+        will-change: stroke-dashoffset;
+        filter: drop-shadow(0 0 3px rgba(255, 193, 7, 0.8)) drop-shadow(0 0 1px rgba(255, 255, 255, 0.7));
+    }
+
+    @keyframes btn-border-beam-travel {
+        0% {
+            stroke-dashoffset: var(--btn-perimeter, 400);
+        }
+        100% {
+            stroke-dashoffset: 0;
+        }
     }
     
     .sticky-promo-anchor {
@@ -178,10 +208,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="sp-right">
-                    <a href="{{ $btnLink }}" class="template-btn btn-enroll">
-                        {{ $btnText }} 
-                        <i class="las la-arrow-right"></i>
+                 <div class="sp-right">
+                    <a href="{{ $btnLink }}" class="template-btn btn-enroll position-relative">
+                        <!-- Border Beam SVG -->
+                        <svg class="btn-border-beam-svg">
+                            <defs>
+                                <linearGradient id="btn-beam-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#ffc107" stop-opacity="0" />
+                                    <stop offset="30%" stop-color="#ffc107" stop-opacity="0.85" />
+                                    <stop offset="50%" stop-color="#ffffff" stop-opacity="1" />
+                                    <stop offset="70%" stop-color="#ffc107" stop-opacity="0.85" />
+                                    <stop offset="100%" stop-color="#ffc107" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <rect class="btn-border-beam-rect" fill="none" stroke="url(#btn-beam-gradient)" stroke-width="2.5" rx="8" ry="8" />
+                        </svg>
+                        <span class="btn-text-content" style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 8px;">
+                            {{ $btnText }} 
+                            <i class="las la-arrow-right"></i>
+                        </span>
                     </a>
                 </div>
             </div>
@@ -225,6 +270,48 @@ document.addEventListener("DOMContentLoaded", function() {
             window.addEventListener('resize', handleScroll, { passive: true });
             // Initial check
             handleScroll();
+        }
+
+        // Button Border Beam calculation
+        const enrollBtn = container.querySelector('.btn-enroll');
+        if (enrollBtn) {
+            const btnSvg = enrollBtn.querySelector('.btn-border-beam-svg');
+            const btnRect = enrollBtn.querySelector('.btn-border-beam-rect');
+            if (btnSvg && btnRect) {
+                let btnFrame;
+                const updateBtnBeam = () => {
+                    if (btnFrame) cancelAnimationFrame(btnFrame);
+                    btnFrame = requestAnimationFrame(() => {
+                        const w = enrollBtn.offsetWidth;
+                        const h = enrollBtn.offsetHeight;
+                        btnSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+                        
+                        const strokeWidth = 2.5;
+                        const inset = strokeWidth / 2;
+                        const rectW = w - strokeWidth;
+                        const rectH = h - strokeWidth;
+                        
+                        btnRect.setAttribute('x', inset.toString());
+                        btnRect.setAttribute('y', inset.toString());
+                        btnRect.setAttribute('width', rectW.toString());
+                        btnRect.setAttribute('height', rectH.toString());
+                        
+                        const perimeter = 2 * (rectW + rectH);
+                        btnRect.style.setProperty('--btn-perimeter', perimeter.toString());
+                        
+                        // Set beam length to 30% of the perimeter
+                        const beamLen = perimeter * 0.3;
+                        btnRect.style.strokeDasharray = `${beamLen} ${perimeter - beamLen}`;
+                    });
+                };
+                
+                updateBtnBeam();
+                window.addEventListener('resize', updateBtnBeam);
+                if (window.ResizeObserver) {
+                    const ro = new ResizeObserver(updateBtnBeam);
+                    ro.observe(enrollBtn);
+                }
+            }
         }
 
         const countdownEl = container.querySelector('.js-countdown');

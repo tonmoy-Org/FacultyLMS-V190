@@ -69,7 +69,7 @@
     <div class="container container-1278">
         <div class="row justify-content-center">
             <div class="col-lg-12">
-                <div class="mc-special-gift-card text-center d-flex flex-column align-items-center">
+                <div class="mc-special-gift-card text-center d-flex flex-column align-items-center" data-aos="fade-up">
                     <span class="mc-gift-pill">
                         {{ $giftBadge }}
                     </span>

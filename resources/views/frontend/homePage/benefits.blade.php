@@ -58,7 +58,7 @@
 <section class="benefits-section p-t-60 p-b-60" style="background-color: #ffffff;">
     <div class="container container-1278">
         <div class="mc-benefits-card-wrapper">
-            <h2 class="fw-bold course-section-title text-dark mb-5 text-center px-3" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px;">{{ $benefitsTitle }}</h2>
+            <h2 class="fw-bold course-section-title text-dark mb-5 text-center px-3" data-aos="fade-up" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px;">{{ $benefitsTitle }}</h2>
 
             <div class="row g-4 justify-content-center">
                 @foreach($benefits as $benefit)
@@ -111,7 +111,7 @@
                         }
                     @endphp
 
-                    <div class="{{ $colClass }}">
+                    <div class="{{ $colClass }}" data-aos="fade-up" data-aos-delay="{{ ($idx % 2) * 100 }}">
                         <div class="{{ $cardClass }}" style="{{ $cardStyle }}">
                             <div class="d-flex align-items-start gap-3">
                                 {!! $iconHtml !!}

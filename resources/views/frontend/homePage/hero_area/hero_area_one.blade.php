@@ -3,7 +3,14 @@
 @endphp
 
 @if(isset($hero_course) && $hero_course)
-<section class="hero-area p-t-120 p-b-120 text-center" style="background-color: #123e2b;">
+<section class="hero-area p-t-120 p-b-120 text-center position-relative overflow-hidden" style="background-color: #123e2b;">
+    <!-- Floating background decorative shapes -->
+    <div class="hero-bg-shapes">
+        <div class="hero-shape hero-shape-1" data-speed="1.5"></div>
+        <div class="hero-shape hero-shape-2" data-speed="-1.2"></div>
+        <div class="hero-shape hero-shape-3" data-speed="2"></div>
+        <div class="hero-shape hero-shape-4" data-speed="-0.8"></div>
+    </div>
     <div class="container container-1278">
         <div class="row justify-content-center">
             <div class="col-xl-11 col-lg-12 col-md-12">
@@ -12,7 +19,7 @@
                     {{-- Subject --}}
                     @if($hero_course->subject)
                         <div class="mb-3">
-                            <span class="badge hero-badge" style="background-color: rgba(255,255,255,0.15); color: #2db37c; padding: 6px 14px; border-radius: 20px;">
+                            <span class="badge hero-badge hero-badge-animated" style="background-color: rgba(255,255,255,0.15); color: #2db37c; padding: 6px 14px; border-radius: 20px; cursor: pointer;">
                                 {{ $hero_course->subject->title }}
                             </span>
                         </div>
@@ -34,7 +41,20 @@
                     @endif
 
                     {{-- Video or Image --}}
-                    <div class="video-container position-relative mt-4 shadow-lg mx-auto" style="border-radius: 12px; overflow: hidden; background: #000; max-width: 1150px; border: 2px solid rgba(255,255,255,0.15);">
+                    <div class="hero-video-wrapper video-container position-relative mt-4 shadow-lg mx-auto" style="border-radius: 12px; overflow: hidden; background: #000; max-width: 1150px; border: 2px solid rgba(255, 193, 7, 0.5);">
+                        <!-- Border Beam SVG -->
+                        <svg class="border-beam-svg">
+                            <defs>
+                                <linearGradient id="beam-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#ffc107" stop-opacity="0" />
+                                    <stop offset="30%" stop-color="#ffc107" stop-opacity="0.85" />
+                                    <stop offset="50%" stop-color="#ffffff" stop-opacity="1" />
+                                    <stop offset="70%" stop-color="#ffc107" stop-opacity="0.85" />
+                                    <stop offset="100%" stop-color="#ffc107" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <rect class="border-beam-rect" fill="none" stroke="url(#beam-gradient)" stroke-width="2.5" rx="12" ry="12" />
+                        </svg>
                         @if($hero_course->video_source && $hero_course->video)
                             @include('frontend.components.video', [
                                 'source' => $hero_course->video_source, 
@@ -102,6 +122,83 @@
                 new Plyr(el);
             });
         }
+
+        // Parallax and cursor glow animation
+        const heroSection = document.querySelector('.hero-area');
+        if (heroSection) {
+            const shapes = heroSection.querySelectorAll('.hero-shape');
+            const glow = document.createElement('div');
+            glow.className = 'hero-mouse-glow';
+            heroSection.appendChild(glow);
+
+            heroSection.addEventListener('mousemove', function(e) {
+                const rect = heroSection.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                glow.style.left = x + 'px';
+                glow.style.top = y + 'px';
+
+                shapes.forEach(shape => {
+                    const speed = parseFloat(shape.getAttribute('data-speed')) || 1;
+                    const moveX = (x - rect.width / 2) * (speed / 100);
+                    const moveY = (y - rect.height / 2) * (speed / 100);
+                    shape.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                });
+            });
+
+            heroSection.addEventListener('mouseleave', function() {
+                shapes.forEach(shape => {
+                    shape.style.transform = 'translate(0px, 0px)';
+                });
+            });
+        }
+
+        // Border Beam animation dimensions tracker
+        const videoWrapper = document.querySelector('.hero-video-wrapper');
+        if (videoWrapper) {
+            const beamSvg = videoWrapper.querySelector('.border-beam-svg');
+            const beamRect = videoWrapper.querySelector('.border-beam-rect');
+            
+             if (beamSvg && beamRect) {
+                let rAfFrame;
+                function updateBeam() {
+                    if (rAfFrame) cancelAnimationFrame(rAfFrame);
+                    rAfFrame = requestAnimationFrame(() => {
+                        const w = videoWrapper.clientWidth;
+                        const h = videoWrapper.clientHeight;
+                        
+                        beamSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+                        
+                        const strokeWidth = 2.5;
+                        const inset = strokeWidth / 2;
+                        const rectW = w - strokeWidth;
+                        const rectH = h - strokeWidth;
+                        
+                        beamRect.setAttribute('x', inset.toString());
+                        beamRect.setAttribute('y', inset.toString());
+                        beamRect.setAttribute('width', rectW.toString());
+                        beamRect.setAttribute('height', rectH.toString());
+                        
+                        // Perimeter calculation
+                        const perimeter = 2 * (rectW + rectH);
+                        beamRect.style.setProperty('--perimeter', perimeter);
+                        
+                        // Set beam length to 25% of the container perimeter
+                        const beamLen = perimeter * 0.25;
+                        beamRect.style.strokeDasharray = `${beamLen} ${perimeter - beamLen}`;
+                    });
+                }
+                
+                updateBeam();
+                window.addEventListener('resize', updateBeam);
+                
+                if (window.ResizeObserver) {
+                    const ro = new ResizeObserver(updateBeam);
+                    ro.observe(videoWrapper);
+                }
+            }
+        }
     });
 </script>
 @endpush
@@ -138,6 +235,210 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Background elements styling */
+.hero-area {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-area .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Glowing Orbs */
+.hero-shape {
+    position: absolute;
+    opacity: 0.12;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+    pointer-events: none;
+}
+
+.hero-shape-1 {
+    top: 10%;
+    left: 6%;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2db37c 0%, transparent 70%);
+    filter: blur(40px);
+    animation: hero-float-slow 12s ease-in-out infinite;
+}
+
+.hero-shape-2 {
+    bottom: 12%;
+    right: 5%;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #10b981 0%, transparent 70%);
+    filter: blur(50px);
+    animation: hero-float-slow-rev 15s ease-in-out infinite;
+}
+
+/* Dotted Grid shape */
+.hero-shape-3 {
+    top: 15%;
+    right: 12%;
+    width: 140px;
+    height: 140px;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+    background-size: 18px 18px;
+    animation: hero-float-slow 20s ease-in-out infinite;
+}
+
+/* Hollow clean geometric ring */
+.hero-shape-4 {
+    bottom: 22%;
+    left: 10%;
+    width: 90px;
+    height: 90px;
+    border: 2px dashed rgba(255, 255, 255, 0.07);
+    border-radius: 50%;
+    animation: hero-spin 40s linear infinite;
+}
+
+/* Floating Animation Keyframes */
+@keyframes hero-float-slow {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-18px) rotate(8deg);
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+@keyframes hero-float-slow-rev {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(18px) rotate(-8deg);
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+@keyframes hero-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Mouse cursor glow tracker */
+.hero-mouse-glow {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(255, 193, 7, 0.08) 0%, rgba(255, 193, 7, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    mix-blend-mode: screen;
+    will-change: left, top, opacity;
+}
+
+.hero-area:hover .hero-mouse-glow {
+    opacity: 1;
+}
+
+/* Video Wrapper styling */
+.hero-video-wrapper {
+    border-radius: 12px !important;
+    border-color: rgba(255, 193, 7, 0.5) !important;
+    box-shadow: 0 30px 60px -15px rgba(255, 193, 7, 0.3), 
+                0 0 50px 10px rgba(255, 193, 7, 0.08) !important;
+    transition: box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    will-change: box-shadow, border-color;
+}
+
+.hero-video-wrapper:hover {
+    border-color: rgba(255, 193, 7, 0.75) !important;
+    box-shadow: 0 30px 70px -10px rgba(255, 193, 7, 0.4), 
+                0 0 60px 15px rgba(255, 193, 7, 0.12) !important;
+}
+
+/* Border Beam SVG and rect styles */
+.border-beam-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.border-beam-rect {
+    stroke-linecap: round;
+    animation: border-beam-travel 8s linear infinite;
+    will-change: stroke-dashoffset;
+    filter: drop-shadow(0 0 3px rgba(255, 193, 7, 0.6));
+}
+
+@keyframes border-beam-travel {
+    0% {
+        stroke-dashoffset: var(--perimeter, 2000);
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Badge hover transition */
+.hero-badge-animated {
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.hero-badge-animated:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 0 15px rgba(45, 179, 124, 0.3);
+}
+
+/* Global button hover glow just for hero section */
+.hero-btns .template-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-btns .template-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(45, 179, 124, 0.3);
+}
+.hero-btns .template-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transition: all 0.6s ease;
+}
+.hero-btns .template-btn:hover::before {
+    left: 100%;
 }
 
 /* Mobile Viewport Styles (< 768px) */
@@ -196,6 +497,7 @@
         font-size: 20px !important;
         margin-bottom: 12px !important;
     }
+}
 }
 </style>
 @endpush
