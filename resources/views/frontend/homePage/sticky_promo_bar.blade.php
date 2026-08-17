@@ -165,22 +165,25 @@
             align-items: center;
         }
         .sp-left {
-            width: 100%;
+            flex: 0 0 100%;
+            max-width: 100%;
             justify-content: center;
             padding: 0 0 8px 0;
-            min-width: auto;
+            min-width: 0;
         }
         .sp-middle {
-            width: 55%;
+            flex: 0 0 55%;
+            max-width: 55%;
             justify-content: flex-start;
             padding: 0;
-            min-width: auto;
+            min-width: 0;
         }
         .sp-right {
-            width: 45%;
+            flex: 0 0 45%;
+            max-width: 45%;
             justify-content: flex-end;
             padding: 0;
-            min-width: auto;
+            min-width: 0;
         }
         .sp-left h3 {
             font-size: 14px;
