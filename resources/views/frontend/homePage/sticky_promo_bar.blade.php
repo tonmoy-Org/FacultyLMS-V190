@@ -161,15 +161,39 @@
         .sp-inner-container {
             flex-direction: column;
             text-align: center;
+            padding: 4px 0;
         }
         .sp-left, .sp-middle, .sp-right {
             width: 100%;
             justify-content: center;
-            padding: 12px;
+            padding: 4px 8px;
+            min-width: auto;
         }
         .sp-left h3 {
-            font-size: 18px;
+            font-size: 15px;
             text-align: center;
+            line-height: 1.2;
+        }
+        .sp-cd-item {
+            padding: 4px 8px;
+            min-width: 45px;
+        }
+        .sp-cd-item .num {
+            font-size: 14px;
+        }
+        .sp-cd-item span.label {
+            font-size: 8px;
+            margin-top: 2px;
+        }
+        .sp-right {
+            padding-bottom: 6px;
+        }
+        .sp-right .btn-enroll {
+            padding: 6px 12px;
+            font-size: 14px;
+        }
+        .sp-right .btn-enroll i {
+            font-size: 14px;
         }
         .sticky-promo-wrapper.is-sticky {
             border-radius: 0;
