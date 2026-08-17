@@ -473,6 +473,23 @@
                         <p>এই লাইভ মাস্টারক্লাসে আমরা ই-কমার্স বিজনেস শুরু থেকে স্কেল আপ করার সব দরকারি ট্রিকস ও স্ট্র্যাটেজি নিয়ে বিস্তারিত আলোচনা করবো। ক্লাসে সরাসরি প্রশ্নোত্তর পর্ব থাকবে।</p>
                     @endif
                 </div>
+                
+                <style>
+                    .description-body ul {
+                        list-style: disc outside !important;
+                        padding-left: 20px !important;
+                        margin-bottom: 15px !important;
+                    }
+                    .description-body ol {
+                        list-style: decimal outside !important;
+                        padding-left: 20px !important;
+                        margin-bottom: 15px !important;
+                    }
+                    .description-body li {
+                        display: list-item !important;
+                        margin-bottom: 8px !important;
+                    }
+                </style>
             </div>
 
 

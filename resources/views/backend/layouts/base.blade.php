@@ -66,22 +66,22 @@
     @stack('css')
     <style>
         .note-editor .note-editable ul {
-            list-style: disc !important;
+            list-style: disc outside !important;
             padding-left: 2rem !important;
+            margin-bottom: 1rem !important;
         }
         .note-editor .note-editable ol {
-            list-style: decimal !important;
+            list-style: decimal outside !important;
             padding-left: 2rem !important;
+            margin-bottom: 1rem !important;
         }
         .note-editor .note-editable ul li {
-            list-style: disc !important;
+            list-style: disc outside !important;
             display: list-item !important;
-            list-style-position: inside !important;
         }
         .note-editor .note-editable ol li {
-            list-style: decimal !important;
+            list-style: decimal outside !important;
             display: list-item !important;
-            list-style-position: inside !important;
         }
     </style>
 </head>

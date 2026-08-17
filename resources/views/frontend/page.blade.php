@@ -54,7 +54,14 @@
                                     margin-bottom: 1rem;
                                     padding-left: 1.5rem;
                                 }
+                                .dynamic-page-content ul {
+                                    list-style: disc outside !important;
+                                }
+                                .dynamic-page-content ol {
+                                    list-style: decimal outside !important;
+                                }
                                 .dynamic-page-content li {
+                                    display: list-item !important;
                                     margin-bottom: 0.5rem;
                                 }
                                 .dynamic-page-content a {
