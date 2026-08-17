@@ -64,10 +64,9 @@ class StudentDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
-            ->responsive()
             ->scrollCollapse()
             ->selectStyleSingle()
-            ->setTableAttribute('style', 'width:99.8%')
+            ->setTableAttribute('style', 'width:100%')
             ->footerCallback('function ( row, data, start, end, display ) {
 
                 $(".dataTables_length select").addClass("form-select form-select-lg without_search mb-3");

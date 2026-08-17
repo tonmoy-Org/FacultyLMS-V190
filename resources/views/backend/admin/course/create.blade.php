@@ -362,8 +362,9 @@
 
                                     $defBenefitsTitle = old('masterclass_settings.benefits_title', '');
                                     $benefitsList = old('masterclass_settings.benefits_list', [
-                                        'মার্কেটপ্লেস থেকে ক্লায়েন্ট পাওয়ার জন্য সংগ্রাম করছেন? | বিভিন্ন ফ্রিল্যান্সিং মার্কেটপ্লেসে আপনার মতো আরো হাজারো ফ্রিল্যান্সার বা সার্ভিস প্রোভাইডারের প্রোফাইল রয়েছে। আপনাকে সেখানে তাদের সাথে প্রতিযোগিতা করতে হয়। হাজারো প্রোফাইলের ভিড়ে আপনার প্রোফাইলটি যদি ক্লায়েন্টের চোখে না পড়ে, তাহলে সেখান থেকে কাজ পাওয়া কঠিন হয়ে পড়ে। আর আপনি যদি আউট অফ মার্কেটপ্লেস ক্লায়েন্টকে টার্গেট করতে পারেন তবে ক্লায়েন্ট পাওয়া আপনার জন্য অনেক সহজ হয়ে যায়।',
-                                        '');
+                                        'মার্কেটপ্লেস থেকে ক্লায়েন্ট পাওয়ার জন্য সংগ্রাম করছেন? | বিভিন্ন ফ্রিল্যান্সিং মার্কেটপ্লেসে আপনার মতো আরো হাজারো ফ্রিল্যান্সার বা সার্ভিস প্রোভাইডারের প্রোফাইল রয়েছে। আপনাকে সেখানে তাদের সাথে প্রতিযোগিতা করতে হয়। হাজারো প্রোফাইলের ভিড়ে আপনার প্রোফাইলটি যদি ক্লায়েন্টের চোখে না পড়ে, তাহলে সেখান থেকে কাজ পাওয়া কঠিন হয়ে পড়ে। আর আপনি যদি আউট অফ মার্কেটপ্লেস ক্লায়েন্টকে টার্গেট করতে পারেন তবে ক্লায়েন্ট পাওয়া আপনার জন্য অনেক সহজ হয়ে যায়।'
+                                    ]);
+                                    $defGiftBadge = old('masterclass_settings.gift_badge', '');
                                     $defGiftTitle = old('masterclass_settings.gift_title', '');
                                     $defGiftValue = old('masterclass_settings.gift_value', '');
                                     $defGiftCtaText = old('masterclass_settings.gift_cta_text', '');
@@ -371,7 +372,6 @@
                                     $defGiftDescription = old('masterclass_settings.gift_description', '');
                                     $defGiftQuote = old('masterclass_settings.gift_quote', '');
                                     $defGiftFooterNote = old('masterclass_settings.gift_footer_note', '');
-                                    $defGiftCtaText = old('masterclass_settings.gift_cta_text', '');
                                     $defSupportTitle = old('masterclass_settings.support_title', '');
                                     $defSupportDescription = old('masterclass_settings.support_description', '');
 
@@ -739,7 +739,10 @@
 
                                     @include('backend.common.media-input', [
                                         'title' => 'Slider Image',
-                                        ''),
+                                        'name' => 'image_media_id',
+                                        'col' => 'col-12',
+                                        'size' => '(402x248)',
+                                        'image' => old('image_media_id'),
                                         'label' => __('thumbnail'),
                                     ])
                                     <div class="col-lg-6">

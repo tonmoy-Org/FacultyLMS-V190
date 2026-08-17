@@ -1,3 +1,10 @@
+@php
+    $showNewsletter = request()->routeIs('home', 'home2', 'home3', 'submit.testimonial', 'success.details', 'contact') 
+        || request()->is('/', 'home2', 'home3', 'success', 'success/*', 'contact', 'contact/*') 
+        || isHome();
+@endphp
+
+@if($showNewsletter)
 <!--====== Start Floating Newsletter Section ======-->
 <div class="footer-newsletter-wrapper" style="position: relative; z-index: 10; margin-bottom: -65px;">
     <div class="container container-1278">
@@ -56,9 +63,10 @@
         </div>
     </div>
 </div>
+@endif
 
 <!--====== Start Main Dark Footer Area ======-->
-<footer class="footer-area footer-area-v2" style="background-color: #110B3A; color: #ffffff; padding-top: 120px; padding-bottom: 30px; position: relative;">
+<footer class="footer-area footer-area-v2" style="background-color: #110B3A; color: #ffffff; padding-top: {{ $showNewsletter ? '120px' : '60px' }}; padding-bottom: 30px; position: relative;">
     <div class="footer-widget">
         <div class="container container-1278">
             <div class="row g-4 justify-content-between">

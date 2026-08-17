@@ -18,8 +18,10 @@
 	padding: 20px 0;
 	min-height: 80px;
 	.logo img {
-		width: 105px;
-		height: 40px;
+		max-height: 28px;
+		width: auto;
+		max-width: 140px;
+		object-fit: contain;
 	}
 	.logo-icon {
 		display: none;

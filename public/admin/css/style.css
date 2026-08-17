@@ -22,3 +22,13 @@
 .image_col{
     padding-left: 50px;
 }
+
+/* Dashboard Logo Sizing */
+.dashboard-logo .logo img,
+.dashboard-logo .logo svg {
+    max-height: 28px !important;
+    width: auto !important;
+    max-width: 140px !important;
+    object-fit: contain !important;
+}
+
