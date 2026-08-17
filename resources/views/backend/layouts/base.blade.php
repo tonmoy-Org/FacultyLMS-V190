@@ -64,6 +64,18 @@
     <link rel="stylesheet" href="{{ static_asset('admin/css/style.css') }}?v={{ setting('current_version') }}">
     <link rel="stylesheet" href="{{ static_asset('admin/css/responsive.min.css') }}">
     @stack('css')
+    <style>
+        .note-editable ul {
+            list-style: disc !important;
+            list-style-position: inside !important;
+            padding-left: 1.5rem !important;
+        }
+        .note-editable ol {
+            list-style: decimal !important;
+            list-style-position: inside !important;
+            padding-left: 1.5rem !important;
+        }
+    </style>
 </head>
 
 <body>
