@@ -14,6 +14,9 @@
                 .template-header.header-layout-1 .header-inner .nav-menu > ul > li { flex: 1 1 0px; text-align: center; min-width: 100px; display: flex; justify-content: center; }
                 .template-header.header-layout-1 .brand-logo { position: relative !important; z-index: 35 !important; }
                 .template-header.header-layout-1 .brand-logo a { position: relative !important; z-index: 35 !important; pointer-events: auto !important; cursor: pointer !important; display: inline-flex !important; align-items: center !important; }
+                .template-header.header-layout-1 .brand-logo a.sticky-logo { display: none !important; }
+                .template-header.header-layout-1 .header-navigation.sticky-on .brand-logo a.sticky-logo { display: inline-flex !important; }
+                .template-header.header-layout-1 .header-navigation.sticky-on .brand-logo a.main-logo { display: none !important; }
                 .template-header.header-layout-1 .header-center { pointer-events: none !important; }
                 .template-header.header-layout-1 .header-center .nav-menu { pointer-events: auto !important; }
                 @media (max-width: 991.98px) {
