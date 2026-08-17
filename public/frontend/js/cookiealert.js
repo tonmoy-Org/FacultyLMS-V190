@@ -5,6 +5,10 @@
     var acceptCookies = document.querySelector(".accept-cookies");
     var dontAcceptCookies = document.querySelector(".dont-accept-cookies");
 
+    if (!cookieAlert) {
+        return;
+    }
+
     cookieAlert.offsetHeight; // Force browser to trigger reflow (https://stackoverflow.com/a/39451131)
 
     if (cookieStatus == 1 && !getCookie("acceptCookies")) {
