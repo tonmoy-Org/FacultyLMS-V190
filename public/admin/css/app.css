@@ -12937,7 +12937,10 @@ textarea.form-control::-webkit-scrollbar-thumb,
 }
 .dashboard-logo .logo img,
 .dashboard-logo .logo svg {
-
+  max-height: 28px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
 }
 .dashboard-logo .logo-icon {
   display: none;
@@ -14515,6 +14518,76 @@ table.dataTable td.dataTables_empty {
   text-align: center;
 }
 
+@media (max-width: 767.98px) {
+  .header-top {
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+  .header-top .section-title {
+    margin-bottom: 0 !important;
+  }
+  .header-top .oftions-content-right {
+    margin-left: auto;
+  }
+
+  .yajra-dataTable .dataTables_length label {
+    width: auto !important;
+    max-width: 100% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+    color: #7e7f92;
+  }
+
+  .yajra-dataTable .dataTables_length select,
+  .yajra-dataTable .dataTables_length .select2-container {
+    width: 75px !important;
+    min-width: 75px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .dataTables_wrapper .dataTables_length,
+  .dataTables_wrapper .dataTables_filter,
+  .yajra-dataTable .dataTables_filter {
+    max-width: 100% !important;
+    width: 100% !important;
+    float: none !important;
+    text-align: left !important;
+    margin-bottom: 12px !important;
+  }
+
+  .yajra-dataTable .dataTables_filter label {
+    width: 100% !important;
+    display: block !important;
+    position: relative !important;
+  }
+
+  .dataTables_wrapper .dataTables_filter input,
+  .yajra-dataTable .dataTables_filter input {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .default-list-table.yajra-dataTable .table,
+  .default-list-table .table {
+    min-width: 750px !important;
+  }
+
+  .yajra-dataTable .dataTables_wrapper .dataTables_info,
+  .yajra-dataTable .dataTables_wrapper .dataTables_paginate {
+    float: none !important;
+    text-align: center !important;
+    margin-top: 15px !important;
+  }
+
+  .yajra-dataTable .dataTables_wrapper .dataTables_paginate {
+    display: inline-flex !important;
+    justify-content: center !important;
+  }
+}
+
 .page-item {
   --bdrs: 5px;
 }
@@ -14780,6 +14853,138 @@ table.dataTable td.dataTables_empty {
 }
 .default-tab-list.media-modal-tab .btn-close.modal-close {
   top: 42px;
+}
+
+/* Mobile 2-in-a-row orientation for course wizard tabs (1 to 9 buttons) */
+@media (max-width: 991.98px) {
+  .default-tab-list:not(.default-tab-list-v2) {
+    padding: 12px 10px !important;
+  }
+  .default-tab-list:not(.default-tab-list-v2) ul.nav {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 0 !important;
+    justify-content: flex-start !important;
+  }
+  .default-tab-list:not(.default-tab-list-v2) ul.nav li {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    width: 50% !important;
+    padding: 4px !important;
+    box-sizing: border-box !important;
+  }
+  .default-tab-list:not(.default-tab-list-v2) ul.nav li:first-child {
+    padding-left: 4px !important;
+  }
+  .default-tab-list:not(.default-tab-list-v2) ul li a.nav-link::before {
+    display: none !important;
+  }
+  .default-tab-list:not(.default-tab-list-v2) ul li a.nav-link {
+    display: flex !important;
+    align-items: center !important;
+    padding: 6px 8px !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 6px !important;
+    font-size: 13px !important;
+    line-height: 1.25 !important;
+    color: #334155 !important;
+    min-height: 36px;
+    height: 100%;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  .default-tab-list:not(.default-tab-list-v2) ul li a.nav-link.active {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--sg-primary, #20c997) !important;
+    font-weight: 600 !important;
+  }
+  .default-tab-list:not(.default-tab-list-v2) ul li a.nav-link.text-danger {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #dc3545 !important;
+  }
+  .default-tab-list:not(.default-tab-list-v2) ul li .default-tab-count {
+    width: 24px !important;
+    height: 24px !important;
+    line-height: 22px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    margin-right: 8px !important;
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #475569 !important;
+    box-shadow: none !important;
+  }
+  .default-tab-list:not(.default-tab-list-v2) ul li a.nav-link.active .default-tab-count {
+    background-color: var(--sg-primary, #20c997) !important;
+    color: #ffffff !important;
+    border: 1px solid var(--sg-primary, #20c997) !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Responsive Data Table & Assignment Page Overflow Fix for Mobile Devices */
+@media (max-width: 991.98px) {
+  .default-tab-list {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .default-tab-list .tab-content,
+  .default-tab-list .tab-pane {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .default-list-table,
+  .yajra-dataTable,
+  .dataTables_wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .default-list-table .table,
+  .yajra-dataTable .table,
+  .dataTables_wrapper .table {
+    min-width: 650px !important;
+    width: 100% !important;
+  }
+
+  .default-list-table::-webkit-scrollbar-button,
+  .yajra-dataTable::-webkit-scrollbar-button,
+  .dataTables_wrapper::-webkit-scrollbar-button {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .default-list-table::-webkit-scrollbar,
+  .yajra-dataTable::-webkit-scrollbar,
+  .dataTables_wrapper::-webkit-scrollbar {
+    height: 5px !important;
+  }
+
+  .default-list-table::-webkit-scrollbar-thumb,
+  .yajra-dataTable::-webkit-scrollbar-thumb,
+  .dataTables_wrapper::-webkit-scrollbar-thumb {
+    background: #cbd5e1 !important;
+    border-radius: 10px !important;
+  }
 }
 
 .default-tab-list .tab-content .row .col-lg-12 .editCourseCurriculum .accordion-item:last-child {
