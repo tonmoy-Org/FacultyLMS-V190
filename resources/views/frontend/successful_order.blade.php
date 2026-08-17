@@ -6,7 +6,7 @@
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-12">
-                    <div class="section-title-with-progress-bar m-b-sm-45 m-b-70 text-center">
+                    <div class="section-title-with-progress-bar m-b-sm-45 m-b-70 text-center" data-aos="fade-up">
                         <h4>{{__('successful_order')}}</h4>
                         <p>{{__('order_id')}}: {{ $checkout->invoice_no }}</p>
                         <div class="progress-bar-wrapper">
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="row gx-3 gx-md-4 simple-image-box-wrapper m-b-sm-0 m-b-20">
-                <div class="col-md-6 col-6">
+                <div class="col-md-6 col-6" data-aos="fade-right" data-aos-delay="100">
                     <div class="simple-text-infobox height-100 m-b-30">
                         <h6>{{__('account_info')}}:</h6>
                         <ul>
@@ -48,7 +48,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-6 col-6">
+                <div class="col-md-6 col-6" data-aos="fade-left" data-aos-delay="200">
                     <div class="simple-text-infobox height-100 m-b-30">
                         <h6>{{__('other_info')}}:</h6>
                         <ul>
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
+                <div class="col-12" data-aos="fade-up" data-aos-delay="300">
                     <div class="cart-product-table m-t-sm-20 m-b-15 m-b-sm-30 table-responsive">
                         <table class="table table-v2 align-middle" style="min-width: 700px;">
                             <thead>
@@ -108,10 +108,10 @@
                 </div>
             </div>
             <div class="row justify-content-end align-items-end">
-                <div class="col-lg-8">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-delay="100">
                     <a href="{{route('my-course',$checkout->enrolls[0]->enrollable->slug)}}" class="template-btn bordered-btn d-block text-center">{{__('start_learning')}}</a>
                 </div>
-                <div class="col-lg-4 col-md-5 col-sm-6">
+                <div class="col-lg-4 col-md-5 col-sm-6" data-aos="fade-left" data-aos-delay="200">
                     <div class="cart-product-calculation">
                         <table class="table">
                             <tbody>

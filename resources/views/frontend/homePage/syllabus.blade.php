@@ -36,7 +36,7 @@
     }
 </style>
 
-<section class="syllabus-section p-t-20 p-b-40 position-relative overflow-hidden bg-white">
+<section class="syllabus-section p-t-60 p-b-60 position-relative overflow-hidden bg-white">
     <div class="container container-1278">
         <div class="common-heading text-center m-b-40" data-aos="fade-up">
             @php

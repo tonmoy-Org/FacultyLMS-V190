@@ -64,7 +64,7 @@
 
     <!--====== Start What You Will Learn ======-->
     @if(isset($course) && $course && $course->outcomes)
-    <section class="what-you-learn-section p-t-80 p-b-80 position-relative" style="background-color: #F9FAFB;">
+    <section class="what-you-learn-section p-t-60 p-b-60 position-relative" style="background-color: #F9FAFB;">
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -89,7 +89,7 @@
 
     <!--====== Start Instructor Profile ======-->
     @if(isset($course) && $course && $course->instructor)
-    <section class="instructor-section p-t-80 p-b-80 bg-white">
+    <section class="instructor-section p-t-60 p-b-60 bg-white">
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
@@ -156,7 +156,7 @@
     @endphp
 
     @if($b2Url && $b2Status && !str_contains($b2Url, 'default'))
-    <section class="ad-banner-section-2 p-t-60 p-b-20 bg-white overflow-hidden">
+    <section class="ad-banner-section-2 p-t-60 p-b-60 bg-white overflow-hidden">
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-12 text-center" data-aos="fade-up">
@@ -184,7 +184,7 @@
         }
     @endphp
     @if($successBannerUrl && !str_contains($successBannerUrl, 'default'))
-    <section class="success-banner-section p-t-60 p-b-20 bg-white overflow-hidden">
+    <section class="success-banner-section p-t-60 p-b-60 bg-white overflow-hidden">
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-12 text-center">
@@ -219,7 +219,7 @@
 
     <!--====== Start Coupon Banner Section ======-->
     @if(isset($active_banner_coupon) && $active_banner_coupon && $active_banner_coupon->image)
-    <section class="coupon-banner-section p-t-40 p-b-40 bg-white overflow-hidden">
+    <section class="coupon-banner-section p-t-60 p-b-60 bg-white overflow-hidden">
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-12 text-center" data-aos="fade-up">

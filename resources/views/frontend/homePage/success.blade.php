@@ -81,7 +81,7 @@
     }
 </style>
 
-<section class="success-story-section p-t-80 p-b-80 position-relative" style="background-color: #ffffff;">
+<section class="success-story-section p-t-60 p-b-60 position-relative" style="background-color: #ffffff;">
     <div class="container container-1278">
         <div class="row align-items-center g-5">
             

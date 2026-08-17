@@ -251,7 +251,7 @@
     <div class="container container-1278 position-relative" style="z-index: 2;">
         <div class="row align-items-center">
             <!-- Left Text Column -->
-            <div class="col-lg-7 col-md-8 ps-md-4">
+            <div class="col-lg-7 col-md-8 ps-md-4" data-aos="fade-right">
                 <div class="banner-text-content">
                     <span class="badge-pill-tag">
                         {{ setting('contact_page_banner_tag') ?: __('GET IN TOUCH') }}
@@ -401,7 +401,7 @@
             <!-- Main Content 2-Column Row (Form on Left, Map on Right) -->
             <div class="row g-4 align-items-stretch mb-5">
                 <!-- Left Column: Form -->
-                <div class="col-lg-6">
+                <div class="col-lg-6" data-aos="fade-right">
                     <div class="contact-form-card h-100 p-4" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);">
                         <form action="{{ route('instructor.contact') }}" method="POST" class="user-form">
                             @csrf
@@ -440,7 +440,7 @@
                 </div>
 
                 <!-- Right Column: Map with Floating Card Overlay -->
-                <div class="col-lg-6">
+                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
                     <div class="map-card-wrapper h-100 position-relative" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04); min-height: 480px;">
                         <!-- Floating Location Overlay -->
                         <div class="map-location-badge position-absolute" style="top: 24px; left: 24px; z-index: 10; background: #ffffff; border-radius: 8px; padding: 16px 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08); border: 1px solid #f1f5f9; max-width: 260px;">
@@ -472,7 +472,7 @@
             <!-- Bottom Row: 3 Contact Info Cards -->
             <div class="row g-4 justify-content-center">
                 <!-- Our Address Card -->
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="contact-info-card">
                         <div class="contact-card-icon-badge">
                             <i class="fal fa-map-marker-alt fas fa-map-marker-alt"></i>
@@ -485,7 +485,7 @@
                 </div>
 
                 <!-- Phone Number Card -->
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="contact-info-card">
                         <div class="contact-card-icon-badge">
                             <i class="fal fa-phone fas fa-phone"></i>
@@ -499,7 +499,7 @@
                 </div>
 
                 <!-- Email Address Card -->
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="contact-info-card">
                         <div class="contact-card-icon-badge">
                             <i class="fal fa-envelope fas fa-envelope"></i>

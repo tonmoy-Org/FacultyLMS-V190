@@ -324,7 +324,7 @@
     <div class="container container-1278 position-relative" style="z-index: 2;">
         <div class="row align-items-center">
             <!-- Left Text Column -->
-            <div class="col-lg-6 col-md-7 ps-md-4">
+            <div class="col-lg-6 col-md-7 ps-md-4" data-aos="fade-right">
                 <div class="banner-text-content">
                     <span class="badge-pill-tag">
                         {{ setting('success_page_banner_tag') ?: __('SUCCESS STORIES') }}
@@ -456,7 +456,7 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="testimonial-form-card px-0 py-3">
+                <div class="testimonial-form-card px-0 py-3" data-aos="fade-up">
                     <!-- Header Bar -->
                     <div class="card-header-bar mb-4">
                         <h3 class="card-header-title">{{ setting('success_form_header_title') ?: __('Your Experience Matters') }}</h3>
