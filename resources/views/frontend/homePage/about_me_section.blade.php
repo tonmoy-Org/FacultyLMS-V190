@@ -18,6 +18,24 @@
     }
 @endphp
 
+<style>
+    .about-me-description-content ul {
+        list-style: disc outside !important;
+        padding-left: 0 !important;
+        margin-bottom: 15px !important;
+    }
+    .about-me-description-content ol {
+        list-style: decimal outside !important;
+        padding-left: 0 !important;
+        margin-bottom: 15px !important;
+    }
+    .about-me-description-content li {
+        display: list-item !important;
+        margin-left: 25px !important;
+        margin-bottom: 8px !important;
+    }
+</style>
+
 @if($status !== '0')
 <section class="about-me-section p-t-60 p-b-60 position-relative overflow-hidden bg-white">
     <div class="container container-1278">
