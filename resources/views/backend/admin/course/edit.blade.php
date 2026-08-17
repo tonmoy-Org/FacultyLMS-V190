@@ -569,6 +569,8 @@
                                     $defBreakdownSubheading = !empty($mcSettings['breakdown_subheading']) ? $mcSettings['breakdown_subheading'] : '';
                                     $defBreakdownTodayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : '';
                                     $defBreakdownItems = !empty($mcSettings['breakdown_items']) ? $mcSettings['breakdown_items'] : '';
+                                    $defBreakdownCtaText = !empty($mcSettings['breakdown_cta_text']) ? $mcSettings['breakdown_cta_text'] : '';
+                                    $defBreakdownCtaLink = !empty($mcSettings['breakdown_cta_link']) ? $mcSettings['breakdown_cta_link'] : '';
 
                                     $defOrderFormTitle = !empty($mcSettings['order_form_title']) ? $mcSettings['order_form_title'] : '';
                                     $defOrderFormSubtitle = !empty($mcSettings['order_form_subtitle']) ? $mcSettings['order_form_subtitle'] : '';
@@ -699,11 +701,23 @@
                                                            value="{{ $mcSettings['breakdown_original_price'] ?? '' }}" placeholder="$1,000.00">
                                                 </div>
 
-                                                <div class="col-12 mb-2">
+                                                <div class="col-12 mb-4">
                                                     <label class="form-label mb-2">Breakdown Items (One per line, Format: Title | Price)</label>
                                                     <textarea name="masterclass_settings[breakdown_items]" class="form-control rounded-2" rows="6"
                                                               placeholder="🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০&#10;🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০">{{ $defBreakdownItems }}</textarea>
                                                     <small class="text-muted">Separate title and price with a pipe (|) character.</small>
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Breakdown Red CTA Text</label>
+                                                    <input type="text" name="masterclass_settings[breakdown_cta_text]" class="form-control rounded-2"
+                                                           value="{{ $defBreakdownCtaText }}" placeholder="সিট কনফার্ম করুন →">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Breakdown Red CTA Link</label>
+                                                    <input type="text" name="masterclass_settings[breakdown_cta_link]" class="form-control rounded-2"
+                                                           value="{{ $defBreakdownCtaLink }}" placeholder="e.g. #register or https://...">
                                                 </div>
                                             </div>
                                         </div>

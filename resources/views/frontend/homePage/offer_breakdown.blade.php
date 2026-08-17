@@ -63,6 +63,14 @@
                         </span>
                         @endif
                     </div>
+                    
+                    @if(!empty($mcSettings['breakdown_cta_text']))
+                    <div class="text-center w-100 mt-4">
+                        <a href="{{ !empty($mcSettings['breakdown_cta_link']) ? $mcSettings['breakdown_cta_link'] : (isset($course) ? route('course.details', $course->slug) : '#') }}" class="template-btn">
+                            {{ $mcSettings['breakdown_cta_text'] }}
+                        </a>
+                    </div>
+                    @endif
                 </div>
     </div>
 </section>

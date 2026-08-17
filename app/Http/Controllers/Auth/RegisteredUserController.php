@@ -53,6 +53,13 @@ class RegisteredUserController extends Controller
 
     public function store(Request $request) //: RedirectResponse
     {
+        if ($request->user_type == 'instructor') {
+            $orgName = trim($request->first_name . ' ' . $request->last_name);
+            $request->merge([
+                'organization_id' => $orgName
+            ]);
+        }
+
         $request->validate([
             'first_name'      => ['required', 'string', 'max:255'],
             'last_name'       => ['nullable', 'string', 'max:255'],

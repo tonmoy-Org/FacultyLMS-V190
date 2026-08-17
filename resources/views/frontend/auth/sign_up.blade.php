@@ -142,14 +142,7 @@
                                         </div>
                                     </div>
                                     @if(Request::Route()->getName() != 'student.sign_up')
-                                        <div class="col-12 mb-4">
-                                            <label for="organiName">{{__('organisation_name') }} *</label>
-                                            <input type="text" class="form-control" name="organization_id"
-                                                   id="organiName">
-                                            <div class="nk-block-des text-danger">
-                                                <p>{{ $errors->first('org_name') }}</p>
-                                            </div>
-                                        </div>
+                                        <input type="hidden" name="user_type" value="instructor">
                                     @endif
                                     <div class="col-12 mb-4">
                                         <label for="email">{{__('email') }} *</label>
