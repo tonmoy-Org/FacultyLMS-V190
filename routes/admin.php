@@ -356,6 +356,10 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::get('single-course-section', [WebsiteSettingController::class, 'singleCourseSection'])->name('website.single_course_section');
         Route::match(['get', 'post'], 'save-single-course-section', [WebsiteSettingController::class, 'saveSingleCourseSection'])->name('website.single_course_section.save');
 
+        //website counter section setting
+        Route::get('counter-section', [WebsiteSettingController::class, 'counterSection'])->name('website.counter_section');
+        Route::match(['get', 'post'], 'save-counter-section', [WebsiteSettingController::class, 'saveCounterSection'])->name('website.counter_section.save');
+
         //website seo
         Route::get('website-seo', [WebsiteSettingController::class, 'seo'])->name('website.seo');
         Route::post('website-seo', [WebsiteSettingController::class, 'saveSeoSetting'])->name('website.seo');

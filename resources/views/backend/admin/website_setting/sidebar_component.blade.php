@@ -114,6 +114,13 @@
                     </li>
                 @endif
                 <li>
+                    <a href="{{ route('website.counter_section') }}"
+                       class="{{ request()->routeIs('website.counter_section') ? 'active' : '' }}">
+                        <span class="icon"><i class="las la-calculator"></i></span>
+                        <span>{{ __('Counter Section') }}</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('website.about_section') }}"
                        class="{{ request()->routeIs('website.about_section') ? 'active' : '' }}">
                         <span class="icon"><i class="las la-user-tie"></i></span>

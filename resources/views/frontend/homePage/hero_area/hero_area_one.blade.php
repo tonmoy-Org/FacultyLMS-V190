@@ -3,7 +3,7 @@
 @endphp
 
 @if(isset($hero_course) && $hero_course)
-<section class="hero-area p-t-120 p-b-40 text-center position-relative overflow-hidden" style="background-color: #123e2b;">
+<section class="hero-area p-t-120 p-b-60 text-center position-relative overflow-hidden" style="background-color: #123e2b;">
     <!-- Floating background decorative shapes -->
     <div class="hero-bg-shapes">
         <div class="hero-shape hero-shape-1" data-speed="1.5"></div>
@@ -91,8 +91,11 @@
     </div>
 </section>
 
+<!--====== Start Counter Section ======-->
+@include('frontend.homePage.counter_section')
+
 @if(isset($hero_course->description) && !empty(strip_tags($hero_course->description)))
-<section class="course-description-section" style="padding-top: 80px; padding-bottom: 40px;">
+<section class="course-description-section p-t-60 p-b-60 bg-white">
     <div class="container container-1278">
         <div class="description-card p-4 p-md-5" style="background-color: #eaf7f2; border-radius: 8px;">
             @if($hero_course->description_subtitle)
@@ -347,9 +350,9 @@
 /* Mouse cursor glow tracker */
 .hero-mouse-glow {
     position: absolute;
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(circle, rgba(255, 193, 7, 0.08) 0%, rgba(255, 193, 7, 0) 70%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 193, 7, 0.22) 0%, rgba(255, 193, 7, 0.08) 45%, rgba(255, 193, 7, 0) 70%);
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);

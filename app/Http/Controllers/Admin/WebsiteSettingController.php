@@ -1256,4 +1256,63 @@ class WebsiteSettingController extends Controller
             return response()->json($data);
         }
     }
+
+    public function counterSection(Request $request)
+    {
+        try {
+            $data = [
+                'languages' => $this->language->all(),
+                'lang'      => $request->lang == '' ? app()->getLocale() : $request->lang,
+            ];
+
+            return view('backend.admin.website_setting.counter_section', $data);
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+
+            return back();
+        }
+    }
+
+    public function saveCounterSection(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            return redirect()->route('website.counter_section');
+        }
+
+        if (config('app.demo_mode')) {
+            $data = [
+                'status' => 'danger',
+                'error'  => __('this_function_is_disabled_in_demo_server'),
+                'title'  => 'error',
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+            Toastr::error(__('this_function_is_disabled_in_demo_server'));
+            return back();
+        }
+
+        try {
+            $this->setting->update($request);
+            Toastr::success(__('update_successful'));
+            $data = [
+                'success' => __('update_successful'),
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+
+            return back();
+        } catch (\Exception $e) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'error' => $e->getMessage(),
+                ]);
+            }
+            Toastr::error($e->getMessage());
+            return back();
+        }
+    }
 }
