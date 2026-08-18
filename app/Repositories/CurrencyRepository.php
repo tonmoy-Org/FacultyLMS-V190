@@ -51,6 +51,6 @@ class CurrencyRepository
 
     public function currencyByCode($code)
     {
-        return Currency::where('code', $code)->first();
+        return Currency::where('code', $code)->first() ?: Currency::find($code);
     }
 }

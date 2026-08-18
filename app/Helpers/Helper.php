@@ -134,6 +134,10 @@ if (! function_exists('get_price')) {
 
     function get_price($price, $curr = null): ?string
     {
+        if (! $curr) {
+            $curr = userCurrency();
+        }
+
         return format_price(convert_price($price, $curr), $curr);
     }
 }
@@ -142,26 +146,34 @@ if (! function_exists('format_price')) {
 
     function format_price($price, $curr = null)
     {
+        if (! $curr) {
+            $curr = userCurrency();
+        }
+
         $no_of_decimals         = setting('no_of_decimals');
         $decimal_separator      = setting('decimal_separator') ? setting('decimal_separator') : '.';
         $thousands_separator    = $decimal_separator == ',' ? '.' : ',';
         $currency_symbol_format = setting('currency_symbol_format') ? setting('currency_symbol_format') : 'amount_symbol';
 
-        if ($no_of_decimals != '') {
-            $price = number_format($price, $no_of_decimals, $decimal_separator, $thousands_separator);
+        if ($no_of_decimals !== '' && $no_of_decimals !== null) {
+            $price = number_format(floatval($price), (int)$no_of_decimals, $decimal_separator, $thousands_separator);
         } else {
-            $price = number_format($price, 3, $decimal_separator, $thousands_separator);
+            $price = number_format(floatval($price), 2, $decimal_separator, $thousands_separator);
         }
 
+        $symbol = get_symbol($curr);
+
         if ($currency_symbol_format == 'amount_symbol') {
-            return $price.get_symbol($curr);
+            return $price.$symbol;
         } elseif ($currency_symbol_format == 'symbol_amount') {
-            return get_symbol($curr).$price;
+            return $symbol.$price;
         } elseif ($currency_symbol_format == 'amount__symbol') {
-            return $price.' '.get_symbol($curr);
+            return $price.' '.$symbol;
         } elseif ($currency_symbol_format == 'symbol__amount') {
-            return get_symbol($curr).' '.$price;
+            return $symbol.' '.$price;
         }
+
+        return $symbol.$price;
     }
 }
 if (! function_exists('convert_price')) {
@@ -171,9 +183,9 @@ if (! function_exists('convert_price')) {
         $exchange_rate = 1;
         $currencies    = app('currencies');
         if (! $curr) {
-            $curr = setting('default_currency');
+            $curr = userCurrency();
         }
-        $currency      = $currencies->where('code', $curr)->first();
+        $currency      = $currencies->where('code', $curr)->first() ?: $currencies->where('id', $curr)->first();
         if ($currency) {
             $exchange_rate = $currency->exchange_rate;
         }
@@ -188,12 +200,12 @@ if (! function_exists('get_symbol')) {
         $currencies = \app('currencies');
 
         if (! $curr) {
-            $curr = setting('default_currency');
+            $curr = userCurrency();
         }
 
         $symbol     = '$';
 
-        $currency   = $currencies->where('code', $curr)->first();
+        $currency   = $currencies->where('code', $curr)->first() ?: $currencies->where('id', $curr)->first();
         if ($currency) {
             $symbol = $currency->symbol;
         }
@@ -296,12 +308,13 @@ if (! function_exists('priceFormatUpdate')) {
         if (! $price) {
             $price = 0;
         }
-        $active_currency = \app('currencies')->where('id', $curr)->first();
+        $currencies      = \app('currencies');
+        $active_currency = $currencies->where('id', $curr)->first() ?: $currencies->where('code', $curr)->first();
         $rate            = $active_currency ? $active_currency->exchange_rate : 1;
         if ($type == '*') {
-            return round($price * $rate, setting('no_of_decimals'));
+            return round($price * $rate, setting('no_of_decimals') ?: 2);
         } else {
-            return $price / $rate;
+            return $rate != 0 ? $price / $rate : $price;
         }
     }
 }
@@ -897,14 +910,11 @@ if (! function_exists('authUser')) {
 if (! function_exists('userCurrency')) {
     function userCurrency()
     {
-        $currency_id = setting('default_currency');
-        if (auth()->check()) {
-            $currency_id = auth()->user()->currency_code;
-        } elseif (session()->has('currency_code')) {
-            $currency_id = session()->get('currency_code');
+        if (session()->has('currency_code') && session()->get('currency_code')) {
+            return session()->get('currency_code');
         }
 
-        return $currency_id;
+        return setting('default_currency') ?: 'USD';
     }
 }
 if (! function_exists('userLanguage')) {

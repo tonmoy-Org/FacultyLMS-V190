@@ -17,7 +17,7 @@ class CurrencySeeder extends Seeder
         Currency::create([
             'id'            => 2,
             'name'          => 'Taka',
-            'symbol'        => 'TK',
+            'symbol'        => '৳',
             'code'          => 'BDT',
             'exchange_rate' => 100,
         ]);

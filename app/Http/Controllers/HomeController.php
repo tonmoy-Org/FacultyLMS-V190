@@ -37,8 +37,11 @@ class HomeController extends Controller
                     $data['currency_code'] = $request->currency_code;
                 }
                 $user->update($data);
-            } else {
+            }
+            if ($request->lang) {
                 session()->put('lang', $request->lang);
+            }
+            if ($request->currency_code) {
                 session()->put('currency_code', $request->currency_code);
             }
 
