@@ -496,6 +496,10 @@ class ProfileController extends Controller
 
     public function updateProfile(Request $request)
     {
+        // Prevent non-admin users from changing their phone number.
+        // Even if they bypass the frontend disabled input, we force it to the current value.
+        $request->merge(['phone' => Auth::user()->phone]);
+
         $validate = $request->validate([
             'first_name' => 'required|string',
             'phone'      => 'required|numeric|unique:users,phone,'.Request()->user_id,

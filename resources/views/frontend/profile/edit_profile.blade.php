@@ -60,7 +60,8 @@
                                     <label for="phone">{{__('phone') }}</label>
                                     <input type="tel" class="form-control" name="phone" id="phone"
                                            placeholder="{{__('phone') }}"
-                                           value="{{ old('phone', Auth()->user()->phone) }}">
+                                           value="{{ old('phone', Auth()->user()->phone) }}" disabled>
+                                    <small class="text-muted">{{ __('phone_number_can_only_be_changed_by_admin') ?? 'Phone number can only be changed by admin' }}</small>
                                     @if ($errors->has('phone'))
                                         <div class="nk-block-des text-danger">
                                             <p>{{ $errors->first('phone') }}</p>
