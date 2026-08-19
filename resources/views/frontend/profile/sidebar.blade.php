@@ -220,7 +220,7 @@
                              alt="{{ auth()->user()->name }}">
                     </div>
                     <h3>{{ auth()->user()->name }}</h3>
-                    <p>{{ auth()->user()->phone }}</p>
+                    <p>{{ auth()->user()->formatted_phone }}</p>
                 </div>
             </div>
             <nav class="profile-menu">

@@ -149,8 +149,8 @@
                                     </div>
 
                                     <ul class="user-contact-info">
-                                        <li><a href="tel:{{ auth()->user()->phone }}"><i
-                                                    class="fal fa-phone"></i> {{ auth()->user()->phone }}</a></li>
+                                        <li><a href="tel:{{ auth()->user()->formatted_phone }}"><i
+                                                    class="fal fa-phone"></i> {{ auth()->user()->formatted_phone }}</a></li>
                                         <li><i class="fal fa-map-marker-alt"></i> {{ auth()->user()->address }}</li>
                                     </ul>
                                 </div>

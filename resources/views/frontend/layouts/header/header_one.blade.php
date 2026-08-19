@@ -274,7 +274,7 @@
                                         </div>
                                         <div class="profile-info-content">
                                             <h3>{{ Auth()->user()->first_name }} {{ Auth()->user()->last_name }}</h3>
-                                            <p>{{ Auth()->user()->phone }}</p>
+                                            <p>{{ Auth()->user()->formatted_phone }}</p>
                                         </div>
                                     </div>
                                     @include('frontend.profile.sidebar',['profile_dropdown' => 1])
