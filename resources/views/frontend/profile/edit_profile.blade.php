@@ -57,16 +57,16 @@
                                     @endif
                                 </div> --}}
                                 <div class="col-sm-6">
-                                    <label for="phone">{{__('phone') }}</label>
-                                    <input type="tel" class="form-control" name="phone" id="phone"
-                                           placeholder="{{__('phone') }}"
-                                           value="{{ old('phone', Auth()->user()->phone) }}" disabled>
-                                    <small class="text-muted">{{ __('phone_number_can_only_be_changed_by_admin') ?? 'Phone number can only be changed by admin' }}</small>
-                                    @if ($errors->has('phone'))
-                                        <div class="nk-block-des text-danger">
-                                            <p>{{ $errors->first('phone') }}</p>
-                                        </div>
-                                    @endif
+                                    @include('backend.common.tel-input',[
+                                        'name' => 'phone',
+                                        'value' => old('phone', Auth()->user()->phone),
+                                        'label' => __('phone'),
+                                        'id' => 'phoneNumber',
+                                        'country_id_field' => 'phone_country_id',
+                                        'country_id' => old('phone_country_id', Auth()->user()->phone_country_id ? : (setting('default_country') ? : 19)),
+                                        'disabled' => true
+                                    ])
+                                    <small class="text-muted" style="display:block; margin-top:-15px; margin-bottom:15px;">{{ __('phone_number_can_only_be_changed_by_admin') ?? 'Phone number can only be changed by admin' }}</small>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="email">{{__('email') }}</label>

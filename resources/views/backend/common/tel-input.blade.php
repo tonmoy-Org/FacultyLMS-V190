@@ -53,7 +53,7 @@
         </div>
         <div class="phone-number">
             <input type="hidden" name="countries" value="{{ $countries }}">
-            <input type="tel" class="" id="{{ $id }}" name="{{ $name }}" value="{{ $value }}">
+            <input type="tel" class="" id="{{ $id }}" name="{{ $name }}" value="{{ $value }}" {{ isset($disabled) && $disabled ? 'disabled' : '' }}>
             <input type="hidden" name="{{ $country_id_field }}" class="country_id" value="{{ $country_id }}">
         </div>
     </div>
