@@ -12215,3 +12215,13 @@ svg.logo-icon path {
     color: var(--color-secondary-4, #133e35);
 }
 
+.phone-field .phone-number input {
+    border: none !important;
+    height: 38px !important;
+    padding: 0 10px !important;
+    margin-bottom: 0 !important;
+    border-radius: 5px !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
