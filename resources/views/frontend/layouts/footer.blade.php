@@ -25,11 +25,16 @@
                 <div class="col-lg-5 col-md-12 text-center d-flex flex-column align-items-lg-end align-items-center justify-content-center">
                     <div class="d-inline-flex flex-column align-items-center">
                         @php
-                            $getAccessLink = setting('get_access_btn_link') ?: route('register');
+                            $getAccessRawLink = setting('get_access_btn_link');
+                            if (empty($getAccessRawLink) || $getAccessRawLink === '#register' || $getAccessRawLink === '#') {
+                                $getAccessLink = (request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register');
+                            } else {
+                                $getAccessLink = \Illuminate\Support\Str::startsWith($getAccessRawLink, ['http://', 'https://', '/']) ? $getAccessRawLink : url($getAccessRawLink);
+                            }
                             $getAccessTitle = setting('get_access_btn_title', app()->getLocale()) ?: (setting('get_access_btn_title') ?: __('get_access'));
                         @endphp
                         <div class="mb-3 text-center">
-                            <a href="{{ url($getAccessLink) }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center" style="padding: 10px 24px; font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 8px;">
+                            <a href="{{ $getAccessLink }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center" style="padding: 10px 24px; font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 8px;">
                                 <span>{{ $getAccessTitle }}</span>
                             </a>
                         </div>
@@ -290,6 +295,29 @@
         }
         initCountdown('promoCountdownMain');
         initCountdown('promoCountdownFooter');
+
+        // Smooth scroll to Billing / Order Form section (#register)
+        document.querySelectorAll('a.get-access-btn, a[href*="#register"]').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && (href === '#register' || href.endsWith('#register'))) {
+                    const targetEl = document.getElementById('register');
+                    if (targetEl) {
+                        e.preventDefault();
+                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        if (window.location.hash === '#register') {
+            setTimeout(function() {
+                const targetEl = document.getElementById('register');
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 300);
+        }
     });
 </script>
 

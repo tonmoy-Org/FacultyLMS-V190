@@ -220,13 +220,35 @@
     <!--====== Start Coupon Banner Section ======-->
     @if(isset($active_banner_coupon) && $active_banner_coupon && $active_banner_coupon->image)
     <section class="coupon-banner-section p-t-60 p-b-60 bg-white overflow-hidden">
+        <style>
+            .coupon-code-badge {
+                cursor: pointer;
+                user-select: none;
+                transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            }
+            .coupon-code-badge:hover {
+                transform: translateX(-50%) scale(1.05) !important;
+                box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35) !important;
+            }
+            .coupon-code-badge:active {
+                transform: translateX(-50%) scale(0.98) !important;
+            }
+        </style>
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-12 text-center" data-aos="fade-up">
                     <div class="coupon-banner-wrapper position-relative d-inline-block">
                         <img src="{{ getFileLink('original_image', $active_banner_coupon->image) }}" alt="Special Offer Coupon" class="img-fluid rounded shadow-sm" style="max-width: 100%; max-height: 400px; object-fit: cover; border: 2px dashed #10b981;">
-                        <div class="coupon-code-badge position-absolute" style="bottom: -15px; left: 50%; transform: translateX(-50%); background: #1a1b4b; color: white; padding: 8px 24px; border-radius: 30px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 2px solid #10b981;">
+                        <div class="coupon-code-badge position-absolute"
+                             id="bannerCouponBadge"
+                             onclick="copyCouponCode('{{ $active_banner_coupon->code }}', this)"
+                             title="Click to copy coupon code"
+                             style="bottom: -15px; left: 50%; transform: translateX(-50%); background: #1a1b4b; color: white; padding: 8px 24px; border-radius: 30px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 2px solid #10b981;">
                             CODE: <span style="color: #10b981;">{{ $active_banner_coupon->code }}</span>
+                            <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
                         </div>
                     </div>
                     <p class="mt-4 text-muted font-15">Use this code at checkout to get {{ $active_banner_coupon->discount_type == 'percent' ? $active_banner_coupon->discount . '%' : get_price($active_banner_coupon->discount, userCurrency()) }} off!</p>
@@ -234,6 +256,58 @@
             </div>
         </div>
     </section>
+
+    <script>
+    function copyCouponCode(code, element) {
+        if (!code) return;
+
+        function onSuccess() {
+            if (element) {
+                const originalContent = element.innerHTML;
+                element.innerHTML = '<span style="color: #ffffff;"><svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -3px;"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!</span>';
+                element.style.background = '#10b981';
+                element.style.borderColor = '#047857';
+
+                setTimeout(function() {
+                    element.innerHTML = originalContent;
+                    element.style.background = '#1a1b4b';
+                    element.style.borderColor = '#10b981';
+                }, 2000);
+            }
+
+            const guestCouponInput = document.getElementById('guest_coupon_code');
+            if (guestCouponInput) {
+                guestCouponInput.value = code;
+                const couponWrapper = document.querySelector('.coupon-form-wrapper');
+                if (couponWrapper) {
+                    couponWrapper.style.display = 'block';
+                }
+            }
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(code).then(onSuccess).catch(function() {
+                fallbackCopy();
+            });
+        } else {
+            fallbackCopy();
+        }
+
+        function fallbackCopy() {
+            try {
+                var tempInput = document.createElement("input");
+                tempInput.value = code;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                onSuccess();
+            } catch (err) {
+                console.error('Failed to copy coupon code: ', err);
+            }
+        }
+    }
+    </script>
     @endif
 
     <!--====== Start Order Form Section ======-->

@@ -127,6 +127,28 @@ class CourseRepository
                 $mc['support_image_url'] = $mc['support_image_url_custom'];
             }
 
+            if (request()->hasFile('support_icon_files')) {
+                foreach (request()->file('support_icon_files') as $sIdx => $sFile) {
+                    if ($sFile) {
+                        $response = $this->saveImage($sFile, 'course');
+                        if ($response && isset($response['images'])) {
+                            $mc['support_icons_list'][$sIdx]['icon_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                        }
+                    }
+                }
+            }
+
+            if (request()->hasFile('support_custom_icon_files')) {
+                foreach (request()->file('support_custom_icon_files') as $cIdx => $cFile) {
+                    if ($cFile) {
+                        $response = $this->saveImage($cFile, 'course');
+                        if ($response && isset($response['images'])) {
+                            $mc['support_custom_social_links'][$cIdx]['icon_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                        }
+                    }
+                }
+            }
+
             $request['masterclass_settings'] = $mc;
         }
 
@@ -268,6 +290,28 @@ class CourseRepository
                 }
             } elseif (!empty($mc['support_image_url_custom'])) {
                 $mc['support_image_url'] = $mc['support_image_url_custom'];
+            }
+
+            if (request()->hasFile('support_icon_files')) {
+                foreach (request()->file('support_icon_files') as $sIdx => $sFile) {
+                    if ($sFile) {
+                        $response = $this->saveImage($sFile, 'course');
+                        if ($response && isset($response['images'])) {
+                            $mc['support_icons_list'][$sIdx]['icon_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                        }
+                    }
+                }
+            }
+
+            if (request()->hasFile('support_custom_icon_files')) {
+                foreach (request()->file('support_custom_icon_files') as $cIdx => $cFile) {
+                    if ($cFile) {
+                        $response = $this->saveImage($cFile, 'course');
+                        if ($response && isset($response['images'])) {
+                            $mc['support_custom_social_links'][$cIdx]['icon_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                        }
+                    }
+                }
             }
 
             $existing = is_array($course->masterclass_settings) ? $course->masterclass_settings : (json_decode($course->masterclass_settings, true) ?: []);

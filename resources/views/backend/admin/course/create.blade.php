@@ -661,6 +661,61 @@
                                                         <img src="{{ $mcSettings['support_image_url'] }}" alt="Support Image Preview" class="rounded border" style="max-height: 120px; object-fit: contain; background: #eefaf6; padding: 5px;">
                                                     </div>
                                                 @endif
+
+                                                <!-- Support Icons & Links Section (Dynamic Repeater) -->
+                                                <div class="col-12 mt-4 pt-3 border-top">
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <div>
+                                                            <span class="form-label font-16 fw-normal text-dark m-0">Support Icons & Links</span>
+                                                        </div>
+                                                        <button type="button" class="btn sg-btn-primary py-2 px-3 fw-normal" id="add_create_support_icon_btn">
+                                                            <i class="fas fa-plus me-1"></i> Add New Icon & Link
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div id="create_support_icons_container">
+                                                        @php
+                                                            $supportIconsList = $mcSettings['support_icons_list'] ?? [];
+                                                            if(!is_array($supportIconsList) || empty($supportIconsList)) {
+                                                                $supportIconsList = [
+                                                                    ['url' => 'https://facebook.com/yourpage'],
+                                                                    ['url' => 'https://twitter.com/yourhandle'],
+                                                                    ['url' => 'https://youtube.com/c/yourchannel'],
+                                                                    ['url' => 'https://wa.me/1234567890'],
+                                                                    ['url' => 'https://t.me/yourusername'],
+                                                                ];
+                                                            }
+                                                        @endphp
+                                                        @foreach($supportIconsList as $sIdx => $sItem)
+                                                            <div class="support-icon-single-item p-3 mb-3 border rounded bg-white position-relative">
+                                                                <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+                                                                    <span class="text-dark font-14 fw-normal">Icon & Link <span class="support-icon-num">{{ $sIdx + 1 }}</span></span>
+                                                                    <button type="button" class="btn btn-sm text-danger remove-support-icon-btn p-0 bg-transparent border-0" title="Remove">
+                                                                        <i class="las la-trash-alt fs-5"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="row g-3 align-items-end">
+                                                                    <div class="col-md-6 col-12">
+                                                                        <label class="form-label small mb-1 font-13 fw-normal text-muted">Upload Icon (Optional)</label>
+                                                                        <input type="file" name="support_icon_files[{{ $sIdx }}]" class="form-control form-control-sm rounded-2 fw-normal" accept="image/*">
+                                                                        @if(!empty($sItem['icon_image_url']))
+                                                                            <input type="hidden" name="masterclass_settings[support_icons_list][{{ $sIdx }}][icon_image_url]" value="{{ $sItem['icon_image_url'] }}">
+                                                                            <div class="mt-1 d-flex align-items-center gap-1">
+                                                                                <img src="{{ $sItem['icon_image_url'] }}" alt="Icon Preview" style="width: 20px; height: 20px; object-fit: contain;">
+                                                                            </div>
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="col-md-6 col-12">
+                                                                        <label class="form-label small mb-1 font-13 fw-normal text-muted">Link / URL</label>
+                                                                        <input type="text" name="masterclass_settings[support_icons_list][{{ $sIdx }}][url]" class="form-control form-control-sm rounded-2 fw-normal" value="{{ $sItem['url'] ?? '' }}" placeholder="https://facebook.com/yourpage or https://wa.me/...">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1072,6 +1127,39 @@
 
             $(document).on('click', '.remove-gold-point-btn', function () {
                 $(this).closest('.gold-point-single-item').remove();
+            });
+
+            // Add Support Icon & Link Item
+            $(document).on('click', '#add_create_support_icon_btn', function () {
+                let index = $('#create_support_icons_container .support-icon-single-item').length;
+                let html = `
+                    <div class="support-icon-single-item p-3 mb-3 border rounded bg-white position-relative">
+                        <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+                            <span class="text-dark font-14 fw-normal">Icon & Link <span class="support-icon-num">${index + 1}</span></span>
+                            <button type="button" class="btn btn-sm text-danger remove-support-icon-btn p-0 bg-transparent border-0" title="Remove">
+                                <i class="las la-trash-alt fs-5"></i>
+                            </button>
+                        </div>
+                        <div class="row g-3 align-items-end">
+                            <div class="col-md-6 col-12">
+                                <label class="form-label small mb-1 font-13 fw-normal text-muted">Upload Icon (Optional)</label>
+                                <input type="file" name="support_icon_files[${index}]" class="form-control form-control-sm rounded-2 fw-normal" accept="image/*">
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label class="form-label small mb-1 font-13 fw-normal text-muted">Link / URL</label>
+                                <input type="text" name="masterclass_settings[support_icons_list][${index}][url]" class="form-control form-control-sm rounded-2 fw-normal" placeholder="https://facebook.com/yourpage or https://wa.me/...">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $('#create_support_icons_container').append(html);
+            });
+
+            $(document).on('click', '.remove-support-icon-btn', function () {
+                $(this).closest('.support-icon-single-item').remove();
+                $('#create_support_icons_container .support-icon-single-item').each(function (i) {
+                    $(this).find('.support-icon-num').text(i + 1);
+                });
             });
         });
     </script>

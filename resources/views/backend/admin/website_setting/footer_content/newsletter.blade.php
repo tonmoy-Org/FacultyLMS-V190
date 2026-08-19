@@ -75,7 +75,10 @@
                                         <div class="col-md-6 col-12">
                                             <label for="get_access_btn_link" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Get Access Button Link') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="get_access_btn_link" name="get_access_btn_link"
-                                                   placeholder="{{ __('Enter Button Link') }}" value="{{ setting('get_access_btn_link') ?: '' }}">
+                                                   placeholder="{{ __('Enter Button Link (Default: #register)') }}" value="{{ setting('get_access_btn_link') ?: '' }}">
+                                            <div class="nk-block-des text-muted mt-1" style="font-size: 12px;">
+                                                <p>{{ __('Leave blank to default to the Order Form / Billing Details section (#register).') }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
