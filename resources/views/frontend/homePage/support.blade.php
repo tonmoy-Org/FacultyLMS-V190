@@ -127,7 +127,6 @@
                 ['name' => 'Telegram', 'url' => '#', 'icon' => 'fab fa-telegram-plane', 'class' => 'mc-social-tg'],
             ];
         }
->>>>>>> origin/Update-for-icos-and-copy-system
     }
 @endphp
 
