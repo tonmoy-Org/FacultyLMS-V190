@@ -19,7 +19,7 @@
                         <p>{{ $course->title }}</p>
                     </div>
                 </td>
-                <td><span class="price">${{ $course->price }}</span></td>
+                <td><span class="price">{{ get_symbol() }}{{ $course->price }}</span></td>
                 <td><span class="enrolle">{{ $course->enrolls->count() }}</span></td>
             </tr>
         @endforeach

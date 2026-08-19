@@ -29,7 +29,7 @@
                         {{ $instructor->total_rating }} (1264)</span>
                 </td>
                 <td><span class="ins-course">29</span></td>
-                <td><span class="sell">$8567.50</span></td>
+                <td><span class="sell">{{ get_symbol() }}8567.50</span></td>
             </tr>
         @endforeach
 

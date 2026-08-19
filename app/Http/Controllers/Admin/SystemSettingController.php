@@ -104,6 +104,9 @@ class SystemSettingController extends Controller
                 envWrite('APP_TIMEZONE', $time_zone);
             }
 
+            session()->forget('currency_code');
+            Artisan::call('all:clear');
+
             Toastr::success(__('update_successful'));
 
             DB::commit();

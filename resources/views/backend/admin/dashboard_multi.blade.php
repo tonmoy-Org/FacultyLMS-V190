@@ -42,7 +42,7 @@
                                     <div class="col-lg-4">
                                         <div class="statistics-info mb-3">
                                             <h6>{{ __('total_earning') }}</h6>
-                                            <h4>${{ $total_earning }}{{ $total_earning >= 1000 ? 'K' : '' }}</h4>
+                                            <h4>{{ get_symbol() }}{{ $total_earning }}{{ $total_earning >= 1000 ? 'K' : '' }}</h4>
                                         </div>
                                     </div>
                                     <div class="col-lg-8">
@@ -51,7 +51,7 @@
                                         </div>
                                     </div>
                                     <div class="statistics-footer d-flex align-items-center gap-3">
-                                        <p class="sales-price">+${{ $since_last_month_sale }}
+                                        <p class="sales-price">+{{ get_symbol() }}{{ $since_last_month_sale }}
                                             {{ $since_last_month_sale >= 1000 ? 'K' : '' }}</p>
                                         <h6>{{ __('since_last_month') }}</h6>
                                     </div>
@@ -250,7 +250,7 @@
 
                                                 <div class="analytics-content">
                                                     <p>{{ __('total_sale') }}</p>
-                                                    <h4 id="total_sales">${{ $charts['advance']['total_sales'] }}</h4>
+                                                    <h4 id="total_sales">{{ get_symbol() }}<span id="total_sales_num">{{ $charts['advance']['total_sales'] }}</span></h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -669,7 +669,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><span class="sell">${{ $total_sale }}</span></td>
+                                        <td><span class="sell">{{ get_symbol() }}{{ $total_sale }}</span></td>
                                     </tr>
 
                                     <tr>
@@ -680,7 +680,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><span class="sell">${{ $total_commission }}</span></td>
+                                        <td><span class="sell">{{ get_symbol() }}{{ $total_commission }}</span></td>
                                     </tr>
 
                                     <tr>
@@ -691,7 +691,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><span class="sell">${{ $total_payout }}</span></td>
+                                        <td><span class="sell">{{ get_symbol() }}{{ $total_payout }}</span></td>
                                     </tr>
 
                                     <tr>
@@ -702,7 +702,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><span class="sell">${{ $total_revenue }}</span></td>
+                                        <td><span class="sell">{{ get_symbol() }}{{ $total_revenue }}</span></td>
                                     </tr>
 
                                     <tr>
@@ -713,7 +713,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><span class="sell">${{ $current_month_sales }}</span></td>
+                                        <td><span class="sell">{{ get_symbol() }}{{ $current_month_sales }}</span></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -755,7 +755,11 @@
 
                     $('#new_student_count').html(data.new_student_count)
                     $('#new_course_count').html(data.new_course_count)
-                    $('#total_sales').html(data.total_sales)
+                    if ($('#total_sales_num').length) {
+                        $('#total_sales_num').html(data.total_sales);
+                    } else {
+                        $('#total_sales').html('{{ get_symbol() }}' + data.total_sales);
+                    }
                 })
         })
 

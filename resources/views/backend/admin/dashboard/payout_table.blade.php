@@ -29,7 +29,7 @@
                 <td>
                     <span>{{ \Carbon\Carbon::parse($payout->created_at)->format('d F Y') }}</span>
                 </td>
-                <td><span class="sell">${{ $payout->amount }}</span></td>
+                <td><span class="sell">{{ get_symbol() }}{{ $payout->amount }}</span></td>
             </tr>
         @endforeach
     </tbody>

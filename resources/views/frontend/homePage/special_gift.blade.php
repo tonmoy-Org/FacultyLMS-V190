@@ -15,6 +15,17 @@
 
     $hideSpecialGift = !empty($mcSettings['hide_special_gift']);
     
+    $formatCurrencyText = function($text) {
+        if (empty($text)) return $text;
+        $sym  = get_symbol();
+        $code = userCurrency();
+        if ($code === 'BDT') {
+            return str_replace(['$', 'USD', 'TK', 'Tk'], $sym, $text);
+        } else {
+            return str_replace(['৳', 'TK', 'Tk'], $sym, $text);
+        }
+    };
+
     $giftBadge = !empty($mcSettings['gift_badge']) ? $mcSettings['gift_badge'] : '';
     $giftTitle = !empty($mcSettings['gift_title']) ? $mcSettings['gift_title'] : '';
     $giftValue = !empty($mcSettings['gift_value']) ? $mcSettings['gift_value'] : '';
@@ -70,22 +81,30 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="mc-special-gift-card text-center d-flex flex-column align-items-center" data-aos="fade-up">
-                    <span class="mc-gift-pill">
-                        {{ $giftBadge }}
-                    </span>
+                    @if($giftBadge)
+                        <span class="mc-gift-pill">
+                            {{ $formatCurrencyText($giftBadge) }}
+                        </span>
+                    @endif
 
-                    <h2 class="fw-bold fs-3 text-dark mb-3 text-center">
-                        {{ $giftTitle }}
-                    </h2>
+                    @if($giftTitle)
+                        <h2 class="fw-bold fs-3 text-dark mb-3 text-center">
+                            {{ $formatCurrencyText($giftTitle) }}
+                        </h2>
+                    @endif
 
-                    <div class="d-flex align-items-center justify-content-center gap-3 mb-3">
-                        <span class="fs-5 text-muted text-decoration-line-through">{{ $giftValue }}</span>
-                        <span class="badge bg-danger fs-6 px-3 py-2 rounded-pill">FREE</span>
-                    </div>
+                    @if($giftValue)
+                        <div class="d-flex align-items-center justify-content-center gap-3 mb-3">
+                            <span class="fs-5 text-muted text-decoration-line-through">{{ $formatCurrencyText($giftValue) }}</span>
+                            <span class="badge bg-danger fs-6 px-3 py-2 rounded-pill">FREE</span>
+                        </div>
+                    @endif
 
-                    <div class="text-secondary leading-relaxed fs-6 text-center w-100">
-                        {!! $giftDescription !!}
-                    </div>
+                    @if($giftDescription)
+                        <div class="text-secondary leading-relaxed fs-6 text-center w-100">
+                            {!! $giftDescription !!}
+                        </div>
+                    @endif
 
                     @php
                         $giftQuotesList = !empty($mcSettings['gift_quotes_list']) ? $mcSettings['gift_quotes_list'] : [];
@@ -98,7 +117,7 @@
                                     <div class="quote-text me-3">{!! nl2br(e($quote['text'] ?? '')) !!}</div>
                                     @if(!empty($quote['price']))
                                         <div class="quote-price fw-bolder px-3 py-1 rounded" style="color: #059669; background-color: #ecfdf5; font-style: normal; white-space: nowrap; font-size: 1.15rem; border: 1px solid #a7f3d0;">
-                                            {{ $quote['price'] }} TK
+                                            {{ $formatCurrencyText($quote['price']) }}
                                         </div>
                                     @endif
                                 </div>
@@ -106,11 +125,9 @@
                         </div>
                     @elseif(!empty($giftQuote))
                         <div class="mc-callout-quote w-100 text-start">
-                            {!! $giftQuote !!}
+                            {!! $formatCurrencyText($giftQuote) !!}
                         </div>
                     @endif
-
-
 
                     <div class="text-center w-100">
                         <a href="{{ !empty($giftCtaLink) ? $giftCtaLink : (isset($course) ? route('course.details', $course->slug) : '#') }}" class="template-btn">

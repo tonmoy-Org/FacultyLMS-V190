@@ -169,13 +169,16 @@ class CurrencyController extends Controller
         }
 
         try {
+            $currencyModel = \App\Models\Currency::find($id);
+            $currencyCode  = $currencyModel ? $currencyModel->code : $id;
 
             $request = new \Illuminate\Http\Request();
             $request->setMethod('POST');
-            $request->request->add(['default_currency' => $id]);
-            Artisan::call('all:clear');
+            $request->request->add(['default_currency' => $currencyCode]);
 
             $this->settings->update($request);
+            session()->forget('currency_code');
+            Artisan::call('all:clear');
             Toastr::success(__('updated_successfully'));
 
             return back();

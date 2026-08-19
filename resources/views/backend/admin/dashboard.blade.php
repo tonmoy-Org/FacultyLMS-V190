@@ -38,7 +38,7 @@
                             <div class="col-lg-4">
                                 <div class="statistics-info mb-3">
                                     <h6>Total Earning</h6>
-                                    <h4>$755.5K</h4>
+                                    <h4>{{ get_symbol() }}755.5K</h4>
                                 </div>
                             </div>
                             <div class="col-lg-8">
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="statistics-footer d-flex align-items-center gap-3">
-                                <p class="sales-price">+$25.5k</p>
+                                <p class="sales-price">+{{ get_symbol() }}25.5k</p>
                                 <h6>Since last Month</h6>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                             <div class="col-lg-4">
                                 <div class="statistics-info mb-3">
                                     <h6>{{__('total_invest')}}</h6>
-                                    <h4>$950K</h4>
+                                    <h4>{{ get_symbol() }}950K</h4>
                                 </div>
                             </div>
                             <div class="col-lg-8">
@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="statistics-footer d-flex align-items-center gap-3">
-                                <p class="sales-price">+$25.5k</p>
+                                <p class="sales-price">+{{ get_symbol() }}25.5k</p>
                                 <h6>{{__('since_last_month')}}</h6>
                             </div>
                         </div>
@@ -243,7 +243,7 @@
 
                                         <div class="analytics-content">
                                             <p>Total Sale</p>
-                                            <h4>$5486.48K</h4>
+                                            <h4>{{ get_symbol() }}5486.48K</h4>
                                         </div>
                                     </div>
                                 </div>
