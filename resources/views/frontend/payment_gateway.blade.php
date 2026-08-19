@@ -267,6 +267,8 @@
                                         <input type="radio" name="payment_type" data-id="{{ $offline_method->id }}"
                                                data-name="{{ $offline_method->lang_name }}"
                                                data-instructions="{{ $offline_method->lang_instructions }}"
+                                               data-video-source="{{ $offline_method->video_source }}"
+                                               data-video="{{ $offline_method->video_source == 'upload' ? get_media(getArrayValue('image', $offline_method->video), getArrayValue('storage', $offline_method->video)) : $offline_method->video }}"
                                                value="offline_method" id="offline_method_{{ $offline_method->id }}">
                                         <label for="offline_method_{{ $offline_method->id }}">
                                             <img src="{{ getFileLink('147x80',$offline_method->image) }}"
@@ -496,9 +498,28 @@
                         <input type="hidden" name="trx_id" value="{{ $trx_id }}">
                         <input type="hidden" name="payment_type" value="offline_method">
                         <input type="hidden" name="offline_method_id" id="offline_method_id" value="">
-                        <input type="file" name="offline_method_file" id="chooseFile" accept=".jpg, .jpeg, .gif, .png">
+                        
+                        <div class="mb-4">
+                            <label for="chooseFile" class="form-label fw-bold" style="color: #1a1b4b; display: block; margin-bottom: 8px; font-size: 15px;">পেমেন্ট এর স্ক্রিনশট আপলোড করুন <span class="text-danger">*</span></label>
+                            <input type="file" name="offline_method_file" id="chooseFile" accept=".jpg, .jpeg, .gif, .png" class="form-control" required style="border: 1px solid #ced4da; padding: .375rem .75rem; border-radius: .25rem; width: 100%;">
+                        </div>
+
                         <h6 class="mb-2 mt-2 instruction_header">{{ __('instructions') }} :</h6>
                         <div class="instructions"></div>
+
+                        <!-- Video Instruction Button -->
+                        <div class="video-instruction-btn-wrapper mt-3 d-none">
+                            <button type="button" class="btn btn-primary btn-sm w-100 play-video-instruction-btn" style="background-color: #10b981; border: none; padding: 10px; border-radius: 4px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; color: #fff;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+                                </svg>
+                                ভিডিও গাইডলাইন দেখুন / Watch Video Guideline
+                            </button>
+                        </div>
+
+                        <!-- Video Player Container -->
+                        <div class="video-instruction-container mt-3 d-none" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="template-btn btn-secondary" data-bs-dismiss="modal">{{ __('cancel') }}</button>
@@ -641,6 +662,8 @@
                         id: $(this).data('id'),
                         lang_name: $(this).data('name'),
                         lang_instructions: $(this).data('instructions'),
+                        video_source: $(this).data('video-source'),
+                        video: $(this).data('video'),
                     };
                 }
                 $('.payment_btns').addClass('d-none');
@@ -708,7 +731,57 @@
                     $('.instruction_header').addClass('d-none');
                     $('.instructions').addClass('d-none');
                 }
+
+                // video support
+                if(offline_method.video && offline_method.video_source) {
+                    window.offline_method_video = { source: offline_method.video_source, url: offline_method.video };
+                    $('.video-instruction-btn-wrapper').removeClass('d-none');
+                    $('.video-instruction-container').addClass('d-none').html('');
+                } else {
+                    window.offline_method_video = null;
+                    $('.video-instruction-btn-wrapper').addClass('d-none');
+                    $('.video-instruction-container').addClass('d-none').html('');
+                }
+
                 $('#offline_method_modal').modal('show');
+            });
+
+            $(document).on('click', '.play-video-instruction-btn', function () {
+                if (!window.offline_method_video) return;
+                let source = window.offline_method_video.source;
+                let videoUrl = window.offline_method_video.url;
+                let html = '';
+
+                if (source === 'youtube') {
+                    let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                    let match = videoUrl.match(regExp);
+                    let videoId = (match && match[2].length == 11) ? match[2] : null;
+                    if (videoId) {
+                        html = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                    }
+                } else if (source === 'vimeo') {
+                    let regExp = /vimeo\.com\/([0-9]+)/;
+                    let match = videoUrl.match(regExp);
+                    let videoId = match ? match[1] : null;
+                    if (videoId) {
+                        html = `<iframe src="https://player.vimeo.com/video/${videoId}?autoplay=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+                    }
+                } else if (source === 'upload' || source === 'mp4') {
+                    html = `<video controls autoplay style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px; background: #000;">
+                                <source src="${videoUrl}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>`;
+                }
+
+                if (html) {
+                    $('.video-instruction-container').html(html).removeClass('d-none');
+                    $('.video-instruction-btn-wrapper').addClass('d-none');
+                }
+            });
+
+            $('#offline_method_modal').on('hidden.bs.modal', function () {
+                $('.video-instruction-container').html('').addClass('d-none');
+                $('.video-instruction-btn-wrapper').addClass('d-none');
             });
         });
     </script>

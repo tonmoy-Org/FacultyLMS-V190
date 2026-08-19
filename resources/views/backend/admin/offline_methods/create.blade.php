@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <h3 class="section-title">{{ __('add_new_offline_method') }}</h3>
                     <div class="bg-white redious-border p-20 p-sm-30">
-                        <form action="{{ route('offline-methods.store') }}" method="POST" class="form">@csrf
+                        <form action="{{ route('offline-methods.store') }}" method="POST" class="form" enctype="multipart/form-data">@csrf
                             <div class="row gx-20 add-coupon">
                                 <input type="hidden" class="is_modal" value="0"/>
                                 <div class="col-lg-6">
@@ -45,6 +45,40 @@
                                     'label' => __('image'),
                                     'image' => old('offline_method_media_id')
                                 ])
+
+                                <div class="col-lg-6">
+                                    <div class="mb-4">
+                                        <div class="select-type-v2">
+                                            <label for="video_source" class="form-label">{{ __('video_source') }}</label>
+                                            <select id="video_source" class="form-select form-select-lg mb-3 without_search" name="video_source">
+                                                <option value="">{{ __('select_video_source') }}</option>
+                                                <option value="upload" {{ old('video_source') == 'upload' ? 'selected' : '' }}>{{ __('upload') }}</option>
+                                                <option value="youtube" {{ old('video_source') == 'youtube' ? 'selected' : '' }}>{{ __('youtube') }}</option>
+                                                <option value="vimeo" {{ old('video_source') == 'vimeo' ? 'selected' : '' }}>{{ __('vimeo') }}</option>
+                                                <option value="mp4" {{ old('video_source') == 'mp4' ? 'selected' : '' }}>{{ __('mp4') }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 upload_div {{ old('video_source') == 'upload' ? '' : 'd-none' }}">
+                                    <div class="mb-3">
+                                        <label for="thumbnailFile" class="form-label">{{ __('upload_video') }}</label>
+                                        <label for="thumbnailFile" class="file-upload-text">
+                                            <p class="file_name">{{ __('video') }}</p>
+                                            <span class="file-btn">{{ __('choose_file') }}</span>
+                                        </label>
+                                        <input class="d-none thumb_picker" name="video" type="file" id="thumbnailFile">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 video_link {{ old('video_source') && old('video_source') != 'upload' ? '' : 'd-none' }}">
+                                    <div class="mb-4">
+                                        <label for="videoLink" class="form-label">{{ __('video_link') }}</label>
+                                        <input type="text" class="form-control rounded-2" name="video_link" id="videoLink" placeholder="{{ __('enter_video_link') }}" value="{{ old('video_link') }}">
+                                    </div>
+                                </div>
+
                                 <div class="col-lg-12">
                                     <textarea id="product-update-editor" name="instructions"></textarea>
                                 </div>
@@ -71,4 +105,22 @@
     <!--====== media.js ======-->
     <script src="{{ static_asset('admin/js/dropzone.min.js') }}"></script>
     <script src="{{ static_asset('admin/js/media.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('change', "#video_source", function() {
+                let video_source = $(this).val();
+
+                if (!video_source) {
+                    $('.video_link').addClass('d-none');
+                    $('.upload_div').addClass('d-none');
+                } else if (video_source == 'upload') {
+                    $('.video_link').addClass('d-none');
+                    $('.upload_div').removeClass('d-none');
+                } else {
+                    $('.video_link').removeClass('d-none');
+                    $('.upload_div').addClass('d-none');
+                }
+            });
+        });
+    </script>
 @endpush

@@ -12,7 +12,7 @@ class OfflineMethod extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'instructions', 'type', 'image', 'offline_method_media_id', 'bank_details', 'status'];
+    protected $fillable = ['name', 'instructions', 'type', 'image', 'offline_method_media_id', 'bank_details', 'status', 'video_source', 'video'];
 
     protected $casts    = [
         'bank_details' => 'array',

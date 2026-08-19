@@ -42,6 +42,7 @@
                 $b1Link = !empty($mcSettings['ad_banner_1_link']) ? $mcSettings['ad_banner_1_link'] : $b1Link;
             }
         }
+        $b1Url = dynamic_asset($b1Url);
     @endphp
     @if($b1Url && $b1Status && !str_contains($b1Url, 'default'))
     <section class="ad-banner-section-1 p-t-60 p-b-60 bg-white overflow-hidden">
@@ -88,6 +89,7 @@
     @endif
 
     <!--====== Start Instructor Profile ======-->
+    {{--
     @if(isset($course) && $course && $course->instructor)
     <section class="instructor-section p-t-60 p-b-60 bg-white">
         <div class="container container-1278">
@@ -122,6 +124,7 @@
         </div>
     </section>
     @endif
+    --}}
 
 
 
@@ -153,6 +156,7 @@
                 $b2Link = !empty($mcSettings['ad_banner_2_link']) ? $mcSettings['ad_banner_2_link'] : $b2Link;
             }
         }
+        $b2Url = dynamic_asset($b2Url);
     @endphp
 
     @if($b2Url && $b2Status && !str_contains($b2Url, 'default'))

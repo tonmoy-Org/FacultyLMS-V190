@@ -180,17 +180,7 @@ if (! function_exists('convert_price')) {
 
     function convert_price($price, $curr = null): float|int
     {
-        $exchange_rate = 1;
-        $currencies    = app('currencies');
-        if (! $curr) {
-            $curr = userCurrency();
-        }
-        $currency      = $currencies->where('code', $curr)->first() ?: $currencies->where('id', $curr)->first();
-        if ($currency) {
-            $exchange_rate = $currency->exchange_rate;
-        }
-
-        return floatval($price) * floatval($exchange_rate);
+        return floatval($price);
     }
 }
 if (! function_exists('get_symbol')) {
@@ -949,5 +939,21 @@ if (! function_exists('getVideoId')) {
         }
 
         return '';
+    }
+}
+
+if (! function_exists('dynamic_asset')) {
+    function dynamic_asset($url)
+    {
+        if (blank($url)) {
+            return '';
+        }
+        
+        if (str_contains($url, '/images/')) {
+            $parts = explode('/images/', $url);
+            return asset('images/' . end($parts));
+        }
+        
+        return $url;
     }
 }

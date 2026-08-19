@@ -26,12 +26,18 @@ class EnrollmentDataTable extends DataTable
             })->addColumn('status', function ($checkout) {
                 return view('backend.admin.enrollment.status', compact('checkout'));
             })->addColumn('payment_method', function ($checkout) {
-                return ucwords(str_replace('_', ' ', $checkout->payment_type));
+                $html = ucwords(str_replace('_', ' ', $checkout->payment_type));
+                if ($checkout->payment_type == 'offline_method' && is_array($checkout->payment_details) && !empty($checkout->payment_details['image'])) {
+                    $fileUrl = asset($checkout->payment_details['image']);
+                    $html .= '<br><a href="'.$fileUrl.'" target="_blank" class="btn btn-sm btn-outline-primary mt-1 py-0 px-2" style="font-size: 11px; white-space: nowrap;"><i class="las la-eye"></i> View Receipt</a>';
+                }
+                return $html;
             })->addColumn('date', function ($checkout) {
                 return Carbon::parse($checkout->invoice_date)->format('M d, Y - h:i A');
             })->addColumn('amount', function ($checkout) {
                 return get_price($checkout->payable_amount, userCurrency());
-            })->setRowId('id');
+            })->setRowId('id')
+            ->rawColumns(['payment_method', 'action', 'courses', 'student', 'status']);
     }
 
     public function query(): QueryBuilder

@@ -42,7 +42,7 @@ class CourseController extends Controller
     public function course(Request $request, CategoryRepository $categoryRepository, LevelRepository $levelRepository, SubjectRepository $subjectRepository): View|Factory|\Illuminate\Http\JsonResponse|RedirectResponse|Application
     {
         try {
-            if (setting('website_mode') == 'single_course') {
+            if (setting('website_mode') == 'single_course' || !setting('website_mode')) {
                 $singleCourseId = setting('single_course_id');
                 $singleCourse = null;
                 if ($singleCourseId) {

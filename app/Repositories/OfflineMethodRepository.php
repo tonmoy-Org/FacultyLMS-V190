@@ -42,6 +42,13 @@ class OfflineMethodRepository
             $request['image'] = $this->getImageWithRecommendedSize($request['offline_method_media_id'], '147', '80', true);
         }
 
+        if (arrayCheck('video_source', $request) && arrayCheck('video', $request) && $request['video_source'] == 'upload') {
+            $request['video'] = $this->saveFile($request['video'], 'pos_file', false);
+        }
+        if (arrayCheck('video_source', $request) && $request['video_source'] != 'upload' && arrayCheck('video_link', $request)) {
+            $request['video'] = $request['video_link'];
+        }
+
         if ($request['type'] != 'bank_payment') {
             $request['bank_details'] = [];
         }
@@ -64,6 +71,13 @@ class OfflineMethodRepository
 
         if (arrayCheck('offline_method_media_id', $request)) {
             $request['image'] = $this->getImageWithRecommendedSize($request['offline_method_media_id'], '147', '80', true);
+        }
+
+        if (arrayCheck('video_source', $request) && arrayCheck('video', $request) && $request['video_source'] == 'upload') {
+            $request['video'] = $this->saveFile($request['video'], 'pos_file', false);
+        }
+        if (arrayCheck('video_source', $request) && $request['video_source'] != 'upload' && arrayCheck('video_link', $request)) {
+            $request['video'] = $request['video_link'];
         }
 
         if (arrayCheck('lang', $request) && $request['lang'] != 'en') {

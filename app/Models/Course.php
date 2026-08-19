@@ -69,7 +69,21 @@ class Course extends Model
 
     public function instructor(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(User::class, 'instructor_id');
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getInstructorAttribute()
+    {
+        $firstInstructorId = null;
+        if (is_array($this->instructor_ids) && count($this->instructor_ids) > 0) {
+            $firstInstructorId = $this->instructor_ids[0];
+        }
+        
+        if ($firstInstructorId) {
+            return User::find($firstInstructorId);
+        }
+        
+        return $this->users()->first();
     }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

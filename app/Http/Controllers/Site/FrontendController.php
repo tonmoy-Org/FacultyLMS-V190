@@ -54,7 +54,7 @@ class FrontendController extends Controller
             $data = [];
             $websiteMode = setting('website_mode');
             
-            if ($websiteMode == 'single_course') {
+            if ($websiteMode == 'single_course' || !$websiteMode) {
                 $singleCourseId = setting('single_course_id');
                 if ($singleCourseId) {
                     $data['course'] = \App\Models\Course::with(['category.language', 'lessons', 'instructor', 'reviews'])

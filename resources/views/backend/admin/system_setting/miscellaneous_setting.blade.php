@@ -19,7 +19,7 @@
                                 <div class="mb-4">
                                     <label for="paginate" class="form-label">{{__('pagination_size') }}</label>
                                     <input type="text" class="form-control rounded-2" id="paginate"
-                                           placeholder="{{__('pagination_size') }}" name="paginate" value="{{ old('paginate', setting('paginate') ) }}">
+                                           placeholder="{{__('pagination_size') }}" name="paginate" value="{{ old('paginate', setting('paginate') ?: 10) }}">
                                     <div class="nk-block-des text-danger">
                                         <p class="paginate_error error"></p>
                                     </div>
@@ -30,7 +30,7 @@
                                 <div class="mb-4">
                                     <label for="api_paginate" class="form-label">{{__('api_pagination_size') }}</label>
                                     <input type="text" class="form-control rounded-2" id="api_paginate"
-                                           placeholder="{{__('api_pagination_size') }}" name="api_paginate" value="{{ old('api_paginate', setting('api_paginate') ) }}">
+                                           placeholder="{{__('api_pagination_size') }}" name="api_paginate" value="{{ old('api_paginate', setting('api_paginate') ?: 10) }}">
                                     <div class="nk-block-des text-danger">
                                         <p class="api_paginate_error error"></p>
                                     </div>
@@ -41,7 +41,7 @@
                                 <div class="mb-4">
                                     <label for="index_form_pagination_size" class="form-label">{{__('index_form_pagination_size') }}</label>
                                     <input type="text" class="form-control rounded-2" id="index_form_pagination_size"
-                                           placeholder="{{__('index_form_pagination_size') }}" name="index_form_pagination_size" value="{{ old('index_form_pagination_size', setting('index_form_pagination_size') ) }}">
+                                           placeholder="{{__('index_form_pagination_size') }}" name="index_form_pagination_size" value="{{ old('index_form_pagination_size', setting('index_form_pagination_size') ?: 10) }}">
                                     <div class="nk-block-des text-danger">
                                         <p class="index_form_pagination_size_error error"></p>
                                     </div>
@@ -53,7 +53,7 @@
                                 <div class="mb-4">
                                     <label for="media_paginate" class="form-label">{{__('media_pagination_size') }}</label>
                                     <input type="text" class="form-control rounded-2" id="media_paginate"
-                                           placeholder="{{__('media_pagination_size') }}" name="media_paginate" value="{{ old('media_paginate', setting('media_paginate') ) }}">
+                                           placeholder="{{__('media_pagination_size') }}" name="media_paginate" value="{{ old('media_paginate', setting('media_paginate') ?: 10) }}">
                                     <div class="nk-block-des text-danger">
                                         <p class="media_paginate_error error"></p>
                                     </div>
@@ -64,13 +64,22 @@
                                 <div class="mb-4">
                                     <label for="order_prefix" class="form-label">{{__('invoice_prefix') }}</label>
                                     <input type="text" class="form-control rounded-2" id="order_prefix"
-                                           placeholder="{{__('invoice_prefix') }}" name="order_prefix" value="{{ old('order_prefix', setting('order_prefix') ) }}">
+                                           placeholder="{{__('invoice_prefix') }}" name="order_prefix" value="{{ old('order_prefix', setting('order_prefix') ?: 'OVOY') }}">
                                     <div class="nk-block-des text-danger">
                                         <p class="order_prefix_error error"></p>
                                     </div>
                                 </div>
                             </div>
                             <!-- End Media pagination Size -->
+                            <div class="col-lg-12">
+                                <div class="mb-4">
+                                    <label for="product-update-editor" class="form-label">Success Page Custom Text</label>
+                                    <textarea id="product-update-editor" name="success_page_custom_text">{{ old('success_page_custom_text', setting('success_page_custom_text')) }}</textarea>
+                                    <div class="nk-block-des text-danger">
+                                        <p class="success_page_custom_text_error error"></p>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="d-flex justify-content-start align-items-center">

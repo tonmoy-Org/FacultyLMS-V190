@@ -187,14 +187,14 @@
                             @if(setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com'))
                             <div class="d-flex align-items-center mb-2">
                                 <i class="fas fa-envelope me-2" style="color: #10b981; font-size: 16px; width: 20px;"></i>
-                                <span>{{ setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com') }}</span>
+                                <a href="mailto:{{ setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com') }}" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;">{{ setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com') }}</a>
                             </div>
                             @endif
 
                             @if(setting('contact_phone') ?: (setting('phone') ?: '+8801400620055'))
                             <div class="d-flex align-items-center">
                                 <i class="fas fa-phone me-2" style="color: #10b981; font-size: 16px; width: 20px;"></i>
-                                <span>{{ setting('contact_phone') ?: (setting('phone') ?: '+8801400620055') }}</span>
+                                <a href="tel:{{ setting('contact_phone') ?: (setting('phone') ?: '+8801400620055') }}" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;">{{ setting('contact_phone') ?: (setting('phone') ?: '+8801400620055') }}</a>
                             </div>
                             @endif
                         </div>

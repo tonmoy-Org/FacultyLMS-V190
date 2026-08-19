@@ -106,10 +106,13 @@
                         </table>
                     </div>
                 </div>
-            </div>
             <div class="row justify-content-end align-items-end">
                 <div class="col-lg-8" data-aos="fade-right" data-aos-delay="100">
-                    <a href="{{route('my-course',$checkout->enrolls[0]->enrollable->slug)}}" class="template-btn bordered-btn d-block text-center">{{__('start_learning')}}</a>
+                    @if(setting('success_page_custom_text'))
+                        <div class="success-page-custom-text p-4 mb-4" style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: left;">
+                            {!! setting('success_page_custom_text') !!}
+                        </div>
+                    @endif
                 </div>
                 <div class="col-lg-4 col-md-5 col-sm-6" data-aos="fade-left" data-aos-delay="200">
                     <div class="cart-product-calculation">
@@ -141,7 +144,9 @@
                             </tr>
                             </tbody>
                         </table>
+                        {{--
                         <a href="{{route('download.invoice',$checkout->trx_id)}}" class="template-btn">{{__('download_invoice')}}</a>
+                        --}}
                     </div>
                 </div>
             </div>

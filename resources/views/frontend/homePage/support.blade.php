@@ -8,7 +8,7 @@
     if ($supportStatus) {
         $supportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : '';
         $supportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '';
-        $supportImageUrl = !empty($mcSettings['support_image_url']) ? $mcSettings['support_image_url'] : null;
+        $supportImageUrl = !empty($mcSettings['support_image_url']) ? dynamic_asset($mcSettings['support_image_url']) : null;
     }
 @endphp
 
