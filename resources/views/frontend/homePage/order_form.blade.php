@@ -45,6 +45,10 @@
                     <h3 class="fw-bold mb-3" style="color: #065f46; font-size: 24px;">আপনি ইতিমধ্যে এই কোর্সে ভর্তি হয়েছেন!</h3>
                     <p class="text-muted mb-4" style="font-size: 16px;">কোর্সটি শুরু করতে এখনই আপনার লার্নিং ড্যাশবোর্ডে প্রবেশ করুন।</p>
                     <a href="{{ route('my-profile') }}" class="template-btn px-5 py-3" style="font-size: 16px; border-radius: 8px;">ড্যাশবোর্ডে যান (Go to Dashboard)</a>
+                    
+                    <div class="alert alert-info py-2 mx-auto mt-4 text-start" style="font-size: 14px; line-height: 1.5; max-width: 450px;">
+                        <i class="fa fa-info-circle"></i> <strong>বিঃদ্রঃ:</strong> SMS এর মাধ্যমে পাওয়া আপনার ডিফল্ট পাসওয়ার্ডটি হলো <b>123456</b>। ড্যাশবোর্ডে গিয়ে পাসওয়ার্ডটি পরিবর্তন করে নিন।
+                    </div>
                 </div>
             @else
             

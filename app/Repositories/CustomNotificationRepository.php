@@ -23,11 +23,9 @@ class CustomNotificationRepository
         $userRepository = new UserRepository();
         $users          = $userRepository->findUsers([
             'role_id'   => $request['role_ids'],
-            'onesignal' => 1,
         ]);
 
         if (count($users) > 0) {
-            $url        = 'https://onesignal.com/api/v1/notifications';
             $action_for = '';
             $action_to  = '';
 
@@ -59,33 +57,53 @@ class CustomNotificationRepository
                 }
             }
 
-            $body       = [
-                'include_player_ids' => array_unique(array_filter($users->pluck('onesignal_player_id')->toArray())),
-                'contents'           => [
-                    'en' => $request['description'],
-                ],
-                'headings'           => [
-                    'en' => $request['title'],
-                ],
+            foreach ($users as $user) {
+                \App\Models\Notification::create([
+                    'title'       => $request['title'],
+                    'description' => $request['description'],
+                    'is_read'     => 0,
+                    'url'         => null,
+                    'user_id'     => $user->id,
+                ]);
 
-                'big_picture'        => arrayCheck('image', $request) ? getFileLink('190x230', $request['image']) : null,
-                'chrome_web_image'   => arrayCheck('image', $request) ? getFileLink('190x230', $request['image']) : null,
-                'chrome_big_picture' => arrayCheck('image', $request) ? getFileLink('190x230', $request['image']) : null,
-                'ios_attachments'    => arrayCheck('image', $request) ? getFileLink('190x230', $request['image']) : null,
-                'app_id'             => setting('onesignal_app_id'),
-                'url'                => url('/'),
-                'data'               => [
-                    'action_type' => $action_for,
-                    'action_to'   => $action_to,
-                    'open_from'   => arrayCheck('open_from', $request) ? $request['open_from'] : '',
-                ],
-            ];
-            $headers    = [
-                'Authorization' => 'Basic '.setting('onesignal_rest_api_key'),
-                'accept'        => 'application/json',
-                'content-type'  => 'application/json',
-            ];
-            $request    = curlRequest($url, $body, 'POST', $headers);
+                if (setting('is_pusher_notification_active')) {
+                    event(new \App\Events\PusherNotification($user->id, $request['description'], 'success', null, null));
+                }
+            }
+
+            $oneSignalUsers = $users->where('is_onesignal_subscribed', 1);
+            $player_ids = array_values(array_unique(array_filter($oneSignalUsers->pluck('onesignal_player_id')->toArray())));
+
+            if (count($player_ids) > 0 && setting('onesignal_app_id')) {
+                $url        = 'https://onesignal.com/api/v1/notifications';
+                $body       = [
+                    'include_player_ids' => $player_ids,
+                    'contents'           => [
+                        'en' => $request['description'],
+                    ],
+                    'headings'           => [
+                        'en' => $request['title'],
+                    ],
+
+                    'big_picture'        => arrayCheck('image', $request) ? getFileLink('190x230', $request['image']) : null,
+                    'chrome_web_image'   => arrayCheck('image', $request) ? getFileLink('190x230', $request['image']) : null,
+                    'chrome_big_picture' => arrayCheck('image', $request) ? getFileLink('190x230', $request['image']) : null,
+                    'ios_attachments'    => arrayCheck('image', $request) ? getFileLink('190x230', $request['image']) : null,
+                    'app_id'             => setting('onesignal_app_id'),
+                    'url'                => url('/'),
+                    'data'               => [
+                        'action_type' => $action_for,
+                        'action_to'   => $action_to,
+                        'open_from'   => arrayCheck('open_from', $request) ? $request['open_from'] : '',
+                    ],
+                ];
+                $headers    = [
+                    'Authorization' => 'Basic '.setting('onesignal_rest_api_key'),
+                    'accept'        => 'application/json',
+                    'content-type'  => 'application/json',
+                ];
+                $response    = curlRequest($url, $body, 'POST', $headers);
+            }
         }
 
         return CustomNotification::create($request);

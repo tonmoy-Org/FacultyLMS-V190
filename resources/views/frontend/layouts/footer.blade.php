@@ -2,9 +2,27 @@
     $showNewsletter = request()->routeIs('home', 'home2', 'home3', 'submit.testimonial', 'success.details', 'contact') 
         || request()->is('/', 'home2', 'home3', 'success', 'success/*', 'contact', 'contact/*') 
         || isHome();
+
+    $userIp = request()->ip();
+    $cacheKey = 'sticky_promo_timer_' . str_replace(':', '_', $userIp);
+    
+    $startTime = \Illuminate\Support\Facades\Cache::get($cacheKey);
+    if (!$startTime) {
+        $startTime = time();
+        \Illuminate\Support\Facades\Cache::put($cacheKey, $startTime, now()->addHours(24));
+    }
+    
+    $elapsed = time() - $startTime;
+    $remaining = (5 * 3600) - $elapsed; // 5 hours in seconds
+    
+    if ($remaining <= 0) {
+        $remaining = 0;
+    }
+    
+    $countdownDate = date('Y-m-d H:i:s', time() + $remaining);
 @endphp
 
-@if($showNewsletter)
+@if($showNewsletter && $remaining > 0)
 <!--====== Start Floating Newsletter Section ======-->
 <div class="footer-newsletter-wrapper" style="position: relative; z-index: 10; margin-bottom: -65px;">
     <div class="container container-1278">
@@ -45,7 +63,7 @@
                         @if($countdownTitle)
                         <div class="mb-3 fw-bold text-dark text-center" style="font-size: 1.3rem; letter-spacing: 0.5px;">{{ $countdownTitle }}</div>
                         @endif
-                        <div class="mini-countdown d-flex justify-content-center gap-3" id="promoCountdownFooter" data-target="{{ setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days')) }}">
+                        <div class="mini-countdown d-flex justify-content-center gap-3" id="promoCountdownFooter" data-target="{{ $countdownDate }}">
                             <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
                                 <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
                                 <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">DAYS</span>

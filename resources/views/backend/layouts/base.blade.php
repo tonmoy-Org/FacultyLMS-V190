@@ -127,8 +127,8 @@
 @if (setting('is_pusher_notification_active') && auth()->check())
     <script src="{{ static_asset('admin/js/pusher.min.js') }}"></script>
     <script>
-        const pusher = new Pusher('{{ setting('pusher_app_key') }}', {
-            cluster: '{{ setting('pusher_app_cluster') }}',
+        const pusher = new Pusher('{{ setting('pusher_app_key') ?: config('broadcasting.connections.pusher.key') }}', {
+            cluster: '{{ setting('pusher_app_cluster') ?: config('broadcasting.connections.pusher.options.cluster') }}',
             encrypted: true
         });
 

@@ -146,6 +146,9 @@
                                         <div class="nk-block-des text-danger mb-4">
                                             <p class="password_error error">{{ $errors->first('password') }}</p>
                                         </div>
+                                        <div class="alert alert-info py-2 mt-2 mb-3" style="font-size: 13px; line-height: 1.5;">
+                                            <i class="fa fa-info-circle"></i> <strong>বিঃদ্রঃ:</strong> SMS এর মাধ্যমে পাওয়া আপনার ডিফল্ট পাসওয়ার্ডটি হলো <b>123456</b>। লগিন করার পর পাসওয়ার্ডটি পরিবর্তন করে নিন।
+                                        </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="remember-password m-b-15">

@@ -1,7 +1,27 @@
 @php
     $showStickyBar = setting('show_sticky_promo_bar');
     $title = setting('sticky_promo_title') ?: 'অফার শেষ হওয়ার আগেই কিনুন';
-    $countdownDate = setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days'));
+    
+    $userIp = request()->ip();
+    $cacheKey = 'sticky_promo_timer_' . str_replace(':', '_', $userIp);
+    
+    $startTime = \Illuminate\Support\Facades\Cache::get($cacheKey);
+    if (!$startTime) {
+        $startTime = time();
+        \Illuminate\Support\Facades\Cache::put($cacheKey, $startTime, now()->addHours(24));
+    }
+    
+    $elapsed = time() - $startTime;
+    $remaining = (5 * 3600) - $elapsed; // 5 hours in seconds
+    
+    if ($remaining <= 0) {
+        $remaining = 0;
+        // Optionally hide the sticky bar if time has expired
+        // $showStickyBar = 0; 
+    }
+    
+    $countdownDate = date('Y-m-d H:i:s', time() + $remaining);
+    
     $btnText = setting('sticky_promo_btn_text') ?: 'Enroll Now';
     $rawBtnLink = setting('sticky_promo_btn_link');
     if (empty($rawBtnLink) || $rawBtnLink === '#' || $rawBtnLink === '#register') {
@@ -11,7 +31,7 @@
     }
 @endphp
 
-@if($showStickyBar == 1)
+@if($showStickyBar == 1 && $remaining > 0)
 <style>
     .sticky-promo-container {
         width: 100%;
