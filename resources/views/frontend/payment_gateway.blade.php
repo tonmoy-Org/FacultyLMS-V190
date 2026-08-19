@@ -347,7 +347,7 @@
                                             </h6>
                                             <div class="quantity-price-wrapper">
                                                 <span class="quantity">1 ×</span>
-                                                <span class="price">{{ get_price($course->price, userCurrency()) }}</span>
+                                                <span class="price">{{ get_price($cart->price, userCurrency()) }}</span>
                                             </div>
                                         </div>
                                     </div>
