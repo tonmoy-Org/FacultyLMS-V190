@@ -182,8 +182,10 @@ class User extends Authenticatable implements JWTSubject
     public function getFormattedPhoneAttribute()
     {
         $phone = $this->phone;
-        if (!str_starts_with($phone, '+') && !empty($this->phone_country_id)) {
-            $country = \App\Models\Country::find($this->phone_country_id);
+        $country_id = $this->phone_country_id ?: setting('default_country');
+
+        if (!str_starts_with($phone, '+') && !empty($country_id)) {
+            $country = \App\Models\Country::find($country_id);
             if ($country) {
                 $cleaned_phone = ltrim($phone, '0');
                 $phone = '+' . $country->phonecode . $cleaned_phone;
