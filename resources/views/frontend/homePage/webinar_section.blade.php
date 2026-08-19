@@ -6,7 +6,12 @@
     $desc1 = setting('webinar_description_1', $lang) ?: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non.';
     $desc2 = setting('webinar_description_2', $lang) ?: 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.';
     $btnText = setting('webinar_btn_text', $lang) ?: 'REGISTER NOW';
-    $btnLink = setting('webinar_btn_link', $lang) ?: route('student.sign_up');
+    $rawBtnLink = setting('webinar_btn_link', $lang);
+    if (empty($rawBtnLink) || $rawBtnLink === '#' || $rawBtnLink === '#register' || $rawBtnLink === route('student.sign_up')) {
+        $btnLink = (request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register');
+    } else {
+        $btnLink = \Illuminate\Support\Str::startsWith($rawBtnLink, ['http://', 'https://', '/']) ? $rawBtnLink : url($rawBtnLink);
+    }
     
     $webinarMediaSetting = setting('webinar_image');
     $webinarImageUrl = '';
