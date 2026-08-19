@@ -122,7 +122,7 @@
                         <form method="POST" action="{{ route('confirm.password-update') }}" class="form needs-validation" novalidate>
                             @csrf
                             <input type="hidden" name="otp" value="{{ $otp_request->otp }}" required>
-                            <input type="hidden" name="email" value="{{ $otp_request->user->email }}" required>
+                            <input type="hidden" name="phone" value="{{ $otp_request->user->phone }}" required>
                             <div class="row">
                                 <div class="col-12 password-input">
                                     <label for="password">{{__('password') }} *</label>

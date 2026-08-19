@@ -134,7 +134,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 mb-4">
-                                        <label for="lastName">{{__('last_name') }}</label>
+                                        <label for="lastName">{{__('last_name') }} *</label>
                                         <input type="text" class="form-control" name="last_name" id="lastName"
                                                placeholder="{{__('last_name') }}" value="{{ old('last_name') }}">
                                         <div class="nk-block-des text-danger">
@@ -156,7 +156,7 @@
                                         @include('backend.common.tel-input',[
                                                 'name' => 'phone',
                                                 'value' => old('phone'),
-                                                'label' => __('phone_number'),
+                                                'label' => __('phone_number') . ' *',
                                                 'id' => 'phoneNumber',
                                                 'country_id_field' => 'phone_country_id',
                                                 'country_id' => old('phone_country_id') ? : (setting('default_country') ? : 19)

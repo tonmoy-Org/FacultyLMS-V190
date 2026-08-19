@@ -40,7 +40,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
     Route::get('activation/{email}/{code}', [AuthController::class, 'activation']);
     Route::get('password-forgot', [AuthController::class, 'forgotPassword'])->name('password.forgot');
     Route::post('password-forgot', [AuthController::class, 'forgot'])->name('forgot.password-email');
-    Route::get('confirm-otp/{email}/{otp}', [AuthController::class, 'confirmOtp']);
+    Route::get('confirm-otp/{phone}/{otp}', [AuthController::class, 'confirmOtp']);
     Route::get('confirm-password-otp', [AuthController::class, 'passwordOtpSubmit'])->name('confirm.password.otp-submit');
     Route::post('confirm.password-update', [AuthController::class, 'passwordUpdate'])->name('confirm.password-update');
     /*===================authentication route=============*/

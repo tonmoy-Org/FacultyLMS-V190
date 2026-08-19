@@ -281,8 +281,15 @@ trait SmsSenderTrait
         $sms_template = SmsTemplate::where('key', $key)->first();
         $tags         = ['{otp}', '{site_name}', '{phone_no}'];
         $replace      = [$otp, setting('system_name'), $phone_number];
-        $sms_body     = str_replace($tags, $replace, @$sms_template->body);
+        
+        if ($sms_template) {
+            $sms_body    = str_replace($tags, $replace, $sms_template->body);
+            $template_id = $sms_template->template_id;
+        } else {
+            $sms_body    = "Your OTP code is " . $otp;
+            $template_id = 0;
+        }
 
-        return $this->send($phone_number, $sms_body, $sms_template->template_id);
+        return $this->send($phone_number, $sms_body, $template_id);
     }
 }

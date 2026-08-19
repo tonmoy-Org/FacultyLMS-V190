@@ -118,25 +118,20 @@
                         </div>
                         <div class="form-title text-align-center m-b-40">
                             <h3 class="m-0 text-uppercase">{{__('forgot_password') }}</h3>
-                            <p>{{__('enter_your_email_address_to_recover_your_password') }}</p>
+                            <p>{{__('enter_your_phone_number_to_recover_your_password') }}</p>
                         </div>
                         <form method="POST" action="{{ route('forgot.password-email') }}" class="form needs-validation" novalidate>
                             @csrf
                             <div class="row">
                                 <div class="col-12">
-                                    <label for="username">{{__('email_address') }}</label>
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="{{__('email_address')  }}" required>
-                                    @if($errors->has('email'))
-                                        <div class="nk-block-des text-danger">
-                                            <p>{{ $errors->first('email') }}</p>
-                                        </div>
-                                    @endif
-                                    <div class="invalid-feedback">
-                                        {{__('please_add_your_email') }}.
-                                    </div>
-                                    <div class="valid-feedback">
-                                        {{__('looks_good') }}!
-                                    </div>
+                                    @include('backend.common.tel-input',[
+                                            'name' => 'phone',
+                                            'value' => old('phone'),
+                                            'label' => __('phone_number') . ' *',
+                                            'id' => 'phoneNumber',
+                                            'country_id_field' => 'phone_country_id',
+                                            'country_id' => old('phone_country_id') ? : (setting('default_country') ? : 19)
+                                    ])
                                 </div>
                                 <div class="col-12">
                                     <button class="template-btn m-b-25" type="submit">{{__('submit') }}</button>
@@ -156,4 +151,8 @@
 </section>
 <!--====== End Forgot Password Section ======-->
 @endsection
+
+@push('js')
+    <script src="{{ static_asset('admin/js/countries.js') }}"></script>
+@endpush
 

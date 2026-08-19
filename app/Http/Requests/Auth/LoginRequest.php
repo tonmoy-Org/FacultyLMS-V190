@@ -28,7 +28,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'email'    => ['required', 'string', 'email'],
+            'phone'    => ['required', 'string'],
             'password' => ['required', 'string'],
         ];
         if (setting('is_recaptcha_activated') && setting('recaptcha_Site_key') && setting('recaptcha_secret')) {
@@ -53,24 +53,24 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
-        $user = User::where('email', $this->email)->first();
-        if (isset($user->email) && $user->status == 0) {
+        $user = User::where('phone', $this->phone)->first();
+        if (isset($user->phone) && $user->status == 0) {
             RateLimiter::hit($this->throttleKey());
             throw ValidationException::withMessages([
-                'email' => trans('auth.inactive'),
+                'phone' => trans('auth.inactive'),
             ]);
         } else {
             $check_user_status = userAvailability($user);
 
             if (! $check_user_status['status']) {
                 throw ValidationException::withMessages([
-                    'email' => $check_user_status['message'],
+                    'phone' => $check_user_status['message'],
                 ]);
             }
-            if (! Auth::attempt(array_merge($this->only('email', 'password'), ['status' => 1]), $this->boolean('remember'))) {
+            if (! Auth::attempt(array_merge($this->only('phone', 'password'), ['status' => 1]), $this->boolean('remember'))) {
                 RateLimiter::hit($this->throttleKey());
                 throw ValidationException::withMessages([
-                    'email' => trans('auth.failed'),
+                    'phone' => trans('auth.failed'),
                 ]);
             }
             RateLimiter::clear($this->throttleKey());
@@ -93,7 +93,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'phone' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
@@ -105,6 +105,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->input('phone')).'|'.$this->ip());
     }
 }

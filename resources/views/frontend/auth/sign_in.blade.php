@@ -128,13 +128,14 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
-                                        <label for="email">{{__('email') }}*</label>
-                                        <input type="email" class="form-control" name="email" id="email"
-                                               placeholder="{{ __('email') }}"
-                                               value="">
-                                        <div class="nk-block-des text-danger mb-4">
-                                            <p class="email_error error">{{ $errors->first('email') }}</p>
-                                        </div>
+                                        @include('backend.common.tel-input',[
+                                                'name' => 'phone',
+                                                'value' => old('phone'),
+                                                'label' => __('phone_number') . ' *',
+                                                'id' => 'phoneNumber',
+                                                'country_id_field' => 'phone_country_id',
+                                                'country_id' => old('phone_country_id') ? : (setting('default_country') ? : 19)
+                                        ])
                                     </div>
                                     <div class="col-12 password-input">
                                         <label for="password">{{__('password') }}</label>
@@ -327,6 +328,7 @@
 @endif
 
 @push('js')
+    <script src="{{ static_asset('admin/js/countries.js') }}"></script>
     @if(setting('is_recaptcha_activated') && setting('recaptcha_Site_key') && setting('recaptcha_secret'))
         <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async
                 defer></script>

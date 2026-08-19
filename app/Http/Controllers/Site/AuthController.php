@@ -20,16 +20,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Traits\SmsSenderTrait;
 
 class AuthController extends Controller
 {
-    use ImageTrait, SendMailTrait;
+    use ImageTrait, SendMailTrait, SmsSenderTrait;
 
     protected $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
+    }
+
+    private function getFormattedPhone($user)
+    {
+        $phone = $user->phone;
+        if (!str_starts_with($phone, '+') && !empty($user->phone_country_id)) {
+            $country = \App\Models\Country::find($user->phone_country_id);
+            if ($country) {
+                $cleaned_phone = ltrim($phone, '0');
+                $phone = '+' . $country->phonecode . $cleaned_phone;
+            }
+        }
+        return $phone;
     }
 
     public function socialLogin(Request $request): \Illuminate\Http\JsonResponse
@@ -144,10 +158,10 @@ class AuthController extends Controller
     public function forgot(Request $request)
     {
         $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'phone' => ['required', 'string'],
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('phone', $request->phone)->first();
 
         if ($user) {
             try {
@@ -164,17 +178,13 @@ class AuthController extends Controller
                     'user_id' => $user->id,
                     'otp'     => $otp,
                 ]);
-                $data              = [
-                    'otp'            => $otp,
-                    'user'           => $user,
-                    'reset_link'     => url('/').'/confirm-otp/'.$request->email.'/'.$otp,
-                    'template_title' => 'password_reset',
-                ];
 
-                $this->sendmail($request->email, 'emails.template_mail', $data);
-                Toastr::success(__('receive__mail_password_hints'));
+                // Send SMS OTP instead of mail
+                $this->sendSMS($this->getFormattedPhone($user), 'forgot_password', $otp);
 
-                return redirect()->back();
+                Toastr::success(__('otp_has_been_sent_to_your_mobile'));
+
+                return redirect()->to(url('/').'/confirm-otp/'.$request->phone.'/'.$otp);
             } catch (Exception $e) {
                 Toastr::warning(__($e->getMessage()));
 
@@ -187,14 +197,18 @@ class AuthController extends Controller
         }
     }
 
-    public function confirmOtp($email, $otp)
+    public function confirmOtp($phone, $otp)
     {
         $password_request = PasswordRequest::where('otp', $otp)->first();
+        if (!$password_request) {
+            Toastr::warning(__('sorry_otp_not_match'));
+            return redirect()->route('password.forgot');
+        }
         $otp_array        = array_map('intval', str_split($password_request->otp));
         $data             = [
             'password_request' => $password_request,
             'otp_array'        => $otp_array,
-            'email'            => $email,
+            'phone'            => $phone,
         ];
 
         return view('frontend.auth.otp', $data);
@@ -232,16 +246,21 @@ class AuthController extends Controller
         ]);
 
         try {
-            $user = User::where('email', $request->email)->first();
+            $user = User::where('phone', $request->phone)->first();
             $otp  = PasswordRequest::where('otp', $request->otp)->where('user_id', $user->id)->latest()->first();
             if ($otp) {
-                $data           = [
-                    'user'           => $user,
-                    'login_link'     => url('/login'),
-                    'template_title' => 'recovery_mail',
-                ];
-
-                $this->sendmail($request->email, 'emails.template_mail', $data);
+                if ($user->email) {
+                    $data           = [
+                        'user'           => $user,
+                        'login_link'     => url('/login'),
+                        'template_title' => 'recovery_mail',
+                    ];
+                    try {
+                        $this->sendmail($user->email, 'emails.template_mail', $data);
+                    } catch (Exception $mailEx) {
+                        // ignore mail send failure
+                    }
+                }
                 $user->password = bcrypt($request->password);
                 $user->save();
                 $otp->delete();

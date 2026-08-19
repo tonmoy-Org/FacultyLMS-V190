@@ -90,7 +90,7 @@ class AuthenticatedSessionController extends Controller
 
     public function activityLog(Request $request)
     {
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('phone', $request->phone)->first();
         if (blank($user)) {
             Toastr::warning(__('user_not_found'));
 

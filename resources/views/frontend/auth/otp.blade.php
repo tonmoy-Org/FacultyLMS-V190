@@ -117,8 +117,8 @@
                             <img src="{{ static_asset('frontend/img/particle/ellipse-fill-large.svg') }} " alt="Ellipse" class="image-3">
                         </div>
                         <div class="form-title text-align-center m-b-40">
-                            <h3 class="m-0 text-uppercase">{{__('confirm_your_mail') }}</h3>
-                            <p>{{__('forget_password_hints') }} {{ $email }}</p>
+                            <h3 class="m-0 text-uppercase">Confirm Your Phone</h3>
+                            <p>{{__('forget_password_hints') }} {{ $phone }}</p>
                         </div>
                         <form action="{{ route('confirm.password.otp-submit') }}" method="get" class="form otp-form needs-validation" novalidate>
                             @csrf
