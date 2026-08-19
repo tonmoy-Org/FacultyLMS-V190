@@ -29,7 +29,7 @@ class EnrollmentDataTable extends DataTable
                 $html = ucwords(str_replace('_', ' ', $checkout->payment_type));
                 if ($checkout->payment_type == 'offline_method' && is_array($checkout->payment_details) && !empty($checkout->payment_details['image'])) {
                     $fileUrl = asset($checkout->payment_details['image']);
-                    $html .= '<br><a href="'.$fileUrl.'" target="_blank" class="btn btn-sm btn-outline-primary mt-1 py-0 px-2" style="font-size: 11px; white-space: nowrap;"><i class="las la-eye"></i> View Receipt</a>';
+                    $html .= '<br><a href="javascript:void(0)" data-url="'.$fileUrl.'" class="btn btn-sm btn-outline-primary mt-1 py-0 px-2 view-receipt-btn" style="font-size: 11px; white-space: nowrap;"><i class="las la-eye"></i> View Receipt</a>';
                 }
                 return $html;
             })->addColumn('date', function ($checkout) {

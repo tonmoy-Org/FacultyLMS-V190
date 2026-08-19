@@ -35,9 +35,32 @@
         @if(hasPermission('enrollments.status'))
             @include('backend.common.delete-script')
         @endif
+
+        <!-- Receipt Modal -->
+        <div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="receiptModalLabel">{{ __('receipt') }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="" id="receiptImage" class="img-fluid" alt="Receipt">
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
 @endsection
 @push('js')
     {{ $dataTable->scripts() }}
+    <script>
+        $(document).on('click', '.view-receipt-btn', function() {
+            var url = $(this).data('url');
+            $('#receiptImage').attr('src', url);
+            var receiptModal = new bootstrap.Modal(document.getElementById('receiptModal'));
+            receiptModal.show();
+        });
+    </script>
 @endpush
