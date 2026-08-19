@@ -295,17 +295,7 @@ if (! function_exists('languageCheck')) {
 if (! function_exists('priceFormatUpdate')) {
     function priceFormatUpdate($price, $curr, $type = null): float|int
     {
-        if (! $price) {
-            $price = 0;
-        }
-        $currencies      = \app('currencies');
-        $active_currency = $currencies->where('id', $curr)->first() ?: $currencies->where('code', $curr)->first();
-        $rate            = $active_currency ? $active_currency->exchange_rate : 1;
-        if ($type == '*') {
-            return round($price * $rate, setting('no_of_decimals') ?: 2);
-        } else {
-            return $rate != 0 ? $price / $rate : $price;
-        }
+        return floatval($price);
     }
 }
 if (! function_exists('arrayCheck')) {
