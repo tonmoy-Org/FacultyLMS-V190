@@ -3,7 +3,12 @@
     $title = setting('sticky_promo_title') ?: 'অফার শেষ হওয়ার আগেই কিনুন';
     $countdownDate = setting('promo_banner_countdown') ?: date('Y-m-d H:i:s', strtotime('+5 days'));
     $btnText = setting('sticky_promo_btn_text') ?: 'Enroll Now';
-    $btnLink = setting('sticky_promo_btn_link') ?: '#';
+    $rawBtnLink = setting('sticky_promo_btn_link');
+    if (empty($rawBtnLink) || $rawBtnLink === '#' || $rawBtnLink === '#register') {
+        $btnLink = (request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register');
+    } else {
+        $btnLink = \Illuminate\Support\Str::startsWith($rawBtnLink, ['http://', 'https://', '/']) ? $rawBtnLink : url($rawBtnLink);
+    }
 @endphp
 
 @if($showStickyBar == 1)
