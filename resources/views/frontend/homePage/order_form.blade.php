@@ -32,11 +32,21 @@
     }
 @endphp
 
-@if(!$is_enrolled && isset($course))
+@if(isset($course))
 <section class="order-form-section p-t-60 p-b-35" style="background: #ffffff;">
     @include('frontend.homePage.sticky_promo_bar')
     <div class="container container-1278">
         <div class="mc-registration-section" id="register">
+            @if($is_enrolled && !(auth()->check() && (auth()->user()->user_type == 'admin' || auth()->user()->user_type == 'staff')))
+                <div class="text-center p-5 shadow-sm" style="border: 2px dashed #10b981; border-radius: 12px; background-color: #f0fdf4; margin-top: 20px; margin-bottom: 20px;">
+                    <div class="mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    </div>
+                    <h3 class="fw-bold mb-3" style="color: #065f46; font-size: 24px;">আপনি ইতিমধ্যে এই কোর্সে ভর্তি হয়েছেন!</h3>
+                    <p class="text-muted mb-4" style="font-size: 16px;">কোর্সটি শুরু করতে এখনই আপনার লার্নিং ড্যাশবোর্ডে প্রবেশ করুন।</p>
+                    <a href="{{ route('my-profile') }}" class="template-btn px-5 py-3" style="font-size: 16px; border-radius: 8px;">ড্যাশবোর্ডে যান (Go to Dashboard)</a>
+                </div>
+            @else
             
             <form action="{{ route('masterclass.checkout') }}" method="post" class="form">
                 @csrf
@@ -179,6 +189,7 @@
                     </div>
                 </div>
             </form>
+            @endif
         </div>
     </div>
 </section>
