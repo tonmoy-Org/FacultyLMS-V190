@@ -733,11 +733,11 @@
                                                 <div class="col-12 mb-4">
                                                     <div class="d-flex align-items-center gap-2">
                                                         <div class="setting-check">
-                                                            <input type="checkbox" name="masterclass_settings[hide_special_gift]" value="1" id="hide_gift"
-                                                                {{ !empty($mcSettings['hide_special_gift']) ? 'checked' : '' }}>
-                                                            <label for="hide_gift"></label>
+                                                            <input type="checkbox" name="masterclass_settings[show_special_gift]" value="1" id="show_gift"
+                                                                {{ isset($mcSettings['show_special_gift']) ? ($mcSettings['show_special_gift'] ? 'checked' : '') : (empty($mcSettings['hide_special_gift']) ? 'checked' : '') }}>
+                                                            <label for="show_gift"></label>
                                                         </div>
-                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="hide_gift">Hide Special Gift Banner Card</label>
+                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="show_gift">Show Special Gift Banner Card</label>
                                                     </div>
                                                 </div>
 

@@ -75,7 +75,8 @@ class CourseRepository
 
         if (arrayCheck('masterclass_settings', $request)) {
             $mc = $request['masterclass_settings'];
-            $mc['hide_special_gift'] = isset($mc['hide_special_gift']) ? 1 : 0;
+            $mc['show_special_gift'] = isset($mc['show_special_gift']) ? 1 : 0;
+            unset($mc['hide_special_gift']);
             $mc['hide_explainer'] = isset($mc['hide_explainer']) ? 1 : 0;
             $mc['hide_breakdown'] = isset($mc['hide_breakdown']) ? 1 : 0;
             $mc['hide_reviews'] = isset($mc['hide_reviews']) ? 1 : 0;
@@ -240,7 +241,8 @@ class CourseRepository
 
         if (arrayCheck('masterclass_settings', $request)) {
             $mc = $request['masterclass_settings'];
-            $mc['hide_special_gift'] = isset($mc['hide_special_gift']) ? 1 : 0;
+            $mc['show_special_gift'] = isset($mc['show_special_gift']) ? 1 : 0;
+            unset($mc['hide_special_gift']);
             $mc['hide_explainer'] = isset($mc['hide_explainer']) ? 1 : 0;
             $mc['hide_breakdown'] = isset($mc['hide_breakdown']) ? 1 : 0;
             $mc['hide_reviews'] = isset($mc['hide_reviews']) ? 1 : 0;

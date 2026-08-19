@@ -13,7 +13,7 @@
         $remainingSeats = 100;
     }
 
-    $hideSpecialGift = !empty($mcSettings['hide_special_gift']);
+    $showSpecialGift = isset($mcSettings['show_special_gift']) ? $mcSettings['show_special_gift'] : empty($mcSettings['hide_special_gift']);
     
     $formatCurrencyText = function($text) {
         if (empty($text)) return $text;
@@ -36,7 +36,7 @@
     $giftCtaLink = !empty($mcSettings['gift_cta_link']) ? $mcSettings['gift_cta_link'] : '';
 @endphp
 
-@if(!$hideSpecialGift)
+@if($showSpecialGift)
 <style>
     .mc-special-gift-card {
         background-color: #ebf5f1;
