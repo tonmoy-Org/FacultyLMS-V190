@@ -465,6 +465,7 @@
     "create_instructor": "Create Instructor",
     "password_reset": "Password Reset",
     "enter_your_email_address_to_recover_your_password": "Enter your email address to recover your password",
+    "enter_your_phone_number_to_recover_your_password": "أدخل رقم هاتفك لاستعادة كلمة المرور الخاصة بك",
     "please_add_your_email": "Please add your email",
     "back_to": "Back to",
     "password_reset_mail": "Password reset mail",
