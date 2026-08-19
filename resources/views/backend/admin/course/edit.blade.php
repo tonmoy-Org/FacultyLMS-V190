@@ -664,65 +664,6 @@
                                         </div>
                                      </div>
 
-                                    <!-- Section 3.5: Offer Breakdown -->
-                                    <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-normal text-dark m-0">Offer Breakdown Section</span>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="row gx-20">
-                                                <div class="col-12 mb-3">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="setting-check">
-                                                            <input type="checkbox" name="masterclass_settings[breakdown_status]" value="1"
-                                                                   id="breakdown_status"
-                                                                   {{ !empty($mcSettings['breakdown_status']) ? 'checked' : '' }}>
-                                                            <label for="breakdown_status"></label>
-                                                        </div>
-                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="breakdown_status">Show Offer Breakdown Section</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-12 mb-4">
-                                                    <label class="form-label">Breakdown Today Title</label>
-                                                    <input type="text" name="masterclass_settings[breakdown_today_title]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownTodayTitle }}" placeholder="এই $1,000.00 টাকায় আপনি পাচ্ছেন:">
-                                                </div>
-
-                                                <div class="col-lg-6 mb-4">
-                                                    <label class="form-label">Bottom Subheading</label>
-                                                    <input type="text" name="masterclass_settings[breakdown_subheading]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownSubheading }}" placeholder="আজকের মূল্য (token) ২৯৯০ টাকা মাত্র">
-                                                </div>
-
-                                                <div class="col-lg-6 mb-4">
-                                                    <label class="form-label">Original Price (Strikethrough)</label>
-                                                    <input type="text" name="masterclass_settings[breakdown_original_price]" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['breakdown_original_price'] ?? '' }}" placeholder="$1,000.00">
-                                                </div>
-
-                                                <div class="col-12 mb-4">
-                                                    <label class="form-label mb-2">Breakdown Items (One per line, Format: Title | Price)</label>
-                                                    <textarea name="masterclass_settings[breakdown_items]" class="form-control rounded-2" rows="6"
-                                                              placeholder="🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০&#10;🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০">{{ $defBreakdownItems }}</textarea>
-                                                    <small class="text-muted">Separate title and price with a pipe (|) character.</small>
-                                                </div>
-
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Breakdown Red CTA Text</label>
-                                                    <input type="text" name="masterclass_settings[breakdown_cta_text]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownCtaText }}" placeholder="সিট কনফার্ম করুন →">
-                                                </div>
-
-                                                <div class="col-lg-6 col-md-6 mb-4">
-                                                    <label class="form-label">Breakdown Red CTA Link</label>
-                                                    <input type="text" name="masterclass_settings[breakdown_cta_link]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownCtaLink }}" placeholder="e.g. #register or https://...">
-                                                </div>
-                                            </div>
-                                        </div>
-                                     </div>
-
                                     <!-- Section 4: Special Bonus Gift -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3">
@@ -819,6 +760,65 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Section 3.5: Offer Breakdown -->
+                                    <div class="card border mb-4 rounded-3 shadow-sm">
+                                        <div class="card-header bg-white py-3">
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Offer Breakdown Section</span>
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <div class="row gx-20">
+                                                <div class="col-12 mb-3">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="setting-check">
+                                                            <input type="checkbox" name="masterclass_settings[breakdown_status]" value="1"
+                                                                   id="breakdown_status"
+                                                                   {{ !empty($mcSettings['breakdown_status']) ? 'checked' : '' }}>
+                                                            <label for="breakdown_status"></label>
+                                                        </div>
+                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="breakdown_status">Show Offer Breakdown Section</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 mb-4">
+                                                    <label class="form-label">Breakdown Today Title</label>
+                                                    <input type="text" name="masterclass_settings[breakdown_today_title]" class="form-control rounded-2"
+                                                           value="{{ $defBreakdownTodayTitle }}" placeholder="এই $1,000.00 টাকায় আপনি পাচ্ছেন:">
+                                                </div>
+
+                                                <div class="col-lg-6 mb-4">
+                                                    <label class="form-label">Bottom Subheading</label>
+                                                    <input type="text" name="masterclass_settings[breakdown_subheading]" class="form-control rounded-2"
+                                                           value="{{ $defBreakdownSubheading }}" placeholder="আজকের মূল্য (token) ২৯৯০ টাকা মাত্র">
+                                                </div>
+
+                                                <div class="col-lg-6 mb-4">
+                                                    <label class="form-label">Original Price (Strikethrough)</label>
+                                                    <input type="text" name="masterclass_settings[breakdown_original_price]" class="form-control rounded-2"
+                                                           value="{{ $mcSettings['breakdown_original_price'] ?? '' }}" placeholder="$1,000.00">
+                                                </div>
+
+                                                <div class="col-12 mb-4">
+                                                    <label class="form-label mb-2">Breakdown Items (One per line, Format: Title | Price)</label>
+                                                    <textarea name="masterclass_settings[breakdown_items]" class="form-control rounded-2" rows="6"
+                                                              placeholder="🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০&#10;🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০">{{ $defBreakdownItems }}</textarea>
+                                                    <small class="text-muted">Separate title and price with a pipe (|) character.</small>
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Breakdown Red CTA Text</label>
+                                                    <input type="text" name="masterclass_settings[breakdown_cta_text]" class="form-control rounded-2"
+                                                           value="{{ $defBreakdownCtaText }}" placeholder="সিট কনফার্ম করুন →">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 mb-4">
+                                                    <label class="form-label">Breakdown Red CTA Link</label>
+                                                    <input type="text" name="masterclass_settings[breakdown_cta_link]" class="form-control rounded-2"
+                                                           value="{{ $defBreakdownCtaLink }}" placeholder="e.g. #register or https://...">
+                                                </div>
+                                            </div>
+                                        </div>
+                                     </div>
 
 
 
