@@ -949,9 +949,16 @@ if (! function_exists('dynamic_asset')) {
             return '';
         }
         
+        $prefix = isLocalhost(); // Returns 'public/' on VPS, '' on local
+        
         if (str_contains($url, '/images/')) {
             $parts = explode('/images/', $url);
-            return asset('images/' . end($parts));
+            return asset($prefix . 'images/' . end($parts));
+        }
+
+        if (str_contains($url, '/uploads/')) {
+            $parts = explode('/uploads/', $url);
+            return asset($prefix . 'uploads/' . end($parts));
         }
         
         return $url;
