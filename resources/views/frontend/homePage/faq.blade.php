@@ -88,6 +88,67 @@
         align-items: center;
         gap: 15px;
     }
+
+    /* Mobile & Tablet Responsive Media Queries */
+    @media (max-width: 991.98px) {
+        .faq-section {
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
+        }
+        .faq-image-card {
+            margin-top: 25px;
+            border-width: 4px;
+        }
+        .faq-image-card img {
+            min-height: auto !important;
+            max-height: 360px !important;
+            height: 300px !important;
+        }
+        .custom-faq-accordion .accordion-button {
+            font-size: 15px;
+            padding: 16px 18px;
+        }
+        .custom-faq-accordion .accordion-body {
+            padding: 0 18px 18px 18px;
+            font-size: 14px;
+        }
+        .faq-content-wrap .common-heading h2 {
+            font-size: 22px !important;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .faq-image-card img {
+            height: 220px !important;
+            max-height: 240px !important;
+        }
+        .faq-badge-floating {
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            padding: 10px 14px;
+            gap: 10px;
+        }
+        .faq-badge-floating h5 {
+            font-size: 0.85rem !important;
+        }
+        .faq-badge-floating span {
+            font-size: 0.75rem !important;
+            line-height: 1.3;
+            display: block;
+        }
+        .faq-badge-icon {
+            width: 36px !important;
+            height: 36px !important;
+            font-size: 1rem !important;
+        }
+        .custom-faq-accordion .faq-toggle-icon {
+            width: 28px;
+            height: 28px;
+            font-size: 15px;
+            margin-left: 10px;
+        }
+    }
 </style>
 
 <section class="faq-section p-t-60 p-b-60 position-relative" style="background-color: #ffffff;">
@@ -149,7 +210,7 @@
                 <div class="faq-image-card">
                     <img src="{{ $faqImgUrl }}" alt="Frequently Asked Questions">
                     
-                    <div class="faq-badge-floating d-none d-sm-flex">
+                    <div class="faq-badge-floating d-flex">
                         <div class="faq-badge-icon d-flex align-items-center justify-content-center" 
                              style="width: 46px; height: 46px; border-radius: 8px; background: rgba(16, 185, 129, 0.15); color: #10b981; font-size: 1.3rem;">
                             <i class="fas fa-question-circle"></i>

@@ -410,9 +410,9 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::post('system-update', [UtilityController::class, 'downloadUpdate'])->name('system.update');
 
         //Support System
-        Route::resource('tickets', TicketController::class)->except(['edit', 'destroy', 'show']);
+        Route::resource('tickets', TicketController::class)->except(['edit', 'show']);
         Route::get('tickets-update/{id}', [TicketController::class, 'update'])->name('tickets.update');
-        Route::get('tickets/{id}', [TicketController::class, 'show'])->name('ticket.reply');
+        Route::get('tickets/{id}', [TicketController::class, 'show'])->name('tickets.show');
         Route::post('ticket-reply', [TicketController::class, 'reply'])->name('ticket.reply');
         Route::get('ticket-reply-edit/{id}', [TicketController::class, 'replyEdit'])->name('ticket.reply.edit');
         Route::post('ticket-reply-update/{id}', [TicketController::class, 'replyUpdate'])->name('ticket.reply.update');
@@ -504,6 +504,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::post('level-status', [LevelController::class, 'statusChange'])->name('level.status.change');
         Route::post('tag-status', [TagController::class, 'statusChange'])->name('tag.status.change');
         Route::post('success-status', [SuccessStoryController::class, 'statusChange'])->name('success.status.change');
+        Route::post('success-feature', [SuccessStoryController::class, 'featuredChange'])->name('success.feature.change');
         Route::post('testimonial-status', [TestimonialController::class, 'statusChange'])->name('testimonial.status.change');
         Route::post('brand-status', [BrandController::class, 'statusChange'])->name('brand.status.change');
         Route::post('package-status', [PackageSolutionController::class, 'statusChange'])->name('package.status.change');

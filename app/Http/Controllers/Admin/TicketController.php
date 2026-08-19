@@ -197,7 +197,7 @@ class TicketController extends Controller
 
             $data  = [
                 'success' => __('reply_updated'),
-                'route'   => route('ticket.reply', $reply->ticket_id),
+                'route'   => route('tickets.show', $reply->ticket_id),
             ];
 
             return response()->json($data);
@@ -224,6 +224,39 @@ class TicketController extends Controller
                 'status'  => 'success',
                 'message' => __('delete_successful'),
                 'title'   => __('success'),
+            ];
+
+            return response()->json($data);
+        } catch (\Exception $e) {
+            $data = [
+                'status'  => 'danger',
+                'message' => $e->getMessage(),
+                'title'   => __('error'),
+            ];
+
+            return response()->json($data);
+        }
+    }
+
+    public function destroy($id): \Illuminate\Http\JsonResponse
+    {
+        if (config('app.demo_mode')) {
+            $data = [
+                'status'  => 'danger',
+                'message' => __('this_function_is_disabled_in_demo_server'),
+                'title'   => 'error',
+            ];
+
+            return response()->json($data);
+        }
+        try {
+            $this->ticket->destroy($id);
+            Toastr::success(__('delete_successful'));
+            $data = [
+                'status'  => 'success',
+                'message' => __('delete_successful'),
+                'title'   => __('success'),
+                'route'   => route('tickets.index'),
             ];
 
             return response()->json($data);

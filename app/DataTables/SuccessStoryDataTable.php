@@ -19,6 +19,8 @@ class SuccessStoryDataTable extends DataTable
                 return view('backend.admin.website_setting.successStory.action', compact('success_story'));
             })->addColumn('status', function ($success_story) {
                 return view('backend.admin.website_setting.successStory.status', compact('success_story'));
+            })->addColumn('is_featured', function ($success_story) {
+                return view('backend.admin.website_setting.successStory.featured', compact('success_story'));
             })->addColumn('image', function ($success_story) {
                 return view('backend.admin.website_setting.successStory.image', compact('success_story'));
             })->addColumn('title', function ($success_story) {
@@ -73,6 +75,8 @@ class SuccessStoryDataTable extends DataTable
             Column::make('title')->title(__('title')),
             Column::computed('image')->title(__('image')),
             Column::computed('status')->title(__('status'))->exportable(false)
+                ->printable(false)->width(10),
+            Column::computed('is_featured')->title(__('featured'))->exportable(false)
                 ->printable(false)->width(10),
             Column::computed('action')->title(__('action'))
                 ->exportable(false)

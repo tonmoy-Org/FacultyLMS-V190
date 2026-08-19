@@ -41,8 +41,9 @@
                             <div class="col-sm-6">
                                 <label for="department">Department</label>
                                 <select name="department_id" id="department" class="select2">
+                                    <option value="">{{ __('select_department') }}</option>
                                     @foreach($departments as $department)
-                                        <option value="{{ $department->id }}">{{ $department->title }}</option>
+                                        <option value="{{ $department->id }}">{{ $department->lang_title }}</option>
                                     @endforeach
                                 </select>
                                 <p class="text-danger department_id_error error"></p>

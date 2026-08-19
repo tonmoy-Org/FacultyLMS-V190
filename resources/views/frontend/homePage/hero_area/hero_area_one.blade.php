@@ -503,6 +503,36 @@
         font-size: 20px !important;
         margin-bottom: 12px !important;
     }
+
+    .course-description-content,
+    .course-description-content * {
+        font-size: 14.5px !important;
+        line-height: 1.65 !important;
+        color: #334155 !important;
+    }
+    .course-description-content h1,
+    .course-description-content h2,
+    .course-description-content h3,
+    .course-description-content h4 {
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        color: #0f172a !important;
+        margin-top: 10px !important;
+        margin-bottom: 6px !important;
+    }
+    .course-description-content p,
+    .course-description-content span,
+    .course-description-content div {
+        font-size: 14.5px !important;
+        line-height: 1.65 !important;
+        color: #334155 !important;
+        margin-bottom: 8px !important;
+    }
+    .course-description-content strong,
+    .course-description-content b {
+        font-weight: 600 !important;
+        color: #10b981 !important;
+    }
 }
 </style>
 @endpush

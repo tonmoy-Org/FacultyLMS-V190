@@ -172,7 +172,7 @@
                                  </a>
                                  <ul class="dropdown-menu dropdown-menu-end get-access-dropdown-menu" aria-labelledby="getAccessDropdown3">
                                      <li>
-                                         <a class="dropdown-item" href="{{ route('register') }}">
+                                         <a class="dropdown-item text-capitalize" href="{{ route('register') }}">
                                              <i class="fal fa-user-plus me-2"></i>{{ __('registration') }}
                                          </a>
                                      </li>

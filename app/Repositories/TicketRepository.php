@@ -45,6 +45,9 @@ class TicketRepository
         if (! arrayCheck('status', $request)) {
             $request['status'] = 'pending';
         }
+        if (arrayCheck('description', $request) && ! arrayCheck('body', $request)) {
+            $request['body'] = $request['description'];
+        }
         $request['file']      = $all_files;
         $request['user_id']   = auth()->id();
         $request['ticket_id'] = rand(1000, 50000);
