@@ -77,6 +77,16 @@
                             {{ __('Course Outcomes & Key Takeaways') }}
                         </h2>
                     </div>
+                    <style>
+                        @media (max-width: 768px) {
+                            .learn-outcomes-content,
+                            .learn-outcomes-content * {
+                                font-size: 14.5px !important;
+                                line-height: 1.65 !important;
+                                color: #334155 !important;
+                            }
+                        }
+                    </style>
                     <div class="card shadow-lg border-0 p-4 p-md-5" data-aos="fade-up" data-aos-delay="100" style="border-radius: 20px; background: #ffffff;">
                         <div class="learn-outcomes-content" style="color: #475569; font-size: 16px; line-height: 1.8;">
                             {!! $course->outcomes !!}
@@ -229,6 +239,7 @@
                 cursor: pointer;
                 user-select: none;
                 transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+                white-space: nowrap;
             }
             .coupon-code-badge:hover {
                 transform: translateX(-50%) scale(1.05) !important;
@@ -236,6 +247,33 @@
             }
             .coupon-code-badge:active {
                 transform: translateX(-50%) scale(0.98) !important;
+            }
+            @media (max-width: 768px) {
+                .coupon-banner-wrapper {
+                    width: 100%;
+                }
+                .coupon-banner-wrapper img {
+                    max-height: 220px !important;
+                    width: 100% !important;
+                    object-fit: cover !important;
+                }
+                .coupon-code-badge {
+                    font-size: 14px !important;
+                    padding: 6px 16px !important;
+                    bottom: -16px !important;
+                    max-width: 90% !important;
+                }
+                .coupon-code-badge svg {
+                    width: 14px !important;
+                    height: 14px !important;
+                }
+            }
+            @media (max-width: 480px) {
+                .coupon-code-badge {
+                    font-size: 13px !important;
+                    padding: 5px 14px !important;
+                    bottom: -14px !important;
+                }
             }
         </style>
         <div class="container container-1278">

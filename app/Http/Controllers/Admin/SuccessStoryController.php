@@ -172,4 +172,35 @@ class SuccessStoryController extends Controller
             return response()->json($data);
         }
     }
+
+    public function featuredChange(Request $request): \Illuminate\Http\JsonResponse
+    {
+        if (config('app.demo_mode')) {
+            $data = [
+                'status'  => 'danger',
+                'message' => __('this_function_is_disabled_in_demo_server'),
+                'title'   => 'error',
+            ];
+
+            return response()->json($data);
+        }
+        try {
+            $this->successStoryRepository->feature($request->all());
+            $data = [
+                'status'  => 200,
+                'message' => __('update_successful'),
+                'title'   => __('success'),
+            ];
+
+            return response()->json($data);
+        } catch (\Exception $e) {
+            $data = [
+                'status'  => 'danger',
+                'message' => $e->getMessage(),
+                'title'   => __('error'),
+            ];
+
+            return response()->json($data);
+        }
+    }
 }

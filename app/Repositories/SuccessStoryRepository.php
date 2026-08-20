@@ -17,12 +17,16 @@ class SuccessStoryRepository
 
     public function activeStories($data = [])
     {
-        return SuccessStory::active()->when(arrayCheck('lang', $data), function ($query) use ($data) {
-            $query->whereHas('languages', function ($query) use ($data) {
-                $query->where('lang', $data['lang'])
-                    ->selectRaw('success_stories.*,success_story_languages.title as story_title');
-            });
-        })->latest()->get();
+        return SuccessStory::active()
+            ->when(arrayCheck('featured', $data), function ($query) {
+                $query->featured();
+            })
+            ->when(arrayCheck('lang', $data), function ($query) use ($data) {
+                $query->whereHas('languages', function ($query) use ($data) {
+                    $query->where('lang', $data['lang'])
+                        ->selectRaw('success_stories.*,success_story_languages.title as story_title');
+                });
+            })->latest()->get();
     }
 
     public function getByLang($id, $lang)
@@ -113,6 +117,14 @@ class SuccessStoryRepository
     {
         $key         = SuccessStory::findOrfail($data['id']);
         $key->status = $data['status'];
+
+        return $key->save();
+    }
+
+    public function feature($data)
+    {
+        $key              = SuccessStory::findOrfail($data['id']);
+        $key->is_featured = $data['status'];
 
         return $key->save();
     }

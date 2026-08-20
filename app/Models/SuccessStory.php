@@ -9,7 +9,7 @@ class SuccessStory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'description', 'image', 'success_media_id', 'status', 'position', 'rating', 'video'];
+    protected $fillable = ['title', 'slug', 'description', 'image', 'success_media_id', 'status', 'position', 'rating', 'video', 'is_featured'];
 
     protected $casts    = [
         'image' => 'array',
@@ -18,6 +18,11 @@ class SuccessStory extends Model
     public function scopeActive($query)
     {
         return $query->where('status', 1);
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('is_featured', 1);
     }
 
     public function languages(): \Illuminate\Database\Eloquent\Relations\HasMany

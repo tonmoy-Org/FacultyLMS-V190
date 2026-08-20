@@ -35,6 +35,11 @@ class Ticket extends Model
         return $this->first_name.' '.$this->last_name;
     }
 
+    public function setDescriptionAttribute($value)
+    {
+        $this->attributes['body'] = $value;
+    }
+
     public function department(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Department::class);
