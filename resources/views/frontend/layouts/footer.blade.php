@@ -40,46 +40,48 @@
                 </div>
 
                 <!-- Column 2: Admission Now Countdown Timer -->
-                <div class="col-lg-5 col-md-12 text-center d-flex flex-column align-items-lg-end align-items-center justify-content-center">
-                    <div class="d-inline-flex flex-column align-items-center">
-                        @php
-                            $getAccessRawLink = setting('get_access_btn_link');
-                            if (empty($getAccessRawLink) || $getAccessRawLink === '#register' || $getAccessRawLink === '#') {
-                                $getAccessLink = (request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register');
-                            } else {
-                                $getAccessLink = \Illuminate\Support\Str::startsWith($getAccessRawLink, ['http://', 'https://', '/']) ? $getAccessRawLink : url($getAccessRawLink);
-                            }
-                            $getAccessTitle = setting('get_access_btn_title', app()->getLocale()) ?: (setting('get_access_btn_title') ?: __('get_access'));
-                        @endphp
-                        <div class="mb-3 text-center">
-                            <a href="{{ $getAccessLink }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center" style="padding: 10px 24px; font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 8px;">
-                                <span>{{ $getAccessTitle }}</span>
-                            </a>
-                        </div>
-                        
-                        @php
-                            $countdownTitle = setting('promo_banner_countdown_title', app()->getLocale());
-                        @endphp
-                        @if($countdownTitle)
-                        <div class="mb-3 fw-bold text-dark text-center" style="font-size: 1.3rem; letter-spacing: 0.5px;">{{ $countdownTitle }}</div>
-                        @endif
-                        <div class="mini-countdown d-flex justify-content-center gap-3" id="promoCountdownFooter" data-target="{{ $countdownDate }}">
-                            <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
-                                <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
+                <div class="col-lg-5 col-md-12 mt-4 mt-lg-0 text-center d-flex flex-column align-items-lg-end align-items-center justify-content-center">
+                    @php
+                        $getAccessRawLink = setting('get_access_btn_link');
+                        if (empty($getAccessRawLink) || $getAccessRawLink === '#register' || $getAccessRawLink === '#') {
+                            $getAccessLink = (request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register');
+                        } else {
+                            $getAccessLink = \Illuminate\Support\Str::startsWith($getAccessRawLink, ['http://', 'https://', '/']) ? $getAccessRawLink : url($getAccessRawLink);
+                        }
+                        $getAccessTitle = setting('get_access_btn_title', app()->getLocale()) ?: (setting('get_access_btn_title') ?: __('get_access'));
+                        $countdownTitle = setting('promo_banner_countdown_title', app()->getLocale());
+                    @endphp
+                    
+                    @if($countdownTitle)
+                    <div class="mb-3 fw-bold text-dark text-center w-100" style="font-size: 1.3rem; letter-spacing: 0.5px;">{{ $countdownTitle }}</div>
+                    @endif
+
+                    <div class="d-flex flex-row flex-lg-column align-items-center justify-content-center gap-2 gap-md-3 flex-wrap">
+                        <!-- Timer: Order 1 on mobile, Order 2 on desktop -->
+                        <div class="mini-countdown d-flex justify-content-center gap-2 gap-md-3 order-1 order-lg-2" id="promoCountdownFooter" data-target="{{ $countdownDate }}">
+                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center" style="min-width: 50px; height: 60px;">
+                                <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.4rem; line-height: 1.1;">00</h4>
                                 <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">DAYS</span>
                             </div>
-                            <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
-                                <h4 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
+                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center" style="min-width: 50px; height: 60px;">
+                                <h4 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 1.4rem; line-height: 1.1;">00</h4>
                                 <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">HRS</span>
                             </div>
-                            <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
-                                <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
+                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center" style="min-width: 50px; height: 60px;">
+                                <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.4rem; line-height: 1.1;">00</h4>
                                 <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">MIN</span>
                             </div>
-                            <div class="bg-white rounded shadow-sm p-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 64px; height: 72px;">
-                                <h4 class="seconds m-0 fw-bold" style="color: #ea580c; font-size: 1.6rem; line-height: 1.1;">00</h4>
+                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center" style="min-width: 50px; height: 60px;">
+                                <h4 class="seconds m-0 fw-bold" style="color: #ea580c; font-size: 1.4rem; line-height: 1.1;">00</h4>
                                 <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">SEC</span>
                             </div>
+                        </div>
+
+                        <!-- Button: Order 2 on mobile, Order 1 on desktop -->
+                        <div class="text-center order-2 order-lg-1 mb-0 mb-lg-3">
+                            <a href="{{ $getAccessLink }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center" style="padding: 10px 20px; font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 8px; white-space: nowrap;">
+                                <span>{{ $getAccessTitle }}</span>
+                            </a>
                         </div>
                     </div>
                 </div>
