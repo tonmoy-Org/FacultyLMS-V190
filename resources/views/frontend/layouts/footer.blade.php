@@ -30,7 +30,7 @@
              style="background-color: {{ setting('promo_banner_bg_color') ?: '#eef7f4' }}; border-radius: 8px; padding: 35px 40px;">
             <div class="row align-items-center g-4">
                 <!-- Column 1: Newsletter Title & Description -->
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-6 col-md-12">
                     <h3 class="fw-bold mb-2" style="color: #1a1b4b; font-size: 24px; line-height: 1.2;">
                         {{ setting('newsletter_title', app()->getLocale()) ?: __('Subscribe Newsletter') }}
                     </h3>
@@ -40,7 +40,7 @@
                 </div>
 
                 <!-- Column 2: Admission Now Countdown Timer -->
-                <div class="col-lg-5 col-md-12 mt-4 mt-lg-0 text-center d-flex flex-column align-items-lg-end align-items-center justify-content-center">
+                <div class="col-lg-6 col-md-12 mt-4 mt-lg-0 d-flex flex-column align-items-center align-items-lg-end justify-content-center">
                     @php
                         $getAccessRawLink = setting('get_access_btn_link');
                         if (empty($getAccessRawLink) || $getAccessRawLink === '#register' || $getAccessRawLink === '#') {
@@ -71,22 +71,22 @@
                         }
                         @media(min-width: 992px) {
                             .footer-timer-item {
-                                width: 64px; height: 72px; min-width: 64px;
+                                width: 55px; height: 60px; min-width: 55px;
                             }
                             .footer-timer-item h4 {
-                                font-size: 1.6rem;
+                                font-size: 1.4rem;
                             }
                             .footer-timer-item span {
-                                font-size: 10px;
+                                font-size: 9px;
                             }
                             .footer-btn-cta {
                                 padding: 10px 24px; font-size: 14px;
                             }
                         }
                     </style>
-                    <div class="d-flex flex-row flex-lg-column align-items-center justify-content-center gap-2 gap-lg-3 flex-nowrap w-100 overflow-hidden" style="max-width: 100%;">
+                    <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-end gap-2 gap-lg-3 flex-wrap flex-lg-nowrap w-100">
                         <!-- Timer -->
-                        <div class="mini-countdown d-flex justify-content-center gap-1 gap-md-3 order-1 flex-nowrap" id="promoCountdownFooter" data-target="{{ $countdownDate }}">
+                        <div class="mini-countdown d-flex justify-content-center gap-1 gap-md-2 order-1 flex-nowrap" id="promoCountdownFooter" data-target="{{ $countdownDate }}">
                             <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center footer-timer-item">
                                 <h4 class="days m-0 fw-bold" style="color: #ea580c; line-height: 1.1;">00</h4>
                                 <span class="small text-secondary fw-bold" style="letter-spacing: 0.5px;">DAYS</span>
@@ -106,7 +106,7 @@
                         </div>
 
                         <!-- Button -->
-                        <div class="text-center order-2 flex-shrink-0">
+                        <div class="text-center flex-shrink-0 order-2 mt-2 mt-lg-0">
                             <a href="{{ $getAccessLink }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center footer-btn-cta" style="font-weight: 600; text-decoration: none; border-radius: 6px; white-space: nowrap;">
                                 <span>{{ $getAccessTitle }}</span>
                             </a>
