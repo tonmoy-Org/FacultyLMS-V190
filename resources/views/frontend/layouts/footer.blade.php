@@ -56,30 +56,30 @@
                     <div class="mb-3 fw-bold text-dark text-center w-100" style="font-size: 1.3rem; letter-spacing: 0.5px;">{{ $countdownTitle }}</div>
                     @endif
 
-                    <div class="d-flex flex-row flex-lg-column align-items-center justify-content-center gap-2 gap-md-3 flex-wrap">
+                    <div class="d-flex flex-row flex-lg-column align-items-center justify-content-center gap-2 gap-md-3 flex-nowrap w-100 overflow-hidden" style="max-width: 100%;">
                         <!-- Timer: Order 1 on mobile, Order 2 on desktop -->
-                        <div class="mini-countdown d-flex justify-content-center gap-2 gap-md-3 order-1 order-lg-2" id="promoCountdownFooter" data-target="{{ $countdownDate }}">
-                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center" style="min-width: 50px; height: 60px;">
-                                <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.4rem; line-height: 1.1;">00</h4>
-                                <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">DAYS</span>
+                        <div class="mini-countdown d-flex justify-content-center gap-1 gap-md-3 order-1 order-lg-2 flex-nowrap" id="promoCountdownFooter" data-target="{{ $countdownDate }}">
+                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 45px; height: 50px; min-width: 40px; @media(min-width:992px){ width: 64px; height: 72px; }">
+                                <h4 class="days m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem; line-height: 1.1; @media(min-width:992px){ font-size: 1.6rem; }">00</h4>
+                                <span class="small text-secondary fw-bold" style="font-size: 8px; letter-spacing: 0.5px; @media(min-width:992px){ font-size: 10px; }">DAYS</span>
                             </div>
-                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center" style="min-width: 50px; height: 60px;">
-                                <h4 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 1.4rem; line-height: 1.1;">00</h4>
-                                <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">HRS</span>
+                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 45px; height: 50px; min-width: 40px; @media(min-width:992px){ width: 64px; height: 72px; }">
+                                <h4 class="hours m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem; line-height: 1.1; @media(min-width:992px){ font-size: 1.6rem; }">00</h4>
+                                <span class="small text-secondary fw-bold" style="font-size: 8px; letter-spacing: 0.5px; @media(min-width:992px){ font-size: 10px; }">HRS</span>
                             </div>
-                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center" style="min-width: 50px; height: 60px;">
-                                <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.4rem; line-height: 1.1;">00</h4>
-                                <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">MIN</span>
+                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 45px; height: 50px; min-width: 40px; @media(min-width:992px){ width: 64px; height: 72px; }">
+                                <h4 class="minutes m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem; line-height: 1.1; @media(min-width:992px){ font-size: 1.6rem; }">00</h4>
+                                <span class="small text-secondary fw-bold" style="font-size: 8px; letter-spacing: 0.5px; @media(min-width:992px){ font-size: 10px; }">MIN</span>
                             </div>
-                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center" style="min-width: 50px; height: 60px;">
-                                <h4 class="seconds m-0 fw-bold" style="color: #ea580c; font-size: 1.4rem; line-height: 1.1;">00</h4>
-                                <span class="small text-secondary fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">SEC</span>
+                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center" style="width: 45px; height: 50px; min-width: 40px; @media(min-width:992px){ width: 64px; height: 72px; }">
+                                <h4 class="seconds m-0 fw-bold" style="color: #ea580c; font-size: 1.1rem; line-height: 1.1; @media(min-width:992px){ font-size: 1.6rem; }">00</h4>
+                                <span class="small text-secondary fw-bold" style="font-size: 8px; letter-spacing: 0.5px; @media(min-width:992px){ font-size: 10px; }">SEC</span>
                             </div>
                         </div>
 
                         <!-- Button: Order 2 on mobile, Order 1 on desktop -->
-                        <div class="text-center order-2 order-lg-1 mb-0 mb-lg-3">
-                            <a href="{{ $getAccessLink }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center" style="padding: 10px 20px; font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 8px; white-space: nowrap;">
+                        <div class="text-center order-2 order-lg-1 mb-0 mb-lg-3 flex-shrink-0">
+                            <a href="{{ $getAccessLink }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center" style="padding: 8px 12px; font-size: 12px; font-weight: 600; text-decoration: none; border-radius: 6px; white-space: nowrap; @media(min-width:992px){ padding: 10px 24px; font-size: 14px; }">
                                 <span>{{ $getAccessTitle }}</span>
                             </a>
                         </div>
