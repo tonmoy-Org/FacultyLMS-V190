@@ -285,17 +285,28 @@
         function initCountdown(elementId) {
             const countdownEl = document.getElementById(elementId);
             if(countdownEl) {
-                const targetDateStr = countdownEl.getAttribute('data-target');
-                if(!targetDateStr) return;
-                const safeDateStr = targetDateStr.replace('T', ' ').replace(/-/g, '/');
-                const targetDate = new Date(safeDateStr).getTime();
+                let durationHours = 5;
+                let promoEndTime = localStorage.getItem('sticky_promo_end_time');
+                let now = new Date().getTime();
+                
+                // Reset cycle: 24 hours. If there's no end time or it's been more than 24 hours since the end time.
+                if (!promoEndTime || promoEndTime < (now - 24 * 3600 * 1000)) {
+                    promoEndTime = now + (durationHours * 3600 * 1000);
+                    localStorage.setItem('sticky_promo_end_time', promoEndTime);
+                }
+                
+                const targetDate = parseInt(promoEndTime);
 
                 const timer = setInterval(function() {
                     const now = new Date().getTime();
                     const distance = targetDate - now;
 
-                    if (distance < 0) {
+                    if (distance <= 0) {
                         clearInterval(timer);
+                        if(countdownEl.querySelector('.days')) countdownEl.querySelector('.days').innerText = '00';
+                        if(countdownEl.querySelector('.hours')) countdownEl.querySelector('.hours').innerText = '00';
+                        if(countdownEl.querySelector('.minutes')) countdownEl.querySelector('.minutes').innerText = '00';
+                        if(countdownEl.querySelector('.seconds')) countdownEl.querySelector('.seconds').innerText = '00';
                         return;
                     }
 
@@ -304,10 +315,10 @@
                     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                    if(countdownEl.querySelector('.days')) countdownEl.querySelector('.days').innerText = days;
-                    if(countdownEl.querySelector('.hours')) countdownEl.querySelector('.hours').innerText = hours;
-                    if(countdownEl.querySelector('.minutes')) countdownEl.querySelector('.minutes').innerText = minutes;
-                    if(countdownEl.querySelector('.seconds')) countdownEl.querySelector('.seconds').innerText = seconds;
+                    if(countdownEl.querySelector('.days')) countdownEl.querySelector('.days').innerText = days < 10 ? '0' + days : days;
+                    if(countdownEl.querySelector('.hours')) countdownEl.querySelector('.hours').innerText = hours < 10 ? '0' + hours : hours;
+                    if(countdownEl.querySelector('.minutes')) countdownEl.querySelector('.minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+                    if(countdownEl.querySelector('.seconds')) countdownEl.querySelector('.seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
                 }, 1000);
             }
         }

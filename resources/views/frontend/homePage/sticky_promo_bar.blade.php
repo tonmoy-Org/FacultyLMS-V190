@@ -2,26 +2,6 @@
     $showStickyBar = setting('show_sticky_promo_bar');
     $title = setting('sticky_promo_title') ?: 'অফার শেষ হওয়ার আগেই কিনুন';
     
-    $userIp = request()->ip();
-    $cacheKey = 'sticky_promo_timer_' . str_replace(':', '_', $userIp);
-    
-    $startTime = \Illuminate\Support\Facades\Cache::get($cacheKey);
-    if (!$startTime) {
-        $startTime = time();
-        \Illuminate\Support\Facades\Cache::put($cacheKey, $startTime, now()->addHours(24));
-    }
-    
-    $elapsed = time() - $startTime;
-    $remaining = (5 * 3600) - $elapsed; // 5 hours in seconds
-    
-    if ($remaining <= 0) {
-        $remaining = 0;
-        // Optionally hide the sticky bar if time has expired
-        // $showStickyBar = 0; 
-    }
-    
-    $countdownDate = date('Y-m-d H:i:s', time() + $remaining);
-    
     $btnText = setting('sticky_promo_btn_text') ?: 'Enroll Now';
     $rawBtnLink = setting('sticky_promo_btn_link');
     if (empty($rawBtnLink) || $rawBtnLink === '#' || $rawBtnLink === '#register') {
@@ -31,7 +11,7 @@
     }
 @endphp
 
-@if($showStickyBar == 1 && $remaining > 0)
+@if($showStickyBar == 1)
 <style>
     .sticky-promo-container {
         width: 100%;
@@ -256,7 +236,7 @@
                     <h3>{{ $title }}</h3>
                 </div>
                 <div class="sp-middle">
-                    <div class="sp-countdown js-countdown" data-date="{{ $countdownDate }}">
+                    <div class="sp-countdown js-countdown">
                         <div class="sp-cd-item">
                             <span class="num js-days">00</span>
                             <span class="label">DAYS</span>
@@ -383,41 +363,53 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const countdownEl = container.querySelector('.js-countdown');
         if (countdownEl) {
-            const targetDateStr = countdownEl.getAttribute('data-date');
-            if (targetDateStr) {
-                const safeDateStr = targetDateStr.replace('T', ' ').replace(/-/g, '/');
-                const countDownDate = new Date(safeDateStr).getTime();
-                if (!isNaN(countDownDate)) {
-                    const x = setInterval(function() {
-                        const now = new Date().getTime();
-                        const distance = countDownDate - now;
-                        
-                        const daysEl = countdownEl.querySelector(".js-days");
-                        const hoursEl = countdownEl.querySelector(".js-hours");
-                        const minsEl = countdownEl.querySelector(".js-minutes");
-                        const secsEl = countdownEl.querySelector(".js-seconds");
-
-                        if (distance < 0) {
-                            clearInterval(x);
-                            if(daysEl) daysEl.innerHTML = "00";
-                            if(hoursEl) hoursEl.innerHTML = "00";
-                            if(minsEl) minsEl.innerHTML = "00";
-                            if(secsEl) secsEl.innerHTML = "00";
-                            return;
-                        }
-                        
-                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                        
-                        if(daysEl) daysEl.innerHTML = days < 10 ? '0' + days : days;
-                        if(hoursEl) hoursEl.innerHTML = hours < 10 ? '0' + hours : hours;
-                        if(minsEl) minsEl.innerHTML = minutes < 10 ? '0' + minutes : minutes;
-                        if(secsEl) secsEl.innerHTML = seconds < 10 ? '0' + seconds : seconds;
-                    }, 1000);
-                }
+            let durationHours = 5;
+            let promoEndTime = localStorage.getItem('sticky_promo_end_time');
+            let now = new Date().getTime();
+            
+            // Reset cycle: 24 hours. If there's no end time or it's been more than 24 hours since the end time.
+            if (!promoEndTime || promoEndTime < (now - 24 * 3600 * 1000)) {
+                promoEndTime = now + (durationHours * 3600 * 1000);
+                localStorage.setItem('sticky_promo_end_time', promoEndTime);
             }
+            
+            const countDownDate = parseInt(promoEndTime);
+
+            const x = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+                
+                const daysEl = countdownEl.querySelector(".js-days");
+                const hoursEl = countdownEl.querySelector(".js-hours");
+                const minsEl = countdownEl.querySelector(".js-minutes");
+                const secsEl = countdownEl.querySelector(".js-seconds");
+
+                if (distance <= 0) {
+                    clearInterval(x);
+                    if(daysEl) daysEl.innerHTML = "00";
+                    if(hoursEl) hoursEl.innerHTML = "00";
+                    if(minsEl) minsEl.innerHTML = "00";
+                    if(secsEl) secsEl.innerHTML = "00";
+                    
+                    // Hide the sticky bar when time expires
+                    container.style.display = 'none';
+                    const scrollTopBtn = document.getElementById('fixed-scroll-top');
+                    if (scrollTopBtn) {
+                        scrollTopBtn.style.removeProperty('bottom');
+                    }
+                    return;
+                }
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                if(daysEl) daysEl.innerHTML = days < 10 ? '0' + days : days;
+                if(hoursEl) hoursEl.innerHTML = hours < 10 ? '0' + hours : hours;
+                if(minsEl) minsEl.innerHTML = minutes < 10 ? '0' + minutes : minutes;
+                if(secsEl) secsEl.innerHTML = seconds < 10 ? '0' + seconds : seconds;
+            }, 1000);
         }
     });
 });
