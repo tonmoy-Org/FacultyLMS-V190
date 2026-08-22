@@ -88,10 +88,6 @@
                         <!-- Timer -->
                         <div class="mini-countdown d-flex justify-content-center gap-1 gap-md-2 order-1 flex-nowrap" id="promoCountdownFooter" data-target="{{ $countdownDate }}">
                             <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center footer-timer-item">
-                                <h4 class="days m-0 fw-bold" style="color: #ea580c; line-height: 1.1;">00</h4>
-                                <span class="small text-secondary fw-bold" style="letter-spacing: 0.5px;">DAYS</span>
-                            </div>
-                            <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center footer-timer-item">
                                 <h4 class="hours m-0 fw-bold" style="color: #ea580c; line-height: 1.1;">00</h4>
                                 <span class="small text-secondary fw-bold" style="letter-spacing: 0.5px;">HRS</span>
                             </div>
@@ -340,12 +336,10 @@
                         return;
                     }
 
-                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const hours = Math.floor(distance / (1000 * 60 * 60));
                     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                    if(countdownEl.querySelector('.days')) countdownEl.querySelector('.days').innerText = days < 10 ? '0' + days : days;
                     if(countdownEl.querySelector('.hours')) countdownEl.querySelector('.hours').innerText = hours < 10 ? '0' + hours : hours;
                     if(countdownEl.querySelector('.minutes')) countdownEl.querySelector('.minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
                     if(countdownEl.querySelector('.seconds')) countdownEl.querySelector('.seconds').innerText = seconds < 10 ? '0' + seconds : seconds;

@@ -238,10 +238,6 @@
                 <div class="sp-middle">
                     <div class="sp-countdown js-countdown">
                         <div class="sp-cd-item">
-                            <span class="num js-days">00</span>
-                            <span class="label">DAYS</span>
-                        </div>
-                        <div class="sp-cd-item">
                             <span class="num js-hours">00</span>
                             <span class="label">HRS</span>
                         </div>
@@ -400,12 +396,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     return;
                 }
                 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const hours = Math.floor(distance / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 
-                if(daysEl) daysEl.innerHTML = days < 10 ? '0' + days : days;
                 if(hoursEl) hoursEl.innerHTML = hours < 10 ? '0' + hours : hours;
                 if(minsEl) minsEl.innerHTML = minutes < 10 ? '0' + minutes : minutes;
                 if(secsEl) secsEl.innerHTML = seconds < 10 ? '0' + seconds : seconds;
