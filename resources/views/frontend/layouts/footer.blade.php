@@ -13,7 +13,7 @@
     }
     
     $elapsed = time() - $startTime;
-    $remaining = (2 * 3600) - $elapsed; // 2 hours in seconds
+    $remaining = (1 * 3600) - $elapsed; // 1 hour in seconds
     
     if ($remaining <= 0) {
         $remaining = 0;
@@ -311,11 +311,11 @@
         function initCountdown(elementId) {
             const countdownEl = document.getElementById(elementId);
             if(countdownEl) {
-                let durationHours = 2;
+                let durationHours = 1;
                 let promoEndTime = localStorage.getItem('sticky_promo_end_time');
                 let now = new Date().getTime();
                 
-                // Reset cycle: 24 hours. If there's no end time, or end time > 2 hours from now, or it's been more than 24 hours since the end time.
+                // Reset cycle: 24 hours. If there's no end time, or end time > 1 hours from now, or it's been more than 24 hours since the end time.
                 if (!promoEndTime || promoEndTime > (now + durationHours * 3600 * 1000) || promoEndTime < (now - 24 * 3600 * 1000)) {
                     promoEndTime = now + (durationHours * 3600 * 1000);
                     localStorage.setItem('sticky_promo_end_time', promoEndTime);
