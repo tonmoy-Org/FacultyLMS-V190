@@ -97,16 +97,97 @@
 @if(isset($hero_course->description) && !empty(strip_tags($hero_course->description)))
 <section class="course-description-section p-t-60 p-b-60 bg-white">
     <div class="container container-1278">
-        <div class="description-card p-4 p-md-5" style="background-color: #eaf7f2; border-radius: 8px;">
-            @if($hero_course->description_subtitle)
-                <h2 class="text-center mb-4" style="color: #111827; font-size: 28px; font-weight: 700;">
-                    {{ $hero_course->description_subtitle }}
-                </h2>
-            @endif
+        <div class="description-card p-4 p-md-5 position-relative overflow-hidden" 
+             style="background-color: #eaf7f2; border: 1px solid #bfead8; border-radius: 20px; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.05);">
             
-            <div class="course-description-content" style="color: #4b5563; font-size: 14px; line-height: 1.8; font-weight: 400; text-align: left;">
-                {!! $hero_course->description !!}
+            <div class="row g-4 g-lg-5 align-items-center">
+                <!-- Left Column -->
+                <div class="col-lg-6 col-md-12">
+                    <div class="quote-decorator mb-2" style="color: #10b981; font-size: 55px; line-height: 1; font-family: Georgia, serif; font-weight: bold;">
+                        “
+                    </div>
+                    @if($hero_course->description_subtitle)
+                        <h2 class="mb-3 fw-bold" style="color: #111827; font-size: 30px; line-height: 1.3;">
+                            {!! format_title_highlight($hero_course->description_subtitle) !!}
+                        </h2>
+                    @else
+                        <h2 class="mb-3 fw-bold" style="color: #111827; font-size: 30px; line-height: 1.3;">
+                            আমি আপনাদের বলতে চাই
+                        </h2>
+                    @endif
+                    
+                    <div class="course-description-content" style="color: #374151; font-size: 16px; line-height: 1.85; font-weight: 400;">
+                        {!! $hero_course->description !!}
+                    </div>
+                </div>
+
+                <!-- Right Column: Structured Feature Layout -->
+                @php
+                    $descRightTitle  = !empty($mcSettings['desc_right_title']) ? $mcSettings['desc_right_title'] : 'আমি আমার কাজের দীর্ঘ সময়ের অভিজ্ঞতা থেকে দেখিয়েছি তিন ধরনের আয় করার কার্যকরী প্রুভেন সিস্টেম।';
+                    $descStep1Title  = !empty($mcSettings['desc_step_1_title']) ? $mcSettings['desc_step_1_title'] : 'শর্ট টার্ম';
+                    $descStep1Sub    = !empty($mcSettings['desc_step_1_sub']) ? $mcSettings['desc_step_1_sub'] : 'দ্রুত প্রথম আয়';
+                    $descStep2Title  = !empty($mcSettings['desc_step_2_title']) ? $mcSettings['desc_step_2_title'] : 'মিড টার্ম';
+                    $descStep2Sub    = !empty($mcSettings['desc_step_2_sub']) ? $mcSettings['desc_step_2_sub'] : 'নিয়মিত মাসিক আয়';
+                    $descStep3Title  = !empty($mcSettings['desc_step_3_title']) ? $mcSettings['desc_step_3_title'] : 'লং টার্ম';
+                    $descStep3Sub    = !empty($mcSettings['desc_step_3_sub']) ? $mcSettings['desc_step_3_sub'] : 'প্যাসিভ ও স্থায়ী আয়';
+                    $descBannerIcon  = !empty($mcSettings['desc_banner_icon']) ? $mcSettings['desc_banner_icon'] : '💰';
+                    $descBannerTitle = !empty($mcSettings['desc_banner_title']) ? $mcSettings['desc_banner_title'] : '$1,000+ প্রতি মাসে আয় করুন!';
+                    $descBannerSub   = !empty($mcSettings['desc_banner_sub']) ? $mcSettings['desc_banner_sub'] : 'প্রতি মাসে ১,০০০ ডলার প্লাস আয় করার নিশ্চয়তার জার্নি হচ্ছে এই কোর্স।';
+                @endphp
+                <div class="col-lg-6 col-md-12">
+                    <div class="p-3 p-md-4 rounded-4" style="background: rgba(255, 255, 255, 0.7); border: 1px solid #d1fae5;">
+                        <!-- Top Subtitle -->
+                        @if(!empty($descRightTitle))
+                            <h4 class="fw-bold mb-4" style="color: #111827; font-size: 17.5px; line-height: 1.65;">
+                                {!! format_title_highlight($descRightTitle) !!}
+                            </h4>
+                        @endif
+
+                        <!-- 3-Step Timeline Nodes -->
+                        <div class="timeline-nodes-wrapper position-relative mb-4 py-2">
+                            <div class="timeline-line" style="position: absolute; top: 18px; left: 10%; right: 10%; height: 2px; background: #a7f3d0; z-index: 1;"></div>
+                            <div class="row text-center position-relative" style="z-index: 2;">
+                                <div class="col-4">
+                                    <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: #10b981; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #10b981;"></div>
+                                    <div class="fw-bold text-dark" style="font-size: 14px;">{{ $descStep1Title }}</div>
+                                    <div class="text-muted" style="font-size: 11.5px;">{{ $descStep1Sub }}</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: #10b981; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #10b981;"></div>
+                                    <div class="fw-bold text-dark" style="font-size: 14px;">{{ $descStep2Title }}</div>
+                                    <div class="text-muted" style="font-size: 11.5px;">{{ $descStep2Sub }}</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: #10b981; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #10b981;"></div>
+                                    <div class="fw-bold text-dark" style="font-size: 14px;">{{ $descStep3Title }}</div>
+                                    <div class="text-muted" style="font-size: 11.5px;">{{ $descStep3Sub }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Inner Highlight Banner Card -->
+                        <div class="highlight-banner-card p-3 p-md-4 rounded-3 text-center" 
+                             style="background: #ffffff; border: 2px solid #10b981; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.12);">
+                            <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
+                                @if(!empty($descBannerIcon))
+                                    <span style="font-size: 26px;">{{ $descBannerIcon }}</span>
+                                @endif
+                                @if(!empty($descBannerTitle))
+                                    <h3 class="m-0 fw-bold" style="color: #d97706; font-size: 22px; letter-spacing: 0.5px;">
+                                        {!! format_title_highlight($descBannerTitle) !!}
+                                    </h3>
+                                @endif
+                            </div>
+                            @if(!empty($descBannerSub))
+                                <p class="m-0 fw-semibold" style="color: #4b5563; font-size: 14.5px;">
+                                    {{ $descBannerSub }}
+                                </p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </section>

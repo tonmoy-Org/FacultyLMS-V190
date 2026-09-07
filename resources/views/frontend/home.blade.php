@@ -52,7 +52,7 @@
                     @if($b1Link)
                         <a href="{{ $b1Link }}" target="_blank" class="d-block w-100 overflow-hidden">
                     @endif
-                        <img src="{{ $b1Url }}" alt="Ad Banner 1" class="img-fluid w-100" style="border-radius: 0px !important; width: 100%; max-height: 280px; object-fit: cover; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                        <img src="{{ $b1Url }}" alt="Ad Banner 1" class="img-fluid w-100" style="border-radius: 0px !important; width: 100%; height: auto; max-height: none !important; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
                     @if($b1Link)
                         </a>
                     @endif
@@ -143,50 +143,6 @@
     <!--====== Start Syllabus Section ======-->
     @include('frontend.homePage.syllabus')
 
-    <!--====== Start Offer Breakdown Section ======-->
-    @include('frontend.homePage.offer_breakdown')
-
-
-
-    <!--====== Start Ad Banner 2 (Lower Home Section) ======-->
-    @php
-        $b2ImgSetting = setting('home_ad_banner_image_2');
-        $b2Url = '';
-        if ($b2ImgSetting) {
-            $b2Url = getFileLink('original_image', $b2ImgSetting);
-        }
-        $b2Status = setting('home_ad_banner_status_2') !== '0';
-        $b2Link = setting('home_ad_banner_link_2');
-        
-        if(isset($course) && $course) {
-            $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
-            if(is_array($mcSettings)) {
-                $b2Url = !empty($mcSettings['ad_banner_2_image_url']) ? $mcSettings['ad_banner_2_image_url'] : $b2Url;
-                $b2Status = isset($mcSettings['ad_banner_2_status']) ? !empty($mcSettings['ad_banner_2_status']) : $b2Status;
-                $b2Link = !empty($mcSettings['ad_banner_2_link']) ? $mcSettings['ad_banner_2_link'] : $b2Link;
-            }
-        }
-        $b2Url = dynamic_asset($b2Url);
-    @endphp
-
-    @if($b2Url && $b2Status && !str_contains($b2Url, 'default'))
-    <section class="ad-banner-section-2 p-t-60 p-b-60 bg-white overflow-hidden">
-        <div class="container container-1278">
-            <div class="row justify-content-center">
-                <div class="col-12 text-center" data-aos="fade-up">
-                    @if($b2Link)
-                        <a href="{{ $b2Link }}" target="_blank" class="d-block w-100 overflow-hidden">
-                    @endif
-                        <img src="{{ $b2Url }}" alt="Ad Banner 2" class="img-fluid w-100" style="border-radius: 0px !important; width: 100%; max-height: 280px; object-fit: cover; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
-                    @if($b2Link)
-                        </a>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </section>
-    @endif
-
     <!--====== Start Success Banner Section ======-->
     @php
         $successBannerImg = setting('success_page_banner_image');
@@ -220,6 +176,48 @@
 
     <!--====== Start Success Story Section ======-->
     @include('frontend.homePage.success')
+
+    <!--====== Start Offer Breakdown Section (Today's Value Breakdown) ======-->
+    @include('frontend.homePage.offer_breakdown')
+
+    <!--====== Start Ad Banner 2 (Lower Home Section) ======-->
+    @php
+        $b2ImgSetting = setting('home_ad_banner_image_2');
+        $b2Url = '';
+        if ($b2ImgSetting) {
+            $b2Url = getFileLink('original_image', $b2ImgSetting);
+        }
+        $b2Status = setting('home_ad_banner_status_2') !== '0';
+        $b2Link = setting('home_ad_banner_link_2');
+        
+        if(isset($course) && $course) {
+            $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
+            if(is_array($mcSettings)) {
+                $b2Url = !empty($mcSettings['ad_banner_2_image_url']) ? $mcSettings['ad_banner_2_image_url'] : $b2Url;
+                $b2Status = isset($mcSettings['ad_banner_2_status']) ? !empty($mcSettings['ad_banner_2_status']) : $b2Status;
+                $b2Link = !empty($mcSettings['ad_banner_2_link']) ? $mcSettings['ad_banner_2_link'] : $b2Link;
+            }
+        }
+        $b2Url = dynamic_asset($b2Url);
+    @endphp
+
+    @if($b2Url && $b2Status && !str_contains($b2Url, 'default'))
+    <section class="ad-banner-section-2 p-t-60 p-b-60 bg-white overflow-hidden">
+        <div class="container container-1278">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center" data-aos="fade-up">
+                    @if($b2Link)
+                        <a href="{{ $b2Link }}" target="_blank" class="d-block w-100 overflow-hidden">
+                    @endif
+                        <img src="{{ $b2Url }}" alt="Ad Banner 2" class="img-fluid w-100" style="border-radius: 0px !important; width: 100%; height: auto; max-height: none !important; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                    @if($b2Link)
+                        </a>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
 
     <!--====== Start FAQ Section ======-->
     @include('frontend.homePage.faq')

@@ -296,7 +296,7 @@
             <div class="row align-items-end g-4">
                 <!-- Left Side: Content -->
                 <div class="col-lg-6 col-md-12 mc-support-content text-start">
-                    <h2 class="mc-support-title">{!! $supportTitle !!}</h2>
+                    <h2 class="mc-support-title">{!! format_title_highlight($supportTitle) !!}</h2>
                     <div class="mc-support-description">
                         {!! $supportDescription !!}
                     </div>

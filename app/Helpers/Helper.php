@@ -954,3 +954,22 @@ if (! function_exists('dynamic_asset')) {
         return $url;
     }
 }
+
+if (! function_exists('format_title_highlight')) {
+    function format_title_highlight($title)
+    {
+        if (blank($title)) {
+            return '';
+        }
+
+        // Convert {word(s)} or [word(s)] or ==word(s)== into <mark class="title-highlight">word(s)</mark>
+        $title = preg_replace('/\{([^}]+)\}/', '<mark class="title-highlight">$1</mark>', $title);
+        $title = preg_replace('/\[([^\]]+)\]/', '<mark class="title-highlight">$1</mark>', $title);
+        $title = preg_replace('/==([^=]+)==/', '<mark class="title-highlight">$1</mark>', $title);
+
+        // Ensure any standard <mark> tag gets class title-highlight
+        $title = preg_replace('/<mark\b[^>]*>(.*?)<\/mark>/i', '<mark class="title-highlight">$1</mark>', $title);
+
+        return $title;
+    }
+}

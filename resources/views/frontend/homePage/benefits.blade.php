@@ -5,7 +5,7 @@
         if(!is_array($mcSettings)) $mcSettings = [];
     }
 
-    $benefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : '';
+    $benefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : 'Who Is This {Masterclass} For?';
     
     $benefits = [];
     if(!empty($mcSettings['benefits_list']) && is_array($mcSettings['benefits_list'])) {
@@ -53,12 +53,58 @@
         border-color: #3b82f6 !important;
         box-shadow: 0 12px 30px rgba(59, 130, 246, 0.12) !important;
     }
+    mark.title-highlight, .title-highlight, h2 mark, .course-section-title mark {
+        background: transparent !important;
+        color: inherit;
+        position: relative;
+        display: inline-block;
+        padding: 0 8px;
+        margin: 0 2px;
+        font-weight: 700;
+        z-index: 1;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    mark.title-highlight::before, .title-highlight::before, h2 mark::before, .course-section-title mark::before {
+        content: "";
+        position: absolute;
+        left: -6px;
+        right: -6px;
+        top: 12%;
+        bottom: 2%;
+        background: linear-gradient(98deg, #d1fae5 0%, #a7f3d0 40%, #6ee7b7 85%, #d1fae5 100%);
+        opacity: 0.95;
+        z-index: -1;
+        clip-path: polygon(
+            0% 14%, 2% 6%, 8% 10%, 18% 4%, 32% 9%, 48% 3%, 64% 8%, 79% 2%, 92% 7%, 100% 12%,
+            99% 88%, 95% 96%, 82% 91%, 66% 97%, 51% 92%, 35% 98%, 19% 93%, 6% 97%, 0% 86%
+        );
+        transform: rotate(-0.8deg) scaleY(1.04);
+        transition: all 0.3s ease;
+    }
+
+    mark.title-highlight::after, .title-highlight::after, h2 mark::after, .course-section-title mark::after {
+        content: "";
+        position: absolute;
+        left: -4px;
+        right: -4px;
+        top: 20%;
+        bottom: 6%;
+        background: rgba(16, 185, 129, 0.15);
+        z-index: -2;
+        clip-path: polygon(
+            1% 8%, 15% 12%, 30% 6%, 50% 11%, 70% 5%, 88% 10%, 98% 5%,
+            99% 92%, 84% 96%, 65% 90%, 45% 95%, 25% 89%, 5% 94%, 0% 85%
+        );
+        transform: rotate(0.4deg);
+    }
 </style>
 
 <section class="benefits-section p-t-60 p-b-60" style="background-color: #ffffff;">
     <div class="container container-1278">
         <div class="mc-benefits-card-wrapper">
-            <h2 class="fw-bold course-section-title text-dark mb-5 text-center px-3" data-aos="fade-up" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px;">{{ $benefitsTitle }}</h2>
+            <h2 class="fw-bold course-section-title text-dark mb-5 text-center px-3" data-aos="fade-up" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px;">{!! format_title_highlight($benefitsTitle) !!}</h2>
 
             <div class="row g-4 justify-content-center">
                 @foreach($benefits as $benefit)

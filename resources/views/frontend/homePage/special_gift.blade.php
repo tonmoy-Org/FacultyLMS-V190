@@ -31,8 +31,8 @@
     $giftValue = !empty($mcSettings['gift_value']) ? $mcSettings['gift_value'] : '';
     $giftDescription = !empty($mcSettings['gift_description']) ? $mcSettings['gift_description'] : '';
     $giftQuote = !empty($mcSettings['gift_quote']) ? $mcSettings['gift_quote'] : '';
-    $giftFooterNote = !empty($mcSettings['gift_footer_note']) ? $mcSettings['gift_footer_note'] : '';
-    $giftCtaText = !empty($mcSettings['gift_cta_text']) ? $mcSettings['gift_cta_text'] : '';
+    $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : 'Enroll Now';
+    $giftCtaText = !empty($mcSettings['gift_cta_text']) ? $mcSettings['gift_cta_text'] : $heroBtnText;
     $giftCtaLink = !empty($mcSettings['gift_cta_link']) ? $mcSettings['gift_cta_link'] : '';
 @endphp
 
@@ -89,7 +89,7 @@
 
                     @if($giftTitle)
                         <h2 class="fw-bold fs-3 text-dark mb-3 text-center">
-                            {{ $formatCurrencyText($giftTitle) }}
+                            {!! format_title_highlight($formatCurrencyText($giftTitle)) !!}
                         </h2>
                     @endif
 
@@ -129,8 +129,12 @@
                         </div>
                     @endif
 
-                    <div class="text-center w-100">
-                        <a href="{{ !empty($giftCtaLink) ? $giftCtaLink : (isset($course) ? route('course.details', $course->slug) : '#') }}" class="template-btn">
+                    @php
+                        $heroBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : ((request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register'));
+                        $finalGiftCtaLink = !empty($giftCtaLink) ? $giftCtaLink : $heroBtnUrl;
+                    @endphp
+                    <div class="text-center w-100 mt-4">
+                        <a href="{{ $finalGiftCtaLink }}" class="template-btn get-access-btn">
                             {{ $giftCtaText }}
                         </a>
                     </div>

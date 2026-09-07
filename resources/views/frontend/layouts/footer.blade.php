@@ -4,7 +4,7 @@
         || isHome();
 
     $userIp = request()->ip();
-    $cacheKey = 'sticky_promo_timer_' . str_replace(':', '_', $userIp);
+    $cacheKey = 'sticky_promo_timer_v2_' . str_replace(':', '_', $userIp);
     
     $startTime = \Illuminate\Support\Facades\Cache::get($cacheKey);
     if (!$startTime) {
@@ -12,11 +12,11 @@
         \Illuminate\Support\Facades\Cache::put($cacheKey, $startTime, now()->addHours(24));
     }
     
+    $durationSeconds = (1 * 3600) + (59 * 60) + 59; // 1 hour 59 minutes 59 seconds
     $elapsed = time() - $startTime;
-    $remaining = (1 * 3600) - $elapsed; // 1 hour in seconds
-    
+    $remaining = $durationSeconds - ($elapsed % $durationSeconds);
     if ($remaining <= 0) {
-        $remaining = 0;
+        $remaining = $durationSeconds;
     }
     
     $countdownDate = date('Y-m-d H:i:s', time() + $remaining);
@@ -48,7 +48,12 @@
                         } else {
                             $getAccessLink = \Illuminate\Support\Str::startsWith($getAccessRawLink, ['http://', 'https://', '/']) ? $getAccessRawLink : url($getAccessRawLink);
                         }
-                        $getAccessTitle = setting('get_access_btn_title', app()->getLocale()) ?: (setting('get_access_btn_title') ?: __('get_access'));
+                        $mcSettings = [];
+                        if (isset($course) && $course) {
+                            $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
+                        }
+                        $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : null;
+                        $getAccessTitle = $heroBtnText ?: (setting('get_access_btn_title', app()->getLocale()) ?: (setting('get_access_btn_title') ?: __('get_access')));
                         $countdownTitle = setting('promo_banner_countdown_title', app()->getLocale());
                     @endphp
                     
@@ -66,9 +71,6 @@
                         .footer-timer-item span {
                             font-size: 8px;
                         }
-                        .footer-btn-cta {
-                            padding: 8px 12px; font-size: 12px;
-                        }
                         @media(min-width: 992px) {
                             .footer-timer-item {
                                 width: 55px; height: 60px; min-width: 55px;
@@ -78,9 +80,6 @@
                             }
                             .footer-timer-item span {
                                 font-size: 9px;
-                            }
-                            .footer-btn-cta {
-                                padding: 10px 24px; font-size: 14px;
                             }
                         }
                     </style>
@@ -261,23 +260,50 @@
                     <!-- Left: Follow Us Social Links -->
                     <div class="col-md-6 col-12 text-center text-md-start">
                         @if(setting('show_social_links', 1) != 0)
+                        <style>
+                            .footer-social-link {
+                                width: 36px;
+                                height: 36px;
+                                background: rgba(255, 255, 255, 0.1);
+                                color: #ffffff !important;
+                                border-radius: 50%;
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                                text-decoration: none !important;
+                                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                                position: relative;
+                            }
+                            .footer-social-link:hover {
+                                transform: translateY(-3px) scale(1.1);
+                                color: #ffffff !important;
+                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                            }
+                            .footer-social-link.fb:hover { background-color: #1877F2 !important; }
+                            .footer-social-link.tw:hover { background-color: #1DA1F2 !important; }
+                            .footer-social-link.yt:hover { background-color: #FF0000 !important; }
+                            .footer-social-link.insta:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important; }
+                            .footer-social-link.li:hover { background-color: #0A66C2 !important; }
+                            .footer-social-link.wa:hover { background-color: #25D366 !important; }
+                            .footer-social-link.tg:hover { background-color: #0088cc !important; }
+                        </style>
                         <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-3">
                             <span class="fw-bold" style="color: #ffffff; font-size: 16px;">{{ setting('follow_us_title', app()->getLocale()) ?: (setting('follow_us_title') ?: __('Follow Us :')) }}</span>
                             <div class="social-links-list d-flex gap-2">
                                 @if(setting('facebook_link'))
-                                <a href="{{ setting('facebook_link') }}" target="_blank" class="d-flex align-items-center justify-content-center text-white rounded-circle" style="width: 34px; height: 34px; background: rgba(255,255,255,0.1); text-decoration: none;"><i class="fab fa-facebook-f" style="font-size: 14px;"></i></a>
+                                <a href="{{ setting('facebook_link') }}" target="_blank" rel="noopener noreferrer" class="footer-social-link fb" title="Facebook" data-bs-toggle="tooltip" data-bs-placement="top"><i class="fab fa-facebook-f" style="font-size: 14px;"></i></a>
                                 @endif
                                 @if(setting('twitter_link'))
-                                <a href="{{ setting('twitter_link') }}" target="_blank" class="d-flex align-items-center justify-content-center text-white rounded-circle" style="width: 34px; height: 34px; background: rgba(255,255,255,0.1); text-decoration: none;"><i class="fab fa-twitter" style="font-size: 14px;"></i></a>
+                                <a href="{{ setting('twitter_link') }}" target="_blank" rel="noopener noreferrer" class="footer-social-link tw" title="Twitter" data-bs-toggle="tooltip" data-bs-placement="top"><i class="fab fa-twitter" style="font-size: 14px;"></i></a>
                                 @endif
                                 @if(setting('youtube_link'))
-                                <a href="{{ setting('youtube_link') }}" target="_blank" class="d-flex align-items-center justify-content-center text-white rounded-circle" style="width: 34px; height: 34px; background: rgba(255,255,255,0.1); text-decoration: none;"><i class="fab fa-youtube" style="font-size: 14px;"></i></a>
+                                <a href="{{ setting('youtube_link') }}" target="_blank" rel="noopener noreferrer" class="footer-social-link yt" title="YouTube" data-bs-toggle="tooltip" data-bs-placement="top"><i class="fab fa-youtube" style="font-size: 14px;"></i></a>
                                 @endif
                                 @if(setting('instagram_link'))
-                                <a href="{{ setting('instagram_link') }}" target="_blank" class="d-flex align-items-center justify-content-center text-white rounded-circle" style="width: 34px; height: 34px; background: rgba(255,255,255,0.1); text-decoration: none;"><i class="fab fa-instagram" style="font-size: 14px;"></i></a>
+                                <a href="{{ setting('instagram_link') }}" target="_blank" rel="noopener noreferrer" class="footer-social-link insta" title="Instagram" data-bs-toggle="tooltip" data-bs-placement="top"><i class="fab fa-instagram" style="font-size: 14px;"></i></a>
                                 @endif
                                 @if(setting('linkedin_link'))
-                                <a href="{{ setting('linkedin_link') }}" target="_blank" class="d-flex align-items-center justify-content-center text-white rounded-circle" style="width: 34px; height: 34px; background: rgba(255,255,255,0.1); text-decoration: none;"><i class="fab fa-linkedin-in" style="font-size: 14px;"></i></a>
+                                <a href="{{ setting('linkedin_link') }}" target="_blank" rel="noopener noreferrer" class="footer-social-link li" title="LinkedIn" data-bs-toggle="tooltip" data-bs-placement="top"><i class="fab fa-linkedin-in" style="font-size: 14px;"></i></a>
                                 @endif
                             </div>
                         </div>
@@ -311,29 +337,26 @@
         function initCountdown(elementId) {
             const countdownEl = document.getElementById(elementId);
             if(countdownEl) {
-                let durationHours = 1;
-                let promoEndTime = localStorage.getItem('sticky_promo_end_time');
+                const durationMs = ((1 * 3600) + (59 * 60) + 59) * 1000; // 1 hr 59 min 59 sec
+                const storageKey = 'sticky_promo_timer_end_v2';
+                let promoEndTime = localStorage.getItem(storageKey);
                 let now = new Date().getTime();
                 
-                // Reset cycle: 24 hours. If there's no end time, or end time > 1 hours from now, or it's been more than 24 hours since the end time.
-                if (!promoEndTime || promoEndTime > (now + durationHours * 3600 * 1000) || promoEndTime < (now - 24 * 3600 * 1000)) {
-                    promoEndTime = now + (durationHours * 3600 * 1000);
-                    localStorage.setItem('sticky_promo_end_time', promoEndTime);
+                if (!promoEndTime || parseInt(promoEndTime) <= now || parseInt(promoEndTime) > (now + durationMs)) {
+                    promoEndTime = now + durationMs;
+                    localStorage.setItem(storageKey, promoEndTime);
                 }
                 
-                const targetDate = parseInt(promoEndTime);
+                let targetDate = parseInt(promoEndTime);
 
                 const timer = setInterval(function() {
-                    const now = new Date().getTime();
-                    const distance = targetDate - now;
+                    let now = new Date().getTime();
+                    let distance = targetDate - now;
 
                     if (distance <= 0) {
-                        clearInterval(timer);
-                        if(countdownEl.querySelector('.days')) countdownEl.querySelector('.days').innerText = '00';
-                        if(countdownEl.querySelector('.hours')) countdownEl.querySelector('.hours').innerText = '00';
-                        if(countdownEl.querySelector('.minutes')) countdownEl.querySelector('.minutes').innerText = '00';
-                        if(countdownEl.querySelector('.seconds')) countdownEl.querySelector('.seconds').innerText = '00';
-                        return;
+                        targetDate = now + durationMs;
+                        localStorage.setItem(storageKey, targetDate);
+                        distance = targetDate - now;
                     }
 
                     const hours = Math.floor(distance / (1000 * 60 * 60));

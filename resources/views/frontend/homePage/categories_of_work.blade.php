@@ -118,7 +118,7 @@
     <div class="container container-1278">
         <div class="cow-wrapper">
             @if($title)
-                <h3 class="cow-title" data-aos="fade-up">{{ __($title) }}</h3>
+                <h3 class="cow-title" data-aos="fade-up">{!! format_title_highlight(__($title)) !!}</h3>
             @endif
 
             <div class="row g-4 justify-content-center">

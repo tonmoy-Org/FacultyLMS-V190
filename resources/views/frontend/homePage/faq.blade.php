@@ -158,13 +158,26 @@
             <!-- Left Column: FAQ Accordion -->
             <div class="col-lg-6 col-md-12">
                 <div class="faq-content-wrap">
+                    @php
+                        $mcSettings = [];
+                        if(isset($course) && $course) {
+                            $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
+                            if(!is_array($mcSettings)) $mcSettings = [];
+                        }
+                        $faqTitle = !empty($mcSettings['faq_title']) ? $mcSettings['faq_title'] : __('Frequently Asked Questions');
+                        $faqSubtitle = !empty($mcSettings['faq_subtitle']) ? $mcSettings['faq_subtitle'] : __('POPULAR QUESTIONS');
+                    @endphp
                     <div class="common-heading m-b-30">
-                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
-                            {{ __('POPULAR QUESTIONS') }}
-                        </span>
-                        <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 28px; line-height: 1.25;">
-                            {{ __('Frequently Asked Questions') }}
-                        </h2>
+                        @if($faqSubtitle)
+                            <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                                {{ __($faqSubtitle) }}
+                            </span>
+                        @endif
+                        @if($faqTitle)
+                            <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 28px; line-height: 1.25;">
+                                {!! format_title_highlight(__($faqTitle)) !!}
+                            </h2>
+                        @endif
                     </div>
                     
                     <div class="accordion custom-faq-accordion" id="courseFaqAccordion">

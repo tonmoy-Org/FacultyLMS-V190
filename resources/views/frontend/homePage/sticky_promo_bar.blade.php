@@ -2,7 +2,12 @@
     $showStickyBar = setting('show_sticky_promo_bar');
     $title = setting('sticky_promo_title') ?: 'অফার শেষ হওয়ার আগেই কিনুন';
     
-    $btnText = setting('sticky_promo_btn_text') ?: 'Enroll Now';
+    $mcSettings = [];
+    if (isset($course) && $course) {
+        $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
+    }
+    $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : (setting('sticky_promo_btn_text') ?: 'Enroll Now');
+    $btnText = $heroBtnText;
     $rawBtnLink = setting('sticky_promo_btn_link');
     if (empty($rawBtnLink) || $rawBtnLink === '#' || $rawBtnLink === '#register') {
         $btnLink = (request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register');
@@ -210,14 +215,6 @@
             font-size: 8px;
             margin-top: 2px;
         }
-        .sp-right .btn-enroll {
-            padding: 6px 8px;
-            font-size: 12px;
-            gap: 4px;
-        }
-        .sp-right .btn-enroll i {
-            font-size: 12px;
-        }
         .sticky-promo-wrapper.is-sticky {
             border-radius: 0;
             max-width: 100%;
@@ -264,7 +261,7 @@
                                     <stop offset="100%" stop-color="#ffc107" stop-opacity="0" />
                                 </linearGradient>
                             </defs>
-                            <rect class="btn-border-beam-rect" fill="none" stroke="url(#btn-beam-gradient)" stroke-width="2.5" rx="8" ry="8" />
+                            <rect class="btn-border-beam-rect" fill="none" stroke="url(#btn-beam-gradient)" stroke-width="2.5" rx="3" ry="3" />
                         </svg>
                         <span class="btn-text-content" style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 8px;">
                             {{ $btnText }} 
@@ -359,47 +356,38 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const countdownEl = container.querySelector('.js-countdown');
         if (countdownEl) {
-            let durationHours = 1;
-            let promoEndTime = localStorage.getItem('sticky_promo_end_time');
+            const durationMs = ((1 * 3600) + (59 * 60) + 59) * 1000; // 1 hr 59 min 59 sec
+            const storageKey = 'sticky_promo_timer_end_v2';
+            let promoEndTime = localStorage.getItem(storageKey);
             let now = new Date().getTime();
             
-            // Reset cycle: 24 hours. If there's no end time, or end time > 1 hours from now, or it's been more than 24 hours since the end time.
-            if (!promoEndTime || promoEndTime > (now + durationHours * 3600 * 1000) || promoEndTime < (now - 24 * 3600 * 1000)) {
-                promoEndTime = now + (durationHours * 3600 * 1000);
-                localStorage.setItem('sticky_promo_end_time', promoEndTime);
+            if (!promoEndTime || parseInt(promoEndTime) <= now || parseInt(promoEndTime) > (now + durationMs)) {
+                promoEndTime = now + durationMs;
+                localStorage.setItem(storageKey, promoEndTime);
             }
             
-            const countDownDate = parseInt(promoEndTime);
+            let countDownDate = parseInt(promoEndTime);
 
             const x = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = countDownDate - now;
+                let now = new Date().getTime();
+                let distance = countDownDate - now;
                 
+                if (distance <= 0) {
+                    countDownDate = now + durationMs;
+                    localStorage.setItem(storageKey, countDownDate);
+                    distance = countDownDate - now;
+                }
+
                 const daysEl = countdownEl.querySelector(".js-days");
                 const hoursEl = countdownEl.querySelector(".js-hours");
                 const minsEl = countdownEl.querySelector(".js-minutes");
                 const secsEl = countdownEl.querySelector(".js-seconds");
-
-                if (distance <= 0) {
-                    clearInterval(x);
-                    if(daysEl) daysEl.innerHTML = "00";
-                    if(hoursEl) hoursEl.innerHTML = "00";
-                    if(minsEl) minsEl.innerHTML = "00";
-                    if(secsEl) secsEl.innerHTML = "00";
-                    
-                    // Hide the sticky bar when time expires
-                    container.style.display = 'none';
-                    const scrollTopBtn = document.getElementById('fixed-scroll-top');
-                    if (scrollTopBtn) {
-                        scrollTopBtn.style.removeProperty('bottom');
-                    }
-                    return;
-                }
                 
                 const hours = Math.floor(distance / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 
+                if(daysEl) daysEl.innerHTML = "00";
                 if(hoursEl) hoursEl.innerHTML = hours < 10 ? '0' + hours : hours;
                 if(minsEl) minsEl.innerHTML = minutes < 10 ? '0' + minutes : minutes;
                 if(secsEl) secsEl.innerHTML = seconds < 10 ? '0' + seconds : seconds;

@@ -1,5 +1,15 @@
+@php
+    $mcSettings = [];
+    if(isset($course) && $course) {
+        $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
+        if(!is_array($mcSettings)) $mcSettings = [];
+    }
+    $showCurriculumSection = !isset($mcSettings['show_curriculum_section']) || !empty($mcSettings['show_curriculum_section']);
+    $curriculumTitle = !empty($mcSettings['curriculum_title']) ? $mcSettings['curriculum_title'] : __('Course Syllabus');
+@endphp
+
 <!--====== Start Syllabus Section ======-->
-@if(isset($course) && $course->sections->count() > 0)
+@if(isset($course) && $course->sections->count() > 0 && $showCurriculumSection)
 <style>
     .custom-syllabus-accordion .accordion-item {
         border: 1px solid #E5E7EB;
@@ -39,16 +49,8 @@
 <section class="syllabus-section p-t-60 p-b-60 position-relative overflow-hidden bg-white">
     <div class="container container-1278">
         <div class="common-heading text-center m-b-40" data-aos="fade-up">
-            @php
-                $mcSettings = [];
-                if(isset($course) && $course) {
-                    $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
-                    if(!is_array($mcSettings)) $mcSettings = [];
-                }
-                $curriculumTitle = !empty($mcSettings['curriculum_title']) ? $mcSettings['curriculum_title'] : __('Course Syllabus');
-            @endphp
             <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 28px; line-height: 1.25;">
-                {{ $curriculumTitle }}
+                {!! format_title_highlight($curriculumTitle) !!}
             </h2>
         </div>
         

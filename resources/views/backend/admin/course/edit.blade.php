@@ -525,7 +525,7 @@
                                         $defGoldSeatsText = 'আর মাত্র ' . $availSeatsCount . ' সিট বাকি';
                                     }
 
-                                    $defBenefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : '';
+                                    $defBenefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : 'Who Is This {Masterclass} For?';
                                     
                                     $benefitsList = [];
                                     if (!empty($mcSettings['benefits_list']) && is_array($mcSettings['benefits_list'])) {
@@ -626,9 +626,106 @@
                                     $defOverviewBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : '';
                                     $defOverviewImageUrl = !empty($mcSettings['overview_image_url']) ? $mcSettings['overview_image_url'] : '';
                                     $defHideOverviewSection = !empty($mcSettings['hide_overview_section']);
+
+                                    $defDescRightTitle  = !empty($mcSettings['desc_right_title']) ? $mcSettings['desc_right_title'] : 'আমি আমার কাজের দীর্ঘ সময়ের অভিজ্ঞতা থেকে দেখিয়েছি তিন ধরনের আয় করার কার্যকরী প্রুভেন সিস্টেম।';
+                                    $defDescStep1Title  = !empty($mcSettings['desc_step_1_title']) ? $mcSettings['desc_step_1_title'] : 'শর্ট টার্ম';
+                                    $defDescStep1Sub    = !empty($mcSettings['desc_step_1_sub']) ? $mcSettings['desc_step_1_sub'] : 'দ্রুত প্রথম আয়';
+                                    $defDescStep2Title  = !empty($mcSettings['desc_step_2_title']) ? $mcSettings['desc_step_2_title'] : 'মিড টার্ম';
+                                    $defDescStep2Sub    = !empty($mcSettings['desc_step_2_sub']) ? $mcSettings['desc_step_2_sub'] : 'নিয়মিত মাসিক আয়';
+                                    $defDescStep3Title  = !empty($mcSettings['desc_step_3_title']) ? $mcSettings['desc_step_3_title'] : 'লং টার্ম';
+                                    $defDescStep3Sub    = !empty($mcSettings['desc_step_3_sub']) ? $mcSettings['desc_step_3_sub'] : 'প্যাসিভ ও স্থায়ী আয়';
+                                    $defDescBannerIcon  = !empty($mcSettings['desc_banner_icon']) ? $mcSettings['desc_banner_icon'] : '💰';
+                                    $defDescBannerTitle = !empty($mcSettings['desc_banner_title']) ? $mcSettings['desc_banner_title'] : '$1,000+ প্রতি মাসে আয় করুন!';
+                                    $defDescBannerSub   = !empty($mcSettings['desc_banner_sub']) ? $mcSettings['desc_banner_sub'] : 'প্রতি মাসে ১,০০০ ডলার প্লাস আয় করার নিশ্চয়তার জার্নি হচ্ছে এই কোর্স।';
+
+                                    $defSuccessEyebrow  = !empty($mcSettings['success_eyebrow']) ? $mcSettings['success_eyebrow'] : 'SUCCESS STORIES';
+                                    $defSuccessTitle    = !empty($mcSettings['success_title']) ? $mcSettings['success_title'] : 'What Says My Students About The Platform';
+                                    $defSuccessSubtitle = !empty($mcSettings['success_subtitle']) ? $mcSettings['success_subtitle'] : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi.';
+                                    $defSuccessBtnText  = !empty($mcSettings['success_btn_text']) ? $mcSettings['success_btn_text'] : 'View All Success Stories';
+                                    $defSuccessBtnUrl   = !empty($mcSettings['success_btn_url']) ? $mcSettings['success_btn_url'] : url('success');
                                 @endphp
                                 
                                 <div class="masterclass-single-page-wrapper">
+                                    <!-- Section 2: Course Description Right Feature Card -->
+                                    <div class="card border mb-4 rounded-3 shadow-sm">
+                                        <div class="card-header bg-white py-3">
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Course Description Right Box Settings</span>
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <div class="row gx-20">
+                                                <div class="col-lg-12 mb-4">
+                                                    <label class="form-label">Top Subtitle / Heading</label>
+                                                    <input type="text" name="masterclass_settings[desc_right_title]" class="form-control rounded-2"
+                                                           value="{{ $defDescRightTitle }}" placeholder="আমি আমার কাজের দীর্ঘ সময়ের অভিজ্ঞতা থেকে দেখিয়েছি...">
+                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>Use <code>&lt;mark&gt;word&lt;/mark&gt;</code> or <code>{word}</code> to highlight words.</small>
+                                                </div>
+
+                                                <!-- 3 Timeline Steps -->
+                                                <div class="col-12 mb-4">
+                                                    <label class="form-label mb-2 fw-semibold">Timeline Steps</label>
+                                                    <div class="row g-3">
+                                                        <div class="col-md-4">
+                                                            <div class="p-3 bg-light rounded-3 border">
+                                                                <h6 class="fw-bold mb-2 text-primary font-14">Step 1</h6>
+                                                                <label class="form-label font-12 text-muted">Title</label>
+                                                                <input type="text" name="masterclass_settings[desc_step_1_title]" class="form-control rounded-2 bg-white mb-2"
+                                                                       value="{{ $defDescStep1Title }}" placeholder="শর্ট টার্ম">
+                                                                <label class="form-label font-12 text-muted">Subtitle</label>
+                                                                <input type="text" name="masterclass_settings[desc_step_1_sub]" class="form-control rounded-2 bg-white"
+                                                                       value="{{ $defDescStep1Sub }}" placeholder="দ্রুত প্রথম আয়">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="p-3 bg-light rounded-3 border">
+                                                                <h6 class="fw-bold mb-2 text-primary font-14">Step 2</h6>
+                                                                <label class="form-label font-12 text-muted">Title</label>
+                                                                <input type="text" name="masterclass_settings[desc_step_2_title]" class="form-control rounded-2 bg-white mb-2"
+                                                                       value="{{ $defDescStep2Title }}" placeholder="মিড টার্ম">
+                                                                <label class="form-label font-12 text-muted">Subtitle</label>
+                                                                <input type="text" name="masterclass_settings[desc_step_2_sub]" class="form-control rounded-2 bg-white"
+                                                                       value="{{ $defDescStep2Sub }}" placeholder="নিয়মিত মাসিক আয়">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="p-3 bg-light rounded-3 border">
+                                                                <h6 class="fw-bold mb-2 text-primary font-14">Step 3</h6>
+                                                                <label class="form-label font-12 text-muted">Title</label>
+                                                                <input type="text" name="masterclass_settings[desc_step_3_title]" class="form-control rounded-2 bg-white mb-2"
+                                                                       value="{{ $defDescStep3Title }}" placeholder="লং টার্ম">
+                                                                <label class="form-label font-12 text-muted">Subtitle</label>
+                                                                <input type="text" name="masterclass_settings[desc_step_3_sub]" class="form-control rounded-2 bg-white"
+                                                                       value="{{ $defDescStep3Sub }}" placeholder="প্যাসিভ ও স্থায়ী আয়">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Highlight Banner Card -->
+                                                <div class="col-12">
+                                                    <label class="form-label mb-2 fw-semibold">Highlight Banner Card</label>
+                                                    <div class="row g-3">
+                                                        <div class="col-md-3">
+                                                            <label class="form-label font-12 text-muted">Icon / Emoji</label>
+                                                            <input type="text" name="masterclass_settings[desc_banner_icon]" class="form-control rounded-2"
+                                                                   value="{{ $defDescBannerIcon }}" placeholder="💰">
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <label class="form-label font-12 text-muted">Card Heading</label>
+                                                            <input type="text" name="masterclass_settings[desc_banner_title]" class="form-control rounded-2"
+                                                                   value="{{ $defDescBannerTitle }}" placeholder="$1,000+ প্রতি মাসে আয় করুন!">
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label class="form-label font-12 text-muted">Card Subtitle</label>
+                                                            <input type="text" name="masterclass_settings[desc_banner_sub]" class="form-control rounded-2"
+                                                                   value="{{ $defDescBannerSub }}" placeholder="প্রতি মাসে ১,০০০ ডলার প্লাস আয় করার নিশ্চয়তার জার্নি হচ্ছে এই কোর্স।">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <!-- Section 3: Benefits Section -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
@@ -642,7 +739,8 @@
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Benefits Heading</label>
                                                     <input type="text" name="masterclass_settings[benefits_title]" class="form-control rounded-2"
-                                                           value="{{ $defBenefitsTitle }}" placeholder="এই মাস্টারক্লাস কার জন্য?">
+                                                           value="{{ $defBenefitsTitle }}" placeholder="Who Is This {Masterclass} For?">
+                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>Use <code>&lt;mark&gt;word&lt;/mark&gt;</code> or <code>{word}</code> to highlight words (e.g. <code>Who Is This {Masterclass} For?</code>).</small>
                                                 </div>
 
                                                 <div class="col-12 mb-2">
@@ -652,7 +750,7 @@
                                                             <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
                                                                 <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">{{ $bIdx + 1 }}</span></span>
                                                                 <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white"
-                                                                       value="{{ $bItem }}" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
+                                                                       value="{{ $bItem }}" placeholder="Enter benefit point...">
                                                                 <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
                                                                     <i class="las la-trash-alt fs-5"></i>
                                                                 </a>
@@ -663,6 +761,43 @@
                                             </div>
                                         </div>
                                      </div>
+
+                                    <!-- Section: Success Stories Header Settings -->
+                                    <div class="card border mb-4 rounded-3 shadow-sm">
+                                        <div class="card-header bg-white py-3">
+                                            <span class="form-label font-16 fw-normal text-dark m-0">Success Stories Section Settings</span>
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <div class="row gx-20">
+                                                <div class="col-lg-6 mb-4">
+                                                    <label class="form-label">Eyebrow Badge Title</label>
+                                                    <input type="text" name="masterclass_settings[success_eyebrow]" class="form-control rounded-2"
+                                                           value="{{ $defSuccessEyebrow }}" placeholder="SUCCESS STORIES">
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <label class="form-label">Main Title</label>
+                                                    <input type="text" name="masterclass_settings[success_title]" class="form-control rounded-2"
+                                                           value="{{ $defSuccessTitle }}" placeholder="What Says My Students About The Platform">
+                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>Use <code>&lt;mark&gt;word&lt;/mark&gt;</code> or <code>{word}</code> to highlight words.</small>
+                                                </div>
+                                                <div class="col-lg-12 mb-4">
+                                                    <label class="form-label">Subtitle / Description</label>
+                                                    <textarea name="masterclass_settings[success_subtitle]" class="form-control rounded-2" rows="3"
+                                                              placeholder="Lorem ipsum dolor sit amet...">{{ $defSuccessSubtitle }}</textarea>
+                                                </div>
+                                                <div class="col-lg-6 mb-4 mb-lg-0">
+                                                    <label class="form-label">Button Text</label>
+                                                    <input type="text" name="masterclass_settings[success_btn_text]" class="form-control rounded-2"
+                                                           value="{{ $defSuccessBtnText }}" placeholder="View All Success Stories">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="form-label">Button Link URL</label>
+                                                    <input type="text" name="masterclass_settings[success_btn_url]" class="form-control rounded-2"
+                                                           value="{{ $defSuccessBtnUrl }}" placeholder="{{ url('success') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <!-- Section 4: Special Bonus Gift -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
@@ -691,7 +826,8 @@
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Title</label>
                                                     <input type="text" name="masterclass_settings[gift_title]" class="form-control rounded-2"
-                                                           value="{{ $defGiftTitle }}" placeholder="৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ">
+                                                           value="{{ $defGiftTitle }}" placeholder="৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — {FREE} করার সুযোগ">
+                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>শব্দ হাইলাইট করতে <code>&lt;mark&gt;শব্দ&lt;/mark&gt;</code> অথবা <code>{শব্দ}</code> ব্যবহার করুন (যেমন: <code>{FREE} করার সুযোগ</code>)।</small>
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
@@ -783,7 +919,8 @@
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Breakdown Today Title</label>
                                                     <input type="text" name="masterclass_settings[breakdown_today_title]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownTodayTitle }}" placeholder="এই $1,000.00 টাকায় আপনি পাচ্ছেন:">
+                                                           value="{{ $defBreakdownTodayTitle }}" placeholder="আজকে এই {কোর্সে} যুক্ত হলে যা যা পাচ্ছেন:">
+                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>শব্দ হাইলাইট করতে <code>&lt;mark&gt;শব্দ&lt;/mark&gt;</code> অথবা <code>{শব্দ}</code> ব্যবহার করুন (যেমন: <code>আজকে এই {কোর্সে} যুক্ত হলে</code>)।</small>
                                                 </div>
 
                                                 <div class="col-lg-6 mb-4">
@@ -938,7 +1075,8 @@
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Support Title / Heading</label>
                                                     <input type="text" name="masterclass_settings[support_title]" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['support_title'] ?? $defSupportTitle }}" placeholder="আর সাপোর্ট?">
+                                                           value="{{ $mcSettings['support_title'] ?? $defSupportTitle }}" placeholder="আর {সাপোর্ট}?">
+                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>শব্দ হাইলাইট করতে <code>&lt;mark&gt;শব্দ&lt;/mark&gt;</code> অথবা <code>{শব্দ}</code> ব্যবহার করুন (যেমন: <code>আর {সাপোর্ট}?</code>)।</small>
                                                 </div>
 
                                                 <!-- Support Description -->
@@ -1288,11 +1426,21 @@
                                 <div class="row">
 
                                     <div class="col-lg-12 mb-4">
+                                        <div class="d-flex align-items-center gap-2 mb-3">
+                                            <div class="setting-check">
+                                                <input type="hidden" name="masterclass_settings[show_curriculum_section]" value="0">
+                                                <input type="checkbox" name="masterclass_settings[show_curriculum_section]" value="1" id="show_curriculum_section"
+                                                    {{ !isset($mcSettings['show_curriculum_section']) || !empty($mcSettings['show_curriculum_section']) ? 'checked' : '' }}>
+                                                <label for="show_curriculum_section"></label>
+                                            </div>
+                                            <label class="form-label mb-0 fw-semibold cursor-pointer" for="show_curriculum_section">{{ __('Show Curriculum Section on Landing Page') }}</label>
+                                        </div>
                                         <div class="form-group">
                                             <label for="curriculum_title" class="form-label">{{ __('Curriculum Section Title') }}</label>
                                             <input type="text" name="masterclass_settings[curriculum_title]" id="curriculum_title" class="form-control rounded-2"
                                                    value="{{ $mcSettings['curriculum_title'] ?? '' }}"
-                                                   placeholder="{{ __('e.g. Course Syllabus') }}">
+                                                   placeholder="{{ __('e.g. Course {Syllabus}') }}">
+                                            <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight 1-3 words (e.g. <code>Course {Syllabus}</code>).</small>
                                         </div>
                                     </div>
 
@@ -1733,6 +1881,28 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         
+                                        <!-- FAQ Section Title & Settings -->
+                                        <div class="card mb-4 mt-2 border-0 shadow-sm">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-3">{{ __('FAQ Section Title & Tag') }}</h5>
+                                                
+                                                <div class="form-group mb-3">
+                                                    <label for="faq_title" class="form-label">{{ __('FAQ Section Title') }}</label>
+                                                    <input type="text" name="masterclass_settings[faq_title]" id="faq_title" class="form-control rounded-2"
+                                                           value="{{ $mcSettings['faq_title'] ?? '' }}"
+                                                           placeholder="{{ __('e.g. Frequently Asked {Questions}') }}">
+                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight 1-3 words (e.g. <code>Frequently Asked {Questions}</code>).</small>
+                                                </div>
+
+                                                <div class="form-group mb-0">
+                                                    <label for="faq_subtitle" class="form-label">{{ __('FAQ Section Tag / Subtitle') }}</label>
+                                                    <input type="text" name="masterclass_settings[faq_subtitle]" id="faq_subtitle" class="form-control rounded-2"
+                                                           value="{{ $mcSettings['faq_subtitle'] ?? '' }}"
+                                                           placeholder="{{ __('e.g. POPULAR QUESTIONS') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <!-- FAQ Image Upload -->
                                         <div class="card mb-4 mt-2 border-0 shadow-sm">
                                             <div class="card-body">

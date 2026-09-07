@@ -42,7 +42,7 @@
     <div class="container container-1278">
         <div class="mc-content-card" data-aos="fade-up" style="border: 2px solid #10b981; border-radius: 8px; padding: 24px; background: #ffffff;">
             <h3 class="fw-bold text-center mb-4" style="color: #1a1b4b; font-size: 28px;">
-                {{ $formatCurrencyText(!empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : 'আজকে এই কোর্সে যুক্ত হলে যা যা পাচ্ছেন:') }}
+                {!! format_title_highlight($formatCurrencyText(!empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : 'আজকে এই কোর্সে যুক্ত হলে যা যা পাচ্ছেন:')) !!}
             </h3>
             
             <div class="breakdown-list">
@@ -76,13 +76,17 @@
                 @endif
             </div>
             
-            @if(!empty($mcSettings['breakdown_cta_text']))
+            @php
+                $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : 'Enroll Now';
+                $heroBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : ((request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register'));
+                $breakdownCtaText = !empty($mcSettings['breakdown_cta_text']) ? $mcSettings['breakdown_cta_text'] : $heroBtnText;
+                $breakdownCtaLink = !empty($mcSettings['breakdown_cta_link']) ? $mcSettings['breakdown_cta_link'] : $heroBtnUrl;
+            @endphp
             <div class="text-center w-100 mt-4">
-                <a href="{{ !empty($mcSettings['breakdown_cta_link']) ? $mcSettings['breakdown_cta_link'] : (isset($course) ? route('course.details', $course->slug) : '#') }}" class="template-btn">
-                    {{ $mcSettings['breakdown_cta_text'] }}
+                <a href="{{ $breakdownCtaLink }}" class="template-btn get-access-btn">
+                    {{ $breakdownCtaText }}
                 </a>
             </div>
-            @endif
         </div>
     </div>
 </section>

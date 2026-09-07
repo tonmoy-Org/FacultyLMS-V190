@@ -21,8 +21,9 @@
     $passwordPlaceholder = '.........';
     $termsLabel = 'I have read and agree to the website\'s Terms and Refund Policy';
 
-    $privacyNotice = 'Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.';
-    $payNowBtnText = 'PAY NOW';
+    $privacyNotice = !empty($mcSettings['privacy_notice']) ? $mcSettings['privacy_notice'] : 'Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.';
+    $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : 'PAY NOW';
+    $payNowBtnText = $heroBtnText;
     
     $is_enrolled = false;
     if(auth()->check() && isset($course)) {

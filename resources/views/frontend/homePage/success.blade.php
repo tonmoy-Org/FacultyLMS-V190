@@ -6,6 +6,19 @@
             $success_stories = \App\Models\SuccessStory::active()->latest()->get();
         }
     }
+
+    $mcSettings = [];
+    if (isset($hero_course) && $hero_course->masterclass_settings) {
+        $mcSettings = is_array($hero_course->masterclass_settings) 
+            ? $hero_course->masterclass_settings 
+            : json_decode($hero_course->masterclass_settings, true);
+    }
+
+    $successEyebrow  = !empty($mcSettings['success_eyebrow']) ? $mcSettings['success_eyebrow'] : (setting('success_section_eyebrow') ?: __('SUCCESS STORIES'));
+    $successTitle    = !empty($mcSettings['success_title']) ? $mcSettings['success_title'] : (isset($section->contents['title']) && !empty($section->contents['title']) ? $section->contents['title'] : (setting('success_section_title') ?: __('What Says My Students About The Platform')));
+    $successSubtitle = !empty($mcSettings['success_subtitle']) ? $mcSettings['success_subtitle'] : (isset($section->contents['sub_title']) && !empty($section->contents['sub_title']) ? $section->contents['sub_title'] : (setting('success_section_subtitle') ?: __('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi.')));
+    $successBtnText  = !empty($mcSettings['success_btn_text']) ? $mcSettings['success_btn_text'] : (setting('success_section_btn_text') ?: __('View All Success Stories'));
+    $successBtnUrl   = !empty($mcSettings['success_btn_url']) ? $mcSettings['success_btn_url'] : (setting('success_section_btn_url') ?: url('success'));
 @endphp
 <style>
     /* Equal Height Card Container */
@@ -212,18 +225,26 @@
             <!-- Content & Heading Column -->
             <div class="col-lg-5 order-1 order-lg-2 ps-lg-4 mb-4 mb-lg-0">
                 <div class="common-heading" data-aos="fade-left" dir="{{ systemLanguage() ? systemLanguage()->text_direction : 'ltr' }}">
-                    <span class="sub-title text-uppercase fw-bold m-b-15 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
-                        {{ __('SUCCESS STORIES') }}
-                    </span>
-                    <h2 class="fw-bold m-b-20" style="color: #1a1b4b; font-size: 28px; line-height: 1.25;">
-                        {{ isset($section->contents['title']) && !empty($section->contents['title']) ? $section->contents['title'] : __('What Says My Students About The Platform') }}
-                    </h2>
-                    <p class="m-b-25" style="color: #475569; font-size: 16px; line-height: 1.7;">
-                        {{ isset($section->contents['sub_title']) && !empty($section->contents['sub_title']) ? $section->contents['sub_title'] : __('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi.') }}
-                    </p>
-                    <a href="{{ url('success') }}" class="template-btn" style="border-radius: 8px;">
-                        {{ __('View All Success Stories') }}
-                    </a>
+                    @if(!empty($successEyebrow))
+                        <span class="sub-title text-uppercase fw-bold m-b-15 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                            {!! format_title_highlight($successEyebrow) !!}
+                        </span>
+                    @endif
+                    @if(!empty($successTitle))
+                        <h2 class="fw-bold m-b-20" style="color: #1a1b4b; font-size: 28px; line-height: 1.25;">
+                            {!! format_title_highlight($successTitle) !!}
+                        </h2>
+                    @endif
+                    @if(!empty($successSubtitle))
+                        <p class="m-b-25" style="color: #475569; font-size: 16px; line-height: 1.7;">
+                            {{ $successSubtitle }}
+                        </p>
+                    @endif
+                    @if(!empty($successBtnText))
+                        <a href="{{ $successBtnUrl }}" class="template-btn" style="border-radius: 8px;">
+                            {{ $successBtnText }}
+                        </a>
+                    @endif
                 </div>
             </div>
 

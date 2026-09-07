@@ -64,7 +64,7 @@
                 <div class="why-choose-content ps-lg-4">
                     <div class="common-heading m-b-35">
                         <h2 class="m-b-10 fw-bold" style="color: #1a1b4b; font-size: 2.5rem; line-height: 1.25;">
-                            {{ __($title) }}
+                            {!! format_title_highlight(__($title)) !!}
                         </h2>
                     </div>
 
