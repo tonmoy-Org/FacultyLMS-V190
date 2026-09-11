@@ -128,6 +128,13 @@ class CourseRepository
                 $mc['support_image_url'] = $mc['support_image_url_custom'];
             }
 
+            if (request()->hasFile('support_title_icon_file')) {
+                $response = $this->saveImage(request()->file('support_title_icon_file'), 'course');
+                if ($response && isset($response['images'])) {
+                    $mc['support_title_icon'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                }
+            }
+
             if (request()->hasFile('support_icon_files')) {
                 foreach (request()->file('support_icon_files') as $sIdx => $sFile) {
                     if ($sFile) {
@@ -139,13 +146,86 @@ class CourseRepository
                 }
             }
 
-            if (request()->hasFile('support_custom_icon_files')) {
-                foreach (request()->file('support_custom_icon_files') as $cIdx => $cFile) {
-                    if ($cFile) {
-                        $response = $this->saveImage($cFile, 'course');
-                        if ($response && isset($response['images'])) {
-                            $mc['support_custom_social_links'][$cIdx]['icon_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+            for ($ch = 1; $ch <= 3; $ch++) {
+                if (request()->hasFile("support_channel_{$ch}_team_avatar_file")) {
+                    $response = $this->saveImage(request()->file("support_channel_{$ch}_team_avatar_file"), 'course');
+                    if ($response && isset($response['images'])) {
+                        $mc["support_channel_{$ch}_team_avatar"] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                    }
+                } elseif (isset($mc["support_channel_{$ch}_team_avatar_custom"]) && $mc["support_channel_{$ch}_team_avatar_custom"] !== '') {
+                    $mc["support_channel_{$ch}_team_avatar"] = $mc["support_channel_{$ch}_team_avatar_custom"];
+                }
+            }
+
+            if (isset($mc['support_features_list']) && is_array($mc['support_features_list'])) {
+                if (request()->hasFile('support_feature_icon_files')) {
+                    foreach (request()->file('support_feature_icon_files') as $fIdx => $fFile) {
+                        if ($fFile && isset($mc['support_features_list'][$fIdx])) {
+                            $response = $this->saveImage($fFile, 'course');
+                            if ($response && isset($response['images'])) {
+                                $mc['support_features_list'][$fIdx]['icon'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                            }
                         }
+                    }
+                }
+
+                $mc['support_features_list'] = array_values(array_filter($mc['support_features_list'], function ($item) {
+                    return is_array($item) && (!empty(trim($item['title'] ?? '')) || !empty(trim($item['desc'] ?? '')) || !empty(trim($item['icon'] ?? '')));
+                }));
+                if (!empty($mc['support_features_list'][0])) {
+                    $mc['support_feature_1_title'] = $mc['support_features_list'][0]['title'] ?? '';
+                    $mc['support_feature_1_icon']  = $mc['support_features_list'][0]['icon'] ?? '';
+                    $mc['support_feature_1_desc']  = $mc['support_features_list'][0]['desc'] ?? '';
+                }
+                if (!empty($mc['support_features_list'][1])) {
+                    $mc['support_feature_2_title'] = $mc['support_features_list'][1]['title'] ?? '';
+                    $mc['support_feature_2_icon']  = $mc['support_features_list'][1]['icon'] ?? '';
+                    $mc['support_feature_2_desc']  = $mc['support_features_list'][1]['desc'] ?? '';
+                }
+                if (!empty($mc['support_features_list'][2])) {
+                    $mc['support_feature_3_title'] = $mc['support_features_list'][2]['title'] ?? '';
+                    $mc['support_feature_3_icon']  = $mc['support_features_list'][2]['icon'] ?? '';
+                    $mc['support_feature_3_desc']  = $mc['support_features_list'][2]['desc'] ?? '';
+                }
+            }
+
+            if (isset($mc['support_channels_list']) && is_array($mc['support_channels_list'])) {
+                if (request()->hasFile('support_channel_avatar_files')) {
+                    foreach (request()->file('support_channel_avatar_files') as $cIdx => $cFile) {
+                        if ($cFile && isset($mc['support_channels_list'][$cIdx])) {
+                            $response = $this->saveImage($cFile, 'course');
+                            if ($response && isset($response['images'])) {
+                                $mc['support_channels_list'][$cIdx]['team_avatar'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                            }
+                        }
+                    }
+                }
+
+                if (request()->hasFile('support_channel_icon_files')) {
+                    foreach (request()->file('support_channel_icon_files') as $cIdx => $cIconFile) {
+                        if ($cIconFile && isset($mc['support_channels_list'][$cIdx])) {
+                            $response = $this->saveImage($cIconFile, 'course');
+                            if ($response && isset($response['images'])) {
+                                $mc['support_channels_list'][$cIdx]['icon'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                            }
+                        }
+                    }
+                }
+
+                $mc['support_channels_list'] = array_values(array_filter($mc['support_channels_list'], function ($item) {
+                    return is_array($item) && (!empty(trim($item['title'] ?? '')) || !empty(trim($item['url'] ?? '')) || !empty(trim($item['desc'] ?? '')));
+                }));
+
+                for ($ch = 1; $ch <= 3; $ch++) {
+                    $cIdx = $ch - 1;
+                    if (!empty($mc['support_channels_list'][$cIdx])) {
+                        $mc["support_channel_{$ch}_title"] = $mc['support_channels_list'][$cIdx]['title'] ?? '';
+                        $mc["support_channel_{$ch}_desc"]  = $mc['support_channels_list'][$cIdx]['desc'] ?? '';
+                        $mc["support_channel_{$ch}_icon"]  = $mc['support_channels_list'][$cIdx]['icon'] ?? '';
+                        $mc["support_channel_{$ch}_team_avatar"] = $mc['support_channels_list'][$cIdx]['team_avatar'] ?? '';
+                        $mc["support_channel_{$ch}_team_label"]  = $mc['support_channels_list'][$cIdx]['team_label'] ?? '';
+                        $mc["support_channel_{$ch}_btn_text"]    = $mc['support_channels_list'][$cIdx]['btn_text'] ?? '';
+                        $mc["support_channel_{$ch}_url"]         = $mc['support_channels_list'][$cIdx]['url'] ?? '';
                     }
                 }
             }
@@ -294,6 +374,13 @@ class CourseRepository
                 $mc['support_image_url'] = $mc['support_image_url_custom'];
             }
 
+            if (request()->hasFile('support_title_icon_file')) {
+                $response = $this->saveImage(request()->file('support_title_icon_file'), 'course');
+                if ($response && isset($response['images'])) {
+                    $mc['support_title_icon'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                }
+            }
+
             if (request()->hasFile('support_icon_files')) {
                 foreach (request()->file('support_icon_files') as $sIdx => $sFile) {
                     if ($sFile) {
@@ -305,21 +392,100 @@ class CourseRepository
                 }
             }
 
-            if (request()->hasFile('support_custom_icon_files')) {
-                foreach (request()->file('support_custom_icon_files') as $cIdx => $cFile) {
-                    if ($cFile) {
-                        $response = $this->saveImage($cFile, 'course');
-                        if ($response && isset($response['images'])) {
-                            $mc['support_custom_social_links'][$cIdx]['icon_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+            for ($ch = 1; $ch <= 3; $ch++) {
+                if (request()->hasFile("support_channel_{$ch}_team_avatar_file")) {
+                    $response = $this->saveImage(request()->file("support_channel_{$ch}_team_avatar_file"), 'course');
+                    if ($response && isset($response['images'])) {
+                        $mc["support_channel_{$ch}_team_avatar"] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                    }
+                } elseif (isset($mc["support_channel_{$ch}_team_avatar_custom"]) && $mc["support_channel_{$ch}_team_avatar_custom"] !== '') {
+                    $mc["support_channel_{$ch}_team_avatar"] = $mc["support_channel_{$ch}_team_avatar_custom"];
+                }
+            }
+
+            if (isset($mc['support_features_list']) && is_array($mc['support_features_list'])) {
+                if (request()->hasFile('support_feature_icon_files')) {
+                    foreach (request()->file('support_feature_icon_files') as $fIdx => $fFile) {
+                        if ($fFile && isset($mc['support_features_list'][$fIdx])) {
+                            $response = $this->saveImage($fFile, 'course');
+                            if ($response && isset($response['images'])) {
+                                $mc['support_features_list'][$fIdx]['icon'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                            }
                         }
                     }
                 }
+
+                $mc['support_features_list'] = array_values(array_filter($mc['support_features_list'], function ($item) {
+                    return is_array($item) && (!empty(trim($item['title'] ?? '')) || !empty(trim($item['desc'] ?? '')) || !empty(trim($item['icon'] ?? '')));
+                }));
+                if (!empty($mc['support_features_list'][0])) {
+                    $mc['support_feature_1_title'] = $mc['support_features_list'][0]['title'] ?? '';
+                    $mc['support_feature_1_icon']  = $mc['support_features_list'][0]['icon'] ?? '';
+                    $mc['support_feature_1_desc']  = $mc['support_features_list'][0]['desc'] ?? '';
+                }
+                if (!empty($mc['support_features_list'][1])) {
+                    $mc['support_feature_2_title'] = $mc['support_features_list'][1]['title'] ?? '';
+                    $mc['support_feature_2_icon']  = $mc['support_features_list'][1]['icon'] ?? '';
+                    $mc['support_feature_2_desc']  = $mc['support_features_list'][1]['desc'] ?? '';
+                }
+                if (!empty($mc['support_features_list'][2])) {
+                    $mc['support_feature_3_title'] = $mc['support_features_list'][2]['title'] ?? '';
+                    $mc['support_feature_3_icon']  = $mc['support_features_list'][2]['icon'] ?? '';
+                    $mc['support_feature_3_desc']  = $mc['support_features_list'][2]['desc'] ?? '';
+                }
+            } elseif (arrayCheck('masterclass_settings', $request)) {
+                $mc['support_features_list'] = [];
+            }
+
+            if (isset($mc['support_channels_list']) && is_array($mc['support_channels_list'])) {
+                if (request()->hasFile('support_channel_avatar_files')) {
+                    foreach (request()->file('support_channel_avatar_files') as $cIdx => $cFile) {
+                        if ($cFile && isset($mc['support_channels_list'][$cIdx])) {
+                            $response = $this->saveImage($cFile, 'course');
+                            if ($response && isset($response['images'])) {
+                                $mc['support_channels_list'][$cIdx]['team_avatar'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                            }
+                        }
+                    }
+                }
+
+                if (request()->hasFile('support_channel_icon_files')) {
+                    foreach (request()->file('support_channel_icon_files') as $cIdx => $cIconFile) {
+                        if ($cIconFile && isset($mc['support_channels_list'][$cIdx])) {
+                            $response = $this->saveImage($cIconFile, 'course');
+                            if ($response && isset($response['images'])) {
+                                $mc['support_channels_list'][$cIdx]['icon'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                            }
+                        }
+                    }
+                }
+
+                $mc['support_channels_list'] = array_values(array_filter($mc['support_channels_list'], function ($item) {
+                    return is_array($item) && (!empty(trim($item['title'] ?? '')) || !empty(trim($item['url'] ?? '')) || !empty(trim($item['desc'] ?? '')));
+                }));
+
+                for ($ch = 1; $ch <= 3; $ch++) {
+                    $cIdx = $ch - 1;
+                    if (!empty($mc['support_channels_list'][$cIdx])) {
+                        $mc["support_channel_{$ch}_title"] = $mc['support_channels_list'][$cIdx]['title'] ?? '';
+                        $mc["support_channel_{$ch}_desc"]  = $mc['support_channels_list'][$cIdx]['desc'] ?? '';
+                        $mc["support_channel_{$ch}_icon"]  = $mc['support_channels_list'][$cIdx]['icon'] ?? '';
+                        $mc["support_channel_{$ch}_team_avatar"] = $mc['support_channels_list'][$cIdx]['team_avatar'] ?? '';
+                        $mc["support_channel_{$ch}_team_label"]  = $mc['support_channels_list'][$cIdx]['team_label'] ?? '';
+                        $mc["support_channel_{$ch}_btn_text"]    = $mc['support_channels_list'][$cIdx]['btn_text'] ?? '';
+                        $mc["support_channel_{$ch}_url"]         = $mc['support_channels_list'][$cIdx]['url'] ?? '';
+                    }
+                }
+            } elseif (arrayCheck('masterclass_settings', $request)) {
+                $mc['support_channels_list'] = [];
             }
 
             $existing = is_array($course->masterclass_settings) ? $course->masterclass_settings : (json_decode($course->masterclass_settings, true) ?: []);
             foreach ($mc as $k => $v) {
                 $existing[$k] = $v;
             }
+            $existing['support_features_list'] = $mc['support_features_list'] ?? [];
+            $existing['support_channels_list'] = $mc['support_channels_list'] ?? [];
 
             $request['masterclass_settings'] = $existing;
             $course->masterclass_settings = $existing;

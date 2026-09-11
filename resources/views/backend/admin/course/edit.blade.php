@@ -1051,123 +1051,14 @@
                                         </div>
                                     </div>
 
-                                    <!-- Section 11: Masterclass Support Section -->
-                                    <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-normal text-dark m-0">Support Section (Masterclass Landing Page)</span>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="row gx-20">
-                                                <!-- Status -->
-                                                <div class="col-12 mb-3">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="setting-check">
-                                                            <input type="checkbox" name="masterclass_settings[support_status]" value="1"
-                                                                   id="support_status"
-                                                                   {{ !empty($mcSettings['support_status']) ? 'checked' : '' }}>
-                                                            <label for="support_status"></label>
-                                                        </div>
-                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="support_status">Show Support Section</label>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Support Title -->
-                                                <div class="col-lg-12 col-md-12 mb-4">
-                                                    <label class="form-label">Support Title / Heading</label>
-                                                    <input type="text" name="masterclass_settings[support_title]" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['support_title'] ?? $defSupportTitle }}" placeholder="আর {সাপোর্ট}?">
-                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>শব্দ হাইলাইট করতে <code>&lt;mark&gt;শব্দ&lt;/mark&gt;</code> অথবা <code>{শব্দ}</code> ব্যবহার করুন (যেমন: <code>আর {সাপোর্ট}?</code>)।</small>
-                                                </div>
-
-                                                <!-- Support Description -->
-                                                <div class="col-lg-12 col-md-12 mb-4">
-                                                    <label class="form-label">Support Description</label>
-                                                    <textarea name="masterclass_settings[support_description]" class="form-control rounded-2 summernote" rows="3"
-                                                              placeholder="সাপোর্টের বিস্তারিত লিখুন...">{{ $mcSettings['support_description'] ?? $defSupportDescription }}</textarea>
-                                                </div>
-
-                                                <!-- Support Image Upload -->
-                                                <div class="col-lg-6 mb-2">
-                                                    <label class="form-label mb-1">Upload Support Image File (Transparent cut-out recommended)</label>
-                                                    <input type="file" name="support_image_file" class="form-control rounded-2" accept="image/*">
-                                                </div>
-                                                <div class="col-lg-6 mb-2">
-                                                    <label class="form-label mb-1">Or Support Image URL / Link</label>
-                                                    <input type="text" name="masterclass_settings[support_image_url_custom]" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['support_image_url'] ?? '' }}" placeholder="https://example.com/support-person.png">
-                                                </div>
-
-                                                @if(!empty($mcSettings['support_image_url']))
-                                                    <div class="col-12 mt-2">
-                                                        <label class="small text-muted d-block mb-1">Current Support Image Preview:</label>
-                                                        <img src="{{ $mcSettings['support_image_url'] }}" alt="Support Image Preview" class="rounded border" style="max-height: 120px; object-fit: contain; background: #eefaf6; padding: 5px;">
-                                                    </div>
-                                                @endif
-
-                                                <!-- Support Icons & Links Section (Dynamic Repeater) -->
-                                                <div class="col-12 mt-4 pt-3 border-top">
-                                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                                        <div>
-                                                            <span class="form-label font-16 fw-normal text-dark m-0">Support Icons & Links</span>
-                                                        </div>
-                                                        <button type="button" class="btn sg-btn-primary py-2 px-3 fw-normal" id="add_support_icon_btn">
-                                                            <i class="fas fa-plus me-1"></i> Add New Icon & Link
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div id="support_icons_container">
-                                                        @php
-                                                            $supportIconsList = $mcSettings['support_icons_list'] ?? [];
-                                                            if(!is_array($supportIconsList) || empty($supportIconsList)) {
-                                                                $supportIconsList = [
-                                                                    ['url' => 'https://facebook.com/yourpage'],
-                                                                    ['url' => 'https://twitter.com/yourhandle'],
-                                                                    ['url' => 'https://youtube.com/c/yourchannel'],
-                                                                    ['url' => 'https://wa.me/1234567890'],
-                                                                    ['url' => 'https://t.me/yourusername'],
-                                                                ];
-                                                            }
-                                                        @endphp
-                                                        @foreach($supportIconsList as $sIdx => $sItem)
-                                                            <div class="support-icon-single-item p-3 mb-3 border rounded bg-white position-relative">
-                                                                <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
-                                                                    <span class="text-dark font-14 fw-normal">Icon & Link <span class="support-icon-num">{{ $sIdx + 1 }}</span></span>
-                                                                    <button type="button" class="btn btn-sm text-danger remove-support-icon-btn p-0 bg-transparent border-0" title="Remove">
-                                                                        <i class="las la-trash-alt fs-5"></i>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="row g-3 align-items-end">
-                                                                    <div class="col-md-6 col-12">
-                                                                        <label class="form-label small mb-1 font-13 fw-normal text-muted">Upload Icon (Optional)</label>
-                                                                        <input type="file" name="support_icon_files[{{ $sIdx }}]" class="form-control form-control-sm rounded-2 fw-normal" accept="image/*">
-                                                                        @if(!empty($sItem['icon_image_url']))
-                                                                            <input type="hidden" name="masterclass_settings[support_icons_list][{{ $sIdx }}][icon_image_url]" value="{{ $sItem['icon_image_url'] }}">
-                                                                            <div class="mt-1 d-flex align-items-center gap-1">
-                                                                                <img src="{{ $sItem['icon_image_url'] }}" alt="Icon Preview" style="width: 20px; height: 20px; object-fit: contain;">
-                                                                            </div>
-                                                                        @endif
-                                                                    </div>
-                                                                    <div class="col-md-6 col-12">
-                                                                        <label class="form-label small mb-1 font-13 fw-normal text-muted">Link / URL</label>
-                                                                        <input type="text" name="masterclass_settings[support_icons_list][{{ $sIdx }}][url]" class="form-control form-control-sm rounded-2 fw-normal" value="{{ $sItem['url'] ?? '' }}" placeholder="https://facebook.com/yourpage or https://wa.me/...">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @include('backend.admin.course.masterclass_support')
                                 </div>
-
                                 <div class="col-lg-12">
                                     <div class="d-flex justify-content-between align-items-center mt-30 pt-3 border-top">
                                         <a href="#" type="button" class="btn sg-btn-outline-primary btn_action"
                                             data-bs-target="#basicCourseInformation">{{ __('back') }}</a>
 
+                                        <button type="submit" class="btn sg-btn-primary px-4"><i class="las la-save me-1"></i> {{ __('update') }} {{ __('masterclass') }}</button>
                                         <a href="#" type="button" class="btn sg-btn-primary btn_action"
                                             data-bs-target="#courseMediaImages">{{ __('next') }}</a>
                                     </div>
