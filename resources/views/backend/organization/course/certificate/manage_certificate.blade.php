@@ -84,7 +84,65 @@
             border-radius: 20px;
             font-weight: 400 !important;
         }
+
+        /* Prevent mobile viewport blowout & horizontal overflow */
+        .oftions {
+            overflow-x: hidden !important;
+        }
+        .cert-col-form,
+        .cert-col-preview {
+            min-width: 0 !important;
+            max-width: 100% !important;
+        }
+        .cert-preview-card {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 10px;
+            background: #f8faf9;
+            border: 1px solid #eef2f0;
+            padding: 8px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .cert-preview-scroll {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            display: block;
+            scrollbar-width: thin;
+            scrollbar-color: #c2d1cb #f0f4f2;
+        }
+        .cert-preview-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+        .cert-preview-scroll::-webkit-scrollbar-thumb {
+            background: #c2d1cb;
+            border-radius: 4px;
+        }
+        .cert-preview-scroll::-webkit-scrollbar-track {
+            background: #f0f4f2;
+        }
+        @media (max-width: 1199.98px) {
+            .preview-sticky-wrapper {
+                position: static !important;
+                top: auto !important;
+                margin-top: 25px;
+            }
+        }
         @media (max-width: 575.98px) {
+            .bg-white.redious-border {
+                padding: 14px 10px !important;
+                border-radius: 8px !important;
+                overflow: hidden !important;
+            }
+            .cert-section-body {
+                padding: 14px 12px !important;
+            }
+            .cert-card-header {
+                padding: 12px 14px !important;
+            }
             .cert-top-header {
                 flex-direction: column !important;
                 align-items: flex-start !important;
@@ -97,6 +155,9 @@
             }
             .cert-top-header .btn {
                 align-self: flex-start !important;
+            }
+            .cert-preview-scroll .pfa-cert-container {
+                min-width: 520px;
             }
         }
     </style>
@@ -124,8 +185,8 @@
 
                             <div class="row gx-20">
                                 <!-- LEFT COLUMN: EDITABLE FIELDS -->
-                                <div class="col-xl-6 col-md-12">
-                                    <div class="d-flex justify-content-between align-items-center mb-15">
+                                <div class="col-xl-6 col-md-12 cert-col-form">
+                                    <div class="d-flex justify-content-between align-items-start align-items-sm-center flex-column flex-sm-row gap-1 mb-15">
                                         <h5 class="mb-0 cert-info-title"><i class="las la-sliders-h me-1 text-success"></i> {{ __('certificate_information') }}</h5>
                                         <span class="text-muted small"><i class="las la-eye me-1"></i> Changes update live on the preview</span>
                                     </div>
@@ -385,23 +446,26 @@
                                 </div>
 
                                 <!-- RIGHT COLUMN: LIVE CERTIFICATE PREVIEW -->
-                                <div class="col-xl-6 col-md-12">
+                                <div class="col-xl-6 col-md-12 cert-col-preview">
                                     <div class="preview-sticky-wrapper">
-                                        <div class="d-flex justify-content-between align-items-center mb-15">
+                                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-15">
                                             <h5 class="mb-0 cert-info-title"><i class="las la-certificate me-1 text-success"></i> {{ __('preview') }}</h5>
                                             <span class="preview-badge-hint"><i class="las la-magic"></i> Live Interactive Preview</span>
                                         </div>
 
-                                        <div class="card p-2 border-0 shadow-sm bg-light" style="border-radius: 10px;">
-                                            @include('backend.admin.course.certificate.certificate_view', [
-                                                'course' => $course,
-                                                'certificate' => $course->certificate,
-                                                'isPreview' => true
-                                            ])
+                                        <div class="cert-preview-card">
+                                            <div class="cert-preview-scroll">
+                                                @include('backend.admin.course.certificate.certificate_view', [
+                                                    'course' => $course,
+                                                    'certificate' => $course->certificate,
+                                                    'isPreview' => true
+                                                ])
+                                            </div>
                                         </div>
 
-                                        <div class="text-center text-muted small mt-2">
-                                            <i class="las la-shield-alt text-success"></i> High-resolution vector layout matching Pro Freelancers Academy Certificate standard.
+                                        <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 text-muted small mt-2">
+                                            <span><i class="las la-shield-alt text-success"></i> High-resolution vector layout matching Pro Freelancers Academy Certificate standard.</span>
+                                            <span class="d-inline-block d-xl-none text-success fw-medium"><i class="las la-arrows-alt-h"></i> Swipe horizontally on preview to view full certificate</span>
                                         </div>
                                     </div>
                                 </div>
