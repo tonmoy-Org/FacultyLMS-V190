@@ -125,13 +125,33 @@
         text-decoration: none;
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 8px;
-        border-radius: 8px !important;
+        padding: 12px 28px !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+        border-radius: 10px !important;
+        background-color: #10b981 !important;
+        border: 2px solid #10b981 !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
         overflow: visible !important;
+        transition: all 0.3s ease;
+    }
+
+    .sp-right .btn-enroll:hover {
+        background-color: #059669 !important;
+        border-color: #059669 !important;
+        color: #ffffff !important;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45);
     }
 
     .sp-right .btn-enroll i {
-        font-size: 16px;
+        font-size: 14px;
+        margin-left: 0 !important;
+        line-height: 1;
     }
 
     /* Button Border Beam Animation styles */
@@ -148,9 +168,9 @@
 
     .btn-border-beam-rect {
         stroke-linecap: round;
-        animation: btn-border-beam-travel 6s linear infinite;
+        animation: btn-border-beam-travel 4s linear infinite;
         will-change: stroke-dashoffset;
-        filter: drop-shadow(0 0 3px rgba(255, 193, 7, 0.8)) drop-shadow(0 0 1px rgba(255, 255, 255, 0.7));
+        filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.9)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
     }
 
     @keyframes btn-border-beam-travel {
@@ -194,6 +214,11 @@
             justify-content: flex-end;
             padding: 0;
             min-width: 0;
+        }
+        .sp-right .btn-enroll {
+            padding: 8px 14px !important;
+            font-size: 13px !important;
+            border-radius: 8px !important;
         }
         .sp-left h3 {
             font-size: 14px;
@@ -263,9 +288,9 @@
                             </defs>
                             <rect class="btn-border-beam-rect" fill="none" stroke="url(#btn-beam-gradient)" stroke-width="2.5" rx="3" ry="3" />
                         </svg>
-                        <span class="btn-text-content" style="position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 8px;">
-                            {{ $btnText }} 
-                            <i class="las la-arrow-right"></i>
+                        <span class="btn-text-content" style="position: relative; z-index: 2; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span>{{ $btnText }}</span>
+                            <i class="fas fa-arrow-right" style="margin-left: 0 !important; font-size: 14px;"></i>
                         </span>
                     </a>
                 </div>
@@ -324,23 +349,31 @@ document.addEventListener("DOMContentLoaded", function() {
                     btnFrame = requestAnimationFrame(() => {
                         const w = enrollBtn.offsetWidth;
                         const h = enrollBtn.offsetHeight;
+                        if (w <= 0 || h <= 0) return;
+
                         btnSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
                         
                         const strokeWidth = 2.5;
                         const inset = strokeWidth / 2;
-                        const rectW = w - strokeWidth;
-                        const rectH = h - strokeWidth;
+                        const rectW = Math.max(0, w - strokeWidth);
+                        const rectH = Math.max(0, h - strokeWidth);
+                        
+                        const computedStyle = window.getComputedStyle(enrollBtn);
+                        const borderRadius = parseFloat(computedStyle.borderRadius) || 10;
+                        const rx = Math.max(0, borderRadius - inset);
                         
                         btnRect.setAttribute('x', inset.toString());
                         btnRect.setAttribute('y', inset.toString());
                         btnRect.setAttribute('width', rectW.toString());
                         btnRect.setAttribute('height', rectH.toString());
+                        btnRect.setAttribute('rx', rx.toString());
+                        btnRect.setAttribute('ry', rx.toString());
                         
                         const perimeter = 2 * (rectW + rectH);
                         btnRect.style.setProperty('--btn-perimeter', perimeter.toString());
                         
-                        // Set beam length to 30% of the perimeter
-                        const beamLen = perimeter * 0.3;
+                        // Set beam length to 25% of the perimeter
+                        const beamLen = perimeter * 0.25;
                         btnRect.style.strokeDasharray = `${beamLen} ${perimeter - beamLen}`;
                     });
                 };

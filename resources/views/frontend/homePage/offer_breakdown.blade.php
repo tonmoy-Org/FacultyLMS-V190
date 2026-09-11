@@ -312,6 +312,30 @@ Future Updates (if applicable) | FREE";
         font-weight: 500;
     }
 
+    .mc-bd-light-card .get-access-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 13px 32px !important;
+        font-size: 1.05rem !important;
+        font-weight: 800 !important;
+        line-height: 1.2 !important;
+        border-radius: 12px !important;
+        background: linear-gradient(135deg, #10b981 0%, #047857 100%) !important;
+        border: none !important;
+        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35) !important;
+        transition: all 0.3s ease !important;
+        color: #ffffff !important;
+        text-decoration: none !important;
+    }
+
+    .mc-bd-light-card .get-access-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(16, 185, 129, 0.45) !important;
+        color: #ffffff !important;
+    }
+
     @media (max-width: 767px) {
         .mc-breakdown-light-card {
             padding: 20px 14px;
