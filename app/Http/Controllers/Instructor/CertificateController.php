@@ -57,24 +57,26 @@ class CertificateController extends Controller
             return response()->json($data);
         }
         $request->validate([
-            'title'                            => 'required|max:38',
-            'body'                             => 'required|max:275',
-            'instructor_signature_media_id'    => 'required',
-            'administrator_signature_media_id' => 'required',
-            'background_image_media_id'        => 'required',
-        ], [
-            'instructor_signature_media_id.required'    => __('instructor_signature_is_required'),
-            'administrator_signature_media_id.required' => __('administrator_signature_is_required'),
-            'background_image_media_id.required'        => __('background_image_is_required'),
+            'title'                            => 'required',
+            'body'                             => 'nullable',
+            'instructor_signature_media_id'    => 'nullable',
+            'administrator_signature_media_id' => 'nullable',
+            'background_image_media_id'        => 'nullable',
         ]);
 
         DB::beginTransaction();
         try {
             $certificate = $this->certificateRepository->findCertificate($id);
+
+            $data = $request->all();
+            if (empty($data['body'])) {
+                $data['body'] = $request->input('custom_fields.completion_text', 'Certificate of Completion');
+            }
+
             if ($certificate) {
-                $this->certificateRepository->update($request->all(), $certificate->id);
+                $this->certificateRepository->update($data, $certificate->id);
             } else {
-                $this->certificateRepository->store($request->all());
+                $this->certificateRepository->store($data);
             }
 
             Toastr::success(__('update_successful'));

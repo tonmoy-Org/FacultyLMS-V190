@@ -1,0 +1,447 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+/* PFA Certificate Root Styles */
+.pfa-cert-container {
+    position: relative;
+    width: 100%;
+    max-width: 1024px;
+    aspect-ratio: 1024 / 682;
+    background: #ffffff;
+    margin: 0 auto;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    box-sizing: border-box;
+    container-type: inline-size;
+    container-name: pfa-cert;
+}
+
+.pfa-cert-frame-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.pfa-cert-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    padding: 4.8% 7.8% 2.8% 7.8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Header Section */
+.pfa-header-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pfa-org-name {
+    font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+    font-size: clamp(14px, 3cqw, 30px);
+    font-weight: 700;
+    color: #0d2e24;
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: 0.5px;
+    text-transform: none;
+}
+
+.pfa-divider-top {
+    margin: 2px 0;
+    line-height: 1;
+}
+
+.pfa-divider-top img {
+    height: clamp(8px, 1.8cqw, 18px);
+    width: auto;
+    max-width: 165px;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.pfa-tagline {
+    font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+    font-size: clamp(8px, 1.45cqw, 14.5px);
+    font-weight: 600;
+    color: #0d2e24;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: 0.4px;
+}
+
+.pfa-divider-sub {
+    margin: 2px 0 3px 0;
+    line-height: 1;
+}
+
+.pfa-divider-sub img {
+    height: clamp(6px, 1.3cqw, 13px);
+    width: auto;
+    max-width: 55px;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+/* Certificate Title with Left/Right Filigrees */
+.pfa-title-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 1.5cqw, 15px);
+    margin: 2px 0;
+}
+
+.pfa-cert-title {
+    font-family: 'Playfair Display', 'Cinzel', Georgia, serif;
+    font-size: clamp(13px, 2.7cqw, 27px);
+    font-weight: 800;
+    color: #0d2e24;
+    letter-spacing: clamp(1px, 0.22cqw, 2.2px);
+    margin: 0;
+    text-transform: uppercase;
+    line-height: 1.15;
+}
+
+.pfa-flourish-left,
+.pfa-flourish-right {
+    height: clamp(10px, 2.1cqw, 21px);
+    width: auto;
+    object-fit: contain;
+}
+
+/* Presentation Text */
+.pfa-presented-to {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: normal;
+    font-size: clamp(8px, 1.35cqw, 13.5px);
+    font-weight: 500;
+    color: #2b3b33;
+    margin: 2px 0;
+    line-height: 1.2;
+}
+
+/* Recipient Student Name */
+.pfa-student-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1px 0 2px 0;
+}
+
+.pfa-student-name {
+    font-family: 'Alex Brush', cursive, 'Brush Script MT';
+    font-size: clamp(22px, 4.7cqw, 48px);
+    font-weight: 400;
+    color: #0d2e24;
+    line-height: 1.05;
+    margin: 0;
+    padding: 0 10px;
+    white-space: nowrap;
+}
+
+.pfa-student-underline {
+    width: clamp(200px, 46cqw, 470px);
+    height: 1px;
+    background: rgba(13, 46, 36, 0.35);
+    margin: 3px auto 0 auto;
+}
+
+/* Course & Laurels Section */
+.pfa-course-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 1.8cqw, 18px);
+    margin: 3px 0;
+}
+
+.pfa-laurel-left,
+.pfa-laurel-right {
+    height: clamp(24px, 4.8cqw, 48px);
+    width: auto;
+    object-fit: contain;
+}
+
+.pfa-course-text-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pfa-completion-text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(7.5px, 1.25cqw, 12.5px);
+    font-weight: 500;
+    color: #2b3b33;
+    margin-bottom: 2px;
+    line-height: 1.2;
+}
+
+.pfa-course-name {
+    font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+    font-size: clamp(11px, 2.1cqw, 21.5px);
+    font-weight: 800;
+    color: #0d2e24;
+    text-transform: uppercase;
+    letter-spacing: clamp(0.5px, 0.12cqw, 1.2px);
+    line-height: 1.2;
+}
+
+/* 4 Feature Badges Row */
+.pfa-badges-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(4px, 1.2cqw, 12px);
+    margin: 3px auto;
+    width: 93%;
+}
+
+.pfa-badge-item {
+    display: flex;
+    align-items: center;
+    gap: clamp(3px, 0.6cqw, 6px);
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: clamp(6.5px, 1.05cqw, 10.2px);
+    font-weight: 700;
+    color: #113329;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.pfa-badge-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(14px, 2.1cqw, 21px);
+    height: clamp(14px, 2.1cqw, 21px);
+    border-radius: 50%;
+    border: 1px solid #113329;
+    color: #113329;
+    flex-shrink: 0;
+}
+
+.pfa-badge-icon svg {
+    width: clamp(9px, 1.3cqw, 13px);
+    height: clamp(9px, 1.3cqw, 13px);
+}
+
+.pfa-badge-divider {
+    width: 1px;
+    height: clamp(10px, 1.6cqw, 16px);
+    background: #d4dcd7;
+    margin: 0 clamp(2px, 0.5cqw, 5px);
+    flex-shrink: 0;
+}
+
+/* 4 Metadata Grid */
+.pfa-meta-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #cbb88a;
+    border-bottom: none;
+    padding: clamp(3px, 0.6cqw, 6px) clamp(6px, 1.2cqw, 12px);
+    margin: 3px auto;
+    width: 93%;
+    box-sizing: border-box;
+}
+
+.pfa-meta-col {
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 0.8cqw, 8px);
+    text-align: left;
+    flex: 1;
+    justify-content: center;
+}
+
+.pfa-meta-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(18px, 2.8cqw, 28px);
+    height: clamp(18px, 2.8cqw, 28px);
+    border-radius: 50%;
+    border: 1px solid #cbb88a;
+    background: #faf8f3;
+    color: #113329;
+    flex-shrink: 0;
+}
+
+.pfa-meta-icon svg {
+    width: clamp(11px, 1.7cqw, 17px);
+    height: clamp(11px, 1.7cqw, 17px);
+}
+
+.pfa-meta-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.15;
+}
+
+.pfa-meta-label {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: clamp(5.5px, 0.88cqw, 8.8px);
+    font-weight: 600;
+    color: #556b62;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+}
+
+.pfa-meta-value {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: clamp(6.8px, 1.08cqw, 10.8px);
+    font-weight: 700;
+    color: #0d2e24;
+    letter-spacing: 0.2px;
+}
+
+.pfa-meta-divider {
+    width: 1px;
+    height: clamp(16px, 2.6cqw, 26px);
+    background: #cbb88a;
+    margin: 0 clamp(2px, 0.4cqw, 4px);
+    flex-shrink: 0;
+}
+
+/* Signatures & Seal Row */
+.pfa-signatures-seal-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 2px auto 0 auto;
+    width: 90%;
+}
+
+.pfa-sign-col {
+    width: clamp(110px, 21cqw, 210px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pfa-sign-img-wrapper {
+    height: clamp(24px, 4.2cqw, 42px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 2px;
+}
+
+.pfa-sign-img-wrapper img {
+    max-height: clamp(22px, 3.8cqw, 38px);
+    max-width: clamp(90px, 16cqw, 160px);
+    object-fit: contain;
+}
+
+.pfa-sign-line {
+    height: 1px;
+    background: #cbb88a;
+    width: 100%;
+    margin: 0 auto 3px auto;
+}
+
+.pfa-sign-designation {
+    font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+    font-size: clamp(7.5px, 1.15cqw, 11.5px);
+    font-weight: 700;
+    color: #0d2e24;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+}
+
+.pfa-seal-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(60px, 10cqw, 100px);
+    margin-bottom: -2px;
+}
+
+.pfa-seal-col img {
+    width: clamp(50px, 8.2cqw, 82px);
+    height: clamp(50px, 8.2cqw, 82px);
+    object-fit: contain;
+    filter: none;
+}
+
+/* Website Footer */
+.pfa-cert-web-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: clamp(7.5px, 1.15cqw, 11.2px);
+    font-weight: 600;
+    color: #1b3b31;
+    margin-top: 3px;
+    line-height: 1;
+    background: transparent;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+.pfa-globe-icon {
+    width: clamp(10px, 1.4cqw, 14px);
+    height: clamp(10px, 1.4cqw, 14px);
+    color: #1b3b31;
+}
+
+/* Fallback for browsers without container queries */
+@supports not (container-type: inline-size) {
+    .pfa-org-name { font-size: 26px; }
+    .pfa-tagline { font-size: 13.5px; }
+    .pfa-cert-title { font-size: 24px; }
+    .pfa-student-name { font-size: 42px; }
+    .pfa-course-name { font-size: 19px; }
+    .pfa-badge-item { font-size: 9.5px; }
+    .pfa-meta-label { font-size: 8px; }
+    .pfa-meta-value { font-size: 10px; }
+    .pfa-sign-designation { font-size: 10.5px; }
+    .pfa-cert-web-footer { font-size: 10.5px; }
+}
+
+/* Print Stylesheet for High-Res Print / Save as PDF */
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+    .pfa-cert-container, .pfa-cert-container * {
+        visibility: visible !important;
+    }
+    .pfa-cert-container {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+    }
+    @page {
+        size: landscape;
+        margin: 0;
+    }
+}
