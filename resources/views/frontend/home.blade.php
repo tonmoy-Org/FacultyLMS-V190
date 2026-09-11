@@ -27,9 +27,9 @@
             padding-bottom: 38px !important;
         }
 
-        /* Hero Area Mobile Padding (Headline immediately visible without excessive scroll) */
+        /* Hero Area Mobile Padding (Clears fixed/absolute header without overlap) */
         section.hero-area {
-            padding-top: 48px !important;
+            padding-top: 88px !important;
             padding-bottom: 36px !important;
         }
 
@@ -62,26 +62,44 @@
             font-size: 22px !important;
         }
 
-        /* Internal Card Padding Alignment */
+        /* Internal Card Padding & Responsive Alignment */
         .cow-wrapper {
-            padding: 24px 16px !important;
+            padding: 24px 14px !important;
             border-radius: 12px !important;
         }
+        .cow-card-content {
+            padding-left: 0 !important;
+        }
         .mc-special-gift-card {
-            padding: 24px 16px !important;
+            padding: 24px 14px !important;
         }
         .what-you-learn-section .card {
-            padding: 20px 16px !important;
+            padding: 20px 14px !important;
             border-radius: 12px !important;
         }
         .mc-content-card {
-            padding: 20px 16px !important;
+            padding: 20px 14px !important;
         }
         .about-me-card {
-            min-height: 340px !important;
+            min-height: auto !important;
+            max-height: 380px !important;
         }
         .about-me-card img {
-            min-height: 340px !important;
+            min-height: auto !important;
+            max-height: 380px !important;
+            object-fit: cover !important;
+        }
+        .faq-image-card img {
+            min-height: auto !important;
+            max-height: 320px !important;
+            object-fit: cover !important;
+        }
+        /* Mobile Input & Button Usability (Prevents Safari Auto-Zoom & Overflow) */
+        .order-form-section input[type="text"],
+        .order-form-section input[type="email"],
+        .order-form-section input[type="tel"],
+        .order-form-section input[type="password"] {
+            font-size: 16px !important;
         }
     }
 
@@ -100,25 +118,32 @@
         section.faq-section,
         section.mc-support-section-wrapper,
         section.order-form-section {
-            padding-top: 32px !important;
-            padding-bottom: 32px !important;
+            padding-top: 30px !important;
+            padding-bottom: 30px !important;
         }
 
         section.hero-area {
-            padding-top: 40px !important;
-            padding-bottom: 30px !important;
+            padding-top: 80px !important;
+            padding-bottom: 28px !important;
         }
 
         section.ad-banner-section-1,
         section.ad-banner-section-2,
         section.coupon-banner-section {
-            padding-top: 18px !important;
-            padding-bottom: 18px !important;
+            padding-top: 16px !important;
+            padding-bottom: 16px !important;
         }
 
         .container.container-1278 {
-            padding-left: 14px !important;
-            padding-right: 14px !important;
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+        }
+
+        .common-heading h2,
+        .course-section-title,
+        .cow-title {
+            font-size: 22px !important;
+            line-height: 1.35 !important;
         }
     }
 </style>

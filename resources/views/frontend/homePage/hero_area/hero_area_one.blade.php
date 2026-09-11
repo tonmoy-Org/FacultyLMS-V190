@@ -531,7 +531,7 @@
 /* Mobile Viewport Styles (< 768px) */
 @media (max-width: 767.98px) {
     .hero-area {
-        padding-top: 100px !important;
+        padding-top: 88px !important;
         padding-bottom: 30px !important;
     }
 
@@ -563,12 +563,13 @@
     }
 
     .hero-btn {
-        font-size: 15px !important;
+        font-size: 14px !important;
         line-height: 1.2 !important;
         font-weight: 600 !important;
-        height: 48px !important;
-        min-height: 48px !important;
-        padding: 12px 28px !important;
+        height: 40px !important;
+        min-height: 40px !important;
+        padding: 8px 22px !important;
+        border-radius: 6px !important;
     }
 
     .course-description-section {

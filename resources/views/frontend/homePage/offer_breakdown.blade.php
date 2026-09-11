@@ -338,19 +338,33 @@ Future Updates (if applicable) | FREE";
 
     @media (max-width: 767px) {
         .mc-breakdown-light-card {
-            padding: 20px 14px;
+            padding: 20px 12px;
         }
         .mc-bd-light-eyebrow, .mc-bd-light-title {
-            font-size: 22px;
+            font-size: 20px;
+            line-height: 1.35;
         }
         .mc-bd-light-price-huge {
-            font-size: 1.85rem;
+            font-size: 1.75rem;
         }
         .mc-bd-light-divider {
             border-right: none;
             border-bottom: 1px solid #a7f3d0;
             padding-bottom: 14px;
             margin-bottom: 14px;
+        }
+        .mc-bd-light-items-box {
+            padding: 4px 10px;
+        }
+        .mc-bd-light-row {
+            gap: 8px;
+        }
+        .mc-bd-light-item-title {
+            font-size: 0.88rem;
+            word-break: break-word;
+        }
+        .mc-bd-light-item-val {
+            font-size: 0.95rem;
         }
     }
 </style>

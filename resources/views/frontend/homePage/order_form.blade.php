@@ -73,8 +73,8 @@
                             </div>
                             <div class="coupon-form-wrapper mt-4 p-4 shadow-sm" style="display: none; transition: all 0.3s ease; border: 1px dashed #e2e8f0; border-radius: 4px;">
                                 <p class="text-muted small mb-3">If you have a coupon code, please apply it below.</p>
-                                <div class="d-flex gap-2">
-                                    <input type="text" id="guest_coupon_code" class="form-control" placeholder="Coupon code" style="height: 45px; border: 1px solid #e2e8f0; border-radius: 4px; max-width: 300px;">
+                                <div class="d-flex flex-wrap gap-2">
+                                    <input type="text" id="guest_coupon_code" class="form-control" placeholder="Coupon code" style="height: 45px; border: 1px solid #e2e8f0; border-radius: 4px; max-width: 300px; flex: 1 1 180px;">
                                     <button type="button" class="template-btn apply-coupon-btn px-4 border-0" id="apply_guest_coupon_btn" style="height: 45px; border-radius: 4px; line-height: 1;">Apply</button>
                                 </div>
                             </div>

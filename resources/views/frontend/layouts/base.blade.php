@@ -127,7 +127,19 @@
             border-radius: 8px !important;
         }
         .plyr__control--overlaid {
-            transform: scale(1.5) !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) scale(1.15) !important;
+            background: #10b981 !important;
+            border-radius: 50% !important;
+        }
+        @media (max-width: 767.98px) {
+            .plyr__control--overlaid {
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) scale(0.9) !important;
+                padding: 12px !important;
+            }
         }
         .recent-video-slider .template-btn {
             margin-top: 30px;
@@ -186,7 +198,7 @@
             transform: rotate(0.4deg);
         }
 
-        /* Universal Hero Button Hover Shine & Design across ALL sections */
+        /* Universal Compact & Elegant Button Design across ALL sections */
         .template-btn, 
         a.template-btn, 
         button.template-btn,
@@ -194,10 +206,10 @@
         .footer-btn-cta,
         .about-me-btn,
         .sp-right .btn-enroll {
-            font-size: 15px !important;
-            font-weight: 500 !important;
-            padding: 14px 38px !important;
-            border-radius: 3px !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            padding: 10px 24px !important;
+            border-radius: 6px !important;
             background: #10b981 !important;
             background-color: #10b981 !important;
             color: #ffffff !important;
@@ -205,13 +217,14 @@
             align-items: center !important;
             justify-content: center !important;
             gap: 8px !important;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25) !important;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.22) !important;
             border: none !important;
             text-decoration: none !important;
-            line-height: 1.4 !important;
+            line-height: 1.35 !important;
+            min-height: 42px !important;
             position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            transition: all 0.3s ease !important;
         }
 
         .template-btn:hover,
@@ -221,8 +234,8 @@
         .footer-btn-cta:hover,
         .about-me-btn:hover,
         .sp-right .btn-enroll:hover {
-            transform: translateY(-3px) scale(1.02) !important;
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35) !important;
             background: #059669 !important;
             background-color: #059669 !important;
             color: #ffffff !important;
@@ -256,7 +269,7 @@
             object-fit: contain !important;
         }
 
-        @media (max-width: 576px) {
+        @media (max-width: 767.98px) {
             .template-btn, 
             a.template-btn, 
             button.template-btn,
@@ -264,9 +277,27 @@
             .footer-btn-cta,
             .about-me-btn,
             .sp-right .btn-enroll {
-                padding: 12px 24px !important;
-                font-size: 15px !important;
-                font-weight: 500 !important;
+                padding: 8px 18px !important;
+                font-size: 13.5px !important;
+                font-weight: 600 !important;
+                min-height: 38px !important;
+                border-radius: 6px !important;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .template-btn, 
+            a.template-btn, 
+            button.template-btn,
+            .get-access-btn,
+            .footer-btn-cta,
+            .about-me-btn,
+            .sp-right .btn-enroll {
+                padding: 7px 16px !important;
+                font-size: 13px !important;
+                font-weight: 600 !important;
+                min-height: 36px !important;
+                border-radius: 6px !important;
             }
         }
     </style>

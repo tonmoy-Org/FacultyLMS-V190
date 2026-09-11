@@ -3,6 +3,8 @@
     <div class="header-navigation sticky-header {{ isHome() ? '': 'header-shadow'}}">
         <div class="container container-1278">
             <style>
+                .template-header.header-layout-1 { position: relative; z-index: 100 !important; }
+                .template-header.header-layout-1.position-absolute { position: absolute !important; width: 100%; top: 0; left: 0; z-index: 100 !important; }
                 .template-header.header-layout-1 .header-inner { padding-top: 5px !important; padding-bottom: 5px !important; min-height: auto !important; }
                 .template-header .nav-menu > ul > li > a { padding-top: 8px !important; padding-bottom: 8px !important; }
                 .header-extra { padding-top: 5px !important; padding-bottom: 5px !important; }
@@ -37,13 +39,13 @@
                     .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle::after { display: none !important; }
                     .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle span { display: none !important; }
                     .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle img { width: 34px !important; height: 34px !important; min-width: 34px !important; min-height: 34px !important; border-radius: 50% !important; object-fit: cover !important; margin-inline-end: 0 !important; border: 2px solid rgba(255, 255, 255, 0.5) !important; box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important; background-color: #ffffff !important; }
-                    .template-header.header-layout-1 .header-extra .login-btn .get-access-btn { padding: 6px 14px !important; font-size: 12px !important; font-weight: 600 !important; border-radius: 5px !important; white-space: nowrap !important; color: #ffffff !important; background-color: var(--theme-clr, #10b981) !important; border: none !important; box-shadow: none !important; display: inline-flex !important; align-items: center !important; }
+                    .template-header.header-layout-1 .header-extra .login-btn .get-access-btn { padding: 6px 14px !important; font-size: 12px !important; font-weight: 600 !important; border-radius: 5px !important; min-height: 32px !important; height: 32px !important; white-space: nowrap !important; color: #ffffff !important; background-color: var(--theme-clr, #10b981) !important; border: none !important; box-shadow: none !important; display: inline-flex !important; align-items: center !important; }
                     .template-header.header-layout-1 .header-extra .login-btn .get-access-btn span { display: inline-block !important; }
                 }
                 @media (max-width: 576px) {
                     .template-header.header-layout-1 .header-left { max-width: 40% !important; }
                     .template-header.header-layout-1 .header-left .brand-logo img { max-height: 26px !important; }
-                    .template-header.header-layout-1 .header-extra .login-btn .get-access-btn { padding: 5px 10px !important; font-size: 11px !important; border-radius: 5px !important; }
+                    .template-header.header-layout-1 .header-extra .login-btn .get-access-btn { padding: 4px 10px !important; font-size: 11px !important; min-height: 28px !important; height: 28px !important; border-radius: 5px !important; }
                     .template-header.header-layout-1 .header-extra > ul { gap: 4px !important; }
                 }
             </style>

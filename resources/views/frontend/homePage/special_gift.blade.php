@@ -77,7 +77,16 @@
     
     @media (max-width: 767px) {
         .mc-special-gift-card {
-            padding: 22px 18px;
+            padding: 22px 14px;
+        }
+        .mc-callout-quote {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 10px !important;
+            padding: 14px 14px !important;
+        }
+        .mc-callout-quote .quote-price {
+            align-self: flex-start !important;
         }
     }
 </style>
