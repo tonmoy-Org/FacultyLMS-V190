@@ -87,6 +87,35 @@
     $stripText2 = old('masterclass_settings.support_strip_text_2', $mcSettings['support_strip_text_2'] ?? 'আপনার সফলতাই আমাদের লক্ষ্য।');
 @endphp
 
+<style>
+    .support-card-delete-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent !important;
+        background-color: transparent !important;
+        color: #ef4444;
+        border: none !important;
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+        padding: 4px;
+        transition: color 0.2s ease, transform 0.2s ease;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+    .support-card-delete-btn:hover {
+        background: transparent !important;
+        background-color: transparent !important;
+        color: #b91c1c;
+        transform: scale(1.15);
+        box-shadow: none !important;
+    }
+    .support-card-delete-btn:active {
+        transform: scale(0.95);
+    }
+</style>
+
 <!-- Section: Support Section -->
 <div class="card border mb-4 rounded-3 shadow-sm">
     <div class="card-header bg-white py-3">
@@ -121,18 +150,6 @@
                        value="{{ $supportTitleIcon }}" placeholder="fas fa-headset or image path">
                 <label class="form-label small text-muted mb-1">Or Upload Title Icon / Image File</label>
                 <input type="file" name="support_title_icon_file" class="form-control form-control-sm rounded-2" accept="image/*">
-                @if(!empty($supportTitleIcon))
-                    <div class="d-flex align-items-center gap-2 mt-2 p-1 px-2 bg-light border rounded" style="width: fit-content;">
-                        <span class="small text-muted">Preview:</span>
-                        @if(preg_match('/\.(png|jpg|jpeg|svg|webp)$/i', $supportTitleIcon) || str_contains($supportTitleIcon, '/') || str_starts_with($supportTitleIcon, 'http'))
-                            <img src="{{ dynamic_asset($supportTitleIcon) }}" alt="Title Icon" style="width: 24px; height: 24px; object-fit: contain;" onerror="this.style.display='none';">
-                            <span class="small text-muted text-truncate" style="max-width: 140px;">{{ basename($supportTitleIcon) }}</span>
-                        @else
-                            <i class="{{ $supportTitleIcon }} font-16 text-primary"></i>
-                            <span class="small text-muted text-truncate" style="max-width: 140px;">{{ $supportTitleIcon }}</span>
-                        @endif
-                    </div>
-                @endif
             </div>
 
             <!-- Subtitle -->
@@ -182,8 +199,8 @@
                         <div class="col-md-4 support-feature-card-item" data-index="{{ $idx }}">
                             <div class="p-3 bg-light rounded-3 border h-100 position-relative">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <h6 class="fw-bold mb-0 text-primary font-14 card-num-label">Card {{ $idx + 1 }}</h6>
-                                    <button type="button" class="btn btn-sm btn-outline-danger remove-support-card-btn py-0 px-2 font-12" title="Delete Card">
+                                    <h6 class="fw-bold mb-0 text-dark font-14 card-num-label">Card {{ $idx + 1 }}</h6>
+                                    <button type="button" class="support-card-delete-btn remove-support-card-btn" title="Delete Card">
                                         <i class="las la-trash-alt"></i>
                                     </button>
                                 </div>
@@ -192,27 +209,13 @@
                                        class="form-control rounded-2 bg-white mb-2 support-feature-title-input"
                                        value="{{ $fCard['title'] ?? '' }}" placeholder="ফিচার শিরোনাম">
 
-                                <label class="form-label font-12 text-muted mb-1">Icon Class / Image Link</label>
-                                <input type="text" name="masterclass_settings[support_features_list][{{ $idx }}][icon]"
-                                       class="form-control rounded-2 bg-white mb-2 support-feature-icon-input"
-                                       value="{{ $fCard['icon'] ?? '' }}" placeholder="fas fa-comment-dots or image link">
+                                <input type="hidden" name="masterclass_settings[support_features_list][{{ $idx }}][icon]"
+                                       class="support-feature-icon-input"
+                                       value="{{ $fCard['icon'] ?? '' }}">
 
-                                <label class="form-label font-12 text-muted mb-1">Or Upload Icon / Image File</label>
+                                <label class="form-label font-12 text-muted mb-1">Upload Icon / Image File</label>
                                 <input type="file" name="support_feature_icon_files[{{ $idx }}]"
                                        class="form-control font-12 bg-white mb-2 support-feature-file-input" accept="image/*">
-
-                                @if(!empty($fCard['icon']))
-                                    <div class="d-flex align-items-center gap-2 mb-2 p-1 px-2 bg-white border rounded">
-                                        <span class="font-11 text-muted">Preview:</span>
-                                        @if(preg_match('/\.(png|jpg|jpeg|svg|webp)$/i', $fCard['icon']) || str_contains($fCard['icon'], '/') || str_starts_with($fCard['icon'], 'http'))
-                                            <img src="{{ dynamic_asset($fCard['icon']) }}" alt="Icon" style="width: 22px; height: 22px; object-fit: contain;" onerror="this.style.display='none';">
-                                            <span class="font-11 text-muted text-truncate" style="max-width: 140px;">{{ basename($fCard['icon']) }}</span>
-                                        @else
-                                            <i class="{{ $fCard['icon'] }} font-16 text-primary"></i>
-                                            <span class="font-11 text-muted text-truncate" style="max-width: 140px;">{{ $fCard['icon'] }}</span>
-                                        @endif
-                                    </div>
-                                @endif
 
                                 <label class="form-label font-12 text-muted mb-1">Description</label>
                                 <textarea name="masterclass_settings[support_features_list][{{ $idx }}][desc]"
@@ -253,8 +256,8 @@
                         <div class="col-md-4 support-channel-card-item" data-index="{{ $cIdx }}">
                             <div class="p-3 bg-light rounded-3 border h-100 position-relative">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <h6 class="fw-bold mb-0 text-primary font-14 channel-num-label">Channel {{ $cIdx + 1 }} {{ !empty($chCard['title']) ? '('.$chCard['title'].')' : '' }}</h6>
-                                    <button type="button" class="btn btn-sm btn-outline-danger remove-support-channel-btn py-0 px-2 font-12" title="Delete Channel">
+                                    <h6 class="fw-bold mb-0 text-dark font-14 channel-num-label">Channel {{ $cIdx + 1 }} {{ !empty($chCard['title']) ? '('.$chCard['title'].')' : '' }}</h6>
+                                    <button type="button" class="support-card-delete-btn remove-support-channel-btn" title="Delete Channel">
                                         <i class="las la-trash-alt"></i>
                                     </button>
                                 </div>
@@ -277,27 +280,13 @@
                                        class="form-control rounded-2 bg-white mb-2 support-channel-desc-input"
                                        value="{{ $chCard['desc'] ?? '' }}" placeholder="আমাদের পেজে মেসেজ করুন">
 
-                                <label class="form-label font-12 text-muted mb-1">Icon Class or Image Link</label>
-                                <input type="text" name="masterclass_settings[support_channels_list][{{ $cIdx }}][icon]"
-                                       class="form-control rounded-2 bg-white mb-2 support-channel-icon-input"
-                                       value="{{ $chCard['icon'] ?? '' }}" placeholder="fab fa-facebook-f or image link">
+                                <input type="hidden" name="masterclass_settings[support_channels_list][{{ $cIdx }}][icon]"
+                                       class="support-channel-icon-input"
+                                       value="{{ $chCard['icon'] ?? '' }}">
 
-                                <label class="form-label font-12 text-muted mb-1">Or Upload Icon / Image File</label>
+                                <label class="form-label font-12 text-muted mb-1">Upload Icon / Image File</label>
                                 <input type="file" name="support_channel_icon_files[{{ $cIdx }}]"
                                        class="form-control font-12 bg-white mb-2 support-channel-icon-file-input" accept="image/*">
-
-                                @if(!empty($chCard['icon']))
-                                    <div class="d-flex align-items-center gap-2 mb-2 p-1 px-2 bg-white border rounded">
-                                        <span class="font-11 text-muted">Preview:</span>
-                                        @if(preg_match('/\.(png|jpg|jpeg|svg|webp)$/i', $chCard['icon']) || str_contains($chCard['icon'], '/') || str_starts_with($chCard['icon'], 'http'))
-                                            <img src="{{ dynamic_asset($chCard['icon']) }}" alt="Icon" style="width: 22px; height: 22px; object-fit: contain;" onerror="this.style.display='none';">
-                                            <span class="font-11 text-muted text-truncate" style="max-width: 140px;">{{ basename($chCard['icon']) }}</span>
-                                        @else
-                                            <i class="{{ $chCard['icon'] }} font-16 text-primary"></i>
-                                            <span class="font-11 text-muted text-truncate" style="max-width: 140px;">{{ $chCard['icon'] }}</span>
-                                        @endif
-                                    </div>
-                                @endif
 
                                 <label class="form-label font-12 text-muted mb-1">Team Avatars Image</label>
                                 <input type="file" name="support_channel_avatar_files[{{ $cIdx }}]"
@@ -394,8 +383,8 @@
                     <div class="col-md-4 support-feature-card-item" data-index="${nextIndex}">
                         <div class="p-3 bg-light rounded-3 border h-100 position-relative">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="fw-bold mb-0 text-primary font-14 card-num-label">Card ${nextNum}</h6>
-                                <button type="button" class="btn btn-sm btn-outline-danger remove-support-card-btn py-0 px-2 font-12" title="Delete Card">
+                                <h6 class="fw-bold mb-0 text-dark font-14 card-num-label">Card ${nextNum}</h6>
+                                <button type="button" class="support-card-delete-btn remove-support-card-btn" title="Delete Card">
                                     <i class="las la-trash-alt"></i>
                                 </button>
                             </div>
@@ -403,11 +392,10 @@
                             <input type="text" name="masterclass_settings[support_features_list][${nextIndex}][title]"
                                    class="form-control rounded-2 bg-white mb-2 support-feature-title-input" placeholder="ফিচার শিরোনাম">
 
-                            <label class="form-label font-12 text-muted mb-1">Icon Class / Image Link</label>
-                            <input type="text" name="masterclass_settings[support_features_list][${nextIndex}][icon]"
-                                   class="form-control rounded-2 bg-white mb-2 support-feature-icon-input" placeholder="fas fa-check-circle or image link">
+                            <input type="hidden" name="masterclass_settings[support_features_list][${nextIndex}][icon]"
+                                   class="support-feature-icon-input" value="">
 
-                            <label class="form-label font-12 text-muted mb-1">Or Upload Icon / Image File</label>
+                            <label class="form-label font-12 text-muted mb-1">Upload Icon / Image File</label>
                             <input type="file" name="support_feature_icon_files[${nextIndex}]"
                                    class="form-control font-12 bg-white mb-2 support-feature-file-input" accept="image/*">
 
@@ -479,8 +467,8 @@
                     <div class="col-md-4 support-channel-card-item" data-index="${nextIndex}">
                         <div class="p-3 bg-light rounded-3 border h-100 position-relative">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="fw-bold mb-0 text-primary font-14 channel-num-label">Channel ${nextNum}</h6>
-                                <button type="button" class="btn btn-sm btn-outline-danger remove-support-channel-btn py-0 px-2 font-12" title="Delete Channel">
+                                <h6 class="fw-bold mb-0 text-dark font-14 channel-num-label">Channel ${nextNum}</h6>
+                                <button type="button" class="support-card-delete-btn remove-support-channel-btn" title="Delete Channel">
                                     <i class="las la-trash-alt"></i>
                                 </button>
                             </div>
@@ -502,12 +490,10 @@
                                    class="form-control rounded-2 bg-white mb-2 support-channel-desc-input"
                                    placeholder="সংক্ষিপ্ত বিবরণ লিখুন...">
 
-                            <label class="form-label font-12 text-muted mb-1">Icon Class or Image Link</label>
-                            <input type="text" name="masterclass_settings[support_channels_list][${nextIndex}][icon]"
-                                   class="form-control rounded-2 bg-white mb-2 support-channel-icon-input"
-                                   placeholder="fab fa-discord or image link">
+                            <input type="hidden" name="masterclass_settings[support_channels_list][${nextIndex}][icon]"
+                                   class="support-channel-icon-input" value="">
 
-                            <label class="form-label font-12 text-muted mb-1">Or Upload Icon / Image File</label>
+                            <label class="form-label font-12 text-muted mb-1">Upload Icon / Image File</label>
                             <input type="file" name="support_channel_icon_files[${nextIndex}]"
                                    class="form-control font-12 bg-white mb-2 support-channel-icon-file-input" accept="image/*">
 
@@ -545,6 +531,7 @@
                 $(this).closest('.support-channel-card-item').remove();
                 renumberSupportChannels();
             });
+
         });
     })(jQuery);
 </script>
