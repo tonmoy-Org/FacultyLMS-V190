@@ -82,7 +82,7 @@
             color: #0d2e24;
             padding: 4px 10px;
             border-radius: 20px;
-            font-weight: 600;
+            font-weight: 400 !important;
         }
     </style>
 @endpush
@@ -373,7 +373,7 @@
                                 <div class="col-xl-6 col-md-12">
                                     <div class="preview-sticky-wrapper">
                                         <div class="d-flex justify-content-between align-items-center mb-15">
-                                            <h5 class="mb-0 text-dark fw-bold"><i class="las la-certificate me-1 text-success"></i> {{ __('preview') }}</h5>
+                                            <h5 class="mb-0 cert-info-title"><i class="las la-certificate me-1 text-success"></i> {{ __('preview') }}</h5>
                                             <span class="preview-badge-hint"><i class="las la-magic"></i> Live Interactive Preview</span>
                                         </div>
 
