@@ -84,6 +84,21 @@
             border-radius: 20px;
             font-weight: 400 !important;
         }
+        @media (max-width: 575.98px) {
+            .cert-top-header {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 12px !important;
+            }
+            .cert-top-header .section-title {
+                font-size: 16px !important;
+                line-height: 1.4 !important;
+                word-break: break-word !important;
+            }
+            .cert-top-header .btn {
+                align-self: flex-start !important;
+            }
+        }
     </style>
 @endpush
 
@@ -92,9 +107,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="d-flex justify-content-between align-items-center mb-20">
-                        <h3 class="section-title mb-0">{{ __('edit_certificate') }} - {{ $course->title }}</h3>
-                        <a href="{{ route('certificates.index') }}" class="btn btn-sm btn-outline-secondary">
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 cert-top-header mb-20">
+                        <h3 class="section-title mb-0 flex-grow-1 text-break">{{ __('edit_certificate') }} - {{ $course->title }}</h3>
+                        <a href="{{ route('certificates.index') }}" class="btn btn-sm btn-outline-secondary flex-shrink-0 text-nowrap align-self-start align-self-sm-center">
                             <i class="las la-arrow-left me-1"></i> {{ __('back_to_list') }}
                         </a>
                     </div>
