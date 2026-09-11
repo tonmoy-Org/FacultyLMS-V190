@@ -1,6 +1,129 @@
 @extends('frontend.layouts.master')
 @section('title', __('home'))
 
+@push('css')
+<style>
+    /* ==========================================================================
+       PROFESSIONAL MOBILE SECTION SPACING & MARGIN/PADDING HARMONIZATION
+       Standardizes vertical cadence, container gutters, and heading spacing
+       across all landing page sections on mobile and tablet devices.
+       ========================================================================== */
+    @media (max-width: 767.98px) {
+        /* Standardized Section Vertical Spacing (38px top & bottom) */
+        .home-page-sections > section,
+        section.about-me-section,
+        section.categories-of-work-section,
+        section.benefits-section,
+        section.special-gift-section,
+        section.what-you-learn-section,
+        section.syllabus-section,
+        section.success-banner-section,
+        section.success-story-section,
+        section.offer-breakdown-section,
+        section.faq-section,
+        section.mc-support-section-wrapper,
+        section.order-form-section {
+            padding-top: 38px !important;
+            padding-bottom: 38px !important;
+        }
+
+        /* Hero Area Mobile Padding (Headline immediately visible without excessive scroll) */
+        section.hero-area {
+            padding-top: 48px !important;
+            padding-bottom: 36px !important;
+        }
+
+        /* Compact graphical divider banners */
+        section.ad-banner-section-1,
+        section.ad-banner-section-2,
+        section.coupon-banner-section {
+            padding-top: 24px !important;
+            padding-bottom: 24px !important;
+        }
+
+        /* Container Edge Alignment */
+        .container.container-1278 {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+        }
+
+        /* Harmonized Section Heading Spacing on Mobile */
+        .common-heading.m-b-40,
+        .common-heading.m-b-30,
+        .common-heading {
+            margin-bottom: 22px !important;
+        }
+        .course-section-title.mb-5,
+        .course-section-title {
+            margin-bottom: 22px !important;
+        }
+        .cow-title {
+            margin-bottom: 22px !important;
+            font-size: 22px !important;
+        }
+
+        /* Internal Card Padding Alignment */
+        .cow-wrapper {
+            padding: 24px 16px !important;
+            border-radius: 12px !important;
+        }
+        .mc-special-gift-card {
+            padding: 24px 16px !important;
+        }
+        .what-you-learn-section .card {
+            padding: 20px 16px !important;
+            border-radius: 12px !important;
+        }
+        .mc-content-card {
+            padding: 20px 16px !important;
+        }
+        .about-me-card {
+            min-height: 340px !important;
+        }
+        .about-me-card img {
+            min-height: 340px !important;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        /* Extra small devices (compact phones) */
+        .home-page-sections > section,
+        section.about-me-section,
+        section.categories-of-work-section,
+        section.benefits-section,
+        section.special-gift-section,
+        section.what-you-learn-section,
+        section.syllabus-section,
+        section.success-banner-section,
+        section.success-story-section,
+        section.offer-breakdown-section,
+        section.faq-section,
+        section.mc-support-section-wrapper,
+        section.order-form-section {
+            padding-top: 32px !important;
+            padding-bottom: 32px !important;
+        }
+
+        section.hero-area {
+            padding-top: 40px !important;
+            padding-bottom: 30px !important;
+        }
+
+        section.ad-banner-section-1,
+        section.ad-banner-section-2,
+        section.coupon-banner-section {
+            padding-top: 18px !important;
+            padding-bottom: 18px !important;
+        }
+
+        .container.container-1278 {
+            padding-left: 14px !important;
+            padding-right: 14px !important;
+        }
+    }
+</style>
+@endpush
+
 @section('base.content')
     <!--====== Start Header ======-->
     @include('frontend.layouts.header.'.$section['header'])

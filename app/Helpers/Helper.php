@@ -938,20 +938,24 @@ if (! function_exists('dynamic_asset')) {
         if (blank($url)) {
             return '';
         }
-        
-        $prefix = isLocalhost(); // Returns 'public/' on VPS, '' on local
-        
-        if (str_contains($url, '/images/')) {
-            $parts = explode('/images/', $url);
-            return asset($prefix . 'images/' . end($parts));
+
+        if (str_starts_with($url, 'http://') || str_starts_with($url, 'https://')) {
+            return $url;
         }
 
-        if (str_contains($url, '/uploads/')) {
-            $parts = explode('/uploads/', $url);
-            return asset($prefix . 'uploads/' . end($parts));
+        $cleanUrl = ltrim($url, '/');
+
+        if (str_contains($cleanUrl, 'images/')) {
+            $parts = explode('images/', $cleanUrl);
+            return static_asset('images/' . end($parts));
         }
-        
-        return $url;
+
+        if (str_contains($cleanUrl, 'uploads/')) {
+            $parts = explode('uploads/', $cleanUrl);
+            return static_asset('uploads/' . end($parts));
+        }
+
+        return static_asset($cleanUrl);
     }
 }
 
