@@ -103,26 +103,24 @@
             padding: 8px;
             box-sizing: border-box;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .cert-preview-scroll {
+        .cert-scaler-wrapper {
             width: 100%;
             max-width: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
-            -webkit-overflow-scrolling: touch;
-            display: block;
-            scrollbar-width: thin;
-            scrollbar-color: #c2d1cb #f0f4f2;
-        }
-        .cert-preview-scroll::-webkit-scrollbar {
-            height: 6px;
-        }
-        .cert-preview-scroll::-webkit-scrollbar-thumb {
-            background: #c2d1cb;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow: hidden;
             border-radius: 4px;
         }
-        .cert-preview-scroll::-webkit-scrollbar-track {
-            background: #f0f4f2;
+        .cert-scaler-wrapper .pfa-cert-container {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            margin: 0 auto;
         }
         @media (max-width: 1199.98px) {
             .preview-sticky-wrapper {
@@ -155,9 +153,6 @@
             }
             .cert-top-header .btn {
                 align-self: flex-start !important;
-            }
-            .cert-preview-scroll .pfa-cert-container {
-                min-width: 520px;
             }
         }
     </style>
@@ -454,7 +449,7 @@
                                         </div>
 
                                         <div class="cert-preview-card">
-                                            <div class="cert-preview-scroll">
+                                            <div class="cert-scaler-wrapper" id="certScalerWrapper">
                                                 @include('backend.admin.course.certificate.certificate_view', [
                                                     'course' => $course,
                                                     'certificate' => $course->certificate,
@@ -465,7 +460,7 @@
 
                                         <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 text-muted small mt-2">
                                             <span><i class="las la-shield-alt text-success"></i> High-resolution vector layout matching Pro Freelancers Academy Certificate standard.</span>
-                                            <span class="d-inline-block d-xl-none text-success fw-medium"><i class="las la-arrows-alt-h"></i> Swipe horizontally on preview to view full certificate</span>
+                                            <span class="d-inline-block d-xl-none text-success fw-medium"><i class="las la-mobile-alt"></i> Complete certificate fitted for mobile screen</span>
                                         </div>
                                     </div>
                                 </div>
@@ -521,6 +516,46 @@
             }
 
             setInterval(checkMediaChanges, 1000);
+
+            // Dynamically scale certificate preview to fit mobile screens in a single glance
+            function fitCertificatePreview() {
+                var wrapper = document.getElementById('certScalerWrapper');
+                var cert = document.getElementById('pfaCertPreview');
+                if (!wrapper || !cert) return;
+
+                var card = wrapper.closest('.cert-preview-card');
+                var cardWidth = card ? (card.clientWidth - 16) : wrapper.clientWidth;
+
+                if (window.innerWidth < 576 && cardWidth > 0 && cardWidth < 540) {
+                    var baseWidth = 540;
+                    var scale = cardWidth / baseWidth;
+                    cert.style.width = baseWidth + 'px';
+                    cert.style.minWidth = baseWidth + 'px';
+                    cert.style.maxWidth = baseWidth + 'px';
+                    cert.style.transform = 'scale(' + scale + ')';
+                    cert.style.transformOrigin = 'top left';
+                    var baseHeight = baseWidth * (682 / 1024);
+                    wrapper.style.height = (baseHeight * scale) + 'px';
+                    wrapper.style.width = (baseWidth * scale) + 'px';
+                    wrapper.style.margin = '0 auto';
+                    wrapper.style.overflow = 'hidden';
+                } else {
+                    cert.style.width = '100%';
+                    cert.style.minWidth = '0px';
+                    cert.style.maxWidth = '100%';
+                    cert.style.transform = 'none';
+                    cert.style.transformOrigin = 'center';
+                    wrapper.style.height = 'auto';
+                    wrapper.style.width = '100%';
+                    wrapper.style.margin = '0 auto';
+                    wrapper.style.overflow = 'visible';
+                }
+            }
+
+            fitCertificatePreview();
+            $(window).on('resize orientationchange', fitCertificatePreview);
+            setTimeout(fitCertificatePreview, 250);
+            setTimeout(fitCertificatePreview, 650);
         });
     </script>
 @endpush

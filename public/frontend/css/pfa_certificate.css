@@ -50,7 +50,7 @@
 
 .pfa-org-name {
     font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
-    font-size: clamp(14px, 3cqw, 30px);
+    font-size: clamp(9px, 3cqw, 30px);
     font-weight: 700;
     color: #0d2e24;
     margin: 0;
@@ -65,7 +65,7 @@
 }
 
 .pfa-divider-top img {
-    height: clamp(8px, 1.8cqw, 18px);
+    height: clamp(5px, 1.8cqw, 18px);
     width: auto;
     max-width: 165px;
     display: block;
@@ -75,7 +75,7 @@
 
 .pfa-tagline {
     font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
-    font-size: clamp(8px, 1.45cqw, 14.5px);
+    font-size: clamp(5.5px, 1.45cqw, 14.5px);
     font-weight: 600;
     color: #0d2e24;
     margin: 0;
@@ -89,7 +89,7 @@
 }
 
 .pfa-divider-sub img {
-    height: clamp(6px, 1.3cqw, 13px);
+    height: clamp(4px, 1.3cqw, 13px);
     width: auto;
     max-width: 55px;
     display: block;
@@ -102,16 +102,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(8px, 1.5cqw, 15px);
+    gap: clamp(4px, 1.5cqw, 15px);
     margin: 2px 0;
 }
 
 .pfa-cert-title {
     font-family: 'Playfair Display', 'Cinzel', Georgia, serif;
-    font-size: clamp(13px, 2.7cqw, 27px);
+    font-size: clamp(8px, 2.7cqw, 27px);
     font-weight: 800;
     color: #0d2e24;
-    letter-spacing: clamp(1px, 0.22cqw, 2.2px);
+    letter-spacing: clamp(0.5px, 0.22cqw, 2.2px);
     margin: 0;
     text-transform: uppercase;
     line-height: 1.15;
@@ -119,7 +119,7 @@
 
 .pfa-flourish-left,
 .pfa-flourish-right {
-    height: clamp(10px, 2.1cqw, 21px);
+    height: clamp(6px, 2.1cqw, 21px);
     width: auto;
     object-fit: contain;
 }
@@ -128,7 +128,7 @@
 .pfa-presented-to {
     font-family: 'Playfair Display', Georgia, serif;
     font-style: normal;
-    font-size: clamp(8px, 1.35cqw, 13.5px);
+    font-size: clamp(5px, 1.35cqw, 13.5px);
     font-weight: 500;
     color: #2b3b33;
     margin: 2px 0;
@@ -146,7 +146,7 @@
 
 .pfa-student-name {
     font-family: 'Alex Brush', cursive, 'Brush Script MT';
-    font-size: clamp(22px, 4.7cqw, 48px);
+    font-size: clamp(14px, 4.7cqw, 48px);
     font-weight: 400;
     color: #0d2e24;
     line-height: 1.05;
@@ -156,7 +156,7 @@
 }
 
 .pfa-student-underline {
-    width: clamp(200px, 46cqw, 470px);
+    width: clamp(100px, 46cqw, 470px);
     height: 1px;
     background: rgba(13, 46, 36, 0.35);
     margin: 3px auto 0 auto;
@@ -167,13 +167,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(8px, 1.8cqw, 18px);
+    gap: clamp(4px, 1.8cqw, 18px);
     margin: 3px 0;
 }
 
 .pfa-laurel-left,
 .pfa-laurel-right {
-    height: clamp(24px, 4.8cqw, 48px);
+    height: clamp(15px, 4.8cqw, 48px);
     width: auto;
     object-fit: contain;
 }
@@ -186,7 +186,7 @@
 
 .pfa-completion-text {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(7.5px, 1.25cqw, 12.5px);
+    font-size: clamp(5px, 1.25cqw, 12.5px);
     font-weight: 500;
     color: #2b3b33;
     margin-bottom: 2px;
@@ -195,11 +195,11 @@
 
 .pfa-course-name {
     font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
-    font-size: clamp(11px, 2.1cqw, 21.5px);
+    font-size: clamp(7.5px, 2.1cqw, 21.5px);
     font-weight: 800;
     color: #0d2e24;
     text-transform: uppercase;
-    letter-spacing: clamp(0.5px, 0.12cqw, 1.2px);
+    letter-spacing: clamp(0.3px, 0.12cqw, 1.2px);
     line-height: 1.2;
 }
 
@@ -208,7 +208,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(4px, 1.2cqw, 12px);
+    gap: clamp(2px, 1.2cqw, 12px);
     margin: 3px auto;
     width: 93%;
 }
@@ -216,9 +216,9 @@
 .pfa-badge-item {
     display: flex;
     align-items: center;
-    gap: clamp(3px, 0.6cqw, 6px);
+    gap: clamp(2px, 0.6cqw, 6px);
     font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    font-size: clamp(6.5px, 1.05cqw, 10.2px);
+    font-size: clamp(4.5px, 1.05cqw, 10.2px);
     font-weight: 700;
     color: #113329;
     letter-spacing: 0.3px;
@@ -229,8 +229,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: clamp(14px, 2.1cqw, 21px);
-    height: clamp(14px, 2.1cqw, 21px);
+    width: clamp(9px, 2.1cqw, 21px);
+    height: clamp(9px, 2.1cqw, 21px);
     border-radius: 50%;
     border: 1px solid #113329;
     color: #113329;
@@ -238,15 +238,15 @@
 }
 
 .pfa-badge-icon svg {
-    width: clamp(9px, 1.3cqw, 13px);
-    height: clamp(9px, 1.3cqw, 13px);
+    width: clamp(5.5px, 1.3cqw, 13px);
+    height: clamp(5.5px, 1.3cqw, 13px);
 }
 
 .pfa-badge-divider {
     width: 1px;
-    height: clamp(10px, 1.6cqw, 16px);
+    height: clamp(6px, 1.6cqw, 16px);
     background: #d4dcd7;
-    margin: 0 clamp(2px, 0.5cqw, 5px);
+    margin: 0 clamp(1px, 0.5cqw, 5px);
     flex-shrink: 0;
 }
 
@@ -266,7 +266,7 @@
 .pfa-meta-col {
     display: flex;
     align-items: center;
-    gap: clamp(4px, 0.8cqw, 8px);
+    gap: clamp(2px, 0.8cqw, 8px);
     text-align: left;
     flex: 1;
     justify-content: center;
@@ -276,8 +276,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: clamp(18px, 2.8cqw, 28px);
-    height: clamp(18px, 2.8cqw, 28px);
+    width: clamp(11px, 2.8cqw, 28px);
+    height: clamp(11px, 2.8cqw, 28px);
     border-radius: 50%;
     border: 1px solid #cbb88a;
     background: #faf8f3;
@@ -286,8 +286,8 @@
 }
 
 .pfa-meta-icon svg {
-    width: clamp(11px, 1.7cqw, 17px);
-    height: clamp(11px, 1.7cqw, 17px);
+    width: clamp(6.5px, 1.7cqw, 17px);
+    height: clamp(6.5px, 1.7cqw, 17px);
 }
 
 .pfa-meta-content {
@@ -299,7 +299,7 @@
 
 .pfa-meta-label {
     font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    font-size: clamp(5.5px, 0.88cqw, 8.8px);
+    font-size: clamp(3.8px, 0.88cqw, 8.8px);
     font-weight: 600;
     color: #556b62;
     text-transform: uppercase;
@@ -308,7 +308,7 @@
 
 .pfa-meta-value {
     font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    font-size: clamp(6.8px, 1.08cqw, 10.8px);
+    font-size: clamp(4.5px, 1.08cqw, 10.8px);
     font-weight: 700;
     color: #0d2e24;
     letter-spacing: 0.2px;
@@ -316,9 +316,9 @@
 
 .pfa-meta-divider {
     width: 1px;
-    height: clamp(16px, 2.6cqw, 26px);
+    height: clamp(10px, 2.6cqw, 26px);
     background: #cbb88a;
-    margin: 0 clamp(2px, 0.4cqw, 4px);
+    margin: 0 clamp(1px, 0.4cqw, 4px);
     flex-shrink: 0;
 }
 
@@ -332,7 +332,7 @@
 }
 
 .pfa-sign-col {
-    width: clamp(110px, 21cqw, 210px);
+    width: clamp(65px, 21cqw, 210px);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -340,7 +340,7 @@
 }
 
 .pfa-sign-img-wrapper {
-    height: clamp(24px, 4.2cqw, 42px);
+    height: clamp(15px, 4.2cqw, 42px);
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -348,8 +348,8 @@
 }
 
 .pfa-sign-img-wrapper img {
-    max-height: clamp(22px, 3.8cqw, 38px);
-    max-width: clamp(90px, 16cqw, 160px);
+    max-height: clamp(14px, 3.8cqw, 38px);
+    max-width: clamp(55px, 16cqw, 160px);
     object-fit: contain;
 }
 
@@ -362,7 +362,7 @@
 
 .pfa-sign-designation {
     font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
-    font-size: clamp(7.5px, 1.15cqw, 11.5px);
+    font-size: clamp(5px, 1.15cqw, 11.5px);
     font-weight: 700;
     color: #0d2e24;
     letter-spacing: 0.7px;
@@ -373,13 +373,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: clamp(60px, 10cqw, 100px);
+    width: clamp(35px, 10cqw, 100px);
     margin-bottom: -2px;
 }
 
 .pfa-seal-col img {
-    width: clamp(50px, 8.2cqw, 82px);
-    height: clamp(50px, 8.2cqw, 82px);
+    width: clamp(28px, 8.2cqw, 82px);
+    height: clamp(28px, 8.2cqw, 82px);
     object-fit: contain;
     filter: none;
 }
@@ -391,7 +391,7 @@
     justify-content: center;
     gap: 4px;
     font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    font-size: clamp(7.5px, 1.15cqw, 11.2px);
+    font-size: clamp(5px, 1.15cqw, 11.2px);
     font-weight: 600;
     color: #1b3b31;
     margin-top: 3px;
@@ -402,8 +402,8 @@
 }
 
 .pfa-globe-icon {
-    width: clamp(10px, 1.4cqw, 14px);
-    height: clamp(10px, 1.4cqw, 14px);
+    width: clamp(6.5px, 1.4cqw, 14px);
+    height: clamp(6.5px, 1.4cqw, 14px);
     color: #1b3b31;
 }
 
