@@ -172,8 +172,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="forgot-pass-btn m-b-20">
-                                            {{__('forgot_password') }} <a
-                                                href="{{ route('password.forgot') }}">{{__('password') }}?</a>
+                                            <a href="{{ route('password.forgot') }}">{{__('forgot_password') }}?</a>
                                         </div>
                                         <div class="forgot-pass-btn m-b-20">
                                             {{__('new_user') }}? <a

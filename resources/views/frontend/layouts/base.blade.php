@@ -300,6 +300,14 @@
                 border-radius: 6px !important;
             }
         }
+
+        /* Ensure hidden loading buttons stay hidden when d-none is present */
+        .template-btn.d-none,
+        a.template-btn.d-none,
+        button.template-btn.d-none,
+        .loading_button.d-none {
+            display: none !important;
+        }
     </style>
     <!--====== Responsive CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/responsive.css') }}">
