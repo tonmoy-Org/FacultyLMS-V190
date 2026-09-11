@@ -8,7 +8,7 @@
     <meta name="paginate" content="{{ setting('paginate') }}"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') | {{ setting('system_name') != '' ? setting('system_name') : 'OvoyLMS' }}</title>
+    <title>@yield('title') | {{ setting('system_name') != '' ? setting('system_name') : 'Pro Freelancers Academy' }}</title>
 
     <!-- SEO -->
     <meta name="title" content="{{ $meta['meta_title'] }}"/>

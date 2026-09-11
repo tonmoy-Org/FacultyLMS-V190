@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') | {{ setting('system_title') != '' ? setting('system_title') : 'Faculty' }}</title>
+    <title>@yield('title') | {{ setting('system_title') != '' ? setting('system_title') : 'Pro Freelancers Academy' }}</title>
 
     @php
         $icon = setting('admin_favicon');

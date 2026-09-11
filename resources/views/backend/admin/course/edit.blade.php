@@ -566,9 +566,9 @@
                                     $defExplainerTitle = !empty($mcSettings['explainer_title']) ? $mcSettings['explainer_title'] : '';
                                     $defExplainerText = !empty($mcSettings['explainer_text']) ? $mcSettings['explainer_text'] : '';
 
-                                    $defBreakdownSubheading = !empty($mcSettings['breakdown_subheading']) ? $mcSettings['breakdown_subheading'] : '';
-                                    $defBreakdownTodayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : '';
-                                    $defBreakdownItems = !empty($mcSettings['breakdown_items']) ? $mcSettings['breakdown_items'] : '';
+                                    $defBreakdownSubheading = !empty($mcSettings['breakdown_subheading']) ? $mcSettings['breakdown_subheading'] : "Today's Special Token Price: Only ৳২,৯৯০";
+                                    $defBreakdownTodayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : "Today's {Value} Breakdown";
+                                    $defBreakdownItems = !empty($mcSettings['breakdown_items']) ? $mcSettings['breakdown_items'] : "🎓 2-Day Live Masterclass with a Complete Step-by-Step Roadmap | ৳৪,০০০\n🎁 FREE Access to the Ecom Dropshipping Mastery Course | ৳১০,০০০\n🎓 Lifetime Access to the Masterclass Recording | ৳৩,০০০\n🎁 Ready-to-Use Templates, Checklists & Resources | ৳৩,০০০\n🎁 Private Community Support | ৳৪,০০০\n🎁 Live Q&A Session with Direct Expert Guidance | ৳৩,০০০\n🎁 Winning Product Research Strategy | ৳৩,০০০\n🎁 Facebook Ads & Scaling Blueprint | ৳৭,০০০\n🎁 Premium Bonus Resources & Materials | ৳৩,০০০\n🎁 Certificate of Participation | ৳২,০০০\n🎁 Future Updates (if applicable) | FREE\n🎁 Practical Action Plan to launch Your Store | ৳৪,০০০";
                                     $defBreakdownCtaText = !empty($mcSettings['breakdown_cta_text']) ? $mcSettings['breakdown_cta_text'] : '';
                                     $defBreakdownCtaLink = !empty($mcSettings['breakdown_cta_link']) ? $mcSettings['breakdown_cta_link'] : '';
 
@@ -880,7 +880,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-8">
                                                                         <label class="form-label small">Text/Quote</label>
-                                                                        <textarea name="masterclass_settings[gift_quotes_list][{{ $gqIdx }}][text]" class="form-control rounded-2 bg-white" rows="2">{{ $gqItem['text'] ?? '' }}</textarea>
+                                                                        <textarea name="masterclass_settings[gift_quotes_list][{{ $gqIdx }}][text]" class="form-control rounded-2 bg-white summernote" rows="2">{{ $gqItem['text'] ?? '' }}</textarea>
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label class="form-label small">Price</label>
@@ -2143,7 +2143,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <label class="form-label small">Text/Quote</label>
-                                <textarea name="masterclass_settings[gift_quotes_list][${index}][text]" class="form-control rounded-2 bg-white" rows="2"></textarea>
+                                <textarea name="masterclass_settings[gift_quotes_list][${index}][text]" class="form-control rounded-2 bg-white summernote" rows="2"></textarea>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label small">Price</label>
@@ -2152,7 +2152,29 @@
                         </div>
                     </div>
                 `;
-                $('#gift_quotes_container').append(html);
+                let $newItem = $(html);
+                $('#gift_quotes_container').append($newItem);
+                if ($.fn.summernote) {
+                    $newItem.find('.summernote').summernote({
+                        tabsize: 2,
+                        height: 200,
+                        fontNames: ["sans-serif", "Arial"],
+                        fontsize: "16",
+                        disableResize: true,
+                        disableResizeEditor: true,
+                        resize: false,
+                        toolbar: [
+                            ["font", ["bold", "underline"]],
+                            ["fontname", ["fontname"]],
+                            ["fontsize", ["fontsize"]],
+                            ["color", ["color"]],
+                            ["para", ["ul", "ol", "paragraph"]],
+                            ["table", ["table"]],
+                            ["insert", ["link", "picture", "video"]],
+                            ["view", ["fullscreen", "help"]],
+                        ],
+                    });
+                }
             });
 
             $(document).on('click', '.remove-gift-quote-btn', function () {
