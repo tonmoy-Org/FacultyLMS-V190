@@ -8,35 +8,49 @@
 
 @push('css')
     <style>
+        .cert-info-title {
+            font-weight: 400 !important;
+            font-size: 16px;
+            color: #2b3b33;
+        }
         .cert-card-header {
             background: #f8faf9;
             border-bottom: 1px solid #eef2f0;
             padding: 14px 18px;
             border-radius: 8px 8px 0 0;
-            font-weight: 700;
-            font-size: 15px;
-            color: #0d2e24;
+            font-weight: 400 !important;
+            font-size: 14px;
+            color: #2b3b33;
             display: flex;
             align-items: center;
             gap: 8px;
         }
+        .cert-card-header span {
+            font-weight: 400 !important;
+        }
         .cert-form-group {
             margin-bottom: 16px;
         }
-        .cert-form-group label {
-            font-weight: 600;
+        .cert-form-group label,
+        .cert-section-body label,
+        .cert-section-body .form-label {
+            font-weight: 400 !important;
             font-size: 13px;
-            color: #273832;
+            color: #445650;
             margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
-        .cert-form-group .form-control {
+        .cert-form-group .form-control,
+        .cert-section-body .form-control,
+        .cert-section-body input,
+        .cert-section-body textarea {
             border-radius: 6px;
             border: 1px solid #dbe2df;
             padding: 9px 13px;
             font-size: 13.5px;
+            font-weight: 400 !important;
             transition: all 0.2s ease;
         }
         .cert-form-group .form-control:focus {
@@ -97,7 +111,7 @@
                                 <!-- LEFT COLUMN: EDITABLE FIELDS -->
                                 <div class="col-xl-6 col-md-12">
                                     <div class="d-flex justify-content-between align-items-center mb-15">
-                                        <h5 class="mb-0 text-dark fw-bold"><i class="las la-sliders-h me-1 text-success"></i> {{ __('certificate_information') }}</h5>
+                                        <h5 class="mb-0 cert-info-title"><i class="las la-sliders-h me-1 text-success"></i> {{ __('certificate_information') }}</h5>
                                         <span class="text-muted small"><i class="las la-eye me-1"></i> Changes update live on the preview</span>
                                     </div>
 

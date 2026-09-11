@@ -77,6 +77,15 @@
             line-height: 28px;
             font-weight: 400;
         }
+        .section-top h6 {
+            font-weight: 400 !important;
+        }
+        .form-label {
+            font-weight: 400 !important;
+        }
+        .form-control {
+            font-weight: 400 !important;
+        }
     </style>
 @endpush
 @section('content')
