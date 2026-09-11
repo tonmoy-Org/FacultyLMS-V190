@@ -531,7 +531,7 @@
 /* Mobile Viewport Styles (< 768px) */
 @media (max-width: 767.98px) {
     .hero-area {
-        padding-top: 100px !important;
+        padding-top: 88px !important;
         padding-bottom: 30px !important;
     }
 

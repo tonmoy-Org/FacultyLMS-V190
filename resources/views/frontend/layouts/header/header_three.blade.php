@@ -154,8 +154,14 @@
                                         aria-labelledby="userProfileDropdown">
                                         <div class="profile-info">
                                             <div class="profile-picture">
-                                                <img src="{{ getFileLink('40x40', Auth()->user()->images) }}"
-                                                     alt="Profile Picture">
+                                                @php
+                                                    $authUserImages3 = Auth()->user()->images;
+                                                    $userAvatar3 = ($authUserImages3 && is_array($authUserImages3) && (!empty($authUserImages3['image_40x40']) || !empty($authUserImages3['original_image'])))
+                                                        ? getFileLink('40x40', $authUserImages3)
+                                                        : static_asset('images/default/user.jpg');
+                                                @endphp
+                                                <img src="{{ $userAvatar3 }}"
+                                                     alt="Profile Picture" onerror="this.onerror=null;this.src='{{ static_asset('images/default/user.jpg') }}';">
                                             </div>
                                             <div class="profile-info-content">
                                                 <h3>{{ Auth()->user()->first_name }} {{ Auth()->user()->last_name }}</h3>

@@ -36,7 +36,7 @@
                     .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle { padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; text-decoration: none !important; }
                     .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle::after { display: none !important; }
                     .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle span { display: none !important; }
-                    .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle img { width: 34px !important; height: 34px !important; min-width: 34px !important; min-height: 34px !important; border-radius: 50% !important; object-fit: cover !important; margin-inline-end: 0 !important; border: 2px solid rgba(255, 255, 255, 0.5) !important; box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important; background-color: #ffffff !important; }
+                    .template-header.header-layout-1 .header-extra .user-profile-dropdown .dropdown-toggle img { width: 34px !important; height: 34px !important; min-width: 34px !important; min-height: 34px !important; border-radius: 50% !important; object-fit: cover !important; margin-inline-end: 0 !important; border: 2px solid rgba(255, 255, 255, 0.7) !important; box-shadow: 0 2px 6px rgba(0,0,0,0.15) !important; background-color: #f1f5f9 !important; }
                     .template-header.header-layout-1 .header-extra .login-btn .get-access-btn { padding: 6px 14px !important; font-size: 12px !important; font-weight: 600 !important; border-radius: 5px !important; white-space: nowrap !important; color: #ffffff !important; background-color: var(--theme-clr, #10b981) !important; border: none !important; box-shadow: none !important; display: inline-flex !important; align-items: center !important; }
                     .template-header.header-layout-1 .header-extra .login-btn .get-access-btn span { display: inline-block !important; }
                 }
@@ -258,10 +258,16 @@
                             </a>
                         </li> --}}
                         @if(auth()->check())
+                            @php
+                                $authUserImages = Auth()->user()->images;
+                                $userAvatar = ($authUserImages && is_array($authUserImages) && (!empty($authUserImages['image_40x40']) || !empty($authUserImages['original_image'])))
+                                    ? getFileLink('40x40', $authUserImages)
+                                    : static_asset('images/default/user.jpg');
+                            @endphp
                             <li class="user-profile-dropdown">
                                 <a href="#" class="dropdown-toggle" id="userProfileDropdown" data-bs-toggle="dropdown"
                                    aria-expanded="false">
-                                    <img src="{{ getFileLink('40x40', Auth()->user()->images) }}" width="32" alt="User">
+                                    <img src="{{ $userAvatar }}" width="34" height="34" alt="{{ Auth()->user()->first_name }}" onerror="this.onerror=null;this.src='{{ static_asset('images/default/user.jpg') }}';">
                                     <span>{{ Auth()->user()->first_name }}</span>
                                 </a>
                                 <div
@@ -269,8 +275,8 @@
                                     aria-labelledby="userProfileDropdown">
                                     <div class="profile-info">
                                         <div class="profile-picture">
-                                            <img src="{{ getFileLink('40x40', Auth()->user()->images) }}"
-                                                 alt="Profile Picture">
+                                            <img src="{{ $userAvatar }}"
+                                                 alt="Profile Picture" onerror="this.onerror=null;this.src='{{ static_asset('images/default/user.jpg') }}';">
                                         </div>
                                         <div class="profile-info-content">
                                             <h3>{{ Auth()->user()->first_name }} {{ Auth()->user()->last_name }}</h3>

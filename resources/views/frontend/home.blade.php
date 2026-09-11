@@ -27,9 +27,9 @@
             padding-bottom: 38px !important;
         }
 
-        /* Hero Area Mobile Padding (Headline immediately visible without excessive scroll) */
+        /* Hero Area Mobile Padding (Clears the 68px absolute header cleanly) */
         section.hero-area {
-            padding-top: 48px !important;
+            padding-top: 88px !important;
             padding-bottom: 36px !important;
         }
 
@@ -105,7 +105,7 @@
         }
 
         section.hero-area {
-            padding-top: 40px !important;
+            padding-top: 82px !important;
             padding-bottom: 30px !important;
         }
 
